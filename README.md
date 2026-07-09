@@ -117,9 +117,11 @@ the mirage drill.
    `SEAT_CONTRACT.md` for the interface and the complement-pair pattern for
    product objectives.
 4. Bundle and run: `node tools/bundle.mjs my/harness.config.mjs my/harness.workflow.mjs`
-5. Read `HARNESS_PATHS.md` for three real instances — quantum circuits, ZK
-   constraint systems, research papers — that are the same skeleton under
-   very different bodies.
+5. Read `HARNESS_PATHS.md` for eight real instances — quantum circuits, ZK
+   constraint systems, research papers, consent agreements, a publishing
+   loop — the same skeleton under very different bodies, grouped by how much
+   of the loop each one actually runs. The partial ones are labelled as
+   partial; they teach the bar better than the complete ones do.
 6. When it earns it, dress the seats: `SPECIALISATION.md` covers binding
    personas and spells to seats, and the Game of 42 station pattern for
    growing a fleet without drifting.
@@ -134,7 +136,7 @@ TRUSTS.md          the constitution — read first
 GROUND_RULES.md    GR-1..GR-10, pasted into every seat at boot
 SEAT_CONTRACT.md   what a config provides
 SPECIALISATION.md  personas, spells, the Game of 42
-HARNESS_PATHS.md   three real instances
+HARNESS_PATHS.md   eight real instances, and how the fleet syncs
 CLAUDE.md          one session, one seat — the boot protocol
 SKILL.md           this repo as a Claude Code skill
 engine/            the loop, and the gate that proves its algebra

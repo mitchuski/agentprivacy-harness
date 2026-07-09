@@ -1,0 +1,15 @@
+# manifest.yaml — pipeline state. Keystone-only writes (GR-10).
+pipeline: <instance name>
+version: 1
+gates:
+  - G0-conform        # node engine/conform.mjs <instance> green
+  - G1-held-out       # full gate pass on Gap-derived witnesses
+  - G2-hard-constraint
+  - G3-frontier-fold  # keystone folds, frontier first, prose second
+  - G4-door           # push/submit/publish/send
+rules:
+  g4_owner: first-person          # T6 — non-delegable
+  keystone_only_writes: [frontier.json, claims_register.md, manifest.yaml]
+  scratch_dir: runs/
+  chronicle_per_session: chronicles/
+artifacts: {}

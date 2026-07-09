@@ -1,0 +1,132 @@
+// dual_agent_loop.mjs — the soulbis ⚔️ ⊥ soulbae 🧙 dual-agent harness engine.
+//
+//   (⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ
+//
+// Target-agnostic. A concrete harness is a CONFIG (see SEAT_CONTRACT.md)
+// passed to runHarness(config, rt). The two invariants the loop exists to
+// keep: I(Y_S; Y_M | X) = 0 (the proposer never touches the held-out
+// witnesses) and I(S; M | FP) < ε (the pair share only their root in the
+// First Person). See TRUSTS.md.
+//
+// rt = { agent, parallel, pipeline, phase, log } — the Claude Code Workflow
+// globals, or your own driver. No imports here: tools/bundle.mjs concatenates
+// this file with a config into one self-contained .workflow.mjs.
+
+export function bootPreamble(root, repo, seatCard) {
+  return `You are a seat in a soulbis/soulbae dual-agent harness. Instance: ${repo}. Skeleton root: ${root}.
+BOOT (mandatory, in order): read ${root}/GROUND_RULES.md, then ${root}/TRUSTS.md, then your seat card ${root}/seats/${seatCard}, then ${repo}/frontier.json. If any of these files is missing, STOP and return an error naming the missing path — do not proceed unbound (T3). GR-1..GR-10 and trusts T1..T6 bind you. Read nothing else shared between seats (T3). Your final message is consumed as data by the orchestrator, not shown to a human.`
+}
+
+export function validateConfig(config) {
+  const errs = []
+  const need = (cond, msg) => { if (!cond) errs.push(msg) }
+  need(config && typeof config.name === 'string' && config.name, 'config.name required')
+  need(config?.door === 'first-person', "config.door must be the literal 'first-person' (T6: the door is the First Person's)")
+  need(typeof config?.heldApartRule === 'string' && config.heldApartRule.trim().length > 0, 'config.heldApartRule required (T2/GR-4: the Gap is held apart)')
+  need(config?.objective?.metric, 'config.objective.metric required (GR-1)')
+  need(config?.objective?.gate, 'config.objective.gate required (T5: the multiplicative gate)')
+  need(config?.objective?.hardConstraint, 'config.objective.hardConstraint required (GR-3)')
+  need(Array.isArray(config?.keystoneOnlyWrites) && config.keystoneOnlyWrites.length > 0, 'config.keystoneOnlyWrites required (GR-10)')
+  need(Array.isArray(config?.finders) && config.finders.length >= 2, 'config.finders needs >= 2 lenses (blind complements)')
+  if (Array.isArray(config?.finders)) {
+    const lenses = new Set(config.finders.map(f => f && f.lens))
+    need(lenses.size === config.finders.length, 'config.finders lenses must be distinct')
+  }
+  for (const p of ['measure', 'propose', 'holdApart', 'assay', 'critic', 'chronicle']) {
+    need(typeof config?.prompts?.[p] === 'function', `config.prompts.${p} required (T1: the promises must be seated)`)
+  }
+  for (const s of ['measure', 'proposal', 'gap', 'verdict', 'critic']) {
+    need(config?.schemas?.[s] && typeof config.schemas[s] === 'object', `config.schemas.${s} required`)
+  }
+  need(typeof config?.isValidated === 'function', 'config.isValidated required')
+  need(typeof config?.isStructural === 'function', 'config.isStructural required')
+  need(Number.isFinite(config?.stop?.dryRounds) && config.stop.dryRounds >= 1, 'config.stop.dryRounds required')
+  need(Number.isFinite(config?.stop?.maxRounds) && config.stop.maxRounds >= 1, 'config.stop.maxRounds required')
+  return errs
+}
+
+export async function runHarness(config, rt, runArgs = {}) {
+  const { agent, parallel, pipeline, phase, log } = rt
+  const errs = validateConfig(config)
+  if (errs.length) throw new Error('config violates the seat contract:\n  - ' + errs.join('\n  - '))
+
+  const repo = String(runArgs.repo || config.repo || '').replace(/\\/g, '/')
+  if (!repo) throw new Error('runArgs.repo required (absolute path to the harness instance)')
+  // root = where GROUND_RULES.md, TRUSTS.md, and seats/ live (the skeleton
+  // clone). Defaults to the instance itself, which is only correct if the
+  // instance carries its own copies (T3: every seat boots from the same docs).
+  const root = String(runArgs.root || config.root || repo).replace(/\\/g, '/')
+  const runId = String(runArgs.runId || 'r0')
+  const runDir = `${repo}/runs/${runId}`
+  const ctx = { root, repo, runId, runDir, config }
+  const BOOT = (card) => bootPreamble(root, repo, card)
+
+  const rounds = []
+  const tally = { VALIDATED: 0, MIRAGE: 0, BLOCKED: 0 }
+  let confirmed = []
+  let dry = 0
+  let round = 0
+
+  while (dry < config.stop.dryRounds && round < config.stop.maxRounds) {
+    round += 1
+    const roundId = `${runId}.${round}`
+
+    // ---- Measure — numbers only, no advocacy ----
+    phase('Measure')
+    log(`round ${roundId} opens — measure syncs the frontier`)
+    const measure = await agent(`${BOOT('measure.md')}\n${config.prompts.measure(ctx)}`,
+      { label: `measure:${roundId}`, phase: 'Measure', schema: config.schemas.measure })
+
+    // ---- Propose — soulbae 🧙, parallel lenses, blind to each other ----
+    phase('Propose')
+    const proposalSets = await parallel(config.finders.map(f => () => agent(
+      `${BOOT('soulbae-propose.md')}\nHELD-APART RULE (T2/GR-4, binding): ${config.heldApartRule}\n${config.prompts.propose(f, measure, ctx)}`,
+      { label: `propose:${f.lens}`, phase: 'Propose', schema: config.schemas.proposal })))
+    const proposals = proposalSets.filter(Boolean).flatMap(s => s.proposals || [])
+    log(`${proposals.length} proposal(s) on the table: ${proposals.map(p => p.leverId).join(', ') || 'none'}`)
+
+    let closed = []
+    let critic = null
+    if (proposals.length > 0) {
+      // ---- per proposal: Hold-apart (the Gap ⿻) then Assay (soulbis ⚔️), no barrier ----
+      closed = (await pipeline(
+        proposals,
+        (p, _item, i) => agent(
+          `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx)}`,
+          { label: `gap:${p.leverId}`, phase: 'Hold-apart', schema: config.schemas.gap }),
+        (gap, p, i) => gap ? agent(
+          `${BOOT('soulbis-assay.md')}\n${config.prompts.assay(p, gap, i, ctx)}`,
+          { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict }) : null,
+      )).filter(Boolean)
+      for (const v of closed) tally[v.status] = (tally[v.status] || 0) + 1
+      log(`assay closed: ${closed.length}/${proposals.length} — ${JSON.stringify(tally)}`)
+
+      // ---- Critic — the only barrier: classifies the WHOLE round ----
+      phase('Critic')
+      critic = await agent(
+        `${BOOT('critic.md')}\n${config.prompts.critic(proposals, closed, ctx)}`,
+        { label: `critic:${roundId}`, phase: 'Critic', schema: config.schemas.critic })
+    }
+
+    // ---- Chronicle — draft only; the keystone reviews and files ----
+    phase('Chronicle')
+    const roundData = { roundId, measure, proposals, verdicts: closed, critic }
+    const chronicle = await agent(
+      `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
+      { label: `chronicle:${roundId}`, phase: 'Chronicle' })
+
+    // ---- dry-round accounting: only validated AND structural resets ----
+    const validated = closed.filter(v => config.isValidated(v, measure))
+    const structural = critic ? validated.filter(v => config.isStructural(critic, v.leverId)) : []
+    if (structural.length > 0) { dry = 0; confirmed = confirmed.concat(structural) } else { dry += 1 }
+    rounds.push({ ...roundData, chronicleDraft: String(chronicle).slice(0, 600), validated: validated.map(v => v.leverId) })
+    log(`round ${roundId} closes — ${structural.length} structural win(s), dry=${dry}/${config.stop.dryRounds}`)
+  }
+
+  return {
+    name: config.name, runId, rounds: rounds.length, tally, confirmed,
+    best: confirmed.length ? confirmed[confirmed.length - 1] : null,
+    detail: rounds,
+    keystoneTodo: 'fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)',
+  }
+}

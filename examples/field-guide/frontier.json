@@ -1,0 +1,24 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-07-09",
+  "objective": {
+    "metric": "words",
+    "gate": "held-out comprehension 8/8, questions drawn by the Gap from the original guide",
+    "hardConstraint": "compressed guide stays a self-contained instruction document"
+  },
+  "baseline": {
+    "metric": 730,
+    "date": "2026-07-09",
+    "how": "tr -s '[:space:]' '\\n' < artifact/GUIDE.md | grep -c .  (whitespace-split tokens of the full markdown file)"
+  },
+  "best": {
+    "metric": 730,
+    "leverIds": [],
+    "evidence": "baseline — no fold yet"
+  },
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "first validated compression below 730 words at gate 8/8",
+    "status": "OPEN"
+  }
+}

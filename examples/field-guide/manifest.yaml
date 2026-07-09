@@ -1,0 +1,16 @@
+# manifest.yaml — field-guide pipeline state. Keystone-only writes (GR-10).
+pipeline: field-guide
+version: 1
+gates:
+  - G0-conform        # node engine/conform.mjs examples/field-guide green
+  - G1-held-out       # 8/8 on Gap-drawn comprehension questions
+  - G2-hard-constraint # self-contained instruction document
+  - G3-frontier-fold  # keystone writes artifact/GUIDE.compressed.md + frontier
+  - G4-door           # publishing the compressed guide anywhere
+rules:
+  g4_owner: first-person
+  keystone_only_writes: [frontier.json, claims_register.md, manifest.yaml]
+  scratch_dir: runs/
+  chronicle_per_session: chronicles/
+artifacts:
+  GUIDE.md: { status: baseline, gate: none }

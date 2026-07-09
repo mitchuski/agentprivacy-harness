@@ -1,0 +1,24 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "YYYY-MM-DD",
+  "objective": {
+    "metric": "",
+    "gate": "",
+    "hardConstraint": ""
+  },
+  "baseline": {
+    "metric": null,
+    "date": "YYYY-MM-DD",
+    "how": "the exact command or counting rule that produced this number"
+  },
+  "best": {
+    "metric": null,
+    "leverIds": [],
+    "evidence": "path to the verdict.json / run log that proved it"
+  },
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "the next number to beat, or the question that decides it",
+    "status": "OPEN"
+  }
+}

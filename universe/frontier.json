@@ -10,23 +10,47 @@
     "hardConstraint": "every claim carries pathway + tier + status + a resolving trace; MYTH never in a method section"
   },
   "baseline": {
-    "metric": 7285,
+    "metric": 7753,
     "measuredAt": "2026-07-10",
-    "note": "hand-authored seed map, written before the loop existed. It has NOT passed the gate — no Gap has drawn against it. This number is a starting line, not a result (GR-5)."
+    "note": "hand-authored seed map, written before universe/harness.config.mjs existed. It has NOT passed the gate — no Gap has drawn against it. A starting line, not a result (GR-5). Includes the E-2 reversal."
   },
   "best": {
-    "metric": 7285,
+    "metric": 7753,
     "leverId": null,
     "gateResult": null,
     "note": "equal to baseline: no validated round yet. best.metric may only move on a VALIDATED 12/12 verdict folded by the keystone."
   },
   "corpora": [
-    { "slug": "docs", "layer": "canon", "authority": "papers/v6 for maths; the conjecture register for C-ids" },
-    { "slug": "spellweb", "layer": "substrate", "authority": "the coherence audit triad, 0 errors" },
-    { "slug": "cityofmages", "layer": "structure", "authority": "the grimoire JSON head" },
-    { "slug": "master", "layer": "surface", "authority": "the build; mirrors cite, never edit" },
-    { "slug": "skills", "layer": "cast", "authority": "the directory tree, not the stale MAPPING.md counts" },
-    { "slug": "instances", "layer": "harness", "authority": "each instance's own frontier.json" }
+    {
+      "slug": "docs",
+      "layer": "canon",
+      "authority": "papers/v6 for maths; the conjecture register for C-ids"
+    },
+    {
+      "slug": "spellweb",
+      "layer": "substrate",
+      "authority": "the coherence audit triad, 0 errors"
+    },
+    {
+      "slug": "cityofmages",
+      "layer": "structure",
+      "authority": "the grimoire JSON head"
+    },
+    {
+      "slug": "master",
+      "layer": "surface",
+      "authority": "the build; mirrors cite, never edit"
+    },
+    {
+      "slug": "skills",
+      "layer": "cast",
+      "authority": "the directory tree, not the stale MAPPING.md counts"
+    },
+    {
+      "slug": "instances",
+      "layer": "harness",
+      "authority": "each instance's own frontier.json"
+    }
   ],
   "openItems": [
     "The seed map is unvalidated. Round u1 must run before any claim here is cited as PROVEN.",

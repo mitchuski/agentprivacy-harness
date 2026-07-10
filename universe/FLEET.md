@@ -65,9 +65,23 @@ Gatehouse states the reason in nine words:
 
 Neither token opens anything alone.
 
-**Status: SPEC.** No implemented system mints trust-graph edges today. §7
-names the one engineering decision that blocks it, and it is a decision for
-the First Person, not a detail for an agent.
+The deeper reason is limitative, not procedural. No sufficiently rich system
+is both complete and consistent, so **trust always waits on a witness from
+beyond the system that holds it.** A corpus that could certify itself would
+have either stopped listening or begun to lie. The counterparty is that
+witness. This is why the Gap is a seat and not a sentence.
+
+**Status: SPEC.** No implemented system mints trust-graph edges today. But the
+rite is not unspecified: **the LAN ceremony** already works it out —
+consent-first offer (the agent offers its address; it is never scanned), a
+gateway page, understanding, the seal, and then graduated host-scoped access
+brokered so the agent never sees the raw credential. Its rule is the fleet's:
+*access is earned by understanding, not credential.* See `ERRATA.md` E-2, and
+note that its example name was deliberately left non-canonical — one good name
+per instance, never a global one.
+
+§7 names the one engineering decision that remains, and it is the First
+Person's, not a detail for an agent.
 
 ---
 

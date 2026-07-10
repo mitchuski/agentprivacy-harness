@@ -47,18 +47,53 @@ the drift today.
 
 ---
 
-## E-2 · `mage.mesh` does not exist
+## E-2 · `mage.mesh` is absent from canon **on purpose** — and this entry was itself wrong
 
-**Where:** an earlier memory of mine, recorded as "LAN ceremony / mage.mesh
-trust task."
+**Filed as a reversal, at the prominence of a win (GR-6).**
 
-**Finding:** a full-corpus search returns **zero hits** for `mage.mesh`. The
-LAN ceremony appears only as a named intent in a privacy-pools planning note,
-alongside "myTerms/IEEE-7012 lineage, LAN-ceremony rite. Design open." There
-is no implementation and no spec document.
+**What I first wrote here:** that a full-corpus search returns zero hits for
+`mage.mesh`, therefore the name was drift, therefore my memory of it was an
+error to correct.
 
-**Fix:** the memory is corrected. The consent-first LAN rite remains a real
-*intent*; the name was drift. Tier: **OPEN**, not REPORTED.
+**The search result was right. Every inference from it was wrong.**
+
+`mage.mesh` is absent from canon because the First Person **refused to
+canonise it**, explicitly, at design time:
+
+> *Don't make `mage.mesh` canon; a fixed universal name is the kind of
+> "completeness" Gödel warns against.* One good name **per instance, not a
+> global canon.** Each shared model names itself; the namespace stays open,
+> plural, federated — the myTerms move. `mage.mesh` was only ever the example
+> for the first box.
+
+So the zero hits are not an absence. They are **the presence of a decision.**
+An unnamed thing and a deliberately-unnamed thing look identical to `grep`,
+and only one of them is a gap.
+
+**Why this matters more than the fact it corrects.** The LAN ceremony is not a
+vague intent, as I claimed. It is a **worked design of the trust task**, with
+the ladder `FLEET.md` reconstructs from first principles already in it:
+consent-first offer (the agent *offers* its address; it is never scanned) → a
+gateway page → **understanding begins** → the doors open → the seal → and then
+graduated, host-scoped write access brokered so the agent never sees the raw
+credential. Its governing sentence is the one this repo keeps rediscovering:
+
+> *Access is earned by understanding, not credential.*
+
+Its lintel is the Gatehouse's, and it is Gödel-grounded rather than
+decorative: no sufficiently rich system is both complete and consistent, so
+**trust always waits on a witness from beyond the system that holds it.** That
+is `TRUSTS.md` T2 stated as a limitative theorem, and it is the deepest reason
+the Gap cannot be a sentence appended to a prompt.
+
+**The correction to the correction.** The LAN ceremony rite: tier **OPEN**
+(design worked, unimplemented), status **SPEC**. `mage.mesh`: not a name at
+all — a **deliberately non-canonical example**, and the refusal to fix it is
+itself a canonical act.
+
+**What it teaches.** A survey that treats silence as ignorance will overwrite
+a decision with a default. Before filing an absence as drift, ask whether
+someone chose it. I did not, and the entry above is what that costs.
 
 ---
 

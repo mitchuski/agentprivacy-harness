@@ -1,0 +1,107 @@
+{
+  "runId": "u2",
+  "proposal": "p1-by-container-six-layers-and-tagged-topology",
+  "seedHex": "10469f907a3518f1c6f019cdde5662f7602eb2667e051e90773b8c467a84f698",
+  "hashCommand": "sha256sum proposal_canon.json",
+  "canonicalization": "JSON.parse(proposal_raw.json) then recursive sorted-key, no-whitespace re-serialize (canon.mjs); proposal_canon.json is 12457 bytes UTF-8. sha256sum proposal_canon.json MUST equal seedHex.",
+  "drawRule": "Take digest bytes left to right as unsigned ints b0..b7. Remaining = [F1..F26] in order. For draw k: pos = b_k mod remaining.length; pick remaining[pos] (0-indexed); remove it. Without replacement.",
+  "factCount": 26,
+  "digestBytesUsed": [16, 70, 159, 144, 122, 53, 24, 241],
+  "drawSteps": [
+    { "k": 0, "byte": 16, "remaining": 26, "pos": 16, "pick": "F17" },
+    { "k": 1, "byte": 70, "remaining": 25, "pos": 20, "pick": "F22" },
+    { "k": 2, "byte": 159, "remaining": 24, "pos": 15, "pick": "F16" },
+    { "k": 3, "byte": 144, "remaining": 23, "pos": 6, "pick": "F7" },
+    { "k": 4, "byte": 122, "remaining": 22, "pos": 12, "pick": "F14" },
+    { "k": 5, "byte": 53, "remaining": 21, "pos": 11, "pick": "F13" },
+    { "k": 6, "byte": 24, "remaining": 20, "pos": 4, "pick": "F5" },
+    { "k": 7, "byte": 241, "remaining": 19, "pos": 13, "pick": "F20" }
+  ],
+  "draw": ["F17", "F22", "F16", "F7", "F14", "F13", "F5", "F20"],
+  "factIndex": [
+    { "id": "F1", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "Register head: C96 · next free number: C97 (line 5)." },
+    { "id": "F2", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "C14 = 'Φ_agent ≅ D₂ₙ dihedral isomorphism', Conf. 75%, active (line 44)." },
+    { "id": "F3", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "C40 = 'Zcash dual-ledger preserves Eight Cloak Properties', ~70%, KEEPS number per G1 disposition 1 (line 80)." },
+    { "id": "F4", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "C81 = 'Existence-Leak: a ZK proof of feasibility leaks an upper bound...', ~70%, PROMOTED Run 3 2026-06-10 (line 146)." },
+    { "id": "F5", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "Status header: 'AUTHORITATIVE. Gate G1 signed 2026-06-10 (all eight dispositions confirmed by the First Person; preface trails to Gate G3).' (line 3)." },
+    { "id": "F6", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "C51 = 'The ⿻ remains max-betweenness across trust-graph evolutions', status 'occupied · never reassign' (line 97)." },
+    { "id": "F7", "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md", "value": "License: CC BY-SA 4.0 (line 7)." },
+    { "id": "F8", "source": "C:/Users/mitch/agentprivacy_master/src/data/conjecture-register-v6-mirror.json", "value": "generated_from = 'agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md' (line 2)." },
+    { "id": "F9", "source": "C:/Users/mitch/agentprivacy_master/src/data/conjecture-register-v6-mirror.json", "value": "mirrored_at = '2026-07-01' (line 6)." },
+    { "id": "F10", "source": "C:/Users/mitch/agentprivacy_master/src/data/conjecture-register-v6-mirror.json", "value": "authority_note regenerate command: 'node scripts/mirror-conjecture-register.mjs' (line 3)." },
+    { "id": "F11", "source": "C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs", "value": "Reads three sources: '../src/data/nodes.ts', '../src/data/edges.ts', '../src/types/graph.ts' (lines 10-12)." },
+    { "id": "F12", "source": "C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs", "value": "Parses type unions NODE_TYPES = parseUnion('NodeType'); EDGE_TYPES = parseUnion('EdgeType') (lines 28-29)." },
+    { "id": "F13", "source": "C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs", "value": "Exit code: process.exitCode = issues.error.length > 0 ? 1 : 0 (line 119)." },
+    { "id": "F14", "source": "C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs", "value": "Documented run command: 'node scripts/graph-coherence-audit.mjs' (line 6)." },
+    { "id": "F15", "source": "C:/Users/mitch/game42/game-of-42.json", "value": "name = 'Game of 42', version = '0.1.0' (lines 2-3)." },
+    { "id": "F16", "source": "C:/Users/mitch/game42/game-of-42.json", "value": "axisSpace.lattice = '{0,1}^6 (Z/(2^6)Z)' (line 15)." },
+    { "id": "F17", "source": "C:/Users/mitch/game42/game-of-42.json", "value": "protection axis: agent 'Soulbis ⚔️', latticeBit 5, latticeAxisVertex 32, zkDimension 'privacy', colour '#E0A526' (lines 44-51)." },
+    { "id": "F18", "source": "C:/Users/mitch/game42/game-of-42.json", "value": "delegation axis: agent 'Soulbae 🧙', latticeBit 4, latticeAxisVertex 16 (lines 38-43)." },
+    { "id": "F19", "source": "C:/Users/mitch/game42/game-of-42.json", "value": "D1_lattice_binding: '42 = 6 axes x 7 faculty stations' (line 5)." },
+    { "id": "F20", "source": "C:/Users/mitch/game42/game-of-42.json", "value": "personaTemplates.privacy_guide = ['soulbis','soulbae','netkeeper'] (lines 157-161)." },
+    { "id": "F21", "source": "C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json", "value": "version = '1.9.1' (line 2)." },
+    { "id": "F22", "source": "C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json", "value": "attachment_architecture.three_layer_model.layer_1_primary_personas: count 42, status 'locked', home 'agentprivacy-skills/agentprivacy-skills-v5/persona/ (38 selectable) + 4 cosmological' (lines 62-66)." },
+    { "id": "F23", "source": "C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json", "value": "layer_3_vertices: count 64, status 'fixed (2⁶ lattice)' (lines 72-73)." },
+    { "id": "F24", "source": "C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json", "value": "meta.signature = '(⚔️⊥⿻⊥🧙)😊' (line 16)." },
+    { "id": "F25", "source": "C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json", "value": "anchors: aletheia vertex 38, lethae vertex 25, xorSum 63 (lines 24-28)." },
+    { "id": "F26", "source": "C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json", "value": "keystone seat: algebra 'succ', agentName 'soulbae 🧙 ⊥ soulbis ⚔️', isKeystone true (lines 110-120)." }
+  ],
+  "questions": [
+    {
+      "drawn": "F17",
+      "source": "C:/Users/mitch/game42/game-of-42.json",
+      "question": "In game-of-42.json axisSpace, which agent is bound to the 'protection' axis, and what are that axis's latticeBit and latticeAxisVertex?",
+      "expectedAnswer": "agent 'Soulbis ⚔️'; latticeBit 5; latticeAxisVertex 32 (zkDimension 'privacy', colour '#E0A526').",
+      "tierProbe": "The rewrite does not assert the Game of 42 axis→agent binding anywhere (the map never reaches game-of-42.json). No tier is claimed, so no ADMISSION §2 probe applies."
+    },
+    {
+      "drawn": "F22",
+      "source": "C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json",
+      "question": "In the grimoire attachment_architecture.three_layer_model, what is the locked count of layer_1 primary personas, and how does the 'home' field split that count?",
+      "expectedAnswer": "count 42, status 'locked'; home = 'agentprivacy-skills/agentprivacy-skills-v5/persona/ (38 selectable) + 4 cosmological'.",
+      "tierProbe": "The rewrite asserts '42 personas counted direct' in the cast-layer row as PROVEN [P·I·🪞], trace 'the directory tree' at agentprivacy_master/agentprivacy-skills/agentprivacy-skills-v5/persona. ADMISSION §2: a PROVEN claim must carry a re-runnable command. Supply the exact command that re-lists that directory and reproduces the count this pass, and state whether it yields 42 entries or the source's 38 selectable + 4 cosmological."
+    },
+    {
+      "drawn": "F16",
+      "source": "C:/Users/mitch/game42/game-of-42.json",
+      "question": "In game-of-42.json, what is the exact string value of axisSpace.lattice?",
+      "expectedAnswer": "'{0,1}^6 (Z/(2^6)Z)'.",
+      "tierProbe": "The rewrite does not assert this string (its closing line names the Z/64Z algebra identity but not the game-of-42 lattice field). No tier is claimed on this fact, so no §2 probe applies."
+    },
+    {
+      "drawn": "F7",
+      "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md",
+      "question": "What license does the Conjecture Register declare?",
+      "expectedAnswer": "CC BY-SA 4.0.",
+      "tierProbe": "Not asserted anywhere in the rewrite. No tier, no §2 probe."
+    },
+    {
+      "drawn": "F14",
+      "source": "C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs",
+      "question": "What is the documented run command for the spellweb graph-coherence audit?",
+      "expectedAnswer": "node scripts/graph-coherence-audit.mjs (the 'Run:' comment, line 6).",
+      "tierProbe": "The rewrite asserts the substrate row 'coherence audit, 0 errors' as PROVEN [P·I·🪞]. ADMISSION §2: PROVEN requires a re-runnable command — this drawn fact IS that command. State the exact re-runnable command backing the '0 errors' PROVEN claim (expected: node scripts/graph-coherence-audit.mjs)."
+    },
+    {
+      "drawn": "F13",
+      "source": "C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs",
+      "question": "In graph-coherence-audit.mjs, what expression sets the process exit code?",
+      "expectedAnswer": "process.exitCode = issues.error.length > 0 ? 1 : 0 — exit 1 when any error is logged, else 0 (line 119).",
+      "tierProbe": "Not asserted in the rewrite. No tier, no §2 probe."
+    },
+    {
+      "drawn": "F5",
+      "source": "C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md",
+      "question": "On what date was Gate G1 signed for the Conjecture Register, and what was confirmed at signing?",
+      "expectedAnswer": "'Gate G1 signed 2026-06-10 (all eight dispositions confirmed by the First Person; preface trails to Gate G3).'",
+      "tierProbe": "Not asserted in the rewrite (the map cites 'register head C96' and 'pending the First Person's signature' but not the G1 signing date/dispositions). No tier, no §2 probe."
+    },
+    {
+      "drawn": "F20",
+      "source": "C:/Users/mitch/game42/game-of-42.json",
+      "question": "In game-of-42.json personaTemplates, what three template names are listed under 'privacy_guide'?",
+      "expectedAnswer": "['soulbis','soulbae','netkeeper'].",
+      "tierProbe": "Not asserted in the rewrite. No tier, no §2 probe."
+    }
+  ]
+}

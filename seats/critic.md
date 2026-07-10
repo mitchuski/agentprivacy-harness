@@ -21,6 +21,27 @@ Per closed lever:
   witnesses, wrong scale); the lever is neither proven nor killed.
 - **noise** — the round's outcome does not bear on the lever (tooling
   failure, mis-implementation, wrong artifact).
+- **mis-gated** — the gate asked for something the objective forbids, or for
+  facts the target was never responsible for. The verdict is sound and the
+  lever is unjudged, because **no candidate could have passed.**
+
+`mis-gated` is the only classification that accuses the **config**, not the
+proposer. Reach for it when a failure is total and uniform across independent
+seeds and orthogonal lenses, and the drawn witnesses lie outside what the
+objective could ever let a candidate carry. Two lenses failing identically is
+not always structure — sometimes it is the sound of a wall.
+
+When you classify `mis-gated`:
+
+- **File no killed lever.** A kill recorded on a gate the lever could not pass
+  is a fence around good ground (GR-6). Say so explicitly.
+- **Fold nothing**, and name the contradiction between `objective.gate` and
+  `objective.metric` in one sentence a keystone can act on.
+- The `nextLead` addresses the **gate**, never the proposer's next attempt.
+
+A critic that lacks this word will always blame the proposer, because the
+other three classifications leave it nowhere else to look. That is a failure
+mode of the vocabulary, not of the round.
 
 ## Reads
 

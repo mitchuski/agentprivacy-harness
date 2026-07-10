@@ -210,13 +210,29 @@ async function runHarness(config, rt, runArgs = {}) {
 
 const WORD_RULE = `tr -s '[:space:]' '\\n' < <file> | grep -c .  (whitespace-split tokens)`
 
-// One entry per map file. `sources` is the Gap's ENTIRE reading list for that
-// target: bounded, First-Person-authored, and blind to the proposer's choices.
-// Add a target by naming the files whose facts that map section is answerable
-// from — never by pointing at a corpus root.
+// One entry per map file.
+//
+//   sources    — the Gap's ENTIRE reading list. Bounded, First-Person-authored,
+//                blind to the proposer's choices.
+//   mustAnswer — the SCOPE CONTRACT: the fact classes this map is responsible
+//                for carrying. The Gap indexes ONLY facts that answer one of
+//                these. Everything else in the sources is out of scope.
+//
+// Why mustAnswer exists (round u2, 2026-07-10): the Gap was told to index "any
+// mechanically checkable fact" from the sources, and duly drew the grimoire's
+// licence string, a JSON `version` field, and an audit script's
+// `process.exitCode` expression. The target is a 1,150-word map of a 612 KB
+// corpus — 1.1% of its sources. An 8/8 on arbitrary source facts demands a
+// TRANSCRIPT, while objective.metric demands compression. Both proposals came
+// back 0/8. No candidate could ever have passed. That is not a bad map; it is
+// a bad gate — and a gate no candidate can pass is a wall.
+//
+// The scope contract fixes it without handing the proposer its own exam: the
+// config declares WHICH KINDS of fact are fair game, the Gap still chooses
+// WHICH ONES by hashing the proposal, and the proposer sees neither.
 const TARGETS = {
   'README.md': {
-    what: 'the five-layer corpus topology, the work dynamics, the resolution rule',
+    what: 'the corpus topology, the work dynamics, the resolution rule',
     sources: [
       'C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md',
       'C:/Users/mitch/agentprivacy_master/src/data/conjecture-register-v6-mirror.json',
@@ -225,12 +241,28 @@ const TARGETS = {
       'C:/Users/mitch/game42/game-of-42.json',
       'C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json',
     ],
+    mustAnswer: [
+      'for each corpus layer: which repo owns it, and the exact path of its authority file',
+      'the rule that resolves a disagreement between prose and register, stated in the source',
+      'what a mirror says about its own editability (cite the field, not a paraphrase)',
+      'the current conjecture register head and the next free number',
+      'the exit condition of the substrate coherence gate (what makes it fail)',
+      'the name and algebra of each of the seven seats, per the worked instance registry',
+      'for any claim the map marks PROVEN: the exact re-runnable command that proves it',
+    ],
   },
   'SEATS.md': {
     what: 'the 42 personas, the seat map, the invariants, the falsified wing rule',
     sources: [
       'C:/Users/mitch/agentprivacy_master/agentprivacy-skills/agentprivacy-skills-v5/persona',
       'C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json',
+    ],
+    mustAnswer: [
+      'the count of personas, and the split by alignment',
+      'which persona the worked instance seats at each of the seven seats, and its alignment',
+      'the algebra operator carried by each algebra-bearing seat',
+      'the equation_term of any persona the map names',
+      'for any claim the map marks PROVEN: the exact re-runnable command that proves it',
     ],
   },
   'FLEET.md': {
@@ -239,6 +271,12 @@ const TARGETS = {
       'C:/Users/mitch/agentprivacy_master/public/tomes/workshops',
       'C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json',
       'C:/Users/mitch/cityofmages/architecture/lattice-vertex.ts',
+    ],
+    mustAnswer: [
+      'the six sovereignty axes, in order, with their bit weights',
+      'for any workshop the map names: its vertex, its ceremony shape, and its resident mage (or null)',
+      'the anchor law, and the complement of any vertex the map names',
+      'for any claim the map marks PROVEN: the exact re-runnable command that proves it',
     ],
   },
 }
@@ -253,6 +291,7 @@ const targetOf = (ctx) => {
   return { name: t, ...TARGETS[t] }
 }
 const sourceList = (t) => t.sources.map(s => `  - ${s}`).join('\n')
+const mustAnswerList = (t) => t.mustAnswer.map((q, i) => `  Q${i + 1}. ${q}`).join('\n')
 
 const config = {
   name: 'universe-builder',
@@ -333,8 +372,10 @@ Proposal artifact (verbatim):
 ${JSON.stringify(proposal)}
 YOUR READING LIST IS FIXED AND COMPLETE. It was set by the config before the proposer was summoned; the proposer has never seen it and cannot influence it. Read these and ONLY these as the ORIGINAL:
 ${sourceList(t)}
+YOUR SCOPE CONTRACT. The target is a MAP, not a transcript: it is roughly 1% the size of its sources, and it is answerable only for the fact classes below. Index ONLY facts that answer one of these questions. A licence string, a JSON version field, a line number, or a code expression is OUT OF SCOPE unless one of these questions asks for it — drawing such a fact tests nothing and fails every possible candidate (round u2 proved this: 0/8 twice, on two independent seeds).
+${mustAnswerList(t)}
 Procedure:
-1. Index checkable facts from the sources above — a count, a name, a vertex, a field value, a status, a path. Number them F1..Fn; aim for 20-30 (enough for a fair draw, few enough to finish). Print the numbered list with each fact's source path and the value. Index the SOURCES, not the proposal: a fact the rewrite never mentions is exactly the kind the draw must be able to reach. Do not let the proposal steer what you index.
+1. Index checkable facts from the sources above that fall INSIDE the scope contract — a count, a name, a vertex, a field value, a status, a path, a command. Number them F1..Fn; aim for 20-30. Print the numbered list with each fact's source path, its value, and the contract question (Q1..Qn) it answers. A fact answering no question does not go in the pool. Index the SOURCES, not the proposal: within the contract, a fact the rewrite never mentions is exactly the kind the draw must reach. Do not let the proposal steer what you index.
 2. Canonically serialize the proposal above (JSON, recursive sorted keys, no whitespace) and SAVE THOSE EXACT BYTES to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/proposal_canon.json. It must persist — it is the auditor's only route to your seed. SHA-256 that file with a real shell command; show the command and the digest. sha256sum of the saved file MUST equal seedHex.
 3. Draw 8 distinct fact indices without replacement: take the digest bytes left to right as unsigned ints b0,b1,...; for draw k, idx = b_k mod (remaining count); remove it. Show every step.
 4. For each drawn fact write one question and quote the expected answer from its source, with the path.
@@ -359,7 +400,9 @@ Write verdict.json to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/ with EXACTLY 
     critic: (proposals, verdicts, ctx) =>
       `Seat CRITIC. Proposals: ${JSON.stringify(proposals.map(p => ({ leverId: p.leverId, lens: p.lens, expectedMetric: p.expectedMetric })))}
 Verdicts: ${JSON.stringify(verdicts)}
-Classify each closed lever structural / probe-limited / noise. Red-team the CARTOGRAPHER's rationale — did the lens actually find its layer, or did the draw simply miss what it dropped? An 8-question draw over 20-30 indexed facts catches a single omission only sometimes; say so plainly when it applies and classify probe-limited rather than pretending. Never overrule the prover's verdict.
+Classify each closed lever structural / probe-limited / noise / mis-gated (see your seat card). Red-team the CARTOGRAPHER's rationale — did the lens actually find its layer, or did the draw simply miss what it dropped? An 8-question draw over 20-30 indexed facts catches a single omission only sometimes; say so plainly and classify probe-limited rather than pretending.
+BEFORE blaming the proposer, check the gate. If every lever failed totally and uniformly across independent seeds and orthogonal lenses, ask whether the drawn witnesses lie outside what objective.metric could ever let a candidate carry. If so the class is MIS-GATED: the verdict stands, the lever is unjudged, no killed lever is filed, and your nextLead addresses the GATE, not the proposer. Two lenses failing identically is not always structure — sometimes it is the sound of a wall.
+Never overrule the prover's verdict.
 Draft KILLED_LEVERS entries for structural kills. Name exactly ONE next lead.`,
 
     chronicle: (round, ctx) =>
@@ -424,7 +467,7 @@ Then do the seat's real work (universe/SEATS.md §5): compress this round to ONE
     critic: {
       type: 'object', required: ['classifications', 'nextLead'],
       properties: {
-        classifications: { type: 'array', items: { type: 'object', required: ['leverId', 'class', 'why'], properties: { leverId: { type: 'string' }, class: { type: 'string', enum: ['structural', 'probe-limited', 'noise'] }, why: { type: 'string' } } } },
+        classifications: { type: 'array', items: { type: 'object', required: ['leverId', 'class', 'why'], properties: { leverId: { type: 'string' }, class: { type: 'string', enum: ['structural', 'probe-limited', 'noise', 'mis-gated'] }, why: { type: 'string' } } } },
         nextLead: { type: 'string' },
         killedLeverDrafts: { type: 'array', items: { type: 'string' } },
       },

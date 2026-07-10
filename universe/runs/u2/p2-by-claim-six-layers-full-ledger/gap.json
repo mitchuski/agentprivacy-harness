@@ -1,0 +1,118 @@
+{
+  "seat": "hold-apart (the Gap ⟻)",
+  "runId": "u2",
+  "proposal": "p2-by-claim-six-layers-full-ledger",
+  "seedHex": "529f37e944b0ed4bd620ef0a3960ede8ba2e0c097f6f219f025e4e10285177da",
+  "hashCommand": "sha256sum proposal_canon.json  (== node crypto.createHash('sha256') over the same bytes)",
+  "serialization": "JSON.parse(proposal_raw.json) then recursive sorted-key, no-whitespace re-emit -> proposal_canon.json (14786 bytes). canon(v): arrays '['+map+']'; objects '{'+Object.keys.sort().map(JSON.stringify(k)+':'+canon(v[k]))+'}'; primitives JSON.stringify.",
+  "drawRule": "Take digest bytes left-to-right b0..b7. Maintain remaining = [1..30] (fact ids in order). For draw k: idx = b_k mod remaining.length; pick remaining[idx]; splice it out. Without replacement.",
+  "factIndex": [
+    { "id": "F1",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:5",  "value": "Register head: C96 - next free number: C97" },
+    { "id": "F2",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:3",  "value": "Status AUTHORITATIVE; Gate G1 signed 2026-06-10 (all eight dispositions confirmed by the First Person)" },
+    { "id": "F3",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:37",  "value": "C7 = 'Three-axis separation is multiplicative', Conf 30%, status 'active - V6 falsification frontier', register core" },
+    { "id": "F4",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:80",  "value": "C40 = 'Zcash dual-ledger preserves Eight Cloak Properties', ~70%, 'KEEPS this number (see G1 disposition 1)'" },
+    { "id": "F5",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:97",  "value": "C51 = 'The ⟻ remains max-betweenness across trust-graph evolutions', status 'occupied - never reassign'" },
+    { "id": "F6",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:146",  "value": "C81 = 'Existence-Leak: a ZK proof of feasibility leaks an upper bound on reconstruction difficulty; I(feasibility; method) > 0', ~70%, PROMOTED Run 3 2026-06-10" },
+    { "id": "F7",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:79",  "value": "C39 = 'Kindred-blade as ecosystem-layer primitive', ~80%, PROMOTED 2026-07-01 (Tome X), discharged from ~50%" },
+    { "id": "F8",  "source": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:7",  "value": "License: CC BY-SA 4.0" },
+    { "id": "F9",  "source": "agentprivacy_master/src/data/conjecture-register-v6-mirror.json:6",  "value": "mirrored_at = 2026-07-01" },
+    { "id": "F10", "source": "agentprivacy_master/src/data/conjecture-register-v6-mirror.json:2",  "value": "generated_from = agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md" },
+    { "id": "F11", "source": "agentprivacy_master/src/data/conjecture-register-v6-mirror.json:3",  "value": "Regenerate command: node scripts/mirror-conjecture-register.mjs; 'when prose and register disagree, the register wins'" },
+    { "id": "F12", "source": "agentprivacy_master/src/data/conjecture-register-v6-mirror.json:5",  "value": "register_head = 'C96 - next free number: C97'" },
+    { "id": "F13", "source": "spellweb/scripts/graph-coherence-audit.mjs:6",  "value": "Run command: node scripts/graph-coherence-audit.mjs" },
+    { "id": "F14", "source": "spellweb/scripts/graph-coherence-audit.mjs:10-12",  "value": "It reads three files: ../src/data/nodes.ts, ../src/data/edges.ts, ../src/types/graph.ts" },
+    { "id": "F15", "source": "spellweb/scripts/graph-coherence-audit.mjs:55-59",  "value": "Duplicate labels are logged at severity 'warn' (not error) because 'imports resolve waypoints by exact label'" },
+    { "id": "F16", "source": "spellweb/scripts/graph-coherence-audit.mjs:119",  "value": "process.exitCode = issues.error.length > 0 ? 1 : 0 (nonzero exit only when there are errors, not warnings)" },
+    { "id": "F17", "source": "spellweb/scripts/graph-coherence-audit.mjs:101-104",  "value": "Check 8: a shopAnchor that matches no workshop href is a 'warn'" },
+    { "id": "F18", "source": "game42/game-of-42.json:44-52",  "value": "protection axis: axis 'boundary', latticeBit 5, latticeAxisVertex 32, agent 'Soulbis ⚔️', colour #E0A526, zkDimension privacy" },
+    { "id": "F19", "source": "game42/game-of-42.json:37-43",  "value": "delegation axis: axis 'agency', latticeBit 4, latticeAxisVertex 16, agent 'Soulbae 🧙', colour #2563EB" },
+    { "id": "F20", "source": "game42/game-of-42.json:168",  "value": "collapseRule: 'board seals only when all six heptads lock; any heptad incomplete -> board cannot seal (multiplicative collapse)'" },
+    { "id": "F21", "source": "game42/game-of-42.json:157-161",  "value": "personaTemplates.privacy_guide = [soulbis, soulbae, netkeeper]" },
+    { "id": "F22", "source": "game42/game-of-42.json:14-16",  "value": "axisSpace.lattice = '{0,1}^6 (Z/(2^6)Z)'; roots = 'stratum-1 (C(6,1)=6)'" },
+    { "id": "F23", "source": "tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json:1-4",  "value": "canon = 'tigzkp-mage', version = 1, date = '2026-07-03'" },
+    { "id": "F24", "source": "tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json:24-28",  "value": "anchors: aletheia vertex 38, lethae vertex 25, xorSum 63" },
+    { "id": "F25", "source": "tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json:13-19",  "value": "axis id 'compute', latticeAxisVertex 2, colour #7C5CFF, meaning 'intelligence/learning'" },
+    { "id": "F26", "source": "tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json:110-118",  "value": "keystone seat: algebra 'succ', agentName 'soulbae 🧙 ⊥ soulbis ⚔️', isKeystone true" },
+    { "id": "F27", "source": "cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json:2-4",  "value": "version '1.9.1', created_at '2026-05-09T00:00:00Z', updated_at '2026-07-01'" },
+    { "id": "F28", "source": "cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json:61-64",  "value": "attachment_architecture layer_1_primary_personas count 42, status 'locked'" },
+    { "id": "F29", "source": "cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json:72-73",  "value": "layer_3_vertices count 64, status 'fixed (2⁶ lattice)'" },
+    { "id": "F30", "source": "cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json:92-101",  "value": "first_divergent_attachment: cast_name 'Lethae', sigil 🌘, primary_persona 'moonkeeper', vertex 'V38', register_shift 'mage_register', complement_of_cast 'aletheia (V38)'" }
+  ],
+  "drawSteps": [
+    { "k": 0, "byte": 82,  "mod": 30, "idx": 22, "picked": "F23" },
+    { "k": 1, "byte": 159, "mod": 29, "idx": 14, "picked": "F15" },
+    { "k": 2, "byte": 55,  "mod": 28, "idx": 27, "picked": "F30" },
+    { "k": 3, "byte": 233, "mod": 27, "idx": 17, "picked": "F19" },
+    { "k": 4, "byte": 68,  "mod": 26, "idx": 16, "picked": "F18" },
+    { "k": 5, "byte": 176, "mod": 25, "idx": 1,  "picked": "F2"  },
+    { "k": 6, "byte": 237, "mod": 24, "idx": 21, "picked": "F27" },
+    { "k": 7, "byte": 75,  "mod": 23, "idx": 6,  "picked": "F8"  }
+  ],
+  "draw": [
+    {
+      "n": 1,
+      "factId": "F23",
+      "question": "In the tigzkp-mage workshop canon, what is the top-level `date` field, and what is the `version` integer?",
+      "expectedAnswer": "date = \"2026-07-03\"; version = 1 (canon = \"tigzkp-mage\").",
+      "sourcePath": "tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json:1-4",
+      "tierProbe": "The map (mapText) lists `tig_zk_loop` as a harness-layer instance and cites `tigzkp_mage/claims_register.md#CR-10` at tier PROVEN, but it never asserts this canon's version/date. The map is SILENT on F23. Per T5, a question the map alone cannot answer is worth zero for the proposer; no re-run command is owed because nothing is asserted."
+    },
+    {
+      "n": 2,
+      "factId": "F15",
+      "question": "In spellweb's graph-coherence-audit.mjs, at what severity are duplicate node labels reported, and what is the stated reason?",
+      "expectedAnswer": "Severity 'warn' (not 'error'); reason: imports resolve waypoints by exact label (comment: 'duplicate labels (imports resolve waypoints by exact label)').",
+      "sourcePath": "spellweb/scripts/graph-coherence-audit.mjs:55-59",
+      "tierProbe": "The map's substrate row cites the authority as 'coherence audit, 0 errors' and elsewhere tags the corpora table {PROVEN,IMPLEMENTED,...}. If the assay answers F15 as PROVEN from the map, the §2 probe demands the re-runnable command; the only audit command anywhere is `node scripts/graph-coherence-audit.mjs` (F13) - and note the map's '0 errors' is about ERRORS, whereas F15 concerns WARNINGS, which the audit's exit code (F16) deliberately ignores. The map does not carry the warn-vs-error distinction; expect it unanswerable."
+    },
+    {
+      "n": 3,
+      "factId": "F30",
+      "question": "In the cityofmages grimoire v1.9.1, the first_divergent_attachment carries a `cast_name`. What is that cast_name, what sigil and vertex does it hold, and which cast is it the complement of?",
+      "expectedAnswer": "cast_name = \"Lethae\", sigil 🌘, vertex \"V38\", register_shift mage_register, complement_of_cast \"aletheia (V38)\" (primary_persona moonkeeper).",
+      "sourcePath": "cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json:92-101",
+      "tierProbe": "The map DOES assert a related claim - the name-collision sentence - tagged DERIVED: `{DERIVED,IMPLEMENTED,reflect,cityofmages-grimoire-cast_name-keys+SEATS.md§1}`. Per §2 (DERIVED), the derivation step is owed: show that the grimoire literally contains a `cast_name` key (it does, at line 98/94), and that this is the field naming the divergent attachment 'Lethae'. Note the map asserts only that `cast_name` KEYS EXIST; it does NOT state the value 'Lethae' or the V38 vertex - so the value half of F30 is still unanswerable from the map alone."
+    },
+    {
+      "n": 4,
+      "factId": "F19",
+      "question": "In game-of-42.json, for the axis whose agent is the Mage, give the axis id, the latticeBit, and the latticeAxisVertex.",
+      "expectedAnswer": "axis id = \"delegation\" (axis 'agency'), latticeBit 4, latticeAxisVertex 16, agent \"Soulbae 🧙\", colour #2563EB.",
+      "sourcePath": "game42/game-of-42.json:37-43",
+      "tierProbe": "The map names game42 only as a co-authority for the 'structure' layer ('the grimoire JSON head', where 'cityofmages, game42'). It never asserts the axis->latticeBit->vertex mapping. The map is SILENT on F19; unanswerable from the map alone (T5)."
+    },
+    {
+      "n": 5,
+      "factId": "F18",
+      "question": "In game-of-42.json, which agent is bound to the `protection` axis, and what are that axis's latticeBit and latticeAxisVertex?",
+      "expectedAnswer": "agent = \"Soulbis ⚔️\", axis 'boundary', latticeBit 5, latticeAxisVertex 32, zkDimension 'privacy', colour #E0A526.",
+      "sourcePath": "game42/game-of-42.json:44-52",
+      "tierProbe": "Same as F19: the map does not carry the game42 axis/agent/vertex bindings. SILENT; unanswerable from the map alone. (A map that claims game42 as a structure authority yet cannot answer which agent holds protection is exactly the by-claim gap the draw exists to expose.)"
+    },
+    {
+      "n": 6,
+      "factId": "F2",
+      "question": "The Conjecture Register states its authority status and a signing gate with a date. What gate was signed, on what date, and how many dispositions were confirmed?",
+      "expectedAnswer": "Status AUTHORITATIVE; Gate G1 signed 2026-06-10; all eight (8) dispositions confirmed by the First Person.",
+      "sourcePath": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:3",
+      "tierProbe": "The map cites the register's MIRROR at tier REPORTED (`{REPORTED,IMPLEMENTED,protect,...conjecture-register-v6-mirror.json}`) and states the resolution rule 'register wins, prose gets an erratum' {PROVEN,...,ERRATA.md+ADMISSION.md§4.5}. Per §2 (REPORTED), the source slug is owed: the claim traces to the register md / its mirror. But the specific G1 date and disposition count are NOT in the map; expect the date/count unanswerable, only the 'register is authoritative' framing recoverable."
+    },
+    {
+      "n": 7,
+      "factId": "F27",
+      "question": "What is the exact `version` string of the cityofmages grimoire in the reading-list file, and what are its created_at and updated_at values?",
+      "expectedAnswer": "version = \"1.9.1\"; created_at = \"2026-05-09T00:00:00Z\"; updated_at = \"2026-07-01\".",
+      "sourcePath": "cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json:2-4",
+      "tierProbe": "The map's structure row cites 'the grimoire JSON head' as the authority for cityofmages, so the map POINTS AT this file - but it never states the version number 1.9.1 or the dates. Per the map's own tags the pointer is {PROVEN,...} for the corpora table; the assay must still produce '1.9.1' from the map alone, which it cannot. SILENT on the value; unanswerable (T5)."
+    },
+    {
+      "n": 8,
+      "factId": "F8",
+      "question": "Under what license is the Conjecture Register published?",
+      "expectedAnswer": "CC BY-SA 4.0.",
+      "sourcePath": "agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md:7",
+      "tierProbe": "The map never mentions the register's license. SILENT on F8; unanswerable from the map alone (T5). Indexed precisely because a by-claim map about the canon layer omits the license its own authority file declares."
+    }
+  ],
+  "notes": "Fact index built from the six fixed sources only, not steered by the proposal (source facts the rewrite never mentions were indexed deliberately, e.g. F8 license, F18/F19 game42 axis bindings, F2 G1 date). Witnesses derive solely from the Fiat-Shamir seed; none was suggested by the proposer (GR-4). A revised proposal is a new artifact and must re-seed."
+}

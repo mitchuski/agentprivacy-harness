@@ -6,19 +6,19 @@
     "metric": "words",
     "direction": "lower-is-better",
     "countingRule": "tr -s '[:space:]' '\\n' < <file> | grep -c .  summed over universe/*.md",
-    "gate": "12 held-out corpus claims, drawn by hashing the map, answered from the map alone — must be 12/12",
+    "gate": "8 held-out claims, drawn by hashing the map from the target's FIXED source list AND bounded by that target's mustAnswer scope contract, answered from the map alone — must be 8/8. The scope contract exists because u2 proved an unbounded draw makes the feasible set empty (see runs[].u2).",
     "hardConstraint": "every claim carries pathway + tier + status + a resolving trace; MYTH never in a method section"
   },
   "baseline": {
-    "metric": 7753,
-    "measuredAt": "2026-07-10",
-    "note": "hand-authored seed map, written before universe/harness.config.mjs existed. It has NOT passed the gate — no Gap has drawn against it. A starting line, not a result (GR-5). Includes the E-2 reversal."
+    "metric": 7868,
+    "measuredAt": "2026-07-10 (post-u2 keystone correction)",
+    "note": "Re-measured after the keystone amended universe/README.md to retract a falsified claim (that this instance is the field-guide toy promoted to real work; u2 disproved it). The map GREW by 115 words. Growth is honest here: the objective is to shrink, but a correction that costs words is still a correction, and a frontier that hides it is a lying frontier (GR-1). Still UNVALIDATED — no Gap has drawn against this map under an honest gate."
   },
   "best": {
-    "metric": 7753,
+    "metric": 7868,
     "leverId": null,
     "gateResult": null,
-    "note": "equal to baseline: no validated round yet. best.metric may only move on a VALIDATED 12/12 verdict folded by the keystone."
+    "note": "equal to baseline. No validated round. u1 INCOMPLETE, u2 MIS-GATED — neither produced evidence about the map. best.metric may only move on a VALIDATED verdict folded by the keystone."
   },
   "corpora": [
     {
@@ -58,11 +58,33 @@
       "date": "2026-07-10",
       "status": "INCOMPLETE",
       "reason": "session token limit killed 12 of 17 agents, including all four Gap draws. No witnesses derived; no gate ran.",
-      "tally": { "VALIDATED": 0, "MIRAGE": 0, "BLOCKED": 0 },
+      "tally": {
+        "VALIDATED": 0,
+        "MIRAGE": 0,
+        "BLOCKED": 0
+      },
       "folded": null,
       "yield": "a defect in engine/dual_agent_loop.mjs: dead seats were counted as dry rounds, so the loop reported an outage as exhaustion. Fixed; pinned by engine/loop.test.mjs.",
       "survivors": "measure + 4 proposals, unassayed. Candidates, not results (GR-5). Cached against the run for replay.",
       "chronicle": "chronicles/2026-07-10_u1_incomplete.md"
+    },
+    {
+      "runId": "u2",
+      "date": "2026-07-10",
+      "status": "COMPLETE",
+      "reason": "9/9 agents, zero errors. Both seeds re-derived by the auditor's command; both verdicts sound.",
+      "tally": {
+        "VALIDATED": 0,
+        "MIRAGE": 2,
+        "BLOCKED": 0
+      },
+      "folded": null,
+      "note": "MIS-GATED. Both candidates BEAT the metric (7514, 7732 < 7753) and both scored 0/8, because the Gap drew arbitrary source facts (a licence string, a JSON version field, a code expression) from 612 KB of sources that the 7 KB map was never responsible for carrying. The feasible set was empty: objective.metric says compress, the gate demanded a transcript. A gate no candidate can pass is a wall, and the verdicts measure the config, not the map.",
+      "yield": "the critic's taxonomy had no word for a bad gate — structural/probe-limited/noise all blame the proposer — so it convicted the proposer on sound evidence. Added the 'mis-gated' classification (seats/critic.md). Added the mustAnswer scope contract per target. Corrected universe/README.md's false claim that this instance is the field-guide toy promoted: the toy's candidate is a compression OF its source; this map is 1.1% of its sources.",
+      "killedLeversFiled": "NONE, deliberately. A kill recorded against a gate the lever could not pass is a fence around good ground (GR-6). Both levers remain unjudged.",
+      "fairCatch": "one drawn fact was legitimate and survives: the map asserted the substrate coherence audit as PROVEN without stating its re-runnable command, which ADMISSION §2 requires. The tier-dependent probe tests the map's own claims and was always sound.",
+      "unclaimedFinding": "the by-container lens observed the map describes FIVE layers while frontier.json enumerates SIX corpora (skills → cast is dropped) and conformChecks refuses fewer than six. Produced by a round that scored zero; not folded, because no gate validated it.",
+      "chronicle": "chronicles/2026-07-10_u2_mis-gated.md"
     }
   ],
   "openItems": [

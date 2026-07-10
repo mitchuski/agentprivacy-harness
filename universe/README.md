@@ -37,7 +37,18 @@ as every other result here:
   **IMPLEMENTED / SPEC / LORE** label and traces to a concrete path. A
   beautiful sentence with no path is deleted, not softened (GR-9).
 
-It is the field-guide toy in `examples/`, promoted to real work.
+**It is not the field-guide toy promoted to real work**, and saying so cost a
+round. The toy compresses a document *into itself*: every fact the Gap can
+draw lives in the original, so `candidate ⊆ facts(original)` and 8/8 is
+reachable. This map is ~1% the size of its sources. Draw an arbitrary fact
+from them — a licence string, a JSON `version` field — and no compression can
+answer it; only a transcript can, and the objective forbids one.
+
+So the Gap here is bounded by a **scope contract** (`mustAnswer` in
+`harness.config.mjs`): the config declares which *classes* of fact the map is
+responsible for, the Gap still chooses *which ones* by hashing the proposal,
+and the proposer sees neither. Round u2 is why. See
+`chronicles/2026-07-10_u2_mis-gated.md`.
 
 ## The five layers
 

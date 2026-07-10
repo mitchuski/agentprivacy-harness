@@ -102,7 +102,7 @@ Classify each closed lever structural/probe-limited/noise (red-team the proposer
     critic: {
       type: 'object', required: ['classifications', 'nextLead'],
       properties: {
-        classifications: { type: 'array', items: { type: 'object', required: ['leverId', 'class', 'why'], properties: { leverId: { type: 'string' }, class: { type: 'string', enum: ['structural', 'probe-limited', 'noise'] }, why: { type: 'string' } } } },
+        classifications: { type: 'array', items: { type: 'object', required: ['leverId', 'class', 'why'], properties: { leverId: { type: 'string' }, class: { type: 'string', enum: ['structural', 'probe-limited', 'noise', 'mis-gated'] }, why: { type: 'string' } } } },
         nextLead: { type: 'string' },
         killedLeverDrafts: { type: 'array', items: { type: 'string' } },
       },

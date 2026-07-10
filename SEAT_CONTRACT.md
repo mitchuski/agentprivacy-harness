@@ -30,11 +30,13 @@ ledgers live, with the door (G4) always the First Person's.
 export default {
   name: 'my-harness',
 
-  // objective — all three fields required
+  // objective — the first three required; the fourth is advised and will
+  // likely become required
   objective: {
     metric: 'what frontier.json tracks, lower is better (e.g. "words")',
     gate: 'the held-out check that must fully pass — T5: zero collapses',
     hardConstraint: 'validity no score can override — GR-3',
+    canary: 'an artifact that passes `gate` BY CONSTRUCTION, and why',
   },
 
   // trust literals — conform.mjs checks these
@@ -107,6 +109,39 @@ source harnesses.
 - **critic**: `{ classifications: [{leverId, class:
   'structural'|'probe-limited'|'noise', why}], nextLead, killedLeverDrafts[] }`
   — exactly one `nextLead`.
+
+## The canary — and when NOT to build a harness
+
+**A gate with no artifact known to pass it cannot distinguish a bad candidate
+from an impossible gate.** Name one, in `objective.canary`.
+
+The toy is safe by accident: its 8 questions are drawn *from* `GUIDE.md`, so
+the uncompressed original answers all 8 by construction. The feasible set is
+provably non-empty, and every `MIRAGE` is therefore the candidate's fault.
+Take the canary away and a total failure becomes ambiguous — which is exactly
+what happened to the `universe-builder` instance, where two blind lenses each
+scored 0/8 against a gate that *no* candidate could pass, and the critic,
+having no word for a bad gate, convicted the proposer on sound evidence.
+`conform.mjs` advises on a missing canary today.
+
+Before you write any of this, ask whether you need a harness at all:
+
+> **The Gap earns its cost only where the claim space is too large to check.**
+
+shor_mage samples 9,024 witnesses because you cannot run every input. tigzkp
+samples held-out points because R1CS equivalence cannot be enumerated. There,
+sampling is a necessity and hashing the proposal is what makes it honest.
+
+If your claim space is **enumerable**, check all of it. Against an exhaustive
+check a mirage is impossible: there is nothing to tune to. You want an
+**auditor** — deterministic, total, cheap — not a prover. `universe/audit.mjs`
+is one, and `universe/retired/` is the harness it replaced, kept as a worked
+negative result.
+
+The complementary test, from Promise Theory: the split is warranted when a
+single agent would have to promise **two things it cannot independently
+control**. If one agent can honestly promise the whole job — because anyone
+may verify it completely, afterward — you do not need the pair.
 
 ## Product objectives — the complement pair
 

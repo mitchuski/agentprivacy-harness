@@ -3,22 +3,23 @@
   "updated": "2026-07-10",
   "instance": "universe-builder",
   "objective": {
-    "metric": "words",
-    "direction": "lower-is-better",
+    "metric": "words (historical; retained for the record, no longer an optimization target)",
+    "direction": "none — the universe layer is audited, not optimized",
     "countingRule": "tr -s '[:space:]' '\\n' < <file> | grep -c .  summed over universe/*.md",
-    "gate": "8 held-out claims, drawn by hashing the map from the target's FIXED source list AND bounded by that target's mustAnswer scope contract, answered from the map alone — must be 8/8. The scope contract exists because u2 proved an unbounded draw makes the feasible set empty (see runs[].u2).",
-    "hardConstraint": "every claim carries pathway + tier + status + a resolving trace; MYTH never in a method section"
+    "gate": "node universe/audit.mjs — EXHAUSTIVE and DETERMINISTIC. Every claim is checked, not sampled. Against an exhaustive check a mirage is impossible: there is nothing to tune to.",
+    "hardConstraint": "every claim carries pathway + tier + status + a resolving trace; MYTH never in a method section; the layer table covers every corpus; the anchor law holds on every declared pair",
+    "whyNotAHarness": "The Fiat-Shamir Gap earns its cost only where the claim space is too large to check. This map makes ~100 enumerable claims. Rounds u1 and u2 applied a sampled gate here and produced no evidence about the map at a cost of ~1.4M tokens. See chronicles/2026-07-10_u3_retirement.md."
   },
   "baseline": {
-    "metric": 7868,
-    "measuredAt": "2026-07-10 (post-u2 keystone correction)",
-    "note": "Re-measured after the keystone amended universe/README.md to retract a falsified claim (that this instance is the field-guide toy promoted to real work; u2 disproved it). The map GREW by 115 words. Growth is honest here: the objective is to shrink, but a correction that costs words is still a correction, and a frontier that hides it is a lying frontier (GR-1). Still UNVALIDATED — no Gap has drawn against this map under an honest gate."
+    "metric": 8112,
+    "measuredAt": "2026-07-10 (post-retirement)",
+    "note": "Re-measured after the keystone (a) retracted the field-guide-toy claim, (b) restored the dropped `cast` layer that audit.mjs caught on its first run, and (c) reframed the map around the auditor. The map GREW. Growth is honest: the objective was to shrink a map under a sampled gate, and that objective is retired. See runs[].u3."
   },
   "best": {
-    "metric": 7868,
+    "metric": 8112,
     "leverId": null,
     "gateResult": null,
-    "note": "equal to baseline. No validated round. u1 INCOMPLETE, u2 MIS-GATED — neither produced evidence about the map. best.metric may only move on a VALIDATED verdict folded by the keystone."
+    "note": "equal to baseline. No round ever validated anything. The metric is retained as a HISTORICAL number, not a live objective — the universe layer is now audited exhaustively, not optimized adversarially."
   },
   "corpora": [
     {
@@ -85,12 +86,26 @@
       "fairCatch": "one drawn fact was legitimate and survives: the map asserted the substrate coherence audit as PROVEN without stating its re-runnable command, which ADMISSION §2 requires. The tier-dependent probe tests the map's own claims and was always sound.",
       "unclaimedFinding": "the by-container lens observed the map describes FIVE layers while frontier.json enumerates SIX corpora (skills → cast is dropped) and conformChecks refuses fewer than six. Produced by a round that scored zero; not folded, because no gate validated it.",
       "chronicle": "chronicles/2026-07-10_u2_mis-gated.md"
+    },
+    {
+      "runId": "u3",
+      "date": "2026-07-10",
+      "status": "RETIRED",
+      "reason": "No round was run. The keystone retired the universe-builder harness instead, on the argument that an exhaustive auditor strictly dominates a sampled gate when every claim is enumerable.",
+      "tally": {
+        "VALIDATED": 0,
+        "MIRAGE": 0,
+        "BLOCKED": 0
+      },
+      "folded": null,
+      "yield": "universe/audit.mjs — exhaustive, deterministic, zero agents. On its FIRST run it caught the dropped `cast` layer: the defect the u2 by-container lens had found but could not validate, because its round scored 0/8 against an impossible gate. Milliseconds and zero tokens, against 811k tokens and no verdict.",
+      "chronicle": "chronicles/2026-07-10_u3_retirement.md"
     }
   ],
   "openItems": [
-    "The seed map is unvalidated. Round u1 did not complete — no Gap drew against it. Nothing here may be cited as PROVEN on the strength of a run that never ran.",
-    "countingRule ambiguity found by the measure seat: notes/KILLED_LEVERS.md is a 6th .md under universe/ but sits outside the 'universe/*.md' glob and is therefore excluded from the metric. Decide the rule; do not quietly change the number.",
-    "FLEET.md §7 names a First-Person decision (co-present rite vs key custody); SEATS.md §5 argues it is already settled by RPP. Neither is a verdict.",
+    "objective.canary is proposed for the core SEAT_CONTRACT (a reference artifact the gate must pass by construction). conform.mjs WARNS when absent; it does not yet FAIL, because making it fail would break sibling instances mid-flight. Flipping it to a hard failure is a First-Person call.",
+    "The retired loop lives in universe/retired/. It is prior art and a worked negative result, not dead weight — HARNESS_PATHS.md cites it as the domain where the harness was applied and should not have been.",
+    "FLEET.md section 7 names a First-Person decision (co-present rite vs key custody); SEATS.md section 5 argues RPP already settles it. Neither is a verdict.",
     "ERRATA E-1..E-8 are recorded, not fixed. Each belongs to the corpus that owns it."
   ]
 }

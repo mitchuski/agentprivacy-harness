@@ -245,11 +245,18 @@ thing a harness is ever allowed to do with a door (T6, GR-8).
 
 ## 8 · Build order
 
-1. **spellweb coherence harness** (§5) — ready; proves the skeleton in a
-   metric-free domain.
-2. **The universe-builder** (`universe/harness.config.mjs`) — already here;
-   run it, and let this directory be its output rather than my prose.
-3. **The shelf-life harness** (#12) — the instance the model demands.
+1. **spellweb coherence harness** (§5) — but read `universe/retired/` first.
+   Its audit triad may already be the right shape, in which case it needs a
+   *canary*, not a Gap. A domain whose claims are enumerable wants an auditor.
+2. ~~**The universe-builder**~~ — **RETIRED**, and kept as prior art in
+   `universe/retired/`. It was never a harness: the map's claims are
+   enumerable, so `universe/audit.mjs` checks them all, and against an
+   exhaustive check a mirage is impossible. Two rounds and ~1.4M tokens
+   produced no evidence about the map; nine lines of JavaScript produced a
+   verdict. See `chronicles/2026-07-10_u3_retirement.md`.
+3. **The shelf-life harness** (#12) — the instance the model demands, and a
+   real one: `R(t)` drift cannot be checked exhaustively, because the adversary
+   is next year's frontier model.
 4. **The rite at `/hall` V15** — *after* §7 is decided by the First Person,
    and not before.
 5. Fold MyTerms' loop off the mock bus (#5), then Hearthold (#6).

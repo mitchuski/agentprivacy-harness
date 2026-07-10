@@ -12,6 +12,12 @@ export default {
     metric: 'TODO — what frontier.json tracks, lower is better',
     gate: 'TODO — the held-out check that must fully pass (T5: zero collapses)',
     hardConstraint: 'TODO — validity no score can override (GR-3)',
+    // TODO — the CANARY: name an artifact (or the procedure that builds one)
+    // that passes `gate` BY CONSTRUCTION. Usually it is the current artifact,
+    // unoptimised. Without a canary you cannot tell a bad candidate from an
+    // impossible gate: every lens scores zero and the critic blames the
+    // proposer. conform.mjs advises on this today and may refuse it tomorrow.
+    canary: 'TODO — what passes the gate by construction, and why',
   },
 
   door: 'first-person', // T6 — leave exactly as is; conform.mjs checks the literal

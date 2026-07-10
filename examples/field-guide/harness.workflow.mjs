@@ -197,6 +197,12 @@ const config = {
     metric: 'words',
     gate: 'held-out comprehension: 8 questions drawn by the Gap from the ORIGINAL guide, answered from the compressed text alone, graded against the original — must be 8/8 (T5: zero collapses)',
     hardConstraint: 'the compressed guide remains a self-contained instruction document: no pointers back to the original, no "see full version", every section still actionable on its own (GR-3)',
+    // The canary: the artifact that passes the gate BY CONSTRUCTION.
+    // The Gap draws its 8 questions FROM artifact/GUIDE.md, so GUIDE.md itself
+    // answers all 8 trivially. That guarantees the feasible set is non-empty:
+    // an 8/8 is reachable, so any failure is the candidate's, never the gate's.
+    // Run it if you doubt: feed GUIDE.md as the candidate and it scores 8/8.
+    canary: 'artifact/GUIDE.md itself. The questions are drawn from it, so it answers 8/8 by construction — the gate is satisfiable, and a MIRAGE is therefore always a fault of the candidate, never of the gate.',
   },
 
   door: 'first-person',
@@ -312,7 +318,7 @@ Classify each closed lever structural / probe-limited / noise. Red-team the prop
     critic: {
       type: 'object', required: ['classifications', 'nextLead'],
       properties: {
-        classifications: { type: 'array', items: { type: 'object', required: ['leverId', 'class', 'why'], properties: { leverId: { type: 'string' }, class: { type: 'string', enum: ['structural', 'probe-limited', 'noise'] }, why: { type: 'string' } } } },
+        classifications: { type: 'array', items: { type: 'object', required: ['leverId', 'class', 'why'], properties: { leverId: { type: 'string' }, class: { type: 'string', enum: ['structural', 'probe-limited', 'noise', 'mis-gated'] }, why: { type: 'string' } } } },
         nextLead: { type: 'string' },
         killedLeverDrafts: { type: 'array', items: { type: 'string' } },
       },

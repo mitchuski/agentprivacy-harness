@@ -15,45 +15,57 @@ what may be said about it, at what tier, and which doors it must not open.
 ## What this directory is, and how it stays true
 
 `universe/` is not hand-written prose. It is the **artifact of a harness
-instance** — the universe-builder (`universe/harness.config.mjs`) — whose
-target is the corpus itself.
+auditor** — `universe/audit.mjs` — and of the discovery passes that feed it.
+It is *not* the output of a harness, and the story of why is worth more than
+the map.
 
-That matters because the corpus is too large to hold. Its detail is not
-secret; it is *hidden by volume*. A hand-written map of it would drift,
-flatter, and quietly invent. So the map is produced under the same discipline
-as every other result here:
+The corpus is too large to hold. Its detail is not secret; it is *hidden by
+volume*. A hand-written map of it would drift, flatter, and quietly invent —
+so it must be checked. The question is **how**.
 
-- **The objective** is to make the map *smaller*. A map nobody can hold is not
-  a map.
-- **The Gap** hashes the proposed map and uses the digest to draw facts from
-  the **original corpus** as comprehension questions. The cartographer cannot
-  know which facts will be probed, so the only winning strategy is to preserve
-  every load-bearing one.
-- **The assay** answers those questions *from the map alone* and grades
-  against the corpus. A fabricated claim fails a question drawn from the real
-  thing. This is why `universe/` cannot hallucinate lore: the gate is drawn
-  from what exists, not from what reads well.
-- **The hard constraint** is that every claim carries an honest
-  **IMPLEMENTED / SPEC / LORE** label and traces to a concrete path. A
-  beautiful sentence with no path is deleted, not softened (GR-9).
+**The Gap earns its cost only where the claim space is too large to check.**
+shor_mage draws 9,024 witnesses because you cannot run every input; tigzkp
+draws held-out points because you cannot enumerate R1CS equivalence. Sampling
+is a *necessity*, and hashing the proposal is what makes the sample honest.
 
-**It is not the field-guide toy promoted to real work**, and saying so cost a
-round. The toy compresses a document *into itself*: every fact the Gap can
-draw lives in the original, so `candidate ⊆ facts(original)` and 8/8 is
-reachable. This map is ~1% the size of its sources. Draw an arbitrary fact
-from them — a licence string, a JSON `version` field — and no compression can
-answer it; only a transcript can, and the objective forbids one.
+This map makes on the order of a hundred claims, and every one is enumerable.
+So `audit.mjs` checks **all** of them. Against an exhaustive check a mirage is
+impossible — there is nothing to tune to. A cartographer cannot flatter a
+script that reads every line.
 
-So the Gap here is bounded by a **scope contract** (`mustAnswer` in
-`harness.config.mjs`): the config declares which *classes* of fact the map is
-responsible for, the Gap still chooses *which ones* by hashing the proposal,
-and the proposer sees neither. Round u2 is why. See
-`chronicles/2026-07-10_u2_mis-gated.md`.
+We learned this the expensive way. Rounds `u1` and `u2` ran the corpus through
+a real dual-agent harness, cost about 1.4M tokens, and produced **no evidence
+about the map at all**: `u1` died of infrastructure, `u2` of a gate no
+candidate could pass. Both failures were symptoms of forcing the shape. The
+repo's own applicability test had said so all along — *the harness transfers to
+any pipeline where generated artifacts must survive **adversarial** scrutiny* —
+and an auditor that reads every claim is not an adversary. It is an **integrity
+gate**, exactly as `HARNESS_PATHS.md` classifies the substrate and the
+publishing loop.
 
-## The five layers
+So the universe layer has three jobs, and only the first two are ours:
 
-The universe is not one corpus. It is five, and confusing them is the most
-common error — a claim true at one layer is false at another.
+- **Discovery** — what is in the corpus that the map does not know about? No
+  gate; it proposes, and the First Person ticks. (The dream cycle's shape.)
+- **Audit** — does every claim resolve, at the tier it declares? Deterministic,
+  exhaustive, seconds, `node universe/audit.mjs`. It catches the anchor law, a
+  dropped corpus layer, an unfenced myth, a stale frontier, an unresolved
+  trace, a killed lever with no re-open condition.
+- **A harness** — only if a real metric appears under a constraint you genuinely
+  cannot check exhaustively, facing a proposer who could tune to your check.
+  The map has none. `retired/` holds the loop that assumed otherwise.
+
+`audit.mjs` is the hard constraint made runnable: every claim carries an honest
+**IMPLEMENTED / SPEC / LORE** label and traces to a concrete path. A beautiful
+sentence with no path is deleted, not softened (GR-9).
+
+## The six layers
+
+The universe is not one corpus. It is six, and confusing them is the most
+common error — a claim true at one layer is false at another. The count is not
+decorative: `frontier.json` enumerates the corpora, and `audit.mjs` fails if
+this table drops one. It did, once — `cast` was missing, and the loop that was
+supposed to find it scored zero while a nine-line check found it instantly.
 
 | layer | what it holds | authority | where |
 |---|---|---|---|
@@ -61,6 +73,7 @@ common error — a claim true at one layer is false at another.
 | **substrate** | the shared knowledge graph everything points at | coherence audit (0 errors) | `spellweb` |
 | **structure** | vertices, workshops, tomes, cast, mana | the grimoire JSONs | `cityofmages`, `game42` |
 | **surface** | the rendered sites and their ceremonies | the build; mirrors never edit | `agentprivacy_master`, the guide, soulbis |
+| **cast** | the 42 personas, their spells and proverbs | the directory tree, not the stale mapping counts | `agentprivacy-skills` |
 | **harness** | the loops that produce results | `conform.mjs` + the gate ladder | this repo, and the instances |
 
 **The resolution rule, canon-wide:** *when prose and register disagree, the

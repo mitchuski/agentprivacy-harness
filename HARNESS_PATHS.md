@@ -1,6 +1,6 @@
 # Harness paths — where this skeleton went
 
-Eight instances specialised this harness. None of their code lives here; this
+Nine instances specialised this harness. None of their code lives here; this
 is the map, so you can see what a filled config looks like at full weight —
 and, just as usefully, what a *partial* embodiment looks like — before you
 build your own. Each began as a skeleton like this one and diverged only
@@ -20,10 +20,12 @@ reading a complete one.
 | tigzkp_mage | ZK constraint count | R1CS constraints, ↓ | held-out points, Fiat-Shamir per round | full + specialised |
 | V6 rehydration | research documents | fidelity across audiences | adversarial reviewer who never sees the canon | full, non-numeric |
 | privacy_pools_v2_mage | ZK, real upstream target | R1CS constraints, ↓ | as above, per-rewrite certificates | full, **mechanically fitted** |
+| lexon_pvm | controlled-grammar semantic base (Lexon × PVM) | coverage-debt, ↓ | 5 held-out census terms + 3 regression entries hashed from the proposal | full, **mechanically fitted** |
 | MyTerms / IEEE 7012 | consent agreements | Φ product over a bilateral record | registry + unlock lattice + constellation hash | loop built, mock-only |
 | FedWiki flow + Gatehouse | publishing | presence/absence gap-count | *(no witness draw)* — integrity gate + human | discovery loop |
 | the dream cycle | universe upkeep | *(no metric)* — gap surfacing | *(none)* — the measure seat at fleet scale | measure-only |
 | Game of 42 | the structure itself | *(none)* — a visualization | *(none)* — checks structure, not results | structure layer |
+| **universe-builder** | a map of a corpus | words, ↓ | a sampled draw it never needed | **RETIRED — read this one** |
 
 ---
 
@@ -110,6 +112,31 @@ transferred exactly. Standing intent: the optimized, certificate-audited
 artifact feeds a future deployment's trusted-setup ceremony — the door for
 all of that is the First Person's (T6).
 
+### 5 · lexon_pvm — the grammar workshop
+
+*(instance of the author — public repo `github.com/mitchuski/lexon_pvm`)*
+
+Drives **coverage-debt**: the count of frozen PVM canon census terms (211 at
+fit, drawn deterministically from GLOSSARY_MASTER_v4_0 plus the promise-theory
+concept mappings) not yet expressed as gate-passing Lexon controlled-grammar
+entries in `artifact/LEXICON.lexon.md`. The gate is a spec-checker (parse →
+triple round-trip → role binding → promise typing) built from attested
+lexon.org samples; the real compiler is a macOS-only binary with unpublished
+source, so the frontier gate string carries the regime label honestly. The Gap
+hashes each proposal (a pattern recipe plus worked entries) and draws 5
+uncovered terms the assayer must express using only the recipe, plus 3 covered
+regression entries: generality is the only winning strategy. Per-term
+memorization is this domain's mirage, and the critic carries a cliff-watcher
+for it. Finder lenses: **grammar-forward** (attested patterns seeking term
+families) ⊥ **canon-forward** (canon concepts seeking minimal phrasings), with
+a third lens (spell-grammar: seat cards and skills as promise bundles in
+controlled English) staged for when the base lexicon has legs. Origin: the
+Lexon × 0xagentprivacy convergence run (5 letters, 8 axes, keystone axis
+"grammar to graph"); its chronicles and artefacts live in the instance's
+`out/`. The A5 keystone claim — a Lexon text is at once readable contract,
+executable code, and lossless triple serialisation — is what the checker's
+round-trip stage makes mechanical.
+
 ---
 
 ## Adjacent embodiments — the same topology, a different (or missing) piece
@@ -119,7 +146,7 @@ are here because each shows a real trust boundary doing real work — and
 because naming what they *lack* is how you learn which pieces are load-bearing
 for which job.
 
-### 5 · MyTerms / IEEE 7012 — the two agents made literal
+### 6 · MyTerms / IEEE 7012 — the two agents made literal
 
 *(private instance of the author — a docs package plus two browser extensions)*
 
@@ -140,7 +167,7 @@ door is the one worth stealing: *two mirrors make a door — the Swordsman
 reflects, the Mage reflects, and where the reflections meet, the First Person
 walks through.*
 
-### 6 · FedWiki core flow + the Gatehouse — a publishing loop, human-gated
+### 7 · FedWiki core flow + the Gatehouse — a publishing loop, human-gated
 
 *(public site; the loop and Gatehouse are the author's tooling)*
 
@@ -171,7 +198,7 @@ optimization kind:
   certifies itself is the one you cannot trust.* Neither token opens anything
   alone.
 
-### 7 · The dream cycle — the measure seat at universe scale
+### 8 · The dream cycle — the measure seat at universe scale
 
 *(public tooling; the dreams are the author's working ledgers)*
 
@@ -191,7 +218,7 @@ that travels with the code and is read each morning to resume.
 
 ## The structure layer
 
-### 8 · Game of 42 — the lattice the fleet is seated on
+### 9 · Game of 42 — the lattice the fleet is seated on
 
 *(public: `github.com/mitchuski/game42`)*
 
@@ -210,6 +237,54 @@ that fails if the runtime table drifts from the gate's independent copy. What
 it does **not** have is a solver: the fold scalar is a readout, never a
 control, and the dual agents are *depicted* (Sword ⊥ Mage) rather than
 executed. It is the picture of the structure the other seven are seated in.
+
+---
+
+---
+
+## The negative result
+
+### 9 · universe-builder — where the harness was applied and should not have been
+
+*(in this repo, at `universe/retired/`. Kept on purpose.)*
+
+The most useful entry in this catalogue, because it is the only one that
+failed. Its target was a **map of a corpus**, and it was given the full
+apparatus: two blind lenses, a Fiat-Shamir Gap, a held-out gate, an advancing
+frontier. Two rounds, roughly **1.4 million subagent tokens, and not one fact
+learned about the map.**
+
+- **u1** died of infrastructure — and paid for itself by exposing that the
+  engine counted dead agents as *dry rounds*, reporting an outage as an
+  exhausted search. Fixed, and pinned by `engine/loop.test.mjs`.
+- **u2** ran perfectly: 9/9 agents, seeds re-derived, verdicts on disk. Both
+  candidates **beat the metric**, and both scored **0/8** — because the Gap was
+  drawing arbitrary facts (a licence string, a JSON `version` field) from
+  612 KB of sources that the 7 KB map was never responsible for carrying. The
+  objective demanded compression; the gate demanded a transcript. **The
+  feasible set was empty.** The verdicts measured the config, not the artifact.
+
+Then a nine-line auditor found, on its first run, in milliseconds, for zero
+tokens, the very defect u2's `by-container` lens had found and been unable to
+validate: the map described five corpus layers where the frontier enumerates
+six.
+
+**Why it failed.** The Gap earns its cost only where the claim space is too
+large to check. The map makes ~100 **enumerable** claims. Check them all, and a
+mirage becomes impossible — there is nothing to tune to. What that domain
+wanted was an **integrity gate, not an adversary**, exactly as this catalogue
+already classifies the substrate's audit triad and the publishing loop. The
+lesson was on the page the whole time: *the harness transfers to any pipeline
+where generated artifacts must survive **adversarial** scrutiny.*
+
+**What it gave the core.** The `mis-gated` critic classification — the only one
+that accuses the config rather than the proposer, because `structural`,
+`probe-limited`, and `noise` leave a critic nowhere else to look. And
+`objective.canary`: name an artifact that passes your gate **by construction**,
+or you will not be able to tell a bad candidate from an impossible gate.
+
+*A harness is for adversaries. An auditor is for facts. Knowing which you have
+is the first design decision, and the cheapest one to get wrong.*
 
 ---
 

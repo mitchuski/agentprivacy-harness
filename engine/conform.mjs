@@ -16,7 +16,9 @@ import { dirname, join, resolve } from 'node:path'
 const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
 const errs = []
+const warns = []
 const ok = (cond, msg) => { if (!cond) errs.push(msg) }
+const advise = (cond, msg) => { if (!cond) warns.push(msg) }
 
 // ---- independent axiom copy (do NOT import these; that is the point) ----
 const AXIOM = {
@@ -71,6 +73,24 @@ if (harnessDir) {
     }
     for (const s of ['measure', 'proposal', 'gap', 'verdict', 'critic']) ok(!!config?.schemas?.[s], `config.schemas.${s} missing`)
 
+    // ---- the canary ----------------------------------------------------
+    // A gate with no artifact known to pass it cannot distinguish a bad
+    // candidate from an impossible gate. The field-guide toy is safe by
+    // accident: its questions are drawn FROM the original, so the original
+    // scores 8/8 by construction. The universe-builder had no canary, and
+    // both of its lenses scored 0/8 against a gate no candidate could pass
+    // (universe/chronicles/2026-07-10_u2_mis-gated.md).
+    //
+    // A warning, not yet a failure: making it fatal would break sibling
+    // instances mid-flight. Flipping it is the First Person's call.
+    advise(config?.objective?.canary,
+      'config.objective.canary is absent. Name a reference artifact (or the procedure that builds one) ' +
+      'that passes objective.gate BY CONSTRUCTION, and say why. Without it, a total failure is ambiguous: ' +
+      'you cannot tell a bad candidate from an impossible gate. See universe/chronicles/2026-07-10_u2_mis-gated.md.')
+    if (typeof config?.objective?.canary === 'string' && !config.objective.canary.trim()) {
+      errs.push('config.objective.canary is present but empty. Say what passes the gate by construction, or remove the field.')
+    }
+
     // ---- unfilled template placeholders --------------------------------
     // A config still wearing its TODOs used to pass this gate. It must not.
     // A harness whose objective reads "TODO — what frontier.json tracks" will
@@ -118,6 +138,10 @@ if (harnessDir) {
   }
 }
 
+if (warns.length) {
+  console.warn(`CONFORM ADVISORY (${warns.length}):`)
+  for (const w of warns) console.warn('  ~ ' + w)
+}
 if (errs.length) {
   console.error(`CONFORM FAIL (${errs.length}):`)
   for (const e of errs) console.error('  - ' + e)

@@ -39,8 +39,12 @@ Never the propose session's reasoning beyond the proposal artifact itself.
 
 ## Writes
 
-`runs/<runId>/p<i>-<leverId>/` scratch + `verdict.json` there. Never
-`frontier.json`, never `claims_register.md` (GR-10).
+Your scratch dir `runs/<runId>/<roundId>/p<i>-<leverId>/` and `verdict.json`
+there — **and nothing outside it.** Not `frontier.json`, not
+`claims_register.md`, and **not a chronicle** (GR-10). The chronicle is the
+chronicler's draft and the keystone's to file; a verdict written into
+`chronicles/` is a seat reaching past its card, and the audit trail will name
+it. Put your verdict in `verdict.json`; put nothing anywhere else.
 
 ## Definition of done
 

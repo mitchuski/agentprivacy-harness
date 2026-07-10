@@ -238,7 +238,7 @@ Then, scratch only (GR-10):
 4. Hard constraint, mechanically: every claim in candidate.md carries tier + status + pathway + trace; spot-resolve at least 3 traces against the filesystem; no MYTH outside a fenced chronicle block. Name the first violation.
 5. Metric: total = (words of every top-level .md in ${ctx.repo} EXCEPT ${t.name}) + (words of candidate.md), each by ${WORD_RULE}. Show the arithmetic.
 VALIDATED only if gateResult is 8/8 AND the hard constraint holds AND total < frontier best (read ${ctx.repo}/frontier.json). A rewrite that "reads beautifully" and drops a fact the Gap drew is a MIRAGE — name the dropped fact and its source path. An untraceable claim is a MIRAGE even if every question passed: it means the map asserts what the corpus cannot support.
-Write verdict.json to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/ with EXACTLY the returned shape, flat fields, metric a bare number. The file an auditor reads must match the data the orchestrator receives. Never write universe.json, FLEET.md, or frontier.json.`
+Write verdict.json to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/ with EXACTLY the returned shape, flat fields, metric a bare number. The file an auditor reads must match the data the orchestrator receives. Write NOTHING outside your scratch dir: not universe.json, not FLEET.md, not frontier.json, and not a chronicle. Your only output on disk is verdict.json in your scratch dir.`
     },
 
     critic: (proposals, verdicts, ctx) =>

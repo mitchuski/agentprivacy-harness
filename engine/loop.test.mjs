@@ -36,9 +36,11 @@ const cfg = (over = {}) => ({
 // dead agents to null).
 const makeRt = (handler) => {
   const seen = []
+  const prompts = []
   return {
     seen,
-    agent: async (_prompt, opts) => { seen.push(opts.label); return handler(opts.label) },
+    prompts,
+    agent: async (prompt, opts) => { seen.push(opts.label); prompts.push({ label: opts.label, prompt }); return handler(opts.label) },
     parallel: async (thunks) => Promise.all(thunks.map(t => t().catch(() => null))),
     pipeline: async (items, ...stages) => Promise.all(items.map(async (item, i) => {
       let prev = item
@@ -155,6 +157,38 @@ const proposalSet = { proposals: [{ leverId: 'lev-1' }] }
   console.log('6. two blind lenses collide on one leverId')
   ok(r.tally.VALIDATED === 2, 'tally counts the id twice — one per proposal')
   ok(r.confirmed.length === 2, 'and confirms it twice; the keystone must dedupe before folding')
+}
+
+// ---- 7. the scratch path is round-scoped ----------------------------------
+// The toy's first real run (examples/field-guide/runs/r1) proved this: two
+// rounds' proposers both minted `line-editor-tighten-pass`, both wrote to
+// runs/r1/p1-line-editor-tighten-pass/, and the later round OVERWROTE the
+// earlier round's proposal_canon.json — destroying an audit trail a verdict
+// still claimed. ctx.runDir must carry the round, so a colliding leverId lands
+// in a different directory each round.
+{
+  // a config whose holdApart prompt embeds ctx.runDir, so the stub can see it
+  const runDirCfg = cfg({
+    stop: { dryRounds: 3, maxRounds: 3 },
+    prompts: { ...cfg().prompts, holdApart: (p, i, ctx) => `SCRATCH=${ctx.runDir}/p${i + 1}-${p.leverId}` },
+  })
+  const rt = makeRt(l =>
+    l.startsWith('measure') ? { metric: 1 }
+    : l.startsWith('propose') ? { proposals: [{ leverId: 'same-id' }] }  // same id EVERY round
+    : l.startsWith('gap:') ? { seedHex: 'ab' }
+    : l.startsWith('assay:') ? { leverId: 'same-id', status: 'MIRAGE' }  // never structural → runs all 3 rounds
+    : l.startsWith('critic') ? { classifications: [{ leverId: 'same-id', class: 'noise' }] }
+    : 'draft')
+  await runHarness(runDirCfg, rt, A)
+
+  // 2 finders × 3 rounds = 6 Gap calls, all with leverId 'same-id'.
+  const scratchPaths = rt.prompts.filter(p => p.label.startsWith('gap:')).map(p => p.prompt.match(/SCRATCH=(\S+)/)[1])
+  console.log('7. the scratch path is round-scoped')
+  ok(scratchPaths.length === 6, `six Gap scratch paths (2 lenses × 3 rounds) — got ${scratchPaths.length}`)
+  ok(new Set(scratchPaths).size === 6,
+    `an identical leverId across every round lands in DISTINCT dirs — got ${JSON.stringify(scratchPaths)}`)
+  ok(scratchPaths.every(p => /\/r\.\d+\//.test(p)),
+    'every scratch path carries its roundId (runs/<runId>/<roundId>/…)')
 }
 
 console.log(failed ? `\nLOOP TESTS FAIL (${failed})` : '\nLOOP TESTS PASS — an outage is reported as an outage, not as exhaustion.')

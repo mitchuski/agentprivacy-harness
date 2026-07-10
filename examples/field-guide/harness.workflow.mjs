@@ -72,13 +72,23 @@ async function runHarness(config, rt, runArgs = {}) {
   // instance carries its own copies (T3: every seat boots from the same docs).
   const root = String(runArgs.root || config.root || repo).replace(/\\/g, '/')
   const runId = String(runArgs.runId || 'r0')
-  const runDir = `${repo}/runs/${runId}`
+  const runRoot = `${repo}/runs/${runId}`
+  const BOOT = (card) => bootPreamble(root, repo, card)
+
   // ctx.args exposes the run's arguments to prompt builders, so a config can
   // scope a run (one section, one module, one file) instead of turning every
   // round loose on the whole target. Scope is declared by the CONFIG and the
   // First Person — never by the proposer (T2).
-  const ctx = { root, repo, runId, runDir, config, args: runArgs }
-  const BOOT = (card) => bootPreamble(root, repo, card)
+  //
+  // ctx.runDir is ROUND-SCOPED: runs/<runId>/<roundId>/. It must be, and the
+  // toy's first real run proved why. Two rounds whose proposers independently
+  // mint the same leverId used to land in the SAME directory —
+  // runs/<runId>/p<i>-<leverId> — and the later round silently overwrote the
+  // earlier round's proposal_canon.json, destroying an audit trail a verdict
+  // still claimed. A win an auditor cannot reproduce is not a win (GR-4). With
+  // the round in the path, every (round, proposal) scratch dir is unique, and
+  // no config prompt needs to change since they all build from ctx.runDir.
+  const ctxFor = (roundId) => ({ root, repo, runId, roundId, runDir: `${runRoot}/${roundId}`, runRoot, config, args: runArgs })
 
   // Per-seat model/effort. A measure that counts words and a Gap that must
   // hash and draw are not the same job; paying frontier prices for both is how
@@ -95,6 +105,7 @@ async function runHarness(config, rt, runArgs = {}) {
   while (dry < config.stop.dryRounds && round < config.stop.maxRounds) {
     round += 1
     const roundId = `${runId}.${round}`
+    const ctx = ctxFor(roundId)   // round-scoped scratch: runs/<runId>/<roundId>/
 
     // ---- Measure — numbers only, no advocacy ----
     phase('Measure')

@@ -47,12 +47,15 @@ args: { "repo": "<abs path>/examples/field-guide", "root": "<abs path to the ske
 `measure` recounts GUIDE.md and prices the two lenses. `soulbae` runs twice
 in parallel — a `line-editor` (sentence-level) and a `restructurer`
 (structure-level), blind to each other. For each proposal the `Gap` writes
-`runs/r1/p<i>-<leverId>/gap.json` with a seed, a draw, and a transcript that
-lets you re-derive both by hand. `soulbis` writes `candidate.md`, answers,
-grades, counts, and returns a verdict. `critic` classifies the round.
-`chronicle` drafts the record.
+`runs/<runId>/<roundId>/p<i>-<leverId>/gap.json` with a seed, a draw, and a
+transcript that lets you re-derive both by hand. `soulbis` writes
+`candidate.md`, answers, grades, counts, and returns a verdict. `critic`
+classifies the round. `chronicle` drafts the record.
 
-Everything lands under `runs/<runId>/`. The frontier does not move.
+Everything lands under `runs/<runId>/<roundId>/` — the round is in the path
+because two rounds can independently mint the same `leverId`, and a scratch
+dir that dropped the round would let the later round overwrite the earlier
+round's audit trail. The frontier does not move.
 
 ## Audit the Gap yourself
 
@@ -61,7 +64,7 @@ holds `proposal_canon.json` — the exact bytes the Gap hashed — so anyone, at
 any later date, can verify the witnesses were not chosen:
 
 ```bash
-cd runs/r1/p1-<leverId>
+cd runs/r1/r1.1/p1-<leverId>
 sha256sum proposal_canon.json          # must equal seedHex in gap.json
 ```
 

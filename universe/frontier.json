@@ -52,8 +52,22 @@
       "authority": "each instance's own frontier.json"
     }
   ],
+  "runs": [
+    {
+      "runId": "u1",
+      "date": "2026-07-10",
+      "status": "INCOMPLETE",
+      "reason": "session token limit killed 12 of 17 agents, including all four Gap draws. No witnesses derived; no gate ran.",
+      "tally": { "VALIDATED": 0, "MIRAGE": 0, "BLOCKED": 0 },
+      "folded": null,
+      "yield": "a defect in engine/dual_agent_loop.mjs: dead seats were counted as dry rounds, so the loop reported an outage as exhaustion. Fixed; pinned by engine/loop.test.mjs.",
+      "survivors": "measure + 4 proposals, unassayed. Candidates, not results (GR-5). Cached against the run for replay.",
+      "chronicle": "chronicles/2026-07-10_u1_incomplete.md"
+    }
+  ],
   "openItems": [
-    "The seed map is unvalidated. Round u1 must run before any claim here is cited as PROVEN.",
+    "The seed map is unvalidated. Round u1 did not complete — no Gap drew against it. Nothing here may be cited as PROVEN on the strength of a run that never ran.",
+    "countingRule ambiguity found by the measure seat: notes/KILLED_LEVERS.md is a 6th .md under universe/ but sits outside the 'universe/*.md' glob and is therefore excluded from the metric. Decide the rule; do not quietly change the number.",
     "FLEET.md §7 names a First-Person decision (co-present rite vs key custody); SEATS.md §5 argues it is already settled by RPP. Neither is a verdict.",
     "ERRATA E-1..E-8 are recorded, not fixed. Each belongs to the corpus that owns it."
   ]

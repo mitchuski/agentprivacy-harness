@@ -81,6 +81,7 @@ async function runHarness(config, rt, runArgs = {}) {
   let confirmed = []
   let dry = 0
   let round = 0
+  let aborted = null   // set when a round dies of infrastructure, not of ideas
 
   while (dry < config.stop.dryRounds && round < config.stop.maxRounds) {
     round += 1
@@ -130,19 +131,47 @@ async function runHarness(config, rt, runArgs = {}) {
       `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
       { label: `chronicle:${roundId}`, phase: 'Chronicle' })
 
+    // ---- failure accounting (GR-5): a seat that DIED is not a seat that
+    // found nothing. A round that lost agents to infrastructure carries no
+    // evidence either way, and must never be counted as a dry round —
+    // otherwise stop.dryRounds silently converts an outage into "the search
+    // is exhausted", and the run reports a clean stop over a pile of corpses.
+    const failures = []
+    if (measure == null) failures.push('measure')
+    const deadFinders = proposalSets.filter(s => s == null).length
+    if (deadFinders) failures.push(`propose×${deadFinders}/${config.finders.length}`)
+    if (proposals.length > 0) {
+      const deadClosings = proposals.length - closed.length
+      if (deadClosings) failures.push(`hold-apart|assay×${deadClosings}/${proposals.length}`)
+      if (critic == null) failures.push('critic')
+    }
+    if (chronicle == null) failures.push('chronicle')
+
     // ---- dry-round accounting: only validated AND structural resets ----
     const validated = closed.filter(v => config.isValidated(v, measure))
     const structural = critic ? validated.filter(v => config.isStructural(critic, v.leverId)) : []
+
+    if (failures.length > 0) {
+      aborted = { roundId, failures }
+      rounds.push({ ...roundData, roundStatus: 'FAILED', failures, chronicleDraft: chronicle ? String(chronicle).slice(0, 600) : null, validated: [] })
+      log(`ROUND ${roundId} FAILED — dead seats: ${failures.join(', ')}. NOT counted as a dry round. Stopping: an incomplete round proves nothing (GR-5).`)
+      break
+    }
+
     if (structural.length > 0) { dry = 0; confirmed = confirmed.concat(structural) } else { dry += 1 }
-    rounds.push({ ...roundData, chronicleDraft: String(chronicle).slice(0, 600), validated: validated.map(v => v.leverId) })
+    rounds.push({ ...roundData, roundStatus: 'COMPLETE', chronicleDraft: String(chronicle).slice(0, 600), validated: validated.map(v => v.leverId) })
     log(`round ${roundId} closes — ${structural.length} structural win(s), dry=${dry}/${config.stop.dryRounds}`)
   }
 
+  const status = aborted ? 'INCOMPLETE' : 'COMPLETE'
   return {
-    name: config.name, runId, rounds: rounds.length, tally, confirmed,
+    name: config.name, runId, status, rounds: rounds.length, tally, confirmed,
     best: confirmed.length ? confirmed[confirmed.length - 1] : null,
     detail: rounds,
-    keystoneTodo: 'fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)',
+    ...(aborted ? { aborted } : {}),
+    keystoneTodo: aborted
+      ? `RUN INCOMPLETE — round ${aborted.roundId} lost seats to infrastructure (${aborted.failures.join(', ')}), not to exhausted ideas. FOLD NOTHING: no gate ran on the dead seats, so no verdict here is evidence (GR-5). Re-run the round; the surviving proposals are candidates, not results. Do not move frontier.json.`
+      : 'fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)',
   }
 }
 

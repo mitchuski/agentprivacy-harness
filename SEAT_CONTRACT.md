@@ -133,6 +133,15 @@ The engine takes `rt = { agent, parallel, pipeline, phase, log }`:
   barrier between stages; stage callbacks receive `(prev, item, index)`.
 - `phase(title)`, `log(msg)` — progress display.
 
+`runHarness` returns `{ status, rounds, tally, confirmed, best, detail,
+keystoneTodo }`. **`status` is `'COMPLETE'` or `'INCOMPLETE'`.** A round that
+loses a seat to infrastructure — a dead agent, a killed session — is marked
+`FAILED`, does **not** count as a dry round, and stops the loop with an
+`aborted` block naming the dead seats. An outage is not an exhausted search,
+and `keystoneTodo` says **FOLD NOTHING** when the two are confused. A finder
+that *returns* zero proposals is still a dry round: empty is evidence, dead is
+not. `engine/loop.test.mjs` pins this.
+
 Inside the Claude Code **Workflow tool** these five exist as globals and
 `import` is unavailable — which is why `tools/bundle.mjs` concatenates the
 engine and your config into one self-contained `.workflow.mjs`. Under the

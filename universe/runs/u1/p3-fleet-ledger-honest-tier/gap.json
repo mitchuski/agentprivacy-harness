@@ -1,0 +1,45 @@
+{
+  "seat": "hold-apart (the Gap ⿻, xor)",
+  "runId": "u1",
+  "proposal": "p3-fleet-ledger-honest-tier",
+  "seedHex": "0c2bba221d523005791937bc415279bc73e0204c0cef768c63baf767e557674e",
+  "serialization": {
+    "rule": "recursive sorted-key JSON, no whitespace; arrays keep order; primitives via JSON.stringify. Written by canon.mjs from proposal_raw.json to proposal_canon.json (6716 bytes).",
+    "topLevelKeysSorted": ["expectedMetric","hardConstraintNote","killedLeverCitations","lens","leverId","mapText","rationale","title"],
+    "hashCommand": "sha256sum proposal_canon.json",
+    "digest": "0c2bba221d523005791937bc415279bc73e0204c0cef768c63baf767e557674e"
+  },
+  "drawRule": "seed=SHA-256(proposal_canon.json). Take digest bytes left-to-right b0,b1,... For draw k over an ordered remaining list of the 40 indexed facts, idx = b_k mod remaining.length; pick remaining[idx]; remove it (without replacement).",
+  "factIndexSize": 40,
+  "drawSteps": [
+    {"k":0,"byteHex":"0c","byte":12,"remaining":40,"idx":12,"fact":"F13"},
+    {"k":1,"byteHex":"2b","byte":43,"remaining":39,"idx":4,"fact":"F5"},
+    {"k":2,"byteHex":"ba","byte":186,"remaining":38,"idx":34,"fact":"F37"},
+    {"k":3,"byteHex":"22","byte":34,"remaining":37,"idx":34,"fact":"F38"},
+    {"k":4,"byteHex":"1d","byte":29,"remaining":36,"idx":29,"fact":"F32"},
+    {"k":5,"byteHex":"52","byte":82,"remaining":35,"idx":12,"fact":"F15"},
+    {"k":6,"byteHex":"30","byte":48,"remaining":34,"idx":14,"fact":"F18"},
+    {"k":7,"byteHex":"05","byte":5,"remaining":33,"idx":5,"fact":"F7"},
+    {"k":8,"byteHex":"79","byte":121,"remaining":32,"idx":25,"fact":"F31"},
+    {"k":9,"byteHex":"19","byte":25,"remaining":31,"idx":25,"fact":"F33"},
+    {"k":10,"byteHex":"37","byte":55,"remaining":30,"idx":25,"fact":"F34"},
+    {"k":11,"byteHex":"bc","byte":188,"remaining":29,"idx":14,"fact":"F20"}
+  ],
+  "draw": ["F13","F5","F37","F38","F32","F15","F18","F7","F31","F33","F34","F20"],
+  "questions": [
+    {"fact":"F13","question":"In tigzkp-mage.json's seats array, what algebra and persona does the seat with seatId 'swordsman' carry?","expectedAnswer":"algebra = \"neg\", persona = \"cipher\" (fleetPhase \"Assay\", glyph ⚔️).","sourcePath":"C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json (seats[] seatId=swordsman)","tierProbe":"Mechanical/PROVEN: name the re-runnable command that proves the neg∘bnot=succ algebra the seat is bound to → node canon/conform.mjs (the workshop guard)."},
+    {"fact":"F5","question":"What vertex, glyph, and meaning does anchors.lethae carry in tigzkp-mage.json?","expectedAnswer":"vertex 25, glyph 🌘, meaning \"structural forgetting; the assay that does not trust memory\".","sourcePath":"C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json (anchors.lethae)","tierProbe":"Map §4 row #2 cites this as 'read-directly' (V38⊥V25). Give the exact file+field to read it directly, not a memory restatement."},
+    {"fact":"F37","question":"Does the persona/ directory contain folders named agentprivacy-topologist, agentprivacy-cipher, and agentprivacy-algebraist?","expectedAnswer":"Yes — all three are present in the persona directory tree.","sourcePath":"C:/Users/mitch/agentprivacy_master/agentprivacy-skills/agentprivacy-skills-v5/persona/","tierProbe":"REPORTED-to-tree: name the authority — the directory tree, not the stale MAPPING.md counts (per frontier.json corpora authority)."},
+    {"fact":"F38","question":"What is the version field of the city of mages grimoire head?","expectedAnswer":"\"1.9.1\".","sourcePath":"C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json (version)","tierProbe":"REPORTED: resolve to the concrete grimoire head file and field, not a remembered version."},
+    {"fact":"F32","question":"What sha256 and byte size does privacy_pools_v2_mage/frontier.json record for the frozen 0xbow report?","expectedAnswer":"sha256 c2ca67927c4ca5f7e1a0b368219ee3c2e8846003fe3dc7c8f3aef41b7b9cf68e, 8,414 bytes (docs/REPORT_0XBOW_FROZEN.md).","sourcePath":"C:/Users/mitch/tig_zk_loop/privacy_pools_v2_mage/frontier.json (achieved.V2-REPORT-FREEZE / openTarget)","tierProbe":"REPORTED: name the frontier.json field the digest is quoted from."},
+    {"fact":"F15","question":"In tigzkp-mage.json's pool, what wing and glyph does 'sith' carry?","expectedAnswer":"wing \"swordsman\", glyph 🗡️🔴.","sourcePath":"C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json (pool.sith)","tierProbe":"REPORTED: resolve to the pool.sith object; do not infer wing from the persona name."},
+    {"fact":"F18","question":"What is C82's title, its Home register document, and its registration run/date in CONJECTURE_REGISTER_V6.md?","expectedAnswer":"Title \"The Moving Ceiling\"; conf ~65%; status active, registered Run 1, 2026-06-10; Home privacy_value_v6_draft.md Part I §I.3.","sourcePath":"C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md (line 152, Band VIII)","tierProbe":"OPEN conjecture (the map row #12 marks C82 OPEN/SPEC-PROPOSED): give its Home slug and confirm it is an OPEN/active conjecture (~65%), not PROVEN."},
+    {"fact":"F7","question":"What is facultySpace.bitMap in tigzkp-mage.json?","expectedAnswer":"{ head: 1, heart: 2, hands: 4 }.","sourcePath":"C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json (facultySpace.bitMap)","tierProbe":"REPORTED: resolve to the facultySpace object and quote the three key/values exactly."},
+    {"fact":"F31","question":"What circuit/target does privacy_pools_v2_mage/frontier.json name in its 'target' field?","expectedAnswer":"\"0xbow privacy-pools-core v2 withdraw circuit (github.com/0xbow-io/privacy-pools-core; local clone ../pp_core_v2; exported artifact ../v2_withdraw.json)\".","sourcePath":"C:/Users/mitch/tig_zk_loop/privacy_pools_v2_mage/frontier.json (target)","tierProbe":"REPORTED (map §4 row #4 trace): resolve to the frontier.json target field."},
+    {"fact":"F33","question":"What is the gate defined in privacy_pools_v2_mage/frontier.json objective.gate?","expectedAnswer":"\"64 gap-sealed held-out points + CSE identity audit + drop-certificate audit + bench 15/15, both tiers\".","sourcePath":"C:/Users/mitch/tig_zk_loop/privacy_pools_v2_mage/frontier.json (objective.gate)","tierProbe":"REPORTED: quote objective.gate verbatim from the frontier file."},
+    {"fact":"F34","question":"Which three source files does spellweb/scripts/graph-coherence-audit.mjs read?","expectedAnswer":"../src/data/nodes.ts, ../src/data/edges.ts, ../src/types/graph.ts.","sourcePath":"C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs (lines 10-12)","tierProbe":"PROVEN (map §4 row #10 asserts the audit runs and exits 0): name the re-runnable command → node scripts/graph-coherence-audit.mjs."},
+    {"fact":"F20","question":"What is C83's title and confidence in CONJECTURE_REGISTER_V6.md, and its edge chain?","expectedAnswer":"\"Compositional Leakage Amplification\", conf ~55%; edge C7 → C83 → C17; Home privacy_value_v6_draft.md Part II §II.3.","sourcePath":"C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md (line 153, Band VIII)","tierProbe":"OPEN conjecture: give its Home slug and confirm ~55% active, not restated from memory."}
+  ],
+  "factIndex": "See transcript field for the full numbered F1..F40 index with source paths.",
+  "note": "proposal_canon.json (the exact hashed bytes) persists in this dir. sha256sum proposal_canon.json MUST equal seedHex. No witness here was suggested by the proposer; all draws derive from the Fiat-Shamir seed over the canonical proposal bytes (T2/GR-4)."
+}

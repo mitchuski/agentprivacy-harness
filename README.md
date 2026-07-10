@@ -130,15 +130,41 @@ frontier until you, as keystone, fold it. See
 `examples/field-guide/README.md` for what a round looks like and how to run
 the mirage drill.
 
+## View a run
+
+```bash
+node tools/render_run.mjs examples/field-guide r1     # one run
+node tools/render_run.mjs examples/field-guide --all  # every run
+```
+
+Writes `runs/<runId>/run.html` — a single static page, no dependencies, no
+network — and writes nothing else. The page lays the round out as the
+six-phase loop and, per proposal, **re-derives** the sha256 of
+`proposal_canon.json` from the file bytes at render time and shows it next to
+the seed the Gap recorded. Match means the witnesses provably derive from the
+proposal's own content; mismatch renders as a loud warning, because witnesses
+of unknown origin validate nothing (GR-4). That check is the same audit the
+field-guide README teaches by hand — the page just refuses to skip it.
+
+The page is a generated projection, never the record: the run directory is
+the record, and a phase that left no artifact renders as "not reached / not
+recorded" rather than being papered over (GR-5). Verdicts wear their color —
+VALIDATED green, MIRAGE amber, BLOCKED red — and the frontier does not move
+here any more than it moves in the loop.
+
 ## Build your own harness path
 
 1. **Define the Gap first.** If you cannot say how held-out witnesses derive
    from a proposal by hashing, you do not have a harness yet.
 2. Name the **objective** (what gets smaller), the **gate** (what must fully
    pass), and the **hard constraint** (validity no score can override).
-3. Copy `templates/harness.config.mjs`, fill every TODO — see
-   `SEAT_CONTRACT.md` for the interface and the complement-pair pattern for
-   product objectives.
+3. Scaffold it — `node tools/new_instance.mjs ../my-harness my-harness` —
+   then fill every TODO in its `harness.config.mjs`. See `SEAT_CONTRACT.md`
+   for the interface and the complement-pair pattern for product objectives.
+   **The gate and the bundler both refuse a config still wearing its TODOs**,
+   and they refuse it in the same words: an unfilled harness runs, grades
+   nothing, and reports `VALIDATED`. Measure your baseline before you claim a
+   best — the template ships both `null` on purpose.
 4. Bundle and run: `node tools/bundle.mjs my/harness.config.mjs my/harness.workflow.mjs`
 5. Read `HARNESS_PATHS.md` for eight real instances — quantum circuits, ZK
    constraint systems, research papers, consent agreements, a publishing
@@ -162,13 +188,19 @@ SPECIALISATION.md  personas, spells, the Game of 42
 HARNESS_PATHS.md   eight real instances, and how the fleet syncs
 CLAUDE.md          one session, one seat — the boot protocol
 SKILL.md           this repo as a Claude Code skill
-engine/            the loop, and the gate that proves its algebra
+engine/            the loop, its gate, and loop.test.mjs
 seats/             seven cards: the mandate of each seat
 templates/         ledgers + a blank config to copy
+tools/new_instance.mjs scaffold an instance, and say what is still missing
 tools/bundle.mjs   config + engine → one self-contained workflow file
+tools/render_run.mjs   one run directory → one static run.html projection
 examples/          the runnable toy
 universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks
 ```
+
+That last line is tested, not asserted. Clone the repo, `rm -rf universe`, and
+`node engine/conform.mjs`, the toy's gate, and `node engine/loop.test.mjs` all
+still pass.
 
 Everything above `universe/` is domain-neutral and always will be. That
 directory is the agentprivacy layer: a fleet plan, a cast, an admission rite,

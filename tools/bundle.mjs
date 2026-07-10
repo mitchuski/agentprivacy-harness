@@ -22,6 +22,29 @@ const enginePath = join(dirname(fileURLToPath(import.meta.url)), '..', 'engine',
 const config = (await import(pathToFileURL(cfgPath).href)).default
 if (!config?.name) { console.error('config has no default export with a name'); process.exit(1) }
 
+// Refuse to bundle a config still wearing its TODOs. The conformance gate
+// already refuses one; a bundler that shrugs and emits a runnable workflow
+// anyway hands a newcomer a harness that grades nothing and says VALIDATED.
+// The two refusals must agree, or the softer one is the only one that matters.
+const TODO = /\bTODO\b/i
+const unfilled = []
+if (TODO.test(String(config.name))) unfilled.push('name')
+for (const k of ['metric', 'gate', 'hardConstraint']) {
+  if (TODO.test(String(config.objective?.[k] ?? ''))) unfilled.push(`objective.${k}`)
+}
+if (TODO.test(String(config.heldApartRule ?? ''))) unfilled.push('heldApartRule')
+for (const f of config.finders || []) {
+  if (TODO.test(String(f?.lens ?? ''))) unfilled.push(`finders lens "${f.lens}"`)
+  if (TODO.test(String(f?.hint ?? ''))) unfilled.push(`finders hint for "${f?.lens}"`)
+}
+if (unfilled.length) {
+  console.error(`refusing to bundle: ${unfilled.length} field(s) still contain "TODO":`)
+  for (const u of unfilled) console.error('  - ' + u)
+  console.error('\nFill them, then run `node engine/conform.mjs <instance>` until it PASSES.')
+  console.error('An unfilled harness runs, grades nothing, and reports VALIDATED.')
+  process.exit(1)
+}
+
 const engineSrc = readFileSync(enginePath, 'utf8')
   .replace(/^export /gm, '')
 const configSrc = readFileSync(cfgPath, 'utf8')

@@ -73,8 +73,17 @@ async function runHarness(config, rt, runArgs = {}) {
   const root = String(runArgs.root || config.root || repo).replace(/\\/g, '/')
   const runId = String(runArgs.runId || 'r0')
   const runDir = `${repo}/runs/${runId}`
-  const ctx = { root, repo, runId, runDir, config }
+  // ctx.args exposes the run's arguments to prompt builders, so a config can
+  // scope a run (one section, one module, one file) instead of turning every
+  // round loose on the whole target. Scope is declared by the CONFIG and the
+  // First Person — never by the proposer (T2).
+  const ctx = { root, repo, runId, runDir, config, args: runArgs }
   const BOOT = (card) => bootPreamble(root, repo, card)
+
+  // Per-seat model/effort. A measure that counts words and a Gap that must
+  // hash and draw are not the same job; paying frontier prices for both is how
+  // a round dies of its own weight. Defaults to the caller's model.
+  const seatOpts = (seat) => (config.seatOpts && config.seatOpts[seat]) || {}
 
   const rounds = []
   const tally = { VALIDATED: 0, MIRAGE: 0, BLOCKED: 0 }
@@ -91,13 +100,13 @@ async function runHarness(config, rt, runArgs = {}) {
     phase('Measure')
     log(`round ${roundId} opens — measure syncs the frontier`)
     const measure = await agent(`${BOOT('measure.md')}\n${config.prompts.measure(ctx)}`,
-      { label: `measure:${roundId}`, phase: 'Measure', schema: config.schemas.measure })
+      { label: `measure:${roundId}`, phase: 'Measure', schema: config.schemas.measure, ...seatOpts('measure') })
 
     // ---- Propose — soulbae 🧙, parallel lenses, blind to each other ----
     phase('Propose')
     const proposalSets = await parallel(config.finders.map(f => () => agent(
       `${BOOT('soulbae-propose.md')}\nHELD-APART RULE (T2/GR-4, binding): ${config.heldApartRule}\n${config.prompts.propose(f, measure, ctx)}`,
-      { label: `propose:${f.lens}`, phase: 'Propose', schema: config.schemas.proposal })))
+      { label: `propose:${f.lens}`, phase: 'Propose', schema: config.schemas.proposal, ...seatOpts('propose') })))
     const proposals = proposalSets.filter(Boolean).flatMap(s => s.proposals || [])
     log(`${proposals.length} proposal(s) on the table: ${proposals.map(p => p.leverId).join(', ') || 'none'}`)
 
@@ -109,10 +118,10 @@ async function runHarness(config, rt, runArgs = {}) {
         proposals,
         (p, _item, i) => agent(
           `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx)}`,
-          { label: `gap:${p.leverId}`, phase: 'Hold-apart', schema: config.schemas.gap }),
+          { label: `gap:${p.leverId}`, phase: 'Hold-apart', schema: config.schemas.gap, ...seatOpts('holdApart') }),
         (gap, p, i) => gap ? agent(
           `${BOOT('soulbis-assay.md')}\n${config.prompts.assay(p, gap, i, ctx)}`,
-          { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict }) : null,
+          { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict, ...seatOpts('assay') }) : null,
       )).filter(Boolean)
       for (const v of closed) tally[v.status] = (tally[v.status] || 0) + 1
       log(`assay closed: ${closed.length}/${proposals.length} — ${JSON.stringify(tally)}`)
@@ -121,7 +130,7 @@ async function runHarness(config, rt, runArgs = {}) {
       phase('Critic')
       critic = await agent(
         `${BOOT('critic.md')}\n${config.prompts.critic(proposals, closed, ctx)}`,
-        { label: `critic:${roundId}`, phase: 'Critic', schema: config.schemas.critic })
+        { label: `critic:${roundId}`, phase: 'Critic', schema: config.schemas.critic, ...seatOpts('critic') })
     }
 
     // ---- Chronicle — draft only; the keystone reviews and files ----
@@ -129,7 +138,7 @@ async function runHarness(config, rt, runArgs = {}) {
     const roundData = { roundId, measure, proposals, verdicts: closed, critic }
     const chronicle = await agent(
       `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
-      { label: `chronicle:${roundId}`, phase: 'Chronicle' })
+      { label: `chronicle:${roundId}`, phase: 'Chronicle', ...seatOpts('chronicle') })
 
     // ---- failure accounting (GR-5): a seat that DIED is not a seat that
     // found nothing. A round that lost agents to infrastructure carries no
@@ -178,45 +187,72 @@ async function runHarness(config, rt, runArgs = {}) {
 // harness.config.mjs — the universe-builder.
 //
 // Target: a corpus too large to hold. Its detail is not secret; it is hidden
-// by volume. This harness compresses a corpus into a map an agent can boot
-// from, and proves the map did not drop what matters — by drawing the
-// comprehension questions from the ORIGINAL corpus, seeded by hashing the
-// MAP. The cartographer cannot know what will be asked.
+// by volume. This harness compresses one map file at a time and proves the
+// rewrite dropped nothing that matters — by drawing comprehension questions
+// from the ORIGINAL sources, seeded by hashing the MAP. The cartographer
+// cannot know what will be asked.
 //
-// It is examples/field-guide, promoted to real work. The toy compresses 730
-// words under an 8-question gate; this compresses a corpus under an N-claim
-// gate, and adds one thing the toy did not need: every claim must carry an
-// honest tier and a resolvable trace (ADMISSION.md).
+// It is examples/field-guide, promoted to real work, plus one thing the toy
+// did not need: every claim must carry an honest tier and a resolvable trace
+// (ADMISSION.md).
+//
+// SCOPE IS DECLARED HERE, NOT BY THE PROPOSER. Round u1 died because the Gap
+// was told to "index the corpus" — some 24,000 files — and four lenses were
+// each turned loose on all of it. A round must be bounded before it is run:
+// one target file, a fixed source set, two lenses. Bounding the Gap by the
+// CONFIG keeps the draw held apart (T2); bounding it by the proposal's own
+// citations would hand the proposer its own exam paper.
 //
 // Run:
 //   node ../tools/bundle.mjs harness.config.mjs harness.workflow.mjs
-//   Workflow: { repo: "<abs>/universe", root: "<abs>", runId: "u1" }
+//   Workflow: { repo: "<abs>/universe", root: "<abs>", runId: "u2",
+//               target: "README.md" }
 
 const WORD_RULE = `tr -s '[:space:]' '\\n' < <file> | grep -c .  (whitespace-split tokens)`
 
-// The corpora this map claims to cover. A map that silently drops one has not
-// compressed; it has forgotten. Paths are the First Person's, and stay here —
-// this config is the one file in the repo that is allowed to name them.
-const CORPORA = [
-  { slug: 'docs', layer: 'canon', path: 'C:/Users/mitch/agentprivacy-docs',
-    note: 'the model, the maths, the conjecture register (research/CONJECTURE_REGISTER_V6.md is the numbering authority)' },
-  { slug: 'spellweb', layer: 'substrate', path: 'C:/Users/mitch/spellweb',
-    note: 'the shared knowledge graph (src/data/nodes.ts, edges.ts; scripts/graph-coherence-audit.mjs is the gate)' },
-  { slug: 'cityofmages', layer: 'structure', path: 'C:/Users/mitch/cityofmages',
-    note: 'vertices, workshops, tomes, cast, mana (grimoire/city_of_mages_grimoire_v1_9_1.json is the head)' },
-  { slug: 'master', layer: 'surface', path: 'C:/Users/mitch/agentprivacy_master',
-    note: 'the rendered site, ceremonies, mirrors (public/tomes/workshops/*.md carry vertex + resident_mage)' },
-  { slug: 'skills', layer: 'cast', path: 'C:/Users/mitch/agentprivacy_master/agentprivacy-skills/agentprivacy-skills-v5',
-    note: '42 personas in persona/, each with alignment + equation_term. The directory tree is authoritative; MAPPING.md counts are stale' },
-  { slug: 'instances', layer: 'harness', path: 'C:/Users/mitch/tig_zk_loop',
-    note: 'worked harnesses: tigzkp_mage/canon/tigzkp-mage.json is the seat registry; privacy_pools_v2_mage/ is the fitted successor' },
-]
-
-const CORPUS_TABLE = CORPORA.map(c => `- ${c.slug} (${c.layer}) → ${c.path}\n    ${c.note}`).join('\n')
+// One entry per map file. `sources` is the Gap's ENTIRE reading list for that
+// target: bounded, First-Person-authored, and blind to the proposer's choices.
+// Add a target by naming the files whose facts that map section is answerable
+// from — never by pointing at a corpus root.
+const TARGETS = {
+  'README.md': {
+    what: 'the five-layer corpus topology, the work dynamics, the resolution rule',
+    sources: [
+      'C:/Users/mitch/agentprivacy-docs/research/CONJECTURE_REGISTER_V6.md',
+      'C:/Users/mitch/agentprivacy_master/src/data/conjecture-register-v6-mirror.json',
+      'C:/Users/mitch/spellweb/scripts/graph-coherence-audit.mjs',
+      'C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json',
+      'C:/Users/mitch/game42/game-of-42.json',
+      'C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json',
+    ],
+  },
+  'SEATS.md': {
+    what: 'the 42 personas, the seat map, the invariants, the falsified wing rule',
+    sources: [
+      'C:/Users/mitch/agentprivacy_master/agentprivacy-skills/agentprivacy-skills-v5/persona',
+      'C:/Users/mitch/tig_zk_loop/tigzkp_mage/canon/tigzkp-mage.json',
+    ],
+  },
+  'FLEET.md': {
+    what: 'vertices as addresses, the anchor law, the workshop roster, the arc',
+    sources: [
+      'C:/Users/mitch/agentprivacy_master/public/tomes/workshops',
+      'C:/Users/mitch/cityofmages/grimoire/city_of_mages_grimoire_v1_9_1.json',
+      'C:/Users/mitch/cityofmages/architecture/lattice-vertex.ts',
+    ],
+  },
+}
 
 const TIERS = ['PROVEN', 'DERIVED', 'REPORTED', 'OPEN', 'MYTH']
 const PATHWAYS = ['protect', 'project', 'reflect', 'connect']
 const STATUS = ['IMPLEMENTED', 'SPEC', 'LORE']
+
+const targetOf = (ctx) => {
+  const t = String(ctx.args?.target || 'README.md')
+  if (!TARGETS[t]) throw new Error(`unknown target '${t}'. Known: ${Object.keys(TARGETS).join(', ')}. Add it to TARGETS with an explicit source list — never point the Gap at a corpus root.`)
+  return { name: t, ...TARGETS[t] }
+}
+const sourceList = (t) => t.sources.map(s => `  - ${s}`).join('\n')
 
 const config = {
   name: 'universe-builder',
@@ -224,11 +260,11 @@ const config = {
   objective: {
     metric: 'words',
     gate:
-      'held-out corpus comprehension: N claims drawn by the Gap from the ORIGINAL corpus ' +
-      '(seeded by hashing the proposed map), answered from the map alone, graded against ' +
-      'the corpus. Must be N/N. A single wrong or unanswerable claim is a zero (T5).',
+      'held-out comprehension: 8 claims drawn by the Gap from the target\'s FIXED source list ' +
+      '(seeded by hashing the proposed rewrite), answered from the rewrite alone, graded against ' +
+      'the sources. Must be 8/8. A single wrong or unanswerable claim is a zero (T5).',
     hardConstraint:
-      'every claim in the map carries pathway ∈ {protect,project,reflect,connect}, ' +
+      'every claim in the rewrite carries pathway ∈ {protect,project,reflect,connect}, ' +
       'tier ∈ {PROVEN,DERIVED,REPORTED,OPEN,MYTH}, status ∈ {IMPLEMENTED,SPEC,LORE}, ' +
       'and a trace that resolves to a concrete path/line/run. MYTH never appears outside ' +
       'a chronicle. A beautiful sentence with no trace is deleted, not softened (GR-9, ADMISSION.md).',
@@ -238,72 +274,92 @@ const config = {
 
   heldApartRule:
     'You are BLIND to verification witnesses (T2/GR-4). After you finish, the Gap will hash ' +
-    'YOUR map and use the digest to draw claims from the ORIGINAL corpus — claims you did not ' +
-    'select — and ask them of your map. You cannot know which of the corpus\'s thousands of ' +
-    'facts will be probed, so the only winning strategy is to preserve every load-bearing one ' +
-    'and to state each at the tier it can actually defend. Do not guess at, suggest, or ' +
-    'optimise for particular questions. A claim you cannot trace will fail its draw: cut it.',
+    'YOUR rewrite and use the digest to draw claims from the target\'s source files — a list ' +
+    'fixed by the config before you were summoned, which you do not see and cannot influence. ' +
+    'It will ask those claims of your rewrite. You cannot know which will be drawn, so the only ' +
+    'winning strategy is to preserve every load-bearing fact and to state each at the tier it ' +
+    'can actually defend. Do not guess at, suggest, or optimise for particular questions. ' +
+    'A claim you cannot trace will fail its draw: cut it.',
 
   keystoneOnlyWrites: ['universe.json', 'FLEET.md', 'ERRATA.md'],
 
-  // Multi-modal sweep: one search angle never finds everything in a corpus
-  // this size. Each lens is blind to the others (ADMISSION.md §1).
+  // Two lenses, genuinely different, blind to each other. Four was greed: it
+  // quadrupled the Gap and assay work for a single target file.
   finders: [
-    { lens: 'by-container', hint: 'walk the directory topology: which repo owns which layer (canon/substrate/structure/surface/harness), what the authority rule is, where mirrors say "cite, never edit". Report the SHAPE of the corpus.' },
-    { lens: 'by-entity',    hint: 'walk the named things: vertices, workshops, personas, seats, tomes, mana registers, conjecture C-ids. Report the REGISTRY, and every vacancy.' },
-    { lens: 'by-claim',     hint: 'walk the assertions: what does the corpus claim is PROVEN vs SPEC vs LORE? Find claims that read as implemented and are stubs. Report the honest LEDGER, especially where a name exists at one layer and not another.' },
-    { lens: 'by-time',      hint: 'walk the chronicles and version notes: what changed, what was reversed, what was locked and then contradicted by a stale sheet. Report DRIFT and its direction.' },
+    { lens: 'by-container', hint: 'the SHAPE: which repo owns which layer, what the authority file is, what rule resolves a disagreement. Verify each path exists. Report topology, not narrative.' },
+    { lens: 'by-claim', hint: 'the LEDGER: for each assertion, is it IMPLEMENTED, SPEC, or LORE? Hunt claims that read as implemented and are stubs, and names that exist at one layer and not another. Report what can actually be defended.' },
   ],
 
+  // A word-count and a chronicle draft do not need the same reasoning as a
+  // Fiat-Shamir draw or a verdict. Hold-apart and assay keep the frontier
+  // model; the rest step down. This is the difference between a round that
+  // finishes and a round that dies of its own weight.
+  seatOpts: {
+    measure: { model: 'haiku', effort: 'low' },
+    chronicle: { model: 'sonnet', effort: 'low' },
+    critic: { model: 'sonnet' },
+    propose: { model: 'sonnet' },
+    // holdApart, assay: inherit the session model. The Gap and the prover are
+    // the two seats a harness must never economise on.
+  },
+
   prompts: {
-    measure: (ctx) =>
-      `Seat MEASURE. Count the current map: for each .md in ${ctx.repo}, apply exactly this rule: ${WORD_RULE}. Sum them; that is the metric. Compare to ${ctx.repo}/frontier.json (baseline, best); flag stale if they disagree.
-Then census the corpus WITHOUT summarising it. The corpora:
-${CORPUS_TABLE}
-For each, report a rough file count (a shell count is fine) and confirm the authority file exists at the stated path. Price each finder lens: cost to run, ceiling in words saved if it fully succeeds.
-Numbers only. No advocacy, no recommendations. The moment you argue for a lens, the proposer has a collaborator it must not have.`,
+    measure: (ctx) => {
+      const t = targetOf(ctx)
+      return `Seat MEASURE. Two numbers and a check; nothing else.
+1. Metric: for each .md in ${ctx.repo} (top level only), apply exactly ${WORD_RULE}. Sum them. That is the metric. Compare to ${ctx.repo}/frontier.json baseline/best; set stale=true if they disagree.
+2. Target this round: ${t.name} — ${t.what}. Report its own word count by the same rule.
+3. Confirm each of the target's source paths exists (a file or a directory). Do NOT read their contents; do NOT summarise them. Existence only:
+${sourceList(t)}
+Price the two lenses (by-container, by-claim): cost to run, ceiling in words if fully successful. Ceilings overlap; do not sum them.
+Numbers only. No advocacy, no recommendations. The moment you argue for a lens, the proposer has a collaborator it must not have.`
+    },
 
-    propose: (finder, measure, ctx) =>
-      `Seat PROPOSE — soulbae 🧙 (bnot), lens = ${finder.lens}: ${finder.hint}
+    propose: (finder, measure, ctx) => {
+      const t = targetOf(ctx)
+      return `Seat PROPOSE — soulbae 🧙 (bnot), lens = ${finder.lens}: ${finder.hint}
 Frontier context: ${JSON.stringify(measure)}.
-The corpora you may read (read ONLY through your lens; the other lenses are running blind to you and you to them):
-${CORPUS_TABLE}
-The current map is ${ctx.repo}/*.md — read it, and note that it is UNVALIDATED: no Gap has drawn against it, so treat every claim in it as a candidate, not a source. Where it asserts something you cannot trace to a corpus path, that is a defect to fix, not a fact to preserve.
-Read ${ctx.root}/universe/ADMISSION.md before you write a single claim; it binds you. Read ${ctx.repo}/notes/KILLED_LEVERS.md; never re-propose a K-id without new cited evidence.
-Propose exactly 1 lever through YOUR lens: a complete rewrite of one map section. Your proposal's mapText field MUST carry the full candidate text — that is the artifact the Gap will hash.
-EVERY claim in mapText carries, inline and visibly: its tier (${TIERS.join('|')}), its status (${STATUS.join('|')}), its pathway (${PATHWAYS.join('|')}), and a trace. A claim you cannot trace is not a claim you may compress — cut it. MYTH is admitted gladly, in 3-8 lines, fenced, capture-not-develop, and NEVER in a method section.
-State expectedMetric = mapText's word count by the counting rule, and hardConstraintNote = how every claim satisfies the four labels. Plan and write text only. Never touch files.`,
+TARGET: rewrite ${ctx.repo}/${t.name} in full — ${t.what}. Nothing else is in scope this round.
+You may read the target, ${ctx.root}/universe/ADMISSION.md (it binds you), ${ctx.repo}/notes/KILLED_LEVERS.md (never re-propose a K-id without new cited evidence), and any corpus file you need to VERIFY a claim you intend to make. Verify before you assert: the current target is UNVALIDATED — no Gap has ever drawn against it — so treat its claims as candidates, not sources. Where it asserts something you cannot trace, that is a defect to fix, not a fact to preserve.
+Your mapText field MUST carry the full rewritten file — that is the artifact the Gap will hash.
+EVERY claim carries, inline and visibly: tier (${TIERS.join('|')}), status (${STATUS.join('|')}), pathway (${PATHWAYS.join('|')}), and a trace. A claim you cannot trace is not a claim you may compress — cut it. MYTH is admitted gladly, 3-8 lines, fenced, capture-not-develop, and NEVER in a method section.
+Smaller is the objective, but a fact dropped to save words fails the gate and is worth zero at any length (T5). State expectedMetric = the NEW TOTAL across ${ctx.repo}/*.md (i.e. the current total, minus the target's current words, plus your rewrite's words, by the counting rule). hardConstraintNote = how every claim satisfies the four labels. Plan and write text only. Never touch files.`
+    },
 
-    holdApart: (proposal, i, ctx) =>
-      `Seat HOLD-APART — the Gap ⿻ (xor). You hold the knowledge axioms; you own no corpus.
+    holdApart: (proposal, i, ctx) => {
+      const t = targetOf(ctx)
+      return `Seat HOLD-APART — the Gap ⿻ (xor). You hold the knowledge axioms; you own no corpus.
 Proposal artifact (verbatim):
 ${JSON.stringify(proposal)}
-The corpora — these are the ORIGINAL, and they are your only source. The proposal is NOT a source; it is the thing under test:
-${CORPUS_TABLE}
+YOUR READING LIST IS FIXED AND COMPLETE. It was set by the config before the proposer was summoned; the proposer has never seen it and cannot influence it. Read these and ONLY these as the ORIGINAL:
+${sourceList(t)}
 Procedure:
-1. Index the ORIGINAL corpus's checkable claims. Walk the source files the map's section claims to cover, and number every claim that is mechanically checkable (a count, a name, a vertex, a field, a status, a path) from F1 upward — aim for at least 30 so the draw has room. Print the numbered list in your transcript with each fact's source path. Do NOT let the map tell you what to index: index the corpus, then draw. A fact the map never mentions is exactly the kind the draw must be able to reach.
-2. Canonically serialize the proposal above (JSON, recursive sorted keys, no whitespace) and SAVE THOSE EXACT BYTES to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/proposal_canon.json. It must persist — it is the auditor's only route to your seed. SHA-256 that file with a real shell command; show the command and digest. sha256sum of the saved file MUST equal seedHex.
-3. Draw 12 distinct fact indices without replacement: take the digest bytes left to right as unsigned ints b0,b1,...; for draw k, idx = b_k mod (remaining count); remove it. Show every step.
-4. For each drawn fact write one question, and quote the expected answer from the ORIGINAL source with its path.
-5. Tier-dependent probes (ADMISSION.md §2): if the drawn fact is asserted PROVEN in the map, ask for the re-runnable command; if DERIVED, the derivation step; if REPORTED, the source slug; if MYTH, ask only whether it is fenced outside the method sections.
-Write { seedHex, draw, transcript } to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/gap.json. Leave proposal_canon.json in place. Never accept a witness the proposer suggested — a validation on proposer-chosen witnesses is void.`,
+1. Index checkable facts from the sources above — a count, a name, a vertex, a field value, a status, a path. Number them F1..Fn; aim for 20-30 (enough for a fair draw, few enough to finish). Print the numbered list with each fact's source path and the value. Index the SOURCES, not the proposal: a fact the rewrite never mentions is exactly the kind the draw must be able to reach. Do not let the proposal steer what you index.
+2. Canonically serialize the proposal above (JSON, recursive sorted keys, no whitespace) and SAVE THOSE EXACT BYTES to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/proposal_canon.json. It must persist — it is the auditor's only route to your seed. SHA-256 that file with a real shell command; show the command and the digest. sha256sum of the saved file MUST equal seedHex.
+3. Draw 8 distinct fact indices without replacement: take the digest bytes left to right as unsigned ints b0,b1,...; for draw k, idx = b_k mod (remaining count); remove it. Show every step.
+4. For each drawn fact write one question and quote the expected answer from its source, with the path.
+5. Tier-dependent probe (ADMISSION.md §2): if the rewrite asserts the drawn fact as PROVEN, also ask for its re-runnable command; if DERIVED, the derivation step; if REPORTED, the source slug; if MYTH, ask only whether it is fenced outside the method sections.
+Write { seedHex, draw, transcript } to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/gap.json. Leave proposal_canon.json in place. Never accept a witness the proposer suggested — a validation on proposer-chosen witnesses is void.`
+    },
 
-    assay: (proposal, gap, i, ctx) =>
-      `Seat ASSAY — soulbis ⚔️ (neg), the prover. Forget the cartographer's story; trust only the run.
+    assay: (proposal, gap, i, ctx) => {
+      const t = targetOf(ctx)
+      return `Seat ASSAY — soulbis ⚔️ (neg), the prover. Forget the cartographer's story; trust only the run.
 Gap seed=${gap.seedHex}. Re-derive it the auditor's way FIRST: \`sha256sum ${ctx.runDir}/p${i + 1}-${proposal.leverId}/proposal_canon.json\` must equal seedHex. BLOCKED if the file is missing or the digest does not reproduce. Transcript: ${gap.transcript}
 Then, scratch only (GR-10):
 1. Write the proposal's mapText verbatim to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/candidate.md.
-2. Answer the Gap's 12 questions using ONLY candidate.md. Do NOT open the corpus while answering. ${JSON.stringify(gap.draw)}
-3. Grade against the expected answers. gateResult = "n/12". Any wrong or unanswerable question fails the gate.
-4. Check the hard constraint on candidate.md mechanically: every claim carries tier + status + pathway + trace; every trace resolves to a real path; no MYTH outside a fenced chronicle block. Name the first violation.
-5. Count candidate.md's words: ${WORD_RULE}
-VALIDATED only if gateResult is 12/12 AND the hard constraint holds AND words < frontier best (read ${ctx.repo}/frontier.json). A map that "reads beautifully" and drops a fact the Gap drew is a MIRAGE — name the dropped fact and its path. An untraceable claim is a MIRAGE even if every question passed: it means the map asserts what the corpus cannot support.
-Write verdict.json to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/ with EXACTLY the returned shape, flat fields, metric a bare number. The file an auditor reads must match the data the orchestrator receives. Never write universe.json or FLEET.md.`,
+2. Answer the Gap's 8 questions using ONLY candidate.md. Do NOT open the sources while answering. ${JSON.stringify(gap.draw)}
+3. Grade against the expected answers. gateResult = "n/8". Any wrong or unanswerable question fails the gate.
+4. Hard constraint, mechanically: every claim in candidate.md carries tier + status + pathway + trace; spot-resolve at least 3 traces against the filesystem; no MYTH outside a fenced chronicle block. Name the first violation.
+5. Metric: total = (words of every top-level .md in ${ctx.repo} EXCEPT ${t.name}) + (words of candidate.md), each by ${WORD_RULE}. Show the arithmetic.
+VALIDATED only if gateResult is 8/8 AND the hard constraint holds AND total < frontier best (read ${ctx.repo}/frontier.json). A rewrite that "reads beautifully" and drops a fact the Gap drew is a MIRAGE — name the dropped fact and its source path. An untraceable claim is a MIRAGE even if every question passed: it means the map asserts what the corpus cannot support.
+Write verdict.json to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/ with EXACTLY the returned shape, flat fields, metric a bare number. The file an auditor reads must match the data the orchestrator receives. Never write universe.json, FLEET.md, or frontier.json.`
+    },
 
     critic: (proposals, verdicts, ctx) =>
       `Seat CRITIC. Proposals: ${JSON.stringify(proposals.map(p => ({ leverId: p.leverId, lens: p.lens, expectedMetric: p.expectedMetric })))}
 Verdicts: ${JSON.stringify(verdicts)}
-Classify each closed lever structural / probe-limited / noise. Red-team the CARTOGRAPHER's rationale — did the lens actually find its layer, or did the draw simply miss what it dropped? A 12-question draw over thousands of facts catches a single omission only sometimes; say so plainly when it applies, and classify probe-limited rather than pretending. Never overrule the prover's verdict.
+Classify each closed lever structural / probe-limited / noise. Red-team the CARTOGRAPHER's rationale — did the lens actually find its layer, or did the draw simply miss what it dropped? An 8-question draw over 20-30 indexed facts catches a single omission only sometimes; say so plainly when it applies and classify probe-limited rather than pretending. Never overrule the prover's verdict.
 Draft KILLED_LEVERS entries for structural kills. Name exactly ONE next lead.`,
 
     chronicle: (round, ctx) =>
@@ -315,9 +371,10 @@ Then do the seat's real work (universe/SEATS.md §5): compress this round to ONE
     measure: {
       type: 'object', required: ['metric', 'stale', 'leverCosts'],
       properties: {
-        metric: { type: 'number', description: 'total words across the map' },
+        metric: { type: 'number', description: 'total words across universe/*.md' },
         stale: { type: 'boolean' },
-        corpusCensus: { type: 'array', items: { type: 'object', required: ['slug', 'files', 'authority'], properties: { slug: { type: 'string' }, files: { type: 'number' }, authority: { type: 'string' } } } },
+        targetWords: { type: 'number', description: "the target file's own word count" },
+        sourcesPresent: { type: 'boolean', description: 'every source path in the target list exists' },
         leverCosts: { type: 'array', items: { type: 'object', required: ['lever', 'cost', 'ceiling'], properties: { lever: { type: 'string' }, cost: { type: 'string' }, ceiling: { type: 'string' } } } },
         notes: { type: 'string' },
       },
@@ -326,18 +383,18 @@ Then do the seat's real work (universe/SEATS.md §5): compress this round to ONE
       type: 'object', required: ['proposals'],
       properties: {
         proposals: {
-          type: 'array', minItems: 1,
+          type: 'array', minItems: 1, maxItems: 1,
           items: {
             type: 'object',
             required: ['leverId', 'title', 'lens', 'rationale', 'expectedMetric', 'hardConstraintNote', 'mapText'],
             properties: {
-              leverId: { type: 'string', description: 'short kebab id' },
+              leverId: { type: 'string', description: 'short kebab id; prefix it with your lens so two blind lenses cannot collide' },
               title: { type: 'string' },
-              lens: { type: 'string', enum: ['by-container', 'by-entity', 'by-claim', 'by-time'] },
+              lens: { type: 'string', enum: ['by-container', 'by-claim'] },
               rationale: { type: 'string' },
-              expectedMetric: { type: 'number' },
+              expectedMetric: { type: 'number', description: 'NEW TOTAL across universe/*.md after this rewrite' },
               hardConstraintNote: { type: 'string' },
-              mapText: { type: 'string', description: 'THE FULL candidate map section — this is what the Gap hashes' },
+              mapText: { type: 'string', description: 'THE FULL rewritten target file — this is what the Gap hashes' },
               killedLeverCitations: { type: 'array', items: { type: 'string' } },
             },
           },
@@ -348,7 +405,7 @@ Then do the seat's real work (universe/SEATS.md §5): compress this round to ONE
       type: 'object', required: ['seedHex', 'draw', 'transcript'],
       properties: {
         seedHex: { type: 'string' },
-        draw: { type: 'string', description: 'JSON text: 12 questions, expected answers, and the source path of each' },
+        draw: { type: 'string', description: 'JSON text: 8 questions, expected answers, and the source path of each' },
         transcript: { type: 'string', description: 'numbered fact index + serialization + exact hash command + digest + draw steps; third-party re-derivable' },
       },
     },
@@ -357,9 +414,9 @@ Then do the seat's real work (universe/SEATS.md §5): compress this round to ONE
       properties: {
         leverId: { type: 'string' },
         status: { type: 'string', enum: ['VALIDATED', 'MIRAGE', 'BLOCKED'] },
-        metric: { type: 'number', description: 'mechanical word count of candidate.md' },
-        gateResult: { type: 'string', description: 'n/12' },
-        failingCheck: { type: 'string', description: 'for MIRAGE: the dropped fact + its path, or the untraceable claim' },
+        metric: { type: 'number', description: 'new total words across universe/*.md' },
+        gateResult: { type: 'string', description: 'n/8' },
+        failingCheck: { type: 'string', description: 'for MIRAGE: the dropped fact + its source path, or the untraceable claim' },
         evidence: { type: 'string' },
         scratchDir: { type: 'string' },
       },
@@ -374,9 +431,11 @@ Then do the seat's real work (universe/SEATS.md §5): compress this round to ONE
     },
   },
 
-  stop: { dryRounds: 2, maxRounds: 4 },
+  // One target, two lenses, at most two rounds. A round that cannot finish
+  // proves nothing (see chronicles/2026-07-10_u1_incomplete.md).
+  stop: { dryRounds: 1, maxRounds: 2 },
 
-  isValidated: (v) => v.status === 'VALIDATED' && v.gateResult === '12/12',
+  isValidated: (v) => v.status === 'VALIDATED' && v.gateResult === '8/8',
   isStructural: (critic, leverId) =>
     (critic.classifications || []).some(c => c.leverId === leverId && c.class === 'structural'),
 

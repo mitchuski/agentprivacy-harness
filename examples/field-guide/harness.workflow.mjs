@@ -73,8 +73,17 @@ async function runHarness(config, rt, runArgs = {}) {
   const root = String(runArgs.root || config.root || repo).replace(/\\/g, '/')
   const runId = String(runArgs.runId || 'r0')
   const runDir = `${repo}/runs/${runId}`
-  const ctx = { root, repo, runId, runDir, config }
+  // ctx.args exposes the run's arguments to prompt builders, so a config can
+  // scope a run (one section, one module, one file) instead of turning every
+  // round loose on the whole target. Scope is declared by the CONFIG and the
+  // First Person — never by the proposer (T2).
+  const ctx = { root, repo, runId, runDir, config, args: runArgs }
   const BOOT = (card) => bootPreamble(root, repo, card)
+
+  // Per-seat model/effort. A measure that counts words and a Gap that must
+  // hash and draw are not the same job; paying frontier prices for both is how
+  // a round dies of its own weight. Defaults to the caller's model.
+  const seatOpts = (seat) => (config.seatOpts && config.seatOpts[seat]) || {}
 
   const rounds = []
   const tally = { VALIDATED: 0, MIRAGE: 0, BLOCKED: 0 }
@@ -91,13 +100,13 @@ async function runHarness(config, rt, runArgs = {}) {
     phase('Measure')
     log(`round ${roundId} opens — measure syncs the frontier`)
     const measure = await agent(`${BOOT('measure.md')}\n${config.prompts.measure(ctx)}`,
-      { label: `measure:${roundId}`, phase: 'Measure', schema: config.schemas.measure })
+      { label: `measure:${roundId}`, phase: 'Measure', schema: config.schemas.measure, ...seatOpts('measure') })
 
     // ---- Propose — soulbae 🧙, parallel lenses, blind to each other ----
     phase('Propose')
     const proposalSets = await parallel(config.finders.map(f => () => agent(
       `${BOOT('soulbae-propose.md')}\nHELD-APART RULE (T2/GR-4, binding): ${config.heldApartRule}\n${config.prompts.propose(f, measure, ctx)}`,
-      { label: `propose:${f.lens}`, phase: 'Propose', schema: config.schemas.proposal })))
+      { label: `propose:${f.lens}`, phase: 'Propose', schema: config.schemas.proposal, ...seatOpts('propose') })))
     const proposals = proposalSets.filter(Boolean).flatMap(s => s.proposals || [])
     log(`${proposals.length} proposal(s) on the table: ${proposals.map(p => p.leverId).join(', ') || 'none'}`)
 
@@ -109,10 +118,10 @@ async function runHarness(config, rt, runArgs = {}) {
         proposals,
         (p, _item, i) => agent(
           `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx)}`,
-          { label: `gap:${p.leverId}`, phase: 'Hold-apart', schema: config.schemas.gap }),
+          { label: `gap:${p.leverId}`, phase: 'Hold-apart', schema: config.schemas.gap, ...seatOpts('holdApart') }),
         (gap, p, i) => gap ? agent(
           `${BOOT('soulbis-assay.md')}\n${config.prompts.assay(p, gap, i, ctx)}`,
-          { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict }) : null,
+          { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict, ...seatOpts('assay') }) : null,
       )).filter(Boolean)
       for (const v of closed) tally[v.status] = (tally[v.status] || 0) + 1
       log(`assay closed: ${closed.length}/${proposals.length} — ${JSON.stringify(tally)}`)
@@ -121,7 +130,7 @@ async function runHarness(config, rt, runArgs = {}) {
       phase('Critic')
       critic = await agent(
         `${BOOT('critic.md')}\n${config.prompts.critic(proposals, closed, ctx)}`,
-        { label: `critic:${roundId}`, phase: 'Critic', schema: config.schemas.critic })
+        { label: `critic:${roundId}`, phase: 'Critic', schema: config.schemas.critic, ...seatOpts('critic') })
     }
 
     // ---- Chronicle — draft only; the keystone reviews and files ----
@@ -129,7 +138,7 @@ async function runHarness(config, rt, runArgs = {}) {
     const roundData = { roundId, measure, proposals, verdicts: closed, critic }
     const chronicle = await agent(
       `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
-      { label: `chronicle:${roundId}`, phase: 'Chronicle' })
+      { label: `chronicle:${roundId}`, phase: 'Chronicle', ...seatOpts('chronicle') })
 
     // ---- failure accounting (GR-5): a seat that DIED is not a seat that
     // found nothing. A round that lost agents to infrastructure carries no

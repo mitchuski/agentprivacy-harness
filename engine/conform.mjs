@@ -71,13 +71,41 @@ if (harnessDir) {
     }
     for (const s of ['measure', 'proposal', 'gap', 'verdict', 'critic']) ok(!!config?.schemas?.[s], `config.schemas.${s} missing`)
 
+    // ---- unfilled template placeholders --------------------------------
+    // A config still wearing its TODOs used to pass this gate. It must not.
+    // A harness whose objective reads "TODO — what frontier.json tracks" will
+    // run, and grade nothing, and say VALIDATED — and the gate that let it
+    // through is worth less than no gate at all, because it was believed.
+    const TODO = /\bTODO\b/i
+    const placeholder = (v) => typeof v === 'string' && TODO.test(v)
+    const fill = (label) => `${label} still contains "TODO" — fill it before running. An unfilled config runs and grades nothing.`
+    if (placeholder(config?.name)) errs.push(fill('config.name'))
+    if (placeholder(config?.objective?.metric)) errs.push(fill('config.objective.metric (GR-1)'))
+    if (placeholder(config?.objective?.gate)) errs.push(fill('config.objective.gate (T5: this is the gate a zero collapses)'))
+    if (placeholder(config?.objective?.hardConstraint)) errs.push(fill('config.objective.hardConstraint (GR-3)'))
+    if (placeholder(config?.heldApartRule)) errs.push(fill('config.heldApartRule (T2/GR-4: this text is what keeps the proposer blind)'))
+    for (const f of config?.finders || []) {
+      if (placeholder(f?.lens)) errs.push(fill(`config.finders lens "${f.lens}"`))
+      if (placeholder(f?.hint)) errs.push(fill(`config.finders hint for "${f?.lens}"`))
+    }
+
     // frontier self-consistency (GR-1): numbers must cohere
     try {
       const f = JSON.parse(readFileSync(join(harnessDir, 'frontier.json'), 'utf8'))
       ok(typeof f.authority === 'string' && f.authority.length > 0, 'frontier: authority line missing')
       ok(typeof f.updated === 'string' && f.updated.length > 0, 'frontier: updated date missing')
-      ok(Number.isFinite(f.baseline?.metric), 'frontier: baseline.metric missing')
-      ok(Number.isFinite(f.best?.metric), 'frontier: best.metric missing')
+      // The template ships these as null on purpose: you cannot have a
+      // baseline until you have measured one. Say so, instead of reporting a
+      // deliberate placeholder as an absence.
+      const unmeasured = (v) => v === null || v === undefined
+      ok(Number.isFinite(f.baseline?.metric),
+        unmeasured(f.baseline?.metric)
+          ? 'frontier: baseline.metric is null — the template ships it unmeasured. Run your counting rule against the artifact as it stands today and write the number here, with `how` naming the exact command (GR-1). A harness with no measured baseline has nothing to beat.'
+          : `frontier: baseline.metric must be a number, got ${JSON.stringify(f.baseline?.metric)}`)
+      ok(Number.isFinite(f.best?.metric),
+        unmeasured(f.best?.metric)
+          ? 'frontier: best.metric is null — set it equal to baseline.metric. Nothing has beaten the baseline yet, and pretending otherwise is the first mirage (GR-5).'
+          : `frontier: best.metric must be a number, got ${JSON.stringify(f.best?.metric)}`)
       if (Number.isFinite(f.baseline?.metric) && Number.isFinite(f.best?.metric)) {
         ok(f.best.metric <= f.baseline.metric, `frontier: best.metric ${f.best.metric} must be <= baseline.metric ${f.baseline.metric} (lower is better)`)
       }

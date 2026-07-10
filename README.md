@@ -103,9 +103,26 @@ entries — append-only ledgers do not survive concurrent writers.
 
 ## Run the toy
 
+Start with one command. It runs every gate this repo has, in the order you
+should trust them:
+
+```bash
+node tools/check.mjs
+```
+
+It proves the algebra on all of Z/64Z, runs the engine's own tests (an outage
+must never be reported as an exhausted search), conforms **every** instance it
+discovers rather than the ones it remembers, asserts that the blank template
+**fails** — and fails *for the right reasons* — and, if `universe/` is present,
+audits it exhaustively. Zero dependencies. If it exits non-zero, every line it
+printed is a command you can re-run yourself.
+
+The individual gates, if you want them:
+
 ```bash
 node engine/conform.mjs                      # the axioms hold
 node engine/conform.mjs examples/field-guide # the instance is coherent
+node engine/loop.test.mjs                    # the loop fails loudly
 ```
 
 Then run the example harness. It compresses a 730-word emergency field guide

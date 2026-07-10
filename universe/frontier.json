@@ -1,0 +1,36 @@
+{
+  "authority": "This file is the sole authority for the universe-builder's numbers (GR-1). Prose cites it; prose never restates it. Only the keystone writes it.",
+  "updated": "2026-07-10",
+  "instance": "universe-builder",
+  "objective": {
+    "metric": "words",
+    "direction": "lower-is-better",
+    "countingRule": "tr -s '[:space:]' '\\n' < <file> | grep -c .  summed over universe/*.md",
+    "gate": "12 held-out corpus claims, drawn by hashing the map, answered from the map alone — must be 12/12",
+    "hardConstraint": "every claim carries pathway + tier + status + a resolving trace; MYTH never in a method section"
+  },
+  "baseline": {
+    "metric": 7285,
+    "measuredAt": "2026-07-10",
+    "note": "hand-authored seed map, written before the loop existed. It has NOT passed the gate — no Gap has drawn against it. This number is a starting line, not a result (GR-5)."
+  },
+  "best": {
+    "metric": 7285,
+    "leverId": null,
+    "gateResult": null,
+    "note": "equal to baseline: no validated round yet. best.metric may only move on a VALIDATED 12/12 verdict folded by the keystone."
+  },
+  "corpora": [
+    { "slug": "docs", "layer": "canon", "authority": "papers/v6 for maths; the conjecture register for C-ids" },
+    { "slug": "spellweb", "layer": "substrate", "authority": "the coherence audit triad, 0 errors" },
+    { "slug": "cityofmages", "layer": "structure", "authority": "the grimoire JSON head" },
+    { "slug": "master", "layer": "surface", "authority": "the build; mirrors cite, never edit" },
+    { "slug": "skills", "layer": "cast", "authority": "the directory tree, not the stale MAPPING.md counts" },
+    { "slug": "instances", "layer": "harness", "authority": "each instance's own frontier.json" }
+  ],
+  "openItems": [
+    "The seed map is unvalidated. Round u1 must run before any claim here is cited as PROVEN.",
+    "FLEET.md §7 names a First-Person decision (co-present rite vs key custody); SEATS.md §5 argues it is already settled by RPP. Neither is a verdict.",
+    "ERRATA E-1..E-8 are recorded, not fixed. Each belongs to the corpus that owns it."
+  ]
+}

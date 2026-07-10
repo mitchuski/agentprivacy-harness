@@ -1,0 +1,127 @@
+{
+  "version": "1.0.0",
+  "created_at": "2026-07-10",
+  "updated_at": "2026-07-10",
+  "description": "The agentprivacy layer of the dual-agent-harness. Machine-readable head for universe/. Schema follows the grimoire idiom (meta · master_invocation · inventories · provenance · known_open_items). Delete this directory and the harness still works: the axioms live in the Gap, not in the corpus.",
+
+  "meta": {
+    "title": "universe",
+    "subtitle": "the corpus the harness is seated in",
+    "author": "0xagentprivacy",
+    "tagline": "The universe expands the mind. The harness is the boundary that lets agents find each other regardless of universe.",
+    "license": "Apache-2.0",
+    "signature": "(⚔️⊥⿻⊥🧙)😊"
+  },
+
+  "master_invocation": {
+    "spell": "measure → propose(held-apart) → hold-apart(hash) → assay(held-out) → critic → chronicle(proverb) → accept-only-on-validated-product",
+    "proverb": "The proposer that grades itself builds mirages; only what the Gap could not tune to is a result."
+  },
+
+  "axioms_in_the_gap": {
+    "$comment": "What two agents from different universes share. Not content — axioms. Held in engine/conform.mjs, which keeps its own copy and deliberately does not import them.",
+    "algebra": "neg(bnot(x)) = succ(x) on Z/64Z, computed for all 64 values, never assumed",
+    "operators": { "neg": "(64 - x) % 64", "bnot": "x ^ 63", "succ": "(x + 1) % 64" },
+    "trusts": ["T1 four promises", "T2 separation bound", "T3 shared root", "T4 consent first", "T5 multiplicative gate", "T6 the door"],
+    "ground_rules": "GR-1..GR-10",
+    "shared_root_across_universes": "Origin(A) ∩ Origin(B) = {the axioms}",
+    "gap_formal_definition": "the node of maximal betweenness centrality, C_B(v) = Σ σ_st(v)/σ_st"
+  },
+
+  "layers": {
+    "$comment": "Five corpora. A claim true at one layer is false at another; confusing them is the most common error.",
+    "canon": { "holds": "the model, the maths, the conjecture numbers", "authority": "papers/v6 for maths; the register for C-ids" },
+    "substrate": { "holds": "the shared knowledge graph", "authority": "coherence audit, 0 errors" },
+    "structure": { "holds": "vertices, workshops, tomes, cast, mana", "authority": "the grimoire JSON heads" },
+    "surface": { "holds": "the rendered sites and their ceremonies", "authority": "the build; mirrors cite, never edit" },
+    "harness": { "holds": "the loops that produce results", "authority": "conform.mjs + the gate ladder" },
+    "resolution_rule": "When prose and register disagree, the register wins and the prose gets an erratum. Cross-canon disagreements escalate; they are never resolved locally."
+  },
+
+  "sovereignty_axes": {
+    "$comment": "MSB-first. A vertex declares which dimensions its work burns. Compute from bits; never read dimensions from prose (see ERRATA E-7).",
+    "d1": { "axis": "Protection", "glyph": "🛡️", "weight": 32 },
+    "d2": { "axis": "Delegation", "glyph": "🤝", "weight": 16 },
+    "d3": { "axis": "Memory", "glyph": "📜", "weight": 8 },
+    "d4": { "axis": "Connection", "glyph": "🔗", "weight": 4 },
+    "d5": { "axis": "Computation", "glyph": "⚡", "weight": 2 },
+    "d6": { "axis": "Value", "glyph": "💎", "weight": 1 },
+    "anchor_law": "A harness anchors a complement pair whose vertices XOR to 63. Seating determines the anchor; it is never chosen.",
+    "caveat": "The XOR check cannot catch a transposition of names across a pair. It survives the error in ERRATA E-7. Only the bit-to-axis reading catches that."
+  },
+
+  "vertex_inventory": {
+    "seated_pairs": [
+      { "pair": [38, 25], "xor": 63, "reading": "Aletheia (Protect·Connect·Compute) ⊥ Lethe (Delegate·Memory·Value) — unconcealment against forgetting", "instances": ["tigzkp_mage", "privacy_pools_v2_mage"] },
+      { "pair": [35, 28], "xor": 63, "reading": "Horizon (Protect·Compute·Value) ⊥ the canonical Mage vertex (Delegate·Memory·Connect)", "instances": ["shor_mage"] },
+      { "pair": [19, 44], "xor": 63, "reading": "Forget, the commissioned blade ⊥ Chart Shop, the hold-witness — forgetting against holding", "instances": [] },
+      { "pair": [51, 12], "xor": 63, "reading": "Solchanting/Etherchanting, the commitment-cut ⊥ the Circle, a gathering", "instances": [] }
+    ],
+    "determined_vacancies": [
+      { "workshop": "/hall", "vertex": 15, "burns": ["Memory", "Connection", "Computation", "Value"], "forced_anchor": 48, "anchor_is": "Protection + Delegation, exactly", "ceremony_shape": "bilateral-witness", "resident_mage": null, "note": "The complement of the witness vertex is the sovereignty it protects. The rite has a vacant home at exactly the right address." },
+      { "workshop": "/covenant", "vertex": 55, "burns": ["all but Memory"], "forced_anchor": 8, "anchor_is": "Memory alone", "note": "consent's complement is what it refuses to retain" },
+      { "workshop": "/vault", "vertex": 57, "burns": ["Protection", "Delegation", "Memory", "Value"], "forced_anchor": 6, "anchor_is": "Connection + Computation", "note": "the vault holds; it does not connect or compute" },
+      { "workshop": "/holon", "vertex": 31, "burns": ["all but Protection"], "forced_anchor": 32, "anchor_is": "Protection alone" },
+      { "workshop": "/circle", "vertex": 12, "burns": ["Memory", "Connection"], "forced_anchor": 51, "resident_mage": null }
+    ],
+    "frontier": {
+      "named": 18,
+      "total": 64,
+      "unnamed": 46,
+      "note": "Counts are the structure layer's to publish. Treated here as REPORTED, not PROVEN."
+    }
+  },
+
+  "seats": {
+    "$comment": "Persona alignment is a SKILL AFFINITY, not a seat constraint. The separation is carried by the Gap and the algebra, never by the costume. See SEATS.md §2 and ERRATA E-4.",
+    "measure": { "algebra": null, "persona": "assessor", "alignment": "mage" },
+    "propose": { "algebra": "bnot", "persona": "domain-chosen", "alignment": "any" },
+    "hold-apart": { "algebra": "xor", "persona": "topologist", "alignment": "balanced", "why": "its equation term IS C_B(v), betweenness centrality" },
+    "assay": { "algebra": "neg", "persona": "cipher", "alignment": "swordsman" },
+    "critic": { "algebra": null, "persona": "sith", "alignment": "swordsman" },
+    "chronicle": { "algebra": null, "persona": "chronicler", "alignment": "mage", "mandate": "compress the round to one proverb; under RPP the proverb is key material a counterparty must independently reproduce" },
+    "keystone": { "algebra": "succ", "persona": "soulbae", "personaComplement": "soulbis", "isKeystone": true },
+    "corpus_counts": { "swordsman": 15, "mage": 15, "balanced": 12, "total": 42, "carrying_a_seat_field": 0 },
+    "proposed_field": "metadata.harness_seat ∈ {measure,propose,hold-apart,assay,critic,chronicle,keystone,none}; 'none' is the honest default and should be the majority value"
+  },
+
+  "admission": {
+    "$comment": "Corpus additions are gated on two coordinates and a trace. See ADMISSION.md.",
+    "pathways": ["protect", "project", "reflect", "connect"],
+    "tiers": ["PROVEN", "DERIVED", "REPORTED", "OPEN", "MYTH"],
+    "status_labels": ["IMPLEMENTED", "SPEC", "LORE"],
+    "why_arithmetic": "Φ_agent(Σ) contains det(Σ). Admitting myth as maths makes one pathway a linear combination of the others; det(Σ) → 0; and by T5 the whole product V(π,t) → 0. Not degraded — zero.",
+    "hard_rule": "MYTH lives in chronicles only, never in a method document (GR-2). Myth is admitted gladly, fenced, 3-8 lines, capture-not-develop.",
+    "human_door": "Would a Mage from another forge benefit from pointing at this node?",
+    "canon_cognate": "the City grimoire's four_conditions_of_update, register_of_invitations, archive_of_unfilled_forms, library_of_joint_authorship"
+  },
+
+  "the_edge_rule": {
+    "statement": "A validated round PROPOSES an edge. Only the counterparty's signature MINTS it.",
+    "unsigned_edge": "a candidate, not a result — a MIRAGE at the social layer",
+    "vrc": "Verifiable Relationship Credential — a bilateral, dual-signed attestation. The edge of the trust graph, whose nodes are lattice vertices.",
+    "mechanism": "RPP, the Relationship Proverb Protocol: two parties independently compress a shared experience; if their compressions match, the match is a witness neither party chose.",
+    "why_it_is_the_gap": "Neither party selects the test; the shared work does. Neither can fake a match without understanding. Proof by independent compression, exactly as held-out witnesses are proof by independent derivation.",
+    "key_custody": "RPP dissolves the choice in FLEET.md §7: because the rite is co-present, no signing key need outlive its session. The amnesia protocol survives.",
+    "mana_is_not_proof": "🪢 VRC mana is regime-1: non-transferable, non-attesting, local colour. The mana is what you play with; the VRC is what you prove with.",
+    "status": "SPEC. No implemented system mints trust-graph edges today.",
+    "seal": "A trust that certifies itself is the one you cannot trust."
+  },
+
+  "$provenance": {
+    "produced_by": "a hand-authored seed, written before universe/harness.config.mjs existed",
+    "produced_at": "2026-07-10",
+    "method": "eight parallel corpus scans, synthesised in one session",
+    "head_status": "UNVALIDATED — no Gap has drawn against this map",
+    "honest_label": "Per GR-5: a candidate is not a result. Round u1 of the universe-builder must run before any claim here is cited as PROVEN. The next writer of this file should be the loop, not a person.",
+    "head_signature": "(⚔️⊥⿻⊥🧙)😊"
+  },
+
+  "known_open_items": {
+    "unvalidated_seed": "This map has not passed its own gate. That is the first thing to fix.",
+    "hall_rite": "FLEET.md §7 poses the key-custody question; SEATS.md §5 argues RPP settles it. Neither is a verdict. The door is the First Person's.",
+    "errata_unfixed": "E-1..E-8 are recorded, not fixed. Each belongs to the corpus that owns it; none may be fixed by a seat here.",
+    "harness_seat_field": "Proposed, not added. Adding it to 42 persona files is an admission (pathway: reflect, tier: DERIVED).",
+    "spellweb_gap": "The coherence harness is ready but has no Gap. Build it first — the cheapest proof the skeleton carries into a domain with no metric."
+  }
+}

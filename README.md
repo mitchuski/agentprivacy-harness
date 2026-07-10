@@ -55,6 +55,29 @@ drafts. Folding into the ledgers is the **keystone's** job — soulbae ⊥
 soulbis operating as a pair in the main session, with the conformance gate
 green before and after. And publishing anything is yours alone.
 
+## Why the corpus stays home
+
+Two agents from different projects share no vocabulary. Different domains,
+different ledgers, different lore. They cannot meet inside either corpus,
+because each corpus is the private state of its own First Person.
+
+They meet in **the Gap** — and what is in the Gap is not content. It is the
+**axioms**: the algebra, the six trusts, the ten ground rules, the seven
+seats. Notice that this is already the file layout. `engine/conform.mjs` keeps
+its own copy of the axioms and *deliberately does not import them* from the
+engine; the source says that is the point. They belong to neither the loop nor
+the config, and both are checked against them.
+
+```
+Origin(A) ∩ Origin(B) = {the axioms}
+```
+
+That is trust T3 — the pair share only their root — lifted one scale. **The
+universe expands the mind; the harness is the boundary that lets agents find
+each other regardless of universe.** Which is why `universe/` in this repo is
+one project's corpus, kept behind a seam, and deletable without breaking a
+thing.
+
 ## The trusts
 
 The harness carries six constitutional trusts from the Privacy-is-Value model
@@ -144,7 +167,13 @@ seats/             seven cards: the mandate of each seat
 templates/         ledgers + a blank config to copy
 tools/bundle.mjs   config + engine → one self-contained workflow file
 examples/          the runnable toy
+universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks
 ```
+
+Everything above `universe/` is domain-neutral and always will be. That
+directory is the agentprivacy layer: a fleet plan, a cast, an admission rite,
+and a harness whose target is the corpus itself. It is kept behind a seam so a
+stranger building a compression loop never has to read a word of it.
 
 Apache-2.0. Origin: 0xagentprivacy · the Privacy-is-Value model (PVM V6) ·
 agentprivacy.ai

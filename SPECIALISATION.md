@@ -19,10 +19,17 @@ of the V(π,t) privacy-value equation), `role/` (domain knowledge), and
 
 A specialised instance dresses a seat by binding a persona to it:
 
-- **propose** takes a **mage-aligned** persona; **assay** takes a
-  **swordsman-aligned** one. The persona's frontmatter already declares its
-  side (`alignment`, `dual_agent_role`, `emoji`) — the corpus was built so
-  the pair decomposes this way.
+- A persona's frontmatter declares a **wing** (`alignment`: swordsman ·
+  mage · balanced). Bind by the persona's *term and skills*, not by its wing:
+  **the wing is a skill affinity, not a seat constraint.** The worked
+  reference seats a swordsman-aligned persona at `propose` and another at
+  `assay`, and it is right to — **the separation is carried by the Gap and
+  the algebra, never by the costume.** An instance that trusts the costume has
+  a wing where it needs a Gap. (An earlier version of this document asserted
+  the opposite; see `universe/ERRATA.md` E-4.)
+- The **hold-apart** seat takes a persona belonging to neither working side.
+  Canonically that is the one whose term *is* betweenness centrality — the
+  Gap's own formal definition.
 - Each persona carries a **proverb** (its one-line law) and a **spell** — a
   `→`-chained pipeline that reads as the seat's procedure in miniature. A
   good binding is one where the spell IS the seat's Definition of done said

@@ -67,4 +67,4 @@ mirage a named verdict rather than a surprise.
 `engine/conform.mjs` (the gate that proves the algebra rather than asserting
 it) · `examples/field-guide/` (a runnable spar) · `SPECIALISATION.md`
 (personas, spells, and the Game of 42 station pattern) · `HARNESS_PATHS.md`
-(eight real instances, grouped by how much of the loop each runs).
+(ten real instances + one open seat, grouped by how much of the loop each runs).

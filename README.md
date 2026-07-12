@@ -24,6 +24,28 @@ theorem, and `engine/conform.mjs` computes it for all sixty-four values every
 time it runs rather than taking it on faith. A result exists only where the
 two were genuinely held apart.
 
+## Why this matters for AI
+
+As AI systems increasingly **generate work and also judge it** — reward
+models scoring their own rollouts, LLM-as-judge, an agent writing code and
+then its own tests — one failure recurs: the check an agent invents is the
+check its work was built to survive. That is Goodhart's law wearing an agent
+costume, and it is the failure behind reward hacking, self-preferring judges,
+and green-because-written-green test suites. This harness answers it
+**structurally rather than behaviourally**: the verification witnesses are
+derived by hashing the proposal itself, so the proposer provably could not
+have tuned to them, and the two agents share only their root — the
+information that would let them collude was never routed. Then a
+multiplicative gate refuses partial passes, honest claim-tiers keep results
+from drifting from evidence, and the door keeps every outward action a
+human's.
+
+`RESEARCH.md` states the contribution in full — the problem, the precise
+claim, what is borrowed (Fiat-Shamir, Promise Theory, the PVM model) versus
+assembled here, the evidence on record, and the limits that evidence does not
+cross. It is written to the standard the harness enforces on its instances: a
+claim is worth what it can be re-run to show.
+
 ## Where it stands
 
 This is not a sketch. The engine has been debugged **by being run** — seven
@@ -289,11 +311,12 @@ here any more than it moves in the loop.
    nothing, and reports `VALIDATED`. Measure your baseline before you claim a
    best — the template ships both `null` on purpose.
 4. Bundle and run: `node tools/bundle.mjs my/harness.config.mjs my/harness.workflow.mjs`
-5. Read `HARNESS_PATHS.md` for eight real instances — quantum circuits, ZK
+5. Read `HARNESS_PATHS.md` for ten real instances — quantum circuits, ZK
    constraint systems, research papers, consent agreements, a publishing
    loop — the same skeleton under very different bodies, grouped by how much
-   of the loop each one actually runs. The partial ones are labelled as
-   partial; they teach the bar better than the complete ones do.
+   of the loop each one actually runs, plus one seat held open by invitation.
+   The partial ones are labelled as partial; they teach the bar better than
+   the complete ones do.
 6. When it earns it, dress the seats: `SPECIALISATION.md` covers binding
    personas and spells to seats, and the Game of 42 station pattern for
    growing a fleet without drifting.
@@ -304,12 +327,13 @@ a fork.
 ## Layout
 
 ```
+RESEARCH.md        the contribution — the problem, the claim, the evidence, the limits
 TRUSTS.md          the constitution — read first
 GROUND_RULES.md    GR-1..GR-10, pasted into every seat at boot
 ADOPTION.md        why the duality is topic-free + the mapping procedure
 SEAT_CONTRACT.md   what a config provides
 SPECIALISATION.md  personas, spells, the Game of 42
-HARNESS_PATHS.md   eight real instances, and how the fleet syncs
+HARNESS_PATHS.md   ten real instances + one open seat, and how the fleet syncs
 CLAUDE.md          one session, one seat — the boot protocol
 SKILL.md           this repo as a Claude Code skill
 engine/            the loop, its gate, and loop.test.mjs

@@ -339,6 +339,15 @@ async function handle(req, res) {
     return res.end(page)
   }
 
+  // the workshop's front page — the contribution, a static instrument that
+  // ships beside the live console (both speak the same house geometry).
+  if (url.pathname === '/workshop' || url.pathname === '/workshop.html') {
+    const page = readText(join(here, 'workshop.html'))
+    if (!page) return json(res, 404, { error: 'tools/workshop.html missing' })
+    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' })
+    return res.end(page)
+  }
+
   if (url.pathname === '/api/instances') {
     const list = []
     for (const inst of discover()) {

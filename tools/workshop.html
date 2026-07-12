@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The dual-agent harness — a contribution to verifiable AI</title>
+<style>
+  :root{
+    color-scheme: light dark;
+    --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9;
+    --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12);
+    --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f;
+    --cyan-soft:rgba(15,147,164,.12); --coral-soft:rgba(200,52,31,.10); --violet-soft:rgba(109,75,214,.10);
+    --mono: ui-monospace,"Cascadia Code","JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Hoefler Text","Palatino Linotype",Palatino,Georgia,serif;
+    --sans: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:70rem; --prose:64ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#05060d; --panel:#0b0f1e; --sink:#080b16;
+      --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.15);
+      --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7;
+      --cyan-soft:rgba(77,217,232,.10); --coral-soft:rgba(232,82,58,.12); --violet-soft:rgba(167,139,250,.12);
+    }
+  }
+  :root[data-theme="light"]{
+    color-scheme: light;
+    --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9;
+    --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12);
+    --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f;
+    --cyan-soft:rgba(15,147,164,.12); --coral-soft:rgba(200,52,31,.10); --violet-soft:rgba(109,75,214,.10);
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --ground:#05060d; --panel:#0b0f1e; --sink:#080b16;
+    --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.15);
+    --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7;
+    --cyan-soft:rgba(77,217,232,.10); --coral-soft:rgba(232,82,58,.12); --violet-soft:rgba(167,139,250,.12);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .num{font-variant-numeric:tabular-nums;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(1.2rem,4vw,3rem);}
+  .prose{max-width:var(--prose);}
+  a{color:var(--cyan);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:3px;}
+
+  /* ---- top bar: the workshop identity, ties to the live console ---- */
+  .topbar{
+    position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--ground) 86%, transparent);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .topbar .inner{
+    max-width:var(--maxw); margin:0 auto; padding:.7rem clamp(1.2rem,4vw,3rem);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    font-family:var(--mono); font-size:.76rem; letter-spacing:.12em; text-transform:uppercase;
+  }
+  .topbar .brand{ color:var(--ink); }
+  .topbar .brand .g{ color:var(--violet); }
+  .topbar nav{ display:flex; align-items:center; gap:.4rem 1rem; }
+  .topbar a, .topbar button{
+    font:inherit; color:var(--dim); text-decoration:none; background:none; border:0; cursor:pointer;
+    padding:.3rem .1rem; letter-spacing:.12em; text-transform:uppercase;
+  }
+  .topbar a:hover, .topbar button:hover{ color:var(--ink); }
+  #consoleLink{ display:none; color:var(--cyan); }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--dim); margin:0 0 1rem;
+  }
+  h1,h2,h3{ text-wrap:balance; }
+  h2{ font-family:var(--mono); font-weight:600; letter-spacing:-.01em; font-size:clamp(1.5rem,3.4vw,2.2rem); line-height:1.12; margin:0 0 1rem; }
+  h3{ font-family:var(--mono); font-weight:600; font-size:1.02rem; letter-spacing:.01em; margin:0 0 .4rem; }
+  p{margin:0 0 1.1rem;}
+  .lede{font-size:1.14rem;}
+  .dim{color:var(--dim);}
+  .voice{ font-family:var(--serif); font-style:italic; }
+
+  /* ---- hero ---- */
+  header.hero{ padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,3.5rem); }
+  .inscription{ font-family:var(--mono); font-size:clamp(.82rem,1.9vw,1rem); letter-spacing:.04em; color:var(--violet); margin:0 0 1.6rem; }
+  h1.title{ font-family:var(--mono); font-weight:600; letter-spacing:-.02em; font-size:clamp(2.1rem,6.2vw,4rem); line-height:1.04; margin:0 0 1.3rem; max-width:20ch; }
+  h1.title em{ font-family:var(--serif); font-style:italic; font-weight:400; color:var(--cyan); letter-spacing:0; }
+  .hero .lede{ max-width:52ch; }
+  .metric-strip{ display:flex; flex-wrap:wrap; gap:.5rem .9rem; align-items:baseline; margin-top:1.8rem; font-family:var(--mono); font-size:.86rem; color:var(--dim); }
+  .metric-strip b{ color:var(--num); font-weight:600; }
+
+  /* ---- the frontier instrument ---- */
+  .instrument{ margin-top:2.6rem; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.5rem 1rem; overflow:hidden; }
+  .instrument .cap{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:.4rem; }
+  canvas{ display:block; width:100%; height:auto; }
+  .instrument .foot{ font-family:var(--serif); font-style:italic; color:var(--dim); font-size:.95rem; margin:.6rem 0 .2rem; max-width:60ch; }
+
+  section{ padding:clamp(3rem,7vw,5.5rem) 0; border-top:1px solid var(--line); }
+  section.sink{ background:var(--sink); }
+  .kicker{ display:flex; align-items:center; gap:.7rem; margin-bottom:1.4rem; }
+  .kicker .glyph{ font-size:1.15rem; line-height:1; color:var(--dim); }
+  .kicker .eyebrow{ margin:0; }
+
+  .agent{ font-family:var(--mono); font-weight:600; white-space:nowrap; }
+  .agent.sword{ color:var(--coral); }
+  .agent.mage{ color:var(--violet); }
+  .agent.gap{ color:var(--cyan); }
+
+  .loop{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:stretch; margin:1.6rem 0 .4rem; font-family:var(--mono); font-size:.8rem; }
+  .loop .step{ flex:1 1 auto; min-width:8.5rem; background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:.6rem .7rem; }
+  .loop .step .n{ font-size:.66rem; letter-spacing:.14em; color:var(--dim); text-transform:uppercase; }
+  .loop .step .nm{ display:block; margin-top:.15rem; color:var(--ink); }
+  .loop .step.hold{ border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan) inset, 0 0 22px -8px var(--cyan); }
+  .loop .step.hold .nm{ color:var(--cyan); }
+  .loop .door{ flex:1 1 auto; min-width:8.5rem; border:1px dashed var(--line); border-radius:9px; padding:.6rem .7rem; color:var(--dim); }
+  .loop .door .nm{ color:var(--num); display:block; margin-top:.15rem; }
+  .loop .door .n{ font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .invariant{ font-family:var(--mono); font-size:clamp(1rem,2.6vw,1.5rem); color:var(--cyan); background:var(--cyan-soft); border:1px solid var(--line); border-radius:11px; padding:1rem 1.2rem; margin:1.6rem 0; text-align:center; letter-spacing:.02em; }
+
+  .tiles{ display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1rem; margin-top:1.8rem; }
+  .tile{ background:var(--panel); border:1px solid var(--line); border-radius:13px; padding:1.3rem 1.35rem; }
+  .tile .big{ font-family:var(--mono); font-weight:600; font-variant-numeric:tabular-nums; font-size:clamp(1.9rem,4.4vw,2.6rem); line-height:1; letter-spacing:-.02em; color:var(--ink); display:block; }
+  .tile .big .arrow{ color:var(--dim); font-weight:400; }
+  .tile .big .to{ color:var(--cyan); }
+  .tile .unit{ font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); display:block; margin:.55rem 0 .5rem; }
+  .tile p{ margin:0; font-size:.95rem; color:var(--dim); }
+  .tile.accent-cyan{ border-color:color-mix(in srgb, var(--cyan) 45%, var(--line)); }
+
+  .ladder{ display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:.9rem; margin-top:1.6rem; }
+  .rung{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem; }
+  .rung .t{ font-family:var(--mono); font-weight:600; font-size:1.02rem; color:var(--ink); }
+  .rung .t .g{ margin-right:.4rem; }
+  .rung .stakes{ font-size:.9rem; color:var(--dim); margin-top:.35rem; }
+  .rung .who{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:var(--cyan); margin-top:.6rem; }
+  .rung.reserved{ border-style:dashed; }
+  .rung.reserved .t{ color:var(--dim); }
+  .rung.reserved .who{ color:var(--violet); }
+
+  .limit{ border-left:2px solid var(--coral); padding-left:1.1rem; margin:0 0 1.6rem; max-width:var(--prose); }
+  .limit h3{ color:var(--ink); }
+  .limit p{ color:var(--dim); font-size:.98rem; margin:0; }
+
+  .console-note{
+    display:flex; gap:1rem; align-items:flex-start; margin-top:2rem; max-width:var(--prose);
+    background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem;
+  }
+  .console-note .mono{ font-family:var(--mono); font-size:.85rem; color:var(--cyan); white-space:nowrap; }
+  .console-note p{ margin:0; font-size:.96rem; color:var(--dim); }
+
+  .closer{ text-align:center; padding:clamp(3.5rem,8vw,6rem) 0; }
+  .closer .proverb{ font-family:var(--serif); font-style:italic; font-size:clamp(1.3rem,3.6vw,2rem); line-height:1.35; max-width:24ch; margin:0 auto 2rem; color:var(--ink); text-wrap:balance; }
+  .cta{ display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:.9rem; text-decoration:none; color:var(--ground); background:var(--ink); padding:.7rem 1.2rem; border-radius:9px; letter-spacing:.02em; transition:transform .15s ease; }
+  .cta:hover{ transform:translateY(-2px); }
+  footer{ border-top:1px solid var(--line); padding:2rem 0 3rem; }
+  footer .row{ display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; align-items:center; font-family:var(--mono); font-size:.78rem; color:var(--dim); }
+  footer .inscription-sm{ color:var(--violet); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <span class="brand"><span class="g">⿻</span> the workshop</span>
+    <nav>
+      <a id="consoleLink" href="/">◐ live console</a>
+      <a href="https://github.com/mitchuski/agentprivacy-harness" target="_blank" rel="noopener">repo ↗</a>
+      <button id="themeToggle" aria-label="Toggle light and dark theme">theme</button>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
+    <h1 class="title">Work you can trust from agents that <em>cannot grade themselves</em>.</h1>
+    <p class="lede prose">A verification harness for AI-agent work. One agent proposes, a second independently proves, and the tests that decide are derived by hashing the proposal itself — so neither agent could have chosen them. Config-driven, zero dependencies, every axiom re-checked at runtime.</p>
+    <div class="metric-strip">
+      <span><b>730 → 472</b> words, four audited folds</span>
+      <span aria-hidden="true">·</span>
+      <span><b>7</b> defects found by running</span>
+      <span aria-hidden="true">·</span>
+      <span><b>10</b> embodiments, one skeleton</span>
+    </div>
+
+    <figure class="instrument" aria-label="The frontier: a metric that falls only through the gate, 730 to 472 words across four audited folds.">
+      <div class="cap"><span>the frontier — the moving ceiling</span><span>examples/field-guide</span></div>
+      <canvas id="frontier" width="1100" height="320"></canvas>
+      <figcaption class="foot">A result exists only where the two agents were genuinely held apart. The line steps down only when a human keystone folds an audited win — never on an agent's own word.</figcaption>
+    </figure>
+  </header>
+
+  <section>
+    <div class="kicker"><span class="glyph">◺</span><p class="eyebrow">The problem</p></div>
+    <h2>Self-evaluation is a mirage generator</h2>
+    <div class="prose">
+      <p>As AI systems increasingly <strong>generate work and also judge it</strong> — reward models scoring their own rollouts, an LLM grading model output, an agent writing code and then its own tests — one failure recurs. An agent that proposes a change and then checks its own change will pass: not because it cheats, but because <em class="voice">the check it invents is the check its change was built to survive.</em></p>
+      <p>This is Goodhart's law wearing an agent costume — a problem of <strong>self-reference</strong>, not of any one domain. The result is what this harness names a <span class="agent sword">mirage</span>: it passes the author's probe and fails the real gate. Mirages are the failure behind reward hacking, behind a judge's documented preference for its own style, behind a test suite that is green because it was written to be green. Wherever a generator can influence the test that judges it, the test stops measuring the world and starts measuring the generator's model of the test.</p>
+    </div>
+  </section>
+
+  <section class="sink">
+    <div class="kicker"><span class="glyph">◿</span><p class="eyebrow">The answer</p></div>
+    <h2>Route the information away — don't ask for honesty</h2>
+    <div class="prose">
+      <p>Two agents do the work: <span class="agent mage">soulbae 🧙</span> proposes, <span class="agent sword">soulbis ⚔️</span> proves. Between them sits <span class="agent gap">the Gap ⿻</span>, whose only job is to derive the verification witnesses <strong>by hashing the proposal's own bytes</strong>. The proposer chooses its own exam without ever seeing the syllabus; any revision re-seeds the draw.</p>
+    </div>
+
+    <div class="loop" role="list" aria-label="The six-phase loop">
+      <div class="step" role="listitem"><span class="n">measure</span><span class="nm">frontier</span></div>
+      <div class="step" role="listitem"><span class="n">propose 🧙</span><span class="nm">blind lenses</span></div>
+      <div class="step hold" role="listitem"><span class="n">hold-apart ⿻</span><span class="nm">hash → witnesses</span></div>
+      <div class="step" role="listitem"><span class="n">assay ⚔️</span><span class="nm">the full gate</span></div>
+      <div class="step" role="listitem"><span class="n">critic</span><span class="nm">classify</span></div>
+      <div class="door" role="listitem"><span class="n">the door 😊</span><span class="nm">a human's alone</span></div>
+    </div>
+
+    <p class="invariant" aria-label="Mutual information of the prover and proposer outputs given the target is zero.">I(Y<sub>S</sub> ; Y<sub>M</sub> | X) = 0</p>
+
+    <div class="prose">
+      <p>Given the target, what the prover produces carries <strong>no information</strong> about what the proposer produces. Not a promise the agents make each other — a property of how the information is routed: the witnesses are a deterministic function of the proposal, so the proposer provably could not have tuned to them. Then a <strong>multiplicative gate</strong> refuses partial passes (7/8 is a zero, not 87.5%), honest claim-tiers keep results from drifting from evidence, and <strong>the door</strong> keeps every outward action a human's.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker"><span class="glyph">▤</span><p class="eyebrow">The evidence — all re-runnable</p></div>
+    <h2>Checked, not asserted</h2>
+    <div class="tiles">
+      <div class="tile accent-cyan">
+        <span class="big num">730<span class="arrow"> → </span><span class="to">472</span></span>
+        <span class="unit">words · four audited folds</span>
+        <p>A fact-dense guide compressed 35%, every fold passing an 8-of-~40 held-out gate drawn by hashing the candidate; the last two closed by exhaustive census.</p>
+      </div>
+      <div class="tile">
+        <span class="big num">7</span>
+        <span class="unit">defects found by running</span>
+        <p>Each invisible to inspection and obvious on execution — an outage read as an exhausted search, a gate that passed an empty config. Every one now pinned by a test.</p>
+      </div>
+      <div class="tile">
+        <span class="big num">10<span class="arrow"> + </span>1</span>
+        <span class="unit">embodiments · one open seat</span>
+        <p>The same skeleton over quantum circuits, ZK constraint systems, research documents, consent agreements — plus one workshop seat held open by invitation.</p>
+      </div>
+      <div class="tile">
+        <span class="big num">0</span>
+        <span class="unit">dependencies</span>
+        <p>Plain Node. The governing algebra is re-proven on all 64 values of ℤ/64ℤ every time the gate runs; every result is content-addressed so a stranger can re-derive it from the shipped bytes.</p>
+      </div>
+    </div>
+
+    <div class="console-note">
+      <span class="mono">node tools/console.mjs</span>
+      <p>This page ships beside the <strong>live console</strong> — a read-only localhost window that draws the loop as evolving geometry and re-derives every hash in front of you. One presents the work; the other lets you watch a round move.</p>
+    </div>
+  </section>
+
+  <section class="sink">
+    <div class="kicker"><span class="glyph">⚔</span><p class="eyebrow">The runtime tiers</p></div>
+    <h2>One architecture, widening stakes</h2>
+    <div class="ladder">
+      <div class="rung">
+        <div class="t"><span class="g">🤺</span>the spar</div>
+        <div class="stakes">A practice bout — every strike real, nothing at stake but the frontier.</div>
+        <div class="who">own frontier only</div>
+      </div>
+      <div class="rung reserved">
+        <div class="t">the duel</div>
+        <div class="stakes">The formal bout — a result a counterparty will rely on: signed verdicts, artefacts exchanged.</div>
+        <div class="who">reserved</div>
+      </div>
+      <div class="rung">
+        <div class="t"><span class="g">🏟️</span>the arena</div>
+        <div class="stakes">Against a live external benchmark, other fighters on the board.</div>
+        <div class="who">a public leaderboard</div>
+      </div>
+      <div class="rung">
+        <div class="t"><span class="g">🌍</span>the open world</div>
+        <div class="stakes">Against a real upstream, in the wild — consequences beyond any ledger.</div>
+        <div class="who">the world watching</div>
+      </div>
+    </div>
+    <p class="dim prose" style="margin-top:1.4rem;">The trusts do not change between tiers — the door is the First Person's at every rung. What changes is who is watching, and what a <span class="agent gap">VALIDATED</span> costs.</p>
+  </section>
+
+  <section>
+    <div class="kicker"><span class="glyph">◍</span><p class="eyebrow">The honest boundary</p></div>
+    <h2>The limits this evidence does not cross</h2>
+    <p class="prose dim" style="margin-bottom:2rem;">Stated as plainly as the claims — because the harness would refuse them otherwise.</p>
+    <div class="limit">
+      <h3>Prompt-based separation is topology plus discipline, not a proof.</h3>
+      <p>The engine guarantees what it does not put in a seat's prompt, but not what a seat reads from disk. The invariant holds by construction for the routed information; the rest is enforced by explicit per-seat reads and an audit trail where a seat that read past its card is a named failure. Where a domain permits harder separation — separate processes, models, machines, keys — it should be used.</p>
+    </div>
+    <div class="limit">
+      <h3>The Gap is not always worth its cost.</h3>
+      <p>A held-out adversarial draw earns its price only when the claim space is too large to check. Where every claim is enumerable, an exhaustive auditor gives certainty for free. The repo keeps a retired instance precisely to record where the harness was applied and should not have been. <span class="voice">A harness is for adversaries; an auditor is for facts.</span></p>
+    </div>
+    <div class="limit">
+      <h3>This is a runnable demonstration, not a controlled study.</h3>
+      <p>The evidence is a reproducible repository and a worked frontier, not a benchmarked comparison against baselines under peer review. The claim is that the construction is coherent, checked, and demonstrably catches a class of failure on the instances shown — not that it is optimal.</p>
+    </div>
+  </section>
+
+  <div class="closer">
+    <p class="proverb">A proposer that grades its own work builds mirages; only what the Gap could not tune to is a result.</p>
+    <a class="cta" href="https://github.com/mitchuski/agentprivacy-harness" target="_blank" rel="noopener">↗ github.com/mitchuski/agentprivacy-harness</a>
+  </div>
+
+  <footer>
+    <div class="row">
+      <span class="inscription-sm">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</span>
+      <span aria-hidden="true">·</span>
+      <span>Apache-2.0</span>
+      <span aria-hidden="true">·</span>
+      <span>0xagentprivacy — the Privacy-is-Value model (PVM V6)</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  // show the "live console" link only when this page is being served (not file:// or a static host)
+  if(location.protocol.indexOf('http') === 0 && location.hostname === '127.0.0.1'){
+    var cl = document.getElementById('consoleLink');
+    if(cl) cl.style.display = 'inline';
+  }
+
+  function currentTheme(){
+    var set = root.getAttribute('data-theme');
+    if(set) return set;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    root.setAttribute('data-theme', currentTheme() === 'dark' ? 'light' : 'dark');
+    animStart = null; drawFrontier();
+  });
+
+  // ---- the frontier instrument: the real data, drawn as a descending ceiling ----
+  var canvas = document.getElementById('frontier');
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var folds = [ {v:730}, {v:573}, {v:526}, {v:472} ];
+  var openTarget = 430; // OT-4 — "below 472"
+  var lo = 400, hi = 760;
+
+  function css(name){ return getComputedStyle(root).getPropertyValue(name).trim(); }
+
+  function sizeCanvas(){
+    var cssW = canvas.clientWidth || canvas.parentElement.clientWidth || 800;
+    var ratio = Math.min(window.devicePixelRatio || 1, 2);
+    var h = Math.max(230, Math.min(330, cssW * 0.30));
+    canvas.style.height = h + 'px';
+    canvas.width = Math.round(cssW * ratio);
+    canvas.height = Math.round(h * ratio);
+    ctx.setTransform(ratio,0,0,ratio,0,0);
+    return {w:cssW, h:h};
+  }
+
+  var animStart = null;
+  function drawFrontier(ts){
+    var dim = css('--dim'), cyan = css('--cyan'), violet = css('--violet'), num = css('--num'), line = css('--line'), panel = css('--panel');
+    var d = sizeCanvas();
+    var W = d.w, H = d.h;
+    var padL = 56, padR = 66, padT = 26, padB = 30;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+
+    function X(i){ return padL + plotW * (i/(folds.length-1)); }
+    function Y(v){ return padT + plotH * (1 - (v-lo)/(hi-lo)); }
+
+    ctx.clearRect(0,0,W,H);
+
+    ctx.strokeStyle = line; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, Y(730)); ctx.lineTo(W-padR, Y(730)); ctx.stroke();
+
+    ctx.strokeStyle = violet; ctx.globalAlpha = .85; ctx.setLineDash([6,5]); ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(padL, Y(openTarget)); ctx.lineTo(W-padR, Y(openTarget)); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 1;
+
+    var pts = [{x:X(0), y:Y(folds[0].v)}];
+    for(var i=1;i<folds.length;i++){ pts.push({x:X(i), y:Y(folds[i-1].v)}); pts.push({x:X(i), y:Y(folds[i].v)}); }
+
+    var p = 1;
+    if(!reduce && ts != null){ if(animStart == null) animStart = ts; p = Math.min(1, (ts - animStart) / 1400); }
+
+    ctx.strokeStyle = cyan; ctx.lineWidth = 2.2; ctx.lineJoin = 'round';
+    ctx.shadowColor = cyan; ctx.shadowBlur = 10;
+    ctx.beginPath();
+    var total = pts.length - 1, upto = p * total;
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for(var k=1;k<pts.length;k++){
+      if(k <= upto){ ctx.lineTo(pts[k].x, pts[k].y); }
+      else { var frac = upto - (k-1); if(frac > 0){ ctx.lineTo(pts[k-1].x + (pts[k].x-pts[k-1].x)*frac, pts[k-1].y + (pts[k].y-pts[k-1].y)*frac); } break; }
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    ctx.font = '600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace';
+    ctx.textBaseline = 'middle';
+    for(var j=0;j<folds.length;j++){
+      var reveal = j/(folds.length-1);
+      if(p < reveal - 0.02) continue;
+      var x = X(j), y = Y(folds[j].v), lastNode = (j===folds.length-1);
+      ctx.fillStyle = lastNode ? cyan : panel;
+      ctx.strokeStyle = cyan; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(x, y, lastNode?5:4, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = (j===0) ? dim : num;
+      ctx.textAlign = j===0 ? 'left' : (lastNode ? 'right' : 'center');
+      ctx.fillText(String(folds[j].v), lastNode ? x-8 : x, y - 15);
+    }
+
+    ctx.fillStyle = dim; ctx.font = '11px ui-monospace, Menlo, Consolas, monospace';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText('730 baseline', padL, Y(730)+15);
+    ctx.textAlign = 'right';
+    ctx.fillText('OT-4 · open', W-padR, Y(openTarget)-8);
+
+    if(!reduce && p < 1){ requestAnimationFrame(drawFrontier); }
+  }
+
+  function start(){ animStart = null; if(reduce){ drawFrontier(); } else { requestAnimationFrame(drawFrontier); } }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ start(); io.disconnect(); } }); }, {threshold:.3});
+    io.observe(canvas);
+  } else { start(); }
+
+  var rt;
+  window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ animStart=null; drawFrontier(); }, 120); });
+})();
+</script>
+</body>
+</html>

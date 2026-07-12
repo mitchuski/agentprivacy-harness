@@ -65,11 +65,16 @@
       { "workshop": "/circle", "vertex": 12, "burns": ["Memory", "Connection"], "forced_anchor": 51, "resident_mage": null },
       { "workshop": "hearthold", "vertex": 60, "burns": ["Protection", "Delegation", "Memory", "Connection"], "forced_anchor": 3, "anchor_is": "Computation + Value, exactly", "resident_mage": null, "developer": "House of Archon", "invitation": "../hearthold_mage/SLOT.md — a T4 invitation; the conform gate refusing the unfilled config IS the slot held open", "note": "The hearth burns care, not compute; what it refuses to become is a raw ledger. Seating PROPOSED at invitation, re-derivable from the accepted objective's actual burns." }
     ],
+    "keeper_seated": [
+      { "workshop": "/quartermaster", "vertex": 22, "burns": ["Delegation", "Connection", "Computation"], "forced_anchor": 41, "anchor_is": "Protection + Memory + Value — Memora's Chronicle vertex, exactly", "resident_mage": "Skeva 🎒", "precinct": "the Crucible", "instance": "the harness itself", "note": "The harness's own City seat: where the rig is drawn and fitted (a config, not a fork). It keeps no corpus, so its forced anchor is exactly the Chronicle. Founded by the field-guide working, Tome IX Act 8." },
+      { "workshop": "/chancery", "vertex": 27, "burns": ["Delegation", "Memory", "Computation", "Value"], "forced_anchor": 36, "anchor_is": "Protection + Connection", "resident_mage": "Nomia ⚖️", "precinct": "the Crucible", "instance": "lexon_pvm", "note": "The Lexon law-house: a clause read as law and run as code, held apart by the Gap. Vulcana's Forge vertex (V19) plus Memory — law remembers its precedent. Founded by the grammar working, Tome IX Act 8." },
+      { "workshop": "/wellpool", "vertex": 53, "burns": ["Protection", "Delegation", "Connection", "Value"], "forced_anchor": 10, "anchor_is": "Memory + Computation", "resident_mage": "Limnia 🌊", "precinct": "the Waters (the city's first water)", "instance": "privacy_pools_v2_mage", "note": "The mana pools made a place. Deposit entropy, mix trust-work into a credential, draw the anonymity the others' presence buys. INTENT — NOT DEPLOYED. Founded by the circuit working, Tome IX Act 8." }
+    ],
     "frontier": {
-      "named": 18,
+      "named": 21,
       "total": 64,
-      "unnamed": 46,
-      "note": "Counts are the structure layer's to publish. Treated here as REPORTED, not PROVEN."
+      "unnamed": 43,
+      "note": "Counts are the structure layer's to publish. Treated here as REPORTED, not PROVEN. +3 keeper-seated workshops (Quartermaster's V22, Chancery V27, Wellpool V53) 2026-07-12."
     }
   },
 
@@ -107,6 +112,18 @@
     "mana_is_not_proof": "🪢 VRC mana is regime-1: non-transferable, non-attesting, local colour. The mana is what you play with; the VRC is what you prove with.",
     "status": "SPEC. No implemented system mints trust-graph edges today.",
     "seal": "A trust that certifies itself is the one you cannot trust."
+  },
+
+  "holon_layer": {
+    "$comment": "κ as state — the content-addressed complement to the_edge_rule. Content edges verify by re-hashing; relational edges ARE the VRC above. Added 2026-07-12 when the κ law was baked into the runtime (HOLONS.md).",
+    "holon": "any object carrying a κ-label: κ = 'sha256:' + sha256(canonicalJson(object with the κ field removed)). The City Key / sigil Law L5 — never trusted, only re-derived; the label is excluded from its own preimage so the object carries its own address.",
+    "state_is_content_addressed": "The harness mints κ-addressed holons (artefact.v1, runtime-feed.v1), and the runtime feed self-addresses. The STATE carries its own address: a consumer re-derives it, an auditor verifies it, and κ is what travels between expressions.",
+    "content_edges": "a hash reference to bytes — an artefact's evidenceManifest. Verified by re-hashing; needs no signature, because the content is its own witness. IMPLEMENTED and re-verified under check.mjs.",
+    "relational_edges": "a κ→κ reference between holons, governed by the_edge_rule: a reference PROPOSES, a signature MINTS. The VRC IS the relational edge. SPEC until real signatures land.",
+    "verifier": "tools/holon_audit.mjs — re-derive every κ, re-hash every content edge, resolve every relational edge. Enumerable and deterministic, so it is an AUDITOR, not a harness (the universe-builder lesson, HOLONS.md). The harness mints the holons; the auditor verifies the mesh.",
+    "one_law": "tools/kappa.mjs — the single κ function every producer and verifier imports. Content-addressing needs one identical function, not copies that could drift; two κ functions do not catch each other, they break addressing.",
+    "interoperability": "one κ, computed the same everywhere, is the substrate: a holon minted here re-derives byte-for-byte in spellweb, the model instruments (/star · game42), and hologram-technologies. The site vendors kappa.mjs + HOLONS.md; the corpus stays home. This is the_edge_rule made operational at the content layer.",
+    "spec": "HOLONS.md"
   },
 
   "$provenance": {

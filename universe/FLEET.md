@@ -141,6 +141,25 @@ transfer. Its forced anchor V48 is *Protection + Delegation and nothing else*.
 `resident_mage` is already `null`. The rite has a vacant home waiting at
 exactly the right address, and we did not put it there.
 
+### The keeper-seated workshops (Tome IX Act 8 · 2026-07-12)
+
+The three fleet workings founded three shops, each with a resident mage. Their
+anchors are forced by the same law (XOR 63):
+
+| workshop | vertex | burns | forced anchor | anchor is | resident |
+|---|---|---|---|---|---|
+| **`/quartermaster`** | **V22** | Delegate·Connect·Compute | **V41** | Protection + Memory + Value (**Memora's Chronicle vertex**) | **Skeva 🎒** |
+| **`/chancery`** | **V27** | Delegate·Memory·Compute·Value | **V36** | Protection + Connection | **Nomia ⚖️** |
+| **`/wellpool`** | **V53** | Protect·Delegate·Connect·Value | **V10** | Memory + Computation | **Limnia 🌊** |
+
+**Read `/quartermaster` again.** The harness rig burns Delegation, Connection,
+Computation — issued, connecting the two agents, running — and keeps no Memory,
+Value, or Protection. Its forced anchor is V41, *exactly Memora's Chronicle
+vertex*: **the rig keeps no corpus so that the one who wields it can keep
+everything.** The Quartermaster's is the harness's own City seat (the
+Crucible), where the rig is drawn and fitted before a working — the standing
+complement to `/hall`, where the rite is performed.
+
 ---
 
 ## 4 · The fleet, aligned to the model
@@ -154,7 +173,8 @@ covers factors, not when it covers topics.
 | 1 | shor_mage | `R(d)` reconstruction cost | Horizon V35 | 9,024 hashed witnesses | **IMPLEMENTED** |
 | 2 | tigzkp_mage | `R(d)`, witness-computability | V38 ⊥ V25 | held-out equivalence points | **IMPLEMENTED** |
 | 3 | V6 pipeline | `A_h(τ)` fidelity over time | — (papers) | P0–P3, adversarial reviewer | **IMPLEMENTED** |
-| 4 | privacy_pools_v2 | `R(d)` on a live target | V38 ⊥ V25 | as #2, + certificates | **IMPLEMENTED** |
+| 4 | privacy_pools_v2 | `R(d)` on a live target | **`/wellpool` V53 ⊥ V10** | as #2, + certificates | **IMPLEMENTED** |
+| 4b | lexon_pvm · **the grammar** | `Φ` structural checkability | **`/chancery` V27 ⊥ V36** | held-out census + mutation probe | **IMPLEMENTED** |
 | 5 | MyTerms · **Reclaim** | `Φ_agent(Σ)`, T4 | `/covenant` V55 ⊥ V8 | bilateral record | **SPEC** (loop mock-only) |
 | 6 | Hearthold · **Hold** | `P`, `A_h(τ)` | `/vault` V57 ⊥ V6 | factor-2 step-up ladder | **IMPLEMENTED upstream** |
 | 7 | the rite · **Prove** | **`C`** credential verifiability | **`/hall` V15 ⊥ V48** | trust task + co-signature | **SPEC — blocked, §7** |

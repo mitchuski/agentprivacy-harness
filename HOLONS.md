@@ -119,13 +119,33 @@ sites multiply.
 
 ## Order of work
 
-1. `tools/kappa.mjs` — the single κ primitive; the mint, feed, and console
-   converge on it. **(done in this pass)**
-2. `tools/holon_audit.mjs` — the mesh auditor; wired into `check.mjs` and
-   pinned by a test. **(done in this pass)**
-3. This spec. **(done)**
-4. *Next:* relational edges with real signatures (the VRC), so cross-party
-   holon interop is verifiable — the substrate `hologram-technologies` seats on.
+**Done — the κ law is baked into the runtime:**
+
+1. `tools/kappa.mjs` — the single κ primitive. The mint, feed, and console all
+   import it; the three drifting copies are gone, and the refactor kept every
+   existing κ byte-identical.
+2. `tools/holon_audit.mjs` — the mesh auditor. Wired into `check.mjs` over every
+   instance's minted holons and pinned by a tamper test (flip one evidence byte,
+   the mesh no longer re-derives).
+3. **κ as state, first cut** — the runtime feed self-addresses: `buildFeed`
+   stamps `κ = kappaOf(feed)`, so a state snapshot is a verifiable holon. And
+   the universe head carries a `holon_layer` section (`universe/universe.json`),
+   so the corpus knows κ is the interoperability substrate.
+4. This spec.
+
+**Next — κ as the *whole* runtime state, and across the corpus:**
+
+5. **Every runtime object a holon.** `frontier.json`, each `verdict`, each
+   `gap` gains its own κ, so an entire run is a mesh of content-addressed holons
+   the auditor verifies end to end. Because `kappa.mjs` lives in the shared core,
+   this reaches **every instance — lexon, the pools, hearthold — the moment it
+   re-bundles**: one κ, computed the same everywhere, as the state.
+6. **Relational edges with real signatures** (the VRC) — so cross-party holon
+   interop is verifiable, not just single-party integrity. This is the substrate
+   `hologram-technologies` seats on.
+7. **Map the layer across the corpus** — a κ / holon node and edges in the
+   spellweb graph, a reference in the docs, and the skill, so the corpus speaks
+   one content-addressing law. (Cross-repo; the First Person's door.)
 
 ```
 (⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ

@@ -11,12 +11,12 @@
     "whyNotAHarness": "The Fiat-Shamir Gap earns its cost only where the claim space is too large to check. This map makes ~100 enumerable claims. Rounds u1 and u2 applied a sampled gate here and produced no evidence about the map at a cost of ~1.4M tokens. See chronicles/2026-07-10_u3_retirement.md."
   },
   "baseline": {
-    "metric": 8112,
-    "measuredAt": "2026-07-10 (post-retirement)",
-    "note": "Re-measured after the keystone (a) retracted the field-guide-toy claim, (b) restored the dropped `cast` layer that audit.mjs caught on its first run, and (c) reframed the map around the auditor. The map GREW. Growth is honest: the objective was to shrink a map under a sampled gate, and that objective is retired. See runs[].u3."
+    "metric": 8319,
+    "measuredAt": "2026-07-12 (keeper-seating + holon layer)",
+    "note": "Re-measured after (a) the 2026-07-10 retirement re-measure (8112), then (b) 2026-07-12 seating three keeper workshops (Quartermaster V22 = the harness itself, Chancery V27 = lexon, Wellpool V53 = pools) and adding the holon_layer interoperability head. The map GREW again. Growth is honest: the layer is audited exhaustively, not optimized — the word count is a record, not a target."
   },
   "best": {
-    "metric": 8112,
+    "metric": 8319,
     "leverId": null,
     "gateResult": null,
     "note": "equal to baseline. No round ever validated anything. The metric is retained as a HISTORICAL number, not a live objective — the universe layer is now audited exhaustively, not optimized adversarially."

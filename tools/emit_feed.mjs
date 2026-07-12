@@ -28,6 +28,7 @@
 import { readFileSync, readdirSync, existsSync, writeFileSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve, relative, basename } from 'node:path'
+import { kappaOf } from './kappa.mjs'  // κ as state: the feed is a self-addressing holon (HOLONS.md)
 
 const INSCRIPTION = '(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ'
 const here = dirname(fileURLToPath(import.meta.url))
@@ -117,7 +118,7 @@ export function buildFeed(instanceDir, repoRoot = defaultRepoRoot) {
     }
   }
 
-  return {
+  const out = {
     feed: 'dual-agent-harness/runtime-feed.v1',
     instance: (frontier.objective && frontier.name) || basename(dir),
     updated: frontier.updated || null,
@@ -129,6 +130,10 @@ export function buildFeed(instanceDir, repoRoot = defaultRepoRoot) {
     inscription: INSCRIPTION,
     note: 'A projection of runtime state for the model instruments (/star · game42 · spellweb). The run directory and frontier.json are authoritative; wiring a consumer is the First Person’s (T6).',
   }
+  // κ as state: the feed self-addresses, so a consumer can re-derive it and a
+  // mesh auditor can verify it like any other holon (HOLONS.md).
+  out['κ'] = kappaOf(out)
+  return out
 }
 
 // ---- CLI ----

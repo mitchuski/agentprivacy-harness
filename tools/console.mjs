@@ -29,6 +29,7 @@ import { spawnSync, spawn } from 'node:child_process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join, resolve, relative, basename } from 'node:path'
 import { buildFeed } from './emit_feed.mjs'
+import { canonicalJson, kappaOf } from './kappa.mjs'  // the one κ law (HOLONS.md)
 
 const here = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(join(here, '..'))
@@ -63,19 +64,10 @@ const safeStat = (p) => { try { return statSync(p) } catch { return null } }
 const isDir = (p) => { const s = safeStat(p); return !!s && s.isDirectory() }
 const listDir = (p) => { try { return readdirSync(p, { withFileTypes: true }) } catch { return [] } }
 
-// canonical JSON (recursive sorted keys, no whitespace) — the κ-label preimage
-// convention shared with the City Key and the /sigil verifier (Law L5:
-// a κ-label is never trusted, only re-derived).
-export function canonicalJson(v) {
-  if (v === null || typeof v !== 'object') return JSON.stringify(v)
-  if (Array.isArray(v)) return '[' + v.map(canonicalJson).join(',') + ']'
-  return '{' + Object.keys(v).sort().map(k => JSON.stringify(k) + ':' + canonicalJson(v[k])).join(',') + '}'
-}
-export function deriveKappa(artefact) {
-  const clone = { ...artefact }
-  delete clone['κ']  // the label is excluded from its own preimage
-  return 'sha256:' + createHash('sha256').update(canonicalJson(clone), 'utf8').digest('hex')
-}
+// the κ law lives in tools/kappa.mjs (canonicalJson, kappaOf) — imported above,
+// re-exported here so existing importers keep working. deriveKappa === kappaOf.
+export { canonicalJson }
+export const deriveKappa = kappaOf
 
 // mini YAML frontmatter: `key: value` lines between --- fences ONLY.
 function frontmatter(text) {

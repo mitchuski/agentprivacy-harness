@@ -328,6 +328,7 @@ a fork.
 
 ```
 RESEARCH.md        the contribution — the problem, the claim, the evidence, the limits
+HOLONS.md          κ-addressed interoperability — the holon contract, and why it is an auditor
 TRUSTS.md          the constitution — read first
 GROUND_RULES.md    GR-1..GR-10, pasted into every seat at boot
 ADOPTION.md        why the duality is topic-free + the mapping procedure
@@ -345,7 +346,10 @@ tools/render_run.mjs   one run directory → one static run.html projection
 tools/console.mjs  the workshop console — a live, GET-only localhost window
 tools/workshop.html    the workshop's front page — the contribution, one static instrument (served at /workshop)
 tools/emit_feed.mjs    the runtime feed — a run's produced math (moving ceiling R(t) · ℤ/64ℤ lattice) for /star, game42, spellweb
+tools/frontier.html    the frontier widget — an interactive, per-workshop descent, embeddable in the districts
 tools/mint_artefact.mjs  seal a validated run into a κ-labelled artefact, at the door
+tools/kappa.mjs    the one κ law — content-addressing shared by every producer and verifier
+tools/holon_audit.mjs  the mesh auditor — re-derive every κ, re-hash every edge (HOLONS.md)
 examples/          the runnable spar
 universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks
 ```

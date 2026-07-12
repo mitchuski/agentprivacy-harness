@@ -28,6 +28,7 @@ import { createHash } from 'node:crypto'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join, resolve, relative, basename } from 'node:path'
+import { canonicalJson, sha256Hex, kappaOf } from './kappa.mjs'  // the one κ law (HOLONS.md)
 
 const here = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(join(here, '..'))
@@ -45,16 +46,11 @@ const runId = positional[1]
 const relInst = instDir.startsWith(repoRoot) ? relative(repoRoot, instDir).replace(/\\/g, '/') : instDir.replace(/\\/g, '/')
 
 const refuse = (why) => { console.error(`MINT REFUSED — ${why}`); process.exit(1) }
-const sha256 = (buf) => createHash('sha256').update(buf).digest('hex')
+const sha256 = (buf) => createHash('sha256').update(buf).digest('hex')  // file bytes → hex
 const sha256File = (p) => sha256(readFileSync(p))
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'))
 const maybeJson = (p) => { try { return readJson(p) } catch { return null } }
-
-function canonicalJson(v) {
-  if (v === null || typeof v !== 'object') return JSON.stringify(v)
-  if (Array.isArray(v)) return '[' + v.map(canonicalJson).join(',') + ']'
-  return '{' + Object.keys(v).sort().map(k => JSON.stringify(k) + ':' + canonicalJson(v[k])).join(',') + '}'
-}
+// canonicalJson + sha256Hex + kappaOf come from tools/kappa.mjs — the one κ law.
 
 // ---- gather the run (independent re-derivation) -----------------------------
 const runDir = join(instDir, 'runs', runId)
@@ -200,7 +196,7 @@ const artefact = {
 // re-runnable by anyone from the shipped JSON.)
 const provisional = { ...artefact }
 delete provisional['κ']; delete provisional.evidenceManifest
-const idKappa = sha256(Buffer.from(canonicalJson(provisional), 'utf8'))
+const idKappa = sha256Hex(canonicalJson(provisional))
 artefact.id = 'af-' + idKappa.slice(0, 12)
 if (universe) {
   artefact.universe.spellwebNodeDraft.id = 'artefact-' + artefact.id
@@ -226,10 +222,8 @@ for (const p of withVerdicts) {
 if (frontier) copyEvidence(join(instDir, 'frontier.json'), 'frontier.json')
 if (chronicle) copyEvidence(chronicle.abs, chronicle.path)
 
-// final κ over the complete record (Law L5 preimage: κ excluded)
-const finalClone = { ...artefact }
-delete finalClone['κ']
-artefact['κ'] = 'sha256:' + sha256(Buffer.from(canonicalJson(finalClone), 'utf8'))
+// final κ over the complete record (Law L5 preimage: κ excluded) — the one κ law
+artefact['κ'] = kappaOf(artefact)
 
 writeFileSync(join(outDir, 'artefact.json'), JSON.stringify(artefact, null, 2))
 

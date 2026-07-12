@@ -13,7 +13,7 @@
 //
 // Runs in a scratch copy under the OS temp dir; never touches the repo.
 
-import { mkdtempSync, cpSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
+import { mkdtempSync, cpSync, readFileSync, writeFileSync, rmSync, readdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
@@ -80,6 +80,26 @@ try {
     check(`every evidence hash re-derives (${n} files)`, hashesOk && n > 0, 'a shipped hash does not match its bytes')
     check('the artefact took no outward action', Array.isArray(artefact.door.actionsTaken) && artefact.door.actionsTaken.length === 0,
       'door.actionsTaken is not empty — software opened the door')
+  }
+
+  // ---- 3b. the holon mesh auditor catches a tampered evidence byte ---------
+  if (mint.status === 0) {
+    const id = (mint.stdout.match(/MINTED (af-[0-9a-f]+)/) || [])[1]
+    const artDir = join(clean, 'artefacts')
+    const passRun = spawnSync(process.execPath, ['tools/holon_audit.mjs', artDir], { cwd: root, encoding: 'utf8' })
+    check('holon audit passes a clean mesh', passRun.status === 0 && /HOLON AUDIT PASS/.test(passRun.stdout),
+      ((passRun.stdout || '') + (passRun.stderr || '')).slice(0, 200))
+    // flip one byte of an evidence file — the content edge must no longer re-hash
+    const evDir = join(artDir, id, 'evidence')
+    const ev = readdirSync(evDir)[0]
+    if (ev) {
+      const evPath = join(evDir, ev)
+      const b = Buffer.from(readFileSync(evPath)); b[0] ^= 0x01; writeFileSync(evPath, b)
+      const failRun = spawnSync(process.execPath, ['tools/holon_audit.mjs', artDir], { cwd: root, encoding: 'utf8' })
+      const fout = (failRun.stdout || '') + (failRun.stderr || '')
+      check('holon audit catches a tampered content edge', failRun.status !== 0 && /content edge/.test(fout),
+        `the mesh auditor did not fail on a flipped evidence byte: ${fout.slice(0, 200)}`)
+    }
   }
 
   // ---- 4. the runtime feed projects frontier.json faithfully ---------------

@@ -89,6 +89,17 @@ if (candidates.length === 0) {
 }
 for (const c of candidates) run(`instance: ${relative(root, c).replace(/\\/g, '/')}`, ['engine/conform.mjs', relative(root, c)])
 
+// ---- 3b. the holon mesh — κ re-derivation over minted artefacts -----------
+// Verifying content-addressed holons is enumerable, so it is an auditor, not a
+// harness (HOLONS.md). Run it over every instance that has minted holons; a
+// mesh that does not re-derive is a tampered result masquerading as sealed.
+let holonRan = false
+for (const c of candidates) {
+  const rel = relative(root, c).replace(/\\/g, '/')
+  if (existsSync(join(c, 'artefacts'))) { run(`holon audit: ${rel}`, ['tools/holon_audit.mjs', rel + '/artefacts']); holonRan = true }
+}
+if (!holonRan) steps.push({ label: 'holon audit', cmd: '(no minted holons)', passed: true, out: 'no artefacts/ under any instance — nothing to re-derive yet', optional: true })
+
 // ---- 4. the universe auditor (optional — the directory is deletable) ------
 if (existsSync(join(root, 'universe', 'audit.mjs'))) {
   run('universe audit', ['universe/audit.mjs'])

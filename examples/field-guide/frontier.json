@@ -16,6 +16,12 @@
     "leverIds": ["r4-compose-line-edit"],
     "evidence": "composed line-edit over the folded 526 text: VALIDATED 8/8 (draw F14/F10/F9/F22/F29/F16/F28/F2, seed re-derived by prover AND keystone) AND keystone exhaustive census 2026-07-11: all 32 original facts (F1..F32) recoverable — the critic's named converter for probe-limited, satisfied. Estimate hit exactly (472→472). Scratch: runs/r4/r4.1/p1-r4-compose-line-edit/. Folded to artifact/GUIDE.compressed.md. Prior best 526 evidence: see closedTargets OT-2/OT-3 and chronicles"
   },
+  "history": [
+    { "metric": 730, "date": "2026-07-09", "lever": null, "note": "baseline — the moving ceiling's start" },
+    { "metric": 573, "date": "2026-07-11", "lever": "restructure-merge-terse-prose", "target": "OT-1", "chronicle": "chronicles/2026-07-11_keystone-fold-573.md" },
+    { "metric": 526, "date": "2026-07-11", "lever": "telegraphic-bullets (two disjoint draws + 32/32 census)", "target": "OT-2", "chronicle": "chronicles/2026-07-11_keystone-fold-526.md" },
+    { "metric": 472, "date": "2026-07-11", "lever": "r4-compose-line-edit", "target": "OT-3", "chronicle": "chronicles/2026-07-11_keystone-fold-472.md" }
+  ],
   "openTarget": {
     "id": "OT-4",
     "statement": "below 472 words at gate 8/8 — third composition pass over an already twice-composed text; diminishing returns expected (730→526→472). A proposal must name which word class it removes; the sibling r4-compose-restructure (484, VALIDATED, probe-limited, dominated) is the standing fallback lever family",

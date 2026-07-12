@@ -344,6 +344,7 @@ tools/bundle.mjs   config + engine → one self-contained workflow file
 tools/render_run.mjs   one run directory → one static run.html projection
 tools/console.mjs  the workshop console — a live, GET-only localhost window
 tools/workshop.html    the workshop's front page — the contribution, one static instrument (served at /workshop)
+tools/emit_feed.mjs    the runtime feed — a run's produced math (moving ceiling R(t) · ℤ/64ℤ lattice) for /star, game42, spellweb
 tools/mint_artefact.mjs  seal a validated run into a κ-labelled artefact, at the door
 examples/          the runnable spar
 universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks

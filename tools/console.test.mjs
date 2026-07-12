@@ -20,6 +20,7 @@ import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
 import { gatherRuns, deriveKappa } from './console.mjs'
+import { buildFeed } from './emit_feed.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = resolve(join(here, '..'))
@@ -80,6 +81,16 @@ try {
     check('the artefact took no outward action', Array.isArray(artefact.door.actionsTaken) && artefact.door.actionsTaken.length === 0,
       'door.actionsTaken is not empty — software opened the door')
   }
+
+  // ---- 4. the runtime feed projects frontier.json faithfully ---------------
+  const feed = buildFeed(src)
+  const fr = JSON.parse(readFileSync(join(src, 'frontier.json'), 'utf8'))
+  check('feed moving-ceiling best matches frontier best', feed.movingCeiling.best === fr.best.metric,
+    `feed ${feed.movingCeiling.best} vs frontier ${fr.best.metric}`)
+  check('feed descent ends at the best (R falling, ≤ 1)', (() => {
+    const s = feed.movingCeiling.series
+    return s.length >= 2 && s[s.length - 1].value === fr.best.metric && s[0].ratio >= s[s.length - 1].ratio && s[s.length - 1].ratio <= 1
+  })(), 'the emitted R(t) descent does not end at the folded best')
 } finally {
   rmSync(tmp, { recursive: true, force: true })
 }

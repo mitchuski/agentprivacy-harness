@@ -28,6 +28,7 @@ import { createHash } from 'node:crypto'
 import { spawnSync, spawn } from 'node:child_process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join, resolve, relative, basename } from 'node:path'
+import { buildFeed } from './emit_feed.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(join(here, '..'))
@@ -413,6 +414,16 @@ async function handle(req, res) {
     const inst = instanceById(q.get('instance'))
     if (!inst) return json(res, 404, { error: 'unknown instance' })
     return json(res, 200, gatherArtefacts(inst.dir))
+  }
+
+  // the runtime feed — the harness's produced math, in the shape the model's
+  // other instruments speak (/star moving ceiling · game42 lattice · spellweb).
+  // A live projection a consumer can poll; wiring it is the First Person's (T6).
+  if (url.pathname === '/api/feed') {
+    const inst = instanceById(q.get('instance'))
+    if (!inst) return json(res, 404, { error: 'unknown instance' })
+    try { return json(res, 200, buildFeed(inst.dir, repoRoot)) }
+    catch (e) { return json(res, 500, { error: String(e && e.message || e) }) }
   }
 
   return json(res, 404, { error: 'no such route' })

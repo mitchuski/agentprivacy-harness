@@ -1,3 +1,4 @@
 examples/*/runs/*
 !examples/*/runs/.gitkeep
 node_modules/
+tools/console.roots.json

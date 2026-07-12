@@ -36,6 +36,7 @@ run('the axioms', ['engine/conform.mjs'])
 
 // ---- 2. the engine's own tests -------------------------------------------
 run('engine tests', ['engine/loop.test.mjs'])
+run('console + mint tests', ['tools/console.test.mjs'])
 
 // ---- 3. every instance ---------------------------------------------------
 // An instance is any directory (one level down, or under examples/) carrying a

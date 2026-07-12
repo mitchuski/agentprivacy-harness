@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the workshop console · dual-agent harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,300;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ---- house palette (soulbis /star · game42 · agentprivacy model) ---- */
+:root{
+  --ground:#04050b; --ground2:#080c20; --panel:rgba(10,13,28,.62);
+  --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.16);
+  --cyan:#4dd9e8;   /* holds · VALIDATED · verified */
+  --amber:#e0a526;  /* MIRAGE · warn */
+  --coral:#e8523a;  /* BLOCKED · MISMATCH · breach */
+  --violet:#a78bfa; /* threshold · propose */
+  --warm:#ffd6c7;   /* numeric readouts */
+  --serif:"Fraunces",Georgia,serif;
+  --mono:"Spline Sans Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:14px/1.5 var(--mono);min-height:100vh;
+  background:
+    radial-gradient(1100px 700px at 12% -10%, rgba(43,107,255,.10), transparent 60%),
+    radial-gradient(900px 600px at 105% 110%, rgba(255,77,61,.09), transparent 55%),
+    radial-gradient(1400px 900px at 50% 40%, #060812, var(--ground) 70%, #020308);
+}
+a{color:var(--violet)}
+.num{font-variant-numeric:tabular-nums;color:var(--warm)}
+header{padding:1.4rem 1.6rem .6rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:1rem 1.6rem}
+header h1{font:italic 300 1.7rem var(--serif);margin:0;letter-spacing:.02em}
+header .inscription{color:var(--violet);letter-spacing:.04em}
+header .sub{color:var(--dim);font-size:.8rem;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.6rem .4rem}
+.chip{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--line);border-radius:999px;
+  padding:.12rem .65rem;font-size:.72rem;color:var(--dim);background:rgba(10,13,28,.4)}
+.chip.on{color:var(--cyan);border-color:rgba(77,217,232,.5)}
+.chip.doc{color:var(--dim)}
+.chip.bad{color:var(--coral);border-color:rgba(232,82,58,.55)}
+.chip.warn{color:var(--amber);border-color:rgba(224,165,38,.5)}
+.chip.mana{color:var(--warm)}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:1rem;padding:0 1.6rem 3rem}
+.rail{display:flex;flex-direction:column;gap:.6rem}
+.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding: .9rem 1rem}
+.panel h2{font:italic 400 1.05rem var(--serif);margin:.1rem 0 .55rem;color:var(--ink)}
+.panel h2 .tag{font:400 .68rem var(--mono);color:var(--dim);margin-left:.5rem;letter-spacing:.03em}
+.inst{cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;background:rgba(10,13,28,.4)}
+.inst.sel{border-color:rgba(167,139,250,.6);background:rgba(30,25,60,.45)}
+.inst .nm{display:flex;align-items:center;gap:.45rem}
+.inst .dot{width:9px;height:9px;border-radius:50%;background:var(--dim);flex:none}
+.inst .dot.ok{background:var(--cyan);box-shadow:0 0 8px rgba(77,217,232,.7)}
+.inst .dot.bad{background:var(--coral);box-shadow:0 0 8px rgba(232,82,58,.7)}
+.inst .dot.open{background:transparent;border:1.5px dashed var(--violet)}
+.inst .meta{color:var(--dim);font-size:.72rem;margin-top:.15rem}
+.main{display:flex;flex-direction:column;gap:1rem;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:1100px){.row2{grid-template-columns:1fr}.layout{grid-template-columns:1fr}}
+svg text{font-family:var(--mono)}
+.narrate{font:italic 300 .92rem var(--serif);color:var(--dim);margin-top:.35rem}
+.voidbanner{border:1.5px solid var(--coral);background:rgba(61,20,24,.7);color:#ffb3ad;
+  border-radius:10px;padding:.6rem .9rem;font-weight:500;display:none;margin-bottom:.6rem}
+.voidbanner.show{display:block}
+.station{cursor:pointer}
+.station circle.halo{opacity:0;transition:opacity .6s}
+.station.lit circle.halo{opacity:.9}
+.pulse{animation:pulse 1.2s ease-out 2}
+@keyframes pulse{0%{opacity:.2}40%{opacity:1}100%{opacity:.75}}
+.pcard{border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:.5rem 0;background:rgba(6,8,18,.55)}
+.pcard h4{margin:0 0 .3rem;font-size:.85rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.hashbox{border:1px solid var(--line);border-radius:8px;padding:.45rem .6rem;font-size:.72rem;overflow-wrap:anywhere;margin-top:.35rem}
+.hashbox.match{border-color:rgba(77,217,232,.45)} .hashbox.mismatch{border-color:var(--coral);background:rgba(42,14,17,.6)}
+.hashbox .k{color:var(--dim)}
+.vchip{padding:.05rem .55rem;border-radius:999px;font-size:.7rem;font-weight:500;border:1px solid}
+.vchip.VALIDATED{color:var(--cyan);border-color:var(--cyan);background:rgba(18,38,40,.5)}
+.vchip.MIRAGE{color:var(--amber);border-color:var(--amber);background:rgba(43,34,17,.5)}
+.vchip.BLOCKED{color:var(--coral);border-color:var(--coral);background:rgba(61,20,24,.5)}
+.vchip.none{color:var(--dim);border-color:var(--line)}
+select,button{background:rgba(10,13,28,.7);color:var(--ink);border:1px solid var(--line);border-radius:8px;
+  padding:.3rem .6rem;font:inherit;cursor:pointer}
+button:hover{border-color:var(--violet)}
+pre{background:rgba(4,5,12,.8);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;
+  overflow:auto;font-size:.74rem;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:.76rem}
+td,th{border:1px solid var(--line);padding:.3rem .5rem;text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:400}
+.sidepanel{position:fixed;top:0;right:-560px;width:540px;max-width:92vw;height:100vh;z-index:50;
+  background:rgba(8,10,22,.92);border-left:1px solid var(--line);backdrop-filter:blur(18px);
+  transition:right .3s ease;padding:1.2rem 1.4rem;overflow:auto}
+.sidepanel.open{right:0}
+.sidepanel h3{font:italic 400 1.2rem var(--serif);margin:.2rem 0 .6rem}
+.sidepanel .close{float:right}
+.md h1,.md h2,.md h3{font:italic 400 1.05rem var(--serif);margin:.9rem 0 .35rem}
+.md p,.md li{font-size:.82rem;color:var(--ink)} .md code{color:var(--warm);background:rgba(255,214,199,.08);padding:0 .25rem;border-radius:4px}
+.md pre code{background:none;padding:0}
+.md ul{padding-left:1.2rem}
+.doorpanel .cmd{display:block;background:rgba(4,5,12,.8);border:1px dashed var(--line);border-radius:8px;
+  padding:.4rem .6rem;margin:.3rem 0;font-size:.74rem;color:var(--warm);overflow-wrap:anywhere}
+.kv{color:var(--dim);font-size:.74rem}
+.feed li{font-size:.76rem;margin:.25rem 0;color:var(--dim)} .feed li b{color:var(--ink);font-weight:500}
+.wikichips a{text-decoration:none}
+.wikichips .chip.dead{opacity:.35;pointer-events:none}
+footer{color:var(--dim);font-size:.72rem;padding:0 1.6rem 2rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>the workshop console</h1>
+  <span class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</span>
+  <svg id="axiomCoin" width="40" height="40" viewBox="0 0 40 40" title="the axiom, animated"></svg>
+  <span class="sub">a window, not a hand — this page holds no state; everything below is re-read from the run directories and re-derived where it can be (GR-5 · GR-4). Outward actions are the First Person's alone (T6).</span>
+</header>
+
+<div class="chips" id="trustChips"></div>
+
+<div class="layout">
+  <div class="rail">
+    <div class="panel">
+      <h2>instances</h2>
+      <div id="instList" style="display:flex;flex-direction:column;gap:.5rem"></div>
+    </div>
+    <div class="panel wikichips">
+      <h2>the wiki <span class="tag">instructional layer</span></h2>
+      <div id="wikiChips" style="display:flex;flex-direction:column;gap:.35rem"></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div id="voidBanner" class="voidbanner">⚠ HASH MISMATCH — a recorded Gap seed does not reproduce from the saved proposal bytes. The held-apart property is unproven; treat this round's verdicts as void (GR-4).</div>
+
+    <div class="row2">
+      <div class="panel">
+        <h2>the loop <span class="tag">instrument A · click a station for its seat card</span></h2>
+        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.3rem">
+          <select id="runSel"></select><select id="roundSel"></select>
+          <span class="kv" id="roundKv"></span>
+        </div>
+        <svg id="loopSvg" viewBox="0 0 520 330" width="100%"></svg>
+      </div>
+      <div class="panel">
+        <h2>the frontier <span class="tag" id="frontierTag">instrument B</span></h2>
+        <svg id="frontSvg" viewBox="0 0 520 240" width="100%"></svg>
+        <div class="narrate" id="frontNarrate"></div>
+        <div id="productReadout" style="margin-top:.4rem"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>the round <span class="tag">recorded seed vs derived-at-read-time — never trusted, only re-derived</span></h2>
+      <div id="proposals"></div>
+    </div>
+
+    <div class="row2">
+      <div class="panel">
+        <h2>gates <span class="tag">G0 live · the rest cited from manifest.yaml</span></h2>
+        <div id="gates"></div>
+        <div style="margin-top:.6rem"><button id="runCheck">run every gate (tools/check.mjs)</button></div>
+        <pre id="checkOut" style="display:none"></pre>
+      </div>
+      <div class="panel">
+        <h2>chronicles <span class="tag">verdict-first, from frontmatter</span></h2>
+        <ul class="feed" id="chronFeed" style="list-style:none;padding:0;margin:0"></ul>
+      </div>
+    </div>
+
+    <div class="panel doorpanel">
+      <h2>the door <span class="tag">artefacts PREPARED for the First Person — nothing here executes</span></h2>
+      <div id="doorItems"></div>
+      <div class="kv" style="margin-top:.5rem">mint a new artefact (CLI, keystone-side; this server is read-only):</div>
+      <code class="cmd" id="mintCmd">node tools/mint_artefact.mjs &lt;instanceDir&gt; &lt;runId&gt;</code>
+    </div>
+
+    <div class="panel" id="universePanel" style="display:none">
+      <h2>the lattice <span class="tag">instrument C · the universe seam — ℤ/64ℤ, seated pairs XOR to 63</span></h2>
+      <div style="display:grid;grid-template-columns:minmax(300px,560px) 1fr;gap:1rem">
+        <svg id="lattSvg" viewBox="0 0 560 560" width="100%"></svg>
+        <div>
+          <div class="kv" id="edgeRule" style="font:italic 300 .9rem var(--serif)"></div>
+          <h2 style="margin-top:.8rem">the fleet</h2>
+          <ul class="feed" id="fleetFeed" style="list-style:none;padding:0;margin:0"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sidepanel" id="sidePanel">
+  <button class="close" onclick="document.getElementById('sidePanel').classList.remove('open')">close</button>
+  <h3 id="spTitle"></h3>
+  <div class="md" id="spBody"></div>
+</div>
+
+<footer>the run directory is the record; this console is a generated projection (GR-5). verdicts wear their color: <span class="vchip VALIDATED">VALIDATED</span> <span class="vchip MIRAGE">MIRAGE</span> <span class="vchip BLOCKED">BLOCKED</span> · MIRAGE = beat the metric, failed the gate — a zero collapses the product (T5).</footer>
+
+<script>
+'use strict';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const C = { cyan:'#4dd9e8', amber:'#e0a526', coral:'#e8523a', violet:'#a78bfa', dim:'#7c86b8', ink:'#e8edff', warm:'#ffd6c7', line:'rgba(120,140,220,.16)' };
+const VCOLOR = { VALIDATED:C.cyan, MIRAGE:C.amber, BLOCKED:C.coral };
+
+let instances = [], sel = null, state = null, prevState = null, gates = null;
+let selRun = null, selRound = null;
+
+// ---------- markdown-lite (headings, bold, code, lists; all else escaped) ----------
+function mdLite(src){
+  const lines = esc(src).split('\n'); const out = []; let inCode = false, inList = false;
+  const inline = (s) => s.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\*([^*]+)\*/g,'<i>$1</i>');
+  for (const l of lines){
+    if (l.startsWith('```')) { out.push(inCode ? '</code></pre>' : '<pre><code>'); inCode = !inCode; continue; }
+    if (inCode) { out.push(l); continue; }
+    const li = l.match(/^\s*[-*]\s+(.*)$/);
+    if (li) { if (!inList){out.push('<ul>');inList=true;} out.push('<li>'+inline(li[1])+'</li>'); continue; }
+    if (inList){ out.push('</ul>'); inList=false; }
+    const h = l.match(/^(#{1,3})\s+(.*)$/);
+    if (h) { out.push(`<h${h[1].length}>`+inline(h[2])+`</h${h[1].length}>`); continue; }
+    if (l.trim()==='') { out.push(''); continue; }
+    out.push('<p>'+inline(l)+'</p>');
+  }
+  if (inList) out.push('</ul>'); if (inCode) out.push('</code></pre>');
+  return out.join('\n');
+}
+async function openDoc(name, title){
+  const r = await fetch('/api/doc?name='+encodeURIComponent(name));
+  $('spTitle').textContent = title || name;
+  $('spBody').innerHTML = r.ok ? mdLite(await r.text()) : '<p>unavailable</p>';
+  $('sidePanel').classList.add('open');
+}
+
+// ---------- trust chips ----------
+function renderTrusts(){
+  const cfg = state && state.instance.config || {};
+  const conformOk = gates && gates.conform && gates.conform.exit === 0;
+  const chips = [
+    { t:'T1 four promises', cls: conformOk ? 'on' : 'doc', note:'seat cards partition the promises · conform '+(conformOk?'green':'—') },
+    { t:'T2 separation',   cls: cfg.heldApartRule ? 'on' : 'bad', note: cfg.heldApartRule ? 'heldApartRule present; witnesses hash-derived' : 'heldApartRule MISSING' },
+    { t:'T3 shared root',  cls:'doc', note:'topological — every seat boots from the same three documents (TRUSTS.md map)' },
+    { t:'T4 consent first',cls:'doc', note:'documented — invitation before proposal (TRUSTS.md map)' },
+    { t:'T5 multiplicative gate', cls: cfg.objective && cfg.objective.gate ? 'on' : 'bad', note: cfg.objective && cfg.objective.gate ? 'gate declared; a zero collapses the product' : 'objective.gate MISSING' },
+    { t:'T6 the door', cls: cfg.door === 'first-person' ? 'on' : 'bad', note: cfg.door === 'first-person' ? "door: 'first-person'" : 'door literal missing' },
+  ];
+  $('trustChips').innerHTML = chips.map(c=>`<span class="chip ${c.cls}" title="${esc(c.note)}">${esc(c.t)}</span>`).join('')
+    + `<span class="chip" title="click to read">📜 <a href="#" onclick="openDoc('TRUSTS.md','The Six Trusts');return false" style="color:inherit;text-decoration:none">TRUSTS.md</a></span>`
+    + (cfg.mana ? ` <span class="chip mana" title="declared mana (advisory, display-only)">${esc(Array.isArray(cfg.mana)?cfg.mana.join(' '):String(cfg.mana))}</span>` : '');
+}
+
+// ---------- axiom coin: succ vs neg∘bnot, animated on Z/64Z ----------
+let coinX = 0;
+function drawCoin(){
+  const svg = $('axiomCoin'); const cx=20, cy=20, r=15;
+  const pos = (v) => { const a = (v/64)*Math.PI*2 - Math.PI/2; return [cx+r*Math.cos(a), cy+r*Math.sin(a)]; };
+  const x = coinX, b = x ^ 63, n = (64-b)%64; // neg(bnot(x)) === succ(x)
+  const [px,py]=pos(x), [bx,by]=pos(b), [nx,ny]=pos(n);
+  svg.innerHTML = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${C.line}"/>
+    <line x1="${px}" y1="${py}" x2="${bx}" y2="${by}" stroke="${C.violet}" stroke-opacity=".35"/>
+    <line x1="${bx}" y1="${by}" x2="${nx}" y2="${ny}" stroke="${C.cyan}" stroke-opacity=".35"/>
+    <circle cx="${bx}" cy="${by}" r="1.6" fill="${C.violet}"/>
+    <circle cx="${nx}" cy="${ny}" r="2.4" fill="${C.warm}"/>
+    <title>x=${x} · bnot→${b} · neg→${n} = succ(x). Proven on all 64 by engine/conform.mjs.</title>`;
+  coinX = (coinX+1)%64;
+}
+setInterval(drawCoin, 1000); drawCoin();
+
+// ---------- instrument A: the loop ----------
+const SEATS = [
+  { key:'measure',   label:'Measure',    emoji:'📐', doc:'seats/measure.md' },
+  { key:'propose',   label:'Propose',    emoji:'🧙', doc:'seats/soulbae-propose.md' },
+  { key:'gap',       label:'Hold-apart', emoji:'⿻', doc:'seats/gap-hold-apart.md' },
+  { key:'assay',     label:'Assay',      emoji:'⚔️', doc:'seats/soulbis-assay.md' },
+  { key:'critic',    label:'Critic',     emoji:'🧪', doc:'seats/critic.md' },
+  { key:'chronicle', label:'Chronicle',  emoji:'📜', doc:'seats/chronicle.md' },
+];
+function currentRound(){
+  if (!state) return null;
+  const run = state.runs.find(r=>r.runId===selRun) || state.runs[state.runs.length-1];
+  if (!run) return null;
+  return run.rounds.find(r=>r.roundId===selRound) || run.rounds[run.rounds.length-1];
+}
+function drawLoop(){
+  const svg = $('loopSvg'); const cx=260, cy=160, R=105;
+  const round = currentRound();
+  const props = round ? round.proposals : [];
+  const anyMismatch = props.some(p=>p.hashState==='MISMATCH');
+  $('voidBanner').classList.toggle('show', anyMismatch);
+  // door at top (90° up); 7 slots, stations fill the other 6
+  const slot = (k) => { const a = -Math.PI/2 + (k)*(Math.PI*2/7); return [cx+R*Math.cos(a), cy+R*Math.sin(a), a]; };
+  const parts = [];
+  // ring arc with a literal gap at the door (slot 0 ± 18°)
+  const gapHalf = Math.PI/10;
+  const a0 = -Math.PI/2 + gapHalf, a1 = -Math.PI/2 - gapHalf + Math.PI*2;
+  const arc = (a,b) => `M ${cx+R*Math.cos(a)} ${cy+R*Math.sin(a)} A ${R} ${R} 0 ${b-a>Math.PI?1:0} 1 ${cx+R*Math.cos(b)} ${cy+R*Math.sin(b)}`;
+  parts.push(`<path d="${arc(a0,a1)}" fill="none" stroke="${C.line}" stroke-width="2"/>`);
+  parts.push(`<text x="${cx}" y="${cy-R-14}" text-anchor="middle" fill="${C.dim}" font-size="10">the door — the First Person's alone (T6)</text>`);
+  parts.push(`<text x="${cx}" y="${cy-R+4}" text-anchor="middle" font-size="13">😊</text>`);
+  // lit rules from file presence
+  const lit = {
+    measure: !!round,
+    propose: props.some(p=>p.mtimes && p.mtimes.canon),
+    gap: props.some(p=>p.mtimes && p.mtimes.gap),
+    assay: props.some(p=>p.verdict),
+    critic: false,
+    chronicle: !!(round && round.chronicleDraft),
+  };
+  const stationPos = {};
+  SEATS.forEach((s,i)=>{ const [x,y]=slot(i+1); stationPos[s.key]=[x,y]; });
+  // proposal nodes on an inner arc between propose and assay, chords to gap
+  const [gx,gy] = stationPos.gap;
+  props.forEach((p,i)=>{
+    const a = -Math.PI/2 + (2.4 + (i+1)*0.9/(props.length+1)+i*0.5)*(Math.PI*2/7);
+    const r2 = R*0.52; const x=cx+r2*Math.cos(a), y=cy+r2*Math.sin(a);
+    if (p.mtimes && p.mtimes.gap){
+      const stroke = p.hashState==='MATCH'?C.cyan:(p.hashState==='MISMATCH'?C.coral:C.dim);
+      const dash = p.hashState==='MATCH'?'':'stroke-dasharray="4 4"';
+      parts.push(`<line x1="${x}" y1="${y}" x2="${gx}" y2="${gy}" stroke="${stroke}" stroke-opacity=".7" ${dash}/>`);
+    }
+    const fill = p.verdict ? (VCOLOR[p.verdict.status]||C.dim) : C.violet;
+    const newVerdict = isNewVerdict(p);
+    parts.push(`<circle cx="${x}" cy="${y}" r="7" fill="${fill}" fill-opacity=".85" class="${newVerdict?'pulse':''}"><title>${esc(p.name)} · ${esc(p.verdict?p.verdict.status:'proposed')} · seed ${esc(p.hashState)}</title></circle>`);
+  });
+  // stations
+  SEATS.forEach((s,i)=>{
+    const [x,y]=stationPos[s.key];
+    const on = lit[s.key];
+    const halo = s.key==='gap' && props.some(p=>p.hashState==='MISMATCH') ? C.coral : C.cyan;
+    parts.push(`<g class="station ${on?'lit':''}" onclick="openDoc('${s.doc}','Seat — ${s.label}')">
+      <circle class="halo" cx="${x}" cy="${y}" r="17" fill="none" stroke="${halo}" stroke-opacity=".8"/>
+      <circle cx="${x}" cy="${y}" r="13" fill="rgba(10,13,28,.85)" stroke="${on?halo:C.line}"/>
+      <text x="${x}" y="${y+4}" text-anchor="middle" font-size="12">${s.emoji}</text>
+      <text x="${x}" y="${y+28}" text-anchor="middle" fill="${on?C.ink:C.dim}" font-size="9.5">${s.label}</text>
+      ${(s.key==='measure'||s.key==='critic') && !on ? `<title>returned to the orchestrator, not persisted — honest absence (GR-5)</title>`:''}
+    </g>`);
+  });
+  // keystone center: glows only when COMPUTED (frontier best ∩ round levers)
+  const bestLevers = new Set((state.frontier && state.frontier.best && state.frontier.best.leverIds)||[]);
+  const folded = props.some(p=>p.verdict && bestLevers.has(p.verdict.leverId));
+  parts.push(`<circle cx="${cx}" cy="${cy}" r="20" fill="rgba(10,13,28,.9)" stroke="${folded?C.warm:C.line}" ${folded?`stroke-width="2"`:''}/>
+    <text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="14" onclick="openDoc('seats/keystone.md','Seat — Keystone')" class="station">🗝️</text>
+    <text x="${cx}" y="${cy+42}" text-anchor="middle" fill="${folded?C.warm:C.dim}" font-size="9">${folded?'folded into the frontier':'keystone — folds only in the main session'}</text>`);
+  svg.innerHTML = parts.join('');
+}
+function isNewVerdict(p){
+  if (!prevState || !p.verdict || !p.mtimes || !p.mtimes.verdict) return false;
+  for (const run of prevState.runs) for (const rd of run.rounds) for (const q of rd.proposals)
+    if (q.name===p.name) return (q.mtimes && q.mtimes.verdict) !== p.mtimes.verdict || !q.verdict;
+  return true;
+}
+
+// ---------- instrument B: the frontier (the moving ceiling) ----------
+function drawFrontier(){
+  const svg = $('frontSvg'); const f = state.frontier;
+  if (!f || f.__unparseable || !f.baseline){ svg.innerHTML=`<text x="20" y="30" fill="${C.dim}" font-size="11">frontier.json absent or unfilled — measure a baseline first</text>`; $('frontNarrate').textContent=''; return; }
+  const W=520,H=240,L=56,Rm=16,T=24,B=34;
+  const base = f.baseline.metric, best = (f.best&&f.best.metric)??base;
+  // collect step events: baseline date + closedTargets + updated
+  const steps=[{label:f.baseline.date||'baseline',v:base}];
+  for (const ct of (f.closedTargets||[])) steps.push({label:(ct.id||'')+(ct.date?' '+ct.date:''),v:null});
+  steps.push({label:f.updated||'now',v:best});
+  // metrics for verdict ticks
+  const round=currentRound(); const ticks=[];
+  if (state.runs) for (const run of state.runs) for (const rd of run.rounds) for (const p of rd.proposals)
+    if (p.verdict && typeof p.verdict.metric==='number') ticks.push({v:p.verdict.metric,s:p.verdict.status,name:p.name});
+  const lo=Math.min(best,...ticks.map(t=>t.v),base*0.6), hi=base*1.04;
+  const Y=(v)=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
+  const X=(i)=>L+(W-L-Rm)*(steps.length<2?0:i/(steps.length-1));
+  const parts=[];
+  parts.push(`<line x1="${L}" y1="${Y(base)}" x2="${W-Rm}" y2="${Y(base)}" stroke="${C.line}"/>
+    <text x="${L-6}" y="${Y(base)+3}" text-anchor="end" fill="${C.dim}" font-size="9" class="num">${base}</text>
+    <text x="${W-Rm}" y="${Y(base)-5}" text-anchor="end" fill="${C.dim}" font-size="9">baseline</text>`);
+  // best step-line: walk closedTargets as equal steps down to best
+  const n=steps.length; let prevV=base;
+  for(let i=1;i<n;i++){
+    const v = i===n-1 ? best : base-((base-best)*(i/(n-1)));
+    parts.push(`<line x1="${X(i-1)}" y1="${Y(prevV)}" x2="${X(i)}" y2="${Y(prevV)}" stroke="${C.cyan}" stroke-width="1.6"/>
+      <line x1="${X(i)}" y1="${Y(prevV)}" x2="${X(i)}" y2="${Y(v)}" stroke="${C.cyan}" stroke-width="1.6"/>`);
+    prevV=v;
+  }
+  parts.push(`<text x="${W-Rm}" y="${Y(best)-6}" text-anchor="end" fill="${C.cyan}" font-size="10" class="num">best ${best}</text>`);
+  // open target as violet dashed ceiling just under best
+  if (f.openTarget){ const yv=Y(best)+16;
+    parts.push(`<line x1="${L}" y1="${yv}" x2="${W-Rm}" y2="${yv}" stroke="${C.violet}" stroke-dasharray="6 5"/>
+      <text x="${W-Rm}" y="${yv+12}" text-anchor="end" fill="${C.violet}" font-size="9">${esc(f.openTarget.id)} — open</text>`); }
+  // verdict ticks at right margin band
+  ticks.forEach((t,i)=>{ const x=W-Rm-8-(i%6)*9; const col=VCOLOR[t.s]||C.dim;
+    parts.push(`<circle cx="${x}" cy="${Y(t.v)}" r="3.2" fill="${col}"><title>${esc(t.name)} · ${t.v} · ${esc(t.s)}</title></circle>`); });
+  // x labels
+  steps.forEach((s,i)=>parts.push(`<text x="${X(i)}" y="${H-8}" text-anchor="middle" fill="${C.dim}" font-size="8.4">${esc(String(s.label).slice(0,16))}</text>`));
+  svg.innerHTML=parts.join('');
+  const delta=base-best;
+  $('frontNarrate').textContent=`best ${best} ${f.objective&&f.objective.metric||''}, ${delta} under baseline${f.openTarget?`; open: ${f.openTarget.statement.split('—')[0].trim()} (${f.openTarget.id})`:''}.`;
+  $('frontierTag').textContent = state.universe ? 'instrument B · the moving ceiling R(t)' : 'instrument B';
+}
+
+// ---------- proposals & product readout ----------
+function drawProposals(){
+  const round=currentRound(); const el=$('proposals');
+  if(!round){ el.innerHTML=`<span class="kv">no runs yet — point an agent at this instance (see the README pathway) and this panel comes alive.</span>`; return; }
+  $('roundKv').textContent = `${round.proposals.length} proposal(s)`;
+  el.innerHTML = round.proposals.map(p=>{
+    const v=p.verdict;
+    const gateOk = v && /^(\d+)\/(\d+)$/.test(v.gateResult||'') ? (()=>{const m=v.gateResult.match(/^(\d+)\/(\d+)$/);return m[1]===m[2]})() : (v?v.status==='VALIDATED':null);
+    const bestM = state.frontier&&state.frontier.best&&state.frontier.best.metric;
+    const beat = v&&typeof v.metric==='number'&&typeof bestM==='number' ? v.metric<bestM || (state.frontier.best.leverIds||[]).includes(v.leverId) : null;
+    const product = v ? `<span class="kv">product (T5): gate ${gateOk?'1':'<b style="color:var(--amber)">0</b>'} × constraint ${v.status!=='BLOCKED'?'1':'0'} × beat ${beat?'1':'0'} ⇒ </span><span class="vchip ${v.status}">${esc(v.status)}</span>` : `<span class="vchip none">awaiting assay</span>`;
+    return `<div class="pcard">
+      <h4>${esc(p.name)} ${v?`<span class="vchip ${v.status}">${esc(v.status)}</span>`:`<span class="vchip none">no verdict</span>`}
+        ${v&&typeof v.metric==='number'?`<span class="num">${v.metric}</span>`:''}
+        ${v&&v.gateResult?`<span class="kv">gate ${esc(v.gateResult)}</span>`:''}
+        ${p.gapJournal?`<span class="chip warn" title="the Gap wrote a stub to disk; full transcript keystone-recovered from the workflow journal (CR-8)">journal-recovered</span>`:''}</h4>
+      ${p.canon?`<div class="kv">${esc(p.canon.title||'')} · lens ${esc(p.canon.lens||'')} · expected <span class="num">${esc(p.canon.expectedMetric)}</span></div>`:''}
+      <div class="hashbox ${p.hashState==='MATCH'?'match':p.hashState==='MISMATCH'?'mismatch':''}">
+        <span class="k">recorded seedHex (gap.json):</span> ${esc(p.recorded||'—')}<br>
+        <span class="k">derived sha256(proposal_canon.json) at read time:</span> ${esc(p.derived||'—')}<br>
+        <b style="color:${p.hashState==='MATCH'?C.cyan:p.hashState==='MISMATCH'?C.coral:C.dim}">${p.hashState}</b>
+        ${p.hashState==='MATCH'?'<span class="k"> — the witnesses provably derive from the proposal’s own bytes.</span>':''}
+        ${p.hashState==='MISMATCH'?'<span class="k"> — ROUND VOID: witnesses of unknown origin validate nothing (GR-4).</span>':''}
+      </div>
+      <div style="margin-top:.35rem">${product}${v&&v.failingCheck?`<div class="kv" style="color:var(--amber)">failing: ${esc(v.failingCheck)}</div>`:''}</div>
+    </div>`;
+  }).join('');
+}
+
+// ---------- gates panel ----------
+function drawGates(){
+  const el=$('gates'); const m=state.manifest;
+  const g0 = gates&&gates.conform;
+  const rows=[];
+  const gateList = (m&&m.gates&&m.gates.length)?m.gates:['G0-conform','G1','G2','G3','G4-door'];
+  for(const g of gateList){
+    if(/^G0/.test(g)) rows.push(`<tr><td>${esc(g)}</td><td>${g0?(g0.exit===0?`<span class="chip on">green</span>`:`<span class="chip bad">FAIL</span>`):'<span class="chip">…</span>'} <span class="kv">${esc(g0?g0.cmd:'')}</span></td></tr>`);
+    else if(/G4|door/i.test(g)) rows.push(`<tr><td>${esc(g)}</td><td><span class="chip doc">owner: first-person — no software state, by design (T6)</span></td></tr>`);
+    else rows.push(`<tr><td>${esc(g)}</td><td><span class="kv">cited from manifest.yaml — enforced by the loop, not by this page</span></td></tr>`);
+  }
+  if (gates&&gates.audit) rows.push(`<tr><td>universe audit</td><td>${gates.audit.exit===0?'<span class="chip on">green</span>':'<span class="chip bad">FAIL</span>'} <span class="kv">${esc(gates.audit.cmd)}</span></td></tr>`);
+  el.innerHTML = `<table>${rows.join('')}</table>` + (m&&m.raw?`<div class="kv" style="margin-top:.4rem">manifest.yaml could not be parsed — raw file shown honestly:<pre>${esc(m.raw.slice(0,1200))}</pre></div>`:'');
+}
+
+// ---------- chronicles, door, wiki ----------
+function drawChronicles(){
+  $('chronFeed').innerHTML = state.chronicles.map(c=>`<li><b>${esc(c.file)}</b><br>${esc(c.verdict||'(no frontmatter verdict)')}</li>`).join('') || '<li class="kv">a session without a chronicle is unfinished (GR-7) — none filed yet.</li>';
+}
+function drawDoor(){
+  const items=state.doorItems||[];
+  $('mintCmd').textContent = `node tools/mint_artefact.mjs ${state.instance.id} ${selRun||'<runId>'}`;
+  $('doorItems').innerHTML = items.length ? items.map(a=>`
+    <div class="pcard">
+      <h4>${esc(a.id)} <span class="chip ${a.status==='PREPARED'?'warn':'doc'}">${esc(a.status||'?')}</span>
+        <span class="chip ${a.kappaState==='MATCH'?'on':a.kappaState==='MISMATCH'?'bad':'doc'}" title="κ-label re-derived from canonical bytes (Law L5: never trusted, only re-derived)">κ ${esc(a.kappaState)}</span>
+        ${a.universe&&a.universe.gatehouseEligible?'<span class="chip doc">sigil-gate eligible</span>':''}
+        ${a.mana?`<span class="chip mana">${esc(Array.isArray(a.mana)?a.mana.join(' '):String(a.mana))}</span>`:''}</h4>
+      <div class="kv">run ${esc(a.run&&a.run.runId)} · ${(a.proposals||[]).map(p=>`${esc(p.leverId)} <span class="vchip ${p.verdict||'none'}" style="font-size:.62rem">${esc(p.verdict||'—')}</span>`).join(' · ')}</div>
+      ${a.door?`<div class="kv" style="margin-top:.3rem">actions taken by software: <b>${a.door.actionsTaken&&a.door.actionsTaken.length?esc(a.door.actionsTaken.join(', ')):'none — and it stays that way'}</b> · available to the First Person: ${esc((a.door.actionsAvailable||[]).join(' · '))}</div>`:''}
+    </div>`).join('')
+    : '<span class="kv">no artefacts minted. A candidate is not a result; a result is not an artefact until the keystone mints it — and nothing leaves without you.</span>';
+}
+const WIKI_PAGES=[['welcome-visitors','the harness wiki'],['the-setup-pathway','the setup pathway'],['adopting-the-harness','adopting the harness'],['the-harness-paths','the harness paths'],['workflows-and-runtimes','workflows & runtimes']];
+async function probeWiki(){
+  let alive=false;
+  try{ const ctl=new AbortController(); setTimeout(()=>ctl.abort(),1200);
+    await fetch('http://harness.localhost:3030/favicon.png',{mode:'no-cors',signal:ctl.signal}); alive=true; }catch(e){}
+  $('wikiChips').innerHTML = WIKI_PAGES.map(([slug,label])=>`<a href="http://harness.localhost:3030/view/${slug}" target="_blank"><span class="chip ${alive?'':'dead'}">📖 ${esc(label)}</span></a>`).join('')
+    + `<span class="kv">${alive?'served by the local FedWiki farm':'farm not reachable — start it to light these links'}</span>`;
+}
+
+// ---------- instrument C: the lattice (universe seam) ----------
+function drawLattice(){
+  const u=state.universe;
+  $('universePanel').style.display = u?'':'none';
+  if(!u) return;
+  const svg=$('lattSvg'); const cx=280,cy=280;
+  const popcount=(v)=>{let c=0;while(v){c+=v&1;v>>=1}return c};
+  const ringR=[0,64,104,144,184,214,240]; // by popcount 0..6
+  const byRing=Array.from({length:7},()=>[]);
+  for(let v=0;v<64;v++) byRing[popcount(v)].push(v);
+  const pos={};
+  byRing.forEach((ring,k)=>{ ring.forEach((v,i)=>{ const a=-Math.PI/2 + i*(Math.PI*2/ring.length) + k*0.23; pos[v]=[cx+ringR[k]*Math.cos(a), cy+ringR[k]*Math.sin(a)]; }); });
+  const parts=[];
+  for(let k=1;k<7;k++) parts.push(`<circle cx="${cx}" cy="${cy}" r="${ringR[k]}" fill="none" stroke="${C.line}" stroke-opacity=".5"/>`);
+  // axis glyphs from data (E-7: never hardcode)
+  const axes = u.axes ? Object.values(u.axes).filter(a=>a&&a.weight) : [];
+  // instance verdict colors for pairs
+  const instLatest = {};
+  for (const i of instances){ instLatest[i.config&&i.config.name||i.id]=null; }
+  if (state.runs.length){ const lastRun=state.runs[state.runs.length-1]; const lastRound=lastRun.rounds[lastRun.rounds.length-1];
+    const vs=lastRound.proposals.map(p=>p.verdict&&p.verdict.status).filter(Boolean);
+    instLatest[state.instance.config.name]= vs.includes('BLOCKED')?'BLOCKED':vs.includes('MIRAGE')?'MIRAGE':vs.includes('VALIDATED')?'VALIDATED':null; }
+  for (const sp of (u.seatedPairs||[])){
+    const [a,b]=sp.pair; if(!(pos[a]&&pos[b]))continue;
+    const owned=(sp.instances||[]).find(n=>instLatest[n]!==undefined);
+    const v=owned?instLatest[owned]:null;
+    const col=v?VCOLOR[v]:C.violet;
+    parts.push(`<line x1="${pos[a][0]}" y1="${pos[a][1]}" x2="${pos[b][0]}" y2="${pos[b][1]}" stroke="${col}" stroke-opacity="${v?.85:.4}" stroke-width="1.5"><title>${esc(sp.reading)} · ${a}⊕${b}=63 · ${esc((sp.instances||[]).join(', ')||'unseated')}</title></line>`);
+  }
+  for (const vac of (u.vacancies||[])){
+    const v=vac.vertex, fa=vac.forced_anchor;
+    if(pos[v]&&pos[fa]!==undefined&&pos[fa]) parts.push(`<line x1="${pos[v][0]}" y1="${pos[v][1]}" x2="${pos[fa][0]}" y2="${pos[fa][1]}" stroke="${C.dim}" stroke-opacity=".35" stroke-dasharray="3 5"/>`);
+    if(pos[v]) parts.push(`<circle cx="${pos[v][0]}" cy="${pos[v][1]}" r="8" fill="none" stroke="${C.violet}" stroke-dasharray="3 3"><title>${esc(vac.workshop)} · vertex ${v} · OPEN${vac.developer?' — invited: '+esc(vac.developer):''}${vac.note?' · '+esc(vac.note):''}</title></circle>`);
+  }
+  for(let v=0;v<64;v++){ const [x,y]=pos[v]; const ax=axes.find(a=>a.weight===v);
+    parts.push(`<circle cx="${x}" cy="${y}" r="${ax?5:2.2}" fill="${ax?'rgba(10,13,28,.9)':C.dim}" ${ax?`stroke="${C.cyan}"`:''} fill-opacity="${ax?1:.55}"><title>V${v}</title></circle>`);
+    if(ax) parts.push(`<text x="${x}" y="${y-9}" text-anchor="middle" font-size="11">${esc(ax.glyph)}</text>`);
+  }
+  parts.push(`<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="10" fill="${C.dim}">V0</text>`);
+  svg.innerHTML=parts.join('');
+  $('edgeRule').textContent = u.edgeRule ? `“${u.edgeRule.statement}” — ${u.edgeRule.seal||''}` : '';
+  $('fleetFeed').innerHTML=(u.runsFeed||[]).map(r=>`<li><b>${esc(r.runId)}</b> ${esc(r.status)} ${r.tally?`<span class="num">${r.tally.VALIDATED||0}✓ ${r.tally.MIRAGE||0}∿ ${r.tally.BLOCKED||0}✕</span>`:''}<br><span class="kv">${esc(String(r.reason||'').slice(0,110))}</span></li>`).join('') || '<li class="kv">no fleet runs recorded</li>';
+}
+
+// ---------- instance rail + selectors ----------
+function drawInstances(){
+  $('instList').innerHTML = instances.map(i=>{
+    const open = i.config && i.config.error;
+    const conformDotCls = i._conform===undefined?'':i._conform?'ok':(open?'open':'bad');
+    return `<div class="inst ${sel===i.id?'sel':''}" onclick="selectInstance('${esc(i.id)}')">
+      <div class="nm"><span class="dot ${conformDotCls}"></span><b>${esc(i.config&&i.config.name||i.id)}</b></div>
+      <div class="meta">${i.frontierSummary?`<span class="num">${esc(i.frontierSummary.best)}</span> / ${esc(i.frontierSummary.baseline)} · ${esc(i.frontierSummary.openTarget||'')}`:(open?'config unfilled — an OPEN slot; the gate refusing it is the invitation held open':'no frontier')}
+      ${i.config&&i.config.mana?`<span class="chip mana" style="margin-left:.3rem">${esc(Array.isArray(i.config.mana)?i.config.mana.join(' '):String(i.config.mana))}</span>`:''}</div>
+    </div>`;
+  }).join('');
+}
+function drawRunSelectors(){
+  const runs=state.runs;
+  $('runSel').innerHTML = runs.map(r=>`<option ${r.runId===selRun?'selected':''}>${esc(r.runId)}</option>`).join('') || '<option>—</option>';
+  const run = runs.find(r=>r.runId===selRun)||runs[runs.length-1];
+  $('roundSel').innerHTML = run? run.rounds.map(r=>`<option ${r.roundId===selRound?'selected':''}>${esc(r.roundId)}</option>`).join(''):'<option>—</option>';
+}
+window.selectInstance = async (id)=>{ sel=id; state=null; prevState=null; selRun=null; selRound=null; await refresh(true); };
+$('runSel').onchange = e=>{ selRun=e.target.value; selRound=null; renderAll(); drawRunSelectors(); };
+$('roundSel').onchange = e=>{ selRound=e.target.value; renderAll(); };
+$('runCheck').onclick = async ()=>{ $('checkOut').style.display='block'; $('checkOut').textContent='running node tools/check.mjs …';
+  const r=await fetch('/api/check'); const j=await r.json(); $('checkOut').textContent=`$ ${j.cmd}\n\n${j.out}\n\nexit ${j.exit} · ${j.at}`; };
+
+function renderAll(){
+  if(!state) return;
+  drawLoop(); drawFrontier(); drawProposals(); drawGates(); drawChronicles(); drawDoor(); drawLattice(); renderTrusts();
+}
+
+// ---------- poller ----------
+async function refresh(force){
+  try{
+    if(!instances.length || force){
+      instances = await (await fetch('/api/instances')).json();
+      if(!sel && instances.length) sel = instances[0].id;
+      drawInstances();
+    }
+    if(!sel) return;
+    const since = state && !force ? '&since='+encodeURIComponent(state.stamp) : '';
+    const s = await (await fetch('/api/state?instance='+encodeURIComponent(sel)+since)).json();
+    if(!s.unchanged){
+      prevState = state; state = s;
+      if(!selRun && s.runs.length) selRun = s.runs[s.runs.length-1].runId;
+      if(selRun){ const run=s.runs.find(r=>r.runId===selRun)||s.runs[s.runs.length-1]; if(run && !run.rounds.find(r=>r.roundId===selRound)) selRound = run.rounds.length?run.rounds[run.rounds.length-1].roundId:null; }
+      drawRunSelectors(); renderAll();
+      gates = await (await fetch('/api/gates?instance='+encodeURIComponent(sel))).json();
+      for (const i of instances) if (i.id===sel) i._conform = gates.conform && gates.conform.exit===0;
+      drawInstances(); drawGates(); renderTrusts();
+    }
+  }catch(e){ /* server briefly away — the next tick re-reads */ }
+}
+refresh(true); setInterval(refresh, 2000); probeWiki();
+</script>
+</body>
+</html>

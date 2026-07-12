@@ -1,0 +1,131 @@
+{
+  "artefact": "dual-agent-harness/artefact.v1",
+  "id": "af-0f8625eec136",
+  "κ": "sha256:f57406e1786ad34fdaf22bf1df6f1522d4aafae7ff8e2ad39253b9915dea2a91",
+  "mintedAt": "2026-07-12T12:58:10.202Z",
+  "mintedBy": "node tools/mint_artefact.mjs examples/field-guide r4",
+  "status": "PREPARED",
+  "door": {
+    "owner": "first-person",
+    "actionsTaken": [],
+    "actionsAvailable": [
+      "git commit/push",
+      "fedwiki publish",
+      "gatehouse sigil-gate",
+      "send"
+    ],
+    "note": "Software prepared this bundle and stopped. Any outward movement is the First Person’s alone (T6/GR-8)."
+  },
+  "instance": {
+    "name": "field-guide",
+    "dir": "examples/field-guide"
+  },
+  "run": {
+    "runId": "r4",
+    "rounds": [
+      "r4.1"
+    ]
+  },
+  "frontier": {
+    "beat": true,
+    "objectiveMetric": "words",
+    "baseline": 730,
+    "best": 472,
+    "openTarget": "OT-4",
+    "updated": "2026-07-11",
+    "sha256": "f45c2cd59fda3611504a98c847e7cb408e9a7a1a7404dc58e8c272930152842d"
+  },
+  "proposals": [
+    {
+      "leverId": "r4-compose-line-edit",
+      "path": "runs/r4/r4.1/p1-r4-compose-line-edit/",
+      "seedHex": "ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be",
+      "derivedSha256": "ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be",
+      "hashState": "MATCH",
+      "verdict": {
+        "status": "VALIDATED",
+        "metric": 472,
+        "gateResult": "8/8"
+      },
+      "verdictSha256": "ca19f0da38bb000074edaac8314e6114ac59950572306c4c28c42d96266b4b1e"
+    },
+    {
+      "leverId": "r4-compose-restructure",
+      "path": "runs/r4/r4.1/p2-r4-compose-restructure/",
+      "seedHex": "b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5",
+      "derivedSha256": "b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5",
+      "hashState": "MATCH",
+      "verdict": {
+        "status": "VALIDATED",
+        "metric": 484,
+        "gateResult": "8/8"
+      },
+      "verdictSha256": "24914669d2a4e3ab67f56496e0bbeec2822d02bc021b463574958ef9200f090d"
+    }
+  ],
+  "chronicle": {
+    "path": "chronicles/2026-07-11_r4.1_composed-below-projection.md",
+    "frontmatter": {
+      "date": "2026-07-11",
+      "seat": "chronicle",
+      "runId": "r4.1",
+      "verdict": "Both composed levers cleared the full gate below the 526 best (line-edit 472, restructure 484, each 8/8) — but the critic held BOTH at probe-limited; frontier best stays 526 (frontier.json) until the keystone's 32-fact census converts or kills them. OT-3 is within reach, not closed."
+    },
+    "sha256": "635ba6841a9e7ddbd4e15cdb67a44a921f5d4007de041b5c5b6f3ae867a7fdd8"
+  },
+  "conform": {
+    "command": "node engine/conform.mjs examples/field-guide",
+    "exit": 0,
+    "at": "2026-07-12T12:58:10.203Z"
+  },
+  "evidenceManifest": {
+    "evidence/r4.1__p1-r4-compose-line-edit__proposal_canon.json": "ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be",
+    "evidence/r4.1__p1-r4-compose-line-edit__gap.json": "7eb7f82feb28f436fc2116c2b5c485bb660fc01d3ff74e5fe77eef8084128109",
+    "evidence/r4.1__p1-r4-compose-line-edit__verdict.json": "ca19f0da38bb000074edaac8314e6114ac59950572306c4c28c42d96266b4b1e",
+    "evidence/r4.1__p1-r4-compose-line-edit__candidate.md": "bd120d36434fd2360717c18b1c4b1781cbb918276eeb65f66b5df596ea39609f",
+    "evidence/r4.1__p1-r4-compose-line-edit__gap.journal.json": "779153867a2594f4e0e0ccf80114e9bb72b41be0325bdaeacf4d2770f5d16408",
+    "evidence/r4.1__p2-r4-compose-restructure__proposal_canon.json": "b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5",
+    "evidence/r4.1__p2-r4-compose-restructure__gap.json": "da2803b79c24141267e80371d729949d6cb1066305898374738dc5c2b2be87ce",
+    "evidence/r4.1__p2-r4-compose-restructure__verdict.json": "24914669d2a4e3ab67f56496e0bbeec2822d02bc021b463574958ef9200f090d",
+    "evidence/r4.1__p2-r4-compose-restructure__candidate.md": "6c3abe273bb492a892337c52775b84f6acf5e1c45a636598b35ee68c63ccd019",
+    "evidence/frontier.json": "f45c2cd59fda3611504a98c847e7cb408e9a7a1a7404dc58e8c272930152842d",
+    "evidence/chronicles__2026-07-11_r4.1_composed-below-projection.md": "635ba6841a9e7ddbd4e15cdb67a44a921f5d4007de041b5c5b6f3ae867a7fdd8"
+  },
+  "mana": null,
+  "universe": {
+    "spellwebNodeDraft": {
+      "id": "artefact-af-0f8625eec136",
+      "type": "artefact",
+      "label": "field-guide r4 — 472 words VALIDATED",
+      "desc": "Both composed levers cleared the full gate below the 526 best (line-edit 472, restructure 484, each 8/8) — but the critic held BOTH at probe-limited; frontier best stays 526 (frontier.json) until the keystone's 32-fact census converts or kills them. OT-3 is within reach, not closed.",
+      "edgeDrafts": [
+        {
+          "source": "artefact-af-0f8625eec136",
+          "target": "harness-instance-field-guide",
+          "type": "validated_by"
+        }
+      ],
+      "$note": "A DRAFT for the spellweb builder. A validated round PROPOSES an edge; only a signature MINTS it."
+    },
+    "wikiPageDraft": {
+      "title": "field-guide r4 Artefact",
+      "story": [
+        {
+          "type": "paragraph",
+          "text": "Both composed levers cleared the full gate below the 526 best (line-edit 472, restructure 484, each 8/8) — but the critic held BOTH at probe-limited; frontier best stays 526 (frontier.json) until the keystone's 32-fact census converts or kills them. OT-3 is within reach, not closed."
+        },
+        {
+          "type": "code",
+          "text": "r4-compose-line-edit: seed ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be re-derives MATCH · VALIDATED 472\nr4-compose-restructure: seed b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5 re-derives MATCH · VALIDATED 484"
+        }
+      ]
+    },
+    "gatehouse": {
+      "eligible": true,
+      "note": "wrapping this bundle in a sigil-gate is a First Person ceremony (agentprivacy-guide-gatehouse)"
+    },
+    "vertexHint": null,
+    "edgeRule": "A validated round PROPOSES an edge. Only the counterparty's signature MINTS it."
+  },
+  "inscription": "(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ"
+}

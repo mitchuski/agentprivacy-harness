@@ -1,21 +1,25 @@
-// harness.config.mjs — the field-guide toy instance.
-// Objective: minimize the word count of artifact/GUIDE.md while a held-out
-// 8-question comprehension gate stays 8/8. See README.md in this directory.
+// harness.r3.config.mjs — the OT-2 round for the field-guide toy.
+// Two targeted finders, one round:
+//   1. COMPOSED PASS — line-editor tightening over artifact/GUIDE.compressed.md
+//      (the folded frontier best), targeting below it at gate 8/8.
+//   2. SECOND DRAW — the frozen r1 candidate runs/r1/p2-restructure-to-telegraphic-bullets/
+//      candidate.md re-submitted VERBATIM under a new leverId, so the Gap hashes new
+//      canon bytes and draws an independent witness set (GR-4: a fresh seed is a new
+//      draw). Clears → CR-4 converts from probe-limited; fails → MIRAGE, fact named.
+// The gate, the Gap procedure, and the assay are IDENTICAL to harness.config.mjs:
+// witnesses are always drawn from the ORIGINAL artifact/GUIDE.md, and the bar is
+// always the live frontier best. Scope declared by the config and the First Person,
+// never by the proposer (T2).
 
 const COUNT_RULE = `tr -s '[:space:]' '\\n' < <file> | grep -c .  (whitespace-split tokens of the full markdown file)`
 
 export default {
-  name: 'field-guide',
+  name: 'field-guide-r3',
 
   objective: {
     metric: 'words',
     gate: 'held-out comprehension: 8 questions drawn by the Gap from the ORIGINAL guide, answered from the compressed text alone, graded against the original — must be 8/8 (T5: zero collapses)',
     hardConstraint: 'the compressed guide remains a self-contained instruction document: no pointers back to the original, no "see full version", every section still actionable on its own (GR-3)',
-    // The canary: the artifact that passes the gate BY CONSTRUCTION.
-    // The Gap draws its 8 questions FROM artifact/GUIDE.md, so GUIDE.md itself
-    // answers all 8 trivially. That guarantees the feasible set is non-empty:
-    // an 8/8 is reachable, so any failure is the candidate's, never the gate's.
-    // Run it if you doubt: feed GUIDE.md as the candidate and it scores 8/8.
     canary: 'artifact/GUIDE.md itself. The questions are drawn from it, so it answers 8/8 by construction — the gate is satisfiable, and a MIRAGE is therefore always a fault of the candidate, never of the gate.',
   },
 
@@ -32,19 +36,31 @@ export default {
   keystoneOnlyWrites: ['frontier.json', 'claims_register.md', 'manifest.yaml'],
 
   finders: [
-    { lens: 'line-editor', hint: 'sentence-level compression: cut redundancy, filler, and throat-clearing; convert passive to active; tighten phrasing. NEVER delete a fact — every quantity, duration, temperature, item, and ordered step in the original must survive.' },
-    { lens: 'restructurer', hint: 'structure-level compression: merge overlapping sections, convert prose to tables or lists where denser, collapse preamble. NEVER delete a fact — every quantity, duration, temperature, item, and ordered step in the original must survive.' },
+    {
+      lens: 'line-editor',
+      hint: 'COMPOSED PASS (OT-2). Your source text is artifact/GUIDE.compressed.md — the folded frontier-best candidate — NOT the original guide. Apply sentence-level compression over it: cut residual redundancy, filler, and throat-clearing; tighten phrasing. NEVER delete a fact — every quantity, duration, temperature, item, and ordered step must survive, because the gate draws from the ORIGINAL guide regardless of your source text.',
+    },
+    {
+      lens: 'restructurer',
+      hint: 'SECOND DRAW (OT-2 / CR-4). Do NOT write new text. Read runs/r1/p2-restructure-to-telegraphic-bullets/candidate.md and re-submit its content VERBATIM, byte-identical, as compressedText under the NEW leverId "telegraphic-bullets-second-draw". Any edit — even one character — makes this a new lever and voids the purpose: the point is that the SAME frozen text faces a fresh, independent witness draw (your new leverId/title change the canon bytes, which re-seeds the Gap).',
+    },
   ],
 
   prompts: {
     measure: (ctx) =>
-      `Seat MEASURE. Count the words of ${ctx.repo}/artifact/GUIDE.md mechanically with exactly this rule: ${COUNT_RULE.replace('<file>', ctx.repo + '/artifact/GUIDE.md')}. Compare to frontier.json (baseline and best); flag stale if they disagree. Then price the two lever families (line-editor, restructurer): rough cost to try, rough ceiling in words if fully successful. Numbers only, no advocacy.`,
+      `Seat MEASURE. Two mechanical counts, exactly this rule each time: ${COUNT_RULE}.
+1. Count ${ctx.repo}/artifact/GUIDE.md and compare to frontier.json baseline (flag stale if they disagree).
+2. Count ${ctx.repo}/artifact/GUIDE.compressed.md and compare to frontier.json best.metric (flag stale if they disagree).
+Report metric = the GUIDE.md count (the baseline artifact). Then price this round's two levers (composed line-edit over the folded best; second independent draw of the frozen 526-word r1 candidate): rough cost to try, rough ceiling in words if fully successful. Numbers only, no advocacy.`,
 
-    propose: (finder, measure, ctx) =>
-      `Seat PROPOSE — soulbae 🧙 (bnot), lens = ${finder.lens}: ${finder.hint}
+    propose: (finder, measure, ctx) => finder.lens === 'line-editor'
+      ? `Seat PROPOSE — soulbae 🧙 (bnot), lens = ${finder.lens}: ${finder.hint}
 Frontier context: ${JSON.stringify(measure)}.
-Read ${ctx.repo}/artifact/GUIDE.md and ${ctx.repo}/notes/KILLED_LEVERS.md (never re-propose a K-id without new cited evidence).
-Propose exactly 1 lever through YOUR lens: a complete compressed rewrite of the guide. Your proposal's compressedText field MUST carry the full candidate text (this is the artifact the Gap will hash). State expectedMetric = its word count by the counting rule, and hardConstraintNote = why it is still a self-contained instruction document. Plan and write text only — never touch files.`,
+Read ${ctx.repo}/artifact/GUIDE.compressed.md (your source text) and ${ctx.repo}/notes/KILLED_LEVERS.md (never re-propose a K-id without new cited evidence).
+Propose exactly 1 lever: a complete tightened rewrite of the folded text. leverId = "compose-line-edit-over-best". Your proposal's compressedText field MUST carry the full candidate text (this is the artifact the Gap will hash). State expectedMetric = its word count by the counting rule, and hardConstraintNote = why it is still a self-contained instruction document. Plan and write text only — never touch files.`
+      : `Seat PROPOSE — soulbae 🧙 (bnot), lens = ${finder.lens}: ${finder.hint}
+Frontier context: ${JSON.stringify(measure)}.
+Read ${ctx.repo}/runs/r1/p2-restructure-to-telegraphic-bullets/candidate.md. Propose exactly 1 lever whose compressedText is that file's content VERBATIM (byte-identical — do not normalise whitespace, do not fix typos, do not touch a character). leverId = "telegraphic-bullets-second-draw". title = "Second independent draw of the frozen r1 telegraphic-bullets candidate". rationale = converting CR-4 from probe-limited: same text, fresh Fiat-Shamir seed, independent witness sample. expectedMetric = the file's word count by the counting rule. hardConstraintNote = why it is still a self-contained instruction document. Plan and write text only — never touch files.`,
 
     holdApart: (proposal, i, ctx) =>
       `Seat HOLD-APART — the Gap ⿻ (xor). Proposal artifact (verbatim):
@@ -71,7 +87,8 @@ Verdict VALIDATED only if gateResult is 8/8 AND the hard constraint holds AND wo
     critic: (proposals, verdicts, ctx) =>
       `Seat CRITIC. Proposals (titles/lenses/expected): ${JSON.stringify(proposals.map(p => ({ leverId: p.leverId, lens: p.lens, title: p.title, expectedMetric: p.expectedMetric })))}
 Verdicts: ${JSON.stringify(verdicts)}
-Classify each closed lever structural / probe-limited / noise. Red-team the proposer's rationale (did the lens do its job, or did it get lucky/unlucky on the draw?), never the prover's verdict. Draft KILLED_LEVERS entries for structural kills. Name exactly ONE next lead.`,
+Classify each closed lever structural / probe-limited / noise / mis-gated. Red-team the proposer's rationale (did the lens do its job, or did it get lucky/unlucky on the draw?), never the prover's verdict.
+Round context you must weigh: "telegraphic-bullets-second-draw" is the SAME frozen text that passed 8/8 in run r1 under a different seed (classified probe-limited there — one draw, fact-moving reshape). If it passes 8/8 again on THIS independent draw, you are looking at two disjoint 8-witness samples over ~32-40 facts; state explicitly whether that converts it to structural or what third check would. If it fails, name the dropped fact and whether r1's pass was draw-luck. "compose-line-edit-over-best" starts from the folded frontier best; judge whether its gain is draw-invariant by construction (fact-preserving tightening) or reshape risk. Draft KILLED_LEVERS entries for structural kills. Name exactly ONE next lead.`,
 
     chronicle: (round, ctx) =>
       `Seat CHRONICLE. Draft ${ctx.runDir}/CHRONICLE_DRAFT.md following ${ctx.root}/templates/chronicle.md: verdict first, what happened, reversals at win-prominence, ledger entries returned, handoff block ending in the critic's nextLead. Round data: ${JSON.stringify({ roundId: round.roundId, measure: round.measure, proposals: round.proposals.map(p => ({ leverId: p.leverId, lens: p.lens, expectedMetric: p.expectedMetric })), verdicts: round.verdicts, critic: round.critic })}. Return the path plus a 5-line verdict summary.`,
@@ -96,7 +113,7 @@ Classify each closed lever structural / probe-limited / noise. Red-team the prop
             type: 'object',
             required: ['leverId', 'title', 'lens', 'rationale', 'expectedMetric', 'hardConstraintNote', 'compressedText'],
             properties: {
-              leverId: { type: 'string', description: 'short kebab id, e.g. cut-filler-pass' },
+              leverId: { type: 'string', description: 'short kebab id' },
               title: { type: 'string' },
               lens: { type: 'string', enum: ['line-editor', 'restructurer'] },
               rationale: { type: 'string' },
@@ -139,7 +156,7 @@ Classify each closed lever structural / probe-limited / noise. Red-team the prop
     },
   },
 
-  stop: { dryRounds: 2, maxRounds: 3 },
+  stop: { dryRounds: 1, maxRounds: 1 },
 
   isValidated: (v) => v.status === 'VALIDATED' && v.gateResult === '8/8',
   isStructural: (critic, leverId) =>

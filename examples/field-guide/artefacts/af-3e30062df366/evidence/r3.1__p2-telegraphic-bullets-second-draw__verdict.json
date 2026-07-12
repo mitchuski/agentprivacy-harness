@@ -1,0 +1,9 @@
+{
+  "leverId": "telegraphic-bullets-second-draw",
+  "status": "VALIDATED",
+  "metric": 526,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum runs/r3/r3.1/p2-telegraphic-bullets-second-draw/proposal_canon.json = a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68 (5094 bytes) == seedHex; mod-draw arithmetic re-verified (169%32=9->F10, 193%31=7->F8, 2%30=2->F3, 226%29=23->F27, 52%28=24->F29, 212%27=23->F28, 249%26=15->F19, 223%25=23->F31). Gate 8/8 on Gap witnesses F10,F8,F3,F27,F29,F28,F19,F31 answered solely from candidate.md: manual can opener/electric useless; 3 days; sections in order/earlier matter most; 28 days/pharmacist; 5 minutes/grid stabilise; pharmacy+doctor+poison-control; carbon monoxide odourless fatal; within one week starting water+batteries. Metric: tr -s '[:space:]' '\\n' < candidate.md | grep -c . => 526 < frontier best 573. Hard constraint holds: self-contained instruction document (title, ordered sections, complete quantities and rationales).",
+  "scratchDir": "runs/r3/r3.1/p2-telegraphic-bullets-second-draw"
+}

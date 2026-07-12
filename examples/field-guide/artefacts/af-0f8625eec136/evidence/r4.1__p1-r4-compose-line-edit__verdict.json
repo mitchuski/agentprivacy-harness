@@ -1,0 +1,9 @@
+{
+  "leverId": "r4-compose-line-edit",
+  "status": "VALIDATED",
+  "metric": 472,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be == seedHex (draw arithmetic independently re-verified -> F14,F10,F9,F22,F29,F16,F28,F2). Candidate written verbatim from proposal compressedText to candidate.md; all 8 held-out questions answered from candidate.md alone, 8/8 correct (doors-closed+taped note; manual can opener/electric useless; six named foods; 10C relocate warming centre/neighbour; 5-min wait/grid stabilise; LED primary/avoid candles house-fire cause; pharmacy+doctor+poison-control on paper; temperate climate/no generator). Word count: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 472 < frontier best 526 (frontier.json). Hard constraint holds: candidate is a self-contained instruction document (title, scope, ordering, complete quantified instructions). conform.mjs: CONFORM PASS.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r4/r4.1/p1-r4-compose-line-edit"
+}

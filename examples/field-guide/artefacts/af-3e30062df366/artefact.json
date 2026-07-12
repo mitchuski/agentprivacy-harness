@@ -1,0 +1,132 @@
+{
+  "artefact": "dual-agent-harness/artefact.v1",
+  "id": "af-3e30062df366",
+  "κ": "sha256:ec6ac3dd68d68f9cb983019693a9437443b11fbc334a2bd621aa253d95dc7f8b",
+  "mintedAt": "2026-07-12T12:58:10.072Z",
+  "mintedBy": "node tools/mint_artefact.mjs examples/field-guide r3",
+  "status": "PREPARED",
+  "door": {
+    "owner": "first-person",
+    "actionsTaken": [],
+    "actionsAvailable": [
+      "git commit/push",
+      "fedwiki publish",
+      "gatehouse sigil-gate",
+      "send"
+    ],
+    "note": "Software prepared this bundle and stopped. Any outward movement is the First Person’s alone (T6/GR-8)."
+  },
+  "instance": {
+    "name": "field-guide",
+    "dir": "examples/field-guide"
+  },
+  "run": {
+    "runId": "r3",
+    "rounds": [
+      "r3.1"
+    ]
+  },
+  "frontier": {
+    "beat": false,
+    "objectiveMetric": "words",
+    "baseline": 730,
+    "best": 472,
+    "openTarget": "OT-4",
+    "updated": "2026-07-11",
+    "sha256": "f45c2cd59fda3611504a98c847e7cb408e9a7a1a7404dc58e8c272930152842d"
+  },
+  "proposals": [
+    {
+      "leverId": "compose-line-edit-over-best",
+      "path": "runs/r3/r3.1/p1-compose-line-edit-over-best/",
+      "seedHex": "a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9",
+      "derivedSha256": "a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9",
+      "hashState": "MATCH",
+      "verdict": {
+        "status": "VALIDATED",
+        "metric": 534,
+        "gateResult": "8/8"
+      },
+      "verdictSha256": "a9fd9bb1d946a8f4a497012ed3ec279c3614d44a040ed87bd89ee0b93411183f"
+    },
+    {
+      "leverId": "telegraphic-bullets-second-draw",
+      "path": "runs/r3/r3.1/p2-telegraphic-bullets-second-draw/",
+      "seedHex": "a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68",
+      "derivedSha256": "a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68",
+      "hashState": "MATCH",
+      "verdict": {
+        "status": "VALIDATED",
+        "metric": 526,
+        "gateResult": "8/8"
+      },
+      "verdictSha256": "e732b2a853cf4c802c20f1e904610322656995cc68d167585740b0d62208948f"
+    }
+  ],
+  "chronicle": {
+    "path": "chronicles/2026-07-11_r3.1_second-draw-clears-composed-534.md",
+    "frontmatter": {
+      "date": "2026-07-11",
+      "seat": "chronicle",
+      "runId": "r3.1",
+      "verdict": "Both levers VALIDATED at gate 8/8 — line-edit over the 573 best landed 534, and the frozen r1 telegraphic-bullets 526 cleared its second independent draw, CONVERTING from probe-limited to structural; new candidate best is 526, pending keystone fold with an exhaustive fact-census audit."
+    },
+    "sha256": "77a2754cc5b170b84b017d80c1e6d30d812b7759d7832dcff6ad869e1e502f16"
+  },
+  "conform": {
+    "command": "node engine/conform.mjs examples/field-guide",
+    "exit": 0,
+    "at": "2026-07-12T12:58:10.073Z"
+  },
+  "evidenceManifest": {
+    "evidence/r3.1__p1-compose-line-edit-over-best__proposal_canon.json": "a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9",
+    "evidence/r3.1__p1-compose-line-edit-over-best__gap.json": "4c200c8f4a45206705a2822e121c9f5e54da84a339e3cb7908ac0ebc42efd159",
+    "evidence/r3.1__p1-compose-line-edit-over-best__verdict.json": "a9fd9bb1d946a8f4a497012ed3ec279c3614d44a040ed87bd89ee0b93411183f",
+    "evidence/r3.1__p1-compose-line-edit-over-best__candidate.md": "a5771eb19b2494b82edec3bb718bc7bf215cbd1f7ad00d0225131f5145131a9b",
+    "evidence/r3.1__p1-compose-line-edit-over-best__gap.journal.json": "5676bab4c9a5fdb197dcea59f07c2106ebfff6b3eb1e7c28eab7cd83015b5253",
+    "evidence/r3.1__p2-telegraphic-bullets-second-draw__proposal_canon.json": "a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68",
+    "evidence/r3.1__p2-telegraphic-bullets-second-draw__gap.json": "b86fc245dffa3e1aeb187b2739e62482b0f77596d7fd489a1d24748106504763",
+    "evidence/r3.1__p2-telegraphic-bullets-second-draw__verdict.json": "e732b2a853cf4c802c20f1e904610322656995cc68d167585740b0d62208948f",
+    "evidence/r3.1__p2-telegraphic-bullets-second-draw__candidate.md": "d707728046bc659d29f37cb015fff8d5991dc37605ba13fdb02b2293ae5dba51",
+    "evidence/r3.1__p2-telegraphic-bullets-second-draw__gap.journal.json": "a074b2045f0203f919dc1239079b29b03b4cd2e692b169ea798e6b87c5c5d74c",
+    "evidence/frontier.json": "f45c2cd59fda3611504a98c847e7cb408e9a7a1a7404dc58e8c272930152842d",
+    "evidence/chronicles__2026-07-11_r3.1_second-draw-clears-composed-534.md": "77a2754cc5b170b84b017d80c1e6d30d812b7759d7832dcff6ad869e1e502f16"
+  },
+  "mana": null,
+  "universe": {
+    "spellwebNodeDraft": {
+      "id": "artefact-af-3e30062df366",
+      "type": "artefact",
+      "label": "field-guide r3 — 526 words VALIDATED",
+      "desc": "Both levers VALIDATED at gate 8/8 — line-edit over the 573 best landed 534, and the frozen r1 telegraphic-bullets 526 cleared its second independent draw, CONVERTING from probe-limited to structural; new candidate best is 526, pending keystone fold with an exhaustive fact-census audit.",
+      "edgeDrafts": [
+        {
+          "source": "artefact-af-3e30062df366",
+          "target": "harness-instance-field-guide",
+          "type": "validated_by"
+        }
+      ],
+      "$note": "A DRAFT for the spellweb builder. A validated round PROPOSES an edge; only a signature MINTS it."
+    },
+    "wikiPageDraft": {
+      "title": "field-guide r3 Artefact",
+      "story": [
+        {
+          "type": "paragraph",
+          "text": "Both levers VALIDATED at gate 8/8 — line-edit over the 573 best landed 534, and the frozen r1 telegraphic-bullets 526 cleared its second independent draw, CONVERTING from probe-limited to structural; new candidate best is 526, pending keystone fold with an exhaustive fact-census audit."
+        },
+        {
+          "type": "code",
+          "text": "compose-line-edit-over-best: seed a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9 re-derives MATCH · VALIDATED 534\ntelegraphic-bullets-second-draw: seed a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68 re-derives MATCH · VALIDATED 526"
+        }
+      ]
+    },
+    "gatehouse": {
+      "eligible": true,
+      "note": "wrapping this bundle in a sigil-gate is a First Person ceremony (agentprivacy-guide-gatehouse)"
+    },
+    "vertexHint": null,
+    "edgeRule": "A validated round PROPOSES an edge. Only the counterparty's signature MINTS it."
+  },
+  "inscription": "(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ"
+}

@@ -13,4 +13,5 @@ rules:
   scratch_dir: runs/
   chronicle_per_session: chronicles/
 artifacts:
-  GUIDE.md: { status: baseline, gate: none }
+  GUIDE.md: { status: baseline, gate: none }               # the Gap's fact source — never overwritten
+  GUIDE.compressed.md: { status: folded, gate: G3, lever: r4-compose-line-edit (8/8 + 32/32 census), date: 2026-07-11 }  # G4 (publishing) remains the First Person's

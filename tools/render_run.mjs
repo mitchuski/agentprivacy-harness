@@ -44,18 +44,27 @@ function gatherRun(runId) {
   const runDir = join(runsDir, runId)
   const entries = readdirSync(runDir, { withFileTypes: true })
 
-  // proposal scratch dirs: runs/<runId>/p<i>-<leverId>/ (GR-10 scratch copies)
-  const proposals = entries
-    .filter(e => e.isDirectory() && /^p\d+-/.test(e.name))
-    .sort((a, b) => a.name.localeCompare(b.name, 'en', { numeric: true }))
-    .map(e => {
-      const dir = join(runDir, e.name)
+  // proposal scratch dirs: runs/<runId>/p<i>-<leverId>/, or round-scoped
+  // runs/<runId>/<roundId>/p<i>-<leverId>/ — the engine round-scopes scratch
+  // so a colliding leverId cannot destroy an earlier round's audit trail
+  const isProposalDir = (name) => /^p\d+-/.test(name)
+  const proposalDirs = []
+  for (const e of entries) {
+    if (!e.isDirectory()) continue
+    if (isProposalDir(e.name)) { proposalDirs.push({ label: e.name, dir: join(runDir, e.name) }); continue }
+    for (const s of readdirSync(join(runDir, e.name), { withFileTypes: true })) {
+      if (s.isDirectory() && isProposalDir(s.name)) proposalDirs.push({ label: `${e.name}/${s.name}`, dir: join(runDir, e.name, s.name) })
+    }
+  }
+  const proposals = proposalDirs
+    .sort((a, b) => a.label.localeCompare(b.label, 'en', { numeric: true }))
+    .map(({ label, dir }) => {
       const canonPath = join(dir, 'proposal_canon.json')
       const gap = readJson(join(dir, 'gap.json'))
       const derived = sha256File(canonPath)
       const recorded = gap && typeof gap.seedHex === 'string' ? gap.seedHex.toLowerCase() : null
       return {
-        name: e.name,
+        name: label,
         canon: readJson(canonPath),
         canonExists: existsSync(canonPath),
         gap,
@@ -69,9 +78,17 @@ function gatherRun(runId) {
     })
 
   // chronicle drafts: CHRONICLE_DRAFT.md by convention, plus any *chronicle*.md
-  const chronicles = entries
-    .filter(e => e.isFile() && /chronicle/i.test(e.name) && e.name.endsWith('.md'))
-    .map(e => ({ name: e.name, text: readText(join(runDir, e.name)) }))
+  // — at the run root, or inside a round subdir when the engine round-scopes
+  const isChronicle = (e) => e.isFile() && /chronicle/i.test(e.name) && e.name.endsWith('.md')
+  const chronicles = []
+  for (const e of entries) {
+    if (isChronicle(e)) chronicles.push({ name: e.name, text: readText(join(runDir, e.name)) })
+    else if (e.isDirectory() && !isProposalDir(e.name)) {
+      for (const s of readdirSync(join(runDir, e.name), { withFileTypes: true })) {
+        if (isChronicle(s)) chronicles.push({ name: `${e.name}/${s.name}`, text: readText(join(runDir, e.name, s.name)) })
+      }
+    }
+  }
 
   return {
     runId, runDir, proposals, chronicles,

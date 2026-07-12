@@ -210,8 +210,20 @@ precedent — plus a second em-dash self-certification catch). The critics'
 round-level finding: the three lenses have converged on ONE claim-derivation
 charter validated eleven times, so the next round merges to a single charter
 with round-level disjointness binding. Coverage-debt 123 → 64 (the census 70%
-covered, 147 public blocks, 91 carrying verified claims). Instance head
-`10dad55`.
+covered, 147 public blocks, 91 carrying verified claims). Then two keystone
+checker extensions landed (a numeric layer: number/account types, initial
+literals, comparative predicates, all 0.7-attested; and a send-probe closing
+the checker-shaped absence typing), and lexr5 ran the merged charter over
+three DISJOINT territories: 8 levers VALIDATED, 1 MIRAGE (K-3, an em-dash
+death on already-swept ground). The numeric layer cleared the formula tail
+and the universal cast rule (a section naming no actor takes the First Person
+as holder) cleared the zero-party tail and closed K-2, both proven in the
+field; the disjoint partition made per-lever metrics additive with no
+cross-lever arbitration, dissolving the convergence problem by construction.
+Coverage-debt fell to 22, the census 90% covered, 189 blocks, with a readable
+viewer (viewer/index.html) rendering every term and the 13 constitution
+spells as Lexon text. Residue 22 = 16 terms for one more sweep + 6 C-series
+ids reserved for the operator. Instance head `3a92544`.
 
 > **At a glance** —
 > **objective:** coverage-debt — frozen census terms not yet expressed as gate-passing controlled-grammar entries, ↓ · **gate:** the spec-checker — parse → triple round-trip → role binding → promise typing (regime label honest: the real compiler is unpublished) — plus the mutation probe: every entry's relation claim must survive its mutated twin · **hard constraint:** every entry passes the checker built from attested lexon.org samples
@@ -345,7 +357,7 @@ executed. It is the picture of the structure the other seven are seated in.
 
 ## The negative result
 
-### 9 · universe-builder — where the harness was applied and should not have been
+### 10 · universe-builder — where the harness was applied and should not have been
 
 *(in this repo, at `universe/retired/`. Kept on purpose.)*
 
@@ -398,32 +410,37 @@ is the first design decision, and the cheapest one to get wrong.*
 
 ### 11 · hearthold — the House of Archon's slot
 
-*(scaffolded at `../hearthold_mage` — deliberately unfilled)*
+*(scaffolded at `../hearthold_mage` — deliberately unfilled · upstream:
+`github.com/Flaxscrip/hearthold` v0.11.0, IMPLEMENTED)*
 
 The household sovereignty stack — the Warden who guards, Recall who remembers,
-the Knowledge Portal that faces outward, the factor-2 step-up ladder — has a
-harness seat scaffolded and **held open for the House of Archon**. Nothing in
-it conforms, and nothing should: the config wears its TODOs, the frontier has
-no baseline, and the gate's refusal is the mechanism that keeps the seat warm.
-This is trust T4 made structural — *an invitation establishes the acceptance
-relationship before any specific proposal* — and the proposal here is the
-acceptor's to make. `SLOT.md` in the instance carries the invitation: three
-candidate objective directions (step-up-ladder coverage · Recall fidelity ·
-Portal disclosure-minimization), the five answers that constitute acceptance,
-and a **proposed** seating at V60 (burning Protection · Delegation · Memory ·
-Connection, forcing anchor V3 = Computation + Value — *the hearth burns care,
-not compute*), re-derivable from whatever objective is actually accepted.
+the Knowledge Portal that faces outward, the factor-2 step-up ladder — is real
+and shipped upstream (`github.com/Flaxscrip/hearthold`). So this seat is not to
+*build* hearthold; it is a harness seat **held open for the House of Archon** to
+build a held-apart runtime *on* it. Nothing in it conforms, and nothing should:
+the config wears its TODOs, the frontier has no baseline, and the gate's refusal
+is the mechanism that keeps the seat warm. This is trust T4 made structural — *an
+invitation establishes the acceptance relationship before any specific proposal*
+— and the proposal here is the acceptor's to make. What Archon is growing toward
+is a **dual-agent runtime for content-addressed identity**: `did:cid`, agent
+identity, key custody — which is the harness's own **holon layer** (`HOLONS.md`)
+turned on identity, since *a `did:cid` CID is a κ-address.* `SLOT.md` carries the
+invitation: identity-shaped candidate Gaps (`did:cid` resolution integrity ·
+sword ⊥ mage identity separation · key custody under delegation), the five answers
+that constitute acceptance, and a **proposed** seating at **V60** — burning
+Connection (a DID resolves outward), which is exactly what separates it from the
+Curatrix Vault at V57 (which burns Value, because a vault holds).
 
 > **At a glance** —
 > **objective:** OPEN — defining it IS accepting the seat (ADOPTION.md Part II, the five answers) · **gate:** OPEN · **hard constraint:** OPEN
-> **the Gap:** OPEN — and if the accepted claim space turns out enumerable, an auditor is a valid acceptance too (see #9) · **lenses:** OPEN · **canary:** OPEN
-> **weight:** invited vacancy — conform REFUSES the instance today, by design · **the lesson it carries:** a slot the gate holds open cannot be quietly squatted; the seat stays honest until someone signs their name to its objective.
+> **the Gap:** OPEN — and if the accepted claim space turns out enumerable, an auditor is a valid acceptance too (see #10) · **lenses:** OPEN · **canary:** OPEN
+> **weight:** invited vacancy — conform REFUSES the instance today, by design · **direction:** the House of Archon's content-addressed identity runtime (`did:cid` = a κ-address; the holon layer on identity) · **the lesson it carries:** a slot the gate holds open cannot be quietly squatted; the seat stays honest until someone signs their name to its objective.
 
 ---
 
 ## What travels, what stays, and how the fleet syncs
 
-Read these eight and you will notice the same skeleton under eight
+Read these ten and you will notice the same skeleton under ten
 unrecognisably different bodies: an objective (or an honest absence of one), a
 hard constraint, a gate the proposer cannot choose, a ledger only one seat
 writes, and a door only a person opens.

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The frontier — a verifiable, contributable descent, per workshop</title>
+<style>
+  :root{
+    color-scheme: light dark;
+    --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9;
+    --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12);
+    --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f;
+    --glow:rgba(15,147,164,.28);
+    --mono: ui-monospace,"Cascadia Code","JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Hoefler Text","Palatino Linotype",Palatino,Georgia,serif;
+    --sans: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ground:#05060d; --panel:#0b0f1e; --sink:#080b16; --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.16);
+      --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7; --glow:rgba(77,217,232,.32); }
+  }
+  :root[data-theme="light"]{ color-scheme:light; --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9; --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12); --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f; --glow:rgba(15,147,164,.28); }
+  :root[data-theme="dark"]{ color-scheme:dark; --ground:#05060d; --panel:#0b0f1e; --sink:#080b16; --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.16); --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7; --glow:rgba(77,217,232,.32); }
+
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--ground); color:var(--ink); font-family:var(--sans); }
+  .num{ font-variant-numeric:tabular-nums; }
+
+  .frontier{
+    background:var(--panel); border:1px solid var(--line); border-radius:16px;
+    padding:1.1rem 1.25rem 1rem; position:relative; max-width:56rem; margin:0 auto;
+    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset;
+  }
+  .fr-head{ display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:baseline; justify-content:space-between; margin-bottom:.2rem; }
+  .fr-title{ font-family:var(--mono); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+  .fr-title b{ color:var(--ink); }
+  .fr-stat{ font-family:var(--mono); font-size:.82rem; color:var(--dim); }
+  .fr-stat .best{ color:var(--cyan); font-weight:600; }
+  .fr-stat .drop{ color:var(--num); }
+
+  .fr-controls{ display:flex; gap:.4rem; align-items:center; }
+  select, .fr-btn{
+    font:inherit; font-family:var(--mono); font-size:.74rem; color:var(--ink);
+    background:var(--sink); border:1px solid var(--line); border-radius:8px; padding:.3rem .55rem; cursor:pointer;
+  }
+  .fr-btn:hover, select:hover{ border-color:var(--violet); }
+  .fr-btn[aria-pressed="true"]{ color:var(--cyan); border-color:var(--cyan); }
+
+  .fr-plot{ position:relative; margin-top:.6rem; }
+  svg{ display:block; width:100%; height:auto; overflow:visible; }
+  .grid{ stroke:var(--line); stroke-width:1; }
+  .baseline{ stroke:var(--line); stroke-width:1; }
+  .descent{ fill:none; stroke:var(--cyan); stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round; filter:drop-shadow(0 0 6px var(--glow)); }
+  .area{ opacity:.9; }
+  .opentgt{ stroke:var(--violet); stroke-width:1.5; stroke-dasharray:6 5; }
+  .lbl{ font-family:var(--mono); font-size:11px; fill:var(--dim); }
+  .lbl.val{ fill:var(--num); }
+  .lbl.best{ fill:var(--cyan); }
+  .lbl.violet{ fill:var(--violet); }
+
+  .dot{ cursor:pointer; }
+  .dot circle.hit{ fill:transparent; }
+  .dot circle.node{ fill:var(--panel); stroke:var(--cyan); stroke-width:2; transition:r .15s ease; }
+  .dot.best circle.node{ fill:var(--cyan); }
+  .dot:hover circle.node, .dot:focus-visible circle.node{ r:7; }
+  .dot:focus-visible{ outline:none; }
+  .dot:focus-visible circle.halo{ opacity:1; }
+  .dot circle.halo{ fill:none; stroke:var(--cyan); opacity:0; }
+  @media (prefers-reduced-motion: no-preference){
+    .dot.best circle.pulse{ animation:pulse 2.4s ease-out infinite; transform-origin:center; }
+    .beat-marker{ animation:pulse 2.4s ease-out infinite; transform-origin:center; }
+  }
+  @keyframes pulse{ 0%{ opacity:.5; r:7; } 70%{ opacity:0; r:16; } 100%{ opacity:0; r:16; } }
+
+  /* animated descent reveal */
+  .descent.draw{ stroke-dasharray:var(--len); stroke-dashoffset:var(--len); }
+  @media (prefers-reduced-motion: no-preference){
+    .descent.draw.play{ animation:draw 1.5s ease forwards; }
+    .area.draw{ opacity:0; }
+    .area.draw.play{ animation:fadein 1.1s ease .5s forwards; }
+    .dot.draw{ opacity:0; }
+    .dot.draw.play{ animation:fadein .4s ease forwards; }
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes fadein{ to{ opacity:1; } }
+
+  /* the fold card */
+  .card{
+    position:absolute; pointer-events:none; z-index:5; min-width:12rem; max-width:16rem;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.6rem .75rem;
+    box-shadow:0 8px 30px -12px rgba(0,0,0,.5); opacity:0; transform:translateY(4px); transition:opacity .12s ease, transform .12s ease;
+    font-size:.8rem;
+  }
+  .card.show{ opacity:1; transform:translateY(0); }
+  .card .m{ font-family:var(--mono); font-size:1.15rem; font-weight:600; color:var(--ink); }
+  .card .m .r{ font-size:.82rem; color:var(--cyan); margin-left:.4rem; }
+  .card .tgt{ font-family:var(--mono); font-size:.72rem; color:var(--violet); letter-spacing:.06em; }
+  .card .lever{ color:var(--dim); margin-top:.35rem; word-break:break-word; }
+  .card .date{ color:var(--dim); font-family:var(--mono); font-size:.7rem; margin-top:.25rem; }
+  .card .kappa{ font-family:var(--mono); font-size:.64rem; color:var(--dim); margin-top:.3rem; word-break:break-all; }
+
+  .invite{
+    display:flex; gap:.8rem; align-items:flex-start; margin-top:.9rem; padding-top:.85rem; border-top:1px solid var(--line);
+  }
+  .invite .glyph{ font-size:1.1rem; line-height:1.3; }
+  .invite p{ margin:0; font-size:.86rem; color:var(--dim); }
+  .invite .beat{ color:var(--violet); font-family:var(--mono); font-weight:600; }
+  .invite .proof{ font-family:var(--serif); font-style:italic; color:var(--ink); }
+
+  /* standalone page chrome (hidden when embedded via ?embed=1) */
+  .page{ padding:clamp(1.5rem,5vw,3.5rem) 1.2rem; }
+  .page > h1{ font-family:var(--mono); font-weight:600; font-size:clamp(1.3rem,3.5vw,1.9rem); text-align:center; margin:0 auto .4rem; max-width:40rem; }
+  .page > .sub{ text-align:center; color:var(--dim); max-width:44rem; margin:0 auto 2rem; font-size:.95rem; }
+  body.embed .page{ padding:0; }
+  body.embed .page > h1, body.embed .page > .sub{ display:none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>The frontier — a descent you can contribute to</h1>
+  <p class="sub">Each workshop drives one number down through a gate it cannot tune to. Every point on the line is a fold that carried its own proof — run the harness, beat the line, and your fold joins it.</p>
+  <div class="frontier" id="frontier"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var params = new URLSearchParams(location.search);
+  if(params.get('embed') === '1') document.body.classList.add('embed');
+
+  // ---- demo feeds (used standalone; the console serves the real ones) ----
+  var DEMO = {
+    'field-guide': { feed:'demo', instance:'field-guide', movingCeiling:{ metric:'words', baseline:730, best:472, ratioNow:0.6466,
+      open:{ id:'OT-4', statement:'below 472 words at gate 8/8' },
+      series:[ {label:'baseline',value:730,ratio:1,date:'2026-07-09',lever:null},
+               {label:'OT-1',value:573,ratio:0.7849,date:'2026-07-11',lever:'restructure-merge-terse-prose'},
+               {label:'OT-2',value:526,ratio:0.7205,date:'2026-07-11',lever:'telegraphic-bullets · two disjoint draws + census'},
+               {label:'OT-3',value:472,ratio:0.6466,date:'2026-07-11',lever:'r4-compose-line-edit'} ] },
+      artefacts:[{id:'af-0f8625eec136',kappa:'sha256:f57406e1…',best:472,beat:true}] },
+    'lexon-pvm': { feed:'demo', instance:'lexon-pvm', movingCeiling:{ metric:'coverage-debt', baseline:211, best:123, ratioNow:0.5829,
+      open:{ id:'OT-5', statement:'seat cards as promise bundles' },
+      series:[ {label:'baseline',value:211,ratio:1,date:'2026-07-10',lever:null},
+               {label:'lexr1',value:181,ratio:0.8578,date:'2026-07-11',lever:'4 levers validated 8/8'},
+               {label:'lexr2',value:152,ratio:0.7204,date:'2026-07-11',lever:'quantitative-register + first mirage'},
+               {label:'lexr3',value:123,ratio:0.5829,date:'2026-07-11',lever:'spell-grammar lens, 3/3 structural'} ] },
+      artefacts:[] },
+    'privacy-pools-v2': { feed:'demo', instance:'privacy-pools-v2', movingCeiling:{ metric:'R1CS constraints', baseline:36832, best:17159, ratioNow:0.4658,
+      open:{ id:'certified report', statement:'frozen 0xbow report' },
+      series:[ {label:'baseline',value:36832,ratio:1,date:'2026-07-09',lever:null},
+               {label:'v2r1',value:17159,ratio:0.4658,date:'2026-07-09',lever:'projective-CSE'} ] },
+      artefacts:[] }
+  };
+
+  var host = document.getElementById('frontier');
+  var served = location.protocol.indexOf('http') === 0 && location.hostname === '127.0.0.1';
+  var showRatio = false;
+
+  function css(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
+  function fmt(n){ return (typeof n === 'number') ? n.toLocaleString('en-US') : n; }
+
+  // ---- build the widget for one feed ----
+  function render(feed, instances){
+    var mc = feed.movingCeiling;
+    var s = mc.series || [];
+    var W = 800, H = 340, padL = 58, padR = 92, padT = 28, padB = 44;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var open = mc.open || null;
+
+    // domain
+    var values = s.map(function(p){ return p.value; });
+    var minV = Math.min.apply(null, values), maxV = Math.max.apply(null, values);
+    var floorV = open ? Math.min(minV, mc.best * 0.9) : minV * 0.94;
+    var lo, hi;
+    if(showRatio){ lo = 0.35; hi = 1.04; } else { lo = Math.min(floorV, minV) * 0.98; hi = maxV * 1.03; }
+    function xi(i){ return padL + plotW * (s.length<2 ? 0 : i/(s.length-1)); }
+    function yv(v){ return padT + plotH * (1 - (v - lo)/(hi - lo)); }
+    function Y(p){ return yv(showRatio ? p.ratio : p.value); }
+    var openY = open ? yv(showRatio ? (mc.best/ mc.baseline) * 0.92 : mc.best - (mc.baseline*0.03)) : null;
+    // place the open line a touch below best
+    if(open){ openY = showRatio ? yv((mc.best/mc.baseline) - 0.03) : yv(mc.best - Math.max(6, mc.baseline*0.02)); }
+
+    // stepped ceiling path
+    var dPath = 'M ' + xi(0) + ' ' + Y(s[0]);
+    for(var i=1;i<s.length;i++){ dPath += ' L ' + xi(i) + ' ' + Y(s[i-1]) + ' L ' + xi(i) + ' ' + Y(s[i]); }
+    var areaPath = dPath + ' L ' + xi(s.length-1) + ' ' + (padT+plotH) + ' L ' + xi(0) + ' ' + (padT+plotH) + ' Z';
+
+    var cyan = css('--cyan');
+    var picker = instances && instances.length > 1
+      ? '<select id="wpick" aria-label="workshop">' + instances.map(function(id){ return '<option'+(id===feed.instance?' selected':'')+'>'+id+'</option>'; }).join('') + '</select>'
+      : '';
+
+    host.innerHTML =
+      '<div class="fr-head">'+
+        '<div class="fr-title">the frontier · <b>'+feed.instance+'</b></div>'+
+        '<div class="fr-controls">'+picker+
+          '<button class="fr-btn" id="ratioBtn" aria-pressed="'+showRatio+'" title="toggle absolute metric vs R(t) ratio">R(t)</button>'+
+          '<button class="fr-btn" id="replayBtn" title="replay the descent">↻</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="fr-stat">baseline <span class="num">'+fmt(mc.baseline)+'</span> → best <span class="best num">'+fmt(mc.best)+'</span> '+mc.metric+
+        ' <span class="drop num">('+(mc.baseline?('−'+Math.round((1-mc.best/mc.baseline)*1000)/10+'%'):'')+')</span></div>'+
+      '<div class="fr-plot">'+
+        '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Frontier descent for '+feed.instance+', '+fmt(mc.baseline)+' to '+fmt(mc.best)+' '+mc.metric+'">'+
+          '<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">'+
+            '<stop offset="0%" stop-color="'+cyan+'" stop-opacity="0.22"/>'+
+            '<stop offset="100%" stop-color="'+cyan+'" stop-opacity="0"/></linearGradient></defs>'+
+          '<line class="baseline" x1="'+padL+'" y1="'+Y(s[0])+'" x2="'+(W-padR)+'" y2="'+Y(s[0])+'"/>'+
+          '<text class="lbl" x="'+padL+'" y="'+(Y(s[0])-7)+'">baseline '+(showRatio?'1.00':fmt(mc.baseline))+'</text>'+
+          (open ? '<line class="opentgt" x1="'+padL+'" y1="'+openY+'" x2="'+(W-padR)+'" y2="'+openY+'"/>'+
+                  '<text class="lbl violet" x="'+(W-padR+6)+'" y="'+(openY+4)+'">'+open.id+' · open</text>'+
+                  '<circle class="beat-marker" cx="'+(W-padR)+'" cy="'+openY+'" r="4" fill="'+css('--violet')+'"/>' : '')+
+          '<path class="area draw" d="'+areaPath+'" fill="url(#areaGrad)"/>'+
+          '<path class="descent draw" id="descentPath" d="'+dPath+'"/>'+
+          s.map(function(p,i){
+            var best = (i===s.length-1);
+            var lx = i===0 ? xi(i) : (best ? xi(i) : xi(i));
+            var anchor = i===0 ? 'start' : (best ? 'end' : 'middle');
+            var vAdj = best ? (xi(i)-8) : xi(i);
+            return '<g class="dot draw'+(best?' best':'')+'" tabindex="0" role="button" data-i="'+i+'" '+
+                     'aria-label="'+p.label+': '+fmt(p.value)+' '+mc.metric+(p.lever?', '+p.lever:'')+'">'+
+                   (best?'<circle class="pulse" cx="'+xi(i)+'" cy="'+Y(p)+'" r="7" fill="'+cyan+'"/>':'')+
+                   '<circle class="halo" cx="'+xi(i)+'" cy="'+Y(p)+'" r="11"/>'+
+                   '<circle class="node" cx="'+xi(i)+'" cy="'+Y(p)+'" r="'+(best?5.5:4.5)+'"/>'+
+                   '<circle class="hit" cx="'+xi(i)+'" cy="'+Y(p)+'" r="16"/>'+
+                   '<text class="lbl '+(i===0?'':'val')+(best?' best':'')+'" x="'+vAdj+'" y="'+(Y(p)-14)+'" text-anchor="'+anchor+'">'+(showRatio?p.ratio.toFixed(3):fmt(p.value))+'</text>'+
+                   '<text class="lbl" x="'+xi(i)+'" y="'+(padT+plotH+18)+'" text-anchor="middle">'+p.label+'</text>'+
+                   '</g>';
+          }).join('')+
+        '</svg>'+
+        '<div class="card" id="card"></div>'+
+      '</div>'+
+      '<div class="invite">'+
+        '<span class="glyph">🤺</span>'+
+        '<p>Run this harness and beat <span class="beat">'+fmt(mc.best)+'</span> at the gate — a validated fold joins the frontier. '+
+        '<span class="proof">Every point carries its own proof: re-derive its hash and the fold is real, or it never happened.</span></p>'+
+      '</div>';
+
+    wireInteractions(feed);
+    playDraw();
+  }
+
+  var cardEl, plotEl;
+  function wireInteractions(feed){
+    cardEl = document.getElementById('card');
+    plotEl = host.querySelector('.fr-plot');
+    var mc = feed.movingCeiling, s = mc.series;
+    host.querySelectorAll('.dot').forEach(function(g){
+      var i = +g.getAttribute('data-i'); var p = s[i]; var best = (i===s.length-1);
+      function show(){
+        var kappa = best && feed.artefacts && feed.artefacts[0] ? feed.artefacts[0].kappa : null;
+        cardEl.innerHTML = '<div class="m">'+fmt(p.value)+' <span class="r">R '+p.ratio.toFixed(3)+'</span></div>'+
+          (p.label && p.label!=='baseline' ? '<div class="tgt">'+p.label+' met</div>' : '<div class="tgt">the baseline — the descent begins</div>')+
+          (p.lever ? '<div class="lever">'+p.lever+'</div>' : '')+
+          (p.date ? '<div class="date">'+p.date+'</div>' : '')+
+          (kappa ? '<div class="kappa">κ '+kappa+'</div>' : '');
+        var node = g.querySelector('circle.node');
+        var pr = plotEl.getBoundingClientRect(), nr = node.getBoundingClientRect();
+        var x = nr.left - pr.left + nr.width/2, y = nr.top - pr.top;
+        cardEl.classList.add('show');
+        var cw = cardEl.offsetWidth, ch = cardEl.offsetHeight;
+        cardEl.style.left = Math.max(4, Math.min(pr.width - cw - 4, x - cw/2)) + 'px';
+        cardEl.style.top = Math.max(4, y - ch - 12) + 'px';
+      }
+      function hide(){ cardEl.classList.remove('show'); }
+      g.addEventListener('mouseenter', show); g.addEventListener('focus', show);
+      g.addEventListener('mouseleave', hide); g.addEventListener('blur', hide);
+    });
+    var rb = document.getElementById('ratioBtn');
+    if(rb) rb.addEventListener('click', function(){ showRatio = !showRatio; render(feed, currentInstances); });
+    var pb = document.getElementById('replayBtn');
+    if(pb) pb.addEventListener('click', playDraw);
+    var wp = document.getElementById('wpick');
+    if(wp) wp.addEventListener('change', function(){ load(wp.value); });
+  }
+
+  function playDraw(){
+    var path = document.getElementById('descentPath');
+    if(!path) return;
+    var len = path.getTotalLength ? path.getTotalLength() : 800;
+    path.style.setProperty('--len', len);
+    var els = host.querySelectorAll('.draw');
+    els.forEach(function(e){ e.classList.remove('play'); void e.offsetWidth; e.classList.add('play'); });
+  }
+
+  // ---- data loading: real feed when served, demo otherwise ----
+  var currentInstances = Object.keys(DEMO);
+  function load(instance){
+    if(served){
+      fetch('/api/feed?instance='+encodeURIComponent(instance)).then(function(r){ return r.json(); })
+        .then(function(f){ if(f && f.movingCeiling) render(f, currentInstances); else render(DEMO[instance]||DEMO['field-guide'], currentInstances); })
+        .catch(function(){ render(DEMO[instance]||DEMO['field-guide'], currentInstances); });
+    } else { render(DEMO[instance]||DEMO['field-guide'], currentInstances); }
+  }
+
+  function boot(){
+    var want = params.get('instance');
+    if(served){
+      fetch('/api/instances').then(function(r){ return r.json(); }).then(function(list){
+        currentInstances = list.map(function(i){ return i.id; });
+        var first = want && currentInstances.indexOf(want)>=0 ? want : currentInstances[0];
+        load(first);
+      }).catch(function(){ render(DEMO[want]||DEMO['field-guide'], currentInstances); });
+    } else {
+      render(DEMO[want]||DEMO['field-guide'], currentInstances);
+    }
+  }
+  boot();
+})();
+</script>
+</body>
+</html>

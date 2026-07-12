@@ -349,6 +349,16 @@ async function handle(req, res) {
     return res.end(page)
   }
 
+  // the frontier widget — an interactive, per-workshop descent, embeddable in
+  // the district pages (iframe /frontier?instance=<id>&embed=1). Reads the
+  // live feed here; ships baked-in demo feeds so it renders anywhere.
+  if (url.pathname === '/frontier' || url.pathname === '/frontier.html') {
+    const page = readText(join(here, 'frontier.html'))
+    if (!page) return json(res, 404, { error: 'tools/frontier.html missing' })
+    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' })
+    return res.end(page)
+  }
+
   if (url.pathname === '/api/instances') {
     const list = []
     for (const inst of discover()) {

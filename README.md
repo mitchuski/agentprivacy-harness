@@ -1,6 +1,9 @@
 # dual-agent-harness
 
-A harness for two agents who are not allowed to collude.
+**A verification harness for AI-agent work: one agent proposes, a second
+independently proves, and the tests that decide are derived by hashing the
+proposal itself — so neither agent could have chosen them. Config-driven,
+zero dependencies, every axiom checked at runtime.**
 
 **soulbae 🧙** proposes. **soulbis ⚔️** proves. Between them sits **the Gap
 ⿻**: the held-out tests are derived by hashing soulbae's own proposal, so
@@ -20,6 +23,93 @@ Gap they produce the successor — the step forward. On Z/64Z this is a
 theorem, and `engine/conform.mjs` computes it for all sixty-four values every
 time it runs rather than taking it on faith. A result exists only where the
 two were genuinely held apart.
+
+## Where it stands
+
+This is not a sketch. The engine has been debugged **by being run** — seven
+defects to date, every one invisible to inspection and obvious on execution,
+each fixed and pinned by a test or a prompt rule (an outage reported as an
+exhausted search; a gate that passed an unfilled config; a critic with no
+word for a bad gate; seats whose disk record was thinner than their return).
+The runnable toy has a real advancing frontier: its guide compressed from a
+730-word baseline to a 472-word validated best across four audited folds,
+each held to an 8/8 held-out gate on independent witness draws, the last two
+closed by an exhaustive fact census
+(`examples/field-guide/frontier.json` is the authority; its `chronicles/`
+tell the story). Ten real embodiments — quantum circuits, ZK constraint
+systems, research pipelines, consent agreements, and one deliberate failure —
+are catalogued in `HARNESS_PATHS.md`. The skeleton is domain-neutral and
+stays that way.
+
+## The pathway — clone to your own harness
+
+**Requirements:** Node ≥ 18, nothing else (zero npm dependencies). Running
+rounds multi-agent needs a driver for the seven seats — Claude Code's
+Workflow tool is the reference runtime; `engine/dual_agent_loop.mjs` also
+accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply.
+
+1. **Prove the axioms** — one command, every gate this repo has:
+   ```bash
+   node tools/check.mjs
+   ```
+   Algebra on all of Z/64Z, the engine's failure-semantics tests, conformance
+   of every instance it discovers, and a negative test that the blank
+   template *fails for the right reasons*. Non-zero exit prints re-runnable
+   commands.
+2. **Read the constitution** — `TRUSTS.md` (the six trusts and where each one
+   bites), then `GROUND_RULES.md` (GR-1..10, pasted into every seat at boot).
+   These are the parts you should not change.
+3. **Run the toy** — a real round against `examples/field-guide/` (compress a
+   field guide; a hash-drawn 8-question gate must stay 8/8). In Claude Code,
+   invoke the Workflow tool:
+   ```
+   scriptPath: examples/field-guide/harness.workflow.mjs
+   args: { "repo": "<abs>/examples/field-guide", "root": "<abs of this clone>", "runId": "r4" }
+   ```
+   All writes land in `runs/<runId>/`; the frontier does not move on its own.
+4. **Audit and view the round** — `node tools/render_run.mjs examples/field-guide r4`
+   writes a static `run.html` that re-derives every Gap seed from the saved
+   proposal bytes; or check by hand: `sha256sum proposal_canon.json` must
+   equal `seedHex` in `gap.json`.
+   Or **watch the workshop live**: `node tools/console.mjs` serves a
+   read-only console at `127.0.0.1:4242` — the six-phase loop as evolving
+   geometry, every seed re-derived per poll, the frontier as a moving
+   ceiling, and a door panel that lists what software will never do for you.
+5. **Fold as keystone** — in the main session, per `seats/keystone.md`:
+   conform green → fold the validated-and-structural lever → frontier first,
+   prose second → file the chronicle → conform green again. Where the claim
+   space is enumerable, run the census — what you can count, count.
+   Publishing anything is yours alone (T6).
+6. **Seal what survived** — `node tools/mint_artefact.mjs examples/field-guide r4`
+   writes a κ-labelled artefact bundle (content-addressed by canonical-JSON
+   sha256 — never trusted, only re-derived) with an evidence hash-manifest
+   and a `DOOR.md` of the outward actions software did NOT take. It refuses
+   tampered seeds, red gates, and verdict-less runs. The console's door
+   panel lists every bundle; carrying one anywhere is the door, and the
+   door is yours.
+7. **Scaffold your own instance** — `node tools/new_instance.mjs ../my-harness my-harness`,
+   fill every TODO in its `harness.config.mjs` (the gate and the bundler both
+   refuse a config still wearing them), then
+   `node tools/bundle.mjs my/harness.config.mjs my/harness.workflow.mjs` and
+   run it exactly like the toy. `SEAT_CONTRACT.md` is the interface, and
+   **`ADOPTION.md` is the map**: why the duality works on any topic, the
+   harness-vs-auditor decision, the five answers that become your config, and
+   six worked domain mappings. **Define the Gap first** — if you cannot say
+   how held-out witnesses derive from a proposal by hashing, you do not have
+   a harness yet (and may want an auditor instead).
+8. **When it earns it, specialise** — `SPECIALISATION.md` binds personas and
+   spells to seats and seats instances on the Game-of-42 lattice;
+   `HARNESS_PATHS.md` shows ten real configs at every weight — and one seat
+   held open by invitation, which is also a thing a harness can be.
+
+**Follow the worked example.** The toy's own history is the pathway walked
+end to end: `examples/field-guide/frontier.json` records four audited folds
+(730 → 573 → 526 → 472, every step at gate 8/8, the last two closed by
+exhaustive census), its `chronicles/` tell each round verdict-first, and the
+repo's `chronicles/` tell the system's story — including the seven defects
+found by running and the one round that was watched live. Reading them in
+date order is the fastest way to learn what the discipline feels like in
+practice.
 
 ## Why hold them apart
 
@@ -101,10 +191,10 @@ change anything. It is the part of this repo you should keep.
 Only the keystone writes the first three. Other seats *return* proposed
 entries — append-only ledgers do not survive concurrent writers.
 
-## Run the toy
+## The toy, in detail
 
-Start with one command. It runs every gate this repo has, in the order you
-should trust them:
+(Steps 1, 3, and 4 of the pathway, expanded.) Start with one command. It runs
+every gate this repo has, in the order you should trust them:
 
 ```bash
 node tools/check.mjs
@@ -135,14 +225,14 @@ In Claude Code, invoke the Workflow tool with:
 
 ```
 scriptPath: examples/field-guide/harness.workflow.mjs
-args: { "repo": "<abs path>/examples/field-guide", "root": "<abs path>", "runId": "r1" }
+args: { "repo": "<abs path>/examples/field-guide", "root": "<abs path>", "runId": "r4" }
 ```
 
 `root` is where `GROUND_RULES.md`, `TRUSTS.md`, and `seats/` live — this
 repo's clone. Every seat boots from those documents (T3); an instance that
 lives elsewhere and doesn't carry its own copies must always pass it.
 
-All writes land in `examples/field-guide/runs/r1/`. Nothing touches the
+All writes land in `examples/field-guide/runs/r4/`. Nothing touches the
 frontier until you, as keystone, fold it. See
 `examples/field-guide/README.md` for what a round looks like and how to run
 the mirage drill.
@@ -150,7 +240,7 @@ the mirage drill.
 ## View a run
 
 ```bash
-node tools/render_run.mjs examples/field-guide r1     # one run
+node tools/render_run.mjs examples/field-guide r4     # one run
 node tools/render_run.mjs examples/field-guide --all  # every run
 ```
 
@@ -170,6 +260,8 @@ VALIDATED green, MIRAGE amber, BLOCKED red — and the frontier does not move
 here any more than it moves in the loop.
 
 ## Build your own harness path
+
+(Steps 6 and 7 of the pathway, expanded.)
 
 1. **Define the Gap first.** If you cannot say how held-out witnesses derive
    from a proposal by hashing, you do not have a harness yet.
@@ -200,6 +292,7 @@ a fork.
 ```
 TRUSTS.md          the constitution — read first
 GROUND_RULES.md    GR-1..GR-10, pasted into every seat at boot
+ADOPTION.md        why the duality is topic-free + the mapping procedure
 SEAT_CONTRACT.md   what a config provides
 SPECIALISATION.md  personas, spells, the Game of 42
 HARNESS_PATHS.md   eight real instances, and how the fleet syncs
@@ -211,6 +304,8 @@ templates/         ledgers + a blank config to copy
 tools/new_instance.mjs scaffold an instance, and say what is still missing
 tools/bundle.mjs   config + engine → one self-contained workflow file
 tools/render_run.mjs   one run directory → one static run.html projection
+tools/console.mjs  the workshop console — a live, GET-only localhost window
+tools/mint_artefact.mjs  seal a validated run into a κ-labelled artefact, at the door
 examples/          the runnable toy
 universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks
 ```

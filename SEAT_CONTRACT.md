@@ -110,6 +110,16 @@ source harnesses.
   'structural'|'probe-limited'|'noise', why}], nextLead, killedLeverDrafts[] }`
   — exactly one `nextLead`.
 
+### Optional: `mana` (advisory, display-only)
+
+A config MAY declare `mana: ['🌞', …]` (or a single string) — the instance's
+declared mana affinity from the workshop taxonomy of its universe. The engine
+ignores it entirely; the conformance gate does not check it; the workshop
+console and the artefact mint carry it through as display chips and as
+`artefact.json.mana`. It is colour, not proof — *the mana is what you play
+with; the VRC is what you prove with* — and an instance with no universe
+simply omits it.
+
 ## The canary — and when NOT to build a harness
 
 **A gate with no artifact known to pass it cannot distinguish a bad candidate

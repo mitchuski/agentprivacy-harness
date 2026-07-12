@@ -1,6 +1,6 @@
 # Harness paths — where this skeleton went
 
-Nine instances specialised this harness. None of their code lives here; this
+Ten instances specialised this harness, and an eleventh seat is held open by invitation. None of their code lives here; this
 is the map, so you can see what a filled config looks like at full weight —
 and, just as usefully, what a *partial* embodiment looks like — before you
 build your own. Each began as a skeleton like this one and diverged only
@@ -26,6 +26,7 @@ reading a complete one.
 | the dream cycle | universe upkeep | *(no metric)* — gap surfacing | *(none)* — the measure seat at fleet scale | measure-only |
 | Game of 42 | the structure itself | *(none)* — a visualization | *(none)* — checks structure, not results | structure layer |
 | **universe-builder** | a map of a corpus | words, ↓ | a sampled draw it never needed | **RETIRED — read this one** |
+| hearthold | household sovereignty stack | *(unfilled — defining it IS accepting the seat)* | *(unfilled)* | **OPEN — invited: the House of Archon** |
 
 ---
 
@@ -53,6 +54,11 @@ is *"cheaper-but-unvalidated is not progress"*; its kill ledger runs to
 seventeen entries, each carrying a re-open condition, because killed ≠
 impossible.
 
+> **At a glance** —
+> **objective:** product — average executed Toffoli × peak qubits, ↓ · **gate:** 9,024 held-out witnesses hashed from the candidate's own op stream; only a full clean run (zero classical / phase / ancilla failures) counts · **hard constraint:** exact secp256k1 point-addition semantics — a wrong circuit is not a smaller win
+> **the Gap:** a GPU island search reseeded by Fiat-Shamir from the op-stream hash · **lenses:** gate-minimiser ⊥ qubit-minimiser (the complement pair), with a cliff-watcher scoring the whole product (break-even ≈ 1,184 Toffoli per qubit) · **canary:** the unoptimized reference circuit — passes its own witnesses by construction
+> **weight:** full loop · private · **the lesson it carries:** MIRAGE got its name here; killed ≠ impossible — seventeen kill entries, each with a re-open condition.
+
 ### 2 · tigzkp_mage — ZK circuit constraint reduction
 
 *(private instance of the author — a full workshop directory with its own
@@ -73,6 +79,11 @@ self-correction is the tell worth copying: a declared "floor" was falsified
 within hours by a further pass, and the falsification filed at win-prominence
 rather than quietly amended.
 
+> **At a glance** —
+> **objective:** surviving R1CS constraints, ↓ · **gate:** the gate ladder — conformance → equivalence → witness → frontier → **the door**, with held-out evaluation points drawn Fiat-Shamir per round · **hard constraint:** witness-computability by forward propagation — the purest GR-3
+> **the Gap:** per-round held-out points from the proposal hash · **specialisation:** the fullest — seven seats dressed with personas on the Game-of-42 compute axis, anchor Aletheia (V38) ⊕ Lethe (V25) = 63 checked by conform · **canary:** the reference circuit at its measured baseline
+> **weight:** full + specialised · private; superseded as the live thread by instance 4, which carries its method · **the lesson it carries:** origin of GROUND_RULES.md, conform.mjs, scratch discipline, and the killed-levers bar; a declared floor was falsified within hours and filed at win-prominence.
+
 ### 3 · The V6 rehydration pipeline — research autoresearch
 
 *(private instance of the author — a fourteen-role document pipeline inside a
@@ -88,6 +99,11 @@ never sees the canon — the Gap in document form. This instance is the origin
 of the claim tiers (GR-2), of trace-or-delete (GR-9), of the "proposer never
 approves its own proposal" rule, and of the non-delegable human completion
 read that became **the door** (T6).
+
+> **At a glance** —
+> **objective:** fidelity across audiences — non-numeric; the frontier is a shrinking gap-count against the canon · **gate:** an adversarial reviewer with no goodwill who never sees the canon · **hard constraint:** no drift from canon — additivity only
+> **the Gap:** the reviewer's enforced blindness (the Gap in document form — no hash draw, honestly labelled) · **lenses:** fourteen roles rather than seven seats; same topology — one manifest writer, append-only critique ledger, chronicle per session · **canary:** the canon itself
+> **weight:** full, non-numeric · private · **the lesson it carries:** origin of the claim tiers (GR-2), trace-or-delete (GR-9), and the non-delegable human completion read that became **the door** (T6).
 
 ### 4 · privacy_pools_v2_mage — the fitted successor
 
@@ -111,6 +127,11 @@ instance mispredicted the new artifact in both directions; the *discipline*
 transferred exactly. Standing intent: the optimized, certificate-audited
 artifact feeds a future deployment's trusted-setup ceremony — the door for
 all of that is the First Person's (T6).
+
+> **At a glance** —
+> **objective:** R1CS constraints of a real upstream target (the 0xbow privacy-pools-core v2 suite), ↓ · **gate:** per-rewrite certificates + held-out points, with VOID-gated audits · **hard constraint:** witness-computability plus zero semantic drift from upstream
+> **the Gap:** Fiat-Shamir per round, as instance 2 · **lenses:** fold-deeper (exact reduction in an admissible family, census-first, pre-registered VOID check) ⊥ structure (measurement-only probes at ΔK=0) · **canary:** the upstream compiler's own optimized build
+> **weight:** full, **mechanically fitted** — the first instance whose config passes `engine/conform.mjs` and whose rounds run through the generic engine via `tools/bundle.mjs` · **the lesson it carries:** priors from a training instance mispredict a new artifact in both directions; the *discipline* transfers exactly.
 
 ### 5 · lexon_pvm — the grammar workshop
 
@@ -136,6 +157,66 @@ Lexon × 0xagentprivacy convergence run (5 letters, 8 axes, keystone axis
 `out/`. The A5 keystone claim — a Lexon text is at once readable contract,
 executable code, and lossless triple serialisation — is what the checker's
 round-trip stage makes mechanical.
+
+State after two runs (2026-07-11): coverage-debt 211 → 152, nine levers
+VALIDATED 8/8 across lexr1 and lexr2, and the instance's first MIRAGE — a
+scale-up whose gate arithmetic was perfect and whose hard-constraint
+self-certification was false (one em dash copied from the census term; the
+critic classed it noise and filed no kill). The register-restricted stress
+test (OT-2) closed with the discovery that escrow arithmetic is the subset's
+only native quantity carrier: conservation, ordering, and impossibility ride
+escrow clause shape.
+
+Same day, the gate hardened and grew a public pole. OT-3 (mutation-probe
+falsifiability) closed by construction: held-out T-148 had proved the checker
+validates a claim and its structural inverse with direction living only in
+Notes prose, so `tools/relation_check.mjs` now takes a machine-readable
+relation claim per entry (gate / ordering / conjunction / absence — direction
+IS an absence claim), builds the claim's minimal structural negation as a
+mutated twin that still passes the base gate, and requires the claim to fail
+on the twin. Registered as `objective.canary`; the instance's one standing
+conform advisory cleared. On top of it sits `tools/blocks_emit.mjs`: every
+folded entry renders to a **structured language block** (lex text + typed
+triples + promise edges + emit-time-verified relation claim + provenance),
+59 blocks committed with Cypher renderings whose absence claims are
+re-runnable zero-row constraints — the deterministic write-path unit for a
+shared public knowledge graph (the bonfires connection), with the boundary
+held one-way: nothing in the grammar assumes the graph exists
+(`notes/BONFIRES_STRUCTURED_BLOCKS.md`). Run lexr3 (OT-4) then proved the
+hardened gate in the field: three lenses, three structural VALIDATEDs, zero
+mirage, every entry and held-out RELATION PASS — including the first
+**spell-grammar** lever (a seat card or skill trigger IS a promise bundle),
+whose six authoring conventions (SG-1..SG-6: modal mapping, recital as
+shared root, trust gates that forbid self-approval, single-officiant
+ceremony chains, stakes as escrow with irreversibility as absence, bilateral
+formation as defined-predicate conjunction) folded into SPELL_GRAMMAR.md.
+Coverage-debt 152 → 123; two critic-flagged held-outs refused at fold (scope
+inflation: invented roles). Then the endgame move: **this skeleton's own
+constitution — TRUSTS T1-T6 and all seven seat cards — now exists as thirteen
+verified Lexon promise bundles** in the instance's `artifact/SPELLS/`
+(13/13 CORPUS PASS: base gate plus every relation claim surviving its
+mutated twin; T2's separation bound expressed as pure topology, an absence
+claim — no transfer clause routes anything to the Mage; T6's door as a gate
+no seat may self-declare). Keystone-authored and honestly labelled: not
+census terms, metric unmoved, no Gap draw — a loop round there would have
+been mis-gated by construction, the universe-builder's lesson applied in
+advance. The operator result, lexon your own dual agents, is a verified
+corpus; its projections (skill, SPECIALISATION spell layer, bonfires packet)
+wait at the door. lexr4 then ran overnight under a binding claim-type
+diversity rule: four complete rounds, **eleven levers VALIDATED 8/8 and the
+instance's first structural kill** (K-2: a spell recipe honestly non-general
+on zero-party terms — its own cast rule cited a prior fold refusal as
+precedent — plus a second em-dash self-certification catch). The critics'
+round-level finding: the three lenses have converged on ONE claim-derivation
+charter validated eleven times, so the next round merges to a single charter
+with round-level disjointness binding. Coverage-debt 123 → 64 (the census 70%
+covered, 147 public blocks, 91 carrying verified claims). Instance head
+`10dad55`.
+
+> **At a glance** —
+> **objective:** coverage-debt — frozen census terms not yet expressed as gate-passing controlled-grammar entries, ↓ · **gate:** the spec-checker — parse → triple round-trip → role binding → promise typing (regime label honest: the real compiler is unpublished) — plus the mutation probe: every entry's relation claim must survive its mutated twin · **hard constraint:** every entry passes the checker built from attested lexon.org samples
+> **the Gap:** hash the proposal (recipe + worked entries); draw 5 uncovered terms the assayer must express from the recipe alone, plus 3 covered regressions — generality is the only winning strategy · **lenses:** grammar-forward ⊥ canon-forward ⊥ spell-grammar (promoted at lexr3) · **canary:** the relation fixture authored together with its claims — passes the full pipeline by construction
+> **weight:** full, mechanically fitted · public repo · **the lesson it carries:** per-term memorization is this domain's mirage; the first MIRAGE was perfect gate arithmetic wearing a false self-certification, and the T-148 inversion taught the gate to tell a fortress standing from a fortress fallen.
 
 ---
 
@@ -166,6 +247,11 @@ draw — Fiat-Shamir appears there as lore, not as mechanism. Its image of the
 door is the one worth stealing: *two mirrors make a door — the Swordsman
 reflects, the Mage reflects, and where the reflections meet, the First Person
 walks through.*
+
+> **At a glance** —
+> **objective:** a Φ product over a bilateral consent record · **gate:** a `beatsFrontier` predicate + cliff-watcher — running end-to-end **only on a mock bus** (GR-5: built prototype, not shipped result) · **hard constraint:** both parties hold identical immutable copies of the record
+> **the Gap:** registry + unlock lattice + constellation hash — **not** a Fiat-Shamir draw; Fiat-Shamir appears as lore, not mechanism · **lenses:** the split is literal — two browser extensions that cannot reach into each other · **canary:** the proffered baseline terms
+> **weight:** loop built, mock-only · private · **the lesson it carries:** T4 made executable — invitation before proposal; *two mirrors make a door.*
 
 ### 7 · FedWiki core flow + the Gatehouse — a publishing loop, human-gated
 
@@ -198,6 +284,11 @@ optimization kind:
   certifies itself is the one you cannot trust.* Neither token opens anything
   alone.
 
+> **At a glance** —
+> **objective:** presence/absence gap-count — what canon is not yet federated · **gate:** a deterministic integrity gate (empty pages, broken links, missing JSON siblings, dev-host leaks) — an auditor, not an adversary; **the real gate is a person** · **hard constraint:** nothing sealed crosses; git stays the source of truth
+> **the Gap:** none, deliberately — the human gate is the whole of the verification · **separation mechanism:** the cookie broker — an agent receives host-scoped write capability while the owner credential never enters its context; delegation without disclosure · **canary:** a known-good page through the same build
+> **weight:** discovery loop · public site · **the lesson it carries:** what the architecture looks like when the prover is pass/fail integrity — and why that is correct for this job.
+
 ### 8 · The dream cycle — the measure seat at universe scale
 
 *(public tooling; the dreams are the author's working ledgers)*
@@ -213,6 +304,11 @@ estimation is not an attack; vendored work is not authored) and a relevance
 triage that refuses to treat a version-named directory as a gap. Its headline
 — *every current repo dreams about itself overnight* — describes a chronicle
 that travels with the code and is read each morning to resume.
+
+> **At a glance** —
+> **objective:** none — gap surfacing across a whole corpus · **gate:** the First Person's tick, item by item · **hard constraint:** honest-framing guards held as hard invariants — resource estimation is not an attack; vendored work is not authored
+> **the Gap:** none — this is the measure seat grown to fleet scale, and it says so · **lenses:** relevance triage (a version-named directory is not a gap) · **canary:** n/a — nothing is graded
+> **weight:** measure-only · **the lesson it carries:** the front of the loop can stand alone when the human is the whole gate; it proposes, never fills without a tick, never pushes without an ask.
 
 ---
 
@@ -237,6 +333,11 @@ that fails if the runtime table drifts from the gate's independent copy. What
 it does **not** have is a solver: the fold scalar is a readout, never a
 control, and the dual agents are *depicted* (Sword ⊥ Mage) rather than
 executed. It is the picture of the structure the other seven are seated in.
+
+> **At a glance** —
+> **objective:** none — a visualization of the structure itself · **gate:** the build gate asserts 42 slots, 6 heptads, the class split, per-slot axis vertices, and the anchor sums, with a runtime watchdog against an independent copy · **hard constraint:** the fold scalar is a readout, never a control
+> **the Gap:** none — it checks structure, not results · **lenses:** depicted (Sword ⊥ Mage), not executed — there is no solver, and it says so · **canary:** the stated canon identity `neg(bnot(x)) = succ(x)` itself
+> **weight:** structure layer · public · **the lesson it carries:** structure you cannot check is decoration; the lattice is structure because a gate can fail on it.
 
 ---
 
@@ -285,6 +386,38 @@ or you will not be able to tell a bad candidate from an impossible gate.
 
 *A harness is for adversaries. An auditor is for facts. Knowing which you have
 is the first design decision, and the cheapest one to get wrong.*
+
+> **At a glance** —
+> **objective (historical):** words of a corpus map, ↓ · **gate:** 8 comprehension claims hashed from the map — drawn from 612 KB of sources a 7 KB map was never responsible for carrying; **the feasible set was empty** · **hard constraint:** every claim traces
+> **the Gap:** a sampled draw it never needed — the map makes ~100 claims and every one is enumerable · **lenses:** by-container ⊥ by-content — both refused at 0/8 while both beat the metric · **canary:** MISSING, and that was the diagnosis: without one you cannot tell a bad candidate from an impossible gate. `objective.canary` was born here.
+> **weight:** RETIRED — replaced by `universe/audit.mjs`, exhaustive and agent-free, which found on its first run what two rounds and ~1.4M tokens could not · **the lesson it carries:** a harness is for adversaries; an auditor is for facts.
+
+---
+
+## Invited vacancies — a seat held open is a trust doing work
+
+### 11 · hearthold — the House of Archon's slot
+
+*(scaffolded at `../hearthold_mage` — deliberately unfilled)*
+
+The household sovereignty stack — the Warden who guards, Recall who remembers,
+the Knowledge Portal that faces outward, the factor-2 step-up ladder — has a
+harness seat scaffolded and **held open for the House of Archon**. Nothing in
+it conforms, and nothing should: the config wears its TODOs, the frontier has
+no baseline, and the gate's refusal is the mechanism that keeps the seat warm.
+This is trust T4 made structural — *an invitation establishes the acceptance
+relationship before any specific proposal* — and the proposal here is the
+acceptor's to make. `SLOT.md` in the instance carries the invitation: three
+candidate objective directions (step-up-ladder coverage · Recall fidelity ·
+Portal disclosure-minimization), the five answers that constitute acceptance,
+and a **proposed** seating at V60 (burning Protection · Delegation · Memory ·
+Connection, forcing anchor V3 = Computation + Value — *the hearth burns care,
+not compute*), re-derivable from whatever objective is actually accepted.
+
+> **At a glance** —
+> **objective:** OPEN — defining it IS accepting the seat (ADOPTION.md Part II, the five answers) · **gate:** OPEN · **hard constraint:** OPEN
+> **the Gap:** OPEN — and if the accepted claim space turns out enumerable, an auditor is a valid acceptance too (see #9) · **lenses:** OPEN · **canary:** OPEN
+> **weight:** invited vacancy — conform REFUSES the instance today, by design · **the lesson it carries:** a slot the gate holds open cannot be quietly squatted; the seat stays honest until someone signs their name to its objective.
 
 ---
 

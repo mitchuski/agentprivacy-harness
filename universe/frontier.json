@@ -1,6 +1,6 @@
 {
   "authority": "This file is the sole authority for the universe-builder's numbers (GR-1). Prose cites it; prose never restates it. Only the keystone writes it.",
-  "updated": "2026-07-10",
+  "updated": "2026-07-12",
   "instance": "universe-builder",
   "objective": {
     "metric": "words (historical; retained for the record, no longer an optimization target)",

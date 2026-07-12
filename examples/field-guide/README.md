@@ -1,4 +1,9 @@
-# Toy harness: field-guide
+# The spar: field-guide
+
+A **spar** is a practice bout between the Swordsman and the Mage — every
+strike real, nothing at stake but the frontier. First rung of the runtime
+tiers: **spar → duel → arena → open world** (see the root README — the duel
+is reserved for a formal runtime to come).
 
 Compress a fact-dense document without losing any facts — a domain anyone can
 inspect by eye, with a gate that is genuinely un-tunable.
@@ -71,7 +76,7 @@ sha256sum proposal_canon.json          # must equal seedHex in gap.json
 If the digest matches, the 8 questions provably derive from the proposal's own
 content, and soulbae could not have known them while writing it. If the file
 is missing or the digest differs, the round is void and soulbis returns
-`BLOCKED` — which is exactly what happened the first time this toy was run,
+`BLOCKED` — which is exactly what happened the first time this spar was run,
 before the Gap was required to persist those bytes.
 
 ## The fold (keystone, in the main session)
@@ -82,7 +87,7 @@ second) → file the killed-lever drafts and the chronicle → conform green
 again.
 
 Note what the fold does **not** do: it never overwrites `GUIDE.md`. The
-original stays as the Gap's fact source. That is not an accident of the toy —
+original stays as the Gap's fact source. That is not an accident of the spar —
 it is the PVM shape showing through. The original is the private ledger `X`
 that soulbis alone reads in full; the compressed guide is the authorized
 disclosure that soulbae projects outward. Publishing it anywhere is G4, and

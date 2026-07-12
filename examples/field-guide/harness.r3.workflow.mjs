@@ -81,7 +81,7 @@ async function runHarness(config, rt, runArgs = {}) {
   // First Person — never by the proposer (T2).
   //
   // ctx.runDir is ROUND-SCOPED: runs/<runId>/<roundId>/. It must be, and the
-  // toy's first real run proved why. Two rounds whose proposers independently
+  // spar's first real run proved why. Two rounds whose proposers independently
   // mint the same leverId used to land in the SAME directory —
   // runs/<runId>/p<i>-<leverId> — and the later round silently overwrote the
   // earlier round's proposal_canon.json, destroying an audit trail a verdict
@@ -195,7 +195,7 @@ async function runHarness(config, rt, runArgs = {}) {
   }
 }
 
-// harness.r3.config.mjs — the OT-2 round for the field-guide toy.
+// harness.r3.config.mjs — the OT-2 round for the field-guide spar.
 // Two targeted finders, one round:
 //   1. COMPOSED PASS — line-editor tightening over artifact/GUIDE.compressed.md
 //      (the folded frontier best), targeting below it at gate 8/8.

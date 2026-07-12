@@ -75,7 +75,7 @@ if (harnessDir) {
 
     // ---- the canary ----------------------------------------------------
     // A gate with no artifact known to pass it cannot distinguish a bad
-    // candidate from an impossible gate. The field-guide toy is safe by
+    // candidate from an impossible gate. The field-guide spar is safe by
     // accident: its questions are drawn FROM the original, so the original
     // scores 8/8 by construction. The universe-builder had no canary, and
     // both of its lenses scored 0/8 against a gate no candidate could pass

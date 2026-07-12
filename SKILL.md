@@ -65,6 +65,6 @@ mirage a named verdict rather than a surprise.
 `GROUND_RULES.md` (GR-1..GR-10) · `SEAT_CONTRACT.md` (the config interface) ·
 `seats/` (seven cards) · `engine/dual_agent_loop.mjs` (the loop) ·
 `engine/conform.mjs` (the gate that proves the algebra rather than asserting
-it) · `examples/field-guide/` (a runnable toy) · `SPECIALISATION.md`
+it) · `examples/field-guide/` (a runnable spar) · `SPECIALISATION.md`
 (personas, spells, and the Game of 42 station pattern) · `HARNESS_PATHS.md`
 (eight real instances, grouped by how much of the loop each runs).

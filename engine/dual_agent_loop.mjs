@@ -66,7 +66,7 @@ export async function runHarness(config, rt, runArgs = {}) {
   // First Person — never by the proposer (T2).
   //
   // ctx.runDir is ROUND-SCOPED: runs/<runId>/<roundId>/. It must be, and the
-  // toy's first real run proved why. Two rounds whose proposers independently
+  // spar's first real run proved why. Two rounds whose proposers independently
   // mint the same leverId used to land in the SAME directory —
   // runs/<runId>/p<i>-<leverId> — and the later round silently overwrote the
   // earlier round's proposal_canon.json, destroying an audit trail a verdict

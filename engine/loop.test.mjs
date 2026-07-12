@@ -160,7 +160,7 @@ const proposalSet = { proposals: [{ leverId: 'lev-1' }] }
 }
 
 // ---- 7. the scratch path is round-scoped ----------------------------------
-// The toy's first real run (examples/field-guide/runs/r1) proved this: two
+// The spar's first real run (examples/field-guide/runs/r1) proved this: two
 // rounds' proposers both minted `line-editor-tighten-pass`, both wrote to
 // runs/r1/p1-line-editor-tighten-pass/, and the later round OVERWROTE the
 // earlier round's proposal_canon.json — destroying an audit trail a verdict

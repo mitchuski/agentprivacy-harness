@@ -1,4 +1,4 @@
-// harness.config.mjs — the field-guide toy instance.
+// harness.config.mjs — the field-guide spar instance.
 // Objective: minimize the word count of artifact/GUIDE.md while a held-out
 // 8-question comprehension gate stays 8/8. See README.md in this directory.
 

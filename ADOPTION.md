@@ -94,7 +94,7 @@ Ten embodiments in `HARNESS_PATHS.md` wear this skeleton over bodies that
 share nothing topically: quantum resource estimation, ZK constraint
 reduction, research-document rehydration, a controlled grammar, consent
 agreements, a publishing loop, a fleet-scale measure seat, a checked lattice
-— and the toy in this repo, whose frontier moved under two independent draws
+— and the spar in this repo, whose frontier moved under two independent draws
 and an exhaustive census. Same trusts, same ground rules, same verdict
 vocabulary, different configs.
 
@@ -155,7 +155,7 @@ State, in one paragraph: *witnesses are drawn from ⟨the reference⟩ by
 witness space comes from the **reference** (the original document, the spec,
 the input domain) — never from the candidate, never from the proposer. If you
 cannot write this paragraph, you do not have a harness yet; go back to
-step 0. The toy's version: number the original's ~40 facts, hash the
+step 0. The spar's version: number the original's ~40 facts, hash the
 proposal, draw 8 without replacement, demand 8/8.
 
 ### Step 3 · Pick two lenses that cannot be each other
@@ -190,7 +190,7 @@ delegates, whatever the topic.
 
 | domain | artifact | metric ↓ | the Gap draws from | hard constraint | canary |
 |---|---|---|---|---|---|
-| document compression (the toy) | the guide | words | the ORIGINAL's numbered facts | self-contained instructions | the original itself |
+| document compression (the spar) | the guide | words | the ORIGINAL's numbered facts | self-contained instructions | the original itself |
 | quantum circuits (shor_mage) | point-add circuit | qubits × Toffoli | witnesses hashed from the op stream | full clean run, zero failures | the unoptimized circuit |
 | ZK systems (tigzkp / pools_v2) | R1CS system | constraints | held-out evaluation points per round | witness-computability | the reference circuit |
 | research docs (V6 pipeline) | audience artifacts | fidelity gaps | an adversarial reviewer who never sees the canon | no drift from canon | the canon itself |

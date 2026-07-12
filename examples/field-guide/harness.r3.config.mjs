@@ -1,4 +1,4 @@
-// harness.r3.config.mjs — the OT-2 round for the field-guide toy.
+// harness.r3.config.mjs — the OT-2 round for the field-guide spar.
 // Two targeted finders, one round:
 //   1. COMPOSED PASS — line-editor tightening over artifact/GUIDE.compressed.md
 //      (the folded frontier best), targeting below it at gate 8/8.

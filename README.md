@@ -31,7 +31,7 @@ defects to date, every one invisible to inspection and obvious on execution,
 each fixed and pinned by a test or a prompt rule (an outage reported as an
 exhausted search; a gate that passed an unfilled config; a critic with no
 word for a bad gate; seats whose disk record was thinner than their return).
-The runnable toy has a real advancing frontier: its guide compressed from a
+The runnable spar has a real advancing frontier: its guide compressed from a
 730-word baseline to a 472-word validated best across four audited folds,
 each held to an 8/8 held-out gate on independent witness draws, the last two
 closed by an exhaustive fact census
@@ -59,7 +59,7 @@ accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply.
 2. **Read the constitution** — `TRUSTS.md` (the six trusts and where each one
    bites), then `GROUND_RULES.md` (GR-1..10, pasted into every seat at boot).
    These are the parts you should not change.
-3. **Run the toy** — a real round against `examples/field-guide/` (compress a
+3. **Run the spar** — a practice bout, with real strikes, against `examples/field-guide/` (compress a
    field guide; a hash-drawn 8-question gate must stay 8/8). In Claude Code,
    invoke the Workflow tool:
    ```
@@ -91,7 +91,7 @@ accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply.
    fill every TODO in its `harness.config.mjs` (the gate and the bundler both
    refuse a config still wearing them), then
    `node tools/bundle.mjs my/harness.config.mjs my/harness.workflow.mjs` and
-   run it exactly like the toy. `SEAT_CONTRACT.md` is the interface, and
+   run it exactly like the spar. `SEAT_CONTRACT.md` is the interface, and
    **`ADOPTION.md` is the map**: why the duality works on any topic, the
    harness-vs-auditor decision, the five answers that become your config, and
    six worked domain mappings. **Define the Gap first** — if you cannot say
@@ -102,7 +102,7 @@ accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply.
    `HARNESS_PATHS.md` shows ten real configs at every weight — and one seat
    held open by invitation, which is also a thing a harness can be.
 
-**Follow the worked example.** The toy's own history is the pathway walked
+**Follow the worked example.** The spar's own history is the pathway walked
 end to end: `examples/field-guide/frontier.json` records four audited folds
 (730 → 573 → 526 → 472, every step at gate 8/8, the last two closed by
 exhaustive census), its `chronicles/` tell each round verdict-first, and the
@@ -191,7 +191,21 @@ change anything. It is the part of this repo you should keep.
 Only the keystone writes the first three. Other seats *return* proposed
 entries — append-only ledgers do not survive concurrent writers.
 
-## The toy, in detail
+## The spar, in detail
+
+A **spar** is a practice bout between the Swordsman and the Mage — every
+strike real, nothing at stake but the frontier. It is the first rung of the
+**runtime tiers**, each a wider descriptive space for what a bout can be:
+
+| tier | the bout | stakes | existing instance |
+|---|---|---|---|
+| **the spar** 🤺 | practice, one workshop | its own frontier only | `examples/field-guide/` |
+| **the duel** | the formal bout — *reserved* | a result a counterparty will rely on: signed verdicts, minted artefacts exchanged | the formal runtime to come |
+| **the arena** 🏟️ | against a live external benchmark, other fighters on the board | a public leaderboard the workshop does not control | shor_mage vs ecdsa.fail |
+| **the open world** 🌍 | against a real upstream, in the wild | consequences beyond any ledger | privacy_pools_v2 vs the 0xbow suite; hearthold, when its seat is taken |
+
+The trusts do not change between tiers — the door is the First Person's at
+every rung. What changes is who is watching, and what a VALIDATED costs.
 
 (Steps 1, 3, and 4 of the pathway, expanded.) Start with one command. It runs
 every gate this repo has, in the order you should trust them:
@@ -306,12 +320,12 @@ tools/bundle.mjs   config + engine → one self-contained workflow file
 tools/render_run.mjs   one run directory → one static run.html projection
 tools/console.mjs  the workshop console — a live, GET-only localhost window
 tools/mint_artefact.mjs  seal a validated run into a κ-labelled artefact, at the door
-examples/          the runnable toy
+examples/          the runnable spar
 universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks
 ```
 
 That last line is tested, not asserted. Clone the repo, `rm -rf universe`, and
-`node engine/conform.mjs`, the toy's gate, and `node engine/loop.test.mjs` all
+`node engine/conform.mjs`, the spar's gate, and `node engine/loop.test.mjs` all
 still pass.
 
 Everything above `universe/` is domain-neutral and always will be. That

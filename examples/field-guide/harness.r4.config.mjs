@@ -1,4 +1,4 @@
-// harness.r4.config.mjs — the OT-3 round for the field-guide toy.
+// harness.r4.config.mjs — the OT-3 round for the field-guide spar.
 // Both lenses compose over artifact/GUIDE.compressed.md — the folded frontier
 // best — targeting below it at gate 8/8 (critic's r3 projection: ~490):
 //   1. line-editor: residual sentence-level tightening of the folded text.

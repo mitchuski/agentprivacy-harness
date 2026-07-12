@@ -115,7 +115,7 @@ fitted**: it carries a `harness.config.mjs` satisfying `SEAT_CONTRACT.md`, its
 frontier exposes the `baseline`/`best` compat view pinned to its native ledger
 shape by `conformChecks` (so the two views cannot drift silently), and
 `node engine/conform.mjs <instance>` passes against it. Its rounds run through
-the generic engine via `tools/bundle.mjs` — the same loop that runs the toy
+the generic engine via `tools/bundle.mjs` — the same loop that runs the spar
 compresses a production ZK withdraw circuit with per-rewrite certificates.
 The two finder lenses are the pattern that emerged in practice: **fold-deeper**
 (exact reduction in an admissible family, census-first with a pre-registered

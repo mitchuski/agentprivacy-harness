@@ -125,7 +125,7 @@ simply omits it.
 **A gate with no artifact known to pass it cannot distinguish a bad candidate
 from an impossible gate.** Name one, in `objective.canary`.
 
-The toy is safe by accident: its 8 questions are drawn *from* `GUIDE.md`, so
+The spar is safe by accident: its 8 questions are drawn *from* `GUIDE.md`, so
 the uncompressed original answers all 8 by construction. The feasible set is
 provably non-empty, and every `MIRAGE` is therefore the candidate's fault.
 Take the canary away and a total failure becomes ambiguous — which is exactly
@@ -164,8 +164,8 @@ net-negative trade) collapses the whole. This pattern comes from the
 shor_mage instance, where the score is `avg executed Toffoli × peak qubits`.
 
 When one factor is a **binary gate** (pass/fail), the gate itself is the
-cliff-watcher: a fail is a zero, and a zero collapses the product. The toy
-example (`examples/field-guide/`) uses this form.
+cliff-watcher: a fail is a zero, and a zero collapses the product. The spar
+(`examples/field-guide/`) uses this form.
 
 ## The runtime adapter
 

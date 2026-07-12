@@ -59,12 +59,28 @@ mirage a named verdict rather than a surprise.
 - **The door is the First Person's.** Push, submit, publish, send — the
   harness stops in front of these and lists them. It never opens them.
 
+## κ as state — the holon layer
+
+A validated result seals into a **κ-addressed holon**: a record whose address is
+`sha256(canonicalJson(itself, minus the κ field))` — the City Key / sigil Law L5
+(never trusted, only re-derived). The mint produces them, the runtime feed
+self-addresses, and `tools/holon_audit.mjs` re-derives the whole mesh. Because
+verifying content-addressed holons is enumerable, that verifier is an **auditor,
+not a harness**: the harness mints the holons, the auditor verifies the mesh. One
+κ law (`tools/kappa.mjs`), computed identically everywhere, is the interoperability
+substrate — a holon minted here re-derives byte-for-byte anywhere else. See
+`HOLONS.md`.
+
 ## Map
 
+`RESEARCH.md` (the contribution — problem, claim, evidence, limits) ·
+`HOLONS.md` (κ-addressed interoperability, and why it is an auditor) ·
 `TRUSTS.md` (the constitution — six trusts, and where each one bites) ·
 `GROUND_RULES.md` (GR-1..GR-10) · `SEAT_CONTRACT.md` (the config interface) ·
 `seats/` (seven cards) · `engine/dual_agent_loop.mjs` (the loop) ·
 `engine/conform.mjs` (the gate that proves the algebra rather than asserting
 it) · `examples/field-guide/` (a runnable spar) · `SPECIALISATION.md`
 (personas, spells, and the Game of 42 station pattern) · `HARNESS_PATHS.md`
-(ten real instances + one open seat, grouped by how much of the loop each runs).
+(ten real instances + one open seat, grouped by how much of the loop each runs) ·
+`tools/console.mjs` (the live workshop console) · `tools/frontier.html` (the
+interactive, contributable frontier, per workshop).

@@ -60,9 +60,11 @@ the keystone census unprompted.
 
 ## At the door (T6/GR-8) — the standing list
 
-- **Commits** — the entire arc is uncommitted over `48d017e`; no remote.
-- **The remote question** — fresh-history push to the public URL vs new repo
-  (open since 07-09).
+- **Commits + the remote — OPENED by the First Person at close-out.** On
+  Mitch's ruling: the arc committed as four moves over `48d017e`, remote set
+  to github.com/mitchuski/agentprivacy-harness, and `main` force-pushed over
+  the old `master` (`dc73b5b`, the superseded v1 with the shor-mage bundle)
+  — fresh history, head `d77395d`, the 07-09 question closed.
 - **Two artefacts** PREPARED, never carried.
 - **The invitation** — hearthold's SLOT.md awaits the House of Archon; a
   conversation between First Persons.

@@ -62,7 +62,8 @@
       { "workshop": "/covenant", "vertex": 55, "burns": ["all but Memory"], "forced_anchor": 8, "anchor_is": "Memory alone", "note": "consent's complement is what it refuses to retain" },
       { "workshop": "/vault", "vertex": 57, "burns": ["Protection", "Delegation", "Memory", "Value"], "forced_anchor": 6, "anchor_is": "Connection + Computation", "note": "the vault holds; it does not connect or compute" },
       { "workshop": "/holon", "vertex": 31, "burns": ["all but Protection"], "forced_anchor": 32, "anchor_is": "Protection alone" },
-      { "workshop": "/circle", "vertex": 12, "burns": ["Memory", "Connection"], "forced_anchor": 51, "resident_mage": null }
+      { "workshop": "/circle", "vertex": 12, "burns": ["Memory", "Connection"], "forced_anchor": 51, "resident_mage": null },
+      { "workshop": "hearthold", "vertex": 60, "burns": ["Protection", "Delegation", "Memory", "Connection"], "forced_anchor": 3, "anchor_is": "Computation + Value, exactly", "resident_mage": null, "developer": "House of Archon", "invitation": "../hearthold_mage/SLOT.md — a T4 invitation; the conform gate refusing the unfilled config IS the slot held open", "note": "The hearth burns care, not compute; what it refuses to become is a raw ledger. Seating PROPOSED at invitation, re-derivable from the accepted objective's actual burns." }
     ],
     "frontier": {
       "named": 18,

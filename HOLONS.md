@@ -55,9 +55,34 @@ A holon references another **by κ**. Two kinds of edge:
   > it.* An unsigned edge is a candidate, not a result — a mirage at the social
   > layer.
 
+  **IMPLEMENTED** (`tools/vrc.mjs`): an edge is `{ target: <κ>, relation, by:
+  <did:key>, sig }`. The signature is real **ed25519** (`node:crypto`, zero
+  dependencies) over the exact tuple `(source κ, target κ, relation)` — move any
+  of the three and it no longer verifies. The signer is content-addressed too:
+  an ed25519 public key encoded as a proper `did:key:z6Mk…` (multicodec
+  `0xed01` + base58btc), so the whole edge is self-certifying and interoperates
+  with the DID ecosystem. Keys are ephemeral by design (the amnesia protocol):
+  sign once, keep the signature and the public `did:key`, discard the private
+  key — the signature outlives the key.
+
 A relational edge is verified in two deterministic steps: both κ endpoints
-re-derive, and the signature (when present) checks. Both are facts, not
-judgements — which is the whole point of the next section.
+re-derive, and the signature checks against the signer's `did:key`. A valid
+signature **mints** the edge; no signature is a **proposal**; a signature that
+does not verify is a **failure**. All three are facts, not judgements.
+
+**Edges are relations, not identity.** A holon's `edges` field is excluded from
+its own κ preimage (`tools/kappa.mjs`), so a holon's address stays stable as it
+accrues signed edges — otherwise signing an edge whose source is this holon's κ
+would change that very κ.
+
+### The identity application
+
+A signed relational edge is exactly a **delegation between agents**, and that is
+the substrate the House of Archon identity runtime seats on (`../hearthold_mage/
+SLOT.md`): a `did:cid` identity is a holon (content-addressed), a `did:key` is
+its signer, and a delegation — *this agent may act for that one* — is a signed
+κ→κ edge the mesh auditor mints or rejects. `did:cid` = a κ-address; the VRC =
+the delegation. The identity runtime is this layer, named for people.
 
 ## The call: this layer is an AUDITOR, not a harness
 
@@ -140,9 +165,11 @@ sites multiply.
    the auditor verifies end to end. Because `kappa.mjs` lives in the shared core,
    this reaches **every instance — lexon, the pools, hearthold — the moment it
    re-bundles**: one κ, computed the same everywhere, as the state.
-6. **Relational edges with real signatures** (the VRC) — so cross-party holon
-   interop is verifiable, not just single-party integrity. This is the substrate
-   `hologram-technologies` seats on.
+6. **Relational edges with real signatures** (the VRC) — **DONE** (`tools/vrc.mjs`):
+   ed25519 signed κ→κ edges, signer as `did:key`, verified by the mesh auditor
+   (mint / propose / fail), pinned by a forge-detection test. Cross-party holon
+   interop is now verifiable, not just single-party integrity — and this is the
+   `did:cid` delegation substrate the hearthold identity runtime seats on.
 7. **Map the layer across the corpus** — a κ / holon node and edges in the
    spellweb graph, a reference in the docs, and the skill, so the corpus speaks
    one content-addressing law. (Cross-repo; the First Person's door.)

@@ -24,6 +24,7 @@ import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve, relative } from 'node:path'
 import { kappaOf, verifyKappa } from './kappa.mjs'
+import { verifyEdge } from './vrc.mjs'
 
 const sha256File = (p) => { try { return createHash('sha256').update(readFileSync(p)).digest('hex') } catch { return null } }
 const readJson = (p) => { try { return JSON.parse(readFileSync(p, 'utf8')) } catch { return null } }
@@ -76,15 +77,18 @@ export function auditHolons(root) {
       }
     }
 
-    // 3. relational edges — explicit κ→κ refs (growth path; present when a holon
-    //    declares `refs: [κ, ...]` or edges with a `kappa`/`targetKappa` field)
-    const refs = []
-    if (Array.isArray(holon.refs)) for (const r of holon.refs) refs.push(typeof r === 'string' ? { kappa: r } : r)
-    if (holon.universe && Array.isArray(holon.universe.edges)) for (const e of holon.universe.edges) if (e && e.targetKappa) refs.push({ kappa: e.targetKappa, signed: !!e.signature })
-    for (const r of refs) {
+    // 3. relational edges (the VRC) — signed κ→κ references on holon.edges.
+    //    A reference PROPOSES; a valid signature (against the signer's did:key)
+    //    MINTS. A signature that does not verify is a failure, not a proposal.
+    const sourceKappa = holon['κ']
+    for (const edge of (Array.isArray(holon.edges) ? holon.edges : [])) {
       relEdges++
-      if (r.signed) minted++; else proposed++
-      if (r.kappa && !kappaSet.has(r.kappa) && !r.external) warnings.push(`${rel}: relational edge → ${r.kappa} not present in this mesh (external? mark it so)`)
+      if (edge && edge.sig) {
+        const v = verifyEdge(sourceKappa, edge)
+        if (v.minted) minted++
+        else errors.push(`${rel}: relational edge → ${edge.target} carries a signature that does not verify (by ${edge.by || '?'}: ${v.error || 'invalid'})`)
+      } else proposed++
+      if (edge && edge.target && !kappaSet.has(edge.target) && !edge.external) warnings.push(`${rel}: relational edge → ${edge.target} not present in this mesh (mark it external if it lives elsewhere)`)
     }
   }
 

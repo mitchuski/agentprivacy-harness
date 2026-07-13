@@ -34,9 +34,15 @@ export function sha256Hex(str) {
 
 // the κ-label of a holon: sha256 over its canonical bytes, with the κ field
 // (and any extra excluded keys) removed from the preimage.
+//
+// The `edges` field is ALWAYS excluded: relations are not identity. A holon's
+// address is its content, and it must stay stable as it accrues signed
+// relational edges (the VRC — see tools/vrc.mjs, HOLONS.md). Otherwise signing
+// an edge whose source is this holon's κ would change that very κ.
 export function kappaOf(holon, exclude = []) {
   const clone = { ...holon }
   delete clone['κ']
+  delete clone['edges']
   for (const k of exclude) delete clone[k]
   return 'sha256:' + sha256Hex(canonicalJson(clone))
 }

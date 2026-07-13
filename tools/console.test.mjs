@@ -13,7 +13,7 @@
 //
 // Runs in a scratch copy under the OS temp dir; never touches the repo.
 
-import { mkdtempSync, cpSync, readFileSync, writeFileSync, rmSync, readdirSync } from 'node:fs'
+import { mkdtempSync, cpSync, readFileSync, writeFileSync, rmSync, readdirSync, mkdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
@@ -21,6 +21,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
 import { gatherRuns, deriveKappa } from './console.mjs'
 import { buildFeed } from './emit_feed.mjs'
+import { kappaOf } from './kappa.mjs'
+import { keypair, signEdge, verifyEdge } from './vrc.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = resolve(join(here, '..'))
@@ -111,6 +113,34 @@ try {
     const s = feed.movingCeiling.series
     return s.length >= 2 && s[s.length - 1].value === fr.best.metric && s[0].ratio >= s[s.length - 1].ratio && s[s.length - 1].ratio <= 1
   })(), 'the emitted R(t) descent does not end at the folded best')
+
+  // ---- 5. the VRC: a signed relational edge mints; tampering breaks it ------
+  const kp = keypair()
+  const HA = { holon: 'vrc-test', tag: 'A' }; HA['κ'] = kappaOf(HA)
+  const HB = { holon: 'vrc-test', tag: 'B' }; HB['κ'] = kappaOf(HB)
+  const edge = signEdge(HA['κ'], { target: HB['κ'], relation: 'validated_by' }, kp)
+  check('a signed VRC edge verifies (minted)', verifyEdge(HA['κ'], edge).minted,
+    'signEdge/verifyEdge round-trip failed')
+  check('a tampered edge target breaks the signature', !verifyEdge(HA['κ'], { ...edge, target: 'sha256:' + '0'.repeat(64) }).ok,
+    'moving the target did not break the signature')
+  check('the signer is a real ed25519 did:key (z6Mk…)', edge.by.startsWith('did:key:z6Mk'),
+    `by = ${edge.by}`)
+  const relLeak = { ...HA }; delete relLeak['κ']; relLeak.edges = [edge]
+  check('edges do not change a holon κ (relations are not identity)', kappaOf(relLeak) === HA['κ'],
+    'the edges field leaked into the κ preimage — a holon address must be stable as it accrues edges')
+
+  // end to end: two holons, a signed edge between them, verified by the auditor
+  const vdir = join(tmp, 'vrc-mesh')
+  mkdirSync(vdir, { recursive: true })
+  writeFileSync(join(vdir, 'A.holon.json'), JSON.stringify({ ...HA, edges: [edge] }))
+  writeFileSync(join(vdir, 'B.holon.json'), JSON.stringify(HB))
+  const vPass = spawnSync(process.execPath, ['tools/holon_audit.mjs', vdir], { cwd: root, encoding: 'utf8' })
+  check('holon_audit mints a signed edge across a mesh', vPass.status === 0 && /1 minted/.test(vPass.stdout),
+    ((vPass.stdout || '') + (vPass.stderr || '')).slice(0, 200))
+  writeFileSync(join(vdir, 'A.holon.json'), JSON.stringify({ ...HA, edges: [{ ...edge, sig: (edge.sig[0] === 'A' ? 'B' : 'A') + edge.sig.slice(1) }] }))
+  const vFail = spawnSync(process.execPath, ['tools/holon_audit.mjs', vdir], { cwd: root, encoding: 'utf8' })
+  check('holon_audit catches a forged edge signature', vFail.status !== 0 && /signature does not verify/.test((vFail.stdout || '') + (vFail.stderr || '')),
+    'a forged edge signature passed the mesh audit')
 } finally {
   rmSync(tmp, { recursive: true, force: true })
 }

@@ -349,7 +349,8 @@ tools/emit_feed.mjs    the runtime feed — a run's produced math (moving ceilin
 tools/frontier.html    the frontier widget — an interactive, per-workshop descent, embeddable in the districts
 tools/mint_artefact.mjs  seal a validated run into a κ-labelled artefact, at the door
 tools/kappa.mjs    the one κ law — content-addressing shared by every producer and verifier
-tools/holon_audit.mjs  the mesh auditor — re-derive every κ, re-hash every edge (HOLONS.md)
+tools/vrc.mjs      relational edges — ed25519 signed κ→κ, signer as did:key (a reference proposes, a signature mints)
+tools/holon_audit.mjs  the mesh auditor — re-derive every κ, re-hash every edge, verify every signature (HOLONS.md)
 examples/          the runnable spar
 universe/          ONE PROJECT'S CORPUS — delete it and nothing breaks
 ```

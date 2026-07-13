@@ -123,7 +123,10 @@ const artefactProposals = withVerdicts.map(p => ({
   seedHex: p.recorded,
   derivedSha256: p.derived,
   hashState: p.hashState,
-  verdict: { status: p.verdict.status, metric: p.verdict.metric, gateResult: p.verdict.gateResult },
+  // coverage travels with the seal (D2): a downstream verifier sees exactly
+  // what a VALIDATED bought — CENSUS (every witness) or SAMPLE n/N with its
+  // single-omission detection probability. A sample is never dressed as a proof.
+  verdict: { status: p.verdict.status, metric: p.verdict.metric, gateResult: p.verdict.gateResult, coverage: p.verdict.coverage || null },
   verdictSha256: sha256File(join(p.dir, 'verdict.json')),
 }))
 
@@ -148,7 +151,7 @@ if (instDir.startsWith(repoRoot) && existsSync(uniPath)) {
       title: `${instName} ${runId} Artefact`,
       story: [
         { type: 'paragraph', text: chronicle && chronicle.frontmatter && chronicle.frontmatter.verdict || 'sealed harness run' },
-        { type: 'code', text: artefactProposals.map(p => `${p.leverId}: seed ${p.seedHex} re-derives ${p.hashState} · ${p.verdict.status} ${p.verdict.metric ?? ''}`).join('\n') },
+        { type: 'code', text: artefactProposals.map(p => { const cov = p.verdict.coverage; const covLabel = cov ? ` · ${cov.mode === 'census' ? `CENSUS ${cov.N}/${cov.N}` : `SAMPLE ${cov.N} (detection ${cov.detection})`}` : ''; return `${p.leverId}: seed ${p.seedHex} re-derives ${p.hashState} · ${p.verdict.status} ${p.verdict.metric ?? ''}${covLabel}` }).join('\n') },
       ],
     },
     gatehouse: { eligible: true, note: 'wrapping this bundle in a sigil-gate is a First Person ceremony (agentprivacy-guide-gatehouse)' },

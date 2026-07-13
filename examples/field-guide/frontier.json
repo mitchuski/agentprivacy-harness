@@ -16,11 +16,12 @@
     "leverIds": ["r4-compose-line-edit"],
     "evidence": "composed line-edit over the folded 526 text: VALIDATED 8/8 (draw F14/F10/F9/F22/F29/F16/F28/F2, seed re-derived by prover AND keystone) AND keystone exhaustive census 2026-07-11: all 32 original facts (F1..F32) recoverable — the critic's named converter for probe-limited, satisfied. Estimate hit exactly (472→472). Scratch: runs/r4/r4.1/p1-r4-compose-line-edit/. Folded to artifact/GUIDE.compressed.md. Prior best 526 evidence: see closedTargets OT-2/OT-3 and chronicles"
   },
+  "coverageNote": "D2/C4 backfill (2026-07-13): each fold is labelled by what its gate actually bought. CENSUS = every one of the 32 facts was probed (detection 1.0). SAMPLE = a hash-drawn 8/32 only, whose detection of a single dropped fact is 8/32 = 0.25 — a weaker fold, kept at win-prominence, NOT retroactively upgraded. Only the 573 fold was sample-closed; 526 and 472 were census-closed.",
   "history": [
     { "metric": 730, "date": "2026-07-09", "lever": null, "note": "baseline — the moving ceiling's start" },
-    { "metric": 573, "date": "2026-07-11", "lever": "restructure-merge-terse-prose", "target": "OT-1", "chronicle": "chronicles/2026-07-11_keystone-fold-573.md" },
-    { "metric": 526, "date": "2026-07-11", "lever": "telegraphic-bullets (two disjoint draws + 32/32 census)", "target": "OT-2", "chronicle": "chronicles/2026-07-11_keystone-fold-526.md" },
-    { "metric": 472, "date": "2026-07-11", "lever": "r4-compose-line-edit", "target": "OT-3", "chronicle": "chronicles/2026-07-11_keystone-fold-472.md" }
+    { "metric": 573, "date": "2026-07-11", "lever": "restructure-merge-terse-prose", "target": "OT-1", "coverage": { "mode": "sample", "N": 32, "n": 8, "detection": 0.25 }, "coverageNote": "VALIDATED_SAMPLE: closed on an 8/32 hash-drawn gate (one independent draw); detection of a single omission = 0.25. Not census-verified.", "chronicle": "chronicles/2026-07-11_keystone-fold-573.md" },
+    { "metric": 526, "date": "2026-07-11", "lever": "telegraphic-bullets (two disjoint draws + 32/32 census)", "target": "OT-2", "coverage": { "mode": "census", "N": 32, "n": 32, "detection": 1.0 }, "coverageNote": "VALIDATED_CENSUS: keystone exhaustive census, all 32 facts recoverable.", "chronicle": "chronicles/2026-07-11_keystone-fold-526.md" },
+    { "metric": 472, "date": "2026-07-11", "lever": "r4-compose-line-edit", "target": "OT-3", "coverage": { "mode": "census", "N": 32, "n": 32, "detection": 1.0 }, "coverageNote": "VALIDATED_CENSUS: keystone census 32/32.", "chronicle": "chronicles/2026-07-11_keystone-fold-472.md" }
   ],
   "openTarget": {
     "id": "OT-4",

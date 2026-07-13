@@ -22,6 +22,13 @@ export default {
 
   door: 'first-person', // T6 — leave exactly as is; conform.mjs checks the literal
 
+  // The gate's population and mode (D2). N = the size of your witness bank.
+  // If N is small and enumerable, use 'census' — probe every witness; a sample
+  // that misses one is theatre, and conform.mjs REFUSES 'sample' at
+  // N <= censusThreshold. Only sample when the bank is genuinely too large to
+  // check in full, and then print the detection probability next to the verdict.
+  gate: { N: 0 /* TODO — your witness-bank size */, count: 8, mode: 'census', censusThreshold: 200 },
+
   heldApartRule:
     'You are BLIND to verification witnesses (T2/GR-4). Witnesses are derived ' +
     'by hashing your proposal artifact after you finish; you never see, choose, ' +

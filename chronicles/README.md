@@ -15,6 +15,7 @@ have to rediscover.
 | date | chronicle | verdict |
 |---|---|---|
 | 2026-07-10 | [the harness audits itself](2026-07-10_the-harness-audits-itself.md) | Three rounds, nothing validated, six defects found — every one by running |
+| 2026-07-13 | [the hardening](2026-07-13_the-hardening.md) | The review's four load-bearing defects closed in code, verified, and validated on a live salted-census spar (r5) — best 440, not folded |
 
 ## The instances' chronicles
 

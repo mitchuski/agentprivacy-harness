@@ -37,6 +37,7 @@ if (!existsSync(runsDir)) { console.error(`no runs/ directory under ${instanceDi
 const readText = (p) => { try { return readFileSync(p, 'utf8') } catch { return null } }
 const readJson = (p) => { const t = readText(p); if (t == null) return null; try { return JSON.parse(t) } catch { return { __unparseable: true, __raw: t.slice(0, 400) } } }
 const sha256File = (p) => { try { return createHash('sha256').update(readFileSync(p)).digest('hex') } catch { return null } }
+const sha256Str = (s) => createHash('sha256').update(String(s), 'utf8').digest('hex')
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 // ---- gather one run ----
@@ -61,8 +62,22 @@ function gatherRun(runId) {
     .map(({ label, dir }) => {
       const canonPath = join(dir, 'proposal_canon.json')
       const gap = readJson(join(dir, 'gap.json'))
-      const derived = sha256File(canonPath)
+      const derived = sha256File(canonPath)   // sha256 of the saved canon bytes
       const recorded = gap && typeof gap.seedHex === 'string' ? gap.seedHex.toLowerCase() : null
+      // SALTED runs (D1): the seed is NOT sha256(canon) — it folds a salt the
+      // proposer never saw. sha256(canon) must equal hProposal, and the seed
+      // must re-derive as sha256(hSource || hProposal || salt). LEGACY runs
+      // (pre-salt): the seed IS sha256(canon); shown with a legacy-seed badge.
+      const salted = !!(gap && gap.salt && gap.hProposal)
+      let hashState, reSeed = null, canonToHProposal = null
+      if (salted) {
+        canonToHProposal = derived && gap.hProposal ? (derived === String(gap.hProposal).toLowerCase() ? 'MATCH' : 'MISMATCH') : 'INCOMPLETE'
+        reSeed = sha256Str(String(gap.hSource ?? '') + gap.hProposal + gap.salt)
+        const seedOk = recorded ? (reSeed === recorded ? 'MATCH' : 'MISMATCH') : 'INCOMPLETE'
+        hashState = (canonToHProposal === 'MATCH' && seedOk === 'MATCH') ? 'MATCH' : (canonToHProposal === 'MISMATCH' || seedOk === 'MISMATCH') ? 'MISMATCH' : 'INCOMPLETE'
+      } else {
+        hashState = derived && recorded ? (derived === recorded ? 'MATCH' : 'MISMATCH') : 'INCOMPLETE'
+      }
       return {
         name: label,
         canon: readJson(canonPath),
@@ -72,8 +87,10 @@ function gatherRun(runId) {
         candidateExists: existsSync(join(dir, 'candidate.md')),
         derived,
         recorded,
-        // MATCH only when both sides exist and agree; anything less is not a match
-        hashState: derived && recorded ? (derived === recorded ? 'MATCH' : 'MISMATCH') : 'INCOMPLETE',
+        salted,
+        reSeed,
+        canonToHProposal,
+        hashState,
       }
     })
 
@@ -145,15 +162,23 @@ function renderPropose(run) {
 function renderHoldApart(run) {
   if (!run.proposals.length) return missing('the Gap ⿻')
   return run.proposals.map(p => {
+    const seedRows = p.salted
+      ? [['mode', 'SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)'],
+         ['sha256(proposal_canon.json) vs hProposal', `${p.derived || '(none)'} ${p.canonToHProposal === 'MATCH' ? '✓' : p.canonToHProposal === 'MISMATCH' ? '✗ ≠ ' + (p.gap?.hProposal || '') : ''}`],
+         ['salt (gap.json)', p.gap?.salt], ['hSource', p.gap?.hSource ?? '(source binding off)'],
+         ['recorded seedHex (gap.json)', p.recorded], ['re-derived sha256(hSource‖hProposal‖salt), at render time', p.reSeed]]
+      : [['mode', 'LEGACY — seed = sha256(proposal_canon.json); pre-salt run'],
+         ['recorded seedHex (gap.json)', p.recorded], ['derived sha256(proposal_canon.json), computed at render time', p.derived]]
+    const legacyBadge = p.salted ? '' : ' <span class="badge other" title="drawn before the D1 salt; the seed is the bare proposal hash and a resubmitting proposer could have ground it">legacy-seed</span>'
     let hash
     if (p.hashState === 'MATCH') {
-      hash = `<div class="hashbox match"><span class="badge match">MATCH ✓</span>
-<p>The witnesses provably derive from the proposal's own bytes. soulbae could not have known them.</p>
-${kv([['recorded seedHex (gap.json)', p.recorded], ['derived sha256(proposal_canon.json), computed at render time', p.derived]])}</div>`
+      hash = `<div class="hashbox match"><span class="badge match">MATCH ✓</span>${legacyBadge}
+<p>${p.salted ? 'The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).' : "The witnesses derive from the proposal's own bytes. soulbae could not have known them — but under the legacy rule a resubmitting proposer could have ground the draw; salted runs close that."}</p>
+${kv(seedRows)}</div>`
     } else if (p.hashState === 'MISMATCH') {
       hash = `<div class="hashbox mismatch"><span class="badge mismatch">MISMATCH — ROUND VOID ⚠</span>
-<p><strong>The recorded seed does not reproduce from the saved bytes.</strong> Either the canon file was altered after the draw, or the draw was not seeded from it. Witnesses of unknown origin validate nothing: treat every verdict on this proposal as void and the round as BLOCKED (GR-4).</p>
-${kv([['recorded seedHex (gap.json)', p.recorded], ['derived sha256(proposal_canon.json), computed at render time', p.derived]])}</div>`
+<p><strong>The recorded seed does not reproduce from the saved bytes.</strong> ${p.salted ? 'Either the canon file was altered after the draw, or the seed was not derived as sha256(hSource‖hProposal‖salt).' : 'Either the canon file was altered after the draw, or the draw was not seeded from it.'} Witnesses of unknown origin validate nothing: treat every verdict on this proposal as void and the round as BLOCKED (GR-4).</p>
+${kv(seedRows)}</div>`
     } else {
       hash = `<div class="hashbox incomplete"><span class="badge other">CANNOT RE-DERIVE</span>
 ${kv([['recorded seedHex', p.recorded || '(gap.json missing or seedHex absent)'], ['derived sha256', p.derived || '(proposal_canon.json missing — the auditor has nothing to hash)']])}
@@ -171,8 +196,21 @@ function renderAssay(run) {
     if (!p.verdict) return `<div class="card"><h4>${esc(p.name)}</h4>${missing('verdict.json')}</div>`
     if (p.verdict.__unparseable) return `<div class="card"><h4>${esc(p.name)}</h4><p class="missing">verdict.json unparseable.</p>${mono(p.verdict.__raw)}</div>`
     const v = p.verdict
-    return `<div class="card"><h4>${esc(p.name)} ${chip(v.status)}</h4>` + kv([
+    const cov = v.coverage
+    // D2: print WHAT the gate bought right next to the verdict — census (every
+    // witness) vs sample n/N with its single-omission detection probability.
+    // Nobody who reads "detection 0.25" mistakes a sample for a proof.
+    const covLabel = cov
+      ? (cov.mode === 'census'
+        ? ` <span class="chip validated" title="every witness probed">CENSUS ${cov.N ?? ''}/${cov.N ?? ''}</span>`
+        : ` <span class="chip other" title="a hash-drawn sample — not a proof of full preservation">SAMPLE ${cov.N ?? ''} · detection ${cov.detection ?? '?'}</span>`)
+      : (v.status === 'VALIDATED' ? ` <span class="chip other" title="no coverage recorded — cannot tell census from sample">coverage?</span>` : '')
+    const covRows = cov && cov.mode !== 'census'
+      ? [['coverage', `SAMPLE — ${cov.N} of the bank probed; P(catch one dropped fact) = ${cov.detection}. This does NOT establish complete preservation.`]]
+      : cov ? [['coverage', `CENSUS — every witness probed (detection 1.0).`]] : []
+    return `<div class="card"><h4>${esc(p.name)} ${chip(v.status)}${covLabel}</h4>` + kv([
       ['leverId', v.leverId], ['metric', v.metric], ['gateResult', v.gateResult],
+      ...covRows,
       ['failingCheck', v.failingCheck], ['scratchDir', v.scratchDir],
       ['candidate.md', p.candidateExists ? 'present' : 'missing'],
     ]) + (v.evidence ? `<details><summary>evidence</summary>${mono(v.evidence)}</details>` : '') + '</div>'

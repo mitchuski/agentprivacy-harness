@@ -2,3 +2,8 @@ examples/*/runs/*
 !examples/*/runs/.gitkeep
 node_modules/
 tools/console.roots.json
+
+# run secrets / throwaway prep (never commit)
+.r5args.json
+.r*args.json
+.r*prep.mjs

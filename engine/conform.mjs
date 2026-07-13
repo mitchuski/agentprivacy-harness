@@ -109,6 +109,35 @@ if (harnessDir) {
       if (placeholder(f?.hint)) errs.push(fill(`config.finders hint for "${f?.lens}"`))
     }
 
+    // The gate's population and mode (D2). Optional block — an instance without
+    // it runs legacy. But if present, sampling a small enumerable bank is
+    // refused: at N <= censusThreshold a hash-drawn sample of `count` detects a
+    // single dropped item only count/N of the time, while a census detects it
+    // always and costs no more. "what you can count, count."
+    const g = config?.gate
+    if (g) {
+      ok(Number.isInteger(g.N) && g.N > 0, 'config.gate.N must be a positive integer (the witness-bank size)')
+      ok(g.mode === 'census' || g.mode === 'sample', "config.gate.mode must be 'census' or 'sample'")
+      const threshold = Number.isInteger(g.censusThreshold) ? g.censusThreshold : 200
+      if (g.mode === 'sample' && Number.isInteger(g.N) && g.N <= threshold) {
+        errs.push(`config.gate: mode 'sample' is refused for N=${g.N} <= censusThreshold=${threshold}. A sample of ${g.count || 8}/${g.N} detects one dropped fact only ${(((g.count || 8) / g.N) * 100).toFixed(0)}% of the time; census detects it always at no extra cost (D2). Set mode: 'census', or raise censusThreshold only if you can defend sampling this population.`)
+      }
+      if (g.mode === 'sample') ok(Number.isInteger(g.count) && g.count > 0 && g.count <= g.N, 'config.gate.count must be a positive integer <= N for a sample gate')
+    }
+
+    // Φ_inference (D4b): by the PVM, the separation term is zero when the
+    // proposer and the prover are the same model — they share weights, priors,
+    // and the exact blind spots that make an omission invisible to both. This is
+    // an ADVISORY, not a refusal: a single-model harness is the common case and
+    // still useful, but a same-model pair must be LEGIBLE, never silent. Declare
+    // seat models in config.seatOpts.{propose,assay}.model to make the pair a
+    // measured fact; leaving both default is itself a same-model pair.
+    const proposerModel = config?.seatOpts?.propose?.model || '(caller default)'
+    const proverModel = config?.seatOpts?.assay?.model || '(caller default)'
+    if (proposerModel === proverModel) {
+      advise(false, `Φ_inference ≈ 0 (D4b): proposer and prover are the same model (${proposerModel}). By the PVM the separation term is zero — the prover shares the proposer's blind spots. This is legible, not fatal; a cross-model prover is a pre-registered prediction (CR-H10). Set config.seatOpts.assay.model to a different model to raise Φ_inference.`)
+    }
+
     // frontier self-consistency (GR-1): numbers must cohere
     try {
       const f = JSON.parse(readFileSync(join(harnessDir, 'frontier.json'), 'utf8'))

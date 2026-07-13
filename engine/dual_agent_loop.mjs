@@ -9,8 +9,36 @@
 // First Person). See TRUSTS.md.
 //
 // rt = { agent, parallel, pipeline, phase, log } — the Claude Code Workflow
-// globals, or your own driver. No imports here: tools/bundle.mjs concatenates
-// this file with a config into one self-contained .workflow.mjs.
+// globals, or your own driver. The one import is the Gap tool (engine/gap.mjs):
+// the hold-apart seed and draw are CODE, not a seat's shell arithmetic, so the
+// same function the loop derives with is the one verify_run.mjs replays.
+// tools/bundle.mjs inlines gap.mjs (and its kappa.mjs helpers) when it
+// concatenates this file into a self-contained .workflow.mjs, because the
+// Workflow runtime has no `import`.
+import { canonicalize, hashCanon, perProposalSalt, deriveSeed, draw } from './gap.mjs'
+
+// Code-derive the hold-apart seed and draw for a committed proposal (SALTED
+// mode). Returns null in LEGACY mode (no saltSecret, or no declared gate.N),
+// where the Gap seat still computes its own seed = sha256(proposal_canon) — so
+// pre-existing instances and runs are unaffected.
+//
+// Salt is derived AFTER the proposal is committed, from a run-level secret the
+// proposer never sees (D1, option A). Grinding the proposal cannot fix the
+// draw. Census mode probes every fact; sample mode draws gate.count of N.
+export function deriveHoldApart(proposal, { gate, saltSecret, sourceHash }) {
+  if (!saltSecret || !gate || !Number.isInteger(gate.N)) return null
+  const canon = canonicalize(proposal)
+  const hProposal = hashCanon(canon)
+  const salt = perProposalSalt(saltSecret, hProposal)
+  const seedHex = deriveSeed({ hSource: sourceHash || null, hProposal, salt })
+  const N = gate.N
+  const count = gate.count || gate.n || 8
+  const mode = gate.mode || 'sample'
+  const drawIndices = mode === 'census'
+    ? Array.from({ length: N }, (_, k) => k + 1)
+    : draw(seedHex, N, count)
+  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawIndices }
+}
 
 export function bootPreamble(root, repo, seatCard) {
   return `You are a seat in a soulbis/soulbae dual-agent harness. Instance: ${repo}. Skeleton root: ${root}.
@@ -108,12 +136,23 @@ export async function runHarness(config, rt, runArgs = {}) {
 
     let closed = []
     let critic = null
+    // Code-derive each proposal's seed + draw BEFORE the Gap seat runs (SALTED
+    // mode). The proposer has already returned (Propose closed above), and the
+    // salt secret is the run's, unseen by any seat — so this is after-commit and
+    // grind-proof. In LEGACY mode every entry is null and the Gap computes its
+    // own seed as before. This is also the retry-ledger source: every committed
+    // proposal's hash, recorded (GR-4).
+    const gateCfg = config.gate || null
+    const saltSecret = runArgs.saltSecret || null
+    const sourceHash = runArgs.sourceHash || null
+    const derived = proposals.map(p => deriveHoldApart(p, { gate: gateCfg, saltSecret, sourceHash }))
+    const proposalsLog = proposals.map((p, i) => ({ leverId: p.leverId, roundId, hProposal: derived[i]?.hProposal || null, seedHex: derived[i]?.seedHex || null, salted: !!derived[i] }))
     if (proposals.length > 0) {
       // ---- per proposal: Hold-apart (the Gap ⿻) then Assay (soulbis ⚔️), no barrier ----
       closed = (await pipeline(
         proposals,
         (p, _item, i) => agent(
-          `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx)}`,
+          `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx, derived[i])}`,
           { label: `gap:${p.leverId}`, phase: 'Hold-apart', schema: config.schemas.gap, ...seatOpts('holdApart') }),
         (gap, p, i) => gap ? agent(
           `${BOOT('soulbis-assay.md')}\n${config.prompts.assay(p, gap, i, ctx)}`,
@@ -131,7 +170,7 @@ export async function runHarness(config, rt, runArgs = {}) {
 
     // ---- Chronicle — draft only; the keystone reviews and files ----
     phase('Chronicle')
-    const roundData = { roundId, measure, proposals, verdicts: closed, critic }
+    const roundData = { roundId, measure, proposals, verdicts: closed, critic, holdApart: derived, proposalsLog }
     const chronicle = await agent(
       `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
       { label: `chronicle:${roundId}`, phase: 'Chronicle', ...seatOpts('chronicle') })
@@ -168,9 +207,17 @@ export async function runHarness(config, rt, runArgs = {}) {
     log(`round ${roundId} closes — ${structural.length} structural win(s), dry=${dry}/${config.stop.dryRounds}`)
   }
 
+  // Φ_inference (D4b): record the model pair so a verdict produced by one model
+  // in two hats is legible as such forever. 0 = same model (the separation term
+  // is zero by the PVM); 1 = a genuinely distinct prover.
+  const proposerModel = seatOpts('propose').model || '(caller default)'
+  const proverModel = seatOpts('assay').model || '(caller default)'
+  const phiInference = proposerModel === proverModel ? 0 : 1
+
   const status = aborted ? 'INCOMPLETE' : 'COMPLETE'
   return {
     name: config.name, runId, status, rounds: rounds.length, tally, confirmed,
+    models: { proposer: proposerModel, prover: proverModel }, phiInference,
     best: confirmed.length ? confirmed[confirmed.length - 1] : null,
     detail: rounds,
     ...(aborted ? { aborted } : {}),

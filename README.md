@@ -2,14 +2,15 @@
 
 **A verification harness for AI-agent work: one agent proposes, a second
 independently proves, and the tests that decide are derived by hashing the
-proposal itself — so neither agent could have chosen them. Config-driven,
-zero dependencies, every axiom checked at runtime.**
+proposal together with a secret the proposer never sees — so it cannot grind
+them — and, where the fact set is enumerable, every fact is probed. Config-
+driven, zero dependencies, every axiom checked at runtime.**
 
 **soulbae 🧙** proposes. **soulbis ⚔️** proves. Between them sits **the Gap
-⿻**: the held-out tests are derived by hashing soulbae's own proposal, so
-soulbae cannot have tuned to them and soulbis cannot be accused of choosing
-them. Above them both is **the First Person 😊** — you — who alone opens the
-door to anything outward-facing.
+⿻**: the witnesses are derived by hashing soulbae's own proposal with a run
+secret it cannot see, so soulbae cannot tune or grind them and soulbis cannot
+be accused of choosing them. Above them both is **the First Person 😊** — you
+— who alone opens the door to anything outward-facing.
 
 That is the entire idea. Everything in this repo is machinery for keeping
 those two apart, and a ledger discipline for what survives.
@@ -33,12 +34,15 @@ check its work was built to survive. That is Goodhart's law wearing an agent
 costume, and it is the failure behind reward hacking, self-preferring judges,
 and green-because-written-green test suites. This harness answers it
 **structurally rather than behaviourally**: the verification witnesses are
-derived by hashing the proposal itself, so the proposer provably could not
-have tuned to them, and the two agents share only their root — the
-information that would let them collude was never routed. Then a
-multiplicative gate refuses partial passes, honest claim-tiers keep results
-from drifting from evidence, and the door keeps every outward action a
-human's.
+derived by hashing the proposal **together with a run secret the proposer
+never sees**, so it cannot predict or grind the draw — and where the witness
+bank is small enough to enumerate, the gate is a **census** that probes every
+one, so a single dropped fact cannot hide. The two agents share only their
+root; the routing that would let them collude is a design invariant of the
+seat topology (a target the runtime does not yet enforce with process mounts —
+see `THREATS.md`). Then a multiplicative gate refuses partial passes, an
+`enforced-by` claim register refuses claims stronger than their enforcement,
+and the door keeps every outward action a human's.
 
 `RESEARCH.md` states the contribution in full — the problem, the precise
 claim, what is borrowed (Fiat-Shamir, Promise Theory, the PVM model) versus
@@ -141,9 +145,13 @@ was built to survive. The output is a **mirage**: it passes the author's
 probe and fails the real gate.
 
 This harness makes mirages a named verdict instead of a surprise. Its
-operational invariant is `I(Y_S ; Y_M | X) = 0` — given the target, what the
-prover produces tells you nothing about what the proposer produces. Not
-"promises not to." Cannot, because the information was never routed there.
+operational **target** is `I(Y_S ; Y_M | X) = 0` — given the target, what the
+prover produces should tell you nothing about what the proposer produces.
+Today that is a **routing invariant enforced by prompt topology**: a design
+target, not a measured result, and tiered OPEN in `claims_register.md` until
+per-seat process mounts enforce it (`THREATS.md`). What *is* closed by
+construction is the draw: the proposer cannot grind it, because the seed folds
+a secret it never sees.
 
 ## The loop
 
@@ -252,10 +260,13 @@ node engine/loop.test.mjs                    # the loop fails loudly
 ```
 
 Then run the example harness. It compresses a 730-word emergency field guide
-while an 8-question comprehension gate, drawn from the *original* by hashing
-the *candidate*, must stay 8/8. The proposer cannot know which 8 of ~40 facts
-will be probed, so its only winning strategy is to preserve every fact — which
-is exactly the pressure you want on a compressor.
+while a comprehension gate, drawn from the *original*, must stay a full pass.
+The original has **32** enumerable facts (F1..F32), so the gate is a **census**
+— every one is probed — and the proposer's only winning strategy is to preserve
+every fact, which is exactly the pressure you want on a compressor. (A *sample*
+of 8/32 would miss a single omission 75% of the time; census is why this
+instance refuses `mode: 'sample'`. See `THREATS.md` and D2 in
+`HARDENING.md`.)
 
 In Claude Code, invoke the Workflow tool with:
 
@@ -284,10 +295,12 @@ Writes `runs/<runId>/run.html` — a single static page, no dependencies, no
 network — and writes nothing else. The page lays the round out as the
 six-phase loop and, per proposal, **re-derives** the sha256 of
 `proposal_canon.json` from the file bytes at render time and shows it next to
-the seed the Gap recorded. Match means the witnesses provably derive from the
-proposal's own content; mismatch renders as a loud warning, because witnesses
-of unknown origin validate nothing (GR-4). That check is the same audit the
-field-guide README teaches by hand — the page just refuses to skip it.
+the seed the Gap recorded (salted runs re-derive `sha256(hSource‖hProposal‖
+salt)`; pre-salt runs wear a `legacy-seed` badge). Match means the witnesses
+re-derive from the proposal's own saved bytes; mismatch renders as a loud
+warning, because witnesses of unknown origin validate nothing (GR-4). The same
+audit, fail-closed and offline, is `node tools/verify_run.mjs <instance>
+<runId>` — the page just refuses to skip it.
 
 The page is a generated projection, never the record: the run directory is
 the record, and a phase that left no artifact renders as "not reached / not

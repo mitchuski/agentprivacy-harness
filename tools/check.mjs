@@ -22,6 +22,16 @@ import { dirname, join, relative } from 'node:path'
 const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
 
+// --red: run the adversarial board instead of the conformance gates. The
+// attacks are the failing tests the hardening commits turn green (HARDENING.md
+// D7). Kept as a separate mode because a RED board is the INTENDED state until
+// the fixes land — folding it into the default check would make `check` fail on
+// a healthy in-progress repo.
+if (process.argv.includes('--red')) {
+  const r = spawnSync(process.execPath, ['engine/attacks/run.mjs'], { cwd: root, stdio: 'inherit' })
+  process.exit(r.status == null ? 1 : r.status)
+}
+
 const steps = []
 const run = (label, args, opts = {}) => {
   const r = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8' })
@@ -36,7 +46,10 @@ run('the axioms', ['engine/conform.mjs'])
 
 // ---- 2. the engine's own tests -------------------------------------------
 run('engine tests', ['engine/loop.test.mjs'])
+run('gap tool tests', ['engine/gap.test.mjs'])
+run('salt-mode tests', ['engine/loop.salt.test.mjs'])
 run('console + mint tests', ['tools/console.test.mjs'])
+run('claims register (enforced-by gate)', ['tools/check_claims.mjs'])
 
 // ---- 3. every instance ---------------------------------------------------
 // An instance is any directory (one level down, or under examples/) carrying a
@@ -88,6 +101,15 @@ if (candidates.length === 0) {
   steps.push({ label: 'instances', cmd: '(none found)', passed: true, out: 'no harness.config.mjs anywhere — nothing to gate', optional: true })
 }
 for (const c of candidates) run(`instance: ${relative(root, c).replace(/\\/g, '/')}`, ['engine/conform.mjs', relative(root, c)])
+
+// ---- 3a. verify every run offline — the chain re-derives (D5) -------------
+// verify_run replays each run's seed and draw from its saved bytes with zero
+// LLM calls. If the harness cannot verify its own history, it cannot ask anyone
+// to trust its future. Runs only where an instance has a runs/ directory.
+for (const c of candidates) {
+  const rel = relative(root, c).replace(/\\/g, '/')
+  if (existsSync(join(c, 'runs'))) run(`verify runs: ${rel}`, ['tools/verify_run.mjs', rel, '--all'])
+}
 
 // ---- 3b. the holon mesh — κ re-derivation over minted artefacts -----------
 // Verifying content-addressed holons is enumerable, so it is an auditor, not a

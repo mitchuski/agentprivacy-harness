@@ -1,9 +1,8 @@
-examples/*/runs/*
-!examples/*/runs/.gitkeep
-node_modules/
-tools/console.roots.json
-
-# run secrets / throwaway prep (never commit)
-.r5args.json
+# generated projections — re-run = re-true (spellweb / star / wiki_emit)
+examples/*/web/
+examples/*/wiki/
+# farm runtime state — ownership is claimed, never shipped
+examples/wiki-farm/*/status/
+# operator-local state — run inputs (salt secrets) and machine paths
 .r*args.json
-.r*prep.mjs
+tools/console.roots.json

@@ -26,11 +26,21 @@ and "C83 = non-collusion `I(Y_S;Y_M|X) = 0`."
   `P_e ≥ 1 − R_max`.
 - Non-collusion `I(Y_S;Y_M|X) = 0` is **Precondition 1** of that theorem, not
   a numbered conjecture. (Precondition 2 is the fixed adversary model.)
-- **The real C82** is *The Moving Ceiling*: frontier capability growth raises
-  `C_S(t)+C_M(t)` against a fixed archive without raising `H(X)`, so `R(t)`
-  drifts upward and **every static reconstruction guarantee has a finite shelf
-  life `t*`**. The drift is coupled to frontier capability, not to any action
-  of the subject.
+- **The real C82** is *The Moving Ceiling*: adversary informational capability
+  grows against fixed archives — the linkage corpus and side priors accumulate
+  along calendar time, shrinking `H(X | B_t)` while nothing is added to the
+  archive and no action of the subject is involved; `R_inf(t)` drifts upward
+  on a schedule and **every static reconstruction guarantee has a finite shelf
+  life `t*`**. Frontier-model releases enter only informationally (better
+  extraction of linkage from existing corpora), never as compute against the
+  information-theoretic guarantee, which is compute-saturated.
+
+  > **Dated note (2026-07-17).** The register row was re-typed to the above by
+  > First-Person ruling (L149); the erosion form is proven conditional in
+  > WP-07 Def 3.9 + Cor 5.4b (`R_inf(t) = Σε_i / H(X | B_t)`; the protection
+  > does not leak more, it matters less). The pre-ruling wording ("frontier
+  > capability growth raises `C_S(t)+C_M(t)`") is retired; the conjectural
+  > content is the RATE.
 - **The real C83** is *Compositional Leakage Amplification*: policy-only
   separation compounds toward `(2^N − 1)ε` with chain depth, while amnesia
   separation breaks the Markov chain and caps at `Nε` — exponential to linear.

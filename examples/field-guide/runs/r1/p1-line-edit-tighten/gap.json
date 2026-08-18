@@ -1,0 +1,70 @@
+{
+  "seedHex": "70a9aa1300aaf4a1afda69bf1835d0aef4586c9bb6c052c6c3abb67239f9be96",
+  "draw": [
+    {
+      "order": 1,
+      "byte": "b0=0x70=112",
+      "modulo": "112 mod 32 = 16",
+      "fact": "F1",
+      "question": "According to the guide's opening, for how long does it prepare a household to manage safely and comfortably through a power outage?",
+      "expected": "a power outage lasting up to seventy-two hours"
+    },
+    {
+      "order": 2,
+      "byte": "b5=0xaa=170",
+      "modulo": "170 mod 27 = 8",
+      "fact": "F10",
+      "question": "What kind of can opener does the Food section tell you to own, and what reason does it give?",
+      "expected": "a manual can opener, because an electric one will be useless"
+    },
+    {
+      "order": 3,
+      "byte": "b6=0xf4=244",
+      "modulo": "244 mod 26 = 10",
+      "fact": "F13",
+      "question": "How long does a full freezer hold a safe temperature versus a half-full freezer?",
+      "expected": "A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours"
+    },
+    {
+      "order": 4,
+      "byte": "b1=0xa9=169",
+      "modulo": "169 mod 31 = 14",
+      "fact": "F15",
+      "question": "Under what time-and-temperature condition should perishable food be discarded?",
+      "expected": "Any perishable food that has spent more than two hours above four degrees Celsius should be discarded"
+    },
+    {
+      "order": 5,
+      "byte": "b7=0xa1=161",
+      "modulo": "161 mod 25 = 11",
+      "fact": "F16",
+      "question": "Why does the Light section tell you to avoid candles entirely?",
+      "expected": "candles are a leading cause of house fires during outages"
+    },
+    {
+      "order": 6,
+      "byte": "b0=0x70=112",
+      "modulo": "112 mod 32 = 16",
+      "fact": "F17",
+      "question": "How many lights per person, and how many spare sets of batteries per light, should you store?",
+      "expected": "at least one light per person, plus two spare sets of batteries for each light"
+    },
+    {
+      "order": 7,
+      "byte": "b3=0x13=19",
+      "modulo": "19 mod 29 = 19",
+      "fact": "F22",
+      "question": "At what indoor temperature, if you cannot maintain warmth, should you relocate to a warming centre or neighbour's home?",
+      "expected": "If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate"
+    },
+    {
+      "order": 8,
+      "byte": "b2=0xaa=170",
+      "modulo": "170 mod 30 = 20",
+      "fact": "F23",
+      "question": "What should you know about your local emergency station, and by when?",
+      "expected": "know the frequency of your local emergency station before the outage begins"
+    }
+  ],
+  "transcript": "GAP (⿻ HOLD-APART) TRANSCRIPT — run r1 / p1-line-edit-tighten\nSeat: hold-apart. Trust T2/GR-4: witnesses are Fiat-Shamir-derived from the proposal artifact alone; the proposer neither saw nor influenced them.\n\n=== STEP 1: NUMBERED FACT LIST (source of truth: examples/field-guide/artifact/GUIDE.md) ===\nBody split into sentences on '.', '!', '?'; every sentence stating a checkable fact indexed from F1. Headers excluded. 32 facts total.\nF1  Guide prepares a household for a power outage lasting up to seventy-two hours.\nF2  Written for a temperate climate and assumes no backup generator.\nF3  Work through the sections in order; earlier sections cover the preparations that matter most.\nF4  Store four litres of water per person per day = twelve litres per person for the full seventy-two hours.\nF5  Half of that allowance is for drinking, the other half covers cooking and basic hygiene.\nF6  Store water in food-grade containers, keep out of direct sunlight, replace stored water every six months.\nF7  If a storm is forecast, also fill the bathtub; bathtub water is for flushing toilets and washing, never drinking.\nF8  Keep a dedicated shelf of non-perishable food sufficient for three days.\nF9  Good choices: canned beans, canned fish, peanut butter, crackers, dried fruit, shelf-stable milk.\nF10 Choose foods that require no cooking, and own a manual can opener, because an electric one will be useless.\nF11 Eat perishable refrigerator food first, then freezer food, and only then the emergency shelf.\nF12 An unopened refrigerator keeps food safe for about four hours.\nF13 A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer for only about twenty-four hours.\nF14 Keep both doors closed as much as possible and tape a note to each door as a reminder.\nF15 Any perishable food that has spent more than two hours above four degrees Celsius should be discarded.\nF16 Use battery-powered LED lanterns or headlamps as primary light; avoid candles, a leading cause of house fires during outages.\nF17 Store at least one light per person, plus two spare sets of batteries for each light.\nF18 Keep one headlamp beside each bed and one lantern in the kitchen, placed where they can be found in the dark.\nF19 Never run a camping stove, barbecue, or generator indoors/garage/near a window; each produces carbon monoxide, odourless and can be fatal.\nF20 Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.\nF21 In cold weather, gather everyone in one small room on a south-facing side, close the door; layered clothing/blankets safer than any improvised heater.\nF22 If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or neighbour's home.\nF23 Keep a battery-powered or hand-crank radio; know the frequency of your local emergency station before the outage begins.\nF24 Charge every phone/power bank when a storm is forecast; a full 20000 mAh power bank recharges a typical phone roughly four times.\nF25 Put phone in low-power mode at outage start; agree on one out-of-area contact everyone texts, as texts beat congested networks vs voice calls.\nF26 Keep a first-aid kit and a seven-day supply of every prescription medication, rotated to stay in date.\nF27 Refrigerated medication such as insulin generally stays usable at room temperature for up to twenty-eight days (confirm with pharmacist).\nF28 Write pharmacy, doctor, and poison-control phone numbers on paper, because a dead phone is not a phone book.\nF29 Wait five minutes before switching major appliances back on, so the grid can stabilise.\nF30 Check the freezer: if food still contains ice crystals, it can be safely refrozen.\nF31 Restock everything used within one week, starting with water and batteries.\nF32 Write a one-page note on what was missing or awkward, and fix at least one gap before the next outage.\n\n=== STEP 2: CANONICAL SERIALIZATION + HASH ===\nSerialization: JSON of the proposal artifact, recursive sorted keys, no whitespace (JSON.stringify with recursively key-sorted object). Bytes written to runs/r1/p1-line-edit-tighten/proposal_canon.json (6281 bytes).\nExact hash command:  sha256sum runs/r1/p1-line-edit-tighten/proposal_canon.json\nDigest (seedHex):    70a9aa1300aaf4a1afda69bf1835d0aef4586c9bb6c052c6c3abb67239f9be96\nVerify: re-running the command on the persisted file MUST reproduce seedHex, or the round is void (GR-4).\n\n=== STEP 3: DRAW RULE (8 distinct fact indices, without replacement) ===\nRule: read digest bytes left-to-right as unsigned ints b0,b1,...; for draw k, idx = b_k mod (count of remaining facts); pick remaining[idx] (0-based) from the ordered remaining list [F1..F32]; remove it.\nDigest bytes: b0=0x70=112 b1=0xa9=169 b2=0xaa=170 b3=0x13=19 b4=0x00=0 b5=0xaa=170 b6=0xf4=244 b7=0xa1=161 ...\ndraw 1: remaining=32, idx=112 mod 32=16 -> position16 of [F1..F32] = F17 ; remove F17\ndraw 2: remaining=31, idx=169 mod 31=14 -> position14 = F15 ; remove F15\ndraw 3: remaining=30, idx=170 mod 30=20 -> position20 = F23 ; remove F23\ndraw 4: remaining=29, idx=19  mod 29=19 -> position19 = F22 ; remove F22\ndraw 5: remaining=28, idx=0   mod 28=0  -> position0  = F1  ; remove F1\ndraw 6: remaining=27, idx=170 mod 27=8  -> position8  = F10 ; remove F10\ndraw 7: remaining=26, idx=244 mod 26=10 -> position10 = F13 ; remove F13\ndraw 8: remaining=25, idx=161 mod 25=11 -> position11 = F16 ; remove F16\nDrawn (distinct): F17, F15, F23, F22, F1, F10, F13, F16.\n(Note: b4=0x00 was consumed by draw 5; the draw array below is ordered by fact index for readability, each carrying the byte that selected it.)\n\n=== STEP 4: COMPREHENSION QUESTIONS ===\nOne question per drawn fact; expected answers quoted from the ORIGINAL GUIDE.md sentence. See the 'draw' field."
+}

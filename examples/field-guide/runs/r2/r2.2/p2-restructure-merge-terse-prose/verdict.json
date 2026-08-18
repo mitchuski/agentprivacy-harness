@@ -1,0 +1,9 @@
+{
+  "leverId": "restructure-merge-terse-prose",
+  "status": "VALIDATED",
+  "metric": 573,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = a85595a55f796c951188bfb33229cd2b8c4d9f759be92fdc6f015644d24c9f94 == seedHex (round valid). CONFORM PASS (node engine/conform.mjs examples/field-guide). candidate.md written verbatim from proposal.compressedText (3449 bytes). Word count mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 573. All 8 held-out answers recoverable from candidate.md alone and correct: F9 six foods present; F25 low-power mode + text out-of-area contact (texts beat voice on congested networks); F32 one-page note + fix one gap; F22 below 10C relocate to warming centre/neighbour; F13 full 48h vs half-full 24h; F16 LED lanterns/headlamps, avoid candles (house-fire cause); F5 half drinking half cooking+hygiene; F31 restock within one week, water+batteries first. Hard constraint holds: self-contained instruction document, all quantities and both ordered procedures preserved. 573 < frontier best 730.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r2/r2.2/p2-restructure-merge-terse-prose"
+}

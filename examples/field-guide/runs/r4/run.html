@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>run r4 — dual-agent harness</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --edge:#30363d; --ink:#c9d1d9; --dim:#8b949e;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --grey:#8b949e; --accent:#a5b4fc; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--ink);
+         font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { font-size:1.3rem; margin:0 0 .3rem; } h4 { margin:0 0 .5rem; font-size:1rem; }
+  a { color: var(--accent); }
+  .inscription { color:var(--accent); letter-spacing:.03em; margin:.2rem 0 .8rem; }
+  .disclaimer { border:1px solid var(--edge); border-left:3px solid var(--grey); background:var(--panel);
+                color:var(--dim); padding:.6rem .9rem; margin:0 0 1.4rem; font-size:.85rem; }
+  .voidbanner { border:2px solid var(--red); background:#3d1418; color:#ffb3ad; padding:.9rem 1rem;
+                margin:0 0 1.4rem; font-weight:bold; }
+  section.phase { border:1px solid var(--edge); border-radius:6px; background:var(--panel);
+                  margin:0 0 1rem; padding:1rem 1.2rem; }
+  section.phase > h2 { margin:0 0 .15rem; font-size:1.05rem; }
+  section.phase > p.mandate { margin:0 0 .9rem; color:var(--dim); font-size:.85rem; }
+  .arrow { text-align:center; color:var(--dim); margin:-.4rem 0 .6rem; }
+  .card { border:1px solid var(--edge); border-radius:6px; padding: .8rem 1rem; margin:0 0 .8rem; background:var(--bg); }
+  .chip { display:inline-block; padding:.05rem .55rem; border-radius:999px; font-size:.75rem;
+          font-weight:bold; vertical-align:middle; border:1px solid; }
+  .chip.validated { color:var(--green); border-color:var(--green); background:#12261a; }
+  .chip.mirage    { color:var(--amber); border-color:var(--amber); background:#2b2211; }
+  .chip.blocked   { color:var(--red);   border-color:var(--red);   background:#3d1418; }
+  .chip.other     { color:var(--grey);  border-color:var(--grey);  background:#1c2128; }
+  .badge { display:inline-block; padding:.1rem .6rem; font-weight:bold; border-radius:4px; margin-bottom:.4rem; }
+  .badge.match    { background:#12261a; color:var(--green); border:1px solid var(--green); }
+  .badge.mismatch { background:var(--red); color:#fff; }
+  .badge.other    { background:#1c2128; color:var(--grey); border:1px solid var(--grey); }
+  .hashbox { border-radius:6px; padding:.6rem .8rem; margin:0 0 .6rem; border:1px solid var(--edge); }
+  .hashbox.match { border-color:var(--green); } .hashbox.incomplete { border-color:var(--grey); }
+  .hashbox.mismatch { border:2px solid var(--red); background:#2a0e11; }
+  dl { display:grid; grid-template-columns:max-content 1fr; gap:.15rem .9rem; margin:.4rem 0; }
+  dt { color:var(--dim); } dd { margin:0; overflow-wrap:anywhere; }
+  pre { background:#0a0d12; border:1px solid var(--edge); border-radius:6px; padding:.7rem .9rem;
+        overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.82rem; margin:.4rem 0; }
+  details { margin:.4rem 0; } summary { cursor:pointer; color:var(--dim); }
+  table { border-collapse:collapse; width:100%; font-size:.85rem; }
+  th, td { border:1px solid var(--edge); padding:.35rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--dim); font-weight:normal; }
+  .missing { color:var(--dim); font-style:italic; } .note { color:var(--dim); font-size:.85rem; }
+  .delta { color:var(--accent); }
+  .tally .chip { margin-right:.4rem; }
+  footer { color:var(--dim); font-size:.8rem; margin-top:2rem; border-top:1px solid var(--edge); padding-top:.8rem; }
+</style></head><body><main>
+<h1>run r4 · field-guide</h1>
+<p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
+<p class="disclaimer">generated projection — never hand-edited, never authoritative; the run directory is the record.
+Rendered 2026-07-13T16:30:14.104Z by tools/render_run.mjs from <code>C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r4</code>.
+Re-derive anything you care about from the files themselves.</p>
+
+<p class="tally">2 proposal(s) · <span class="chip validated">VALIDATED</span> 2 <span class="chip mirage">MIRAGE</span> 0 <span class="chip blocked">BLOCKED</span> 0 <span class="chip other">NO VERDICT</span> 0</p>
+<section class="phase"><h2>1 · Measure</h2><p class="mandate">frontier numbers only, no advocacy</p><p>Numbers cited from <code>frontier.json</code> — the sole authority (GR-1). Prose never restates them.</p>
+<dl><dt>objective</dt><dd>words</dd><dt>baseline</dt><dd>730</dd><dt>best</dt><dd>472</dd><dt>best levers</dt><dd>r4-compose-line-edit</dd><dt>updated</dt><dd>2026-07-11</dd></dl>
+<p class="delta">frontier delta to date: 730 → 472 (-258)</p>
+<p class="note">no measure.json — the reference engine returns measure output to the orchestrator without persisting it.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>2 · Propose</h2><p class="mandate">soulbae 🧙 (bnot) — blind lenses in parallel</p><div class="card"><h4>r4.1/p1-r4-compose-line-edit</h4><dl><dt>leverId</dt><dd>r4-compose-line-edit</dd><dt>title</dt><dd>Composed line-edit over the folded 526-word best (OT-3): sentence-level compression, zero fact drops</dd><dt>lens</dt><dd>line-editor</dd><dt>expectedMetric</dt><dd>472</dd><dt>hardConstraintNote</dt><dd>The candidate remains a self-contained instruction document: full title naming the 72-hour power-outage scope, an intro stating goal, assumptions (temperate climate, no generator) and reading order, and all eight sections with imperative, actionable bullets. Every instruction is executable without consulting any other document — no fact, threshold, or step was externalised, only wording tightened. A reader holding only this text can prepare, endure, and recover from the outage exactly as with the 526-word source.</dd></dl><details><summary>rationale</summary><pre>Applies the validated line-editor factor (573→534, structural, runs/r3/r3.1/p1- per frontier.json OT-2 evidence) over the folded frontier-best text (artifact/GUIDE.compressed.md, 526 by frontier.best.metric). All cuts are wording-level, never fact-level: (1) free-standing punctuation tokens removed — the bare '=' in the water line and three bare '—' tokens become attached colons/semicolons (4 words); (2) restatement removed — 'fill bathtub — bathtub water for...' loses the duplicated 'bathtub water' (the referent is unambiguous); (3) filler adverbs cut — 'entirely', 'as much as possible', 'the full', 'basic' (emphasis, not content); (4) connective tissue tightened — 'Agree in advance on'→'Pre-agree', 'If indoor temperature falls below 10°C and you cannot stay warm'→'Below 10°C indoors and unable to stay warm', 'pick one small room on south-facing side, close door, gather everyone'→'gather everyone in one small south-facing room, door closed'; (5) title and two headers shortened (headers carry navigation, not testable facts; 'Refrigerator and freezer' and 'Heat and safety' kept in full). Every quantity, duration, temperature, named item, list member, and ordered step in the source survives: 4 L/person/day and 12 L/person/72 h, drinking-vs-cooking split, food-grade containers out of sunlight, 6-month rotation, advance-warning bathtub fill with never-drink restriction, the six shelf foods, manual can opener with electric-useless note, fridge→freezer→shelf eat order, ~4 h fridge, ~48 h full / ~24 h half freezer with frozen-water consolidation, doors closed + taped reminder notes, 2 h/4°C discard rule with when-in-doubt maxim, LED lanterns/headlamps primary, candles as leading cause of outage house fires, one light per person + two spare battery sets per light, headlamp per bed + kitchen lantern findable in dark, CO triple prohibition (stove/barbecue/generator × indoors/garage/window) with odourless-fatal warning, at-least-one CO alarm per sleeping floor, small south-facing room + layers-beat-heaters, 10°C relocation threshold to warming centre or neighbour, battery/hand-crank radio + pre-learned emergency frequency, charge-on-forecast + 20,000 mAh ≈ 4 phone charges, low-power mode at start, one out-of-area text contact + texts-beat-calls, first-aid kit + 7-day prescriptions rotated in date, insulin 28 days at room temperature + pharmacist confirmation, paper numbers for pharmacy/doctor/poison control + dead-phone line, 5-minute appliance wait for grid stabilisation, ice-crystal refreeze test, one-week restock starting water and batteries, one-page after-action note + fix-one-gap. Counted 472 by the exact frontier rule via pipe (no files touched). KILLED_LEVERS.md contains no entries, so no K-id fence applies.</pre></details></div>
+<div class="card"><h4>r4.1/p2-r4-compose-restructure</h4><dl><dt>leverId</dt><dd>r4-compose-restructure</dd><dt>title</dt><dd>Structure pass over the folded 526: merge Food + cold-storage sections, collapse heading-restating bullets, densify residual prose to telegraphic list forms</dd><dt>lens</dt><dd>restructurer</dd><dt>expectedMetric</dt><dd>484</dd><dt>hardConstraintNote</dt><dd>The candidate remains a self-contained instruction document (GR-3 / objective.hardConstraint): it keeps a scoping title and preamble stating the 72-hour target, the temperate-climate/no-generator assumptions, and the do-sections-in-order priority rule; every section is a set of imperative, executable instructions with all thresholds, quantities, and item lists inline; no instruction refers to external material, prior context, or the original guide. A reader holding only this document can prepare the household end to end.</dd></dl><details><summary>rationale</summary><pre>The folded frontier-best (artifact/GUIDE.compressed.md, 526 by frontier.json best.metric) still carries structural slack the restructurer lens can remove without touching any fact: (1) the Refrigerator-and-freezer section shares full context with Food — merging them deletes a heading and lets adjacent food-safety bullets sit under one roof; (2) several bullets restate their heading ('Store...' under Water, 'Keep battery-powered...radio' under Communication, 'Install...' under Heat) — collapsing the restatement saves tokens per bullet; (3) residual prose forms ('4 L per person per day = 12 L per person', 'Agree in advance on') convert to denser list notation ('4 L/person/day = 12 L/person', 'Pre-agree') while remaining unambiguous; (4) the Water quantity bullet and the drinking/cooking split merge into one line since the second half modifies the first's quantity; (5) heading trims where the section body already carries the dropped word ('Communication and information' -&gt; 'Communication', 'Medical needs' -&gt; 'Medical', 'When the power returns' -&gt; 'When power returns'). Every relocation was checked against a full fact census: all quantities, durations, temperatures, listed items, and both ordered sequences (section priority order; fridge-&gt;freezer-&gt;shelf eat order) survive verbatim or in trivially recoverable notation. Tables were deliberately NOT used: under the whitespace-token counting rule, markdown pipe characters count as tokens, so table forms inflate the metric. Measured count of the candidate below: 484 (tr -s '[:space:]' '\n' | grep -c ., the frontier.json baseline.how rule), a 42-word beat of the 526 frontier best and consistent with the seat-priced ~490 ceiling for the composed OT-3 lever.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>3 · Hold-apart</h2><p class="mandate">the Gap ⿻ (xor) — hash the proposal, derive the witnesses</p><div class="card"><h4>r4.1/p1-r4-compose-line-edit</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span> <span class="badge other" title="drawn before the D1 salt; the seed is the bare proposal hash and a resubmitting proposer could have ground it">legacy-seed</span>
+<p>The witnesses derive from the proposal's own bytes. soulbae could not have known them — but under the legacy rule a resubmitting proposer could have ground the draw; salted runs close that.</p>
+<dl><dt>mode</dt><dd>LEGACY — seed = sha256(proposal_canon.json); pre-salt run</dd><dt>recorded seedHex (gap.json)</dt><dd>ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be</dd><dt>derived sha256(proposal_canon.json), computed at render time</dt><dd>ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>{
+  &quot;Q1_F14&quot;: {
+    &quot;question&quot;: &quot;In the refrigerator/freezer section, what must you do with both appliance doors, and what reminder step goes with it?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Keep both doors closed as much as possible and tape a note to each door as a reminder.&quot;
+  },
+  &quot;Q2_F10&quot;: {
+    &quot;question&quot;: &quot;What kind of can opener must you make sure to own for the emergency food, and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;make sure you own a manual can opener, because an electric one will be useless&quot;
+  },
+  &quot;Q3_F9&quot;: {
+    &quot;question&quot;: &quot;Name the recommended non-perishable food choices for the emergency shelf.&quot;,
+    &quot;expectedAnswer&quot;: &quot;canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk&quot;
+  },
+  &quot;Q4_F22&quot;: {
+    &quot;question&quot;: &quot;At what indoor temperature, and under what condition, should you relocate, and to where?&quot;,
+    &quot;expectedAnswer&quot;: &quot;If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.&quot;
+  },
+  &quot;Q5_F29&quot;: {
+    &quot;question&quot;: &quot;When power returns, how long should you wait before switching major appliances back on, and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Wait five minutes before switching major appliances back on, so the grid can stabilise.&quot;
+  },
+  &quot;Q6_F16&quot;: {
+    &quot;question&quot;: &quot;What primary light source is recommended, and what light source should be avoided and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages.&quot;
+  },
+  &quot;Q7_F28&quot;: {
+    &quot;question&quot;: &quot;Which three phone numbers should you write down on paper, and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.&quot;
+  },
+  &quot;Q8_F2&quot;: {
+    &quot;question&quot;: &quot;What climate is this guide written for, and what backup equipment does it assume you do not have?&quot;,
+    &quot;expectedAnswer&quot;: &quot;It is written for a temperate climate and assumes no backup generator.&quot;
+  }
+}</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>GAP SEAT (hold-apart, xor) — Fiat-Shamir witness derivation for r4-compose-line-edit.
+
+=== STEP 1: NUMBERED FACT LIST (original artifact/GUIDE.md body, split on . ! ? in order; every checkable-fact sentence indexed from F1) ===
+F1: This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours. [72-hour scope]
+F2: It is written for a temperate climate and assumes no backup generator. [assumptions]
+F3: Work through the sections in order; the earlier sections cover the preparations that matter most. [ordering instruction]
+F4: Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours. [4 L/person/day; 12 L/person/72h]
+F5: Half of that allowance is for drinking, and the other half covers cooking and basic hygiene. [drinking vs cooking/hygiene split]
+F6: Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months. [food-grade; out of sunlight; 6-month rotation]
+F7: If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking. [advance-warning bathtub fill; never drink]
+F8: Keep a dedicated shelf of non-perishable food sufficient for three days. [3-day shelf]
+F9: Good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk. [six named foods]
+F10: Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless. [no-cook; manual can opener]
+F11: Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf. [fridge-&gt;freezer-&gt;shelf eat order]
+F12: An unopened refrigerator keeps food safe for about four hours. [~4 h fridge]
+F13: A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water. [~48h full/~24h half; consolidate; frozen water]
+F14: Keep both doors closed as much as possible and tape a note to each door as a reminder. [doors closed; taped notes]
+F15: Any perishable food that has spent more than two hours above four degrees Celsius should be discarded; when in doubt, throw it out. [2h/4C discard; when-in-doubt]
+F16: Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages. [LED primary; avoid candles/fire cause]
+F17: Store at least one light per person, plus two spare sets of batteries for each light. [one light/person; two spare battery sets/light]
+F18: Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark. [headlamp/bed; kitchen lantern; findable in dark]
+F19: Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal. [CO triple prohibition; odourless/fatal]
+F20: Install at least one battery-powered carbon monoxide alarm on each floor where people sleep. [&gt;=1 CO alarm per sleeping floor]
+F21: In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater. [small south room; layers beat heaters]
+F22: If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home. [10C relocation threshold]
+F23: Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins. [radio; pre-learned frequency]
+F24: Charge every phone and powe
+… (truncated — read the file itself)</pre></details></div>
+<div class="card"><h4>r4.1/p2-r4-compose-restructure</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span> <span class="badge other" title="drawn before the D1 salt; the seed is the bare proposal hash and a resubmitting proposer could have ground it">legacy-seed</span>
+<p>The witnesses derive from the proposal's own bytes. soulbae could not have known them — but under the legacy rule a resubmitting proposer could have ground the draw; salted runs close that.</p>
+<dl><dt>mode</dt><dd>LEGACY — seed = sha256(proposal_canon.json); pre-salt run</dd><dt>recorded seedHex (gap.json)</dt><dd>b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5</dd><dt>derived sha256(proposal_canon.json), computed at render time</dt><dd>b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>[
+  {
+    &quot;factIndex&quot;: &quot;F24&quot;,
+    &quot;question&quot;: &quot;When should you charge every phone and power bank, and how many times will a full modern 20,000 mAh (twenty thousand milliamp-hour) power bank recharge a typical phone?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F21&quot;,
+    &quot;question&quot;: &quot;In cold weather, which single room should you gather everyone in, and what does the guide say is safer than any improvised heater?&quot;,
+    &quot;expectedAnswer&quot;: &quot;In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F10&quot;,
+    &quot;question&quot;: &quot;What must you make sure you own for your food supply, and why will an electric version be no use?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F13&quot;,
+    &quot;question&quot;: &quot;How many hours does a full freezer hold a safe temperature, and how many hours does a half-full freezer hold it?&quot;,
+    &quot;expectedAnswer&quot;: &quot;A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F29&quot;,
+    &quot;question&quot;: &quot;When power returns, how long should you wait before switching major appliances back on, and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Wait five minutes before switching major appliances back on, so the grid can stabilise.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F11&quot;,
+    &quot;question&quot;: &quot;In what order should you eat your stored food during the outage?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F7&quot;,
+    &quot;question&quot;: &quot;When should you also fill the bathtub, and what may that bathtub water be used for and not used for?&quot;,
+    &quot;expectedAnswer&quot;: &quot;If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.&quot;
+  },
+  {
+    &quot;factIndex&quot;: &quot;F2&quot;,
+    &quot;question&quot;: &quot;What climate and what equipment assumption is this guide written for?&quot;,
+    &quot;expectedAnswer&quot;: &quot;It is written for a temperate climate and assumes no backup generator.&quot;
+  }
+]</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>GAP (HOLD-APART) TRANSCRIPT - instance examples/field-guide, run r4/r4.1, proposal p2-r4-compose-restructure
+Seat: hold-apart (the Gap, xor). Role: derive held-out witnesses Fiat-Shamir from the proposal artifact. No merit judgement.
+
+=== STEP 1 - NUMBERED FACT CENSUS OF THE ORIGINAL GUIDE ===
+Source: artifact/GUIDE.md, body split into sentences on . ! ? boundaries in reading order; every sentence stating a checkable fact indexed F1 upward. 32 facts (F1..F32), matching frontier.json best.evidence census.
+
+F1: This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours.
+F2: It is written for a temperate climate and assumes no backup generator.
+F3: Work through the sections in order; the earlier sections cover the preparations that matter most.
+F4: Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours.
+F5: Half of that allowance is for drinking, and the other half covers cooking and basic hygiene.
+F6: Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months.
+F7: If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.
+F8: Keep a dedicated shelf of non-perishable food sufficient for three days.
+F9: Good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk.
+F10: Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless.
+F11: Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf.
+F12: An unopened refrigerator keeps food safe for about four hours.
+F13: A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water.
+F14: Keep both doors closed as much as possible and tape a note to each door as a reminder.
+F15: Any perishable food that has spent more than two hours above four degrees Celsius should be discarded; when in doubt, throw it out.
+F16: Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages.
+F17: Store at least one light per person, plus two spare sets of batteries for each light.
+F18: Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark.
+F19: Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal.
+F20: Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.
+F21: In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater.
+F22: If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.
+F23: Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins.
+F24: Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times.
+F25: Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls.
+F26: Keep a first-aid kit and a seven-day supply of every prescription 
+… (truncated — read the file itself)</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>4 · Assay</h2><p class="mandate">soulbis ⚔️ (neg) — the full gate, VALIDATED / MIRAGE / BLOCKED</p><div class="card"><h4>r4.1/p1-r4-compose-line-edit <span class="chip validated">VALIDATED</span> <span class="chip other" title="no coverage recorded — cannot tell census from sample">coverage?</span></h4><dl><dt>leverId</dt><dd>r4-compose-line-edit</dd><dt>metric</dt><dd>472</dd><dt>gateResult</dt><dd>8/8</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r4/r4.1/p1-r4-compose-line-edit</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>Seed re-derived: sha256sum proposal_canon.json = ad6680fa3478b2fbc4737a2024d4f6f0554fc2b230240ccc8f62cc705e5d16be == seedHex (draw arithmetic independently re-verified -&gt; F14,F10,F9,F22,F29,F16,F28,F2). Candidate written verbatim from proposal compressedText to candidate.md; all 8 held-out questions answered from candidate.md alone, 8/8 correct (doors-closed+taped note; manual can opener/electric useless; six named foods; 10C relocate warming centre/neighbour; 5-min wait/grid stabilise; LED primary/avoid candles house-fire cause; pharmacy+doctor+poison-control on paper; temperate climate/no generator). Word count: tr -s '[:space:]' '\n' &lt; candidate.md | grep -c . = 472 &lt; frontier best 526 (frontier.json). Hard constraint holds: candidate is a self-contained instruction document (title, scope, ordering, complete quantified instructions). conform.mjs: CONFORM PASS.</pre></details></div>
+<div class="card"><h4>r4.1/p2-r4-compose-restructure <span class="chip validated">VALIDATED</span> <span class="chip other" title="no coverage recorded — cannot tell census from sample">coverage?</span></h4><dl><dt>leverId</dt><dd>r4-compose-restructure</dd><dt>metric</dt><dd>484</dd><dt>gateResult</dt><dd>8/8</dd><dt>scratchDir</dt><dd>runs/r4/r4.1/p2-r4-compose-restructure</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>Seed re-derived: sha256sum proposal_canon.json = b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5 (matches seedHex; all 8 draw indices re-verified: F24,F21,F10,F13,F29,F11,F7,F2). Gate: all 8 held-out questions answered correctly from candidate.md alone (F24 storm-forecast charging + ~4 recharges from 20,000 mAh; F21 small south-facing room + layered clothing and blankets; F10 manual can opener, electric useless; F13 full freezer ~48h vs half-full ~24h; F29 wait 5 minutes, grid stabilise; F11 fridge then freezer then emergency shelf; F7 fill bathtub on storm forecast with advance warning, flushing/washing never drinking; F2 temperate climate, no backup generator). Metric: tr -s '[:space:]' '\n' &lt; candidate.md | grep -c . = 484 &lt; frontier best 526 (frontier.json). Hard constraint holds: candidate.md remains a self-contained, sectioned instruction document.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>5 · Critic</h2><p class="mandate">classifies the whole round: structural / probe-limited / noise</p><p class="note">no critic.json — the reference engine returns the critic's classification to the orchestrator without persisting it; the chronicle draft carries the round's reading.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>6 · Chronicle</h2><p class="mandate">drafts the record — verdict first</p><div class="card"><h4>r4.1/CHRONICLE_DRAFT.md <span class="chip other">DRAFT — keystone reviews and files</span></h4><pre>---
+date: 2026-07-11
+seat: chronicle
+runId: r4.1
+verdict: Both composed levers cleared the full gate below the 526 best (line-edit 472, restructure 484, each 8/8) — but the critic held BOTH at probe-limited; frontier best stays 526 (frontier.json) until the keystone's 32-fact census converts or kills them. OT-3 is within reach, not closed.
+---
+
+# 2026-07-11 — r4.1 · composing over the folded 526
+
+## Verdict
+
+Two proposals, two prover VALIDATED verdicts, zero frontier movement — yet.
+
+- **r4-compose-line-edit** (line-editor lens over the folded best): full gate
+  8/8, metric 472 per verdict evidence, beating the frontier best of 526
+  (frontier.json `best.metric`). Hard constraint held (self-contained
+  instruction document). conform.mjs CONFORM PASS.
+- **r4-compose-restructure** (restructurer lens over the same base): full gate
+  8/8, metric 484 per verdict evidence, also below 526. Hard constraint held.
+
+The critic classified **both** as **probe-limited**, not structural. The
+prover's verdicts stand on their own terms, but each rests on a single 8-of-32
+Fiat-Shamir draw; fact retention on the 24 unprobed facts is conjectured, not
+established. Under the harness's own precedent — the 526 base required a
+second disjoint draw plus an exhaustive 32/32 census before conversion
+(frontier.json `best.evidence`) — neither candidate may fold today.
+`frontier.json` therefore still reads best = 526; OT-3 (below 526 at gate 8/8,
+frontier.json `openTarget`) remains OPEN pending the census.
+
+## What happened
+
+In round order:
+
+1. **Measure.** Fresh counts by the exact rule: `artifact/GUIDE.md` = 730,
+   matching `frontier.json baseline.metric`; `artifact/GUIDE.compressed.md`
+   = 526, matching `frontier.json best.metric`. No staleness on either
+   artifact. Two lever costs priced descriptively (no recommendation): the
+   composed line-edit over the folded best (~3 seat-sessions, projected
+   ceiling ~490 per the validated line-editor factor cited in frontier.json
+   `openTarget`), and a second independent draw of the frozen 526 candidate
+   (~2 seat-sessions, confirmation only — no metric movement possible).
+2. **Proposals.** soulbae fielded two levers against the folded 526 base:
+   `r4-compose-line-edit` (lens: line-editor, expected 472) and
+   `r4-compose-restructure` (lens: restructurer, expected 484).
+3. **Gap seeds.** Witnesses Fiat-Shamir-derived per proposal (T2/GR-4).
+   Line-edit: sha256 of proposal_canon.json = `ad6680fa…5d16be`, drawing
+   F14, F10, F9, F22, F29, F16, F28, F2. Restructure: sha256 =
+   `b733dbd…ae10c5`, drawing F24, F21, F10, F13, F29, F11, F7, F2. Both
+   seeds independently re-derived at assay; all draw arithmetic re-verified.
+4. **Assay.** Both candidates answered all 8 held-out questions from
+   candidate.md alone — 8/8 each, gate PASS. Metrics counted by the exact
+   rule from the scratch candidates: 472 (line-edit,
+   `runs/r4/r4.1/p1-r4-compose-line-edit/`) and 484 (restructure,
+   `runs/r4/r4.1/p2-r4-compose-restructure/`). Hard constraint verified on
+   both. verdict.json written to each scratch dir. conform.mjs PASS.
+5. **Critic.** Both verdicts downgraded to **probe-limited**. Line-edit: the
+   zero-fact-drop rationale was evidenced only against the 8 drawn
+   questions; a −10.3% claim on already-telegraphic, census-tight text after
+   earning −6.8% on r2 prose is the signature of silently shed qualifiers on
+   the 24 unprobed facts. Restructure: it MOVES facts, so word savings are
+   draw-independent but fact-retention evidence is bounded by one 8-of-32
+   probe — stranded facts are invisible to a single draw. Converter for both:
+   the keystone's exhaustive F1..F32 census (CR-4 procedure), zero agents,
+   subsuming a second draw. Even converted, the 484 is dominated by the
+   sibling 472 over the same base — it matters only as fallback.
+
+## Reversals
+
+**Nothing reversed** — no prior VALIDATED claim was withdrawn and no lever
+was killed. But record the check with the same prominence as the wins: two
+prover VALIDATED verdicts were **held at the door by the critic** in the same
+round. Neither 472 nor 484 is frontier-eligible today. A probe pass is not a
+pass (GR-5); the harness's own precedent on the 526 base was applied to its
+children without flinching.
+
+## Ledger entries returned
+
+For the keystone to serialise (GR-10) — proposed, not written:
+
+- **claims_register (proposed, tier PROVEN, pending census for structural
+  conversion):** `r4-compose-line-edit` — composed line-editor lens over the
+  folded 526 base; gate 8/8 on Gap-drawn witnesses (seed `ad6680fa…5d16be`
+  re-derived); metric 472 by the exact count rule; hard constraint held;
+  scratch `runs/r4/r4.1/p1-r4-compose-line-edit/` (verdict.json on record).
+  Critic class: probe-limited.
+- **claims_register (proposed, tier PROVEN, same caveat):**
+  `r4-compose-restructure` — restructurer lens over the same base; gate 8/8
+  (seed `b733dbd…ae10c5` re-derived); metric 484; hard constraint held;
+  scratch `runs/r4/r4.1/p2-r4-compose-restructure/`. Critic class:
+  probe-limited; dominated by the sibling 472 — fallback only.
+- **KILLED_LEVERS:** none this round (`killedLeverDrafts` empty).
+- **frontier.json:** NO change proposed this round. Update (526 → 472) is
+  contingent on the keystone census returning 32/32 and is the keystone's
+  write alone (GR-1/GR-10).
+
+## Handoff
+
+- **Open questions:** Does the 472-word line-edit candidate retain all 32
+  facts (F1..F32) under exhaustive census, or did the −10.3% shed qualifiers
+  on the 24 unprobed facts? If it drops any, does the 484 restructure
+  candidate survive the same census as fallback?
+- **Blocked items:** OT-3 closure and any frontier fold are blocked on the
+  keystone census; both r4.1 candidates are frozen in their scratch dirs
+  until then. No new lever proposals before the census resolves (per critic).
+- **Single next action:** Keystone runs the exhaustive 32-fact census
+  (F1..F32 per the Gap's numbered list, CR-4 procedure) against the 472-word
+  line-edit candidate at `runs/r4/r4.1/p1-r4-compose-line-edit/candidate.md`;
+  on 32/32 fold it as the new best, update frontier.json (526→472), and close
+  OT-3 — the census converts probe-limited to structural at zero token cost
+  and subsumes a second draw; if any fact is dropped, run the same census on
+  the 484 restructure candidate as fallback before proposing any new lever.
+</pre></div></section>
+<footer>
+<p>Conformance (G0): <code>harness.config.mjs</code> present at the instance root —
+this page does not run the gate; run it yourself: <code>node engine/conform.mjs examples/field-guide</code>.
+The gate proves <code>(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</code> on Z/64Z every time rather than taking it on faith.</p>
+<p>The frontier does not move here. Folding is the keystone's; the door is the First Person's (T6/GR-8).</p>
+</footer>
+</main></body></html>

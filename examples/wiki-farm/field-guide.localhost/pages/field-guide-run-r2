@@ -1,0 +1,76 @@
+{
+  "title": "field-guide run r2",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "f2b058f89baae158",
+      "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+    },
+    {
+      "type": "markdown",
+      "id": "9af6a524a3b6abb1",
+      "text": "### VALIDATED · line-edit-per-sentence-pass 🧙\n\nSentence-level tightening: cut filler and passive voice, preserve every fact\n\n- lens: line-editor\n- Gap seed: `1a575b6ae56e50ea…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "32020089842465db",
+      "text": "### VALIDATED · restructure-lists-and-timing-table 🧙\n\nRestructure prose into imperative bullet lists with a cold-holding timing table\n\n- lens: restructurer\n- Gap seed: `80126a021fa91c85…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "b5683225135678d7",
+      "text": "### VALIDATED · line-editor-tighten-pass 🧙\n\nSingle sentence-level tightening pass; every fact and section order preserved\n\n- lens: line-editor\n- Gap seed: `a7efe7ec8d319f1b…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "fb7ec9533a0dd4fc",
+      "text": "### VALIDATED · restructure-merge-terse-prose 🧙\n\nMerge food+cold-storage, collapse preamble, terse fact-dense prose\n\n- lens: restructurer\n- Gap seed: `a85595a55f796c95…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "d27b069adeada754",
+      "text": "> projected from `runs/r2` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide run r2",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "f2b058f89baae158",
+            "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+          },
+          {
+            "type": "markdown",
+            "id": "9af6a524a3b6abb1",
+            "text": "### VALIDATED · line-edit-per-sentence-pass 🧙\n\nSentence-level tightening: cut filler and passive voice, preserve every fact\n\n- lens: line-editor\n- Gap seed: `1a575b6ae56e50ea…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "32020089842465db",
+            "text": "### VALIDATED · restructure-lists-and-timing-table 🧙\n\nRestructure prose into imperative bullet lists with a cold-holding timing table\n\n- lens: restructurer\n- Gap seed: `80126a021fa91c85…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "b5683225135678d7",
+            "text": "### VALIDATED · line-editor-tighten-pass 🧙\n\nSingle sentence-level tightening pass; every fact and section order preserved\n\n- lens: line-editor\n- Gap seed: `a7efe7ec8d319f1b…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "fb7ec9533a0dd4fc",
+            "text": "### VALIDATED · restructure-merge-terse-prose 🧙\n\nMerge food+cold-storage, collapse preamble, terse fact-dense prose\n\n- lens: restructurer\n- Gap seed: `a85595a55f796c95…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "d27b069adeada754",
+            "text": "> projected from `runs/r2` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1374511828
+    }
+  ]
+}

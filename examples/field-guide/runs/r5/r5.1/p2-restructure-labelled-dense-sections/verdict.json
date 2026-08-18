@@ -1,0 +1,10 @@
+{
+  "leverId": "p2-restructure-labelled-dense-sections",
+  "status": "VALIDATED",
+  "metric": 461,
+  "gateResult": "32/32",
+  "coverage": { "mode": "census", "N": 32, "detection": 1.0 },
+  "failingCheck": "",
+  "evidence": "Seed re-derived auditor's way: sha256(proposal_canon.json)=9bd99da429419226d13bf4c22046f65d90a127c346b1b5e3c5b2a77dce45b414 == hProposal; printf '%s' hSource||hProposal||salt | sha256sum = bbb9099d9daa30ddac53e0b9250e9a36293636605fc66e10c795e8a1bbc24485 == seedHex. CENSUS gate: all 32 facts F1..F32 answered from candidate.md alone, every expected answer recoverable (detection 1.0, nothing held out). Word count mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 461. Frontier best = 472 (r4-compose-line-edit); 461 < 472 by 11 words. Hard constraint holds: candidate.md is a self-contained instruction document with title + 8 labelled sections covering every original directive. VALIDATED = full census pass 32/32 AND hard constraint AND frontier beat.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r5/r5.1/p2-restructure-labelled-dense-sections"
+}

@@ -1,0 +1,10 @@
+{
+  "leverId": "cut-filler-line-edit",
+  "status": "MIRAGE",
+  "metric": 493,
+  "gateResult": "32/32",
+  "coverage": { "mode": "census", "N": 32, "detection": 1.0 },
+  "failingCheck": "frontier-beat: mechanical word count 493 is not below frontier best 472 (493 >= 472). No fact dropped — the census gate is a FULL 32/32 pass and the hard constraint (self-contained instruction document) holds; the candidate reads fine but does not advance the moving ceiling.",
+  "evidence": "Seed re-derived auditor-way: sha256sum proposal_canon.json = e6ba7664ee1a5c8b7a46b296d5c656711e78d8b5545b08a49a527deb3c003016 = hProposal OK; sha256(hSource||hProposal||salt) = 6a69e150a00325b6d9e1f3debb3a4bc80d503380072c7a5f86a152fe65a5927f = seedHex OK; sha256sum artifact/GUIDE.md = 011a4f35...05b58 = hSource OK. Not BLOCKED. candidate.md written verbatim from proposal_canon.json compressedText (493 words via: tr -s '[:space:]' '\\n' < candidate.md | grep -c .). Census gate: all 32 facts F1..F32 answered from candidate.md alone, every expected substring recoverable => 32/32 full pass. Hard constraint holds. Frontier (frontier.json best.metric=472) NOT beaten: 493 > 472, so NOT VALIDATED. Proposal's own expectedMetric was 493, consistent with measured; the estimate simply overshoots the standing best.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r5/r5.2/p1-cut-filler-line-edit"
+}

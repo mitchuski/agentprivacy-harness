@@ -1,0 +1,9 @@
+{
+  "leverId": "compose-line-edit-over-best",
+  "status": "VALIDATED",
+  "metric": 534,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9 == seedHex (5857 bytes); draw independently recomputed from digest bytes 168,37,70,227,142,179,73,115 -> F9,F7,F13,F28,F3,F22,F27,F20, matches gap transcript. Gate answered from candidate.md only: F3 'Work the sections in order; earlier ones matter most' PASS; F7 bathtub for flushing toilets and washing, never drinking PASS; F9 all six foods (canned beans, canned fish, peanut butter, crackers, dried fruit, shelf-stable milk) PASS; F13 full freezer ~48h, half-full ~24h PASS; F20 at least one battery-powered CO alarm per floor where people sleep PASS; F22 below 10C relocate to warming centre or neighbour's home PASS; F27 insulin ~28 days at room temp, confirm with pharmacist PASS; F28 pharmacy/doctor/poison-control numbers on paper, dead phone is not a phone book PASS. Metric: tr -s '[:space:]' '\\n' < candidate.md | grep -c . -> 534. Frontier best 573 (frontier.json); 534 < 573. Hard constraint holds: candidate.md is a self-contained instruction document (title + ordered sections covering water, food/cold storage, light, heat/safety, communication, medical, power-return recovery).",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r3/r3.1/p1-compose-line-edit-over-best"
+}

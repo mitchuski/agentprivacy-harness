@@ -1,0 +1,808 @@
+{
+  "name": "field-guide",
+  "mode": "instance",
+  "derived": "walked from the ledgers by tools/spellweb.mjs — re-run = re-true; never hand-edit",
+  "nodeTypes": [
+    "chronicle",
+    "claim",
+    "frontier",
+    "instance",
+    "lens",
+    "lever",
+    "objective",
+    "run",
+    "target"
+  ],
+  "edgeTypes": [
+    "advances_toward",
+    "chronicles",
+    "claims",
+    "holds",
+    "measured_by",
+    "mirage_in",
+    "ran_in",
+    "searches_for",
+    "through_lens",
+    "validated_in"
+  ],
+  "nodes": [
+    {
+      "id": "instance-field-guide",
+      "type": "instance",
+      "label": "field-guide",
+      "domain": "shared",
+      "layer": "core",
+      "desc": "harness instance at C:/Users/mitch/dual-agent-harness/examples/field-guide"
+    },
+    {
+      "id": "objective-field-guide",
+      "type": "objective",
+      "label": "the objective",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "words",
+      "gate": "held-out comprehension: 8 questions drawn by the Gap from the ORIGINAL guide, answered from the compressed text alone, graded against the original — must be 8/8 (T5: zero collapses)",
+      "hardConstraint": "the compressed guide remains a self-contained instruction document: no pointers back to the original, no \"see full version\", every section still actionable on its own (GR-3)",
+      "canary": "artifact/GUIDE.md itself. The questions are drawn from it, so it answers 8/8 by construction — the gate is satisfiable, and a MIRAGE is therefore always a fault of the candidate, never of the gate."
+    },
+    {
+      "id": "lens-line-editor",
+      "type": "lens",
+      "label": "line-editor",
+      "domain": "mage",
+      "layer": "knowledge",
+      "desc": "sentence-level compression: cut redundancy, filler, and throat-clearing; convert passive to active; tighten phrasing. NEVER delete a fact — every quantity, duration, temperature, item, and ordered step in the original must survive."
+    },
+    {
+      "id": "lens-restructurer",
+      "type": "lens",
+      "label": "restructurer",
+      "domain": "mage",
+      "layer": "knowledge",
+      "desc": "structure-level compression: merge overlapping sections, convert prose to tables or lists where denser, collapse preamble. NEVER delete a fact — every quantity, duration, temperature, item, and ordered step in the original must survive."
+    },
+    {
+      "id": "frontier-field-guide",
+      "type": "frontier",
+      "label": "frontier · best 472",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "baseline 730 (2026-07-09) → best 472",
+      "baseline": 730,
+      "best": 472
+    },
+    {
+      "id": "target-ot-4",
+      "type": "target",
+      "label": "OT-4",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "below 472 words at gate 8/8 — third composition pass over an already twice-composed text; diminishing returns expected (730→526→472). A proposal must name which word class it removes; the sibling r4-compose-restructure (484, VALIDATED, probe-limited, dominated) is the standing fallback lever family",
+      "status": "OPEN"
+    },
+    {
+      "id": "run-r1",
+      "type": "run",
+      "label": "run r1",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "recorded run",
+      "status": null
+    },
+    {
+      "id": "lever-r1-line-edit-tighten",
+      "type": "lever",
+      "label": "line-edit-tighten",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Single line-editor tightening pass: cut filler, activate passives, fuse redundant restatements · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r1-line-editor-tighten-pass",
+      "type": "lever",
+      "label": "line-editor-tighten-pass",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Sentence-level tightening: cut throat-clearing, restatement, and connective padding; passive to active · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r1-restructure-to-bulleted-sections",
+      "type": "lever",
+      "label": "restructure-to-bulleted-sections",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Restructure prose into a bulleted section grid, collapse preamble and connective tissue · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "lever-r1-restructure-to-section-bullets",
+      "type": "lever",
+      "label": "restructure-to-section-bullets",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Convert each section's prose into imperative bullet lists and collapse the preamble · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "lever-r1-restructure-to-telegraphic-bullets",
+      "type": "lever",
+      "label": "restructure-to-telegraphic-bullets",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Collapse all 8 prose sections into terse imperative bullet directives · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "run-r2",
+      "type": "run",
+      "label": "run r2",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "recorded run",
+      "status": null
+    },
+    {
+      "id": "lever-r2-line-edit-per-sentence-pass",
+      "type": "lever",
+      "label": "line-edit-per-sentence-pass",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Sentence-level tightening: cut filler and passive voice, preserve every fact · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r2-restructure-lists-and-timing-table",
+      "type": "lever",
+      "label": "restructure-lists-and-timing-table",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Restructure prose into imperative bullet lists with a cold-holding timing table · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "lever-r2-line-editor-tighten-pass",
+      "type": "lever",
+      "label": "line-editor-tighten-pass",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Single sentence-level tightening pass; every fact and section order preserved · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r2-restructure-merge-terse-prose",
+      "type": "lever",
+      "label": "restructure-merge-terse-prose",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Merge food+cold-storage, collapse preamble, terse fact-dense prose · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "run-r3",
+      "type": "run",
+      "label": "run r3",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "recorded run",
+      "status": null
+    },
+    {
+      "id": "lever-r3-compose-line-edit-over-best",
+      "type": "lever",
+      "label": "compose-line-edit-over-best",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Composed line-edit over the folded 573-word best: cut residual filler and throat-clearing, zero facts dropped · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r3-telegraphic-bullets-second-draw",
+      "type": "lever",
+      "label": "telegraphic-bullets-second-draw",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Second independent draw of the frozen r1 telegraphic-bullets candidate · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "run-r4",
+      "type": "run",
+      "label": "run r4",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "recorded run",
+      "status": null
+    },
+    {
+      "id": "lever-r4-r4-compose-line-edit",
+      "type": "lever",
+      "label": "r4-compose-line-edit",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Composed line-edit over the folded 526-word best (OT-3): sentence-level compression, zero fact drops · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r4-r4-compose-restructure",
+      "type": "lever",
+      "label": "r4-compose-restructure",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Structure pass over the folded 526: merge Food + cold-storage sections, collapse heading-restating bullets, densify residual prose to telegraphic list forms · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "run-r5",
+      "type": "run",
+      "label": "run r5",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "recorded run",
+      "status": null
+    },
+    {
+      "id": "lever-r5-line-edit-baseline-terse-pass",
+      "type": "lever",
+      "label": "line-edit-baseline-terse-pass",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Single-pass telegraphic line-edit of the 730 baseline · MIRAGE",
+      "status": "MIRAGE",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r5-restructure-labelled-dense-sections",
+      "type": "lever",
+      "label": "restructure-labelled-dense-sections",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Re-layout to labelled dense sections with token-fused units · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "lever-r5-cut-filler-line-edit",
+      "type": "lever",
+      "label": "cut-filler-line-edit",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Sentence-level line-edit of the 730 baseline: imperative voice, cut throat-clearing and redundant connectives, all 32 facts intact · MIRAGE",
+      "status": "MIRAGE",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r5-restructure-merge-sections-inline",
+      "type": "lever",
+      "label": "restructure-merge-sections-inline",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Fold each section's bullets into one semicolon-joined paragraph with an inline bold lead · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "lever-r5-strip-markup-dashes-and-filler",
+      "type": "lever",
+      "label": "strip-markup-dashes-and-filler",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Line-edit the 472 champion: delete non-semantic bullet-dash tokens plus two redundant words · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "line-editor"
+    },
+    {
+      "id": "lever-r5-restructure-telegraphic-merge",
+      "type": "lever",
+      "label": "restructure-telegraphic-merge",
+      "domain": "mage",
+      "layer": "work",
+      "desc": "Restructure the whole guide into telegraphic single-line instructions per section, preamble collapsed · VALIDATED",
+      "status": "VALIDATED",
+      "lens": "restructurer"
+    },
+    {
+      "id": "claim-cr-1",
+      "type": "claim",
+      "label": "CR-1",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "artifact/GUIDE.md is 730 words by the counting rule in frontier.json"
+    },
+    {
+      "id": "claim-cr-2",
+      "type": "claim",
+      "label": "CR-2",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "restructure-merge-terse-prose compresses the guide to frontier best (573) at gate 8/8, hard constraint intact; critic structural on an independent draw"
+    },
+    {
+      "id": "claim-cr-3",
+      "type": "claim",
+      "label": "CR-3",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "line-editor tightening is a structural (draw-invariant) lever family: three independent passes validated at 8/8 — 619 (r1), 615 (r2.1), 642 (r2.2) — all dominated by CR-2"
+    },
+    {
+      "id": "claim-cr-4",
+      "type": "claim",
+      "label": "CR-4",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "restructure-to-telegraphic-bullets (526) is draw-invariant: the SAME frozen text passed 8/8 on two disjoint independent Fiat-Shamir draws (r1 + r3.1, only F27/F31 overlap), and the keystone's exhausti"
+    },
+    {
+      "id": "claim-cr-5",
+      "type": "claim",
+      "label": "CR-5",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "proposer word-count estimates run optimistic; only the mechanical recount governs (GR-1): 618→619, 521→526, 627→642 across rounds — but r3's two proposers hit exactly (534→534, 526→526)"
+    },
+    {
+      "id": "claim-cr-6",
+      "type": "claim",
+      "label": "CR-6",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "compose-line-edit-over-best: sentence-level tightening over the folded 573 text yields 534 at gate 8/8 (−6.8% from wording alone), critic structural, exact estimate hit"
+    },
+    {
+      "id": "claim-cr-7",
+      "type": "claim",
+      "label": "CR-7",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "the r3 \"verbatim re-submission\" differed from the r1 frozen text by exactly one trailing newline (r1 3168 bytes no EOF newline, r3 3169 with; content identical after strip, 526 by the counting rule bo"
+    },
+    {
+      "id": "claim-cr-8",
+      "type": "claim",
+      "label": "CR-8",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "the r3 Gap seats returned full {seedHex, draw, transcript} to the orchestrator but wrote stub gap.json files to disk (p1 transcript 4 chars; p2 transcript 149) — file-must-match-return was enforced fo"
+    },
+    {
+      "id": "claim-cr-9",
+      "type": "claim",
+      "label": "CR-9",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "r4-compose-line-edit compresses the folded 526 to frontier best (472) at gate 8/8 (estimate hit exactly); keystone census 32/32 converted it probe-limited→structural — the critic itself named the cens"
+    },
+    {
+      "id": "claim-cr-10",
+      "type": "claim",
+      "label": "CR-10",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "r4-compose-restructure reaches 484 at gate 8/8 over the same base but MOVES facts on one 8/32 probe; dominated by CR-9"
+    },
+    {
+      "id": "claim-cr-11",
+      "type": "claim",
+      "label": "CR-11",
+      "domain": "shared",
+      "layer": "knowledge",
+      "desc": "defect #7 residue: the hardened Gap prompt fixed transcripts (r4: 9,376 + 9,621 chars on disk) but p1's draw field was stubbed once (8 chars) — the file-must-match-return rule holds for two of three f"
+    },
+    {
+      "id": "chronicle-2026-07-10-r1-3-two-validated-fold-held",
+      "type": "chronicle",
+      "label": "2026-07-10 — r1.3 field-guide, biggest beat held behind a second draw",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-10_r1.3_two-validated-fold-held.md"
+    },
+    {
+      "id": "chronicle-2026-07-10-r2-1-first-sub-730",
+      "type": "chronicle",
+      "label": "2026-07-10 — first sub-730 compressions, one structural one probe-limi",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-10_r2.1_first-sub-730.md"
+    },
+    {
+      "id": "chronicle-2026-07-10-r2-2-restructurer-takes-the-lead",
+      "type": "chronicle",
+      "label": "2026-07-10 — r2.2 twin validations, restructurer takes the lead",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-10_r2.2_restructurer-takes-the-lead.md"
+    },
+    {
+      "id": "chronicle-2026-07-11-keystone-fold-472",
+      "type": "chronicle",
+      "label": "The first round anyone watched — 526 folds to 472",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-11_keystone-fold-472.md"
+    },
+    {
+      "id": "chronicle-2026-07-11-keystone-fold-526",
+      "type": "chronicle",
+      "label": "The second draw clears, the census settles it — 526 folds",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-11_keystone-fold-526.md"
+    },
+    {
+      "id": "chronicle-2026-07-11-keystone-fold-573",
+      "type": "chronicle",
+      "label": "The keystone folds — first frontier move of the toy",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-11_keystone-fold-573.md"
+    },
+    {
+      "id": "chronicle-2026-07-11-r3-1-second-draw-clears-composed-534",
+      "type": "chronicle",
+      "label": "2026-07-11 — r3.1 double validation: 534 line-edit + 526 second-draw c",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-11_r3.1_second-draw-clears-composed-534.md"
+    },
+    {
+      "id": "chronicle-2026-07-11-r4-1-composed-below-projection",
+      "type": "chronicle",
+      "label": "2026-07-11 — r4.1 · composing over the folded 526",
+      "domain": "shared",
+      "layer": "record",
+      "desc": "2026-07-11_r4.1_composed-below-projection.md"
+    }
+  ],
+  "edges": [
+    {
+      "source": "instance-field-guide",
+      "target": "objective-field-guide",
+      "type": "holds"
+    },
+    {
+      "source": "lens-line-editor",
+      "target": "instance-field-guide",
+      "type": "searches_for"
+    },
+    {
+      "source": "lens-restructurer",
+      "target": "instance-field-guide",
+      "type": "searches_for"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "frontier-field-guide",
+      "type": "measured_by"
+    },
+    {
+      "source": "frontier-field-guide",
+      "target": "target-ot-4",
+      "type": "advances_toward"
+    },
+    {
+      "source": "run-r1",
+      "target": "instance-field-guide",
+      "type": "ran_in"
+    },
+    {
+      "source": "lever-r1-line-edit-tighten",
+      "target": "run-r1",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r1-line-edit-tighten",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r1-line-editor-tighten-pass",
+      "target": "run-r1",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r1-line-editor-tighten-pass",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r1-restructure-to-bulleted-sections",
+      "target": "run-r1",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r1-restructure-to-bulleted-sections",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r1-restructure-to-section-bullets",
+      "target": "run-r1",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r1-restructure-to-section-bullets",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r1-restructure-to-telegraphic-bullets",
+      "target": "run-r1",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r1-restructure-to-telegraphic-bullets",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "run-r2",
+      "target": "instance-field-guide",
+      "type": "ran_in"
+    },
+    {
+      "source": "lever-r2-line-edit-per-sentence-pass",
+      "target": "run-r2",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r2-line-edit-per-sentence-pass",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r2-restructure-lists-and-timing-table",
+      "target": "run-r2",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r2-restructure-lists-and-timing-table",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r2-line-editor-tighten-pass",
+      "target": "run-r2",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r2-line-editor-tighten-pass",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r2-restructure-merge-terse-prose",
+      "target": "run-r2",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r2-restructure-merge-terse-prose",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "run-r3",
+      "target": "instance-field-guide",
+      "type": "ran_in"
+    },
+    {
+      "source": "lever-r3-compose-line-edit-over-best",
+      "target": "run-r3",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r3-compose-line-edit-over-best",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r3-telegraphic-bullets-second-draw",
+      "target": "run-r3",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r3-telegraphic-bullets-second-draw",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "run-r4",
+      "target": "instance-field-guide",
+      "type": "ran_in"
+    },
+    {
+      "source": "lever-r4-r4-compose-line-edit",
+      "target": "run-r4",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r4-r4-compose-line-edit",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r4-r4-compose-restructure",
+      "target": "run-r4",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r4-r4-compose-restructure",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "run-r5",
+      "target": "instance-field-guide",
+      "type": "ran_in"
+    },
+    {
+      "source": "lever-r5-line-edit-baseline-terse-pass",
+      "target": "run-r5",
+      "type": "mirage_in"
+    },
+    {
+      "source": "lever-r5-line-edit-baseline-terse-pass",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r5-restructure-labelled-dense-sections",
+      "target": "run-r5",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r5-restructure-labelled-dense-sections",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r5-cut-filler-line-edit",
+      "target": "run-r5",
+      "type": "mirage_in"
+    },
+    {
+      "source": "lever-r5-cut-filler-line-edit",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r5-restructure-merge-sections-inline",
+      "target": "run-r5",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r5-restructure-merge-sections-inline",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r5-strip-markup-dashes-and-filler",
+      "target": "run-r5",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r5-strip-markup-dashes-and-filler",
+      "target": "lens-line-editor",
+      "type": "through_lens"
+    },
+    {
+      "source": "lever-r5-restructure-telegraphic-merge",
+      "target": "run-r5",
+      "type": "validated_in"
+    },
+    {
+      "source": "lever-r5-restructure-telegraphic-merge",
+      "target": "lens-restructurer",
+      "type": "through_lens"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-1",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-2",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-3",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-4",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-5",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-6",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-7",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-8",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-9",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-10",
+      "type": "claims"
+    },
+    {
+      "source": "instance-field-guide",
+      "target": "claim-cr-11",
+      "type": "claims"
+    },
+    {
+      "source": "chronicle-2026-07-10-r1-3-two-validated-fold-held",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-10-r2-1-first-sub-730",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-10-r2-2-restructurer-takes-the-lead",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-11-keystone-fold-472",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-11-keystone-fold-526",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-11-keystone-fold-573",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-11-r3-1-second-draw-clears-composed-534",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    },
+    {
+      "source": "chronicle-2026-07-11-r4-1-composed-below-projection",
+      "target": "instance-field-guide",
+      "type": "chronicles"
+    }
+  ]
+}

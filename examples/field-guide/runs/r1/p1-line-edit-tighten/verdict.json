@@ -1,0 +1,9 @@
+{
+  "leverId": "p1-line-edit-tighten",
+  "status": "VALIDATED",
+  "metric": 627,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum runs/r1/p1-line-edit-tighten/proposal_canon.json = 70a9aa1300aaf4a1afda69bf1835d0aef4586c9bb6c052c6c3abb67239f9be96, equals gap.json seedHex (round valid, GR-4). candidate.md written verbatim from proposal compressedText. Held-out gate: all 8 Gap questions (F1,F10,F13,F15,F16,F17,F22,F23) answerable from candidate.md alone and match expected -> 8/8. Word count mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 627. Hard constraint holds: candidate.md is a complete self-contained instruction document (all 8 sections, full instructions retained). 627 < frontier best 730. conform.mjs PASS.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r1/p1-line-edit-tighten"
+}

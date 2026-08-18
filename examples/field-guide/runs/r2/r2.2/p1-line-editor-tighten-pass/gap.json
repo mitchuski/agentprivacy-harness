@@ -1,0 +1,54 @@
+{
+  "seedHex": "a7efe7ec8d319f1b7e0eb10e5f7d920f040f630830315d8b628a9e2819c1467f",
+  "draw": [
+    {
+      "factIndex": "F8",
+      "question": "For how many days should the dedicated shelf of non-perishable food be sufficient?",
+      "expectedAnswer": "three days",
+      "originalSentence": "Keep a dedicated shelf of non-perishable food sufficient for three days."
+    },
+    {
+      "factIndex": "F24",
+      "question": "A full modern power bank of what capacity will recharge a typical phone roughly how many times?",
+      "expectedAnswer": "a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times",
+      "originalSentence": "Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times."
+    },
+    {
+      "factIndex": "F23",
+      "question": "Besides keeping a battery-powered or hand-crank radio, what should you know before the outage begins?",
+      "expectedAnswer": "know the frequency of your local emergency station before the outage begins",
+      "originalSentence": "Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins."
+    },
+    {
+      "factIndex": "F5",
+      "question": "How is the water allowance split between uses?",
+      "expectedAnswer": "Half of that allowance is for drinking, and the other half covers cooking and basic hygiene.",
+      "originalSentence": "Half of that allowance is for drinking, and the other half covers cooking and basic hygiene."
+    },
+    {
+      "factIndex": "F2",
+      "question": "What climate is the guide written for, and what does it assume about a backup generator?",
+      "expectedAnswer": "It is written for a temperate climate and assumes no backup generator.",
+      "originalSentence": "It is written for a temperate climate and assumes no backup generator."
+    },
+    {
+      "factIndex": "F28",
+      "question": "Which phone numbers should you write down on paper, and why?",
+      "expectedAnswer": "the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book",
+      "originalSentence": "Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book."
+    },
+    {
+      "factIndex": "F6",
+      "question": "In what containers should water be stored, how should it be kept, and how often replaced?",
+      "expectedAnswer": "Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months.",
+      "originalSentence": "Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months."
+    },
+    {
+      "factIndex": "F4",
+      "question": "How much water should you store per person per day, and how much does that total per person for the full seventy-two hours?",
+      "expectedAnswer": "four litres of water per person per day, which means twelve litres per person for the full seventy-two hours",
+      "originalSentence": "Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours."
+    }
+  ],
+  "transcript": "GAP (HOLD-APART ⿻) TRANSCRIPT — instance examples/field-guide, run r2/r2.2, proposal p1-line-editor-tighten-pass.\n\n=== STEP 1: NUMBERED FACT LIST (original artifact/GUIDE.md, body split on . ! ? in order; checkable facts only) ===\nF1: This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours. (scope: up to 72 hours)\nF2: It is written for a temperate climate and assumes no backup generator.\nF3: Work through the sections in order; the earlier sections cover the preparations that matter most.\nF4: Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours.\nF5: Half of that allowance is for drinking, and the other half covers cooking and basic hygiene.\nF6: Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months.\nF7: If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.\nF8: Keep a dedicated shelf of non-perishable food sufficient for three days.\nF9: Good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk.\nF10: Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless.\nF11: Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf.\nF12: An unopened refrigerator keeps food safe for about four hours.\nF13: A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water.\nF14: Keep both doors closed as much as possible and tape a note to each door as a reminder.\nF15: Any perishable food that has spent more than two hours above four degrees Celsius should be discarded; when in doubt, throw it out.\nF16: Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages.\nF17: Store at least one light per person, plus two spare sets of batteries for each light.\nF18: Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark.\nF19: Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal.\nF20: Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.\nF21: In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater.\nF22: If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.\nF23: Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins.\nF24: Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times.\nF25: Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls.\nF26: Keep a first-aid kit and a seven-day supply of every prescription medication, and rotate the medications so they stay in date.\nF27: Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens.\nF28: Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.\nF29: Wait five minutes before switching major appliances back on, so the grid can stabilise.\nF30: Check the freezer: if food still contains ice crystals, it can be safely refrozen.\nF31: Restock everything used during the outage within one week, starting with water and batteries.\nF32: Finally, write a one-page note about what was missing or awkward, and fix at least one of those gaps before the next outage arrives.\nTotal checkable facts: 32.\n\n=== STEP 2: CANONICAL SERIALIZATION + HASH ===\nThe proposal artifact (verbatim from the prompt) was JSON-parsed and re-serialized canonically: keys sorted recursively (ascending), no whitespace, UTF-8. Those exact bytes (7097 bytes) were saved to proposal_canon.json in this run dir. Canonicalizer: JSON.stringify over a recursively key-sorted object (Node).\nExact hash command (run in this run dir):\n  sha256sum proposal_canon.json\nOutput:\n  a7efe7ec8d319f1b7e0eb10e5f7d920f040f630830315d8b628a9e2819c1467f *proposal_canon.json\nseedHex = a7efe7ec8d319f1b7e0eb10e5f7d920f040f630830315d8b628a9e2819c1467f\nCheck: sha256sum of the persisted proposal_canon.json MUST equal seedHex; if not, the round is void (T2/GR-4).\n\n=== STEP 3: DRAW RULE (deterministic, without replacement) ===\nDigest bytes left-to-right as unsigned integers b0,b1,...: b0=167(a7) b1=239(ef) b2=231(e7) b3=236(ec) b4=141(8d) b5=49(31) b6=159(9f) b7=27(1b) ...\nStart with remaining = [F1..F32] (ordered ascending, 32 items). For draw k (0-indexed): idx = b_k mod (len remaining); pick remaining[idx] (0-indexed into the CURRENT ordered remaining list); remove it. Repeat for 8 draws.\nStep-by-step:\n  draw 1: b0=167 mod 32 = 7  -> F8   (remaining 32->31)\n  draw 2: b1=239 mod 31 = 22 -> F24  (remaining 31->30)\n  draw 3: b2=231 mod 30 = 21 -> F23  (remaining 30->29)\n  draw 4: b3=236 mod 29 = 4  -> F5   (remaining 29->28)\n  draw 5: b4=141 mod 28 = 1  -> F2   (remaining 28->27)\n  draw 6: b5=49  mod 27 = 22 -> F28  (remaining 27->26)\n  draw 7: b6=159 mod 26 = 3  -> F6   (remaining 26->25)\n  draw 8: b7=27  mod 25 = 2  -> F4   (remaining 25->24)\nDrawn (in order): F8, F24, F23, F5, F2, F28, F6, F4 — 8 distinct indices.\n\n=== STEP 4: COMPREHENSION QUESTIONS ===\nOne question per drawn fact; expected answer quoted from the ORIGINAL sentence (see draw[] for the full objects). These are the held-out gate witnesses (T2): derived only from the proposal hash, not chosen by the proposer or prover.\n"
+}

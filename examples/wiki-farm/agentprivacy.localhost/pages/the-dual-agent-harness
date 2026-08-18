@@ -1,0 +1,82 @@
+{
+  "title": "The Dual Agent Harness",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "0b08baad57beac41",
+      "text": "# The Dual Agent Harness ⚔️🧙\n\nA verification harness for AI-agent work: one agent proposes, a second independently proves, and the tests that decide are derived by hashing the proposal together with a secret the proposer never sees — so it cannot grind them."
+    },
+    {
+      "type": "markdown",
+      "id": "25291e31dde16033",
+      "text": "An agent that proposes a change and then checks its own change will pass — not because it cheats, but because the check it invents is the check its change was built to survive. The harness names that output a **mirage**: it passes the author's probe and fails the real gate. Between the proposer (soulbae 🧙) and the prover (soulbis ⚔️) sits **the Gap ⿻**, and above them both is **the First Person 😊**, who alone opens the door to anything outward-facing."
+    },
+    {
+      "type": "markdown",
+      "id": "33578c7cd2e05cda",
+      "text": "On the ring of integers mod 64 the inscription is a theorem: negation composed with complement is the successor — two *different* inversions, held apart, produce the step forward. A proposer checked by a copy of itself is an identity operation."
+    },
+    {
+      "type": "markdown",
+      "id": "ac130b426c45b982",
+      "text": "## Where the skeleton went\n\nFifteen real embodiments wear this skeleton — quantum circuits, ZK constraint systems, research pipelines, consent agreements, an acceptance registry with an external counterparty, a literature review run against an adversary, and one deliberate failure kept on purpose. The repo's HARNESS_PATHS.md is the map; this wall's sibling site [[field-guide workshop]] shows the runnable spar in full."
+    },
+    {
+      "type": "reference",
+      "site": "field-guide.localhost",
+      "slug": "field-guide-workshop",
+      "title": "field-guide workshop",
+      "text": "The spar: compress a field guide while a hash-drawn comprehension census must stay a full pass.",
+      "id": "1a54c91cc1377f9f"
+    },
+    {
+      "type": "markdown",
+      "id": "090298a2508f0a56",
+      "text": "> Source of truth: the repo docs — README, TRUSTS.md, GROUND_RULES.md, ADOPTION.md. This page is a projection for visitors; the repo is the record."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "The Dual Agent Harness",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "0b08baad57beac41",
+            "text": "# The Dual Agent Harness ⚔️🧙\n\nA verification harness for AI-agent work: one agent proposes, a second independently proves, and the tests that decide are derived by hashing the proposal together with a secret the proposer never sees — so it cannot grind them."
+          },
+          {
+            "type": "markdown",
+            "id": "25291e31dde16033",
+            "text": "An agent that proposes a change and then checks its own change will pass — not because it cheats, but because the check it invents is the check its change was built to survive. The harness names that output a **mirage**: it passes the author's probe and fails the real gate. Between the proposer (soulbae 🧙) and the prover (soulbis ⚔️) sits **the Gap ⿻**, and above them both is **the First Person 😊**, who alone opens the door to anything outward-facing."
+          },
+          {
+            "type": "markdown",
+            "id": "33578c7cd2e05cda",
+            "text": "On the ring of integers mod 64 the inscription is a theorem: negation composed with complement is the successor — two *different* inversions, held apart, produce the step forward. A proposer checked by a copy of itself is an identity operation."
+          },
+          {
+            "type": "markdown",
+            "id": "ac130b426c45b982",
+            "text": "## Where the skeleton went\n\nFifteen real embodiments wear this skeleton — quantum circuits, ZK constraint systems, research pipelines, consent agreements, an acceptance registry with an external counterparty, a literature review run against an adversary, and one deliberate failure kept on purpose. The repo's HARNESS_PATHS.md is the map; this wall's sibling site [[field-guide workshop]] shows the runnable spar in full."
+          },
+          {
+            "type": "reference",
+            "site": "field-guide.localhost",
+            "slug": "field-guide-workshop",
+            "title": "field-guide workshop",
+            "text": "The spar: compress a field guide while a hash-drawn comprehension census must stay a full pass.",
+            "id": "1a54c91cc1377f9f"
+          },
+          {
+            "type": "markdown",
+            "id": "090298a2508f0a56",
+            "text": "> Source of truth: the repo docs — README, TRUSTS.md, GROUND_RULES.md, ADOPTION.md. This page is a projection for visitors; the repo is the record."
+          }
+        ]
+      },
+      "date": 1786968000000
+    }
+  ]
+}

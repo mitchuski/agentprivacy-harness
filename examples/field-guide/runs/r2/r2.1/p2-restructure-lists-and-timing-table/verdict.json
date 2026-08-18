@@ -1,0 +1,9 @@
+{
+  "leverId": "restructure-lists-and-timing-table",
+  "status": "VALIDATED",
+  "metric": 583,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = 80126a021fa91c85d65ea986148ab47f7fd276c73ed4aafe2a8fda874353d437 = seedHex (PASS, Fiat-Shamir). Wrote compressedText verbatim to candidate.md. Word count mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . => 583. Frontier best = 730 (frontier.json), so 583 < 730 beats frontier. Held-out gate 8/8: all of F1(72h), F20(>=1 CO alarm per sleeping floor), F18(headlamp/bed + lantern/kitchen), F4(4 L/person/day = 12 L/72h), F6(food-grade + no sunlight + replace 6mo), F11(fridge->freezer->shelf order), F5(half drink / half cook+hygiene), F14(doors closed + note each) answered correctly from candidate.md alone. Hard constraint holds: candidate.md keeps title, all 8 sections, every directive in executable order (self-contained instruction document).",
+  "scratchDir": "runs/r2/r2.1/p2-restructure-lists-and-timing-table"
+}

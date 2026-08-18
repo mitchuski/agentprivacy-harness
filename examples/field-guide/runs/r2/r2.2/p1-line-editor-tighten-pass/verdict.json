@@ -1,0 +1,9 @@
+{
+  "leverId": "p1-line-editor-tighten-pass",
+  "status": "VALIDATED",
+  "metric": 642,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = a7efe7ec8d319f1b7e0eb10e5f7d920f040f630830315d8b628a9e2819c1467f == seedHex (Gap not tampered). candidate.md written verbatim from compressedText (3958 bytes). Word count mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 642 < frontier best 730 (frontier.json). Held-out gate answered from candidate.md ONLY, 8/8 recoverable: F8 three days; F24 twenty-thousand mAh recharges four times; F23 learn local emergency station's frequency before the outage; F5 half drinking, half cooking and basic hygiene; F2 temperate climate, no backup generator; F28 pharmacy/doctor/poison-control on paper, dead phone is not a phone book; F6 food-grade containers, out of direct sunlight, replace every six months; F4 four litres/person/day, twelve for 72 hours. Hard constraint holds: candidate.md is a self-contained instruction document (8 complete sections, no external references). VALIDATED: gate 8/8 AND hard constraint AND 642 < 730.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r2/r2.2/p1-line-editor-tighten-pass"
+}

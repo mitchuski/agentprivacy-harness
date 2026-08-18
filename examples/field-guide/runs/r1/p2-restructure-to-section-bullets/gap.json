@@ -1,0 +1,46 @@
+{
+  "seedHex": "567093009f514a17e545bc7583373e903a54eb9477e1d8ebccdb59e168d8238e",
+  "draw": [
+    {
+      "factId": "F23",
+      "question": "What two power sources may the emergency-information radio use, and what must you know about your local emergency station before the outage begins?",
+      "expectedAnswer": "\"Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins.\""
+    },
+    {
+      "factId": "F20",
+      "question": "How many battery-powered carbon monoxide alarms must be installed, and where?",
+      "expectedAnswer": "\"Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.\""
+    },
+    {
+      "factId": "F30",
+      "question": "After power returns, under what condition can food from the freezer be safely refrozen?",
+      "expectedAnswer": "\"Check the freezer: if food still contains ice crystals, it can be safely refrozen.\""
+    },
+    {
+      "factId": "F1",
+      "question": "For an outage of what maximum duration does this guide prepare a household?",
+      "expectedAnswer": "\"This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours.\""
+    },
+    {
+      "factId": "F22",
+      "question": "Below what indoor temperature, if you cannot maintain warmth, should you relocate, and to where?",
+      "expectedAnswer": "\"If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.\""
+    },
+    {
+      "factId": "F2",
+      "question": "What climate is this guide written for, and what backup power does it assume?",
+      "expectedAnswer": "\"It is written for a temperate climate and assumes no backup generator.\""
+    },
+    {
+      "factId": "F28",
+      "question": "Whose phone numbers should you write on paper, and why?",
+      "expectedAnswer": "\"Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.\""
+    },
+    {
+      "factId": "F31",
+      "question": "Within what time should you restock supplies used during the outage, and starting with what?",
+      "expectedAnswer": "\"Restock everything used during the outage within one week, starting with water and batteries.\""
+    }
+  ],
+  "transcript": "GAP TRANSCRIPT — seat HOLD-APART (xor) · instance examples/field-guide · run r1 · proposal p2-restructure-to-section-bullets\n\n== STEP 1: NUMBERED FACT LIST (original artifact/GUIDE.md, body split on . ! ? in order; checkable-fact sentences indexed F1..) ==\nF1  Preamble: prepares a household to get safely through a power outage lasting up to seventy-two hours.\nF2  Preamble: written for a temperate climate and assumes no backup generator.\nF3  Preamble: work through the sections in order; earlier sections matter most.\nF4  Water: store four litres per person per day = twelve litres per person for the full seventy-two hours.\nF5  Water: half the allowance is for drinking, the other half for cooking and basic hygiene.\nF6  Water: store in food-grade containers, out of direct sunlight, and replace stored water every six months.\nF7  Water: if a storm is forecast, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.\nF8  Food: keep a dedicated shelf of non-perishable food sufficient for three days.\nF9  Food: good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk.\nF10 Food: choose foods needing no cooking, and own a manual can opener, because an electric one will be useless.\nF11 Food: eat perishable refrigerator food first, then the freezer, then the emergency shelf.\nF12 Fridge/freezer: an unopened refrigerator keeps food safe for about four hours.\nF13 Fridge/freezer: a full freezer holds safe temperature about forty-eight hours, a half-full freezer only about twenty-four hours, so keep it consolidated and full (even with containers of frozen water).\nF14 Fridge/freezer: keep both doors closed as much as possible and tape a note to each door.\nF15 Fridge/freezer: discard any perishable food over two hours above four degrees Celsius; when in doubt, throw it out.\nF16 Light: use battery-powered LED lanterns or headlamps as primary light; avoid candles entirely, as they are a leading cause of house fires during outages.\nF17 Light: store at least one light per person, plus two spare sets of batteries for each light.\nF18 Light: keep one headlamp beside each bed and one lantern in the kitchen, placed to be found in the dark.\nF19 Heat/safety: never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each produces carbon monoxide, which is odourless and can be fatal.\nF20 Heat/safety: install at least one battery-powered carbon monoxide alarm on each floor where people sleep.\nF21 Heat/safety: in cold weather gather everyone in one small south-facing room with its door closed; layered clothing and blankets are safer than any improvised heater.\nF22 Heat/safety: if the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.\nF23 Comms: keep a battery-powered or hand-crank radio for emergency broadcasts, and know your local emergency station's frequency before the outage begins.\nF24 Comms: charge every phone and power bank when a storm is forecast; a full twenty-thousand-mAh power bank recharges a typical phone roughly four times.\nF25 Comms: put your phone in low-power mode at the start of the outage, and agree on one out-of-area contact everyone texts, because texts get through congested networks more reliably than voice calls.\nF26 Medical: keep a first-aid kit and a seven-day supply of every prescription medication, and rotate them to stay in date.\nF27 Medical: refrigerated medication such as insulin generally stays usable at room temperature up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist beforehand.\nF28 Medical: write your pharmacy, doctor, and poison-control numbers on paper, because a dead phone is not a phone book.\nF29 Return: wait five minutes before switching major appliances back on, so the grid can stabilise.\nF30 Return: check the freezer — food that still contains ice crystals can be safely refrozen.\nF31 Return: restock everything used within one week, starting with water and batteries.\nF32 Return: write a one-page note on what was missing or awkward, and fix at least one gap before the next outage.\n(32 facts indexed. Section headings themselves are not facts and are not indexed.)\n\n== STEP 2: CANONICAL SERIALIZATION + SEED ==\nRule: canonical JSON = recursive sorted object keys, arrays in order, no whitespace, default JSON string escaping (non-ASCII emitted as literal UTF-8). The exact hashed bytes are persisted as proposal_canon.json (5751 bytes) in this run dir — the auditor hashes the file, does not reconstruct it.\nExact hash command (run in the run dir):\n  sha256sum proposal_canon.json\nDigest:\n  567093009f514a17e545bc7583373e903a54eb9477e1d8ebccdb59e168d8238e *proposal_canon.json\nseedHex = 567093009f514a17e545bc7583373e903a54eb9477e1d8ebccdb59e168d8238e\nCheck: sha256sum(proposal_canon.json) == seedHex  (PASS by construction).\n\n== STEP 3: DRAW (8 distinct fact indices, without replacement) ==\nRule: digest bytes left-to-right as unsigned ints b0,b1,... ; for draw k, idx = b_k mod (remaining count), pick remaining[idx] (0-based over the ascending remaining list), remove it. Start remaining = [F1..F32].\ndraw0: b0=0x56=86 mod 32 = 22 -> F23   (remaining 32)\ndraw1: b1=0x70=112 mod 31 = 19 -> F20   (remaining 31, F23 gone)\ndraw2: b2=0x93=147 mod 30 = 27 -> F30   (remaining 30)\ndraw3: b3=0x00=0   mod 29 = 0  -> F1    (remaining 29)\ndraw4: b4=0x9f=159 mod 28 = 19 -> F22   (remaining 28)\ndraw5: b5=0x51=81  mod 27 = 0  -> F2    (remaining 27)\ndraw6: b6=0x4a=74  mod 26 = 22 -> F28   (remaining 26)\ndraw7: b7=0x17=23  mod 25 = 23 -> F31   (remaining 25)\nDRAWN (order): F23, F20, F30, F1, F22, F2, F28, F31\n\n== STEP 4: COMPREHENSION QUESTIONS (expected answers quoted verbatim from the ORIGINAL guide) ==\nSee the draw array. Each expectedAnswer is the original sentence, in double quotes.\n\nWitnesses derived by Fiat-Shamir from the proposal artifact alone (T2/GR-4). No proposer-suggested witness accepted. A revised proposal is a new artifact and must be re-seeded."
+}

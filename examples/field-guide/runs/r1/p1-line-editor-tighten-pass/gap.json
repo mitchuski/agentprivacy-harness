@@ -1,0 +1,86 @@
+{
+  "seedHex": "bdd596f8504c1f1e7ba6ee2990a804016332eb98c6753e5132acefe6af2f23f6",
+  "draw": [
+    {
+      "order": 1,
+      "byteIndex": 0,
+      "byteValue": 189,
+      "remainingCount": 32,
+      "mod": 29,
+      "fact": "F30",
+      "question": "After the power returns and you check the freezer, which food can be safely refrozen?",
+      "expectedAnswer": "Check the freezer: if food still contains ice crystals, it can be safely refrozen."
+    },
+    {
+      "order": 2,
+      "byteIndex": 1,
+      "byteValue": 213,
+      "remainingCount": 31,
+      "mod": 27,
+      "fact": "F28",
+      "question": "Whose phone numbers should you write down on paper, and why?",
+      "expectedAnswer": "Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book."
+    },
+    {
+      "order": 3,
+      "byteIndex": 2,
+      "byteValue": 150,
+      "remainingCount": 30,
+      "mod": 0,
+      "fact": "F1",
+      "question": "What is the maximum length of power outage this guide prepares an ordinary household for?",
+      "expectedAnswer": "This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours."
+    },
+    {
+      "order": 4,
+      "byteIndex": 3,
+      "byteValue": 248,
+      "remainingCount": 29,
+      "mod": 16,
+      "fact": "F18",
+      "question": "Where should you keep one headlamp, and where should you keep one lantern?",
+      "expectedAnswer": "Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark."
+    },
+    {
+      "order": 5,
+      "byteIndex": 4,
+      "byteValue": 80,
+      "remainingCount": 28,
+      "mod": 24,
+      "fact": "F27",
+      "question": "For how long does refrigerated medication such as insulin generally remain usable at room temperature, and who should you confirm the rule with?",
+      "expectedAnswer": "Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens."
+    },
+    {
+      "order": 6,
+      "byteIndex": 5,
+      "byteValue": 76,
+      "remainingCount": 27,
+      "mod": 22,
+      "fact": "F25",
+      "question": "Why should every household member text one agreed out-of-area contact rather than place a voice call?",
+      "expectedAnswer": "Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls."
+    },
+    {
+      "order": 7,
+      "byteIndex": 6,
+      "byteValue": 31,
+      "remainingCount": 26,
+      "mod": 5,
+      "fact": "F7",
+      "question": "What is bathtub water to be used for, and what must it never be used for?",
+      "expectedAnswer": "If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking."
+    },
+    {
+      "order": 8,
+      "byteIndex": 7,
+      "byteValue": 30,
+      "remainingCount": 25,
+      "mod": 5,
+      "fact": "F8",
+      "question": "How many days of non-perishable food should the dedicated shelf hold?",
+      "expectedAnswer": "Keep a dedicated shelf of non-perishable food sufficient for three days."
+    }
+  ],
+  "transcript": "SEAT: HOLD-APART (the Gap, xor). Instance: examples/field-guide, run r1, proposal p1-line-editor-tighten-pass. NOTE: a stale gap.json/proposal_canon.json from an earlier session encoded a DIFFERENT proposal draft (canon 6297 bytes, seed 16b80aa9...); a revised proposal is a NEW artifact, so I re-derived from THIS prompt's proposal (canon 5642 bytes, seed bdd596f8...) and never reused the old seed.\n\n=== STEP 1 · NUMBERED FACT LIST (from artifact/GUIDE.md body; sentences split on . ! ? in order; every checkable quantity/duration/temperature/item/instruction indexed) ===\nF1 (intro) This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours. [scope: up to 72 hours]\nF2 (intro) It is written for a temperate climate and assumes no backup generator. [temperate; no generator]\nF3 (intro) Work through the sections in order; the earlier sections cover the preparations that matter most. [work in order]\nF4 (Water) Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours. [4 L/person/day = 12 L/72h]\nF5 (Water) Half of that allowance is for drinking, and the other half covers cooking and basic hygiene. [half drink / half cook+hygiene]\nF6 (Water) Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months. [food-grade; no sunlight; replace 6 months]\nF7 (Water) If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking. [fill bathtub; flush/wash not drink]\nF8 (Food) Keep a dedicated shelf of non-perishable food sufficient for three days. [3 days non-perishable]\nF9 (Food) Good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk. [item list]\nF10 (Food) Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless. [no-cook; manual can opener]\nF11 (Food) Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf. [order: fridge, freezer, shelf]\nF12 (Fridge/freezer) An unopened refrigerator keeps food safe for about four hours. [~4 h fridge]\nF13 (Fridge/freezer) A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water. [~48 h full / ~24 h half]\nF14 (Fridge/freezer) Keep both doors closed as much as possible and tape a note to each door as a reminder. [doors closed; tape note each door]\nF15 (Fridge/freezer) Any perishable food that has spent more than two hours above four degrees Celsius should be discarded; when in doubt, throw it out. [>2 h above 4 C discard]\nF16 (Light) Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages. [battery LED lanterns/headlamps; no candles]\nF17 (Light) Store at least one light per person, plus two spare sets of batteries for each light. [1 light/person + 2 spare battery sets/light]\nF18 (Light) Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark. [1 headlamp/bed; 1 lantern kitchen]\nF19 (Heat/safety) Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal. [no combustion indoors; CO odourless/fatal]\nF20 (Heat/safety) Install at least one battery-powered carbon monoxide alarm on each floor where people sleep. [>=1 CO alarm per sleeping floor]\nF21 (Heat/safety) In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater. [one small south-facing room; layers/blankets]\nF22 (Heat/safety) If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home. [below 10 C relocate]\nF23 (Comms) Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins. [radio; know station frequency]\nF24 (Comms) Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times. [20,000 mAh ~4 recharges]\nF25 (Comms) Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls. [low-power mode; one out-of-area text contact]\nF26 (Medical) Keep a first-aid kit and a seven-day supply of every prescription medication, and rotate the medications so they stay in date. [first-aid kit; 7-day meds; rotate]\nF27 (Medical) Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens. [insulin 28 days room temp; confirm pharmacist]\nF28 (Medical) Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book. [pharmacy/doctor/poison-control on paper]\nF29 (Power returns) Wait five minutes before switching major appliances back on, so the grid can stabilise. [wait 5 minutes]\nF30 (Power returns) Check the freezer: if food still contains ice crystals, it can be safely refrozen. [ice crystals -> refreeze]\nF31 (Power returns) Restock everything used during the outage within one week, starting with water and batteries. [restock within 1 week; start water/batteries]\nF32 (Power returns) Finally, write a one-page note about what was missing or awkward, and fix at least one of those gaps before the next outage arrives. [one-page note; fix >=1 gap]\nTotal checkable facts: 32 (F1..F32).\n\n=== STEP 2 · CANONICAL SERIALIZATION + HASH ===\nSerialization rule: JSON, keys sorted recursively (ASCII order), no whitespace. The proposal artifact (verbatim from this prompt) was parsed and re-emitted in canonical form; the EXACT bytes were persisted.\nPersisted file: examples/field-guide/runs/r1/p1-line-editor-tighten-pass/proposal_canon.json\nSorted top-level keys: compressedText, expectedMetric, hardConstraintNote, killedLeverCitations, lens, leverId, rationale, title.\nByte length: 5642.\nHash command (run in the run dir):\n  sha256sum proposal_canon.json\nOutput:\n  bdd596f8504c1f1e7ba6ee2990a804016332eb98c6753e5132acefe6af2f23f6 *proposal_canon.json\nseedHex = bdd596f8504c1f1e7ba6ee2990a804016332eb98c6753e5132acefe6af2f23f6\nCross-checked with node crypto.createHash('sha256') on the same file bytes: identical.\nVerify: sha256sum(proposal_canon.json) EQUALS seedHex. PASS.\n\n=== STEP 3 · DRAW (Fiat-Shamir, 8 distinct fact indices, without replacement) ===\nRule: remaining list = [F1..F32] in order. For draw k=0..7 take digest byte b_k (left-to-right hex pairs), pos = b_k mod (#remaining), draw remaining[pos] (0-indexed), then remove it.\nDigest bytes b0..b7 = 189,213,150,248,80,76,31,30 (hex bd d5 96 f8 50 4c 1f 1e).\nk=0 b0=189, remaining=32, 189 mod 32 = 29 -> draw F30 (removed)\nk=1 b1=213, remaining=31, 213 mod 31 = 27 -> draw F28 (removed)\nk=2 b2=150, remaining=30, 150 mod 30 = 0  -> draw F1  (removed)\nk=3 b3=248, remaining=29, 248 mod 29 = 16 -> draw F18 (removed)\nk=4 b4=80,  remaining=28, 80 mod 28  = 24 -> draw F27 (removed)\nk=5 b5=76,  remaining=27, 76 mod 27  = 22 -> draw F25 (removed)\nk=6 b6=31,  remaining=26, 31 mod 26  = 5  -> draw F7  (removed)\nk=7 b7=30,  remaining=25, 30 mod 25  = 5  -> draw F8  (removed)\nDRAWN (in order): F30, F28, F1, F18, F27, F25, F7, F8. All 8 distinct.\n\n=== STEP 4 · COMPREHENSION QUESTIONS (expected answers quoted verbatim from the ORIGINAL sentence) ===\n[1] F30\n  Q: After the power returns and you check the freezer, which food can be safely refrozen?\n  A (original): \"Check the freezer: if food still contains ice crystals, it can be safely refrozen.\"\n[2] F28\n  Q: Whose phone numbers should you write down on paper, and why?\n  A (original): \"Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.\"\n[3] F1\n  Q: What is the maximum length of power outage this guide prepares an ordinary household for?\n  A (original): \"This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours.\"\n[4] F18\n  Q: Where should you keep one headlamp, and where should you keep one lantern?\n  A (original): \"Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark.\"\n[5] F27\n  Q: For how long does refrigerated medication such as insulin generally remain usable at room temperature, and who should you confirm the rule with?\n  A (original): \"Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens.\"\n[6] F25\n  Q: Why should every household member text one agreed out-of-area contact rather than place a voice call?\n  A (original): \"Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls.\"\n[7] F7\n  Q: What is bathtub water to be used for, and what must it never be used for?\n  A (original): \"If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.\"\n[8] F8\n  Q: How many days of non-perishable food should the dedicated shelf hold?\n  A (original): \"Keep a dedicated shelf of non-perishable food sufficient for three days.\"\n\nRe-derivable by a third party with no access to this session: run sha256sum on proposal_canon.json -> seedHex -> bytes b0..b7 -> draw rule above against the STEP 1 fact numbering -> reproduces F30, F28, F1, F18, F27, F25, F7, F8 exactly. No proposer-suggested witnesses were used (T2/GR-4); witnesses derive solely from the hash of the proposal artifact."
+}

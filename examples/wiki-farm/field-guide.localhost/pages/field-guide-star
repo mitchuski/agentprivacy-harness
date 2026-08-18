@@ -1,0 +1,56 @@
+{
+  "title": "field-guide star",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "cf45dc496a502b76",
+      "text": "# the star ⭐\n\nThe workshop seated on the sovereignty lattice — ℤ/64ℤ, six axes, results placed by their own content addresses (κ mod 64). Geometry and colour, **never proof**: the anchor is forced by the law (63 XOR vertex), and importing any of this into a City Key, /star, or game42 is the door."
+    },
+    {
+      "type": "markdown",
+      "id": "01e1322c5c7937b8",
+      "text": "**the workshop:** V7 (provisional) — 🔗 Connection · ⚡ Computation · 💎 Value\n\n**the anchor:** V56 — 🛡️ Protection · 🤝 Delegation · 📜 Memory\n\n**results seated:** 19"
+    },
+    {
+      "type": "markdown",
+      "id": "16cacd5ddc19ac1c",
+      "text": "## Data, not picture\n\nFetch [star.json](/assets/star/star.json) (format `star.v1`, dialect GRAPH.md). The harness emits the seating; the star instruments that render it live with their keepers."
+    },
+    {
+      "type": "markdown",
+      "id": "caef26a31184128d",
+      "text": "> projected from `web/star.json` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide star",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "cf45dc496a502b76",
+            "text": "# the star ⭐\n\nThe workshop seated on the sovereignty lattice — ℤ/64ℤ, six axes, results placed by their own content addresses (κ mod 64). Geometry and colour, **never proof**: the anchor is forced by the law (63 XOR vertex), and importing any of this into a City Key, /star, or game42 is the door."
+          },
+          {
+            "type": "markdown",
+            "id": "01e1322c5c7937b8",
+            "text": "**the workshop:** V7 (provisional) — 🔗 Connection · ⚡ Computation · 💎 Value\n\n**the anchor:** V56 — 🛡️ Protection · 🤝 Delegation · 📜 Memory\n\n**results seated:** 19"
+          },
+          {
+            "type": "markdown",
+            "id": "16cacd5ddc19ac1c",
+            "text": "## Data, not picture\n\nFetch [star.json](/assets/star/star.json) (format `star.v1`, dialect GRAPH.md). The harness emits the seating; the star instruments that render it live with their keepers."
+          },
+          {
+            "type": "markdown",
+            "id": "caef26a31184128d",
+            "text": "> projected from `web/star.json` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1548647082
+    }
+  ]
+}

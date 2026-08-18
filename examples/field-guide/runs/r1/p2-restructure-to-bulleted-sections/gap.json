@@ -1,0 +1,48 @@
+{
+  "seedHex": "797727eebf595c087a22a1875c8ef8b99262f2336d2c1a3c9af452ce6f4aa192",
+  "runId": "r1",
+  "leverId": "restructure-to-bulleted-sections",
+  "draw": [
+    {
+      "factId": "F26",
+      "question": "How many days' supply of every prescription medication should you keep, and what must you do with the medications so they stay in date?",
+      "expectedAnswer": "a seven-day supply of every prescription medication, and rotate the medications so they stay in date"
+    },
+    {
+      "factId": "F28",
+      "question": "Which three phone numbers should you write down on paper, and why?",
+      "expectedAnswer": "the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book"
+    },
+    {
+      "factId": "F10",
+      "question": "What kind of can opener must you make sure you own, and why not an electric one?",
+      "expectedAnswer": "a manual can opener, because an electric one will be useless"
+    },
+    {
+      "factId": "F7",
+      "question": "If you fill the bathtub ahead of a forecast storm, what is that water for and what is it never for?",
+      "expectedAnswer": "bathtub water is for flushing toilets and washing, never for drinking"
+    },
+    {
+      "factId": "F27",
+      "question": "How long does refrigerated medication such as insulin generally remain usable at room temperature, and whom should you confirm the rule with?",
+      "expectedAnswer": "up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist"
+    },
+    {
+      "factId": "F11",
+      "question": "In what order should you eat your food stores during the outage?",
+      "expectedAnswer": "the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf"
+    },
+    {
+      "factId": "F18",
+      "question": "Where specifically should you keep one headlamp and where should you keep one lantern?",
+      "expectedAnswer": "one headlamp beside each bed and one lantern in the kitchen"
+    },
+    {
+      "factId": "F12",
+      "question": "For about how long does an unopened refrigerator keep food safe?",
+      "expectedAnswer": "about four hours"
+    }
+  ],
+  "transcript": "See seedHex (sha256sum proposal_canon.json) and draw rule below; full transcript stored in orchestrator return."
+}

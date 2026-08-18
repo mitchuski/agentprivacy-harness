@@ -1,0 +1,56 @@
+{
+  "title": "field-guide graph",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "c38ccd52c99fe36f",
+      "text": "# the graph 🕸️\n\nThis instance's knowledge graph, walked out of its own ledgers by `tools/spellweb.mjs` — every node and edge derives from the config, the frontier, the runs, the claims register, the killed levers, and the chronicles, so the graph cannot drift from the thing it describes. Re-run = re-true."
+    },
+    {
+      "type": "markdown",
+      "id": "91af02d482d906b9",
+      "text": "**49 nodes · 67 edges**\n\n- node types: chronicle, claim, frontier, instance, lens, lever, objective, run, target\n- edge types: advances_toward, chronicles, claims, holds, measured_by, mirage_in, ran_in, searches_for, through_lens, validated_in"
+    },
+    {
+      "type": "markdown",
+      "id": "a18d88018b0879e8",
+      "text": "## Data, not picture\n\nFetch [graph.json](/assets/spellweb/graph.json). The harness emits the graph; **the view lives with the consumer** — spellweb, /star, game42, or your own interface. Dialect (GRAPH.md): node `{id, type, label, domain, layer, desc}`, edge `{source, target, type}`; a derived edge is a proposal — only a signature (VRC) mints one."
+    },
+    {
+      "type": "markdown",
+      "id": "6d42ce160e4880ab",
+      "text": "> projected from `web/graph.json` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide graph",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "c38ccd52c99fe36f",
+            "text": "# the graph 🕸️\n\nThis instance's knowledge graph, walked out of its own ledgers by `tools/spellweb.mjs` — every node and edge derives from the config, the frontier, the runs, the claims register, the killed levers, and the chronicles, so the graph cannot drift from the thing it describes. Re-run = re-true."
+          },
+          {
+            "type": "markdown",
+            "id": "91af02d482d906b9",
+            "text": "**49 nodes · 67 edges**\n\n- node types: chronicle, claim, frontier, instance, lens, lever, objective, run, target\n- edge types: advances_toward, chronicles, claims, holds, measured_by, mirage_in, ran_in, searches_for, through_lens, validated_in"
+          },
+          {
+            "type": "markdown",
+            "id": "a18d88018b0879e8",
+            "text": "## Data, not picture\n\nFetch [graph.json](/assets/spellweb/graph.json). The harness emits the graph; **the view lives with the consumer** — spellweb, /star, game42, or your own interface. Dialect (GRAPH.md): node `{id, type, label, domain, layer, desc}`, edge `{source, target, type}`; a derived edge is a proposal — only a signature (VRC) mints one."
+          },
+          {
+            "type": "markdown",
+            "id": "6d42ce160e4880ab",
+            "text": "> projected from `web/graph.json` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1548647082
+    }
+  ]
+}

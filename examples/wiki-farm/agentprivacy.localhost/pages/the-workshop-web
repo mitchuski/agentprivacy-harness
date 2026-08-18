@@ -1,0 +1,56 @@
+{
+  "title": "The Workshop Web",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "02b8515b1b980893",
+      "text": "# The Workshop Web 🕸️\n\nThe whole harness as one graph, walked out of its own documents by `tools/spellweb.mjs --workshop`: the inscription at the centre; the six trusts, the ground rules, and the seven seats around it; the engine and its lanes; and every one of the fifteen harness paths on the outer ring, classed by weight (full loop · adjacent · descendant · retired)."
+    },
+    {
+      "type": "markdown",
+      "id": "04980f7857bc711b",
+      "text": "## Data, not picture\n\nFetch [graph.json](/assets/spellweb/graph.json). The harness emits graphs; **the view lives with the consumer** — the hand-curated spellweb at spellweb.ai, the star at soulbis.com/star, game42, or your own interface. Dialect (GRAPH.md in the repo): node `{id, type, label, domain, layer, desc}`, edge `{source, target, type}` — and the load-bearing rule: **a derived edge is a proposal; only a signature (a VRC — ed25519 over source κ, target κ, relation, signer a did:key) mints one.** That is the shape credential specs already speak: issuer, subject, claim."
+    },
+    {
+      "type": "markdown",
+      "id": "d1b59e41a26e15ea",
+      "text": "Every instance's own site carries the same data one level down — its graph and its **star** seating (ℤ/64ℤ, results placed by κ mod 64, anchor forced by 63 XOR vertex). See [[Start Your Own Space]]."
+    },
+    {
+      "type": "markdown",
+      "id": "b8a054bbc10924f9",
+      "text": "> Derived, never drawn: re-run `node tools/spellweb.mjs --workshop .` and the same graph re-emerges from the documents. Re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "The Workshop Web",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "02b8515b1b980893",
+            "text": "# The Workshop Web 🕸️\n\nThe whole harness as one graph, walked out of its own documents by `tools/spellweb.mjs --workshop`: the inscription at the centre; the six trusts, the ground rules, and the seven seats around it; the engine and its lanes; and every one of the fifteen harness paths on the outer ring, classed by weight (full loop · adjacent · descendant · retired)."
+          },
+          {
+            "type": "markdown",
+            "id": "04980f7857bc711b",
+            "text": "## Data, not picture\n\nFetch [graph.json](/assets/spellweb/graph.json). The harness emits graphs; **the view lives with the consumer** — the hand-curated spellweb at spellweb.ai, the star at soulbis.com/star, game42, or your own interface. Dialect (GRAPH.md in the repo): node `{id, type, label, domain, layer, desc}`, edge `{source, target, type}` — and the load-bearing rule: **a derived edge is a proposal; only a signature (a VRC — ed25519 over source κ, target κ, relation, signer a did:key) mints one.** That is the shape credential specs already speak: issuer, subject, claim."
+          },
+          {
+            "type": "markdown",
+            "id": "d1b59e41a26e15ea",
+            "text": "Every instance's own site carries the same data one level down — its graph and its **star** seating (ℤ/64ℤ, results placed by κ mod 64, anchor forced by 63 XOR vertex). See [[Start Your Own Space]]."
+          },
+          {
+            "type": "markdown",
+            "id": "b8a054bbc10924f9",
+            "text": "> Derived, never drawn: re-run `node tools/spellweb.mjs --workshop .` and the same graph re-emerges from the documents. Re-run = re-true."
+          }
+        ]
+      },
+      "date": 1786968000000
+    }
+  ]
+}

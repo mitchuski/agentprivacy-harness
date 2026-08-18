@@ -1,0 +1,56 @@
+{
+  "title": "Start Your Own Space",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "975b9d37272c1ac9",
+      "text": "# Start Your Own Space 🕸️\n\nEvery harness instance can put its research on this wall with one command:\n\n    node tools/wiki_install.mjs <instanceDir> --farm examples/wiki-farm\n\nThat derives the instance's knowledge graph, projects its ledgers into pages — a hub, one verdict-first page per run, the killed levers, the chronicles — and installs them as a new site in this farm. Re-run = re-true: an unchanged ledger emits byte-identical pages, and the install never deletes a page you authored or forked by hand."
+    },
+    {
+      "type": "markdown",
+      "id": "f0a70b9099979259",
+      "text": "## The two audiences\n\nEach installed site carries the same knowledge twice: **pages** for people, and **/assets/spellweb/graph.json** for agents — one fetch and a visiting agent holds the instance's whole shape. Both derive from the same ledgers, so neither can drift."
+    },
+    {
+      "type": "markdown",
+      "id": "c331ed85d497a5a2",
+      "text": "## Growing the neighborhood\n\nAdd your new site to the roster on [[Welcome Visitors]] (fork the page, edit the roster item). Cross-site links are reference items — the double-bracket link resolves same-site only. Serve the farm locally with:\n\n    wiki --farm --data examples/wiki-farm --port 3030\n\nthen visit http://agentprivacy.localhost:3030 — every *.localhost name resolves to your own machine."
+    },
+    {
+      "type": "markdown",
+      "id": "6af379b5455bd286",
+      "text": "## The door 😊\n\nEverything above is local and additive. Serving beyond localhost — a tailnet, DNS, a push — is the First Person's alone, and WIKI.md in the repo documents that pattern (pinned ports, tailscale serve, the hardening that comes first). A wall becomes a publication only when a person decides it does."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Start Your Own Space",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "975b9d37272c1ac9",
+            "text": "# Start Your Own Space 🕸️\n\nEvery harness instance can put its research on this wall with one command:\n\n    node tools/wiki_install.mjs <instanceDir> --farm examples/wiki-farm\n\nThat derives the instance's knowledge graph, projects its ledgers into pages — a hub, one verdict-first page per run, the killed levers, the chronicles — and installs them as a new site in this farm. Re-run = re-true: an unchanged ledger emits byte-identical pages, and the install never deletes a page you authored or forked by hand."
+          },
+          {
+            "type": "markdown",
+            "id": "f0a70b9099979259",
+            "text": "## The two audiences\n\nEach installed site carries the same knowledge twice: **pages** for people, and **/assets/spellweb/graph.json** for agents — one fetch and a visiting agent holds the instance's whole shape. Both derive from the same ledgers, so neither can drift."
+          },
+          {
+            "type": "markdown",
+            "id": "c331ed85d497a5a2",
+            "text": "## Growing the neighborhood\n\nAdd your new site to the roster on [[Welcome Visitors]] (fork the page, edit the roster item). Cross-site links are reference items — the double-bracket link resolves same-site only. Serve the farm locally with:\n\n    wiki --farm --data examples/wiki-farm --port 3030\n\nthen visit http://agentprivacy.localhost:3030 — every *.localhost name resolves to your own machine."
+          },
+          {
+            "type": "markdown",
+            "id": "6af379b5455bd286",
+            "text": "## The door 😊\n\nEverything above is local and additive. Serving beyond localhost — a tailnet, DNS, a push — is the First Person's alone, and WIKI.md in the repo documents that pattern (pinned ports, tailscale serve, the hardening that comes first). A wall becomes a publication only when a person decides it does."
+          }
+        ]
+      },
+      "date": 1786968000000
+    }
+  ]
+}

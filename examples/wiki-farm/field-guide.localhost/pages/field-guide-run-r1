@@ -1,0 +1,86 @@
+{
+  "title": "field-guide run r1",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "d465ee9abf5d3552",
+      "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+    },
+    {
+      "type": "markdown",
+      "id": "ce3ab200865c6e98",
+      "text": "### VALIDATED · line-edit-tighten 🧙\n\nSingle line-editor tightening pass: cut filler, activate passives, fuse redundant restatements\n\n- lens: line-editor\n- Gap seed: `70a9aa1300aaf4a1…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "e7cefe31b49b63a5",
+      "text": "### VALIDATED · line-editor-tighten-pass 🧙\n\nSentence-level tightening: cut throat-clearing, restatement, and connective padding; passive to active\n\n- lens: line-editor\n- Gap seed: `bdd596f8504c1f1e…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "183df78a606cdd14",
+      "text": "### VALIDATED · restructure-to-bulleted-sections 🧙\n\nRestructure prose into a bulleted section grid, collapse preamble and connective tissue\n\n- lens: restructurer\n- Gap seed: `797727eebf595c08…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "4f75ff7365c9194f",
+      "text": "### VALIDATED · restructure-to-section-bullets 🧙\n\nConvert each section's prose into imperative bullet lists and collapse the preamble\n\n- lens: restructurer\n- Gap seed: `567093009f514a17…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "a5107a5da93293a7",
+      "text": "### VALIDATED · restructure-to-telegraphic-bullets 🧙\n\nCollapse all 8 prose sections into terse imperative bullet directives\n\n- lens: restructurer\n- Gap seed: `1ec8affb29623c55…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "cf0916f6765ffe03",
+      "text": "> projected from `runs/r1` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide run r1",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "d465ee9abf5d3552",
+            "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+          },
+          {
+            "type": "markdown",
+            "id": "ce3ab200865c6e98",
+            "text": "### VALIDATED · line-edit-tighten 🧙\n\nSingle line-editor tightening pass: cut filler, activate passives, fuse redundant restatements\n\n- lens: line-editor\n- Gap seed: `70a9aa1300aaf4a1…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "e7cefe31b49b63a5",
+            "text": "### VALIDATED · line-editor-tighten-pass 🧙\n\nSentence-level tightening: cut throat-clearing, restatement, and connective padding; passive to active\n\n- lens: line-editor\n- Gap seed: `bdd596f8504c1f1e…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "183df78a606cdd14",
+            "text": "### VALIDATED · restructure-to-bulleted-sections 🧙\n\nRestructure prose into a bulleted section grid, collapse preamble and connective tissue\n\n- lens: restructurer\n- Gap seed: `797727eebf595c08…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "4f75ff7365c9194f",
+            "text": "### VALIDATED · restructure-to-section-bullets 🧙\n\nConvert each section's prose into imperative bullet lists and collapse the preamble\n\n- lens: restructurer\n- Gap seed: `567093009f514a17…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "a5107a5da93293a7",
+            "text": "### VALIDATED · restructure-to-telegraphic-bullets 🧙\n\nCollapse all 8 prose sections into terse imperative bullet directives\n\n- lens: restructurer\n- Gap seed: `1ec8affb29623c55…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "cf0916f6765ffe03",
+            "text": "> projected from `runs/r1` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1374511828
+    }
+  ]
+}

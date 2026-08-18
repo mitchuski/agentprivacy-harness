@@ -1,0 +1,9 @@
+{
+  "leverId": "restructure-to-section-bullets",
+  "status": "VALIDATED",
+  "metric": 610,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = 567093009f514a17e545bc7583373e903a54eb9477e1d8ebccdb59e168d8238e == seedHex (PASS). candidate.md written verbatim from proposal.compressedText (3562 bytes). Mechanical word count: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 610. Held-out gate 8/8 answerable from candidate.md alone: F23(radio power sources+station freq, l.32), F20(>=1 CO alarm per sleeping floor, l.27), F30(ice-crystals refreeze, l.44), F1(72h max, l.3), F22(<10C -> warming centre/neighbour, l.29), F2(temperate + no generator, l.3), F28(pharmacy/doctor/poison-control on paper, l.40), F31(restock within one week, water+batteries first, l.45). Hard constraint holds: candidate.md is a self-contained instruction document with all 8 sections. Metric 610 < frontier best 730. conform.mjs PASS.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r1/p2-restructure-to-section-bullets"
+}

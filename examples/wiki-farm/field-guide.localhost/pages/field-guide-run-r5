@@ -1,0 +1,96 @@
+{
+  "title": "field-guide run r5",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "33d047cde15bdd2d",
+      "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+    },
+    {
+      "type": "markdown",
+      "id": "66f5d2b5c580ecad",
+      "text": "### MIRAGE · line-edit-baseline-terse-pass 🧙\n\nSingle-pass telegraphic line-edit of the 730 baseline\n\n- lens: line-editor\n- Gap seed: `7956adc06a548404…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "3f7d7b923f59d491",
+      "text": "### VALIDATED · restructure-labelled-dense-sections 🧙\n\nRe-layout to labelled dense sections with token-fused units\n\n- lens: restructurer\n- Gap seed: `bbb9099d9daa30dd…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "77497224d6c97f98",
+      "text": "### MIRAGE · cut-filler-line-edit 🧙\n\nSentence-level line-edit of the 730 baseline: imperative voice, cut throat-clearing and redundant connectives, all 32 facts intact\n\n- lens: line-editor\n- Gap seed: `6a69e150a00325b6…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "a10277eb662e1322",
+      "text": "### VALIDATED · restructure-merge-sections-inline 🧙\n\nFold each section's bullets into one semicolon-joined paragraph with an inline bold lead\n\n- lens: restructurer\n- Gap seed: `166281b1ebe2e42f…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "c62895bd64941fe3",
+      "text": "### VALIDATED · strip-markup-dashes-and-filler 🧙\n\nLine-edit the 472 champion: delete non-semantic bullet-dash tokens plus two redundant words\n\n- lens: line-editor\n- Gap seed: `950935759724fd64…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "2f3870f061c399f4",
+      "text": "### VALIDATED · restructure-telegraphic-merge 🧙\n\nRestructure the whole guide into telegraphic single-line instructions per section, preamble collapsed\n\n- lens: restructurer\n- Gap seed: `1f745fdebecf3d58…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "96d522fb40ed7c5d",
+      "text": "> projected from `runs/r5` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide run r5",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "33d047cde15bdd2d",
+            "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+          },
+          {
+            "type": "markdown",
+            "id": "66f5d2b5c580ecad",
+            "text": "### MIRAGE · line-edit-baseline-terse-pass 🧙\n\nSingle-pass telegraphic line-edit of the 730 baseline\n\n- lens: line-editor\n- Gap seed: `7956adc06a548404…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "3f7d7b923f59d491",
+            "text": "### VALIDATED · restructure-labelled-dense-sections 🧙\n\nRe-layout to labelled dense sections with token-fused units\n\n- lens: restructurer\n- Gap seed: `bbb9099d9daa30dd…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "77497224d6c97f98",
+            "text": "### MIRAGE · cut-filler-line-edit 🧙\n\nSentence-level line-edit of the 730 baseline: imperative voice, cut throat-clearing and redundant connectives, all 32 facts intact\n\n- lens: line-editor\n- Gap seed: `6a69e150a00325b6…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "a10277eb662e1322",
+            "text": "### VALIDATED · restructure-merge-sections-inline 🧙\n\nFold each section's bullets into one semicolon-joined paragraph with an inline bold lead\n\n- lens: restructurer\n- Gap seed: `166281b1ebe2e42f…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "c62895bd64941fe3",
+            "text": "### VALIDATED · strip-markup-dashes-and-filler 🧙\n\nLine-edit the 472 champion: delete non-semantic bullet-dash tokens plus two redundant words\n\n- lens: line-editor\n- Gap seed: `950935759724fd64…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "2f3870f061c399f4",
+            "text": "### VALIDATED · restructure-telegraphic-merge 🧙\n\nRestructure the whole guide into telegraphic single-line instructions per section, preamble collapsed\n\n- lens: restructurer\n- Gap seed: `1f745fdebecf3d58…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "96d522fb40ed7c5d",
+            "text": "> projected from `runs/r5` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1552765356
+    }
+  ]
+}

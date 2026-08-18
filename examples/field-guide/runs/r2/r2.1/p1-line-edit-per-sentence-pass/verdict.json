@@ -1,0 +1,9 @@
+{
+  "leverId": "p1-line-edit-per-sentence-pass",
+  "status": "VALIDATED",
+  "metric": 615,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum runs/r2/r2.1/p1-line-edit-per-sentence-pass/proposal_canon.json = 1a575b6ae56e50ea66bb818c7cfa1d0f6d2b3e68091e5413a405e1b5c452cd4c == seedHex (reproduces byte-for-byte). Held-out gate 8/8: Q1_F27 insulin 28 days + pharmacist confirm; Q2_F26 seven-day supply + rotate; Q3_F2 temperate climate, no backup generator; Q4_F21 one small south-facing room, layered clothing/blankets beat improvised heater; Q5_F7 bathtub water for flushing/washing, never drinking; Q6_F4 four litres/person/day = twelve litres/person/72h; Q7_F5 half drinking, half cooking+hygiene; Q8_F14 both doors closed, tape reminder note to each — all answerable from candidate.md alone and correct. Metric: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 615 words < frontier best 730. Hard constraint holds: candidate.md is a complete self-contained instruction document (all sections intact, no external references).",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r2/r2.1/p1-line-edit-per-sentence-pass"
+}

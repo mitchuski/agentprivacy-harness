@@ -1,0 +1,46 @@
+{
+  "title": "field-guide killed levers",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "3b7626bb0cf56f77",
+      "text": "**killed ≠ impossible** — every entry carries a re-open condition, filed as prominently as a win. ⚔️"
+    },
+    {
+      "type": "markdown",
+      "id": "280f72006356841b",
+      "text": "# Killed levers — field-guide\n\nNegative results, filed with the same prominence as wins (GR-6). A K-id here\nis a fence: no seat re-proposes it without NEW evidence, cited.\n\n| id | lever | died how | evidence | date |\n|---|---|---|---|---|\n| — | none yet | | | |\n"
+    },
+    {
+      "type": "markdown",
+      "id": "8796dffe005aa338",
+      "text": "> projected from `notes/KILLED_LEVERS.md` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide killed levers",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "3b7626bb0cf56f77",
+            "text": "**killed ≠ impossible** — every entry carries a re-open condition, filed as prominently as a win. ⚔️"
+          },
+          {
+            "type": "markdown",
+            "id": "280f72006356841b",
+            "text": "# Killed levers — field-guide\n\nNegative results, filed with the same prominence as wins (GR-6). A K-id here\nis a fence: no seat re-proposes it without NEW evidence, cited.\n\n| id | lever | died how | evidence | date |\n|---|---|---|---|---|\n| — | none yet | | | |\n"
+          },
+          {
+            "type": "markdown",
+            "id": "8796dffe005aa338",
+            "text": "> projected from `notes/KILLED_LEVERS.md` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1193076627
+    }
+  ]
+}

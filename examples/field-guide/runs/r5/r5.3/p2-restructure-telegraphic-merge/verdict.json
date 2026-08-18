@@ -1,0 +1,10 @@
+{
+  "leverId": "p2-restructure-telegraphic-merge",
+  "status": "VALIDATED",
+  "metric": 461,
+  "gateResult": "32/32",
+  "coverage": { "mode": "census", "N": 32, "detection": 1.0 },
+  "failingCheck": "",
+  "evidence": "Seed re-derived the auditor's way: sha256sum proposal_canon.json => f92057c8722531975ab86e41de253e1d9afb2c00563ea0aa21aa92c8cef31022 (== hProposal); printf hSource||hProposal||salt | sha256sum => 1f745fdebecf3d58fa5e4dda67998ad76150dc26ab497e026b50af641cfb996f (== seedHex). CENSUS gate: all 32 facts F1..F32 probed and each answer recoverable from candidate.md alone (32/32 full pass, detection 1.0 — no fact can hide). Word count mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . => 461. 461 < frontier best 472 (frontier.json). Hard constraint holds: candidate.md is a self-contained instruction document (titled guide, ordered sections Water/Food/Fridge and freezer/Light/Heat and safety/Communication/Medical/When power returns, complete actionable instructions).",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r5/r5.3/p2-restructure-telegraphic-merge"
+}

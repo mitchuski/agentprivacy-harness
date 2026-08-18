@@ -1,0 +1,56 @@
+{
+  "title": "field-guide run r4",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "706741f3b2797a0e",
+      "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+    },
+    {
+      "type": "markdown",
+      "id": "5522beacffdb84ab",
+      "text": "### VALIDATED · r4-compose-line-edit 🧙\n\nComposed line-edit over the folded 526-word best (OT-3): sentence-level compression, zero fact drops\n\n- lens: line-editor\n- Gap seed: `ad6680fa3478b2fb…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "80194d9edd22d640",
+      "text": "### VALIDATED · r4-compose-restructure 🧙\n\nStructure pass over the folded 526: merge Food + cold-storage sections, collapse heading-restating bullets, densify residual prose to telegraphic list forms\n\n- lens: restructurer\n- Gap seed: `b733dbd6dcabd64c…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "a60d018b827138c4",
+      "text": "> projected from `runs/r4` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide run r4",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "706741f3b2797a0e",
+            "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+          },
+          {
+            "type": "markdown",
+            "id": "5522beacffdb84ab",
+            "text": "### VALIDATED · r4-compose-line-edit 🧙\n\nComposed line-edit over the folded 526-word best (OT-3): sentence-level compression, zero fact drops\n\n- lens: line-editor\n- Gap seed: `ad6680fa3478b2fb…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "80194d9edd22d640",
+            "text": "### VALIDATED · r4-compose-restructure 🧙\n\nStructure pass over the folded 526: merge Food + cold-storage sections, collapse heading-restating bullets, densify residual prose to telegraphic list forms\n\n- lens: restructurer\n- Gap seed: `b733dbd6dcabd64c…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "a60d018b827138c4",
+            "text": "> projected from `runs/r4` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1397040677
+    }
+  ]
+}

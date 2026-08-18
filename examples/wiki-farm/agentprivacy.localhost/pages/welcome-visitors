@@ -1,0 +1,82 @@
+{
+  "title": "Welcome Visitors",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "8c515e4fcb68bbf3",
+      "text": "# Welcome, visitor 😊\n\nThis is the **agentprivacy space** — the sample neighborhood that ships inside the dual-agent harness so a fresh clone has a wiki wall on day one. It is a Smallest Federated Wiki farm: every page here can be forked to your own site, and every site your instances create joins this neighborhood.\n\n`(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ`"
+    },
+    {
+      "type": "markdown",
+      "id": "9f56c641979105a7",
+      "text": "Start with [[The Dual Agent Harness]] — what this machinery is and why two agents are held apart. Then [[The Agentprivacy Origin]] — the fight the skeleton was forged in. See the whole machine at once on [[The Workshop Web]]. When you are ready to put your own research on this wall, read [[Start Your Own Space]]."
+    },
+    {
+      "type": "markdown",
+      "id": "5c96ada5ade4ecbd",
+      "text": "## The neighborhood 👪"
+    },
+    {
+      "type": "roster",
+      "text": "agentprivacy.localhost\nfield-guide.localhost",
+      "id": "416645eb9781f7cf"
+    },
+    {
+      "type": "reference",
+      "site": "field-guide.localhost",
+      "slug": "field-guide-workshop",
+      "title": "field-guide workshop",
+      "text": "The runnable spar, projected onto this wall by tools/wiki_install.mjs — runs, verdicts, killed levers, chronicles, and a knowledge graph agents can fetch as data.",
+      "id": "b46fd66b2be240ea"
+    },
+    {
+      "type": "markdown",
+      "id": "a65231090bdcb548",
+      "text": "> The lemma travels; the corpus stays home. This farm is served on localhost until a person decides otherwise — the door is the First Person's."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Welcome Visitors",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "8c515e4fcb68bbf3",
+            "text": "# Welcome, visitor 😊\n\nThis is the **agentprivacy space** — the sample neighborhood that ships inside the dual-agent harness so a fresh clone has a wiki wall on day one. It is a Smallest Federated Wiki farm: every page here can be forked to your own site, and every site your instances create joins this neighborhood.\n\n`(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ`"
+          },
+          {
+            "type": "markdown",
+            "id": "9f56c641979105a7",
+            "text": "Start with [[The Dual Agent Harness]] — what this machinery is and why two agents are held apart. Then [[The Agentprivacy Origin]] — the fight the skeleton was forged in. See the whole machine at once on [[The Workshop Web]]. When you are ready to put your own research on this wall, read [[Start Your Own Space]]."
+          },
+          {
+            "type": "markdown",
+            "id": "5c96ada5ade4ecbd",
+            "text": "## The neighborhood 👪"
+          },
+          {
+            "type": "roster",
+            "text": "agentprivacy.localhost\nfield-guide.localhost",
+            "id": "416645eb9781f7cf"
+          },
+          {
+            "type": "reference",
+            "site": "field-guide.localhost",
+            "slug": "field-guide-workshop",
+            "title": "field-guide workshop",
+            "text": "The runnable spar, projected onto this wall by tools/wiki_install.mjs — runs, verdicts, killed levers, chronicles, and a knowledge graph agents can fetch as data.",
+            "id": "b46fd66b2be240ea"
+          },
+          {
+            "type": "markdown",
+            "id": "a65231090bdcb548",
+            "text": "> The lemma travels; the corpus stays home. This farm is served on localhost until a person decides otherwise — the door is the First Person's."
+          }
+        ]
+      },
+      "date": 1786968000000
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "leverId": "strip-markup-dashes-and-filler",
+  "status": "VALIDATED",
+  "metric": 440,
+  "gateResult": "32/32",
+  "coverage": { "mode": "census", "N": 32, "detection": 1.0 },
+  "failingCheck": "",
+  "evidence": "Seed re-derived (auditor's way): sha256(artifact/GUIDE.md)=011a4f35..05b58=hSource MATCH; sha256(proposal_canon.json)=4640b119..d1cb=hProposal MATCH; sha256(hSource||hProposal||salt)=950935..d7e9=seedHex MATCH -> not BLOCKED. Wrote proposal.compressedText verbatim to candidate.md (2840 bytes). Metric mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 440. CENSUS gate: answered all 32 Gap questions from candidate.md ONLY; every fact F1..F32 recoverable (all quantities/durations/temperatures/items/ordered steps preserved: 72h, 4L/12L, half+half, food-grade/6 months, bathtub, 3 days, 6 food items, manual opener, fridge->freezer->shelf, ~4h, ~48h/~24h, doors+note, 2h/4°C, LED/candles, 1 light+2 spare sets, headlamp/lantern, indoors/garage/window CO, CO alarm per sleeping floor, south room+layers, 10°C relocate, radio+frequency, 20000 mAh ~4x, out-of-area contact/texts, 7-day+rotate, 28 days+pharmacist, pharmacy/doctor/poison-control on paper, 5 min, ice crystals refreeze, one week water+batteries, one-page note). gateResult=32/32 FULL PASS. Hard constraint holds: candidate.md keeps title + all 8 section headers + every imperative; self-contained instruction document. Frontier beat: 440 < best 472 (frontier.json). Only bullet-dash markup tokens plus two redundant words removed; no fact dropped -> VALIDATED, not MIRAGE.",
+  "scratchDir": "examples/field-guide/runs/r5/r5.3/p1-strip-markup-dashes-and-filler"
+}

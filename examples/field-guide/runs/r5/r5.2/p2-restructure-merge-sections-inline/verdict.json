@@ -1,0 +1,10 @@
+{
+  "leverId": "restructure-merge-sections-inline",
+  "status": "VALIDATED",
+  "metric": 453,
+  "gateResult": "32/32",
+  "coverage": { "mode": "census", "N": 32, "detection": 1.0 },
+  "failingCheck": "",
+  "evidence": "Seed re-derived the auditor's way: sha256sum proposal_canon.json = 839170fae8b6a63b5f5044e976e08716c9b3130a9b8a7792e5506ae357d6af7f = hProposal (MATCH); printf '%s' hSource||hProposal||salt | sha256sum = 166281b1ebe2e42f0942a3ab727e172bd7d434a23c66f7c91caeb05eb8021e05 = seedHex (MATCH). Not BLOCKED. Wrote proposal compressedText verbatim to candidate.md. Mechanical count: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 453. CENSUS gate: all 32 questions answered from candidate.md ONLY, every expected answer recoverable (F1..F32, 32/32 full pass) — key checks: F13 full ~48h/half-full ~24h, F24 20,000 mAh ~4 times, F27 insulin up to 28 days confirm with pharmacist, F22 below 10°C relocate. Hard constraint holds: candidate.md is a self-contained instruction document (title + 8 labelled sections + complete actionable steps). 453 < frontier best 472. VALIDATED.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r5/r5.2/p2-restructure-merge-sections-inline"
+}

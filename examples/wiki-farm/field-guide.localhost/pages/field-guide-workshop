@@ -1,0 +1,106 @@
+{
+  "title": "field-guide workshop",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "decf14a090912160",
+      "text": "# field-guide 🧙⚔️\n\nA dual-agent harness instance. One agent proposes, a second independently proves, and the witnesses are drawn by hashing the proposal with a secret the proposer never sees.\n\n`(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ`"
+    },
+    {
+      "type": "markdown",
+      "id": "ae53d9af4a67e549",
+      "text": "**objective** — words\n\n**gate** — held-out comprehension: 8 questions drawn by the Gap from the ORIGINAL guide, answered from the compressed text alone, graded against the original — must be 8/8 (T5: zero collapses)\n\n**hard constraint** — the compressed guide remains a self-contained instruction document: no pointers back to the original, no \"see full version\", every section still actionable on its own (GR-3)"
+    },
+    {
+      "type": "markdown",
+      "id": "a95d999d461e0e5e",
+      "text": "**frontier** — baseline 730 (2026-07-09) → best 472 (undated)\n\n> projected from `frontier.json` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    },
+    {
+      "type": "markdown",
+      "id": "768d14db5c5dd2a6",
+      "text": "## Runs\n\n- [[field-guide run r1]]\n- [[field-guide run r2]]\n- [[field-guide run r3]]\n- [[field-guide run r4]]\n- [[field-guide run r5]]"
+    },
+    {
+      "type": "markdown",
+      "id": "7dbd9347d32e97ee",
+      "text": "## The web 🕸️\n\n- [[field-guide graph]] — the knowledge graph, for agents (graph.json) and people (web.html)"
+    },
+    {
+      "type": "markdown",
+      "id": "b9100b35795a2c33",
+      "text": "## The star ⭐\n\n- [[field-guide star]] — the workshop and its results seated on the ℤ/64ℤ lattice"
+    },
+    {
+      "type": "markdown",
+      "id": "35739475326fb3ac",
+      "text": "## Negative results\n\n- [[field-guide killed levers]]"
+    },
+    {
+      "type": "markdown",
+      "id": "39287e53db7bfb33",
+      "text": "## Chronicles\n\n- [[field guide chronicle 2026 07 10 r1 3 two validated fold held]]\n- [[field guide chronicle 2026 07 10 r2 1 first sub 730]]\n- [[field guide chronicle 2026 07 10 r2 2 restructurer takes the lead]]\n- [[field guide chronicle 2026 07 11 keystone fold 472]]\n- [[field guide chronicle 2026 07 11 keystone fold 526]]\n- [[field guide chronicle 2026 07 11 keystone fold 573]]\n- [[field guide chronicle 2026 07 11 r3 1 second draw clears composed 534]]\n- [[field guide chronicle 2026 07 11 r4 1 composed below projection]]"
+    },
+    {
+      "type": "markdown",
+      "id": "01654955878a6178",
+      "text": "## The door 😊\n\nThese pages were emitted locally and NOT published. Claiming a host under ~/.wiki, rostering it into the family, and serving it are the First Person's alone (T6) — and whether run records belong on the guide federation at all is a standing ruling, not a default."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide workshop",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "decf14a090912160",
+            "text": "# field-guide 🧙⚔️\n\nA dual-agent harness instance. One agent proposes, a second independently proves, and the witnesses are drawn by hashing the proposal with a secret the proposer never sees.\n\n`(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ`"
+          },
+          {
+            "type": "markdown",
+            "id": "ae53d9af4a67e549",
+            "text": "**objective** — words\n\n**gate** — held-out comprehension: 8 questions drawn by the Gap from the ORIGINAL guide, answered from the compressed text alone, graded against the original — must be 8/8 (T5: zero collapses)\n\n**hard constraint** — the compressed guide remains a self-contained instruction document: no pointers back to the original, no \"see full version\", every section still actionable on its own (GR-3)"
+          },
+          {
+            "type": "markdown",
+            "id": "a95d999d461e0e5e",
+            "text": "**frontier** — baseline 730 (2026-07-09) → best 472 (undated)\n\n> projected from `frontier.json` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          },
+          {
+            "type": "markdown",
+            "id": "768d14db5c5dd2a6",
+            "text": "## Runs\n\n- [[field-guide run r1]]\n- [[field-guide run r2]]\n- [[field-guide run r3]]\n- [[field-guide run r4]]\n- [[field-guide run r5]]"
+          },
+          {
+            "type": "markdown",
+            "id": "7dbd9347d32e97ee",
+            "text": "## The web 🕸️\n\n- [[field-guide graph]] — the knowledge graph, for agents (graph.json) and people (web.html)"
+          },
+          {
+            "type": "markdown",
+            "id": "b9100b35795a2c33",
+            "text": "## The star ⭐\n\n- [[field-guide star]] — the workshop and its results seated on the ℤ/64ℤ lattice"
+          },
+          {
+            "type": "markdown",
+            "id": "35739475326fb3ac",
+            "text": "## Negative results\n\n- [[field-guide killed levers]]"
+          },
+          {
+            "type": "markdown",
+            "id": "39287e53db7bfb33",
+            "text": "## Chronicles\n\n- [[field guide chronicle 2026 07 10 r1 3 two validated fold held]]\n- [[field guide chronicle 2026 07 10 r2 1 first sub 730]]\n- [[field guide chronicle 2026 07 10 r2 2 restructurer takes the lead]]\n- [[field guide chronicle 2026 07 11 keystone fold 472]]\n- [[field guide chronicle 2026 07 11 keystone fold 526]]\n- [[field guide chronicle 2026 07 11 keystone fold 573]]\n- [[field guide chronicle 2026 07 11 r3 1 second draw clears composed 534]]\n- [[field guide chronicle 2026 07 11 r4 1 composed below projection]]"
+          },
+          {
+            "type": "markdown",
+            "id": "01654955878a6178",
+            "text": "## The door 😊\n\nThese pages were emitted locally and NOT published. Claiming a host under ~/.wiki, rostering it into the family, and serving it are the First Person's alone (T6) — and whether run records belong on the guide federation at all is a standing ruling, not a default."
+          }
+        ]
+      },
+      "date": 1548647082
+    }
+  ]
+}

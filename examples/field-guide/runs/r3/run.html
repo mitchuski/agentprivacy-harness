@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>run r3 — dual-agent harness</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --edge:#30363d; --ink:#c9d1d9; --dim:#8b949e;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --grey:#8b949e; --accent:#a5b4fc; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--ink);
+         font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { font-size:1.3rem; margin:0 0 .3rem; } h4 { margin:0 0 .5rem; font-size:1rem; }
+  a { color: var(--accent); }
+  .inscription { color:var(--accent); letter-spacing:.03em; margin:.2rem 0 .8rem; }
+  .disclaimer { border:1px solid var(--edge); border-left:3px solid var(--grey); background:var(--panel);
+                color:var(--dim); padding:.6rem .9rem; margin:0 0 1.4rem; font-size:.85rem; }
+  .voidbanner { border:2px solid var(--red); background:#3d1418; color:#ffb3ad; padding:.9rem 1rem;
+                margin:0 0 1.4rem; font-weight:bold; }
+  section.phase { border:1px solid var(--edge); border-radius:6px; background:var(--panel);
+                  margin:0 0 1rem; padding:1rem 1.2rem; }
+  section.phase > h2 { margin:0 0 .15rem; font-size:1.05rem; }
+  section.phase > p.mandate { margin:0 0 .9rem; color:var(--dim); font-size:.85rem; }
+  .arrow { text-align:center; color:var(--dim); margin:-.4rem 0 .6rem; }
+  .card { border:1px solid var(--edge); border-radius:6px; padding: .8rem 1rem; margin:0 0 .8rem; background:var(--bg); }
+  .chip { display:inline-block; padding:.05rem .55rem; border-radius:999px; font-size:.75rem;
+          font-weight:bold; vertical-align:middle; border:1px solid; }
+  .chip.validated { color:var(--green); border-color:var(--green); background:#12261a; }
+  .chip.mirage    { color:var(--amber); border-color:var(--amber); background:#2b2211; }
+  .chip.blocked   { color:var(--red);   border-color:var(--red);   background:#3d1418; }
+  .chip.other     { color:var(--grey);  border-color:var(--grey);  background:#1c2128; }
+  .badge { display:inline-block; padding:.1rem .6rem; font-weight:bold; border-radius:4px; margin-bottom:.4rem; }
+  .badge.match    { background:#12261a; color:var(--green); border:1px solid var(--green); }
+  .badge.mismatch { background:var(--red); color:#fff; }
+  .badge.other    { background:#1c2128; color:var(--grey); border:1px solid var(--grey); }
+  .hashbox { border-radius:6px; padding:.6rem .8rem; margin:0 0 .6rem; border:1px solid var(--edge); }
+  .hashbox.match { border-color:var(--green); } .hashbox.incomplete { border-color:var(--grey); }
+  .hashbox.mismatch { border:2px solid var(--red); background:#2a0e11; }
+  dl { display:grid; grid-template-columns:max-content 1fr; gap:.15rem .9rem; margin:.4rem 0; }
+  dt { color:var(--dim); } dd { margin:0; overflow-wrap:anywhere; }
+  pre { background:#0a0d12; border:1px solid var(--edge); border-radius:6px; padding:.7rem .9rem;
+        overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.82rem; margin:.4rem 0; }
+  details { margin:.4rem 0; } summary { cursor:pointer; color:var(--dim); }
+  table { border-collapse:collapse; width:100%; font-size:.85rem; }
+  th, td { border:1px solid var(--edge); padding:.35rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--dim); font-weight:normal; }
+  .missing { color:var(--dim); font-style:italic; } .note { color:var(--dim); font-size:.85rem; }
+  .delta { color:var(--accent); }
+  .tally .chip { margin-right:.4rem; }
+  footer { color:var(--dim); font-size:.8rem; margin-top:2rem; border-top:1px solid var(--edge); padding-top:.8rem; }
+</style></head><body><main>
+<h1>run r3 · field-guide</h1>
+<p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
+<p class="disclaimer">generated projection — never hand-edited, never authoritative; the run directory is the record.
+Rendered 2026-07-11T17:12:03.258Z by tools/render_run.mjs from <code>C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r3</code>.
+Re-derive anything you care about from the files themselves.</p>
+
+<p class="tally">2 proposal(s) · <span class="chip validated">VALIDATED</span> 2 <span class="chip mirage">MIRAGE</span> 0 <span class="chip blocked">BLOCKED</span> 0 <span class="chip other">NO VERDICT</span> 0</p>
+<section class="phase"><h2>1 · Measure</h2><p class="mandate">frontier numbers only, no advocacy</p><p>Numbers cited from <code>frontier.json</code> — the sole authority (GR-1). Prose never restates them.</p>
+<dl><dt>objective</dt><dd>words</dd><dt>baseline</dt><dd>730</dd><dt>best</dt><dd>526</dd><dt>best levers</dt><dd>restructure-to-telegraphic-bullets, telegraphic-bullets-second-draw</dd><dt>updated</dt><dd>2026-07-11</dd></dl>
+<p class="delta">frontier delta to date: 730 → 526 (-204)</p>
+<p class="note">no measure.json — the reference engine returns measure output to the orchestrator without persisting it.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>2 · Propose</h2><p class="mandate">soulbae 🧙 (bnot) — blind lenses in parallel</p><div class="card"><h4>r3.1/p1-compose-line-edit-over-best</h4><dl><dt>leverId</dt><dd>compose-line-edit-over-best</dd><dt>title</dt><dd>Composed line-edit over the folded 573-word best: cut residual filler and throat-clearing, zero facts dropped</dd><dt>lens</dt><dd>line-editor</dd><dt>expectedMetric</dt><dd>534</dd><dt>hardConstraintNote</dt><dd>The candidate remains a self-contained instruction document: same seven-section structure plus scope-setting intro (72-hour horizon, temperate climate, no generator, work-in-order guidance), every actionable threshold and quantity stated inline (water volumes and rotation, food-safety durations and 4°C/2-hour discard rule, per-person light and battery counts, CO placement, 10°C relocation trigger, radio frequency prep, power-bank capacity, medication supply and insulin window, post-outage sequence). A reader holding only this text can execute the full preparation and response with no external reference.</dd></dl><details><summary>rationale</summary><pre>Sentence-level pass over artifact/GUIDE.compressed.md (frontier best, 573 per frontier.json). Savings come only from connective tissue, not content: appositive restatements collapsed ('12 litres per person for 72 hours' -&gt; parenthetical '(12 litres each for 72 hours)'; 'bathtub; bathtub water is' -&gt; 'bathtub: that water is'), redundant scaffolding cut ('a dedicated shelf of non-perishable food for 3 days, needing no cooking' -&gt; 'a 3-day shelf of non-perishable food needing no cooking'; 'and only then' -&gt; 'then'; 'pick one small room... close its door, and gather everyone there' -&gt; 'gather everyone in one small room... with its door closed'; 'Put your phone in low-power mode at the outage's start' -&gt; 'Switch phones to low-power mode when the outage starts'; 'since a dead phone is not a phone book' -&gt; colon construction; 'Check the freezer: food still holding' -&gt; 'Freezer food still holding'; 'starting with water and batteries' -&gt; 'water and batteries first'; 'Finally,' dropped), and free-standing em-dash tokens (which count as words under the whitespace-split rule) replaced by attached punctuation. Every quantity, duration, temperature, item, and ordered step in the source survives verbatim in meaning: since the Gap draws 8 of ~40 facts from the ORIGINAL guide and I cannot know which, all semantic content is preserved rather than any subset optimised. Count verified by the declared rule (tr -s '[:space:]' '\n' | grep -c .) on the exact candidate text: 534, a 39-word beat over the 573 frontier best (frontier.json best.metric).</pre></details></div>
+<div class="card"><h4>r3.1/p2-telegraphic-bullets-second-draw</h4><dl><dt>leverId</dt><dd>telegraphic-bullets-second-draw</dd><dt>title</dt><dd>Second independent draw of the frozen r1 telegraphic-bullets candidate</dd><dt>lens</dt><dd>restructurer</dd><dt>expectedMetric</dt><dd>526</dd><dt>hardConstraintNote</dt><dd>The candidate remains a self-contained instruction document: it states its own scope and assumptions in the preamble (72-hour outage, temperate climate, no generator, sections in priority order) and every section gives complete, actionable instructions with concrete quantities (4 L/person/day, 12 L total, 48 h full-freezer window, 2 h/4°C discard rule, 28-day insulin guidance, 20,000 mAh ≈ 4 charges, 5-minute restart wait) — a reader with no access to the original 730-word guide can execute it end to end. Verbatim resubmission cannot weaken the constraint relative to r1, where the text already stood as a complete instruction document; only the witness draw was lacking.</dd></dl><details><summary>rationale</summary><pre>Converts CR-4 from probe-limited to fully gated without any new compression work: the r1 candidate (runs/r1/p2-restructure-to-telegraphic-bullets/candidate.md, sha256 11e41d9041277d941ce10214f3fec062bc9ac1950a70db24021d6874941b39b7) is re-submitted byte-identical under a NEW leverId, so the canon bytes the Gap hashes change and the Fiat-Shamir seed re-derives — the SAME frozen text faces a fresh, independent witness sample of 8 questions it was never tuned toward (T2/GR-4 intact: I am blind to the draw and have changed nothing that could steer it). Per frontier.json leverCosts this is the cheapest round available (gate run only, no proposal work); success validates 526 words against best.metric 573, failure leaves the frontier untouched at 573 (T5: any gate miss is worth zero). KILLED_LEVERS.md contains no entries, so no K-id is being re-proposed.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>3 · Hold-apart</h2><p class="mandate">the Gap ⿻ (xor) — hash the proposal, derive the witnesses</p><div class="card"><h4>r3.1/p1-compose-line-edit-over-best</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses provably derive from the proposal's own bytes. soulbae could not have known them.</p>
+<dl><dt>recorded seedHex (gap.json)</dt><dd>a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9</dd><dt>derived sha256(proposal_canon.json), computed at render time</dt><dd>a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>[
+  {
+    &quot;fact&quot;: &quot;F3&quot;,
+    &quot;question&quot;: &quot;In what order should you work through the sections of the guide, and which sections cover what matters most?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Work through the sections in order; the earlier sections cover the preparations that matter most.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F7&quot;,
+    &quot;question&quot;: &quot;If a storm is forecast and you have advance warning, what should you also fill, and what is that water for?&quot;,
+    &quot;expectedAnswer&quot;: &quot;also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F9&quot;,
+    &quot;question&quot;: &quot;What are the good non-perishable food choices the guide lists for the emergency shelf?&quot;,
+    &quot;expectedAnswer&quot;: &quot;canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F13&quot;,
+    &quot;question&quot;: &quot;For about how long does a full freezer hold a safe temperature, and for about how long does a half-full freezer hold it?&quot;,
+    &quot;expectedAnswer&quot;: &quot;A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F20&quot;,
+    &quot;question&quot;: &quot;How many battery-powered carbon monoxide alarms should you install, and where?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F22&quot;,
+    &quot;question&quot;: &quot;Below what indoor temperature, if you cannot maintain warmth, should you relocate, and where should you go?&quot;,
+    &quot;expectedAnswer&quot;: &quot;If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F27&quot;,
+    &quot;question&quot;: &quot;For up to how long does refrigerated medication such as insulin generally remain usable at room temperature, and who should confirm the rule for your specific medication?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens.&quot;
+  },
+  {
+    &quot;fact&quot;: &quot;F28&quot;,
+    &quot;question&quot;: &quot;Whose phone numbers should you write down on paper, and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.&quot;
+  }
+]</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>[object Object]</pre></details></div>
+<div class="card"><h4>r3.1/p2-telegraphic-bullets-second-draw</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses provably derive from the proposal's own bytes. soulbae could not have known them.</p>
+<dl><dt>recorded seedHex (gap.json)</dt><dd>a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68</dd><dt>derived sha256(proposal_canon.json), computed at render time</dt><dd>a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>[
+  {
+    &quot;factId&quot;: &quot;F10&quot;,
+    &quot;question&quot;: &quot;According to the Food section, what kind of can opener must you own, and why is the alternative useless?&quot;,
+    &quot;expectedAnswer&quot;: &quot;make sure you own a manual can opener, because an electric one will be useless&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F8&quot;,
+    &quot;question&quot;: &quot;How many days worth of non-perishable food should the dedicated shelf hold?&quot;,
+    &quot;expectedAnswer&quot;: &quot;non-perishable food sufficient for three days&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F3&quot;,
+    &quot;question&quot;: &quot;In what order should you work through the sections, and which sections matter most?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Work through the sections in order; the earlier sections cover the preparations that matter most&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F27&quot;,
+    &quot;question&quot;: &quot;How long does refrigerated medication such as insulin generally remain usable at room temperature, and whom should you confirm the rule with?&quot;,
+    &quot;expectedAnswer&quot;: &quot;remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F29&quot;,
+    &quot;question&quot;: &quot;When power returns, how long should you wait before switching major appliances back on, and why?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Wait five minutes before switching major appliances back on, so the grid can stabilise&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F28&quot;,
+    &quot;question&quot;: &quot;Which three phone numbers should you write down on paper?&quot;,
+    &quot;expectedAnswer&quot;: &quot;the phone numbers of your pharmacy, your doctor, and the poison-control line&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F19&quot;,
+    &quot;question&quot;: &quot;Why must you never run a camping stove, barbecue, or generator indoors, in a garage, or near a window?&quot;,
+    &quot;expectedAnswer&quot;: &quot;each of these produces carbon monoxide, which is odourless and can be fatal&quot;
+  },
+  {
+    &quot;factId&quot;: &quot;F31&quot;,
+    &quot;question&quot;: &quot;Within what timeframe should you restock everything used during the outage, and starting with what?&quot;,
+    &quot;expectedAnswer&quot;: &quot;Restock everything used during the outage within one week, starting with water and batteries&quot;
+  }
+]</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>See StructuredOutput transcript; drawn facts F10,F8,F3,F27,F29,F28,F19,F31 from seed a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>4 · Assay</h2><p class="mandate">soulbis ⚔️ (neg) — the full gate, VALIDATED / MIRAGE / BLOCKED</p><div class="card"><h4>r3.1/p1-compose-line-edit-over-best <span class="chip validated">VALIDATED</span></h4><dl><dt>leverId</dt><dd>compose-line-edit-over-best</dd><dt>metric</dt><dd>534</dd><dt>gateResult</dt><dd>8/8</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r3/r3.1/p1-compose-line-edit-over-best</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>Seed re-derived: sha256sum proposal_canon.json = a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9 == seedHex (5857 bytes); draw independently recomputed from digest bytes 168,37,70,227,142,179,73,115 -&gt; F9,F7,F13,F28,F3,F22,F27,F20, matches gap transcript. Gate answered from candidate.md only: F3 'Work the sections in order; earlier ones matter most' PASS; F7 bathtub for flushing toilets and washing, never drinking PASS; F9 all six foods (canned beans, canned fish, peanut butter, crackers, dried fruit, shelf-stable milk) PASS; F13 full freezer ~48h, half-full ~24h PASS; F20 at least one battery-powered CO alarm per floor where people sleep PASS; F22 below 10C relocate to warming centre or neighbour's home PASS; F27 insulin ~28 days at room temp, confirm with pharmacist PASS; F28 pharmacy/doctor/poison-control numbers on paper, dead phone is not a phone book PASS. Metric: tr -s '[:space:]' '\n' &lt; candidate.md | grep -c . -&gt; 534. Frontier best 573 (frontier.json); 534 &lt; 573. Hard constraint holds: candidate.md is a self-contained instruction document (title + ordered sections covering water, food/cold storage, light, heat/safety, communication, medical, power-return recovery).</pre></details></div>
+<div class="card"><h4>r3.1/p2-telegraphic-bullets-second-draw <span class="chip validated">VALIDATED</span></h4><dl><dt>leverId</dt><dd>telegraphic-bullets-second-draw</dd><dt>metric</dt><dd>526</dd><dt>gateResult</dt><dd>8/8</dd><dt>scratchDir</dt><dd>runs/r3/r3.1/p2-telegraphic-bullets-second-draw</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>Seed re-derived: sha256sum runs/r3/r3.1/p2-telegraphic-bullets-second-draw/proposal_canon.json = a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68 (5094 bytes) == seedHex; mod-draw arithmetic re-verified (169%32=9-&gt;F10, 193%31=7-&gt;F8, 2%30=2-&gt;F3, 226%29=23-&gt;F27, 52%28=24-&gt;F29, 212%27=23-&gt;F28, 249%26=15-&gt;F19, 223%25=23-&gt;F31). Gate 8/8 on Gap witnesses F10,F8,F3,F27,F29,F28,F19,F31 answered solely from candidate.md: manual can opener/electric useless; 3 days; sections in order/earlier matter most; 28 days/pharmacist; 5 minutes/grid stabilise; pharmacy+doctor+poison-control; carbon monoxide odourless fatal; within one week starting water+batteries. Metric: tr -s '[:space:]' '\n' &lt; candidate.md | grep -c . =&gt; 526 &lt; frontier best 573. Hard constraint holds: self-contained instruction document (title, ordered sections, complete quantities and rationales).</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>5 · Critic</h2><p class="mandate">classifies the whole round: structural / probe-limited / noise</p><p class="note">no critic.json — the reference engine returns the critic's classification to the orchestrator without persisting it; the chronicle draft carries the round's reading.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>6 · Chronicle</h2><p class="mandate">drafts the record — verdict first</p><div class="card"><h4>r3.1/CHRONICLE_DRAFT.md <span class="chip other">DRAFT — keystone reviews and files</span></h4><pre>---
+date: 2026-07-11
+seat: chronicle
+runId: r3.1
+verdict: Both levers VALIDATED at gate 8/8 — line-edit over the 573 best landed 534, and the frozen r1 telegraphic-bullets 526 cleared its second independent draw, CONVERTING from probe-limited to structural; new candidate best is 526, pending keystone fold with an exhaustive fact-census audit.
+---
+
+# 2026-07-11 — r3.1 double validation: 534 line-edit + 526 second-draw conversion
+
+## Verdict
+
+Two proposals, two VALIDATED verdicts, both classified **structural** by the
+critic:
+
+1. **compose-line-edit-over-best** — line-editor lens over the folded best
+   (`frontier.json` best.metric 573) produced a 534-word candidate at gate
+   8/8. Actual metric hit expectedMetric exactly (534 == 534).
+2. **telegraphic-bullets-second-draw** — the frozen r1 candidate (526 words)
+   passed 8/8 on a second, disjoint, independently re-seeded Fiat-Shamir
+   draw. This **converts** r1's probe-limited classification to structural
+   and satisfies frontier OT-2's own conversion criterion (&quot;until it clears
+   a second independent draw&quot;).
+
+Frontier movement (all numbers cited from `frontier.json` and verdict
+evidence): baseline 730 → current folded best 573 → validated candidates 534
+and 526. The critic's lead: fold **526** as the new best. Nothing killed
+this round; `killedLeverDrafts` is empty.
+
+## What happened
+
+**Measure.** Fresh runs by the declared rule
+(`tr -s '[:space:]' '\n' | grep -c .`): `artifact/GUIDE.md` = 730, matching
+`frontier.json` baseline.metric; `artifact/GUIDE.compressed.md` = 573,
+matching best.metric. Frontier **not stale**. Two levers priced
+(descriptive only, per seat card): (a) composed line-edit over the folded
+573 — one full round, ceiling ~535–550; (b) second independent draw of the
+frozen 526 r1 candidate — gate run only, the cheapest round available,
+ceiling exactly 526 (frozen text: success validates 526, failure leaves
+best at 573).
+
+**Proposals.** Two: `compose-line-edit-over-best` (lens: line-editor,
+expectedMetric 534) and `telegraphic-bullets-second-draw` (lens:
+restructurer, expectedMetric 526).
+
+**Gap seeds (T2/GR-4).** Both seeds independently re-derived by the assay:
+
+- p1: sha256(proposal_canon.json) =
+  `a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9`
+  (5857 bytes) == seedHex; draw recomputed from digest bytes
+  168,37,70,227,142,179,73,115 → F9, F7, F13, F28, F3, F22, F27, F20 —
+  matches the gap transcript.
+- p2: sha256(proposal_canon.json) =
+  `a9c102e234d4f9df9593ade7b10ebd5f7cde03117ac1b9f838f9a47e5e6d9c68`
+  (5094 bytes) == seedHex; mod-draw arithmetic re-verified (169%32=9→F10,
+  193%31=7→F8, 2%30=2→F3, 226%29=23→F27, 52%28=24→F29, 212%27=23→F28,
+  249%26=15→F19, 223%25=23→F31).
+
+**Assay.** Both gates answered solely from each `candidate.md`:
+
+- p1 (F9, F7, F13, F28, F3, F22, F27, F20): all eight PASS — six shelf-stable
+  foods; bathtub water never for drinking; full freezer ~48h / half ~24h;
+  emergency numbers on paper; sections in order; below 10C relocate; insulin
+  ~28 days; one CO alarm per sleeping floor. Metric 534 &lt; 573. Hard
+  constraint holds (self-contained instruction document, title + ordered
+  sections). `verdict.json` written at the scratch dir.
+- p2 (F10, F8, F3, F27, F29, F28, F19, F31): all eight PASS — manual can
+  opener; 3 days; sections in order; insulin 28 days; 5 minutes / grid
+  stabilise; pharmacy/doctor/poison-control; CO odourless and fatal; within
+  one week restart water + batteries. Metric 526 &lt; 573. Hard constraint
+  holds.
+
+Scratch dirs: `runs/r3/r3.1/p1-compose-line-edit-over-best/` and
+`runs/r3/r3.1/p2-telegraphic-bullets-second-draw/` (GR-10 respected — no
+in-place edits).
+
+**Critic.** Both structural:
+
+- p1: deterministic pre-planned edit (exact expectedMetric hit), base is the
+  r2-structural 573 fold, and the transformation class (cut filler, zero
+  facts touched) is draw-invariant by construction. The r3 draw overlaps the
+  r2 fold draw only on F9/F13/F22, so 13 distinct facts are now verified
+  across the lineage.
+- p2: **conversion, not a fresh win** — the same frozen text has now passed
+  8/8 on two disjoint draws (~16 distinct witnesses over a ~32–40 fact
+  space). The exact defect r1 named (draw-luck over a fact-moving reshape)
+  is what an independent re-seed tests, and it survived. Honest residual,
+  recorded at full prominence: sampling leaves **~60% blindness to one
+  silently-dropped fact** at this budget ((N−8)²/N², N≈36). The settling
+  check is not a third draw but an exhaustive fact census of the 526
+  candidate against GUIDE.md's full fact list — enumerable claim space,
+  deterministic zero-token audit the keystone can run at fold time. That is
+  fold-time due diligence, not a bar to classification.
+
+&gt; MYTH (fenced, capture only): the Swordsman drew twice from the Gap and the
+&gt; same small page answered true both times. The Mage's older, bolder cut —
+&gt; once suspected of luck — turns out to have been craft. The keystone now
+&gt; holds two keys; the shorter one opens the same door.
+
+## Reversals
+
+- **Classification reversal (in the win's favour, recorded at equal
+  prominence):** r1's `telegraphic-bullets` was probe-limited; that verdict
+  is now superseded — the lever is structural on two disjoint draws. The r1
+  caution was correct at the time and is not retconned; the second draw is
+  what changed the evidence, not a re-reading of the first.
+- No lever died; no validated result was withdrawn; frontier best remains
+  573 until the keystone folds (GR-10 — this draft does not move numbers).
+
+## Ledger entries returned
+
+Proposed for the keystone to serialise (GR-10); tiers per GR-2:
+
+1. **PROVEN** — `compose-line-edit-over-best` VALIDATED: 534 words at gate
+   8/8 (draw F9/F7/F13/F28/F3/F22/F27/F20), hard constraint holds, seed
+   re-derived (sha256 == seedHex, 5857 bytes). Evidence:
+   `runs/r3/r3.1/p1-compose-line-edit-over-best/` (candidate.md,
+   verdict.json).
+2. **PROVEN** — `telegraphic-bullets-second-draw` VALIDATED: frozen r1 526
+   text at gate 8/8 on a second disjoint draw (F10/F8/F3/F27/F29/F28/F19/
+   F31), seed re-derived (sha256 == seedHex, 5094 bytes). Evidence:
+   `runs/r3/r3.1/p2-telegraphic-bullets-second-draw/`.
+3. **DERIVED** — classification conversion: telegraphic-bullets is
+   structural (two disjoint 8/8 draws meet OT-2's stated conversion
+   criterion; parity with the current best, which was classified structural
+   on a single 8/8 draw). Derivation: critic classification, this round.
+4. **OPEN** — residual sampling blindness on the 526 candidate: ~60% chance
+   one silently-dropped fact survives two draws at this budget
+   ((N−8)²/N², N≈36). What settles it: exhaustive fact census of the 526
+   candidate against GUIDE.md's full fact list at fold time (deterministic,
+   zero-token).
+5. Frontier update proposed (keystone-only write, GR-1/GR-10): best 573 →
+   526, leverIds += telegraphic-bullets (second-draw evidence); OT-2 status
+   update; 534 line-edit recorded as validated-but-superseded-as-best.
+6. KILLED_LEVERS: nothing to file — `killedLeverDrafts` empty.
+
+## Handoff
+
+- **Open questions:** does the 526 candidate survive the exhaustive fact
+  census against GUIDE.md's full fact list (the ~60% residual blindness)?
+  What is the true fact-space size N (assumed ≈36 in the residual estimate)?
+- **Blocked items:** the fold itself and all frontier/claims writes —
+  keystone-only (GR-10); any outward action — First Person's door (T6/GR-8).
+- **Single next action:** Fold 526 (telegraphic-bullets, runs/r1 frozen
+  text, now structural on two disjoint draws) as the new best — keystone
+  should run the exhaustive fact-census audit against GUIDE.md's full fact
+  list at fold time as zero-cost certainty — then compose the validated
+  line-editor lens over the folded 526 text: the two structural levers are
+  orthogonal (structural reshape vs surface wording), the line-edit
+  delivered 573→534 (−6.8%) from wording alone, so the composition targets
+  ~490 words at gate 8/8.
+</pre></div></section>
+<footer>
+<p>Conformance (G0): <code>harness.config.mjs</code> present at the instance root —
+this page does not run the gate; run it yourself: <code>node engine/conform.mjs examples/field-guide</code>.
+The gate proves <code>(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</code> on Z/64Z every time rather than taking it on faith.</p>
+<p>The frontier does not move here. Folding is the keystone's; the door is the First Person's (T6/GR-8).</p>
+</footer>
+</main></body></html>

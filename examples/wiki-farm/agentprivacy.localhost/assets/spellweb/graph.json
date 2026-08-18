@@ -1,0 +1,524 @@
+{
+  "name": "the workshop",
+  "mode": "workshop",
+  "derived": "walked from the ledgers by tools/spellweb.mjs — re-run = re-true; never hand-edit",
+  "nodeTypes": [
+    "algebra",
+    "door",
+    "engine",
+    "path",
+    "rules",
+    "seat",
+    "tool",
+    "trust"
+  ],
+  "edgeTypes": [
+    "binds",
+    "implements",
+    "inherits",
+    "opens",
+    "proves",
+    "retired_from",
+    "seated_on",
+    "wears"
+  ],
+  "nodes": [
+    {
+      "id": "algebra",
+      "type": "algebra",
+      "label": "(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ",
+      "domain": "shared",
+      "layer": "core",
+      "desc": "The inscription: two different inversions, held apart, compose to the step forward. Proven on Z/64Z by engine/conform.mjs every run."
+    },
+    {
+      "id": "trust-t1",
+      "type": "trust",
+      "label": "T1 · The four promises",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "constitutional trust — TRUSTS.md"
+    },
+    {
+      "id": "trust-t2",
+      "type": "trust",
+      "label": "T2 · The separation bound",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "constitutional trust — TRUSTS.md"
+    },
+    {
+      "id": "trust-t3",
+      "type": "trust",
+      "label": "T3 · The shared root",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "constitutional trust — TRUSTS.md"
+    },
+    {
+      "id": "trust-t4",
+      "type": "trust",
+      "label": "T4 · Consent first — invitation, not attack",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "constitutional trust — TRUSTS.md"
+    },
+    {
+      "id": "trust-t5",
+      "type": "trust",
+      "label": "T5 · The multiplicative gate",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "constitutional trust — TRUSTS.md"
+    },
+    {
+      "id": "trust-t6",
+      "type": "trust",
+      "label": "T6 · The door",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "constitutional trust — TRUSTS.md"
+    },
+    {
+      "id": "ground-rules",
+      "type": "rules",
+      "label": "GROUND_RULES GR-1..GR-10",
+      "domain": "shared",
+      "layer": "constitution",
+      "desc": "pasted into every seat at boot: frontier authority, claim tiers, hard constraints, Gap-only witnesses, honest labels, kills at win-prominence, chronicles, the door, trace-or-delete, keystone-only ledgers"
+    },
+    {
+      "id": "seat-chronicle",
+      "type": "seat",
+      "label": "Seat: chronicle — the chronicler",
+      "domain": "shared",
+      "layer": "seats",
+      "desc": "seats/chronicle.md"
+    },
+    {
+      "id": "seat-critic",
+      "type": "seat",
+      "label": "Seat: critic",
+      "domain": "shared",
+      "layer": "seats",
+      "desc": "seats/critic.md"
+    },
+    {
+      "id": "seat-gap-hold-apart",
+      "type": "seat",
+      "label": "Seat: hold-apart — the Gap ⿻",
+      "domain": "shared",
+      "layer": "seats",
+      "desc": "seats/gap-hold-apart.md"
+    },
+    {
+      "id": "seat-keystone",
+      "type": "seat",
+      "label": "Seat: keystone — soulbae 🧙 ⊥ soulbis ⚔️",
+      "domain": "first_person",
+      "layer": "seats",
+      "desc": "seats/keystone.md"
+    },
+    {
+      "id": "seat-measure",
+      "type": "seat",
+      "label": "Seat: measure — the assessor",
+      "domain": "shared",
+      "layer": "seats",
+      "desc": "seats/measure.md"
+    },
+    {
+      "id": "seat-soulbae-propose",
+      "type": "seat",
+      "label": "Seat: propose — soulbae 🧙",
+      "domain": "mage",
+      "layer": "seats",
+      "desc": "seats/soulbae-propose.md"
+    },
+    {
+      "id": "seat-soulbis-assay",
+      "type": "seat",
+      "label": "Seat: assay — soulbis ⚔️",
+      "domain": "swordsman",
+      "layer": "seats",
+      "desc": "seats/soulbis-assay.md"
+    },
+    {
+      "id": "engine",
+      "type": "engine",
+      "label": "engine/ · the loop + conform + tests",
+      "domain": "shared",
+      "layer": "machinery",
+      "desc": "dual_agent_loop.mjs (Measure → Propose → Hold-apart → Assay → Critic → Chronicle) · conform.mjs proves the axioms with its own independent copy · loop.test.mjs pins the failure semantics"
+    },
+    {
+      "id": "holon-layer",
+      "type": "tool",
+      "label": "the holon layer · κ / VRC / audit",
+      "domain": "shared",
+      "layer": "machinery",
+      "desc": "kappa.mjs one κ law · vrc.mjs signed relational edges (a reference proposes; a signature mints) · holon_audit.mjs re-derives everything — an auditor, and it says so (HOLONS.md)"
+    },
+    {
+      "id": "observe-lane",
+      "type": "tool",
+      "label": "the Observe lane · wiki + graph",
+      "domain": "shared",
+      "layer": "machinery",
+      "desc": "WIKI.md: spellweb.mjs → wiki_emit.mjs → wiki_install.mjs — research auto-populates a federated wiki; pages for people, graph.json for agents; serving beyond localhost is the door"
+    },
+    {
+      "id": "console-lane",
+      "type": "tool",
+      "label": "the workshop console + mint",
+      "domain": "shared",
+      "layer": "machinery",
+      "desc": "console.mjs live GET-only window · render_run.mjs / verify_run.mjs re-derive every seed from saved bytes · mint_artefact.mjs seals a validated run at the door"
+    },
+    {
+      "id": "path-shor-mage",
+      "type": "path",
+      "label": "shor_mage",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "quantum circuits — product: qubits × Toffoli, ↓",
+      "gap": "9,024 witnesses hashed from the circuit's own op stream",
+      "weight": "full",
+      "cls": "full"
+    },
+    {
+      "id": "path-tigzkp-mage",
+      "type": "path",
+      "label": "tigzkp_mage",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "ZK constraint count — R1CS constraints, ↓",
+      "gap": "held-out points, Fiat-Shamir per round",
+      "weight": "full + specialised",
+      "cls": "full"
+    },
+    {
+      "id": "path-v6-rehydration",
+      "type": "path",
+      "label": "V6 rehydration",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "research documents — fidelity across audiences",
+      "gap": "adversarial reviewer who never sees the canon",
+      "weight": "full, non-numeric",
+      "cls": "full"
+    },
+    {
+      "id": "path-privacy-pools-v2-mage",
+      "type": "path",
+      "label": "privacy_pools_v2_mage",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "ZK, real upstream target — R1CS constraints, ↓",
+      "gap": "as above, per-rewrite certificates",
+      "weight": "full, mechanically fitted",
+      "cls": "full"
+    },
+    {
+      "id": "path-lexon-pvm",
+      "type": "path",
+      "label": "lexon_pvm",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "controlled-grammar semantic base (Lexon × PVM) — coverage-debt, ↓",
+      "gap": "5 held-out census terms + 3 regression entries hashed from the proposal",
+      "weight": "full, mechanically fitted",
+      "cls": "full"
+    },
+    {
+      "id": "path-myterms-ieee-7012",
+      "type": "path",
+      "label": "MyTerms / IEEE 7012",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "consent agreements — Φ product over a bilateral record",
+      "gap": "registry + unlock lattice + constellation hash",
+      "weight": "loop built, mock-only",
+      "cls": "adjacent"
+    },
+    {
+      "id": "path-fedwiki-flow-gatehouse",
+      "type": "path",
+      "label": "FedWiki flow + Gatehouse",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "publishing — presence/absence gap-count",
+      "gap": "*(no witness draw)* — integrity gate + human",
+      "weight": "discovery loop",
+      "cls": "adjacent"
+    },
+    {
+      "id": "path-the-dream-cycle",
+      "type": "path",
+      "label": "the dream cycle",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "universe upkeep — *(no metric)* — gap surfacing",
+      "gap": "*(none)* — the measure seat at fleet scale",
+      "weight": "measure-only",
+      "cls": "adjacent"
+    },
+    {
+      "id": "path-game-of-42",
+      "type": "path",
+      "label": "Game of 42",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "the structure itself — *(none)* — a visualization",
+      "gap": "*(none)* — checks structure, not results",
+      "weight": "structure layer",
+      "cls": "adjacent"
+    },
+    {
+      "id": "path-universe-builder",
+      "type": "path",
+      "label": "universe-builder",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "a map of a corpus — words, ↓",
+      "gap": "a sampled draw it never needed",
+      "weight": "RETIRED — read this one",
+      "cls": "retired"
+    },
+    {
+      "id": "path-hearthold-mage",
+      "type": "path",
+      "label": "hearthold_mage",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "household sovereignty stack — disclosure-debt, ↓ (baseline 2049 canonical bytes)",
+      "gap": "FULL-mode bundle satisfies all 23 frozen census requirements + one negative fixture per requirement",
+      "weight": "FILLED 2026-07-14 — the House of Archon, signed",
+      "cls": "full"
+    },
+    {
+      "id": "path-hh-workshop",
+      "type": "path",
+      "label": "hh_workshop",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "workshop facilitation (babblefish translation) — translation-debt, ↓ (baseline 32)",
+      "gap": "census over a 31-claim frozen register; the probe FORM drawn Fiat-Shamir from the triptych; assayer blind to canon",
+      "weight": "full, mechanically fitted — standalone (vendored engine, local-model driver)",
+      "cls": "full"
+    },
+    {
+      "id": "path-the-dtg-verification-registry",
+      "type": "path",
+      "label": "the DTG verification registry",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "ZK ceremony suite acceptance — registry rows, honestly accepted",
+      "gap": "digest-manifest byte-match; the decision consumes only `pinned`",
+      "weight": "acceptance flow, human-gated — first external run accepted",
+      "cls": "adjacent"
+    },
+    {
+      "id": "path-the-litreview-runtime",
+      "type": "path",
+      "label": "the litreview runtime",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "prior-art novelty (Programme WP-14) — residues surviving refutation",
+      "gap": "context isolation: refuters never see the prover's argument (D3)",
+      "weight": "full, non-numeric — sweep ⊥ refute ⊥ judge",
+      "cls": "full"
+    },
+    {
+      "id": "path-uor-kappa-mage",
+      "type": "path",
+      "label": "uor_kappa_mage",
+      "domain": "shared",
+      "layer": "paths",
+      "desc": "upstream substrate convergence (kappa-registry) — *(no metric)* — a P-gated research lane",
+      "gap": "*(inherited, not drawn)* — TRUSTS + GROUND_RULES govern every session",
+      "weight": "descendant lane — the constitution inherited whole",
+      "cls": "descendant"
+    },
+    {
+      "id": "first-person",
+      "type": "door",
+      "label": "the First Person 😊 · the door",
+      "domain": "first_person",
+      "layer": "constitution",
+      "desc": "every outward action — push, publish, submit, serve — is a human’s alone; the system’s job is to make the door visible and stop in front of it (T6)"
+    }
+  ],
+  "edges": [
+    {
+      "source": "trust-t1",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "trust-t2",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "trust-t3",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "trust-t4",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "trust-t5",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "trust-t6",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "ground-rules",
+      "target": "algebra",
+      "type": "binds"
+    },
+    {
+      "source": "seat-chronicle",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "seat-critic",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "seat-gap-hold-apart",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "seat-keystone",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "seat-measure",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "seat-soulbae-propose",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "seat-soulbis-assay",
+      "target": "algebra",
+      "type": "seated_on"
+    },
+    {
+      "source": "engine",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "holon-layer",
+      "target": "engine",
+      "type": "implements"
+    },
+    {
+      "source": "observe-lane",
+      "target": "engine",
+      "type": "implements"
+    },
+    {
+      "source": "console-lane",
+      "target": "engine",
+      "type": "implements"
+    },
+    {
+      "source": "path-shor-mage",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-tigzkp-mage",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-v6-rehydration",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-privacy-pools-v2-mage",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-lexon-pvm",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-myterms-ieee-7012",
+      "target": "algebra",
+      "type": "wears"
+    },
+    {
+      "source": "path-fedwiki-flow-gatehouse",
+      "target": "algebra",
+      "type": "wears"
+    },
+    {
+      "source": "path-the-dream-cycle",
+      "target": "algebra",
+      "type": "wears"
+    },
+    {
+      "source": "path-game-of-42",
+      "target": "algebra",
+      "type": "wears"
+    },
+    {
+      "source": "path-universe-builder",
+      "target": "algebra",
+      "type": "retired_from"
+    },
+    {
+      "source": "path-hearthold-mage",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-hh-workshop",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-the-dtg-verification-registry",
+      "target": "algebra",
+      "type": "wears"
+    },
+    {
+      "source": "path-the-litreview-runtime",
+      "target": "algebra",
+      "type": "proves"
+    },
+    {
+      "source": "path-uor-kappa-mage",
+      "target": "algebra",
+      "type": "inherits"
+    },
+    {
+      "source": "first-person",
+      "target": "algebra",
+      "type": "opens"
+    }
+  ]
+}

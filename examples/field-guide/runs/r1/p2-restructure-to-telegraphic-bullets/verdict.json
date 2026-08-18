@@ -1,0 +1,9 @@
+{
+  "leverId": "p2-restructure-to-telegraphic-bullets",
+  "status": "VALIDATED",
+  "metric": 526,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = 1ec8affb29623c553319588df2e8e0dad432f6e711bd92fec5dee3ada8437515 == seedHex. candidate.md written from proposal compressedText verbatim. Held-out gate answered from candidate.md ONLY, all 8 correct: F31 (one week; water and batteries), F15 (>2h above 4C), F27 (28 days; pharmacist), F21 (small south-facing room; layered clothing and blankets), F14 (tape reminder note to each door), F20 (>=1 CO alarm per floor where people sleep), F9 (canned beans, canned fish, peanut butter, crackers, dried fruit, shelf-stable milk), F12 (~4 hours). Metric mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 526 words < frontier best 730. Hard constraint holds: candidate.md is a self-contained instruction document (titled guide, sectioned, all steps actionable standalone). conform.mjs PASS.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r1/p2-restructure-to-telegraphic-bullets"
+}

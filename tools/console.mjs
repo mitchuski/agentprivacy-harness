@@ -206,6 +206,15 @@ export function gatherRuns(dir) {
       const canon = readJson(canonPath)
       const derived = sha256File(canonPath)          // re-derived NOW (GR-4)
       const recorded = gap && typeof gap.seedHex === 'string' ? gap.seedHex.toLowerCase() : null
+      // Salted (post-C4) runs: seedHex = sha256(hSource‖hProposal‖salt), and the
+      // canon bytes must hash to hProposal — the same two checks verify_run.mjs
+      // makes. Comparing sha256(canon) to seedHex directly would cry MISMATCH
+      // on every honest salted run.
+      const salted = !!(gap && gap.salt && gap.hProposal)
+      const reSeed = salted ? createHash('sha256').update(String(gap.hSource ?? '') + gap.hProposal + gap.salt).digest('hex') : null
+      const hashState = !(derived && recorded) ? 'INCOMPLETE'
+        : salted ? ((derived === String(gap.hProposal).toLowerCase() && reSeed === recorded) ? 'MATCH' : 'MISMATCH')
+        : (derived === recorded ? 'MATCH' : 'MISMATCH')
       const mt = (f) => { const s = safeStat(join(pdir, f)); return s ? Math.round(s.mtimeMs) : null }
       if (!rounds.has(roundId)) rounds.set(roundId, { roundId, proposals: [], chronicleDraft: null })
       rounds.get(roundId).proposals.push({
@@ -214,8 +223,8 @@ export function gatherRuns(dir) {
           leverId: canon.leverId, title: canon.title, lens: canon.lens,
           expectedMetric: canon.expectedMetric, hardConstraintNote: canon.hardConstraintNote,
         } : null,
-        recorded, derived,
-        hashState: derived && recorded ? (derived === recorded ? 'MATCH' : 'MISMATCH') : 'INCOMPLETE',
+        recorded, derived, salted,
+        hashState,
         verdict: verdict && !verdict.__unparseable ? {
           leverId: verdict.leverId, status: verdict.status, metric: verdict.metric,
           gateResult: verdict.gateResult, failingCheck: verdict.failingCheck,

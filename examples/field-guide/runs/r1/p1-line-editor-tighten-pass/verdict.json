@@ -1,0 +1,9 @@
+{
+  "leverId": "line-editor-tighten-pass",
+  "status": "VALIDATED",
+  "metric": 619,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = bdd596f8504c1f1e7ba6ee2990a804016332eb98c6753e5132acefe6af2f23f6 == seedHex (5642 bytes). candidate.md written verbatim from proposal.compressedText (3820 bytes). Held-out gate: answered all 8 Gap questions (F30,F28,F1,F18,F27,F25,F7,F8) using candidate.md alone; every drawn fact survives with its quantity/list/order intact -> 8/8. Metric mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 619 words (proposer claimed 618; measured 619 governs, GR-1). Frontier best = 730, so 619 < 730 beats. Hard constraint holds: all 8 sections with headers in original order, every instruction a standalone imperative, nothing points outside the document. conform.mjs PASS. (Overwrote a stale verdict from an earlier session: seed 16b80aa9..., metric 645, draw F23/F31/F11/F27/F20/F14/F24/F2 — a different proposal artifact.)",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/r1/p1-line-editor-tighten-pass"
+}

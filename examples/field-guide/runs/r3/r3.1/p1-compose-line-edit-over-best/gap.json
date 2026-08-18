@@ -1,0 +1,107 @@
+{
+  "seedHex": "a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9",
+  "draw": [
+    {
+      "fact": "F3",
+      "question": "In what order should you work through the sections of the guide, and which sections cover what matters most?",
+      "expectedAnswer": "Work through the sections in order; the earlier sections cover the preparations that matter most."
+    },
+    {
+      "fact": "F7",
+      "question": "If a storm is forecast and you have advance warning, what should you also fill, and what is that water for?",
+      "expectedAnswer": "also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking."
+    },
+    {
+      "fact": "F9",
+      "question": "What are the good non-perishable food choices the guide lists for the emergency shelf?",
+      "expectedAnswer": "canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk."
+    },
+    {
+      "fact": "F13",
+      "question": "For about how long does a full freezer hold a safe temperature, and for about how long does a half-full freezer hold it?",
+      "expectedAnswer": "A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours."
+    },
+    {
+      "fact": "F20",
+      "question": "How many battery-powered carbon monoxide alarms should you install, and where?",
+      "expectedAnswer": "Install at least one battery-powered carbon monoxide alarm on each floor where people sleep."
+    },
+    {
+      "fact": "F22",
+      "question": "Below what indoor temperature, if you cannot maintain warmth, should you relocate, and where should you go?",
+      "expectedAnswer": "If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home."
+    },
+    {
+      "fact": "F27",
+      "question": "For up to how long does refrigerated medication such as insulin generally remain usable at room temperature, and who should confirm the rule for your specific medication?",
+      "expectedAnswer": "Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens."
+    },
+    {
+      "fact": "F28",
+      "question": "Whose phone numbers should you write down on paper, and why?",
+      "expectedAnswer": "Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book."
+    }
+  ],
+  "transcript": {
+    "step1_numbered_facts": {
+      "method": "Read artifact/GUIDE.md (the ORIGINAL guide). Split the body into sentences on '.', '!', '?' boundaries in reading order; indexed every sentence stating a checkable fact (quantity, duration, temperature, item, instruction) from F1 upward. 32 facts total, F1..F32.",
+      "facts": {
+        "F1": "This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours.",
+        "F2": "It is written for a temperate climate and assumes no backup generator.",
+        "F3": "Work through the sections in order; the earlier sections cover the preparations that matter most.",
+        "F4": "Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours.",
+        "F5": "Half of that allowance is for drinking, and the other half covers cooking and basic hygiene.",
+        "F6": "Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months.",
+        "F7": "If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.",
+        "F8": "Keep a dedicated shelf of non-perishable food sufficient for three days.",
+        "F9": "Good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk.",
+        "F10": "Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless.",
+        "F11": "Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf.",
+        "F12": "An unopened refrigerator keeps food safe for about four hours.",
+        "F13": "A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water.",
+        "F14": "Keep both doors closed as much as possible and tape a note to each door as a reminder.",
+        "F15": "Any perishable food that has spent more than two hours above four degrees Celsius should be discarded; when in doubt, throw it out.",
+        "F16": "Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages.",
+        "F17": "Store at least one light per person, plus two spare sets of batteries for each light.",
+        "F18": "Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark.",
+        "F19": "Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal.",
+        "F20": "Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.",
+        "F21": "In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater.",
+        "F22": "If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.",
+        "F23": "Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins.",
+        "F24": "Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times.",
+        "F25": "Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls.",
+        "F26": "Keep a first-aid kit and a seven-day supply of every prescription medication, and rotate the medications so they stay in date.",
+        "F27": "Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens.",
+        "F28": "Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.",
+        "F29": "Wait five minutes before switching major appliances back on, so the grid can stabilise.",
+        "F30": "Check the freezer: if food still contains ice crystals, it can be safely refrozen.",
+        "F31": "Restock everything used during the outage within one week, starting with water and batteries.",
+        "F32": "Finally, write a one-page note about what was missing or awkward, and fix at least one of those gaps before the next outage arrives."
+      }
+    },
+    "step2_serialization_and_hash": {
+      "serialization_rule": "Canonical JSON: parse the verbatim proposal artifact, re-emit with recursively sorted object keys, no whitespace, array order preserved. Written as the exact bytes of proposal_canon.json (5857 bytes).",
+      "canonicalizer": "runs/r3/r3.1/p1-compose-line-edit-over-best/canon.mjs (JSON.parse then recursive canon() that sorts Object.keys and joins with no whitespace); input runs/.../raw_proposal.json is the verbatim artifact.",
+      "hash_command": "sha256sum proposal_canon.json",
+      "digest": "a82546e38eb34973b46d27c5fe4ff6e2b95eea8cc6d1b97faaa4b9a7164c1aa9",
+      "verify": "sha256sum of the saved proposal_canon.json equals seedHex; re-derivable by any third party from proposal_canon.json alone."
+    },
+    "step3_draw": {
+      "rule": "Digest bytes read left to right as unsigned integers b0,b1,... (b0=0xa8=168, b1=0x25=37, b2=0x46=70, b3=0xe3=227, b4=0x8e=142, b5=0xb3=179, b6=0x49=73, b7=0x73=115). Remaining fact list starts as [F1..F32] in order. For draw k: idx = b_k mod (remaining count); pick and remove element at that 0-based index; draw without replacement.",
+      "steps": [
+        "k=0: b0=168, rem=32, idx=168%32=8, list[8]=F9 -> draw F9",
+        "k=1: b1=37, rem=31, idx=37%31=6, list[6]=F7 -> draw F7",
+        "k=2: b2=70, rem=30, idx=70%30=10, list[10]=F13 -> draw F13",
+        "k=3: b3=227, rem=29, idx=227%29=24, list[24]=F28 -> draw F28",
+        "k=4: b4=142, rem=28, idx=142%28=2, list[2]=F3 -> draw F3",
+        "k=5: b5=179, rem=27, idx=179%27=17, list[17]=F22 -> draw F22",
+        "k=6: b6=73, rem=26, idx=73%26=21, list[21]=F27 -> draw F27",
+        "k=7: b7=115, rem=25, idx=115%25=15, list[15]=F20 -> draw F20"
+      ],
+      "drawn": ["F9", "F7", "F13", "F28", "F3", "F22", "F27", "F20"],
+      "distinct": true
+    },
+    "notes": "Seat HOLD-APART (the Gap). Witnesses derived Fiat-Shamir from the proposal artifact alone; no proposer-suggested witnesses accepted (GR-4). proposal_canon.json left in place for the auditor."
+  }
+}

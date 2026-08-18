@@ -1,0 +1,62 @@
+{
+  "title": "Welcome Visitors",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "25533176dcbcb19e",
+      "text": "# The field-guide spar 🤺\n\nThis site is a **generated projection**: every page derives from the spar's own ledgers at examples/field-guide via tools/wiki_install.mjs. The run directory is the record; this wall is its story."
+    },
+    {
+      "type": "markdown",
+      "id": "5a7db854353cfe8a",
+      "text": "Start at [[field-guide workshop]] — the hub: the objective, the frontier (730 words compressed to a validated 472 across three audited folds), the runs, the killed levers, and the chronicles. Agents: fetch [graph.json](/assets/spellweb/graph.json)."
+    },
+    {
+      "type": "reference",
+      "site": "agentprivacy.localhost",
+      "slug": "welcome-visitors",
+      "title": "Welcome Visitors",
+      "text": "The agentprivacy hub space — what this farm is, and how to start your own site on it.",
+      "id": "e14e730dbfdcb855"
+    },
+    {
+      "type": "markdown",
+      "id": "552a274f2b0152cc",
+      "text": "> This welcome page is hand-authored and survives re-installs (the projection is additive). Everything else here regenerates from the ledgers — re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Welcome Visitors",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "25533176dcbcb19e",
+            "text": "# The field-guide spar 🤺\n\nThis site is a **generated projection**: every page derives from the spar's own ledgers at examples/field-guide via tools/wiki_install.mjs. The run directory is the record; this wall is its story."
+          },
+          {
+            "type": "markdown",
+            "id": "5a7db854353cfe8a",
+            "text": "Start at [[field-guide workshop]] — the hub: the objective, the frontier (730 words compressed to a validated 472 across three audited folds), the runs, the killed levers, and the chronicles. Agents: fetch [graph.json](/assets/spellweb/graph.json)."
+          },
+          {
+            "type": "reference",
+            "site": "agentprivacy.localhost",
+            "slug": "welcome-visitors",
+            "title": "Welcome Visitors",
+            "text": "The agentprivacy hub space — what this farm is, and how to start your own site on it.",
+            "id": "e14e730dbfdcb855"
+          },
+          {
+            "type": "markdown",
+            "id": "552a274f2b0152cc",
+            "text": "> This welcome page is hand-authored and survives re-installs (the projection is additive). Everything else here regenerates from the ledgers — re-run = re-true."
+          }
+        ]
+      },
+      "date": 1786968000000
+    }
+  ]
+}

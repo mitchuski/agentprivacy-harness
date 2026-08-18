@@ -1,0 +1,56 @@
+{
+  "title": "field-guide run r3",
+  "story": [
+    {
+      "type": "markdown",
+      "id": "ea422609c97ae5a8",
+      "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+    },
+    {
+      "type": "markdown",
+      "id": "0e7b9a547cf02f23",
+      "text": "### VALIDATED · compose-line-edit-over-best 🧙\n\nComposed line-edit over the folded 573-word best: cut residual filler and throat-clearing, zero facts dropped\n\n- lens: line-editor\n- Gap seed: `a82546e38eb34973…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "bac96e2a5f52d138",
+      "text": "### VALIDATED · telegraphic-bullets-second-draw 🧙\n\nSecond independent draw of the frozen r1 telegraphic-bullets candidate\n\n- lens: restructurer\n- Gap seed: `a9c102e234d4f9df…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+    },
+    {
+      "type": "markdown",
+      "id": "03cd037b5b04a427",
+      "text": "> projected from `runs/r3` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "field-guide run r3",
+        "story": [
+          {
+            "type": "markdown",
+            "id": "ea422609c97ae5a8",
+            "text": "**verdict** — no run.json recorded; the proposal record below is the whole record (GR-5: a phase that left no artifact is \"not recorded\", never papered over)"
+          },
+          {
+            "type": "markdown",
+            "id": "0e7b9a547cf02f23",
+            "text": "### VALIDATED · compose-line-edit-over-best 🧙\n\nComposed line-edit over the folded 573-word best: cut residual filler and throat-clearing, zero facts dropped\n\n- lens: line-editor\n- Gap seed: `a82546e38eb34973…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "bac96e2a5f52d138",
+            "text": "### VALIDATED · telegraphic-bullets-second-draw 🧙\n\nSecond independent draw of the frozen r1 telegraphic-bullets candidate\n\n- lens: restructurer\n- Gap seed: `a9c102e234d4f9df…` — re-derive it from proposal_canon.json before trusting the verdict (GR-4)\n"
+          },
+          {
+            "type": "markdown",
+            "id": "03cd037b5b04a427",
+            "text": "> projected from `runs/r3` by tools/wiki_emit.mjs — the ledger is the authority; this page is a projection. re-run = re-true."
+          }
+        ]
+      },
+      "date": 1378495420
+    }
+  ]
+}

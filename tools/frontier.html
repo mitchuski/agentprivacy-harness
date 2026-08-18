@@ -1,302 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- frontier.html — the frontier, as a page of its own.
+
+     A CONSUMER of the runtime feed (runtime-feed.v1), never a writer: every
+     number on this page is read from /api/feed (served by console.mjs) or, when
+     opened standalone, from a baked demo snapshot of the in-repo spar — the one
+     instance whose numbers re-derive from the shipped bytes. GR-1 holds: the
+     instance's frontier.json is the sole authority; this page cites it via the
+     feed and adds no digit of its own.
+
+     Served:      http://127.0.0.1:4242/frontier?instance=<id>
+     Embedded:    …/frontier?instance=<id>&embed=1     (SVG only)
+     Standalone:  open the file — spar demo, clearly badged.
+
+     The maths it draws is the model's: R(t) = best/baseline is the moving
+     ceiling (PVM — agentprivacy.ai/model), and the gate is multiplicative (T5:
+     a zero collapses the product). Zero dependencies, system fonts, no CDN. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The frontier — a verifiable, contributable descent, per workshop</title>
+<title>the frontier</title>
 <style>
   :root{
-    color-scheme: light dark;
-    --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9;
-    --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12);
-    --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f;
-    --glow:rgba(15,147,164,.28);
-    --mono: ui-monospace,"Cascadia Code","JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
-    --serif:"Iowan Old Style","Hoefler Text","Palatino Linotype",Palatino,Georgia,serif;
-    --sans: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --bg:#0b1020; --panel:#111832; --panel2:#0e1428; --line:#22305c;
+    --ink:#dce4f7; --dim:#8ea0c9; --faint:#5a6a94;
+    --cyan:#39d0d8; --coral:#ff6a5e; --violet:#8f7bff;
+    --amber:#f0b429; --green:#3ecf8e;
+    --mono:ui-monospace,'Cascadia Code',Consolas,monospace;
+    --serif:Georgia,'Times New Roman',serif;
   }
-  @media (prefers-color-scheme: dark){
-    :root{ --ground:#05060d; --panel:#0b0f1e; --sink:#080b16; --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.16);
-      --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7; --glow:rgba(77,217,232,.32); }
-  }
-  :root[data-theme="light"]{ color-scheme:light; --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9; --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12); --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f; --glow:rgba(15,147,164,.28); }
-  :root[data-theme="dark"]{ color-scheme:dark; --ground:#05060d; --panel:#0b0f1e; --sink:#080b16; --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.16); --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7; --glow:rgba(77,217,232,.32); }
-
-  *{box-sizing:border-box;}
-  body{ margin:0; background:var(--ground); color:var(--ink); font-family:var(--sans); }
-  .num{ font-variant-numeric:tabular-nums; }
-
-  .frontier{
-    background:var(--panel); border:1px solid var(--line); border-radius:16px;
-    padding:1.1rem 1.25rem 1rem; position:relative; max-width:56rem; margin:0 auto;
-    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset;
-  }
-  .fr-head{ display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:baseline; justify-content:space-between; margin-bottom:.2rem; }
-  .fr-title{ font-family:var(--mono); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
-  .fr-title b{ color:var(--ink); }
-  .fr-stat{ font-family:var(--mono); font-size:.82rem; color:var(--dim); }
-  .fr-stat .best{ color:var(--cyan); font-weight:600; }
-  .fr-stat .drop{ color:var(--num); }
-
-  .fr-controls{ display:flex; gap:.4rem; align-items:center; }
-  select, .fr-btn{
-    font:inherit; font-family:var(--mono); font-size:.74rem; color:var(--ink);
-    background:var(--sink); border:1px solid var(--line); border-radius:8px; padding:.3rem .55rem; cursor:pointer;
-  }
-  .fr-btn:hover, select:hover{ border-color:var(--violet); }
-  .fr-btn[aria-pressed="true"]{ color:var(--cyan); border-color:var(--cyan); }
-
-  .fr-plot{ position:relative; margin-top:.6rem; }
-  svg{ display:block; width:100%; height:auto; overflow:visible; }
-  .grid{ stroke:var(--line); stroke-width:1; }
-  .baseline{ stroke:var(--line); stroke-width:1; }
-  .descent{ fill:none; stroke:var(--cyan); stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round; filter:drop-shadow(0 0 6px var(--glow)); }
-  .area{ opacity:.9; }
-  .opentgt{ stroke:var(--violet); stroke-width:1.5; stroke-dasharray:6 5; }
-  .lbl{ font-family:var(--mono); font-size:11px; fill:var(--dim); }
-  .lbl.val{ fill:var(--num); }
-  .lbl.best{ fill:var(--cyan); }
-  .lbl.violet{ fill:var(--violet); }
-
-  .dot{ cursor:pointer; }
-  .dot circle.hit{ fill:transparent; }
-  .dot circle.node{ fill:var(--panel); stroke:var(--cyan); stroke-width:2; transition:r .15s ease; }
-  .dot.best circle.node{ fill:var(--cyan); }
-  .dot:hover circle.node, .dot:focus-visible circle.node{ r:7; }
-  .dot:focus-visible{ outline:none; }
-  .dot:focus-visible circle.halo{ opacity:1; }
-  .dot circle.halo{ fill:none; stroke:var(--cyan); opacity:0; }
-  @media (prefers-reduced-motion: no-preference){
-    .dot.best circle.pulse{ animation:pulse 2.4s ease-out infinite; transform-origin:center; }
-    .beat-marker{ animation:pulse 2.4s ease-out infinite; transform-origin:center; }
-  }
-  @keyframes pulse{ 0%{ opacity:.5; r:7; } 70%{ opacity:0; r:16; } 100%{ opacity:0; r:16; } }
-
-  /* animated descent reveal */
-  .descent.draw{ stroke-dasharray:var(--len); stroke-dashoffset:var(--len); }
-  @media (prefers-reduced-motion: no-preference){
-    .descent.draw.play{ animation:draw 1.5s ease forwards; }
-    .area.draw{ opacity:0; }
-    .area.draw.play{ animation:fadein 1.1s ease .5s forwards; }
-    .dot.draw{ opacity:0; }
-    .dot.draw.play{ animation:fadein .4s ease forwards; }
-  }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  @keyframes fadein{ to{ opacity:1; } }
-
-  /* the fold card */
-  .card{
-    position:absolute; pointer-events:none; z-index:5; min-width:12rem; max-width:16rem;
-    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.6rem .75rem;
-    box-shadow:0 8px 30px -12px rgba(0,0,0,.5); opacity:0; transform:translateY(4px); transition:opacity .12s ease, transform .12s ease;
-    font-size:.8rem;
-  }
-  .card.show{ opacity:1; transform:translateY(0); }
-  .card .m{ font-family:var(--mono); font-size:1.15rem; font-weight:600; color:var(--ink); }
-  .card .m .r{ font-size:.82rem; color:var(--cyan); margin-left:.4rem; }
-  .card .tgt{ font-family:var(--mono); font-size:.72rem; color:var(--violet); letter-spacing:.06em; }
-  .card .lever{ color:var(--dim); margin-top:.35rem; word-break:break-word; }
-  .card .date{ color:var(--dim); font-family:var(--mono); font-size:.7rem; margin-top:.25rem; }
-  .card .kappa{ font-family:var(--mono); font-size:.64rem; color:var(--dim); margin-top:.3rem; word-break:break-all; }
-
-  .invite{
-    display:flex; gap:.8rem; align-items:flex-start; margin-top:.9rem; padding-top:.85rem; border-top:1px solid var(--line);
-  }
-  .invite .glyph{ font-size:1.1rem; line-height:1.3; }
-  .invite p{ margin:0; font-size:.86rem; color:var(--dim); }
-  .invite .beat{ color:var(--violet); font-family:var(--mono); font-weight:600; }
-  .invite .proof{ font-family:var(--serif); font-style:italic; color:var(--ink); }
-
-  /* standalone page chrome (hidden when embedded via ?embed=1) */
-  .page{ padding:clamp(1.5rem,5vw,3.5rem) 1.2rem; }
-  .page > h1{ font-family:var(--mono); font-weight:600; font-size:clamp(1.3rem,3.5vw,1.9rem); text-align:center; margin:0 auto .4rem; max-width:40rem; }
-  .page > .sub{ text-align:center; color:var(--dim); max-width:44rem; margin:0 auto 2rem; font-size:.95rem; }
-  body.embed .page{ padding:0; }
-  body.embed .page > h1, body.embed .page > .sub{ display:none; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,Segoe UI,Roboto,sans-serif}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:1180px;margin:0 auto;padding:1.2rem 1.4rem 3rem}
+  header.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:.8rem;border-bottom:1px solid var(--line);padding-bottom:.9rem}
+  header.top h1{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin:0}
+  header.top h1 b{color:var(--cyan)}
+  .badge{font:600 .68rem/1.6 var(--mono);border:1px solid var(--amber);color:var(--amber);border-radius:5px;padding:0 .45em;letter-spacing:.03em}
+  .live{border-color:var(--green);color:var(--green)}
+  header.top nav{margin-left:auto;font-family:var(--mono);font-size:.78rem;display:flex;gap:1.1rem}
+  select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;font:inherit;font-size:.85rem;padding:.15rem .4rem}
+  .strip{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;font-family:var(--mono);font-size:.8rem;color:var(--dim);padding:.7rem 0}
+  .strip b{color:var(--ink);font-weight:600}
+  .strip .v{color:var(--green)} .strip .m{color:var(--amber)} .strip .b{color:var(--coral)}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1.1rem;margin-top:.4rem}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem}
+  .card h2{font-family:var(--serif);font-size:1.02rem;margin:.1rem 0 .6rem;font-weight:600}
+  .chart{padding:.6rem .6rem .2rem}
+  svg{display:block;width:100%;height:auto}
+  .axis{font:10.5px var(--mono);fill:var(--faint)}
+  .ctl{display:flex;gap:.6rem;align-items:center;padding:.4rem .5rem .5rem;font-family:var(--mono);font-size:.75rem;color:var(--dim)}
+  button.tog{background:var(--panel2);color:var(--dim);border:1px solid var(--line);border-radius:6px;font:600 .72rem var(--mono);padding:.2rem .6rem;cursor:pointer}
+  button.tog.on{color:var(--cyan);border-color:var(--cyan)}
+  .kv{font-family:var(--mono);font-size:.78rem;line-height:1.7}
+  .kv dt{color:var(--faint);float:left;clear:left;width:7.2em}
+  .kv dd{margin:0 0 .15rem 7.6em;color:var(--ink);overflow-wrap:anywhere}
+  .kv dd.dim{color:var(--dim)}
+  .delta-down{color:var(--green)} .flat{color:var(--dim)}
+  .cov-census{color:var(--cyan)} .cov-sample{color:var(--amber)}
+  table{width:100%;border-collapse:collapse;font:.78rem var(--mono)}
+  th{color:var(--faint);text-align:left;font-weight:400;border-bottom:1px solid var(--line);padding:.25rem .4rem}
+  td{padding:.3rem .4rem;border-bottom:1px solid var(--panel2)}
+  tr.sel td{background:var(--panel2)}
+  .prose{color:var(--dim);font-size:.85rem}
+  .prose b{color:var(--ink)}
+  .formula{font-family:var(--mono);color:var(--cyan);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:.5rem .8rem;font-size:.82rem;overflow-x:auto}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-top:1.1rem}
+  @media(max-width:900px){.cols{grid-template-columns:1fr}}
+  footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:.9rem;color:var(--faint);font-size:.75rem;font-family:var(--mono);display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}
+  .insc{font-family:var(--mono)}
+  #tip{position:fixed;pointer-events:none;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:.45rem .65rem;font:.74rem var(--mono);color:var(--ink);display:none;z-index:9;max-width:280px}
+  body.embed .wrap>*:not(#chartCard){display:none}
+  body.embed #chartCard{border:0;background:transparent}
+  .hint{color:var(--faint);font-size:.72rem;font-family:var(--mono)}
 </style>
 </head>
 <body>
-<div class="page">
-  <h1>The frontier — a descent you can contribute to</h1>
-  <p class="sub">Each workshop drives one number down through a gate it cannot tune to. Every point on the line is a fold that carried its own proof — run the harness, beat the line, and your fold joins it.</p>
-  <div class="frontier" id="frontier"></div>
+<div class="wrap">
+
+  <header class="top">
+    <h1>the frontier · <b id="hName">…</b></h1>
+    <span id="hBadge" class="badge" hidden>demo snapshot — serve the console for live numbers</span>
+    <nav>
+      <span id="hPick"></span>
+      <a href="#" id="lnkAbout">what is this?</a>
+      <a id="lnkConsole" href="/">console</a>
+      <a id="lnkWorkshop" href="/workshop">workshop</a>
+      <a href="https://agentprivacy.ai/model" target="_blank" rel="noopener">the model ↗</a>
+    </nav>
+  </header>
+
+  <div class="card" id="about" hidden style="margin-top:.9rem">
+    <h2>What the frontier is</h2>
+    <p class="prose">The frontier is an instance's <b>sole authority for numbers</b>, drawn
+    as a <b>moving ceiling</b>: a line that steps down only when a human keystone folds an
+    audited win — never on an agent's own word. Every dot on it carries its own proof: the
+    tests that passed it were derived by hashing the proposal together with a secret its
+    author never saw, so nothing on this line was graded by the hand that made it.</p>
+    <p class="prose"><b>The purpose is verifiable saving.</b> Each fold is the same
+    guaranteed content in fewer words, constraints, or bytes — which, for an agent runtime,
+    means <b>fewer tokens every time the artifact is used</b>: smaller contexts, cheaper
+    processes, and — where the gate is a census — a proof that <em>nothing was lost</em> to
+    buy the saving. And because each saving seals as a κ-addressed node, and each
+    verification of it can be minted as a signed edge, frontiers are how <b>trust graphs
+    form</b>: an agent can trust the smaller artifact, and the process that produced it,
+    without re-deriving its whole history.</p>
+    <h2 style="margin-top:1rem">The words on this page</h2>
+    <dl class="kv">
+      <dt>baseline</dt><dd class="dim">the measured start — what the counting rule said before any round ran.</dd>
+      <dt>lever</dt><dd class="dim">one named, specific change a proposer put forward.</dd>
+      <dt>the gate</dt><dd class="dim">the held-out exam: witnesses hashed from the proposal plus a run secret, so the proposer cannot tune to them.</dd>
+      <dt>census / sample</dt><dd class="dim">whether the gate probed <em>every</em> enumerable fact (detection 1.0) or a drawn subset — labelled on each dot, never upgraded after the fact.</dd>
+      <dt>VALIDATED</dt><dd class="dim">full gate pass + hard constraint intact + a frontier beat. All three, or nothing.</dd>
+      <dt>MIRAGE</dt><dd class="dim">passed the author's own probe, failed the real gate — worth exactly zero at any score. Named, never softened.</dd>
+      <dt>fold</dt><dd class="dim">the keystone accepting a validated lever into the artifact — once, with the conformance gate green before and after. Only folds move this line.</dd>
+      <dt>killed lever</dt><dd class="dim">a change that died on evidence — filed as prominently as a win, so no one digs there twice.</dd>
+      <dt>R(t)</dt><dd class="dim">best ÷ baseline — the moving ceiling as a ratio, the model's own term for it.</dd>
+      <dt>κ artefact</dt><dd class="dim">the sealed record of a fold: content-addressed, never trusted, only re-derived.</dd>
+    </dl>
+    <p class="hint">The full record of every fold lives in the instance's own ledgers; this
+    page carries the numbers and their proofs, not the narratives.</p>
+  </div>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="grid">
+    <div class="card chart" id="chartCard">
+      <div id="svgHost"></div>
+      <div class="ctl">
+        <button class="tog" id="togRatio">R(t) ratio</button>
+        <span class="hint">hover a fold · click to pin · ← → to walk the descent</span>
+      </div>
+    </div>
+    <div class="card" id="detail"></div>
+  </div>
+
+  <div class="cols">
+    <div class="card" id="runsCard"></div>
+    <div class="card" id="mathCard"></div>
+  </div>
+
+  <footer>
+    <span>numbers cited from <b>frontier.json</b> via runtime-feed.v1 — this page is a consumer and adds none of its own (GR-1)</span>
+    <span>views live with the consumer: build your own against the same feed (WORKFLOW.md, BYO contracts)</span>
+    <span class="insc">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</span>
+  </footer>
 </div>
+<div id="tip"></div>
 
 <script>
 (function(){
-  "use strict";
-  var root = document.documentElement;
-  var params = new URLSearchParams(location.search);
-  if(params.get('embed') === '1') document.body.classList.add('embed');
+"use strict";
+var params = new URLSearchParams(location.search);
+if (params.get('embed') === '1') document.body.classList.add('embed');
 
-  // ---- demo feed (used standalone; the console serves real /api/feed data).
-  // Only the in-repo spar ships as demo: its numbers re-derive from the
-  // shipped bytes (examples/field-guide/frontier.json). Other instances'
-  // frontiers are their own; a served feed shows them live, never baked. ----
-  var DEMO = {
-    'field-guide': { feed:'demo', instance:'field-guide', movingCeiling:{ metric:'words', baseline:730, best:472, ratioNow:0.6466,
-      open:{ id:'OT-4', statement:'below 472 words at gate 8/8' },
-      series:[ {label:'baseline',value:730,ratio:1,date:'2026-07-09',lever:null},
-               {label:'OT-1',value:573,ratio:0.7849,date:'2026-07-11',lever:'restructure-merge-terse-prose'},
-               {label:'OT-2',value:526,ratio:0.7205,date:'2026-07-11',lever:'telegraphic-bullets · two disjoint draws + census'},
-               {label:'OT-3',value:472,ratio:0.6466,date:'2026-07-11',lever:'r4-compose-line-edit'} ] },
-      artefacts:[{id:'af-0f8625eec136',kappa:'sha256:f57406e1…',best:472,beat:true}] }
-  };
+// ---- demo feed: the in-repo spar only — its numbers re-derive from the
+// shipped bytes (examples/field-guide/frontier.json). Other instances render
+// only from a live served feed, never baked. ----
+var DEMO = { feed:'demo', instance:'field-guide (demo)',
+  movingCeiling:{ metric:'words', baseline:730, best:472, ratioNow:0.6466,
+    open:{ id:'OT-4', statement:'below 472 words at gate 8/8 — third composition pass over an already twice-composed text; a proposal must name which word class it removes' },
+    series:[
+      {label:'baseline',value:730,ratio:1,date:'2026-07-09',lever:null,coverage:null,chronicle:null},
+      {label:'OT-1',value:573,ratio:0.7849,date:'2026-07-11',lever:'restructure-merge-terse-prose',target:'OT-1',coverage:{mode:'sample',N:32,n:8,detection:0.25},chronicle:'chronicles/2026-07-11_keystone-fold-573.md'},
+      {label:'OT-2',value:526,ratio:0.7205,date:'2026-07-11',lever:'telegraphic-bullets (two disjoint draws + 32/32 census)',target:'OT-2',coverage:{mode:'census',N:32,n:32,detection:1},chronicle:'chronicles/2026-07-11_keystone-fold-526.md'},
+      {label:'OT-3',value:472,ratio:0.6466,date:'2026-07-11',lever:'r4-compose-line-edit',target:'OT-3',coverage:{mode:'census',N:32,n:32,detection:1},chronicle:'chronicles/2026-07-11_keystone-fold-472.md'} ]},
+  objective:{ metric:'words', gate:'held-out comprehension 8/8, questions drawn by the Gap from the original guide', hardConstraint:'compressed guide stays a self-contained instruction document' },
+  verdicts:{VALIDATED:17,MIRAGE:2,BLOCKED:0},
+  runs:[{id:'r1',proposals:5,tally:{VALIDATED:3,MIRAGE:0,BLOCKED:0},view:'runs/r1/run.html'},
+        {id:'r2',proposals:4,tally:{VALIDATED:4,MIRAGE:0,BLOCKED:0},view:'runs/r2/run.html'},
+        {id:'r3',proposals:2,tally:{VALIDATED:2,MIRAGE:0,BLOCKED:0},view:'runs/r3/run.html'},
+        {id:'r4',proposals:2,tally:{VALIDATED:2,MIRAGE:0,BLOCKED:0},view:'runs/r4/run.html'},
+        {id:'r5',proposals:6,tally:{VALIDATED:6,MIRAGE:2,BLOCKED:0},view:'runs/r5/run.html'}],
+  killedLevers:null,
+  artefacts:[{id:'af-3e30062df366',kappa:'sha256:…',best:526,beat:true},{id:'af-0f8625eec136',kappa:'sha256:f57406e1…',best:472,beat:true}] };
 
-  var host = document.getElementById('frontier');
-  var served = location.protocol.indexOf('http') === 0 && location.hostname === '127.0.0.1';
-  var showRatio = false;
+var served = location.protocol.indexOf('http')===0;
+var feed=null, sel=-1, showRatio=false, instList=[];
+var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]}) };
+var fmt = function(n){ return typeof n==='number' ? n.toLocaleString('en-US') : (n==null?'—':n) };
+var css = function(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim() };
 
-  function css(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
-  function fmt(n){ return (typeof n === 'number') ? n.toLocaleString('en-US') : n; }
+// ---- header strip ----
+function strip(){
+  var mc=feed.movingCeiling, v=feed.verdicts||{}, drop=mc.baseline&&mc.best!=null?Math.round((1-mc.best/mc.baseline)*1000)/10:null;
+  var kl=feed.killedLevers, af=(feed.artefacts||[]).length;
+  document.getElementById('strip').innerHTML =
+    '<span>metric <b>'+esc(mc.metric||'—')+'</b></span>'+
+    '<span>descent <b>'+fmt(mc.baseline)+' → '+fmt(mc.best)+'</b>'+(drop!=null?' (−'+drop+'%)':'')+'</span>'+
+    '<span>R(t) <b>'+(mc.ratioNow!=null?mc.ratioNow:'—')+'</b></span>'+
+    '<span>open <b>'+esc(mc.open?mc.open.id:'none')+'</b></span>'+
+    '<span>verdicts <b class="v">'+(v.VALIDATED||0)+'✓</b> <b class="m">'+(v.MIRAGE||0)+'∿</b> <b class="b">'+(v.BLOCKED||0)+'✕</b></span>'+
+    (kl?'<span>killed levers <b>'+kl.count+'</b></span>':'')+
+    (af?'<span>κ artefacts <b>'+af+'</b></span>':'');
+}
 
-  // ---- build the widget for one feed ----
-  function render(feed, instances){
-    var mc = feed.movingCeiling;
-    var s = mc.series || [];
-    var W = 800, H = 340, padL = 58, padR = 92, padT = 28, padB = 44;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-    var open = mc.open || null;
-
-    // domain
-    var values = s.map(function(p){ return p.value; });
-    var minV = Math.min.apply(null, values), maxV = Math.max.apply(null, values);
-    var floorV = open ? Math.min(minV, mc.best * 0.9) : minV * 0.94;
-    var lo, hi;
-    if(showRatio){ lo = 0.35; hi = 1.04; } else { lo = Math.min(floorV, minV) * 0.98; hi = maxV * 1.03; }
-    function xi(i){ return padL + plotW * (s.length<2 ? 0 : i/(s.length-1)); }
-    function yv(v){ return padT + plotH * (1 - (v - lo)/(hi - lo)); }
-    function Y(p){ return yv(showRatio ? p.ratio : p.value); }
-    var openY = open ? yv(showRatio ? (mc.best/ mc.baseline) * 0.92 : mc.best - (mc.baseline*0.03)) : null;
-    // place the open line a touch below best
-    if(open){ openY = showRatio ? yv((mc.best/mc.baseline) - 0.03) : yv(mc.best - Math.max(6, mc.baseline*0.02)); }
-
-    // stepped ceiling path
-    var dPath = 'M ' + xi(0) + ' ' + Y(s[0]);
-    for(var i=1;i<s.length;i++){ dPath += ' L ' + xi(i) + ' ' + Y(s[i-1]) + ' L ' + xi(i) + ' ' + Y(s[i]); }
-    var areaPath = dPath + ' L ' + xi(s.length-1) + ' ' + (padT+plotH) + ' L ' + xi(0) + ' ' + (padT+plotH) + ' Z';
-
-    var cyan = css('--cyan');
-    var picker = instances && instances.length > 1
-      ? '<select id="wpick" aria-label="workshop">' + instances.map(function(id){ return '<option'+(id===feed.instance?' selected':'')+'>'+id+'</option>'; }).join('') + '</select>'
-      : '';
-
-    host.innerHTML =
-      '<div class="fr-head">'+
-        '<div class="fr-title">the frontier · <b>'+feed.instance+'</b>'+(feed.feed==='demo'?' <span style="opacity:.55;font-size:.78em;border:1px solid currentColor;border-radius:4px;padding:0 .35em;">demo snapshot — serve the console for live numbers</span>':'')+'</div>'+
-        '<div class="fr-controls">'+picker+
-          '<button class="fr-btn" id="ratioBtn" aria-pressed="'+showRatio+'" title="toggle absolute metric vs R(t) ratio">R(t)</button>'+
-          '<button class="fr-btn" id="replayBtn" title="replay the descent">↻</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="fr-stat">baseline <span class="num">'+fmt(mc.baseline)+'</span> → best <span class="best num">'+fmt(mc.best)+'</span> '+mc.metric+
-        ' <span class="drop num">('+(mc.baseline?('−'+Math.round((1-mc.best/mc.baseline)*1000)/10+'%'):'')+')</span></div>'+
-      '<div class="fr-plot">'+
-        '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Frontier descent for '+feed.instance+', '+fmt(mc.baseline)+' to '+fmt(mc.best)+' '+mc.metric+'">'+
-          '<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">'+
-            '<stop offset="0%" stop-color="'+cyan+'" stop-opacity="0.22"/>'+
-            '<stop offset="100%" stop-color="'+cyan+'" stop-opacity="0"/></linearGradient></defs>'+
-          '<line class="baseline" x1="'+padL+'" y1="'+Y(s[0])+'" x2="'+(W-padR)+'" y2="'+Y(s[0])+'"/>'+
-          '<text class="lbl" x="'+padL+'" y="'+(Y(s[0])-7)+'">baseline '+(showRatio?'1.00':fmt(mc.baseline))+'</text>'+
-          (open ? '<line class="opentgt" x1="'+padL+'" y1="'+openY+'" x2="'+(W-padR)+'" y2="'+openY+'"/>'+
-                  '<text class="lbl violet" x="'+(W-padR+6)+'" y="'+(openY+4)+'">'+open.id+' · open</text>'+
-                  '<circle class="beat-marker" cx="'+(W-padR)+'" cy="'+openY+'" r="4" fill="'+css('--violet')+'"/>' : '')+
-          '<path class="area draw" d="'+areaPath+'" fill="url(#areaGrad)"/>'+
-          '<path class="descent draw" id="descentPath" d="'+dPath+'"/>'+
-          s.map(function(p,i){
-            var best = (i===s.length-1);
-            var lx = i===0 ? xi(i) : (best ? xi(i) : xi(i));
-            var anchor = i===0 ? 'start' : (best ? 'end' : 'middle');
-            var vAdj = best ? (xi(i)-8) : xi(i);
-            return '<g class="dot draw'+(best?' best':'')+'" tabindex="0" role="button" data-i="'+i+'" '+
-                     'aria-label="'+p.label+': '+fmt(p.value)+' '+mc.metric+(p.lever?', '+p.lever:'')+'">'+
-                   (best?'<circle class="pulse" cx="'+xi(i)+'" cy="'+Y(p)+'" r="7" fill="'+cyan+'"/>':'')+
-                   '<circle class="halo" cx="'+xi(i)+'" cy="'+Y(p)+'" r="11"/>'+
-                   '<circle class="node" cx="'+xi(i)+'" cy="'+Y(p)+'" r="'+(best?5.5:4.5)+'"/>'+
-                   '<circle class="hit" cx="'+xi(i)+'" cy="'+Y(p)+'" r="16"/>'+
-                   '<text class="lbl '+(i===0?'':'val')+(best?' best':'')+'" x="'+vAdj+'" y="'+(Y(p)-14)+'" text-anchor="'+anchor+'">'+(showRatio?p.ratio.toFixed(3):fmt(p.value))+'</text>'+
-                   '<text class="lbl" x="'+xi(i)+'" y="'+(padT+plotH+18)+'" text-anchor="middle">'+p.label+'</text>'+
-                   '</g>';
-          }).join('')+
-        '</svg>'+
-        '<div class="card" id="card"></div>'+
-      '</div>'+
-      '<div class="invite">'+
-        '<span class="glyph">🤺</span>'+
-        '<p>Run this harness and beat <span class="beat">'+fmt(mc.best)+'</span> at the gate — a validated fold joins the frontier. '+
-        '<span class="proof">Every point carries its own proof: re-derive its hash and the fold is real, or it never happened.</span></p>'+
-      '</div>';
-
-    wireInteractions(feed);
-    playDraw();
+// ---- the chart ----
+function chart(){
+  var mc=feed.movingCeiling, s=mc.series||[], W=760, H=380;
+  var padL=64,padR=26,padT=30,padB=64;
+  var vals = showRatio ? s.map(function(p){return p.ratio}) : s.map(function(p){return p.value});
+  var maxV = showRatio?1:Math.max.apply(null,vals), minV = Math.min.apply(null,vals);
+  var span = (maxV-minV)||1; var lo=minV-span*0.12, hi=maxV+span*0.08;
+  var X=function(i){ return padL+(W-padL-padR)*(s.length>1?i/(s.length-1):0) };
+  var Y=function(v){ return padT+(H-padT-padB)*(1-(v-lo)/(hi-lo)) };
+  var g=[];
+  // grid + y labels
+  for(var t=0;t<5;t++){ var vy=lo+(hi-lo)*t/4, y=Y(vy);
+    g.push('<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="'+css('--line')+'" stroke-width="0.6"/>');
+    g.push('<text class="axis" x="'+(padL-8)+'" y="'+(y+3)+'" text-anchor="end">'+(showRatio?vy.toFixed(2):fmt(Math.round(vy)))+'</text>'); }
+  // baseline hairline
+  g.push('<line x1="'+padL+'" y1="'+Y(vals[0])+'" x2="'+(W-padR)+'" y2="'+Y(vals[0])+'" stroke="'+css('--faint')+'" stroke-dasharray="1 4" stroke-width="1"/>');
+  // stepped ceiling + area
+  var steps='M'+X(0)+' '+Y(vals[0]), area='M'+X(0)+' '+Y(vals[0]);
+  for(var i=1;i<s.length;i++){ steps+=' H'+X(i)+' V'+Y(vals[i]); area+=' H'+X(i)+' V'+Y(vals[i]); }
+  area+=' V'+(H-padB)+' H'+X(0)+' Z';
+  g.push('<path d="'+area+'" fill="'+css('--cyan')+'" opacity="0.06"/>');
+  g.push('<path d="'+steps+'" fill="none" stroke="'+css('--cyan')+'" stroke-width="2.2"/>');
+  // open target: dashed continuation + label
+  if(mc.open){ var yb=Y(vals[vals.length-1]);
+    g.push('<line x1="'+X(s.length-1)+'" y1="'+yb+'" x2="'+(W-padR)+'" y2="'+yb+'" stroke="'+css('--violet')+'" stroke-dasharray="5 4" stroke-width="1.6"/>');
+    g.push('<text class="axis" x="'+(W-padR)+'" y="'+(yb-8)+'" text-anchor="end" fill="'+css('--violet')+'">'+esc(mc.open.id)+' open — beat '+(showRatio?vals[vals.length-1]:fmt(mc.best))+'</text>'); }
+  // fold dots + x labels + closed-target annotations
+  for(var i=0;i<s.length;i++){ var p=s[i], x=X(i), y=Y(vals[i]);
+    var cov=p.coverage&&p.coverage.mode;
+    var ring = i===0 ? '<circle cx="'+x+'" cy="'+y+'" r="6" fill="'+css('--bg')+'" stroke="'+css('--dim')+'" stroke-width="1.6"/>'
+      : '<circle cx="'+x+'" cy="'+y+'" r="6.5" fill="'+css('--cyan')+'" stroke="'+css('--bg')+'" stroke-width="1.6"'+(cov==='sample'?' stroke-dasharray="2 2" stroke="'+css('--amber')+'"':'')+'/>'
+        +(cov?'<circle cx="'+x+'" cy="'+y+'" r="10.5" fill="none" stroke="'+(cov==='census'?css('--cyan'):css('--amber'))+'" stroke-width="1" '+(cov==='sample'?'stroke-dasharray="3 3" ':'')+'opacity="0.7"/>':'');
+    g.push('<g class="dot" data-i="'+i+'" style="cursor:pointer">'+ring+'<circle cx="'+x+'" cy="'+y+'" r="16" fill="transparent"/></g>');
+    if(sel===i) g.push('<circle cx="'+x+'" cy="'+y+'" r="13.5" fill="none" stroke="'+css('--ink')+'" stroke-width="1" opacity="0.85"/>');
+    if(p.target) g.push('<text class="axis" x="'+x+'" y="'+(y-16)+'" text-anchor="middle" fill="'+css('--green')+'">'+esc(p.target)+' ✓</text>');
+    g.push('<text class="axis" x="'+x+'" y="'+(H-padB+16)+'" text-anchor="middle">'+(showRatio?(p.ratio!=null?p.ratio:'—'):fmt(p.value))+'</text>');
+    if(p.date) g.push('<text class="axis" x="'+x+'" y="'+(H-padB+30)+'" text-anchor="middle" opacity="0.7">'+esc(p.date)+'</text>');
   }
-
-  var cardEl, plotEl;
-  function wireInteractions(feed){
-    cardEl = document.getElementById('card');
-    plotEl = host.querySelector('.fr-plot');
-    var mc = feed.movingCeiling, s = mc.series;
-    host.querySelectorAll('.dot').forEach(function(g){
-      var i = +g.getAttribute('data-i'); var p = s[i]; var best = (i===s.length-1);
-      function show(){
-        var kappa = best && feed.artefacts && feed.artefacts[0] ? feed.artefacts[0].kappa : null;
-        cardEl.innerHTML = '<div class="m">'+fmt(p.value)+' <span class="r">R '+p.ratio.toFixed(3)+'</span></div>'+
-          (p.label && p.label!=='baseline' ? '<div class="tgt">'+p.label+' met</div>' : '<div class="tgt">the baseline — the descent begins</div>')+
-          (p.lever ? '<div class="lever">'+p.lever+'</div>' : '')+
-          (p.date ? '<div class="date">'+p.date+'</div>' : '')+
-          (kappa ? '<div class="kappa">κ '+kappa+'</div>' : '');
-        var node = g.querySelector('circle.node');
-        var pr = plotEl.getBoundingClientRect(), nr = node.getBoundingClientRect();
-        var x = nr.left - pr.left + nr.width/2, y = nr.top - pr.top;
-        cardEl.classList.add('show');
-        var cw = cardEl.offsetWidth, ch = cardEl.offsetHeight;
-        cardEl.style.left = Math.max(4, Math.min(pr.width - cw - 4, x - cw/2)) + 'px';
-        cardEl.style.top = Math.max(4, y - ch - 12) + 'px';
-      }
-      function hide(){ cardEl.classList.remove('show'); }
-      g.addEventListener('mouseenter', show); g.addEventListener('focus', show);
-      g.addEventListener('mouseleave', hide); g.addEventListener('blur', hide);
+  // coverage legend
+  g.push('<g class="axis"><circle cx="'+(padL+6)+'" cy="'+(H-16)+'" r="5" fill="none" stroke="'+css('--cyan')+'"/><text x="'+(padL+16)+'" y="'+(H-12)+'">census — every fact probed</text>'+
+    '<circle cx="'+(padL+206)+'" cy="'+(H-16)+'" r="5" fill="none" stroke="'+css('--amber')+'" stroke-dasharray="3 3"/><text x="'+(padL+216)+'" y="'+(H-12)+'">sample — labelled, never upgraded</text></g>');
+  document.getElementById('svgHost').innerHTML =
+    '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Frontier descent for '+esc(feed.instance)+': '+fmt(mc.baseline)+' to '+fmt(mc.best)+' '+esc(mc.metric||'')+'">'+g.join('')+'</svg>';
+  // wire dots
+  var tip=document.getElementById('tip');
+  Array.prototype.forEach.call(document.querySelectorAll('.dot'),function(el){
+    var i=+el.getAttribute('data-i'), p=s[i];
+    el.addEventListener('click',function(){ sel=(sel===i?-1:i); render() });
+    el.addEventListener('mousemove',function(ev){
+      tip.style.display='block'; tip.style.left=(ev.clientX+14)+'px'; tip.style.top=(ev.clientY+10)+'px';
+      tip.innerHTML='<b>'+fmt(p.value)+'</b> '+esc(mc.metric||'')+(p.ratio!=null?' · R '+p.ratio:'')+(p.lever?'<br>'+esc(p.lever):'<br>baseline')+(p.coverage?'<br><span class="cov-'+p.coverage.mode+'">'+p.coverage.mode+' '+p.coverage.n+'/'+p.coverage.N+'</span>':'');
     });
-    var rb = document.getElementById('ratioBtn');
-    if(rb) rb.addEventListener('click', function(){ showRatio = !showRatio; render(feed, currentInstances); });
-    var pb = document.getElementById('replayBtn');
-    if(pb) pb.addEventListener('click', playDraw);
-    var wp = document.getElementById('wpick');
-    if(wp) wp.addEventListener('change', function(){ load(wp.value); });
-  }
+    el.addEventListener('mouseleave',function(){ tip.style.display='none' });
+  });
+}
 
-  function playDraw(){
-    var path = document.getElementById('descentPath');
-    if(!path) return;
-    var len = path.getTotalLength ? path.getTotalLength() : 800;
-    path.style.setProperty('--len', len);
-    var els = host.querySelectorAll('.draw');
-    els.forEach(function(e){ e.classList.remove('play'); void e.offsetWidth; e.classList.add('play'); });
+// ---- the detail panel ----
+function detail(){
+  var mc=feed.movingCeiling, s=mc.series||[], el=document.getElementById('detail');
+  if(sel<0||!s[sel]){
+    var o=mc.open, ob=feed.objective||{};
+    el.innerHTML='<h2>the open target</h2>'+
+      (o?'<p class="prose"><b>'+esc(o.id)+'</b> — '+esc(o.statement)+'</p>':'<p class="prose">no open target declared.</p>')+
+      '<dl class="kv">'+
+      (ob.gate?'<dt>gate</dt><dd class="dim">'+esc(ob.gate)+'</dd>':'')+
+      (ob.hardConstraint?'<dt>hard constraint</dt><dd class="dim">'+esc(ob.hardConstraint)+'</dd>':'')+
+      '</dl>'+
+      '<p class="prose" style="margin-bottom:.3rem"><b>Contribute.</b> Beat the line and your fold joins — every dot carries its own proof (a hash-derived draw the proposer could not tune to), so nothing fakes onto this frontier:</p>'+
+      '<div class="formula">node tools/check.mjs<br>node tools/new_instance.mjs … <span style="color:var(--faint)"># or run a round on this instance</span><br>node tools/verify_run.mjs &lt;instance&gt; &lt;runId&gt;</div>'+
+      '<p class="hint" style="margin-top:.6rem">click a fold on the descent for its full record.</p>';
+    return;
   }
+  var p=s[sel], prev=sel>0?s[sel-1]:null, d=prev?p.value-prev.value:0;
+  var af=(feed.artefacts||[]).filter(function(a){return a.best===p.value});
+  el.innerHTML='<h2>'+(sel===0?'the baseline':'fold — '+esc(p.target||p.label))+'</h2>'+
+    '<dl class="kv">'+
+    '<dt>'+esc(mc.metric||'value')+'</dt><dd><b>'+fmt(p.value)+'</b>'+(prev?' <span class="delta-down">('+(d<0?'−':'+')+fmt(Math.abs(d))+')</span>':'')+'</dd>'+
+    (p.ratio!=null?'<dt>R(t)</dt><dd>'+p.ratio+' <span class="dim">of baseline</span></dd>':'')+
+    (p.date?'<dt>date</dt><dd>'+esc(p.date)+'</dd>':'')+
+    (p.lever?'<dt>lever</dt><dd>'+esc(p.lever)+'</dd>':'')+
+    (p.coverage?'<dt>coverage</dt><dd class="cov-'+p.coverage.mode+'">'+p.coverage.mode.toUpperCase()+' — '+p.coverage.n+'/'+p.coverage.N+' facts probed, detection '+p.coverage.detection+'</dd>':'')+
+    (p.note?'<dt>note</dt><dd class="dim">'+esc(p.note)+'</dd>':'')+
+    (p.chronicle?'<dt>record</dt><dd class="dim">chronicled in the instance’s ledger (GR-7) — numbers and proofs live here, narratives live there</dd>':'')+
+    af.map(function(a){return '<dt>κ artefact</dt><dd class="dim">'+esc(a.id)+(a.beat?' · beat=true':'')+'</dd>'}).join('')+
+    '</dl>'+
+    (sel>0?'<p class="hint">a fold lands only through the keystone: gate full-pass, hard constraint intact, frontier first, prose second, conform green before and after.</p>':'<p class="hint">the moving ceiling starts here; every later point had to pass a gate this one never faced.</p>');
+}
 
-  // ---- data loading: real feed when served, demo otherwise ----
-  var currentInstances = Object.keys(DEMO);
-  function load(instance){
-    if(served){
-      fetch('/api/feed?instance='+encodeURIComponent(instance)).then(function(r){ return r.json(); })
-        .then(function(f){ if(f && f.movingCeiling) render(f, currentInstances); else render(DEMO[instance]||DEMO['field-guide'], currentInstances); })
-        .catch(function(){ render(DEMO[instance]||DEMO['field-guide'], currentInstances); });
-    } else { render(DEMO[instance]||DEMO['field-guide'], currentInstances); }
-  }
+// ---- runs + maths cards ----
+function runsCard(){
+  var el=document.getElementById('runsCard'), rs=feed.runs||[];
+  var rows=rs.map(function(r){
+    var t=r.tally||{};
+    var link=(served&&r.view&&feed.__id)?'<a href="/run?instance='+encodeURIComponent(feed.__id)+'&runId='+encodeURIComponent(r.id)+'">audit view</a>':'<span class="hint">render_run</span>';
+    return '<tr><td>'+esc(r.id)+'</td><td>'+r.proposals+'</td><td class="v" style="color:var(--green)">'+(t.VALIDATED||0)+'</td><td style="color:var(--amber)">'+(t.MIRAGE||0)+'</td><td style="color:var(--coral)">'+(t.BLOCKED||0)+'</td><td>'+link+'</td></tr>';
+  }).join('');
+  el.innerHTML='<h2>the rounds on record</h2>'+
+    (rs.length?'<table><tr><th>run</th><th>proposals</th><th>✓ validated</th><th>∿ mirage</th><th>✕ blocked</th><th></th></tr>'+rows+'</table>':'<p class="prose">no runs yet — the frontier moves only when a round survives the gate and a keystone folds it.</p>')+
+    '<p class="hint" style="margin-top:.6rem">every audit view re-derives each Gap seed from the saved proposal bytes at render time — mismatch renders ROUND VOID.</p>';
+}
+function mathCard(){
+  var mc=feed.movingCeiling;
+  document.getElementById('mathCard').innerHTML='<h2>the model’s terms</h2>'+
+    '<p class="prose">This page draws the <b>Privacy-is-Value model’s</b> own mathematics, produced live by the harness rather than illustrated:</p>'+
+    '<div class="formula">R(t) = best / baseline = '+(mc.ratioNow!=null?mc.ratioNow:'—')+'</div>'+
+    '<p class="prose">the <b>moving ceiling</b> — each keystone fold steps it down, and it descends only through the gate.</p>'+
+    '<div class="formula">V(π,t) = Π fᵢ &nbsp;·&nbsp; any fᵢ = 0 ⇒ V = 0</div>'+
+    '<p class="prose">the <b>multiplicative gate</b> (T5) — a candidate that wins the score while failing the held-out gate is worth exactly zero, at any score; that is why a MIRAGE never appears on the line above.</p>'+
+    '<p class="prose">the full model — the value function, the six sovereignty axes, the conjecture register — lives at <a href="https://agentprivacy.ai/model" target="_blank" rel="noopener">agentprivacy.ai/model ↗</a>; this feed (<span style="font-family:var(--mono)">runtime-feed.v1</span>) is what its instruments consume.</p>';
+}
 
-  function boot(){
-    var want = params.get('instance');
-    if(served){
-      fetch('/api/instances').then(function(r){ return r.json(); }).then(function(list){
-        currentInstances = list.map(function(i){ return i.id; });
-        var first = want && currentInstances.indexOf(want)>=0 ? want : currentInstances[0];
-        load(first);
-      }).catch(function(){ render(DEMO[want]||DEMO['field-guide'], currentInstances); });
-    } else {
-      render(DEMO[want]||DEMO['field-guide'], currentInstances);
-    }
-  }
-  boot();
+// ---- assemble ----
+function render(){
+  document.getElementById('hName').textContent=feed.instance;
+  document.getElementById('hBadge').hidden = feed.feed!=='demo';
+  strip(); chart(); detail(); runsCard(); mathCard();
+}
+document.getElementById('togRatio').addEventListener('click',function(){ showRatio=!showRatio; this.classList.toggle('on',showRatio); render() });
+document.getElementById('lnkAbout').addEventListener('click',function(e){ e.preventDefault(); var a=document.getElementById('about'); a.hidden=!a.hidden; });
+if(params.get('about')==='1') document.getElementById('about').hidden=false;
+document.addEventListener('keydown',function(e){
+  var n=(feed&&feed.movingCeiling.series||[]).length;
+  if(e.key==='ArrowRight'){ sel=Math.min(n-1,sel+1); render() }
+  if(e.key==='ArrowLeft'){ sel=Math.max(-1,sel-1); render() }
+});
+
+// ---- data loading: live feed when served, demo otherwise ----
+function pick(list, want){
+  var host=document.getElementById('hPick');
+  if(!list||list.length<2){ host.innerHTML=''; return }
+  host.innerHTML='<select id="wsel" aria-label="workshop">'+list.map(function(i){return '<option value="'+esc(i.id)+'"'+(i.id===want?' selected':'')+'>'+esc(i.config&&i.config.name||i.id)+'</option>'}).join('')+'</select>';
+  document.getElementById('wsel').addEventListener('change',function(){ load(this.value) });
+}
+function load(id){
+  fetch('/api/feed?instance='+encodeURIComponent(id)).then(function(r){return r.json()})
+    .then(function(f){ if(f&&f.movingCeiling){ f.feed='live'; f.__id=id; feed=f; sel=-1; render() } else { feed=DEMO; render() } })
+    .catch(function(){ feed=DEMO; render() });
+}
+if(served){
+  fetch('/api/instances').then(function(r){return r.json()}).then(function(list){
+    instList=list; var want=params.get('instance');
+    var first=(want&&list.some(function(i){return i.id===want}))?want:(list[0]&&list[0].id);
+    pick(list, first);
+    if(first) load(first); else { feed=DEMO; render() }
+  }).catch(function(){ feed=DEMO; render() });
+  var b=document.getElementById('hBadge'); b.classList.add('live');
+}else{ feed=DEMO; render(); }
 })();
 </script>
 </body>

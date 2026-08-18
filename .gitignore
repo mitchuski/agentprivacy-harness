@@ -6,3 +6,6 @@ examples/wiki-farm/*/status/
 # operator-local state — run inputs (salt secrets) and machine paths
 .r*args.json
 tools/console.roots.json
+dist/
+# generated feed projections — re-run = re-derived (emit_feed.mjs)
+examples/*/feed.json

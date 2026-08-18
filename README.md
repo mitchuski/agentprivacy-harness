@@ -76,7 +76,11 @@ it sits behind a seam, and every gate passes without it. The fleet's
 divergence is deliberate — every working piece it delivers feeds one
 construction, trust-graph creation the agentprivacy way, because the harness
 gives each piece the same verifiable shape (a κ-addressed node; a
-signature-minted edge). The skeleton is domain-neutral and stays that way.
+signature-minted edge). The skeleton is domain-neutral and stays that way —
+and it can be held in the hand alone: `node tools/make_default.mjs` emits
+the **default distribution**, the system with no results and no chronicles,
+the spar reset to its baseline, every gate re-proven inside the emitted tree
+before the tool will hand it over.
 
 ## What you can use it for
 
@@ -460,6 +464,7 @@ tools/wiki_install.mjs  the Observe step: derive + project + install into a loca
 tools/wiki_proxy.mjs   Host-rewriting proxy — pin one localhost port per site, for tailnet publishing
 tools/star.mjs     the lattice seating (star.v1) — workshop vertex ⊥ anchor, results at κ mod 64
 tools/adventure.mjs    the front door — choose your own adventure, with local state filled in
+tools/make_default.mjs emit the DEFAULT distribution — the system alone: no results, no chronicles, spar reset to baseline, self-checked green
 tools/kappa.mjs    the one κ law — content-addressing shared by every producer and verifier
 tools/vrc.mjs      relational edges — ed25519 signed κ→κ, signer as did:key (a reference proposes, a signature mints)
 tools/holon_audit.mjs  the mesh auditor — re-derive every κ, re-hash every edge, verify every signature (HOLONS.md)

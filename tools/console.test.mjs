@@ -13,7 +13,7 @@
 //
 // Runs in a scratch copy under the OS temp dir; never touches the repo.
 
-import { mkdtempSync, cpSync, readFileSync, writeFileSync, rmSync, readdirSync, mkdirSync } from 'node:fs'
+import { mkdtempSync, cpSync, readFileSync, writeFileSync, rmSync, readdirSync, mkdirSync, existsSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
@@ -34,18 +34,61 @@ const check = (name, cond, detail) => {
   if (!cond) failures++
 }
 
+// The drill needs a run to tamper with. In the origin repo the real run
+// records are used; in a clean clone (the default distribution ships the spar
+// at its baseline, runs empty) a labelled FIXTURE run is synthesized in the
+// temp copy — a test fixture, never a result (GR-5): two proposals whose seeds
+// derive from their own bytes in the legacy unsalted form.
+const fixtureRun = (instDir) => {
+  const rid = 'drill'
+  for (const name of ['p1-drill-a', 'p2-drill-b']) {
+    const d = join(instDir, 'runs', rid, name)
+    mkdirSync(d, { recursive: true })
+    const canon = JSON.stringify({ fixture: name, note: 'console.test drill fixture — not a result' })
+    writeFileSync(join(d, 'proposal_canon.json'), canon)
+    writeFileSync(join(d, 'gap.json'), JSON.stringify({ seedHex: createHash('sha256').update(canon).digest('hex'), draw: ['F1'], transcript: 'drill fixture — legacy unsalted seed, derived from the canon bytes above' }))
+    writeFileSync(join(d, 'verdict.json'), JSON.stringify({ status: 'VALIDATED', leverId: name, metric: 700, gateResult: 'drill 1/1' }))
+    writeFileSync(join(d, 'candidate.md'), 'drill fixture candidate')
+  }
+  return rid
+}
+const findRun = (instDir) => {
+  const rdir = join(instDir, 'runs')
+  let names = []
+  try { names = readdirSync(rdir, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => e.name) } catch { }
+  for (const rid of names) {
+    const found = (function walk(p, depth) {
+      if (depth < 0) return null
+      let entries = []
+      try { entries = readdirSync(p, { withFileTypes: true }) } catch { return null }
+      for (const e of entries) {
+        if (!e.isDirectory()) continue
+        const q = join(p, e.name)
+        if (existsSync(join(q, 'proposal_canon.json')) && existsSync(join(q, 'gap.json'))) return q
+        const deeper = walk(q, depth - 1); if (deeper) return deeper
+      }
+      return null
+    })(join(rdir, rid), 2)
+    if (found) return { rid, propDir: found }
+  }
+  return null
+}
+
 const tmp = mkdtempSync(join(tmpdir(), 'harness-console-test-'))
 try {
   // ---- 1. tamper drill: one flipped byte must read MISMATCH ----------------
   const tampered = join(tmp, 'fg-tampered')
   cpSync(src, tampered, { recursive: true })
-  const canonPath = join(tampered, 'runs', 'r3', 'r3.1', 'p2-telegraphic-bullets-second-draw', 'proposal_canon.json')
+  if (!findRun(tampered)) fixtureRun(tampered)
+  const hit = findRun(tampered)
+  const RID = hit.rid
+  const canonPath = join(hit.propDir, 'proposal_canon.json')
   const bytes = Buffer.from(readFileSync(canonPath))
   bytes[Math.floor(bytes.length / 2)] ^= 0x01
   writeFileSync(canonPath, bytes)
 
   const runs = gatherRuns(tampered)
-  const r3 = runs.find(r => r.runId === 'r3')
+  const r3 = runs.find(r => r.runId === RID)
   const states = r3 ? r3.rounds.flatMap(rd => rd.proposals).map(p => p.hashState) : []
   check('flipped canon byte reads MISMATCH', states.includes('MISMATCH'),
     `hashStates were ${JSON.stringify(states)} — the tamper went unseen`)
@@ -53,7 +96,7 @@ try {
     `hashStates were ${JSON.stringify(states)}`)
 
   // ---- 2. the mint refuses the tampered run, naming GR-4 -------------------
-  const refusal = spawnSync(process.execPath, ['tools/mint_artefact.mjs', tampered, 'r3'], { cwd: root, encoding: 'utf8' })
+  const refusal = spawnSync(process.execPath, ['tools/mint_artefact.mjs', tampered, RID], { cwd: root, encoding: 'utf8' })
   const rout = (refusal.stdout || '') + (refusal.stderr || '')
   check('mint refuses a tampered run', refusal.status !== 0,
     'THE MINT ACCEPTED witnesses of unknown origin — the door just certified a lie')
@@ -64,7 +107,9 @@ try {
   const clean = join(tmp, 'fg-clean')
   cpSync(src, clean, { recursive: true })
   rmSync(join(clean, 'artefacts'), { recursive: true, force: true })
-  const mint = spawnSync(process.execPath, ['tools/mint_artefact.mjs', clean, 'r3'], { cwd: root, encoding: 'utf8' })
+  if (!findRun(clean)) fixtureRun(clean)
+  const cleanRID = findRun(clean).rid
+  const mint = spawnSync(process.execPath, ['tools/mint_artefact.mjs', clean, cleanRID], { cwd: root, encoding: 'utf8' })
   check('mint succeeds on a clean run', mint.status === 0,
     ((mint.stdout || '') + (mint.stderr || '')).slice(0, 300))
   if (mint.status === 0) {
@@ -109,9 +154,13 @@ try {
   const fr = JSON.parse(readFileSync(join(src, 'frontier.json'), 'utf8'))
   check('feed moving-ceiling best matches frontier best', feed.movingCeiling.best === fr.best.metric,
     `feed ${feed.movingCeiling.best} vs frontier ${fr.best.metric}`)
-  check('feed descent ends at the best (R falling, ≤ 1)', (() => {
+  check('feed descent ends at the best (R non-rising, ≤ 1)', (() => {
     const s = feed.movingCeiling.series
-    return s.length >= 2 && s[s.length - 1].value === fr.best.metric && s[0].ratio >= s[s.length - 1].ratio && s[s.length - 1].ratio <= 1
+    if (!s.length) return false
+    const last = s[s.length - 1]
+    // a fresh instance (best = baseline, one point, R = 1) is a valid descent
+    // of length one — the default distribution ships exactly that shape.
+    return last.value === fr.best.metric && (s[0].ratio ?? 1) >= (last.ratio ?? 1) && (last.ratio ?? 1) <= 1
   })(), 'the emitted R(t) descent does not end at the folded best')
 
   // ---- 5. the VRC: a signed relational edge mints; tampering breaks it ------

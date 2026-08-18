@@ -61,6 +61,10 @@ export function buildFeed(instanceDir, repoRoot = defaultRepoRoot) {
       ratio: Number.isFinite(baseline) && baseline ? round4(h.metric / baseline) : null,
       date: h.date || null,
       lever: h.lever || null,
+      target: h.target || null,
+      coverage: h.coverage || null,          // {mode: census|sample, N, n, detection} — what the fold's gate actually bought
+      note: h.coverageNote || h.note || null,
+      chronicle: h.chronicle || null,        // repo-relative path to the fold's chronicle (the record)
     }))
   } else {
     series = [
@@ -76,18 +80,49 @@ export function buildFeed(instanceDir, repoRoot = defaultRepoRoot) {
     series,
   }
 
-  // --- verdict tally across all runs on disk ---
+  // --- verdict tally across all runs on disk, plus a per-run summary ---
   const tally = { VALIDATED: 0, MIRAGE: 0, BLOCKED: 0 }
   const runsDir = join(dir, 'runs')
-  const walkVerdicts = (p, depth) => {
-    if (depth < 0 || !isDir(p)) return
-    for (const e of readdirSync(p, { withFileTypes: true })) {
-      const q = join(p, e.name)
-      if (e.isDirectory()) walkVerdicts(q, depth - 1)
-      else if (e.name === 'verdict.json') { const v = readJson(q); if (v && v.status && v.status in tally) tally[v.status]++ }
+  const runSummary = (p) => {
+    const t = { VALIDATED: 0, MIRAGE: 0, BLOCKED: 0 }
+    let proposals = 0
+    const walk = (q, depth) => {
+      if (depth < 0 || !isDir(q)) return
+      for (const e of readdirSync(q, { withFileTypes: true })) {
+        const r = join(q, e.name)
+        if (e.isDirectory()) {
+          if (existsSync(join(r, 'proposal_canon.json'))) proposals++
+          walk(r, depth - 1)
+        } else if (e.name === 'verdict.json') {
+          const v = readJson(r)
+          if (v && v.status && v.status in t) { t[v.status]++; tally[v.status]++ }
+        }
+      }
     }
+    walk(p, 3)
+    return { tally: t, proposals }
   }
-  walkVerdicts(runsDir, 4)
+  const runs = []
+  if (isDir(runsDir)) {
+    for (const e of readdirSync(runsDir, { withFileTypes: true })) {
+      if (!e.isDirectory()) continue
+      const s = runSummary(join(runsDir, e.name))
+      runs.push({ id: e.name, proposals: s.proposals, tally: s.tally, view: existsSync(join(runsDir, e.name, 'run.html')) ? `runs/${e.name}/run.html` : null })
+    }
+    runs.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }))
+  }
+
+  // --- killed levers: the fences, counted (GR-6 — filed as prominently as wins) ---
+  let killedLevers = null
+  const klPath = join(dir, 'notes', 'KILLED_LEVERS.md')
+  if (existsSync(klPath)) {
+    try {
+      // an instance may carry a prefixed catalog (V2-K-5) beside citations of a
+      // sibling's (K-5) — capture the full id so the two never dedupe together
+      const ids = [...new Set([...readFileSync(klPath, 'utf8').matchAll(/\b(?:[A-Z]\d+-)?K-\d+[a-z]?\b/g)].map(m => m[0]))]
+      killedLevers = { count: ids.length, ids }
+    } catch { /* unreadable — omit rather than guess */ }
+  }
 
   // --- lattice: the ℤ/64ℤ six-axis structure, from the universe seam ---
   let lattice = null
@@ -123,7 +158,18 @@ export function buildFeed(instanceDir, repoRoot = defaultRepoRoot) {
     instance: (frontier.objective && frontier.name) || basename(dir),
     updated: frontier.updated || null,
     movingCeiling,
+    objective: frontier.objective ? {
+      metric: frontier.objective.metric || null,
+      gate: frontier.objective.gate || null,
+      hardConstraint: frontier.objective.hardConstraint || null,
+    } : null,
+    coverageNote: frontier.coverageNote || null,
+    closedTargets: Array.isArray(frontier.closedTargets)
+      ? frontier.closedTargets.map(t => ({ id: t.id, statement: t.statement, status: t.status, date: t.date || null }))
+      : [],
     verdicts: tally,
+    runs,
+    killedLevers,
     lattice,
     artefacts,
     door: 'first-person',

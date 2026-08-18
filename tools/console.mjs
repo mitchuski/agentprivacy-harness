@@ -427,6 +427,20 @@ async function handle(req, res) {
     return json(res, 200, gatherArtefacts(inst.dir))
   }
 
+  // a run's static audit page — the generated run.html projection (GET-only
+  // read of a file render_run.mjs already wrote; the run directory stays the
+  // record). runId is sanitised to a bare directory name — no traversal.
+  if (url.pathname === '/run') {
+    const inst = instanceById(q.get('instance'))
+    if (!inst) return json(res, 404, { error: 'unknown instance' })
+    const runId = String(q.get('runId') || '')
+    if (!/^[A-Za-z0-9._-]+$/.test(runId)) return json(res, 400, { error: 'bad runId' })
+    const page = readText(join(inst.dir, 'runs', runId, 'run.html'))
+    if (page == null) return json(res, 404, { error: `no runs/${runId}/run.html — render it: node tools/render_run.mjs <instance> ${runId}` })
+    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' })
+    return res.end(page)
+  }
+
   // the runtime feed — the harness's produced math, in the shape the model's
   // other instruments speak (/star moving ceiling · game42 lattice · spellweb).
   // A live projection a consumer can poll; wiring it is the First Person's (T6).

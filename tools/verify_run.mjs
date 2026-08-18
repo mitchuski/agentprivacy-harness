@@ -122,7 +122,16 @@ for (const { label, dir } of proposalDirs.sort((a, b) => a.label.localeCompare(b
     const drawText = typeof gap.draw === 'string' ? gap.draw : JSON.stringify(gap.draw || '')
     const recordedIdx = [...drawText.matchAll(/F(\d+)/g)].map(m => +m[1])
     const uniqRecorded = [...new Set(recordedIdx)]
-    if (uniqRecorded.length && Number.isInteger(gate.N)) {
+    const legacyMode = gap.mode || gate.mode || 'sample'
+    if (legacyMode === 'census') {
+      // census: nothing is drawn — every fact is probed, so there is no
+      // seed-derived subset to replay (defect #13, found by a legacy census
+      // run: replaying a sample against a census cried UNVERIFIABLE on an
+      // honest round). The seed still binds the proposal bytes (checked
+      // above); full coverage is asserted by the verdict's coverage stanza
+      // (check 5) against the gate's N.
+      add('legacy census — no subset to replay', true, `census probes every fact (gate N=${gate.N ?? '?'}); the seed binds the proposal, not a draw`)
+    } else if (uniqRecorded.length && Number.isInteger(gate.N)) {
       // compare as SETS: legacy gap.json lists questions in the LLM's
       // presentation order (often sorted by index), not the draw order. Same 8
       // facts = the draw derived from the seed, regardless of presentation.

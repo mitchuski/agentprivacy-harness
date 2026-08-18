@@ -176,19 +176,25 @@ covers factors, not when it covers topics.
 | 4 | privacy_pools_v2 | `R(d)` on a live target | **`/wellpool` V53 ⊥ V10** | as #2, + certificates | **IMPLEMENTED** |
 | 4b | lexon_pvm · **the grammar** | `Φ` structural checkability | **`/chancery` V27 ⊥ V36** | held-out census + mutation probe | **IMPLEMENTED** |
 | 5 | MyTerms · **Reclaim** | `Φ_agent(Σ)`, T4 | `/covenant` V55 ⊥ V8 | bilateral record | **SPEC** (loop mock-only) |
-| 6 | Hearthold · **Hold** | `P`, `A_h(τ)` | `/vault` V57 ⊥ V6 | factor-2 step-up ladder | **IMPLEMENTED upstream** |
+| 6 | Hearthold · **Hold** | `P`, `A_h(τ)` | `/vault` V57 ⊥ V6 | factor-2 step-up ladder | **IMPLEMENTED upstream · seat SIGNED 07-14, first round pending** |
 | 7 | the rite · **Prove** | **`C`** credential verifiability | **`/hall` V15 ⊥ V48** | trust task + co-signature | **SPEC — blocked, §7** |
 | 8 | the city · **Spend** | `T_∫(π)` edge value | `/etherchanting` V51 | *(none — mana is not proof)* | **IMPLEMENTED, regime-1** |
-| 9 | fedwiki · **Observe** | `e^{−λt}` freshness | the guide | integrity gate + human | **IMPLEMENTED** |
+| 9 | fedwiki · **Observe** | `e^{−λt}` freshness | the guide | integrity gate + human | **IMPLEMENTED — and generalised into the skeleton (`WIKI.md`: derive → project → install)** |
 | 10 | spellweb · coherence | the substrate itself | `/holon` V31 ⊥ V32 | audit triad, 0 errors | **READY — see §5** |
 | 11 | **universe-builder** | the map | this directory | held-out corpus comprehension | **IMPLEMENTED here** |
 | 12 | the shelf-life harness | **`R(t)`, the moving ceiling** | *(unclaimed)* | re-run old guarantees vs new capability | **PROPOSED** |
+| 13 | *(withdrawn)* | — | — | — | **WITHDRAWN** — an accession held private before its counterpart work published; numbers are never reused (T6 — the door names, and when) |
+| 14 | the DTG verification registry | `C` — the ceremony story's verifiability | — (task-force lane 1) | digest-manifest match + human gates A–G | **IMPLEMENTED** — first external run accepted |
+| 15 | the litreview runtime | `A_h(τ)` — novelty before assertion | — (the Programme, WP-14) | sweep ⊥ refute ⊥ judge, D2/D3/D4b | **IMPLEMENTED** — runs 02–04 |
+| 16 | uor_kappa lane | the holon layer, on a live upstream | — (UOR kappa-registry) | P-gates; refuter fleet designed | **LANE OPEN** — constitution inherited |
 
-**#12 deserves a sentence.** C82 says frontier capability raises
-`C_S(t) + C_M(t)` against a *fixed* archive while `H(X)` stays fixed, so
-`R(t)` drifts upward and **every static privacy guarantee has a finite shelf
-life `t*`.** No harness currently watches that drift. A loop that periodically
-re-runs yesterday's guarantees against today's capability is the one instance
+**#12 deserves a sentence.** C82 says the adversary's background information
+accumulates against a *fixed* archive while `H(X)` stays fixed — the residual
+uncertainty `H(X | B_t)` falls on a calendar; the drift is informational, not
+computational (WP-07 Cor 5.4b) — so `R(t)` drifts upward and **every static
+privacy guarantee has a finite shelf life `t*`.** No harness currently watches
+that drift. A loop that periodically re-runs yesterday's guarantees against
+today's background corpus is the one instance
 the model *demands* and nobody has built. Its objective is not to make a
 number smaller — it is to find out when a promise expired.
 

@@ -16,6 +16,8 @@ have to rediscover.
 |---|---|---|
 | 2026-07-10 | [the harness audits itself](2026-07-10_the-harness-audits-itself.md) | Three rounds, nothing validated, six defects found — every one by running |
 | 2026-07-13 | [the hardening](2026-07-13_the-hardening.md) | The review's four load-bearing defects closed in code, verified, and validated on a live salted-census spar (r5) — best 440, not folded |
+| 2026-08-17 | [the fleet sync, and the Observe lane](2026-08-17_the-fleet-sync-and-the-observe-lane.md) | Sixteen entries folded (one withdrawn the next day); the Observe lane built (wiki wall + agent graph); the evening ruling — the harness emits data, never views |
+| 2026-08-18 | [the practices cycle](2026-08-18_the-practices-cycle.md) | The 2024–26 field surveyed with 37 receipts: it converged on the fence, not the Gap; AGENTS.md adopted as the tool-neutral boot file |
 
 ## The instances' chronicles
 

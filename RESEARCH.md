@@ -113,11 +113,12 @@ re-verifies the load-bearing parts in one command.
   and is **not** retroactively upgraded — a weak fold is a fence, not a
   footnote. Numbers live in `frontier.json`, the sole authority; the per-round
   reasoning lives verdict-first in `chronicles/`.
-- **Seven defects, every one found by running.** The engine was debugged not by
-  inspection but by execution: an outage silently reported as an exhausted
+- **Eleven defects, every one found by running.** The engine was debugged not
+  by inspection but by execution: an outage silently reported as an exhausted
   search; a gate that passed an unfilled config; a critic with no vocabulary for
   a mis-specified gate; seats whose on-disk record was thinner than their
-  return. Each was invisible to reading and obvious on running, and each is now
+  return; a verifier that cried tamper on honest salted runs; an emitted page
+  that would have thrown on every load. Each was invisible to reading and obvious on running, and each is now
   pinned by a test or a prompt rule. That execution-driven discovery beats
   review for this class of system is itself a methodological finding, and the
   chronicles record it as one.
@@ -127,12 +128,19 @@ re-verifies the load-bearing parts in one command.
   witnesses are of unknown origin and voids the round (GR-4). The static run
   viewer and the live console both re-derive this in front of the reader rather
   than trusting a stored value.
-- **Ten embodiments, one skeleton.** `HARNESS_PATHS.md` catalogues ten instances
-  wearing the same architecture over topically unrelated bodies — quantum
-  resource estimation, ZK constraint reduction, research-document rehydration, a
-  controlled grammar, consent agreements, a publishing loop — plus one seat held
-  open by invitation. Partial embodiments are labelled partial; an honest
-  partial teaches the bar better than a complete one does.
+- **Fifteen embodiments, one skeleton.** `HARNESS_PATHS.md` catalogues fifteen
+  instances wearing the same architecture over topically unrelated bodies —
+  quantum resource estimation, ZK constraint reduction, research-document
+  rehydration, a controlled grammar, consent agreements, a publishing loop,
+  an agent-operated acceptance registry
+  whose first external run reproduced the pinned digests on another
+  organisation's machine and architecture, an adversarial literature-review
+  runtime, and a descendant lane that inherits the constitution without the
+  engine. One seat was held open by invitation until its acceptor signed.
+  Partial embodiments are labelled partial; an honest partial teaches the bar
+  better than a complete one does. The catalogue is evidence, not the system:
+  it is the origin operator's fleet — work done *with* the harness — and the
+  repo's gates pass without it.
 
 ## The limits this evidence does not cross
 

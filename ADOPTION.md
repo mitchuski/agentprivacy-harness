@@ -90,15 +90,18 @@ hard constraint, Gap recipe — and only there. The skeleton is invariant;
 
 ### 7. The evidence, and the honest boundary
 
-Ten embodiments in `HARNESS_PATHS.md` wear this skeleton over bodies that
+Fifteen embodiments in `HARNESS_PATHS.md` wear this skeleton over bodies that
 share nothing topically: quantum resource estimation, ZK constraint
 reduction, research-document rehydration, a controlled grammar, consent
-agreements, a publishing loop, a fleet-scale measure seat, a checked lattice
-— and the spar in this repo, whose frontier moved under two independent draws
-and an exhaustive census. Same trusts, same ground rules, same verdict
-vocabulary, different configs.
+agreements, a publishing loop, a fleet-scale measure seat, a checked lattice,
+an acceptance registry with an
+external counterparty, a literature review run against an adversary, a
+constitution inherited by a lane with no engine at all — and the spar in
+this repo, whose frontier moved under two independent draws and an
+exhaustive census. Same trusts, same ground rules, same verdict vocabulary,
+different configs.
 
-And one of the ten is a **failure, kept on purpose**: the universe-builder
+And one of the fifteen is a **failure, kept on purpose**: the universe-builder
 spent ~1.4M tokens learning that a map making ~100 *enumerable* claims never
 needed a harness — an auditor checks them all for free, and against an
 exhaustive check a mirage is impossible. So the generality claim gates
@@ -126,6 +129,11 @@ first place they were needed badly enough to be found. The lemma travels; the
 corpus stays home.
 
 ## Part II — how to adopt it: the mapping procedure
+
+Read this part as the **setup wizard's dialog** (the README says why that
+reading is the intended one): five questions, a scaffold, and a refusal to
+run until every answer is real. What the wizard installs is the mage — your
+initiative's own research loop, wearing this constitution.
 
 ### Step 0 · Decide harness vs auditor
 

@@ -129,7 +129,10 @@
   var params = new URLSearchParams(location.search);
   if(params.get('embed') === '1') document.body.classList.add('embed');
 
-  // ---- demo feeds (used standalone; the console serves the real ones) ----
+  // ---- demo feed (used standalone; the console serves real /api/feed data).
+  // Only the in-repo spar ships as demo: its numbers re-derive from the
+  // shipped bytes (examples/field-guide/frontier.json). Other instances'
+  // frontiers are their own; a served feed shows them live, never baked. ----
   var DEMO = {
     'field-guide': { feed:'demo', instance:'field-guide', movingCeiling:{ metric:'words', baseline:730, best:472, ratioNow:0.6466,
       open:{ id:'OT-4', statement:'below 472 words at gate 8/8' },
@@ -137,21 +140,7 @@
                {label:'OT-1',value:573,ratio:0.7849,date:'2026-07-11',lever:'restructure-merge-terse-prose'},
                {label:'OT-2',value:526,ratio:0.7205,date:'2026-07-11',lever:'telegraphic-bullets · two disjoint draws + census'},
                {label:'OT-3',value:472,ratio:0.6466,date:'2026-07-11',lever:'r4-compose-line-edit'} ] },
-      artefacts:[{id:'af-0f8625eec136',kappa:'sha256:f57406e1…',best:472,beat:true}] },
-    'lexon-pvm': { feed:'demo', instance:'lexon-pvm', movingCeiling:{ metric:'coverage-debt', baseline:211, best:22, ratioNow:0.1043,
-      open:{ id:'OT-8', statement:'the residue — 22 terms, 6 reserved for a First-Person naming' },
-      series:[ {label:'baseline',value:211,ratio:1,date:'2026-07-10',lever:null},
-               {label:'lexr1',value:181,ratio:0.8578,date:'2026-07-11',lever:'4 levers validated 8/8'},
-               {label:'lexr2',value:152,ratio:0.7204,date:'2026-07-11',lever:'quantitative-register + first mirage'},
-               {label:'lexr3',value:123,ratio:0.5829,date:'2026-07-11',lever:'spell-grammar lens, 3/3 structural'},
-               {label:'lexr4',value:64,ratio:0.3033,date:'2026-07-12',lever:'coverage census, fourth fold'},
-               {label:'lexr5',value:22,ratio:0.1043,date:'2026-07-12',lever:'constitution 13/13 · census 90%'} ] },
-      artefacts:[] },
-    'privacy-pools-v2': { feed:'demo', instance:'privacy-pools-v2', movingCeiling:{ metric:'R1CS constraints', baseline:36832, best:17159, ratioNow:0.4658,
-      open:{ id:'certified report', statement:'frozen 0xbow report' },
-      series:[ {label:'baseline',value:36832,ratio:1,date:'2026-07-09',lever:null},
-               {label:'v2r1',value:17159,ratio:0.4658,date:'2026-07-09',lever:'projective-CSE'} ] },
-      artefacts:[] }
+      artefacts:[{id:'af-0f8625eec136',kappa:'sha256:f57406e1…',best:472,beat:true}] }
   };
 
   var host = document.getElementById('frontier');
@@ -194,7 +183,7 @@
 
     host.innerHTML =
       '<div class="fr-head">'+
-        '<div class="fr-title">the frontier · <b>'+feed.instance+'</b></div>'+
+        '<div class="fr-title">the frontier · <b>'+feed.instance+'</b>'+(feed.feed==='demo'?' <span style="opacity:.55;font-size:.78em;border:1px solid currentColor;border-radius:4px;padding:0 .35em;">demo snapshot — serve the console for live numbers</span>':'')+'</div>'+
         '<div class="fr-controls">'+picker+
           '<button class="fr-btn" id="ratioBtn" aria-pressed="'+showRatio+'" title="toggle absolute metric vs R(t) ratio">R(t)</button>'+
           '<button class="fr-btn" id="replayBtn" title="replay the descent">↻</button>'+

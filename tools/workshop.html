@@ -180,16 +180,16 @@
   <header class="hero">
     <p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
     <h1 class="title">Work you can trust from agents that <em>cannot grade themselves</em>.</h1>
-    <p class="lede prose">A verification harness for AI-agent work. One agent proposes, a second independently proves, and the tests that decide are derived by hashing the proposal itself — so neither agent could have chosen them. Config-driven, zero dependencies, every axiom re-checked at runtime.</p>
+    <p class="lede prose">A verification harness for AI-agent work. One agent proposes, a second independently proves, and the tests that decide are derived by hashing the proposal together with a run secret the proposer never sees — so it could not have chosen or ground them. Config-driven, zero dependencies, every axiom re-checked at runtime.</p>
     <div class="metric-strip">
-      <span><b>730 → 472</b> words, four audited folds</span>
+      <span><b>730 → 472</b> words, three audited folds</span>
       <span aria-hidden="true">·</span>
-      <span><b>7</b> defects found by running</span>
+      <span><b>11</b> defects found by running</span>
       <span aria-hidden="true">·</span>
-      <span><b>10</b> embodiments, one skeleton</span>
+      <span><b>15</b> embodiments, one skeleton</span>
     </div>
 
-    <figure class="instrument" aria-label="The frontier: a metric that falls only through the gate, 730 to 472 words across four audited folds.">
+    <figure class="instrument" aria-label="The frontier: a metric that falls only through the gate, 730 to 472 words across three audited folds.">
       <div class="cap"><span>the frontier — the moving ceiling</span><span>examples/field-guide</span></div>
       <canvas id="frontier" width="1100" height="320"></canvas>
       <figcaption class="foot">A result exists only where the two agents were genuinely held apart. The line steps down only when a human keystone folds an audited win — never on an agent's own word.</figcaption>
@@ -209,7 +209,7 @@
     <div class="kicker"><span class="glyph">◿</span><p class="eyebrow">The answer</p></div>
     <h2>Route the information away — don't ask for honesty</h2>
     <div class="prose">
-      <p>Two agents do the work: <span class="agent mage">soulbae 🧙</span> proposes, <span class="agent sword">soulbis ⚔️</span> proves. Between them sits <span class="agent gap">the Gap ⿻</span>, whose only job is to derive the verification witnesses <strong>by hashing the proposal's own bytes</strong>. The proposer chooses its own exam without ever seeing the syllabus; any revision re-seeds the draw.</p>
+      <p>Two agents do the work: <span class="agent mage">soulbae 🧙</span> proposes, <span class="agent sword">soulbis ⚔️</span> proves. Between them sits <span class="agent gap">the Gap ⿻</span>, whose only job is to derive the verification witnesses <strong>by hashing the proposal's own bytes with a run secret the proposer never sees</strong>. The proposer chooses its own exam without ever seeing the syllabus; any revision re-seeds the draw, and grinding it is measured at ≈0.</p>
     </div>
 
     <div class="loop" role="list" aria-label="The six-phase loop">
@@ -234,29 +234,29 @@
     <div class="tiles">
       <div class="tile accent-cyan">
         <span class="big num">730<span class="arrow"> → </span><span class="to">472</span></span>
-        <span class="unit">words · four audited folds</span>
-        <p>A fact-dense guide compressed 35%, every fold passing an 8-of-~40 held-out gate drawn by hashing the candidate; the last two closed by exhaustive census.</p>
+        <span class="unit">words · three audited folds</span>
+        <p>A fact-dense guide compressed 35%, every fold passing a held-out gate drawn by hashing the candidate with a secret it never saw; the last two closed by an exhaustive 32-fact census.</p>
       </div>
       <div class="tile">
-        <span class="big num">7</span>
+        <span class="big num">11</span>
         <span class="unit">defects found by running</span>
-        <p>Each invisible to inspection and obvious on execution — an outage read as an exhausted search, a gate that passed an empty config. Every one now pinned by a test.</p>
+        <p>Each invisible to inspection and obvious on execution — an outage read as an exhausted search, a gate that passed an empty config, a verifier that cried tamper on honest runs. Every one now pinned by a test.</p>
       </div>
       <div class="tile">
-        <span class="big num">10<span class="arrow"> + </span>1</span>
-        <span class="unit">embodiments · one open seat</span>
-        <p>The same skeleton over quantum circuits, ZK constraint systems, research documents, consent agreements — plus one workshop seat held open by invitation.</p>
+        <span class="big num">15</span>
+        <span class="unit">embodiments · one skeleton</span>
+        <p>Quantum circuits, ZK constraint systems, research documents, consent agreements, an acceptance registry — the origin operator's fleet, catalogued apart from the system itself. One seat was held open by invitation until its acceptor signed.</p>
       </div>
       <div class="tile">
         <span class="big num">0</span>
         <span class="unit">dependencies</span>
-        <p>Plain Node. The governing algebra is re-proven on all 64 values of ℤ/64ℤ every time the gate runs; every result is content-addressed so a stranger can re-derive it from the shipped bytes.</p>
+        <p>Plain Node. The governing algebra is re-proven on all 64 values of ℤ/64ℤ every time the gate runs; every result is content-addressed so a stranger can re-derive it from the shipped bytes. And because every sealed result is a κ-addressed node and every minted relation a signed edge, a running harness accretes a <strong>verifiable trust graph</strong> — the construction the whole system is built toward.</p>
       </div>
     </div>
 
     <div class="console-note">
       <span class="mono">node tools/console.mjs</span>
-      <p>This page ships beside the <strong>live console</strong> — a read-only localhost window that draws the loop as evolving geometry and re-derives every hash in front of you. One presents the work; the other lets you watch a round move.</p>
+      <p>This page ships beside the <strong>live console</strong> — a read-only localhost window that draws the loop as evolving geometry and re-derives every hash in front of you. One presents the work; the other lets you watch a round move. <strong>Both are just consumers.</strong> The harness emits data and never owns a view: <span class="mono">frontier.json</span> · <span class="mono">graph.json</span> · <span class="mono">star.v1</span> · <span class="mono">runtime-feed.v1</span> · wiki pages · κ artefacts · signed VRC edges are stable read-only projections, and any interface you build against them — a terminal, a game, a gallery, a voice — inherits the discipline for free, because interfaces read projections and never write ledgers. The contract table is in <span class="mono">WORKFLOW.md</span>.</p>
     </div>
   </section>
 

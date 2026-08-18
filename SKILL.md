@@ -74,6 +74,9 @@ substrate — a holon minted here re-derives byte-for-byte anywhere else. See
 ## Map
 
 `RESEARCH.md` (the contribution — problem, claim, evidence, limits) ·
+`PRACTICES.md` (the 2024–26 field surveyed against this harness, every claim
+traced through `SOURCES.md`) ·
+`AGENTS.md` (the tool-neutral boot protocol; `CLAUDE.md` imports it) ·
 `HOLONS.md` (κ-addressed interoperability, and why it is an auditor) ·
 `TRUSTS.md` (the constitution — six trusts, and where each one bites) ·
 `GROUND_RULES.md` (GR-1..GR-10) · `SEAT_CONTRACT.md` (the config interface) ·
@@ -81,6 +84,9 @@ substrate — a holon minted here re-derives byte-for-byte anywhere else. See
 `engine/conform.mjs` (the gate that proves the algebra rather than asserting
 it) · `examples/field-guide/` (a runnable spar) · `SPECIALISATION.md`
 (personas, spells, and the Game of 42 station pattern) · `HARNESS_PATHS.md`
-(ten real instances + one open seat, grouped by how much of the loop each runs) ·
+(the origin fleet — fifteen real instances, grouped by how much of the loop
+each runs; evidence, not part of the system you adopt) ·
+`WIKI.md` (the Observe lane — auto-populating a federated wiki + the
+knowledge-graph asset for agents) ·
 `tools/console.mjs` (the live workshop console) · `tools/frontier.html` (the
 interactive, contributable frontier, per workshop).

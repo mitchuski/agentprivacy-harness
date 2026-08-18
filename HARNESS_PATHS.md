@@ -1,10 +1,32 @@
-# Harness paths — where this skeleton went
+# Harness paths — the origin fleet
 
-Ten instances specialised this harness, and an eleventh seat is held open by invitation. None of their code lives here; this
-is the map, so you can see what a filled config looks like at full weight —
-and, just as usefully, what a *partial* embodiment looks like — before you
-build your own. Each began as a skeleton like this one and diverged only
-through its config, its seat cards, and its gate.
+**This catalogue is not the harness.** It is the origin operator's fleet —
+work done *with* the harness, kept here as evidence and pedagogy the way
+`universe/` keeps one project's corpus behind a seam. The system you adopt
+is the engine, the constitution, and the tools; delete this file and every
+gate still passes.
+
+The fleet is divergent **on purpose**, and the divergence serves one
+construction: **trust-graph creation, the agentprivacy way.** Each entry —
+circuits, grammars, consent records, registries, wikis — is a working piece
+delivered toward that purpose, and the harness is what gives every one of
+them the same verifiable shape: a gated result sealed as a κ-addressed node,
+a relation that a signature mints as an edge (`GRAPH.md`). Bodies diverge;
+the graph they feed is one. What these entries buy you is sight: what a filled
+config looks like at full weight — and, just as usefully, what a *partial*
+embodiment looks like — before you build your own. None of their code lives
+here. Each began as a skeleton like this one and diverged only through its
+config, its seat cards, and its gate.
+
+Ten instances specialised this harness; an eleventh seat — once held open by
+invitation — was signed on 2026-07-14; a twelfth carries the skeleton whole
+as a standalone sibling; two later runtimes carried the hold-apart into an
+agent-operated acceptance flow and into literature review, and the sixteenth
+accession is the first **descendant lane** — no loop at all, but the
+constitution inherited whole. **Fifteen entries stand**; numbering is by
+accession and never reused, so one number sits empty (withdrawn before its
+counterpart work published — the door decides what is named here, and when).
+Grouping is by weight.
 
 They are grouped by **how much of the loop they run**, because that is the
 most useful thing to see. A harness is not all-or-nothing: the minimum that
@@ -26,7 +48,11 @@ reading a complete one.
 | the dream cycle | universe upkeep | *(no metric)* — gap surfacing | *(none)* — the measure seat at fleet scale | measure-only |
 | Game of 42 | the structure itself | *(none)* — a visualization | *(none)* — checks structure, not results | structure layer |
 | **universe-builder** | a map of a corpus | words, ↓ | a sampled draw it never needed | **RETIRED — read this one** |
-| hearthold | household sovereignty stack | *(unfilled — defining it IS accepting the seat)* | *(unfilled)* | **OPEN — invited: the House of Archon** |
+| hearthold_mage | household sovereignty stack | disclosure-debt, ↓ (baseline 2049 canonical bytes) | FULL-mode bundle satisfies all 23 frozen census requirements + one negative fixture per requirement | **FILLED 2026-07-14 — the House of Archon, signed** |
+| hh_workshop | workshop facilitation (babblefish translation) | translation-debt, ↓ (baseline 32) | census over a 31-claim frozen register; the probe FORM drawn Fiat-Shamir from the triptych; assayer blind to canon | full, **mechanically fitted** — standalone (vendored engine, local-model driver) |
+| the DTG verification registry | ZK ceremony suite acceptance | registry rows, honestly accepted | digest-manifest byte-match; the decision consumes only `pinned` | acceptance flow, **human-gated** — first external run accepted |
+| the litreview runtime | prior-art novelty (Programme WP-14) | residues surviving refutation | context isolation: refuters never see the prover's argument (D3) | full, non-numeric — sweep ⊥ refute ⊥ judge |
+| uor_kappa_mage | upstream substrate convergence (kappa-registry) | *(no metric)* — a P-gated research lane | *(inherited, not drawn)* — TRUSTS + GROUND_RULES govern every session | **descendant lane** — the constitution inherited whole |
 
 ---
 
@@ -230,6 +256,21 @@ ids reserved for the operator. Instance head `3a92544`.
 > **the Gap:** hash the proposal (recipe + worked entries); draw 5 uncovered terms the assayer must express from the recipe alone, plus 3 covered regressions — generality is the only winning strategy · **lenses:** grammar-forward ⊥ canon-forward ⊥ spell-grammar (promoted at lexr3) · **canary:** the relation fixture authored together with its claims — passes the full pipeline by construction
 > **weight:** full, mechanically fitted · public repo · **the lesson it carries:** per-term memorization is this domain's mirage; the first MIRAGE was perfect gate arithmetic wearing a false self-certification, and the T-148 inversion taught the gate to tell a fortress standing from a fortress fallen.
 
+### 13 · — withdrawn
+
+*(An accession withdrawn from the catalogue by the First Person before its
+counterpart work published. Numbers are by accession and never reused, so 13
+stands empty rather than renumbering everything after it; external citations
+of other entry numbers keep resolving. What is named here, and when, is the
+door's to decide — T6.)*
+
+Two of its lessons survive it, stated domain-free because they are: **a
+product objective can hide inside one number** — when the gate forbids half
+the search space, re-price the objective (a second scored axis paid from
+the first's headroom), never loosen the gate; and **a killed-lever ledger
+that only accrues at the end of a run is a fence built after the cattle
+left** — a per-round keystone micro-fold is the fix.
+
 ---
 
 ## Adjacent embodiments — the same topology, a different (or missing) piece
@@ -322,6 +363,76 @@ that travels with the code and is read each morning to resume.
 > **the Gap:** none — this is the measure seat grown to fleet scale, and it says so · **lenses:** relevance triage (a version-named directory is not a gap) · **canary:** n/a — nothing is graded
 > **weight:** measure-only · **the lesson it carries:** the front of the loop can stand alone when the human is the whole gate; it proposes, never fills without a tick, never pushes without an ask.
 
+### 14 · the DTG verification registry — an acceptance flow, human-gated
+
+*(instance of the author as task-force co-chair — public repo + Pages site;
+the discipline run as an **agent-operated acceptance flow** over a ZK
+ceremony orchestrator suite)*
+
+Three Groth16/BN254 circuits with pinned constraint counts; a submission
+re-runs the orchestrator on its own machine and must **byte-match the digest
+manifest** on the required artifacts (`r1cs`, `wasm`, the constraint
+counts), while the trusted-setup chain digests are **advisory by design** —
+snarkjs folds its own randomness into every contribution, so advisory
+divergence is the expected signature of an independent build, not a
+failure. The hard constraint lives in code, not policy: the decision
+consumes only the `pinned` block and the manifest — platform, tools, and
+timings can never move a verdict. Around that verifier sits the acceptance
+flow, gates A–G: *the agent operates, the maintainer decides* — admission
+(C) and publication (G) are HUMAN; every reply carries a mandatory
+disclosure of agent involvement; and **G.1, the publication rite**, has the
+agent serve a one-line proverb compressing what *this* publication means,
+answered by the maintainer's typed activation — a challenge–response at the
+human gate, fresh per push. The agent's own canary set includes the rule
+that a submitter's `verdict: ACCEPT` line is *a prediction to check, never
+a result to record*. The registry's six-entry arc is the whole method in
+miniature: maintainer reference → timestamped repeat → first cold
+public-clone run (proving the *instructions*) → pseudonymous seat (proving
+identity is not required) → full digest match from that seat → **the first
+external run** (darwin/arm64: required digests byte-identical across
+architectures). There is no `0001` — an auto-id collision, admitted in the
+flow itself. And the prohibited thing cannot be built: the phase-2 ceremony
+entry point throws unconditionally until its governance gate closes.
+
+> **At a glance** —
+> **objective:** none to minimise — an acceptance flow; the registry row is the unit, and honest acceptance is the product · **gate:** `verify-run.mjs` — required-artifact digest byte-match against the pinned manifest; named failure strings; exit 0 = ACCEPT · **hard constraint:** the decision reads only `pinned` + the manifest — never the informative block (asserted by orchestrator tests)
+> **the Gap:** none drawn — the submitter is *outside* the workshop, so the separation is the architecture itself; the human gates (admission, publication, the G.1 proverb rite) are the verification the flow adds · **canary:** the maintainer's own reference build, which mints the manifest and passes it by construction · **governing sentences:** *agents orchestrate entropy; they are never the entropy* · *no phase-2 ceremony before the gate closes*
+> **weight:** acceptance flow, human-gated · public registry + Pages site, prebuilt and committed so CI never enters the trust story · **the lesson it carries:** an acceptance flow is a harness read backwards — the proposer arrives from outside, and what keeps an agent-operated registry honest is the human door plus disclosure, made structural.
+
+### 15 · the Programme lit-review runtime — novelty against an adversary
+
+*(private instance of the author — inside the research corpus; the V6
+pipeline's descendant, turned on related work. Its epigraph is the whole
+design: "a literature review that only finds agreement has not been run
+against an adversary.")*
+
+The objective is a **defensible novelty claim**, and the operative object is
+the **residue** — what remains of a claim after covering art is subtracted.
+Run 03 seats eleven: **5 sweep ⊥ 5 refute ⊥ 1 judge**. The sweep bench
+searches prior art by modality; the refute bench hunts covering art
+per-residue and is *instructed to default to coverage*; the judge rules
+**SURVIVES / NARROWED / COVERED**. The hold-apart is context isolation by
+construction — a refuter receives the residue and the sweep digest but
+**never the prover's argument** (D3: separation must be structural; a run
+separated by prompt alone is invalid). D2 forbids the domain's oldest
+overclaim: absence of evidence is reported as `not_found_in_corpus(n,
+range)`, never as *novel*. And the honest limit is declared in the manifest
+rather than hidden (D4b): all seats run the same weights, so **an
+all-SURVIVES result is treated as a failed enforcement of the adversarial
+discipline** — the run is trusted not by its result but by whether the
+adversary ever knocked anything down. It did: run 02 returned 0 VALIDATED /
+5 MIRAGE; run 03 (76 sweep items, 48 covering candidates) returned **1
+COVERED / 4 NARROWED / 0 SURVIVES**, retiring one claimed novelty outright
+and shrinking the other four to their defensible cores; run 04 added the
+normative strand and per-paper placement. Verdicts are candidates only —
+adoption and the terminal gate are the First Person's, and the manifests
+are generated artifacts: fix the data, regenerate, never hand-edit.
+
+> **At a glance** —
+> **objective:** residues surviving refutation — the defensible core of a novelty claim, honestly shrunk · **gate:** the refute bench + judge; verdict lexicon SURVIVES / NARROWED / COVERED, confidence never entering tier-A artifacts (GR-2) · **hard constraint:** D2 — absence is `not_found_in_corpus(…)`, never *novel*
+> **the Gap:** context isolation as the hold-apart — refuters never see the prover's argument (D3, structural); the draw is not hashed, and the manifest says so · **lenses:** five search modalities ⊥ five per-residue refuters, judge as the only barrier · **canary:** inverted and declared — same weights on all seats (D4b), so an adversary that never lands a hit indicts the run, not the claims
+> **weight:** full, non-numeric · private, inside the corpus · **the lesson it carries:** in research the mirage is agreement — the valuable verdict is the one that kills your claim, and a review that returns all-clear has failed, not succeeded.
+
 ---
 
 ## The structure layer
@@ -408,42 +519,149 @@ is the first design decision, and the cheapest one to get wrong.*
 
 ## Invited vacancies — a seat held open is a trust doing work
 
-### 11 · hearthold — the House of Archon's slot
+### 11 · hearthold — the House of Archon's slot *(seat TAKEN 2026-07-14)*
 
-*(scaffolded at `../hearthold_mage` — deliberately unfilled · upstream:
-`github.com/Flaxscrip/hearthold` v0.11.0, IMPLEMENTED)*
+*(instance at `../hearthold_mage` — **accepted and signed**, PR #1 merged
+`a55f1a5` · upstream: `github.com/Flaxscrip/hearthold` v0.11.0, IMPLEMENTED)*
 
 The household sovereignty stack — the Warden who guards, Recall who remembers,
 the Knowledge Portal that faces outward, the factor-2 step-up ladder — is real
-and shipped upstream (`github.com/Flaxscrip/hearthold`). So this seat is not to
-*build* hearthold; it is a harness seat **held open for the House of Archon** to
-build a held-apart runtime *on* it. Nothing in it conforms, and nothing should:
-the config wears its TODOs, the frontier has no baseline, and the gate's refusal
-is the mechanism that keeps the seat warm. This is trust T4 made structural — *an
-invitation establishes the acceptance relationship before any specific proposal*
-— and the proposal here is the acceptor's to make. What Archon is growing toward
-is a **dual-agent runtime for content-addressed identity**: `did:cid`, agent
-identity, key custody — which is the harness's own **holon layer** (`HOLONS.md`)
-turned on identity, since *a `did:cid` CID is a κ-address.* `SLOT.md` carries the
-invitation: identity-shaped candidate Gaps (`did:cid` resolution integrity ·
-sword ⊥ mage identity separation · key custody under delegation), the five answers
-that constitute acceptance, and a **proposed** seating at **V60** — burning
-Connection (a DID resolves outward), which is exactly what separates it from the
-Curatrix Vault at V57 (which burns Value, because a vault holds).
+and shipped upstream (`github.com/Flaxscrip/hearthold`). So this seat was never
+to *build* hearthold; it was a harness seat **held open for the House of Archon**
+to build a held-apart runtime *on* it. For its first days nothing in it conformed,
+and nothing should have: the config wore its TODOs, the frontier had no baseline,
+and the gate's refusal was the mechanism that kept the seat warm. This is trust
+T4 made structural — *an invitation establishes the acceptance relationship
+before any specific proposal* — and the proposal was the acceptor's to make.
+
+**On 2026-07-14 the House of Archon signed its name to the objective.** The seat
+is filled on **disclosure-debt**: an auditor stance where the claim space is
+enumerable — `did:cid` resolution integrity, the holon law turned on the
+registry. Acceptance fixed the five answers (`harness.config.mjs` @
+`sha256:16a3f899…`), froze a **23-entry census** (`census/requirements.json` @
+`sha256:89a25a1f…`), and established a reproducible cross-identity baseline of
+**2049 canonical bytes** (`frontier.json`). `scripts/self-test.mjs` proves the
+gate both ways — the FULL-mode bundle satisfies all 23 requirements (canary) and
+a negative fixture per requirement makes the gate actually refuse (a gate nothing
+fails is worth less than none). The horizon it read and accepted is the harness's
+own **holon layer** (`HOLONS.md`) turned on identity, since *a `did:cid` CID is a
+κ-address*: a dual-agent runtime for content-addressed identity — `did:cid`, agent
+identity, key custody under delegation, where a reference proposes and a signature
+mints. Seated at **V60** (Protection · Delegation · Memory · Connection), anchor
+**V3** (Computation + Value) — *the hearth burns care, not compute.*
 
 > **At a glance** —
-> **objective:** OPEN — defining it IS accepting the seat (ADOPTION.md Part II, the five answers) · **gate:** OPEN · **hard constraint:** OPEN
-> **the Gap:** OPEN — and if the accepted claim space turns out enumerable, an auditor is a valid acceptance too (see #10) · **lenses:** OPEN · **canary:** OPEN
-> **weight:** invited vacancy — conform REFUSES the instance today, by design · **direction:** the House of Archon's content-addressed identity runtime (`did:cid` = a κ-address; the holon layer on identity) · **the lesson it carries:** a slot the gate holds open cannot be quietly squatted; the seat stays honest until someone signs their name to its objective.
+> **objective:** disclosure-debt, ↓ · **gate:** `scripts/check-requirement.mjs` over the 23-entry frozen census (zero-dependency verifier boundary, invoked as a subprocess) · **hard constraint:** every census entry canary-satisfiable (§0) — a requirement the canary cannot meet makes the feasible set empty
+> **the Gap:** the auditor's — `did:cid` resolution integrity, enumerable claims (an auditor is a valid acceptance, see #10) · **lenses:** the household stack (Warden / Recall / Knowledge Portal) · **canary:** FULL-mode bundle passes all 23; one negative fixture per requirement, each refused by name
+> **weight:** filled — the invitation was accepted on its own terms: named signature, frozen census, reproducible baseline, a gate that can fail · **direction:** the House of Archon's content-addressed identity runtime (`did:cid` = a κ-address; the holon layer on identity) · **the lesson it carries:** a slot the gate holds open cannot be quietly squatted; the seat stayed honest until someone signed their name to its objective — and then someone did.
+
+**State as of 2026-08-17:** signed, then still. No round has run; the
+frontier stands at 2049 = 2049 (best = baseline, and the ledger says so in
+those words); the census is unchanged at v1/N=23; the chronicle directory
+holds only its `.gitkeep`. Two acts from the signing remain queued and
+unexecuted on the record — the dual-pin of the signed acceptance, and the
+Lexon experiment expressing the genesis Ruleset against `lexon_pvm`. A
+filled seat that has not yet swung is not a failure; it is a frontier
+waiting for its first proposal — but the ledger reports stillness as
+stillness (GR-5).
+
+---
+
+## Standalone siblings — the skeleton carried whole
+
+### 12 · hh_workshop — the Hitchhikers Workshop (babblefish translation)
+
+*(instance at `../hh_workshop` — fitted 2026-07-17, first live round driven by
+a local model; standalone by design: engine vendored per its `VENDOR.md`,
+runs with no framework checkout, no internet, no Claude Code)*
+
+A facilitated masters-cohort course around a shared **air-gapped local mage**:
+one understanding rendered across three tongues — sci-fi narrative → poem →
+white paper → recurse (the babblefish recursion, from the 2026-06-28
+LAN-ceremony chronicle) — with the harness guarding **translation fidelity**.
+The domain's mirage is a beautiful rendering that no longer carries the
+mechanism. The witness bank is a frozen 31-claim register the cohort itself
+amends through the keystone; the Fiat-Shamir draw gates not which claims (a
+census probes all of them) but **which tongue is interrogated** — the proposer
+cannot know which of its three forms will face the blind assayer, so only a
+triptych that carries the understanding in every form survives. Seats are
+pure-data (an Ollama-class endpoint cannot sha256sum); the driver persists
+`proposal_canon.json`/`gap.json`/`verdict.json` and computes every hash
+code-side via the engine's own `deriveHoldApart`, which holds T2 harder — the
+seat physically cannot see the salt. Around the harness sit the course
+mechanics: a rotating weekly **steward** whose corpus folds form a
+re-derivable provenance chain (the cohort as the mage's first trainers),
+consent enforced in the pipes (packer and exporter both refuse unledgered
+material), and an Oasis-Protocol bridge spooling consented pages toward the
+hitchhikers.earth federation — outward legs at the First Person's door.
+
+> **At a glance** —
+> **objective:** translation-debt, ↓ — (claim, form) pairs not yet carried; baseline 32 = 3·31 − 61 (the seed triptych alone) · **gate:** census over the frozen 31-claim register, interrogated through ONE probe form drawn `seedHex mod 3`; assayer blind to the canon; any declared claim unrecovered = zero · **hard constraint:** no canon drift (additive-only register, keystone-folded) + consent-first (no expression enters corpus or export without a signed ledger line)
+> **the Gap:** SALTED mode, engine-derived — the census gates the claims, the draw gates the form · **lenses:** story-forward ⊥ spec-forward (a compression/poem lens staged) · **canary:** the seed triptych, authored WITH the register from the LAN-ceremony chronicle — passes the census by construction
+> **weight:** full loop, mechanically fitted — stub round + first live round (all seats held by a local 12B model) both verify offline · **the lesson it carries:** the access ladder beside it is an AUDITOR and says so (the universe-builder's lesson, applied at design time); and a harness can leave home — vendored whole, driven by whatever model the room co-holds.
+
+**State as of 2026-08-17:** pushed public 2026-07-27 with the bound
+handover package (letters, one-pager, curriculum, ceremony, consent
+registers — the outreach kit for seating a real cohort). Six runs on disk:
+**10 VALIDATED** across four live rounds (including two auto-research
+rounds, every seat a local 12B model), 8 MIRAGE (both stub smokes, as
+designed), **0 folded** — so the frontier stands honestly at 32 until the
+keystone pair sits. At the gate: `t1-the-stewards-week`, submitted
+2026-07-18 and still awaiting the keystone's three-way call
+(promote / send back / leave), plus three validated candidates flagged
+COUNT MISMATCH for review before any fold. The demo cohort is fictional and
+banner-marked; no university has yet been seated — that letter is a door.
+
+---
+
+## Descendant lanes — the constitution inherited
+
+### 16 · uor_kappa_mage — the first descendant
+
+*(public repo `github.com/mitchuski/uor-kappa-mage` — a contribution lane,
+not an optimization loop, and it says so on every page)*
+
+This entry is a new kind. It carries **no** `harness.config.mjs`, no
+frontier, no Gap draw, no VALIDATED/MIRAGE ladder — and it is not partial,
+because what it took from the skeleton is not the loop but **the
+constitution, inherited whole**. Its fleet method states it plainly: *two
+documents govern every fleet session, and this lane inherits both* —
+`TRUSTS.md` T1–T6 and `GROUND_RULES.md` GR-1..GR-10 — and its corpus
+register lists this repo's `HOLONS.md`, `tools/kappa.mjs`, `tools/vrc.mjs`,
+and `tools/holon_audit.mjs` as PUBLIC source. The lane's work: convergence
+and overlap research notes against a live upstream substrate
+(UOR-Foundation/kappa-registry, pinned at a named commit), staffed by the
+Programme's fourteen role cards (A0–A13; the role that drafts never
+verifies its own citations), folding one-way and review-gated. Its first
+fleet run seated twelve verifiers — one per convergence section — and all
+twelve returned HOLDS_WITH_CORRECTIONS, the corrections filed at
+win-prominence (including the one that cut its own framing down: κ's
+lineage is *from* UOR, so the substrate is shared lineage, not parallel
+invention; and the upstream's `DelegationScope` is **ahead of** the VRC —
+a gap filed as prominently as any convergence, GR-6). It even cites this
+catalogue back: entry #10's harness-vs-auditor boundary decides its own
+next move — citation checks are auditor work; whether a convergence
+*thesis* survives hostile reading is harness work, and the refuter fleet
+for that is designed and waiting on the door. The inheritance was proven
+where it counts: the lane went public only on the First Person's explicit
+word, after two refusals — T6, working in a repo that contains not one line
+of the engine.
+
+> **At a glance** —
+> **objective:** none to minimise — convergence understood before anything is proposed upstream; *understanding as key* · **gate:** the Programme's P-gates + a per-section verification fleet; verdict lexicon HOLDS_WITH_CORRECTIONS, corrections folded inline · **hard constraint:** the fold is one-way and review-gated — nothing lands upstream except through maintainer review, and the lane changes no upstream code
+> **the Gap:** not drawn — inherited: the constitution holds the seats apart, and the planned refuter fleet (designed, unrun) is where the lane's theses will face an adversary · **lenses:** fourteen Programme roles, A0–A13 — drafter never verifies its own citations · **canary:** the correction record itself — a first run that returned no corrections would indict the fleet, not flatter the notes
+> **weight:** descendant lane · public · **the lesson it carries:** the skeleton's deepest export is not the loop but the constitution — a lane with no metric, no engine, and no Gap can still inherit every trust, and the proof is behavioural: the door held twice before it opened.
 
 ---
 
 ## What travels, what stays, and how the fleet syncs
 
-Read these ten and you will notice the same skeleton under ten
+Read these fifteen and you will notice the same skeleton under fifteen
 unrecognisably different bodies: an objective (or an honest absence of one), a
 hard constraint, a gate the proposer cannot choose, a ledger only one seat
-writes, and a door only a person opens.
+writes, and a door only a person opens. And one body carries no skeleton at
+all — only the constitution, which turns out to be the part that travels
+furthest.
 
 They also **sync into one universe**, and that is not decoration — it is the
 fractal claim of `SPECIALISATION.md` §2 made real:

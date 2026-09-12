@@ -652,6 +652,44 @@ of the engine.
 > **the Gap:** not drawn — inherited: the constitution holds the seats apart, and the planned refuter fleet (designed, unrun) is where the lane's theses will face an adversary · **lenses:** fourteen Programme roles, A0–A13 — drafter never verifies its own citations · **canary:** the correction record itself — a first run that returned no corrections would indict the fleet, not flatter the notes
 > **weight:** descendant lane · public · **the lesson it carries:** the skeleton's deepest export is not the loop but the constitution — a lane with no metric, no engine, and no Gap can still inherit every trust, and the proof is behavioural: the door held twice before it opened.
 
+### 17 · star-hold — a coherence instance over a ZK construction (added 2026-09-11)
+
+*(instance at `~/dtgwg-zkp-tf-mage/runtimes/star-hold/harness/`, over the
+runtime beside it; the DTG ZKP task force's lab, the author as co-chair)*
+
+The artifact is not prose and not a circuit: it is a **claims register** over a
+reference runtime — nineteen load-bearing claims about a sidecar of signed
+envelopes beside a City Key (the "Hold") and its k-of-n community-vouch
+presentation, each row naming the H-test that backs it or the condition that
+would settle it. The objective is **unbacked claims**: rows whose enforcement is
+`prompt`, `manual` or `nothing` — a claim stronger than its enforcement, the
+claims checker's own rule made the frontier. Baseline 4 of 19 (the X3 cost of
+Ed25519 in-circuit, unlinkability beyond commitment freshness, whether
+hidden-value equality is carded as its own primitive, the pairwise-freshness
+chokepoint that lives at issuance). The gate is a **census**: every row probed,
+so a claim silently weakened or a test silently renamed cannot hide; the
+canary is the runtime's own 45/45. Two lenses: a *circuit-mapper* backs an
+OPEN claim with a runnable check or a measurement; a *refuter* tries to make
+a PROVEN claim's test print FAIL — and a confirmed falsification is a WIN filed
+as a K-id, which is the hard constraint's whole point: a claim leaves the
+register only by being falsified, never by being relabelled. Conform PASS;
+no round has run.
+
+A **second instance** sits beside it, `harness-disclosure/`, and it is #11's
+seat brought to the Star: hearthold_mage's *disclosure-debt* rule — canonical
+bytes of what a verifier learns, against a frozen requirement census checked
+one entry at a time from the public side only — applied to the Star's k-of-n
+presentation instead of a Warden's attestation bundle. Baseline 521 bytes
+disclosed against 2,529 for the same two credentials shown whole and 6,478
+held; a 14-requirement census frozen by sha256; canary 14/14. The seat's own
+signed acceptance rides in the Hold as an item the Hold cannot yet verify and
+says so.
+
+> **At a glance** —
+> **objective:** unbacked claims, lower is better · **gate:** census over `claims_register.md` — PROVEN/DERIVED rows must name H-ids that PASS in `node ../test.mjs`, OPEN/REPORTED rows must state their settling condition · **hard constraint:** no claim leaves except by a falsifying K-id; the disclosure set and the rejection register only grow by a live-triggered test
+> **the Gap:** the census draw over the ORIGINAL register — the proposer never sees which probe checks which claim · **canary:** the register + `test.mjs` as they stand (36/36) · **lenses:** circuit-mapper · refuter · **frontier:** 4/19 → OT-1 = a first measurement for the spec's case X3
+> **weight:** full loop, unrun · local lab, git-excluded · **the lesson it carries:** a claims register is an artifact a harness can fold — the metric is honesty about enforcement, and a refuter's win lowers nothing, which is what keeps the register from being gamed by deletion.
+
 ---
 
 ## What travels, what stays, and how the fleet syncs

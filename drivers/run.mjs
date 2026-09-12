@@ -13,6 +13,15 @@
 // two machines' worth of separation, the corpus never leaving the box except
 // as the proposal's canonical bytes.
 //
+//   node drivers/run.mjs --instance <dir> --driver ollama --assay-model <m> --proposals <file.json> --propose-model "<name>" --run r2
+//
+// --proposals hands the proposer's seat to an agent that already answered
+// elsewhere — a Claude Code subagent, a Workflow seat, a person — whose
+// proposal sets are in a JSON file: { "<lens>": { proposals: [...] }, ... }.
+// The engine still derives every seed AFTER the proposals are committed, so
+// the hand-off is as grind-proof as a live seat; --propose-model names the
+// agent for the record (models + phiInference in run.json).
+//
 // What the Workflow tool does for the reference runtime, this does with a
 // plain rt: drives engine/dual_agent_loop.mjs, then PERSISTS what pure-data
 // seats cannot write themselves:
@@ -48,7 +57,8 @@ const driver = opt('--driver') || 'stub'
 const runId = opt('--run')
 const host = opt('--host') || 'http://127.0.0.1:11434'
 const maxRounds = opt('--max-rounds') ? Number(opt('--max-rounds')) : null
-const proposeModel = opt('--propose-model') || opt('--model') || null
+const proposalsFile = opt('--proposals') ? resolve(opt('--proposals')) : null
+const proposeModel = opt('--propose-model') || opt('--model') || (proposalsFile ? 'handed-off' : null)
 const assayModel = opt('--assay-model') || opt('--model') || null
 if (!runId) { console.error('usage: node drivers/run.mjs --instance <dir> --driver stub|ollama|anthropic|split --run <runId> [--model <m> | --propose-model <a> --assay-model <b>] [--host <url>] [--max-rounds n]'); process.exit(2) }
 if (!existsSync(join(instance, 'harness.config.mjs'))) { console.error('run: no harness.config.mjs in ' + instance); process.exit(2) }
@@ -59,8 +69,9 @@ let base, models
 if (driver === 'stub') { base = makeStubRt(); models = { proposer: 'stub', prover: 'stub' } }
 else if (driver === 'ollama') {
   const { makeOllamaRt } = await import('./ollama.mjs')
-  if (!proposeModel) { console.error('run: --model or --propose-model/--assay-model required for the ollama driver'); process.exit(2) }
-  base = makeOllamaRt({ model: proposeModel, host, log }); models = { proposer: proposeModel, prover: assayModel || proposeModel }
+  const localModel = proposalsFile ? assayModel : proposeModel
+  if (!localModel) { console.error('run: --model or --propose-model/--assay-model required for the ollama driver'); process.exit(2) }
+  base = makeOllamaRt({ model: localModel, host, log }); models = { proposer: proposeModel, prover: assayModel || proposeModel }
 } else if (driver === 'anthropic') {
   const { makeAnthropicRt } = await import('./anthropic.mjs')
   base = makeAnthropicRt({ model: proposeModel || 'claude-opus-5', log }); models = { proposer: proposeModel || 'claude-opus-5', prover: assayModel || proposeModel || 'claude-opus-5' }
@@ -96,8 +107,21 @@ if (models.prover !== 'stub') seatOpts.assay = { ...(seatOpts.assay || {}), mode
 const config = { ...baseConfig, seatOpts, ...(maxRounds ? { stop: { ...baseConfig.stop, maxRounds } } : {}) }
 
 // ---- 5. the rt, with a tap that records full seat outputs -------------------
+// With --proposals, the propose seats are answered from the file (one set per
+// lens, keyed by lens name); every other seat runs on the driver.
+const handed = proposalsFile ? JSON.parse(readFileSync(proposalsFile, 'utf8')) : null
 const taps = []
-const rt = { ...base, agent: async (prompt, opts = {}) => { const r = await base.agent(prompt, opts); taps.push({ label: opts.label || '(unlabelled)', ok: r != null, result: r }); return r } }
+const rt = { ...base, agent: async (prompt, opts = {}) => {
+  const label = String(opts.label || '')
+  let r
+  if (handed && label.startsWith('propose:')) {
+    const lens = label.slice('propose:'.length)
+    r = handed[lens] || null
+    if (!r) log(`propose:${lens} — no handed-off proposal set for this lens; the seat is dead for this round`)
+    else log(`propose:${lens} — handed off (${(r.proposals || []).length} proposal(s) from ${models.proposer})`)
+  } else r = await base.agent(prompt, opts)
+  taps.push({ label: opts.label || '(unlabelled)', ok: r != null, result: r }); return r
+} }
 
 // ---- 6. run -----------------------------------------------------------------
 const result = await runHarness(config, rt, { repo: instance, root, runId, saltSecret, sourceHash, measured })

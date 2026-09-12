@@ -1,9 +1,8 @@
 {
   "version": "1.0.0",
   "created_at": "2026-07-10",
-  "updated_at": "2026-07-10",
+  "updated_at": "2026-09-12",
   "description": "The agentprivacy layer of the dual-agent-harness. Machine-readable head for universe/. Schema follows the grimoire idiom (meta · master_invocation · inventories · provenance · known_open_items). Delete this directory and the harness still works: the axioms live in the Gap, not in the corpus.",
-
   "meta": {
     "title": "universe",
     "subtitle": "the corpus the harness is seated in",
@@ -12,63 +11,266 @@
     "license": "Apache-2.0",
     "signature": "(⚔️⊥⿻⊥🧙)😊"
   },
-
   "master_invocation": {
     "spell": "measure → propose(held-apart) → hold-apart(hash) → assay(held-out) → critic → chronicle(proverb) → accept-only-on-validated-product",
     "proverb": "The proposer that grades itself builds mirages; only what the Gap could not tune to is a result."
   },
-
   "axioms_in_the_gap": {
     "$comment": "What two agents from different universes share. Not content — axioms. Held in engine/conform.mjs, which keeps its own copy and deliberately does not import them.",
     "algebra": "neg(bnot(x)) = succ(x) on Z/64Z, computed for all 64 values, never assumed",
-    "operators": { "neg": "(64 - x) % 64", "bnot": "x ^ 63", "succ": "(x + 1) % 64" },
-    "trusts": ["T1 four promises", "T2 separation bound", "T3 shared root", "T4 consent first", "T5 multiplicative gate", "T6 the door"],
+    "operators": {
+      "neg": "(64 - x) % 64",
+      "bnot": "x ^ 63",
+      "succ": "(x + 1) % 64"
+    },
+    "trusts": [
+      "T1 four promises",
+      "T2 separation bound",
+      "T3 shared root",
+      "T4 consent first",
+      "T5 multiplicative gate",
+      "T6 the door"
+    ],
     "ground_rules": "GR-1..GR-10",
     "shared_root_across_universes": "Origin(A) ∩ Origin(B) = {the axioms}",
     "gap_formal_definition": "the node of maximal betweenness centrality, C_B(v) = Σ σ_st(v)/σ_st"
   },
-
   "layers": {
     "$comment": "Five corpora. A claim true at one layer is false at another; confusing them is the most common error.",
-    "canon": { "holds": "the model, the maths, the conjecture numbers", "authority": "papers/v6 for maths; the register for C-ids" },
-    "substrate": { "holds": "the shared knowledge graph", "authority": "coherence audit, 0 errors" },
-    "structure": { "holds": "vertices, workshops, tomes, cast, mana", "authority": "the grimoire JSON heads" },
-    "surface": { "holds": "the rendered sites and their ceremonies", "authority": "the build; mirrors cite, never edit" },
-    "harness": { "holds": "the loops that produce results", "authority": "conform.mjs + the gate ladder" },
-    "resolution_rule": "When prose and register disagree, the register wins and the prose gets an erratum. Cross-canon disagreements escalate; they are never resolved locally."
+    "canon": {
+      "holds": "the model, the maths, the conjecture numbers",
+      "authority": "papers/v6 for maths; the register for C-ids"
+    },
+    "substrate": {
+      "holds": "the shared knowledge graph",
+      "authority": "coherence audit, 0 errors"
+    },
+    "structure": {
+      "holds": "vertices, workshops, tomes, cast, mana",
+      "authority": "the grimoire JSON heads"
+    },
+    "surface": {
+      "holds": "the rendered sites and their ceremonies",
+      "authority": "the build; mirrors cite, never edit"
+    },
+    "harness": {
+      "holds": "the loops that produce results",
+      "authority": "conform.mjs + the gate ladder"
+    },
+    "resolution_rule": "When prose and register disagree, the register wins and the prose gets an erratum. Cross-canon disagreements escalate; they are never resolved locally.",
+    "record": {
+      "holds": "what every lane and suite RECORDED, census-traced to a quote in a file; the harness checked against itself; a private working-group corpus",
+      "authority": "the trace census (untraced 0 · unquoted 0) + κ per record",
+      "where": "oracle_mage (→ soul_mage), rendered into the lab's /harness/ pages"
+    }
   },
-
   "sovereignty_axes": {
     "$comment": "MSB-first. A vertex declares which dimensions its work burns. Compute from bits; never read dimensions from prose (see ERRATA E-7).",
-    "d1": { "axis": "Protection", "glyph": "🛡️", "weight": 32 },
-    "d2": { "axis": "Delegation", "glyph": "🤝", "weight": 16 },
-    "d3": { "axis": "Memory", "glyph": "📜", "weight": 8 },
-    "d4": { "axis": "Connection", "glyph": "🔗", "weight": 4 },
-    "d5": { "axis": "Computation", "glyph": "⚡", "weight": 2 },
-    "d6": { "axis": "Value", "glyph": "💎", "weight": 1 },
+    "d1": {
+      "axis": "Protection",
+      "glyph": "🛡️",
+      "weight": 32
+    },
+    "d2": {
+      "axis": "Delegation",
+      "glyph": "🤝",
+      "weight": 16
+    },
+    "d3": {
+      "axis": "Memory",
+      "glyph": "📜",
+      "weight": 8
+    },
+    "d4": {
+      "axis": "Connection",
+      "glyph": "🔗",
+      "weight": 4
+    },
+    "d5": {
+      "axis": "Computation",
+      "glyph": "⚡",
+      "weight": 2
+    },
+    "d6": {
+      "axis": "Value",
+      "glyph": "💎",
+      "weight": 1
+    },
     "anchor_law": "A harness anchors a complement pair whose vertices XOR to 63. Seating determines the anchor; it is never chosen.",
     "caveat": "The XOR check cannot catch a transposition of names across a pair. It survives the error in ERRATA E-7. Only the bit-to-axis reading catches that."
   },
-
   "vertex_inventory": {
     "seated_pairs": [
-      { "pair": [38, 25], "xor": 63, "reading": "Aletheia (Protect·Connect·Compute) ⊥ Lethe (Delegate·Memory·Value) — unconcealment against forgetting", "instances": ["tigzkp_mage", "privacy_pools_v2_mage"] },
-      { "pair": [35, 28], "xor": 63, "reading": "Horizon (Protect·Compute·Value) ⊥ the canonical Mage vertex (Delegate·Memory·Connect)", "instances": ["shor_mage"] },
-      { "pair": [19, 44], "xor": 63, "reading": "Forget, the commissioned blade ⊥ Chart Shop, the hold-witness — forgetting against holding", "instances": [] },
-      { "pair": [51, 12], "xor": 63, "reading": "Solchanting/Etherchanting, the commitment-cut ⊥ the Circle, a gathering", "instances": [] }
+      {
+        "pair": [
+          38,
+          25
+        ],
+        "xor": 63,
+        "reading": "Aletheia (Protect·Connect·Compute) ⊥ Lethe (Delegate·Memory·Value) — unconcealment against forgetting",
+        "instances": [
+          "tigzkp_mage",
+          "privacy_pools_v2_mage"
+        ]
+      },
+      {
+        "pair": [
+          35,
+          28
+        ],
+        "xor": 63,
+        "reading": "Horizon (Protect·Compute·Value) ⊥ the canonical Mage vertex (Delegate·Memory·Connect)",
+        "instances": [
+          "shor_mage"
+        ]
+      },
+      {
+        "pair": [
+          19,
+          44
+        ],
+        "xor": 63,
+        "reading": "Forget, the commissioned blade ⊥ Chart Shop, the hold-witness — forgetting against holding",
+        "instances": []
+      },
+      {
+        "pair": [
+          51,
+          12
+        ],
+        "xor": 63,
+        "reading": "Solchanting/Etherchanting, the commitment-cut ⊥ the Circle, a gathering",
+        "instances": []
+      }
     ],
     "determined_vacancies": [
-      { "workshop": "/hall", "vertex": 15, "burns": ["Memory", "Connection", "Computation", "Value"], "forced_anchor": 48, "anchor_is": "Protection + Delegation, exactly", "ceremony_shape": "bilateral-witness", "resident_mage": null, "note": "The complement of the witness vertex is the sovereignty it protects. The rite has a vacant home at exactly the right address." },
-      { "workshop": "/covenant", "vertex": 55, "burns": ["all but Memory"], "forced_anchor": 8, "anchor_is": "Memory alone", "note": "consent's complement is what it refuses to retain" },
-      { "workshop": "/vault", "vertex": 57, "burns": ["Protection", "Delegation", "Memory", "Value"], "forced_anchor": 6, "anchor_is": "Connection + Computation", "note": "the vault holds; it does not connect or compute", "city_seating": "master's districts.ts seats /vault V57 as the Curatrix Vault (Aria Silverhue 🪞, the Reliquary) — a City provenance shop, not a harness instance. The harness-vacancy view and the City-workshop view share the address; they are different layers." },
-      { "workshop": "/holon", "vertex": 31, "burns": ["all but Protection"], "forced_anchor": 32, "anchor_is": "Protection alone" },
-      { "workshop": "/circle", "vertex": 12, "burns": ["Memory", "Connection"], "forced_anchor": 51, "resident_mage": null },
-      { "workshop": "hearthold", "vertex": 60, "burns": ["Protection", "Delegation", "Memory", "Connection"], "forced_anchor": 3, "anchor_is": "Computation + Value, exactly", "resident_mage": null, "developer": "House of Archon", "upstream": "github.com/Flaxscrip/hearthold (v0.11.0, IMPLEMENTED upstream — Warden, Recall on-device RAG, Knowledge Portal, factor-2 step-up ladder). The stack is BUILT; this seat is a held-apart harness ON it, not a build of it.", "target": "the House of Archon dual-agent (sword ⊥ mage) runtime for CONTENT-ADDRESSED IDENTITY: did:cid, agent identity, key custody under delegation. This IS the holon_layer turned on identity — a did:cid CID is a κ-address; resolving it is re-derivation (Law L5); a delegation is a relational edge (VRC). tools/kappa.mjs + tools/holon_audit.mjs are the substrate. Candidate Gaps: did:cid resolution integrity · sword⊥mage identity separation I(id_S;id_M|FP)=0 · key-custody-under-delegation.", "invitation": "../hearthold_mage/SLOT.md — a T4 invitation; the conform gate refusing the unfilled config IS the slot held open", "why_connection_not_value": "V60 burns Connection (the did:cid resolves outward — a public handle to a private root), which is exactly what distinguishes this identity seat from the Curatrix Vault at V57 (which burns Value because a vault holds). Different bit, different vertex, no collision; both may hold a mage.", "distinct_from": "NOT the Curatrix Vault at /vault V57 (Aria Silverhue, the Reliquary — a City provenance shop, different vertex/keeper), and NOT the FLEET arc's 'Hold' phase (FLEET.md line ~179, which maps hearthold to /vault V57 and is now stale — that address is the Vault's; the hearthold HARNESS is V60). This V60 seat is the only hearthold address the House of Archon is invited to fill.", "note": "The hearth burns care, not compute; what it refuses to become is a raw ledger. Seating PROPOSED at invitation, re-derivable from the accepted objective's actual burns." }
+      {
+        "workshop": "/hall",
+        "vertex": 15,
+        "burns": [
+          "Memory",
+          "Connection",
+          "Computation",
+          "Value"
+        ],
+        "forced_anchor": 48,
+        "anchor_is": "Protection + Delegation, exactly",
+        "ceremony_shape": "bilateral-witness",
+        "resident_mage": null,
+        "note": "The complement of the witness vertex is the sovereignty it protects. The rite has a vacant home at exactly the right address."
+      },
+      {
+        "workshop": "/covenant",
+        "vertex": 55,
+        "burns": [
+          "all but Memory"
+        ],
+        "forced_anchor": 8,
+        "anchor_is": "Memory alone",
+        "note": "consent's complement is what it refuses to retain"
+      },
+      {
+        "workshop": "/vault",
+        "vertex": 57,
+        "burns": [
+          "Protection",
+          "Delegation",
+          "Memory",
+          "Value"
+        ],
+        "forced_anchor": 6,
+        "anchor_is": "Connection + Computation",
+        "note": "the vault holds; it does not connect or compute",
+        "city_seating": "master's districts.ts seats /vault V57 as the Curatrix Vault (Aria Silverhue 🪞, the Reliquary) — a City provenance shop, not a harness instance. The harness-vacancy view and the City-workshop view share the address; they are different layers."
+      },
+      {
+        "workshop": "/holon",
+        "vertex": 31,
+        "burns": [
+          "all but Protection"
+        ],
+        "forced_anchor": 32,
+        "anchor_is": "Protection alone"
+      },
+      {
+        "workshop": "/circle",
+        "vertex": 12,
+        "burns": [
+          "Memory",
+          "Connection"
+        ],
+        "forced_anchor": 51,
+        "resident_mage": null
+      },
+      {
+        "workshop": "hearthold",
+        "vertex": 60,
+        "burns": [
+          "Protection",
+          "Delegation",
+          "Memory",
+          "Connection"
+        ],
+        "forced_anchor": 3,
+        "anchor_is": "Computation + Value, exactly",
+        "resident_mage": null,
+        "developer": "House of Archon",
+        "upstream": "github.com/Flaxscrip/hearthold (v0.11.0, IMPLEMENTED upstream — Warden, Recall on-device RAG, Knowledge Portal, factor-2 step-up ladder). The stack is BUILT; this seat is a held-apart harness ON it, not a build of it.",
+        "target": "the House of Archon dual-agent (sword ⊥ mage) runtime for CONTENT-ADDRESSED IDENTITY: did:cid, agent identity, key custody under delegation. This IS the holon_layer turned on identity — a did:cid CID is a κ-address; resolving it is re-derivation (Law L5); a delegation is a relational edge (VRC). tools/kappa.mjs + tools/holon_audit.mjs are the substrate. Candidate Gaps: did:cid resolution integrity · sword⊥mage identity separation I(id_S;id_M|FP)=0 · key-custody-under-delegation.",
+        "invitation": "../hearthold_mage/SLOT.md — a T4 invitation; the conform gate refusing the unfilled config IS the slot held open",
+        "why_connection_not_value": "V60 burns Connection (the did:cid resolves outward — a public handle to a private root), which is exactly what distinguishes this identity seat from the Curatrix Vault at V57 (which burns Value because a vault holds). Different bit, different vertex, no collision; both may hold a mage.",
+        "distinct_from": "NOT the Curatrix Vault at /vault V57 (Aria Silverhue, the Reliquary — a City provenance shop, different vertex/keeper), and NOT the FLEET arc's 'Hold' phase (FLEET.md line ~179, which maps hearthold to /vault V57 and is now stale — that address is the Vault's; the hearthold HARNESS is V60). This V60 seat is the only hearthold address the House of Archon is invited to fill.",
+        "note": "The hearth burns care, not compute; what it refuses to become is a raw ledger. Seating PROPOSED at invitation, re-derivable from the accepted objective's actual burns."
+      }
     ],
     "keeper_seated": [
-      { "workshop": "/quartermaster", "vertex": 22, "burns": ["Delegation", "Connection", "Computation"], "forced_anchor": 41, "anchor_is": "Protection + Memory + Value — Memora's Chronicle vertex, exactly", "resident_mage": "Skeva 🎒", "precinct": "the Crucible", "instance": "the harness itself", "note": "The harness's own City seat: where the rig is drawn and fitted (a config, not a fork). It keeps no corpus, so its forced anchor is exactly the Chronicle. Founded by the field-guide working, Tome IX Act 8." },
-      { "workshop": "/chancery", "vertex": 27, "burns": ["Delegation", "Memory", "Computation", "Value"], "forced_anchor": 36, "anchor_is": "Protection + Connection", "resident_mage": "Nomia ⚖️", "precinct": "the Crucible", "instance": "lexon_pvm", "note": "The Lexon law-house: a clause read as law and run as code, held apart by the Gap. Vulcana's Forge vertex (V19) plus Memory — law remembers its precedent. Founded by the grammar working, Tome IX Act 8." },
-      { "workshop": "/wellpool", "vertex": 53, "burns": ["Protection", "Delegation", "Connection", "Value"], "forced_anchor": 10, "anchor_is": "Memory + Computation", "resident_mage": "Limnia 🌊", "precinct": "the Waters (the city's first water)", "instance": "privacy_pools_v2_mage", "note": "The mana pools made a place. Deposit entropy, mix trust-work into a credential, draw the anonymity the others' presence buys. INTENT — NOT DEPLOYED. Founded by the circuit working, Tome IX Act 8." }
+      {
+        "workshop": "/quartermaster",
+        "vertex": 22,
+        "burns": [
+          "Delegation",
+          "Connection",
+          "Computation"
+        ],
+        "forced_anchor": 41,
+        "anchor_is": "Protection + Memory + Value — Memora's Chronicle vertex, exactly",
+        "resident_mage": "Skeva 🎒",
+        "precinct": "the Crucible",
+        "instance": "the harness itself",
+        "note": "The harness's own City seat: where the rig is drawn and fitted (a config, not a fork). It keeps no corpus, so its forced anchor is exactly the Chronicle. Founded by the field-guide working, Tome IX Act 8."
+      },
+      {
+        "workshop": "/chancery",
+        "vertex": 27,
+        "burns": [
+          "Delegation",
+          "Memory",
+          "Computation",
+          "Value"
+        ],
+        "forced_anchor": 36,
+        "anchor_is": "Protection + Connection",
+        "resident_mage": "Nomia ⚖️",
+        "precinct": "the Crucible",
+        "instance": "lexon_pvm",
+        "note": "The Lexon law-house: a clause read as law and run as code, held apart by the Gap. Vulcana's Forge vertex (V19) plus Memory — law remembers its precedent. Founded by the grammar working, Tome IX Act 8."
+      },
+      {
+        "workshop": "/wellpool",
+        "vertex": 53,
+        "burns": [
+          "Protection",
+          "Delegation",
+          "Connection",
+          "Value"
+        ],
+        "forced_anchor": 10,
+        "anchor_is": "Memory + Computation",
+        "resident_mage": "Limnia 🌊",
+        "precinct": "the Waters (the city's first water)",
+        "instance": "privacy_pools_v2_mage",
+        "note": "The mana pools made a place. Deposit entropy, mix trust-work into a credential, draw the anonymity the others' presence buys. INTENT — NOT DEPLOYED. Founded by the circuit working, Tome IX Act 8."
+      }
     ],
     "frontier": {
       "named": 21,
@@ -77,31 +279,80 @@
       "note": "Counts are the structure layer's to publish. Treated here as REPORTED, not PROVEN. +3 keeper-seated workshops (Quartermaster's V22, Chancery V27, Wellpool V53) 2026-07-12."
     }
   },
-
   "seats": {
     "$comment": "Persona alignment is a SKILL AFFINITY, not a seat constraint. The separation is carried by the Gap and the algebra, never by the costume. See SEATS.md §2 and ERRATA E-4.",
-    "measure": { "algebra": null, "persona": "assessor", "alignment": "mage" },
-    "propose": { "algebra": "bnot", "persona": "domain-chosen", "alignment": "any" },
-    "hold-apart": { "algebra": "xor", "persona": "topologist", "alignment": "balanced", "why": "its equation term IS C_B(v), betweenness centrality" },
-    "assay": { "algebra": "neg", "persona": "cipher", "alignment": "swordsman" },
-    "critic": { "algebra": null, "persona": "sith", "alignment": "swordsman" },
-    "chronicle": { "algebra": null, "persona": "chronicler", "alignment": "mage", "mandate": "compress the round to one proverb; under RPP the proverb is key material a counterparty must independently reproduce" },
-    "keystone": { "algebra": "succ", "persona": "soulbae", "personaComplement": "soulbis", "isKeystone": true },
-    "corpus_counts": { "swordsman": 15, "mage": 15, "balanced": 12, "total": 42, "carrying_a_seat_field": 0 },
+    "measure": {
+      "algebra": null,
+      "persona": "assessor",
+      "alignment": "mage"
+    },
+    "propose": {
+      "algebra": "bnot",
+      "persona": "domain-chosen",
+      "alignment": "any"
+    },
+    "hold-apart": {
+      "algebra": "xor",
+      "persona": "topologist",
+      "alignment": "balanced",
+      "why": "its equation term IS C_B(v), betweenness centrality"
+    },
+    "assay": {
+      "algebra": "neg",
+      "persona": "cipher",
+      "alignment": "swordsman"
+    },
+    "critic": {
+      "algebra": null,
+      "persona": "sith",
+      "alignment": "swordsman"
+    },
+    "chronicle": {
+      "algebra": null,
+      "persona": "chronicler",
+      "alignment": "mage",
+      "mandate": "compress the round to one proverb; under RPP the proverb is key material a counterparty must independently reproduce"
+    },
+    "keystone": {
+      "algebra": "succ",
+      "persona": "soulbae",
+      "personaComplement": "soulbis",
+      "isKeystone": true
+    },
+    "corpus_counts": {
+      "swordsman": 15,
+      "mage": 15,
+      "balanced": 12,
+      "total": 42,
+      "carrying_a_seat_field": 0
+    },
     "proposed_field": "metadata.harness_seat ∈ {measure,propose,hold-apart,assay,critic,chronicle,keystone,none}; 'none' is the honest default and should be the majority value"
   },
-
   "admission": {
     "$comment": "Corpus additions are gated on two coordinates and a trace. See ADMISSION.md.",
-    "pathways": ["protect", "project", "reflect", "connect"],
-    "tiers": ["PROVEN", "DERIVED", "REPORTED", "OPEN", "MYTH"],
-    "status_labels": ["IMPLEMENTED", "SPEC", "LORE"],
+    "pathways": [
+      "protect",
+      "project",
+      "reflect",
+      "connect"
+    ],
+    "tiers": [
+      "PROVEN",
+      "DERIVED",
+      "REPORTED",
+      "OPEN",
+      "MYTH"
+    ],
+    "status_labels": [
+      "IMPLEMENTED",
+      "SPEC",
+      "LORE"
+    ],
     "why_arithmetic": "Φ_agent(Σ) contains det(Σ). Admitting myth as maths makes one pathway a linear combination of the others; det(Σ) → 0; and by T5 the whole product V(π,t) → 0. Not degraded — zero.",
     "hard_rule": "MYTH lives in chronicles only, never in a method document (GR-2). Myth is admitted gladly, fenced, 3-8 lines, capture-not-develop.",
     "human_door": "Would a Mage from another forge benefit from pointing at this node?",
     "canon_cognate": "the City grimoire's four_conditions_of_update, register_of_invitations, archive_of_unfilled_forms, library_of_joint_authorship"
   },
-
   "the_edge_rule": {
     "statement": "A validated round PROPOSES an edge. Only the counterparty's signature MINTS it.",
     "unsigned_edge": "a candidate, not a result — a MIRAGE at the social layer",
@@ -113,7 +364,6 @@
     "status": "SPEC. No implemented system mints trust-graph edges today.",
     "seal": "A trust that certifies itself is the one you cannot trust."
   },
-
   "holon_layer": {
     "$comment": "κ as state — the content-addressed complement to the_edge_rule. Content edges verify by re-hashing; relational edges ARE the VRC above. Added 2026-07-12 when the κ law was baked into the runtime (HOLONS.md).",
     "holon": "any object carrying a κ-label: κ = 'sha256:' + sha256(canonicalJson(object with the κ field removed)). The City Key / sigil Law L5 — never trusted, only re-derived; the label is excluded from its own preimage so the object carries its own address.",
@@ -125,7 +375,6 @@
     "interoperability": "one κ, computed the same everywhere, is the substrate: a holon minted here re-derives byte-for-byte in spellweb, the model instruments (/star · game42), and hologram-technologies. The site vendors kappa.mjs + HOLONS.md; the corpus stays home. This is the_edge_rule made operational at the content layer.",
     "spec": "HOLONS.md"
   },
-
   "$provenance": {
     "produced_by": "a hand-authored seed, written before universe/harness.config.mjs existed",
     "produced_at": "2026-07-10",
@@ -134,12 +383,58 @@
     "honest_label": "Per GR-5: a candidate is not a result. Round u1 of the universe-builder must run before any claim here is cited as PROVEN. The next writer of this file should be the loop, not a person.",
     "head_signature": "(⚔️⊥⿻⊥🧙)😊"
   },
-
   "known_open_items": {
     "unvalidated_seed": "This map has not passed its own gate. That is the first thing to fix.",
     "hall_rite": "FLEET.md §7 poses the key-custody question; SEATS.md §5 argues RPP settles it. Neither is a verdict. The door is the First Person's.",
     "errata_unfixed": "E-1..E-8 are recorded, not fixed. Each belongs to the corpus that owns it; none may be fixed by a seat here.",
     "harness_seat_field": "Proposed, not added. Adding it to 42 persona files is an admission (pathway: reflect, tier: DERIVED).",
-    "spellweb_gap": "The coherence harness is ready but has no Gap. Build it first — the cheapest proof the skeleton carries into a domain with no metric."
+    "spellweb_gap": "The coherence harness is ready but has no Gap. Build it first — the cheapest proof the skeleton carries into a domain with no metric.",
+    "self_fold_first_fold": "examples/self has not folded: r1 (local models) caught two mirages; r2 (Claude proposers, local prover) is the next lead.",
+    "one_public_repo": "Ruled 2026-09-12: this repository IS the public one; no separate default repo. A clone lands on the origin README, so it must open with the folded newcomer path and push the workshop material below it; make_default.mjs remains the way to hand someone the system alone."
+  },
+  "tree_2026_09_12": {
+    "drivers": [
+      "drivers/stub.mjs",
+      "drivers/ollama.mjs",
+      "drivers/anthropic.mjs",
+      "drivers/run.mjs"
+    ],
+    "examples": {
+      "field-guide": "the spar",
+      "corpus": "the auditor — the adopter's front door",
+      "self": "the harness on its own newcomer path; r1 two mirages, no fold"
+    },
+    "default_distribution": {
+      "emitter": "tools/make_default.mjs",
+      "out": "dist/default-harness (ignored; re-run = re-derived)",
+      "gates": "11 (+1 skipped) re-proven inside the emitted tree",
+      "root_docs": "12,883 words in 14 files",
+      "optional_layers": [
+        "SPECIALISATION.md",
+        "GRAPH.md",
+        "HOLONS.md",
+        "WIKI.md"
+      ]
+    },
+    "newcomer_path": [
+      "templates/README.default.md",
+      "templates/PATHWAYS.default.md"
+    ],
+    "whose_problem": "AGENTS.md § Whose problem this is",
+    "record_layer": "oracle_mage beside this repo (renaming to soul_mage): 3 corpora · 267 claims · untraced 0 · weak 12",
+    "defects_found_by_running": 15,
+    "evocations": {
+      "board": "evocations/README.md",
+      "entries": {
+        "primer": "What Agentprivacy Really Is — 1,998 words, census 64",
+        "whitepaper": "Swordsman ⊥ Mage v6.3 — 13,681 words, census 162",
+        "personas": "42 persona bodies — 53,254 words, census 206"
+      },
+      "doors": [
+        "mages.city/skill.md § Evoke the harness against the corpus",
+        "agentprivacy.org/harness (evocations card)",
+        "agentprivacy.org/begin (route G)"
+      ]
+    }
   }
 }

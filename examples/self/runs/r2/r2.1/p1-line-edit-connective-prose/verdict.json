@@ -1,0 +1,12 @@
+{
+  "leverId": "line-edit-connective-prose",
+  "status": "VALIDATED",
+  "evidence": "The candidate document adheres to the specified structure: it begins with an introduction, outlines the five commands for running the harness, details the loop structure with a table, explains the adoption steps, presents the constitution, and lists the contents of the box. It does not invent any new concepts or point to external resources for further information. The document is clearly intended as a first-time introduction to the harness.",
+  "metric": 1092,
+  "gateResult": "95/95",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r2/r2.1/p1-line-edit-connective-prose",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

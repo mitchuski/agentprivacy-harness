@@ -1,0 +1,38 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-12",
+  "objective": {
+    "metric": "words of artifact/WHITEPAPER.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check.mjs), N/N or MIRAGE",
+    "hardConstraint": "still the whitepaper: every ## section in order, every defined term, every formal expression; nothing invented"
+  },
+  "gate": {
+    "N": 162,
+    "mode": "census",
+    "how": "node tools/check.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 13681,
+    "date": "2026-09-12",
+    "how": "node tools/measure.mjs → metric; census 162/162; artefact from agentprivacy-docs/papers/whitepapers/swordsman_mage_whitepaper_v6_3.md at 031f0b8"
+  },
+  "best": {
+    "metric": 13681,
+    "leverIds": [],
+    "evidence": "the artefact as it stands in the corpus; nothing has beaten the baseline yet"
+  },
+  "history": [
+    {
+      "metric": 13681,
+      "date": "2026-09-12",
+      "lever": null,
+      "note": "baseline — census N=162 drawn from the artefact"
+    }
+  ],
+  "attempts": [],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "below 13681 words with all 162 witnesses and the hard constraint intact",
+    "status": "OPEN"
+  }
+}

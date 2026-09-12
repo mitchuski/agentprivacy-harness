@@ -75,6 +75,7 @@ supposed to find it scored zero while a nine-line check found it instantly.
 | **surface** | the rendered sites and their ceremonies | the build; mirrors never edit | `agentprivacy_master`, the guide, soulbis |
 | **cast** | the 42 personas, their spells and proverbs | the directory tree, not the stale mapping counts | `agentprivacy-skills` |
 | **harness** | the loops that produce results | `conform.mjs` + the gate ladder | this repo, and the instances |
+| **record** | what every lane and suite RECORDED, census-traced to a quote in a file; the harness checked against itself; a private working-group corpus | the trace census (untraced 0 · unquoted 0) + κ per record | `oracle_mage` (→ soul_mage), rendered into the lab's `/harness/` pages |
 
 **The resolution rule, canon-wide:** *when prose and register disagree, the
 register wins and the prose gets an erratum.* Cross-canon disagreements are
@@ -124,6 +125,28 @@ The deeper test, from Promise Theory: the split is warranted when **a single
 agent would have to promise two things it cannot independently control** —
 protection *and* delegation. If one agent can honestly promise the whole job,
 you do not need the pair.
+
+## The tree, as of 2026-09-12
+
+The repository above this seam changed shape, and this map records it so the
+seam still says what it is behind (IMPLEMENTED, every path resolves):
+
+| what | where | status |
+|---|---|---|
+| the drivers — a round runs with no model, a local model, or the Claude API | `drivers/stub.mjs` · `drivers/ollama.mjs` · `drivers/anthropic.mjs` · `drivers/run.mjs` | IMPLEMENTED — stub rounds verify on the spar and on examples/self |
+| the auditor example — your own documents under a zero-dependency census | `examples/corpus/harness.config.mjs` · `examples/corpus/tools/census.mjs` | IMPLEMENTED — the adopter's front door; weak 1 by design |
+| the self-fold — the harness on its own newcomer path | `examples/self/harness.config.mjs` · `examples/self/tools/check_path.mjs` · `examples/self/census.json` | IMPLEMENTED — r1 (gemma3:12b ⊥ gemma3:27b) caught two mirages, no fold; see `examples/self/chronicles/2026-09-12_r1_two-mirages.md` |
+| the default distribution — the system alone, for handing to someone | `tools/make_default.mjs` → `dist/default-harness/` (ignored; re-run = re-derived) | IMPLEMENTED — 11 gates re-proven inside the emitted tree; root docs 12,883 words in 14 files. Ruled 2026-09-12: this repository is the public one; a clone lands here, so the origin README opens with the folded newcomer path |
+| the newcomer path and the pathways back | `templates/README.default.md` · `templates/PATHWAYS.default.md` | IMPLEMENTED — the README is the artefact examples/self folds |
+| the optional layers — this universe's ecosystem, adopted one at a time | `SPECIALISATION.md` · `GRAPH.md` · `HOLONS.md` · `WIKI.md`, shipped behind `optional/` in the default | IMPLEMENTED — none needed to run a round |
+| whose problem an instance is | `AGENTS.md` § Whose problem this is | IMPLEMENTED — origin documents are method, never mandate |
+| the record layer — this fleet's numbers, census-traced, rendered | `~/oracle_mage` (a sibling instance; renaming to soul_mage) | IMPLEMENTED beside this repo, not in it — see the layer table |
+| evocations — the harness called up against the corpus: the mission primer, the whitepaper v6.3, the 42 personas, each with a frozen census, a measured baseline and a frontier | `evocations/README.md` · `evocations/_lib/census.mjs` · `evocations/primer/harness.config.mjs` · `evocations/whitepaper/harness.config.mjs` · `evocations/personas/harness.config.mjs` | IMPLEMENTED — three conform with passing canaries; primer r1 in progress. Doors: the City's skill.md, the lab's /harness/ and /begin/ |
+
+The `universe/` seam itself is unchanged in kind: still an integrity gate, not
+an adversary; `audit.mjs` still reads every claim. What changed is that the
+corpus-shaped adopter no longer needs this directory at all — `examples/corpus`
+is the auditor pattern carried into the default, with no universe behind it.
 
 ## The files here
 

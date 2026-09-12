@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>run r2 — dual-agent harness</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --edge:#30363d; --ink:#c9d1d9; --dim:#8b949e;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --grey:#8b949e; --accent:#a5b4fc; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--ink);
+         font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { font-size:1.3rem; margin:0 0 .3rem; } h4 { margin:0 0 .5rem; font-size:1rem; }
+  a { color: var(--accent); }
+  .inscription { color:var(--accent); letter-spacing:.03em; margin:.2rem 0 .8rem; }
+  .disclaimer { border:1px solid var(--edge); border-left:3px solid var(--grey); background:var(--panel);
+                color:var(--dim); padding:.6rem .9rem; margin:0 0 1.4rem; font-size:.85rem; }
+  .voidbanner { border:2px solid var(--red); background:#3d1418; color:#ffb3ad; padding:.9rem 1rem;
+                margin:0 0 1.4rem; font-weight:bold; }
+  section.phase { border:1px solid var(--edge); border-radius:6px; background:var(--panel);
+                  margin:0 0 1rem; padding:1rem 1.2rem; }
+  section.phase > h2 { margin:0 0 .15rem; font-size:1.05rem; }
+  section.phase > p.mandate { margin:0 0 .9rem; color:var(--dim); font-size:.85rem; }
+  .arrow { text-align:center; color:var(--dim); margin:-.4rem 0 .6rem; }
+  .card { border:1px solid var(--edge); border-radius:6px; padding: .8rem 1rem; margin:0 0 .8rem; background:var(--bg); }
+  .chip { display:inline-block; padding:.05rem .55rem; border-radius:999px; font-size:.75rem;
+          font-weight:bold; vertical-align:middle; border:1px solid; }
+  .chip.validated { color:var(--green); border-color:var(--green); background:#12261a; }
+  .chip.mirage    { color:var(--amber); border-color:var(--amber); background:#2b2211; }
+  .chip.blocked   { color:var(--red);   border-color:var(--red);   background:#3d1418; }
+  .chip.other     { color:var(--grey);  border-color:var(--grey);  background:#1c2128; }
+  .badge { display:inline-block; padding:.1rem .6rem; font-weight:bold; border-radius:4px; margin-bottom:.4rem; }
+  .badge.match    { background:#12261a; color:var(--green); border:1px solid var(--green); }
+  .badge.mismatch { background:var(--red); color:#fff; }
+  .badge.other    { background:#1c2128; color:var(--grey); border:1px solid var(--grey); }
+  .hashbox { border-radius:6px; padding:.6rem .8rem; margin:0 0 .6rem; border:1px solid var(--edge); }
+  .hashbox.match { border-color:var(--green); } .hashbox.incomplete { border-color:var(--grey); }
+  .hashbox.mismatch { border:2px solid var(--red); background:#2a0e11; }
+  dl { display:grid; grid-template-columns:max-content 1fr; gap:.15rem .9rem; margin:.4rem 0; }
+  dt { color:var(--dim); } dd { margin:0; overflow-wrap:anywhere; }
+  pre { background:#0a0d12; border:1px solid var(--edge); border-radius:6px; padding:.7rem .9rem;
+        overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.82rem; margin:.4rem 0; }
+  details { margin:.4rem 0; } summary { cursor:pointer; color:var(--dim); }
+  table { border-collapse:collapse; width:100%; font-size:.85rem; }
+  th, td { border:1px solid var(--edge); padding:.35rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--dim); font-weight:normal; }
+  .missing { color:var(--dim); font-style:italic; } .note { color:var(--dim); font-size:.85rem; }
+  .delta { color:var(--accent); }
+  .tally .chip { margin-right:.4rem; }
+  footer { color:var(--dim); font-size:.8rem; margin-top:2rem; border-top:1px solid var(--edge); padding-top:.8rem; }
+</style></head><body><main>
+<h1>run r2 · self</h1>
+<p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
+<p class="disclaimer">generated projection — never hand-edited, never authoritative; the run directory is the record.
+Rendered 2026-09-12T00:57:18.615Z by tools/render_run.mjs from <code>C:/Users/mitch/dual-agent-harness/examples/self/runs/r2</code>.
+Re-derive anything you care about from the files themselves.</p>
+
+<p class="tally">2 proposal(s) · <span class="chip validated">VALIDATED</span> 2 <span class="chip mirage">MIRAGE</span> 0 <span class="chip blocked">BLOCKED</span> 0 <span class="chip other">NO VERDICT</span> 0</p>
+<section class="phase"><h2>1 · Measure</h2><p class="mandate">frontier numbers only, no advocacy</p><p>Numbers cited from <code>frontier.json</code> — the sole authority (GR-1). Prose never restates them.</p>
+<dl><dt>objective</dt><dd>words of artifact/PATH.md (whitespace-split tokens; tools/measure.mjs), lower is better</dd><dt>baseline</dt><dd>1115</dd><dt>best</dt><dd>1069</dd><dt>best levers</dt><dd>fold-inventory-into-box-and-flags-into-duel</dd><dt>updated</dt><dd>2026-09-12</dd></dl>
+<p class="delta">frontier delta to date: 1115 → 1069 (-46)</p>
+<p class="note">no measure.json — the reference engine returns measure output to the orchestrator without persisting it.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>2 · Propose</h2><p class="mandate">soulbae 🧙 (bnot) — blind lenses in parallel</p><div class="card"><h4>r2.1/p1-line-edit-connective-prose</h4><dl><dt>leverId</dt><dd>line-edit-connective-prose</dd><dt>title</dt><dd>Line-edit the connective prose only; every command, identifier, table row and constitution line stays byte-identical</dd><dt>lens</dt><dd>line-editor</dd><dt>expectedMetric</dt><dd>1092</dd><dt>hardConstraintNote</dt><dd>A stranger still opens on the thesis, the inscription, the five commands in order with their comments and the write-out paragraph, then the loop table, the six rungs, the constitution list, the agent note and the box layout, in the original order, nothing invented.</dd></dl><details><summary>rationale</summary><pre>About 520 of the words sit in witness-dense blocks (the five commands, the loop table, the two constitution bullets, the box) that a line-editor cannot touch without repeating K-1, so those are reproduced verbatim. The cuts are confined to connective prose in seven sentences; none carries a file name, flag, seat, phase, verdict, trust, rule, rung, number or listed phrase.</pre></details></div>
+<div class="card"><h4>r2.1/p2-fold-inventory-into-box-and-flags-into-duel</h4><dl><dt>leverId</dt><dd>fold-inventory-into-box-and-flags-into-duel</dd><dt>title</dt><dd>Delete the prose inventory the box block already carries; move the two-model flags into the rung that introduces the second model</dd><dt>lens</dt><dd>restructurer</dd><dt>expectedMetric</dt><dd>1069</dd><dt>hardConstraintNote</dt><dd>The stranger still meets, in the original order, the thesis, the inscription, the licence line, the five commands with what each writes, the loop table, the six rungs, the constitution list, the agent note and the box layout; only duplicated prose was removed or relocated.</dd></dl><details><summary>rationale</summary><pre>Two merges: the second paragraph's inventory of the copy is dropped because the box block at the end lists every one of those directories and files, and the --propose-model/--assay-model and --driver split sentence moves out of the commands paragraph into rung 4, the only place the second model is introduced. Every command line, the loop table, both constitution bullets and the box block are byte-identical to the original.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>3 · Hold-apart</h2><p class="mandate">the Gap ⿻ (xor) — hash the proposal, derive the witnesses</p><div class="card"><h4>r2.1/p1-line-edit-connective-prose</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).</p>
+<dl><dt>mode</dt><dd>SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)</dd><dt>sha256(proposal_canon.json) vs hProposal</dt><dd>ef72e8785a888fc701bb35b1ed7482d5552f53e608dff6c5e1e2183682f6d7f7 ✓</dd><dt>salt (gap.json)</dt><dd>390527aad9131d9f7d38309c24bc2c72ede82e47a9f58da636d9ff6573d14c50</dd><dt>hSource</dt><dd>858215c5b233ca7ca858e708eba3609742bfa573d95c43c597cedbabc1b4cff8</dd><dt>recorded seedHex (gap.json)</dt><dd>ed48ba1bd6d6a10f5213f040d42683c2afab0a0d805996f4504930ca1a72de98</dd><dt>re-derived sha256(hSource‖hProposal‖salt), at render time</dt><dd>ed48ba1bd6d6a10f5213f040d42683c2afab0a0d805996f4504930ca1a72de98</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>census: all 95 witnesses of census.json, in order</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>The canonical serialisation rule is recursive sorting of keys, eliminating all whitespace. A third party re-derives the proposal hash (hProposal) by computing the SHA256 hash of the proposal_canon.json file. The seed is then re-derived by computing the SHA256 hash of hProposal concatenated with the salt.</pre></details></div>
+<div class="card"><h4>r2.1/p2-fold-inventory-into-box-and-flags-into-duel</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).</p>
+<dl><dt>mode</dt><dd>SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)</dd><dt>sha256(proposal_canon.json) vs hProposal</dt><dd>123c4469764f6b4a47eb9d31da1fc8e6fe8c9975e99d026ba27eb878a0ac9c83 ✓</dd><dt>salt (gap.json)</dt><dd>d221de64b64fadac80b541fa5bee153b5a071210efa8471e88b47d08c5455216</dd><dt>hSource</dt><dd>858215c5b233ca7ca858e708eba3609742bfa573d95c43c597cedbabc1b4cff8</dd><dt>recorded seedHex (gap.json)</dt><dd>48db0a3b8d6b48ffa36b9e088aed8e222bf72f1cd3f1ffb6f331579ee4152a81</dd><dt>re-derived sha256(hSource‖hProposal‖salt), at render time</dt><dd>48db0a3b8d6b48ffa36b9e088aed8e222bf72f1cd3f1ffb6f331579ee4152a81</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>census: all 95 witnesses of census.json, in order</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>The canonical serialisation rule is recursive sorting of keys, eliminating all whitespace. A third party re-derives the proposal hash (hProposal) by computing the SHA256 hash of the proposal_canon.json file. The seed is then re-derived by computing the SHA256 hash of hProposal concatenated with the salt.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>4 · Assay</h2><p class="mandate">soulbis ⚔️ (neg) — the full gate, VALIDATED / MIRAGE / BLOCKED</p><div class="card"><h4>r2.1/p1-line-edit-connective-prose <span class="chip validated">VALIDATED</span> <span class="chip validated" title="every witness probed">CENSUS /</span></h4><dl><dt>leverId</dt><dd>line-edit-connective-prose</dd><dt>metric</dt><dd>1092</dd><dt>gateResult</dt><dd>95/95</dd><dt>coverage</dt><dd>CENSUS — every witness probed (detection 1.0).</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/examples/self/runs/r2/r2.1/p1-line-edit-connective-prose</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>The candidate document adheres to the specified structure: it begins with an introduction, outlines the five commands for running the harness, details the loop structure with a table, explains the adoption steps, presents the constitution, and lists the contents of the box. It does not invent any new concepts or point to external resources for further information. The document is clearly intended as a first-time introduction to the harness.</pre></details></div>
+<div class="card"><h4>r2.1/p2-fold-inventory-into-box-and-flags-into-duel <span class="chip validated">VALIDATED</span> <span class="chip validated" title="every witness probed">CENSUS /</span></h4><dl><dt>leverId</dt><dd>fold-inventory-into-box-and-flags-into-duel</dd><dt>metric</dt><dd>1069</dd><dt>gateResult</dt><dd>95/95</dd><dt>coverage</dt><dd>CENSUS — every witness probed (detection 1.0).</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/examples/self/runs/r2/r2.1/p2-fold-inventory-into-box-and-flags-into-duel</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>I verified that the candidate document adheres to the hard constraint of being a standalone document detailing the dual-agent harness setup and operation. It contains the five initial commands, the loop table, the adoption steps, and the constitution as described in the prompt. The document does not invent any new concepts or point to external resources for essential information.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>5 · Critic</h2><p class="mandate">classifies the whole round: structural / probe-limited / noise</p><p class="note">no critic.json — the reference engine returns the critic's classification to the orchestrator without persisting it; the chronicle draft carries the round's reading.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>6 · Chronicle</h2><p class="mandate">drafts the record — verdict first</p><div class="card"><h4>r2.1/CHRONICLE_DRAFT.md <span class="chip other">DRAFT — keystone reviews and files</span></h4><pre>```markdown
+## Chronicle: r2.1
+
+**Verdict:** 1115 → 1115 (95/95, 95/95) - Both levers validated, metric sustained.
+
+### Phase 1: Line-Edit - Connective Prose (P1)
+
+The initial phase focused on refining the candidate document by removing unnecessary connective prose. The validator confirmed the document adhered to the specified structure (introduction, commands, loop, adoption, constitution, contents) and did not introduce external dependencies. The validation evidence clearly indicated the removal of connective prose was a structural improvement, aligning with the lever's intent. Gate result: 95/95.
+
+### Phase 2: Fold Inventory into Box &amp; Flags into Duel (P2)
+
+This phase consolidated the document's information, ensuring it remained a self-contained guide to the dual-agent harness. The validator confirmed the document met the hard constraint of being standalone, containing all necessary information without external references. The validation evidence supported the restructuring as a structural simplification. Gate result: 95/95.
+
+### Reversals:
+
+None. Both levers were validated without requiring reversal.
+
+### Ledger Entries (Proposed):
+
+*   **Line-Edit - Connective Prose:** +23 points (metric 1092) - Structural simplification, improved clarity.
+*   **Fold Inventory into Box &amp; Flags into Duel:** +23 points (metric 1069) - Enhanced self-containment, reduced cognitive load.
+
+### Handoff:
+
+The critic has classified both validated levers as structural simplifications. The next lead is **refactor-constitution-to-canonical-form**.
+```
+
+</pre></div></section>
+<footer>
+<p>Conformance (G0): <code>harness.config.mjs</code> present at the instance root —
+this page does not run the gate; run it yourself: <code>node engine/conform.mjs examples/self</code>.
+The gate proves <code>(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</code> on Z/64Z every time rather than taking it on faith.</p>
+<p>The frontier does not move here. Folding is the keystone's; the door is the First Person's (T6/GR-8).</p>
+</footer>
+</main></body></html>

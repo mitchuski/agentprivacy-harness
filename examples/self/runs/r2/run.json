@@ -1,0 +1,45 @@
+{
+  "name": "self",
+  "runId": "r2",
+  "driver": "ollama",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 2,
+    "MIRAGE": 0,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "line-edit-connective-prose",
+      "status": "VALIDATED",
+      "evidence": "The candidate document adheres to the specified structure: it begins with an introduction, outlines the five commands for running the harness, details the loop structure with a table, explains the adoption steps, presents the constitution, and lists the contents of the box. It does not invent any new concepts or point to external resources for further information. The document is clearly intended as a first-time introduction to the harness.",
+      "metric": 1092,
+      "gateResult": "95/95",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r2/r2.1/p1-line-edit-connective-prose"
+    },
+    {
+      "leverId": "fold-inventory-into-box-and-flags-into-duel",
+      "status": "VALIDATED",
+      "evidence": "I verified that the candidate document adheres to the hard constraint of being a standalone document detailing the dual-agent harness setup and operation. It contains the five initial commands, the loop table, the adoption steps, and the constitution as described in the prompt. The document does not invent any new concepts or point to external resources for essential information.",
+      "metric": 1069,
+      "gateResult": "95/95",
+      "failingCheck": "",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r2/r2.1/p2-fold-inventory-into-box-and-flags-into-duel"
+    }
+  ],
+  "models": {
+    "proposer": "claude-opus-5 (Claude Code subagents, one per lens)",
+    "prover": "gemma3:27b"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1115,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "858215c5b233ca7ca858e708eba3609742bfa573d95c43c597cedbabc1b4cff8",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)"
+}

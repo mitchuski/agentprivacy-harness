@@ -1,0 +1,13 @@
+{
+  "leverId": "line-edit-body-prose",
+  "status": "VALIDATED",
+  "evidence": "The document adheres to the specified structural requirements (thesis before architecture, proof before invitation, appendix present with all listed items). The word count is within the acceptable range. The content appears consistent with the project's stated goals and principles.",
+  "metric": 1875,
+  "gateResult": "64/64",
+  "failingCheck": "",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1/r1.1/p1-line-edit-body-prose",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

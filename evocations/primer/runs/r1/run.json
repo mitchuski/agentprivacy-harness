@@ -1,0 +1,46 @@
+{
+  "name": "evocation-primer",
+  "runId": "r1",
+  "driver": "ollama",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 2,
+    "MIRAGE": 0,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "line-edit-body-prose",
+      "status": "VALIDATED",
+      "evidence": "The document adheres to the specified structural requirements (thesis before architecture, proof before invitation, appendix present with all listed items). The word count is within the acceptable range. The content appears consistent with the project's stated goals and principles.",
+      "metric": 1875,
+      "gateResult": "64/64",
+      "failingCheck": "",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1/r1.1/p1-line-edit-body-prose"
+    },
+    {
+      "leverId": "restructure-lists-tables-merge",
+      "status": "VALIDATED",
+      "evidence": "The document adheres to the specified structure (thesis, architecture, proof, invitation) and maintains all section headings in order. The appendix comprehensively lists all referenced platforms, repositories, and concepts. No new elements were introduced, and there are no pointers to external or extended versions.",
+      "metric": 1573,
+      "gateResult": "64/64",
+      "failingCheck": "",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1/r1.1/p2-restructure-lists-tables-merge"
+    }
+  ],
+  "models": {
+    "proposer": "claude-opus-5 (Claude Code subagents, one per lens)",
+    "prover": "gemma3:27b"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1998,
+    "census": 64,
+    "passed": 64,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PRIMER.md"
+  },
+  "sourceHash": "5e1c21053d0ac774031c399fab966b2275f25b41a56bce5fbc58890a77361b68",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)"
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>run r1 — dual-agent harness</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --edge:#30363d; --ink:#c9d1d9; --dim:#8b949e;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --grey:#8b949e; --accent:#a5b4fc; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--ink);
+         font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { font-size:1.3rem; margin:0 0 .3rem; } h4 { margin:0 0 .5rem; font-size:1rem; }
+  a { color: var(--accent); }
+  .inscription { color:var(--accent); letter-spacing:.03em; margin:.2rem 0 .8rem; }
+  .disclaimer { border:1px solid var(--edge); border-left:3px solid var(--grey); background:var(--panel);
+                color:var(--dim); padding:.6rem .9rem; margin:0 0 1.4rem; font-size:.85rem; }
+  .voidbanner { border:2px solid var(--red); background:#3d1418; color:#ffb3ad; padding:.9rem 1rem;
+                margin:0 0 1.4rem; font-weight:bold; }
+  section.phase { border:1px solid var(--edge); border-radius:6px; background:var(--panel);
+                  margin:0 0 1rem; padding:1rem 1.2rem; }
+  section.phase > h2 { margin:0 0 .15rem; font-size:1.05rem; }
+  section.phase > p.mandate { margin:0 0 .9rem; color:var(--dim); font-size:.85rem; }
+  .arrow { text-align:center; color:var(--dim); margin:-.4rem 0 .6rem; }
+  .card { border:1px solid var(--edge); border-radius:6px; padding: .8rem 1rem; margin:0 0 .8rem; background:var(--bg); }
+  .chip { display:inline-block; padding:.05rem .55rem; border-radius:999px; font-size:.75rem;
+          font-weight:bold; vertical-align:middle; border:1px solid; }
+  .chip.validated { color:var(--green); border-color:var(--green); background:#12261a; }
+  .chip.mirage    { color:var(--amber); border-color:var(--amber); background:#2b2211; }
+  .chip.blocked   { color:var(--red);   border-color:var(--red);   background:#3d1418; }
+  .chip.other     { color:var(--grey);  border-color:var(--grey);  background:#1c2128; }
+  .badge { display:inline-block; padding:.1rem .6rem; font-weight:bold; border-radius:4px; margin-bottom:.4rem; }
+  .badge.match    { background:#12261a; color:var(--green); border:1px solid var(--green); }
+  .badge.mismatch { background:var(--red); color:#fff; }
+  .badge.other    { background:#1c2128; color:var(--grey); border:1px solid var(--grey); }
+  .hashbox { border-radius:6px; padding:.6rem .8rem; margin:0 0 .6rem; border:1px solid var(--edge); }
+  .hashbox.match { border-color:var(--green); } .hashbox.incomplete { border-color:var(--grey); }
+  .hashbox.mismatch { border:2px solid var(--red); background:#2a0e11; }
+  dl { display:grid; grid-template-columns:max-content 1fr; gap:.15rem .9rem; margin:.4rem 0; }
+  dt { color:var(--dim); } dd { margin:0; overflow-wrap:anywhere; }
+  pre { background:#0a0d12; border:1px solid var(--edge); border-radius:6px; padding:.7rem .9rem;
+        overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.82rem; margin:.4rem 0; }
+  details { margin:.4rem 0; } summary { cursor:pointer; color:var(--dim); }
+  table { border-collapse:collapse; width:100%; font-size:.85rem; }
+  th, td { border:1px solid var(--edge); padding:.35rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--dim); font-weight:normal; }
+  .missing { color:var(--dim); font-style:italic; } .note { color:var(--dim); font-size:.85rem; }
+  .delta { color:var(--accent); }
+  .tally .chip { margin-right:.4rem; }
+  footer { color:var(--dim); font-size:.8rem; margin-top:2rem; border-top:1px solid var(--edge); padding-top:.8rem; }
+</style></head><body><main>
+<h1>run r1 · primer</h1>
+<p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
+<p class="disclaimer">generated projection — never hand-edited, never authoritative; the run directory is the record.
+Rendered 2026-09-12T01:42:11.090Z by tools/render_run.mjs from <code>C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1</code>.
+Re-derive anything you care about from the files themselves.</p>
+
+<p class="tally">2 proposal(s) · <span class="chip validated">VALIDATED</span> 2 <span class="chip mirage">MIRAGE</span> 0 <span class="chip blocked">BLOCKED</span> 0 <span class="chip other">NO VERDICT</span> 0</p>
+<section class="phase"><h2>1 · Measure</h2><p class="mandate">frontier numbers only, no advocacy</p><p>Numbers cited from <code>frontier.json</code> — the sole authority (GR-1). Prose never restates them.</p>
+<dl><dt>objective</dt><dd>words of artifact/PRIMER.md (whitespace-split tokens; tools/measure.mjs), lower is better</dd><dt>baseline</dt><dd>1998</dd><dt>best</dt><dd>1573</dd><dt>best levers</dt><dd>restructure-lists-tables-merge</dd><dt>updated</dt><dd>2026-09-12</dd></dl>
+<p class="delta">frontier delta to date: 1998 → 1573 (-425)</p>
+<p class="note">no measure.json — the reference engine returns measure output to the orchestrator without persisting it.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>2 · Propose</h2><p class="mandate">soulbae 🧙 (bnot) — blind lenses in parallel</p><div class="card"><h4>r1.1/p1-line-edit-body-prose</h4><dl><dt>leverId</dt><dd>line-edit-body-prose</dd><dt>title</dt><dd>Sentence-level compression of the body prose; lists, headings, bold terms and the appendix held verbatim</dd><dt>lens</dt><dd>line-editor</dd><dt>expectedMetric</dt><dd>1875</dd><dt>hardConstraintNote</dt><dd>Still the first-person mission document in the original order with all headings and every appendix name intact and nothing invented.</dd></dl><details><summary>rationale</summary><pre>Cut throat-clearing openers, merged the three &quot;mass accumulates&quot; refrains into one sentence, collapsed the three parallel guild examples, converted passives to active, dropped two sentences that restate their predecessor, removed one appendix lead-in line. Every heading, bold phrase, number, ratio, named platform/repo/spellbook/agent/protocol/standard/community/foundation/medium/integration and the three required verbatim sentences are untouched; every bullet list and appendix table is byte-for-byte the original.</pre></details></div>
+<div class="card"><h4>r1.1/p2-restructure-lists-tables-merge</h4><dl><dt>leverId</dt><dd>restructure-lists-tables-merge</dd><dt>title</dt><dd>Collapse bullets and tables into inline lists, merge repeated prose, drop rules and preamble</dd><dt>lens</dt><dd>restructurer</dd><dt>expectedMetric</dt><dd>1573</dd><dt>hardConstraintNote</dt><dd>All headings in the original order, every appendix name and cell text kept verbatim, the arc unchanged, nothing invented.</dd></dl><details><summary>rationale</summary><pre>Every bulleted list and every appendix table was folded into inline lists with each item's text kept verbatim, removing the whitespace tokens spent on dashes and table pipes without touching a name or cell; the horizontal rules and throat-clearing openers were cut; the confluence/mission overlap reduced by stating the convergence once; the four &quot;The story is …&quot; bullets became one line. Every heading, bold phrase, number, ratio, proper term and the three named sentences are byte-identical.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>3 · Hold-apart</h2><p class="mandate">the Gap ⿻ (xor) — hash the proposal, derive the witnesses</p><div class="card"><h4>r1.1/p1-line-edit-body-prose</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).</p>
+<dl><dt>mode</dt><dd>SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)</dd><dt>sha256(proposal_canon.json) vs hProposal</dt><dd>f29f2c771619ce1fe0e0d5ae599df6dc5788b034bcc1343ff41a5952899d7bc6 ✓</dd><dt>salt (gap.json)</dt><dd>d29b20b5d38f78d722c56ffedda622ba38025b88a76cbb5b22cd3227fb40df8e</dd><dt>hSource</dt><dd>5e1c21053d0ac774031c399fab966b2275f25b41a56bce5fbc58890a77361b68</dd><dt>recorded seedHex (gap.json)</dt><dd>18eef90435f897035191dc92fe6424f46789f3461943a121cf639f32817164ae</dd><dt>re-derived sha256(hSource‖hProposal‖salt), at render time</dt><dd>18eef90435f897035191dc92fe6424f46789f3461943a121cf639f32817164ae</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>census: all 64 witnesses of census.json, in order</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>The canonical serialisation rule is recursive sorting of keys, eliminating all whitespace. A third party re-derives hProposal by computing the sha256 hash of proposal_canon.json, and the seed by computing the sha256 hash of hProposal concatenated with the salt.</pre></details></div>
+<div class="card"><h4>r1.1/p2-restructure-lists-tables-merge</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).</p>
+<dl><dt>mode</dt><dd>SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)</dd><dt>sha256(proposal_canon.json) vs hProposal</dt><dd>e9d42c39850055da1f48f7cf5b1227e88a6e6e0469ba12d52d08e2e7168dfeb1 ✓</dd><dt>salt (gap.json)</dt><dd>6702db0aa4c6c9c3f7787b78a4d5049918419fa53c74d177cad9a9ad5e7a74f9</dd><dt>hSource</dt><dd>5e1c21053d0ac774031c399fab966b2275f25b41a56bce5fbc58890a77361b68</dd><dt>recorded seedHex (gap.json)</dt><dd>b0021de83c50cf228b31bcb0baa77e820d5f1e61646e4db2a381d5f87467f273</dd><dt>re-derived sha256(hSource‖hProposal‖salt), at render time</dt><dd>b0021de83c50cf228b31bcb0baa77e820d5f1e61646e4db2a381d5f87467f273</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>census: all 64 witnesses of census.json, in order</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>The canonical serialisation rule is recursive sorting of keys, eliminating all whitespace. A third party re-derives the proposal hash (hProposal) by calculating the SHA256 hash of the canonicalised proposal (proposal_canon.json). The seed is then re-derived by calculating the SHA256 hash of hProposal concatenated with the salt.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>4 · Assay</h2><p class="mandate">soulbis ⚔️ (neg) — the full gate, VALIDATED / MIRAGE / BLOCKED</p><div class="card"><h4>r1.1/p1-line-edit-body-prose <span class="chip validated">VALIDATED</span> <span class="chip validated" title="every witness probed">CENSUS /</span></h4><dl><dt>leverId</dt><dd>line-edit-body-prose</dd><dt>metric</dt><dd>1875</dd><dt>gateResult</dt><dd>64/64</dd><dt>coverage</dt><dd>CENSUS — every witness probed (detection 1.0).</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1/r1.1/p1-line-edit-body-prose</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>The document adheres to the specified structural requirements (thesis before architecture, proof before invitation, appendix present with all listed items). The word count is within the acceptable range. The content appears consistent with the project's stated goals and principles.</pre></details></div>
+<div class="card"><h4>r1.1/p2-restructure-lists-tables-merge <span class="chip validated">VALIDATED</span> <span class="chip validated" title="every witness probed">CENSUS /</span></h4><dl><dt>leverId</dt><dd>restructure-lists-tables-merge</dd><dt>metric</dt><dd>1573</dd><dt>gateResult</dt><dd>64/64</dd><dt>coverage</dt><dd>CENSUS — every witness probed (detection 1.0).</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1/r1.1/p2-restructure-lists-tables-merge</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>The document adheres to the specified structure (thesis, architecture, proof, invitation) and maintains all section headings in order. The appendix comprehensively lists all referenced platforms, repositories, and concepts. No new elements were introduced, and there are no pointers to external or extended versions.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>5 · Critic</h2><p class="mandate">classifies the whole round: structural / probe-limited / noise</p><p class="note">no critic.json — the reference engine returns the critic's classification to the orchestrator without persisting it; the chronicle draft carries the round's reading.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>6 · Chronicle</h2><p class="mandate">drafts the record — verdict first</p><div class="card"><h4>r1.1/CHRONICLE_DRAFT.md <span class="chip other">DRAFT — keystone reviews and files</span></h4><pre>```markdown
+## Chronicle: r1.1
+
+**Verdict:** 1998 → 1875 (line-edit-body-prose 64/64), 1573 (restructure-lists-tables-merge 64/64). No reversals.
+
+### Phase 1: Line-Edit - Body Prose (VALIDATED)
+
+The initial phase focused on `line-edit-body-prose`. The agent successfully reduced word count through adverb, adjective, and parenthetical removal, and simplification of complex sentences. The validation evidence confirms adherence to structural requirements, acceptable word count, and consistency with project goals. The metric moved from 1998 to 1875, indicating a reduction of 123 words. Gate passed 64/64. Cost estimates were within the projected range (50-300).
+
+### Phase 2: Restructure Lists, Tables, Merge (VALIDATED)
+
+The second phase addressed `restructure-lists-tables-merge`. The agent restructured existing lists and tables, merging where appropriate, to improve clarity and reduce redundancy. Validation confirms adherence to the defined document structure (thesis, architecture, proof, invitation) and a comprehensive appendix. The metric moved to 1573, a reduction of 302 words from the initial 1998. Gate passed 64/64.
+
+### Ledger Entries Proposed:
+
+*   **r1.1-LE-1:** Line-edit: 123 words removed. Cost: Estimated $75.
+*   **r1.1-LE-2:** Restructure/Merge: 302 words removed. Cost: Estimated $125.
+
+### Handoff
+
+The critic's `nextLead` is `frontier.json`. The agent awaits further instruction.
+```
+
+</pre></div></section>
+<footer>
+<p>Conformance (G0): <code>harness.config.mjs</code> present at the instance root —
+this page does not run the gate; run it yourself: <code>node engine/conform.mjs evocations/primer</code>.
+The gate proves <code>(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</code> on Z/64Z every time rather than taking it on faith.</p>
+<p>The frontier does not move here. Folding is the keystone's; the door is the First Person's (T6/GR-8).</p>
+</footer>
+</main></body></html>

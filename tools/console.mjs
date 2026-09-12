@@ -303,7 +303,7 @@ function cachedGate(key, stamp, thunk) {
 
 // ---- doc allowlist (literal names; no path resolution of user input) --------
 const DOCS = {
-  'README.md': 'README.md', 'TRUSTS.md': 'TRUSTS.md', 'GROUND_RULES.md': 'GROUND_RULES.md',
+  'ENTRY.md': 'ENTRY.md', 'README.md': 'README.md', 'TRUSTS.md': 'TRUSTS.md', 'GROUND_RULES.md': 'GROUND_RULES.md',
   'ADOPTION.md': 'ADOPTION.md', 'SEAT_CONTRACT.md': 'SEAT_CONTRACT.md',
   'seats/measure.md': 'seats/measure.md', 'seats/soulbae-propose.md': 'seats/soulbae-propose.md',
   'seats/gap-hold-apart.md': 'seats/gap-hold-apart.md', 'seats/soulbis-assay.md': 'seats/soulbis-assay.md',

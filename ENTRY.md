@@ -60,15 +60,23 @@ Complete the generated, gitignored `connection.local.json`: purpose, source
 revision, allowed inputs, runtime and authorization. This is a planning record,
 not a sandbox or adapter. The runner does not ingest that repository automatically.
 Wire explicit authorized inputs and checks into the configuration/measurement
-adapter. Do not send an entire repository to a provider by default.
+adapter: a counting rule that is code lives at `<instance>/tools/measure.mjs`;
+the runner executes it before each round and hands its JSON to every prompt as
+`ctx.args.measured`. A config `sourceFile` is resolved relative to the instance
+and its sha256 binds every seed. Do not send an entire repository to a provider
+by default. Every model call carries GROUND_RULES.md, TRUSTS.md, the seat card,
+the instance's frontier.json and the seat prompt, so whatever those name
+reaches the provider; the adapter's JSON is stored in `runs/<id>/run.json`.
 
 Define the metric (what improves), gate (what passes), hard constraint, known-good
-baseline and frozen witness population. The metric is not the Gap. The Gap derives
+baseline and frozen witness population — ADOPTION.md Part II is the map for
+these five answers, the Gap first. The metric is not the Gap. The Gap derives
 independent verification from the committed proposal and a run secret. Use a
 census where the whole population is practical to check.
 
 Fill every config TODO and measure the baseline into frontier.json. A blank
-scaffold is expected to fail conformance. Then:
+scaffold is expected to fail conformance; the runner and the bundler refuse it
+too. Then:
 
 ```bash
 node engine/conform.mjs ../my-harness
@@ -76,15 +84,25 @@ node drivers/run.mjs --instance ../my-harness --driver stub --run smoke
 node tools/verify_run.mjs ../my-harness smoke
 ```
 
-The stub checks plumbing only. For a real, configured local Ollama round:
+The stub checks plumbing only. `verify_run` re-derives every seed and draw from
+the saved bytes and checks a VALIDATED for full-pass form; it cannot show that
+the salt came from an unseen secret or that gate evidence was executed. It and
+`conform` import the instance config; only the console does not. For a real,
+configured local Ollama round:
 
 ```bash
 node drivers/run.mjs --instance ../my-harness --driver ollama --propose-model MODEL_A --assay-model MODEL_B --run r1
 ```
 
 Seat-specific CLI flags override saved seat models; saved models override
-`--model`. The runner prints the pair. Different names alone do not prove
-independence. API drivers exchange text/JSON, without shell or filesystem tools.
+`--model`. The runner prints the pair. Drivers: `stub` (no model), `ollama` (a
+running Ollama server with the named models already pulled; nothing is
+downloaded), `anthropic` (ANTHROPIC_API_KEY), `openai` (any OpenAI-compatible
+endpoint: OPENAI_BASE_URL, OPENAI_API_KEY) and `multi`, where each seat names
+its provider as `provider:model`, for example
+`--propose-model anthropic:claude-opus-5 --assay-model ollama:gemma3:27b`; the
+proposer's provider holds the propose seats and the prover's holds the rest.
+Different names alone do not prove independence. API drivers exchange text/JSON, without shell or filesystem tools.
 Missing executable evidence means BLOCKED, never imagined. A measurement adapter
 executes local code. Provider calls can disclose inputs and incur costs; establish
 these bounds before selecting a driver.

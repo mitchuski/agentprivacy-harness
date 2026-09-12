@@ -20,8 +20,12 @@ const spar = readJson(join(root, 'examples', 'field-guide', 'frontier.json'))
 const farm = existsSync(join(root, 'examples', 'wiki-farm'))
 const universe = existsSync(join(root, 'universe'))
 const instances = []
+// same skip rule as tools/check.mjs: templates/ carries a harness.config.mjs
+// but is the blank a newcomer copies, not an instance nearby.
+const SKIP = new Set(['node_modules', '.git', 'retired', 'templates'])
 for (const base of [root]) {
   try { for (const e of readdirSync(base)) {
+    if (SKIP.has(e)) continue
     const p = join(base, e)
     try { if (statSync(p).isDirectory() && existsSync(join(p, 'harness.config.mjs')) && p !== root) instances.push(p) } catch {}
   } } catch {}

@@ -51,8 +51,10 @@ a source-cited handoff; it does not claim a local run.
    constraint is validity no score can override.
 3. **Give the proposer at least two blind lenses.** For a product objective,
    one lens per factor, plus a cliff-watcher in the prover.
-4. **Copy `templates/harness.config.mjs`**, fill every TODO, bundle it with
-   `tools/bundle.mjs`, run it.
+4. **Scaffold with `node tools/new_instance.mjs ../my-harness my-harness`**,
+   fill every TODO, then `node drivers/run.mjs --instance ../my-harness
+   --driver stub --run smoke` and `node tools/verify_run.mjs ../my-harness
+   smoke`; bundle with `tools/bundle.mjs` only for a Workflow runtime.
 5. **Fold as the keystone**, in the main session, with `conform.mjs` green
    before and after.
 

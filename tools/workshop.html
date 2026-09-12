@@ -179,7 +179,7 @@
   var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ animStart = null; drawFrontier(); }, 120); });
 
   function showFeed(f, id){
-    feed = f; var mc = f.movingCeiling, folds = Math.max(0, (mc.series || []).length - 1);
+    feed = f; var mc = f.movingCeiling, folds = foldsOf(mc);
     document.getElementById('istat').innerHTML = '<span>baseline <b>' + fmt(mc.baseline) + '</b></span><span>best <b>' + fmt(mc.best) + '</b></span><span>R(t) <b>' + (mc.ratioNow != null ? mc.ratioNow : '—') + '</b></span><span>folds <b>' + folds + '</b></span>' + (mc.open ? '<span>' + esc(mc.open.id) + ' · ' + esc(mc.open.statement || mc.open.status || '').slice(0, 110) + '</span>' : '');
     document.getElementById('ifoot').textContent = folds === 0 ? 'No fold has run here yet.' : folds + ' audited fold' + (folds === 1 ? '' : 's') + ' — each one a full held-out pass a human keystone chose to fold.';
     document.getElementById('foldLink').href = served ? '/frontier?instance=' + encodeURIComponent(id) : 'https://github.com/mitchuski/agentprivacy-harness/tree/main/examples/field-guide';
@@ -189,14 +189,17 @@
   function card(i){
     var c = i.config || {}, fs = i.frontierSummary || {}, f = feeds[i.id], mc = f && f.movingCeiling;
     var base = mc ? mc.baseline : fs.baseline, best = mc ? mc.best : fs.best, r = mc && mc.ratioNow != null ? mc.ratioNow : (base && best != null ? Math.round(best / base * 10000) / 10000 : null);
-    var folds = mc ? Math.max(0, (mc.series || []).length - 1) : null, metric = (c.objective && c.objective.metric) || (mc && mc.metric) || '', ot = (mc && mc.open) || null;
+    var folds = mc ? foldsOf(mc) : null, metric = (c.objective && c.objective.metric) || (mc && mc.metric) || '', ot = (mc && mc.open) || null;
     var chips = '<span class="chip ' + (folds > 0 ? 'built' : 'open') + '">' + (folds > 0 ? folds + ' fold' + (folds === 1 ? '' : 's') : 'no fold yet') + '</span>' + (ot && ot.id ? '<span class="chip open">' + esc(ot.id) + '</span>' : '') + (STAR(i) ? '<span class="chip new">star hold</span>' : '') + (c.error ? '<span class="chip mirage">config error</span>' : '');
     return '<article class="ws' + (STAR(i) ? ' star' : '') + '"><div class="name"><a href="/frontier?instance=' + encodeURIComponent(i.id) + '">' + esc(c.name || i.id) + '</a></div><div class="metric" title="' + esc(metric) + '">' + esc(metric || i.id) + '</div><div class="fold num">' + fmt(base) + '<span class="arrow"> → </span><span class="to">' + fmt(best) + '</span>' + (r != null ? '<span class="r">R ' + r + '</span>' : '') + '</div><div class="chips">' + chips + '</div></article>';
   }
+  // a fold is a step DOWN the series; a re-baseline (the metric rising because
+  // the artefact grew) is not a fold and must not be counted as one
+  function foldsOf(mc){ var s = (mc && mc.series) || [], n = 0; for (var k = 1; k < s.length; k++) if (s[k].value != null && s[k - 1].value != null && s[k].value < s[k - 1].value) n++; return n; }
   function renderFleet(){ var order = instances.slice().sort(function(a, b){ return (STAR(b) ? 1 : 0) - (STAR(a) ? 1 : 0); }); document.getElementById('fleet').innerHTML = order.map(card).join('') || '<div class="ws"><div class="name">no frontiers found</div><div class="metric">the console discovers any directory carrying harness.config.mjs</div></div>'; }
   function renderStrip(){
     var totalFolds = 0, deepest = null;
-    instances.forEach(function(i){ var f = feeds[i.id]; if(!f || !f.movingCeiling) return; var mc = f.movingCeiling, folds = Math.max(0, (mc.series || []).length - 1); totalFolds += folds; if(mc.ratioNow != null && (!deepest || mc.ratioNow < deepest.r)) deepest = { name:(i.config && i.config.name) || i.id, r:mc.ratioNow, base:mc.baseline, best:mc.best }; });
+    instances.forEach(function(i){ var f = feeds[i.id]; if(!f || !f.movingCeiling) return; var mc = f.movingCeiling, folds = foldsOf(mc); totalFolds += folds; if(mc.ratioNow != null && (!deepest || mc.ratioNow < deepest.r)) deepest = { name:(i.config && i.config.name) || i.id, r:mc.ratioNow, base:mc.baseline, best:mc.best }; });
     document.getElementById('strip').innerHTML = '<span class="chip built">' + instances.length + ' frontiers</span><span class="chip ' + (totalFolds ? 'built' : 'open') + '">' + totalFolds + ' audited folds</span>' + (deepest ? '<span class="chip plain">deepest: ' + esc(deepest.name) + ' ' + fmt(deepest.base) + ' → ' + fmt(deepest.best) + ' · R ' + deepest.r + '</span>' : '');
   }
   function pick(first){ var sel = document.getElementById('wsel'); sel.innerHTML = instances.map(function(i){ return '<option value="' + esc(i.id) + '"' + (i.id === first ? ' selected' : '') + '>' + esc((i.config && i.config.name) || i.id) + '</option>'; }).join(''); sel.addEventListener('change', function(){ var f = feeds[this.value]; if(f) showFeed(f, this.value); }); }
@@ -207,7 +210,12 @@
       var params = new URLSearchParams(location.search), want = params.get('instance');
       var first = (want && instances.some(function(i){ return i.id === want; })) ? want : (instances.filter(STAR)[0] || instances[0] || {}).id;
       pick(first); renderFleet();
-      return Promise.all(instances.map(function(i){ return fetch('/api/feed?instance=' + encodeURIComponent(i.id)).then(function(r){ return r.json(); }).then(function(f){ if(f && f.movingCeiling) feeds[i.id] = f; }).catch(function(){}); })).then(function(){ renderFleet(); renderStrip(); if(first && feeds[first]) showFeed(feeds[first], first); else showFeed(DEMO, DEMO.instance); });
+      return Promise.all(instances.map(function(i){ return fetch('/api/feed?instance=' + encodeURIComponent(i.id)).then(function(r){ return r.json(); }).then(function(f){ if(f && f.movingCeiling) feeds[i.id] = f; }).catch(function(){}); })).then(function(){ renderFleet(); renderStrip();
+        // no ?instance= asked for: open on the frontier with the most audited
+        // folds (deepest R(t) breaks ties), not the first id alphabetically —
+        // which on a fresh clone is a flat line the reader cannot learn from
+        if(!want){ var best = null; instances.forEach(function(i){ var f = feeds[i.id]; if(!f || !f.movingCeiling) return; var n = foldsOf(f.movingCeiling), r = f.movingCeiling.ratioNow; if(!best || n > best.n || (n === best.n && r != null && (best.r == null || r < best.r))) best = { id: i.id, n: n, r: r }; }); if(best && best.n > 0){ first = best.id; pick(first); } }
+        if(first && feeds[first]) showFeed(feeds[first], first); else showFeed(DEMO, DEMO.instance); });
     }).catch(function(){ showFeed(DEMO, DEMO.instance); document.getElementById('strip').innerHTML = '<span class="chip mirage">console not answering — demo numbers</span>'; });
   } else {
     showFeed(DEMO, DEMO.instance);

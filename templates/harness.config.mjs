@@ -1,12 +1,26 @@
 // harness.config.mjs — blank harness config. Copy this next to your target
-// artifact, fill every TODO, then bundle:
+// artifact, fill every TODO, then run it with Node alone:
+//   node drivers/run.mjs --instance <dir> --driver stub --run smoke
+// or bundle it for a runtime that provides the Workflow interface:
 //   node tools/bundle.mjs <this file> <out>.workflow.mjs
 // Contract: SEAT_CONTRACT.md. Constitution: TRUSTS.md. Define the Gap FIRST —
 // if you cannot say how held-out witnesses derive from a proposal, you do not
 // have a harness yet, you have a to-do list.
+//
+// The runner, conform.mjs and bundle.mjs all refuse a config still wearing
+// its TODOs. Keep this file self-contained (no imports) if you want to bundle
+// it; a counting rule that is code belongs in <dir>/tools/measure.mjs, which
+// drivers/run.mjs executes before each round and hands to every prompt as
+// ctx.args.measured.
 
 export default {
   name: 'TODO-my-harness',
+
+  // optional — the artifact the run is bound to, RELATIVE TO THIS INSTANCE
+  // (drivers/run.mjs joins it to the instance directory). Its sha256 becomes
+  // hSource in every seed, so a candidate cannot silently change the
+  // population it is graded against.
+  // sourceFile: 'artifact/TARGET.md',
 
   objective: {
     metric: 'TODO — what frontier.json tracks, lower is better',

@@ -24,9 +24,10 @@ node tools/adventure.mjs                               # 2 · see your paths
 node tools/new_instance.mjs ../my-harness my-harness   # 3 · scaffold (the wizard)
 #    fill every TODO in harness.config.mjs — ADOPTION.md, five answers, Gap first
 node engine/conform.mjs ../my-harness                  # 4 · the gate accepts your config
-node tools/bundle.mjs ../my-harness/harness.config.mjs ../my-harness/harness.workflow.mjs
-#    run the workflow (your driver) → runs/<runId>/    # 5 · a round: propose ⊥ prove
-node tools/render_run.mjs ../my-harness r1             # 6 · audit — every seed re-derived
+node drivers/run.mjs --instance ../my-harness --driver stub --run smoke   # 5a · plumbing, no model
+node drivers/run.mjs --instance ../my-harness --driver ollama --propose-model <a> --assay-model <b> --run r1   # 5 · a round: propose ⊥ prove → runs/r1/
+#    (a Workflow runtime instead: node tools/bundle.mjs ../my-harness/harness.config.mjs ../my-harness/harness.workflow.mjs, run with args incl. saltSecret)
+node tools/verify_run.mjs ../my-harness r1             # 6 · audit — every seed re-derived (render_run.mjs draws it as a page)
 #    fold as keystone: frontier first, chronicle, conform green again (README step 5)
 node tools/mint_artefact.mjs ../my-harness r1          # 7 · seal what survived (κ)
 node tools/wiki_install.mjs ../my-harness --farm ~/.wiki   # 8 · observe — the wall updates

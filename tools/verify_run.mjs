@@ -26,6 +26,17 @@
 // Checks 7+ (read-log in-mount, model-pair) land with C6 and are reported as
 // PENDING, never silently passed.
 //
+// What a pass does NOT establish (the newcomer review of 2026-09-12 proved
+// each by tampering): that the salt came from a secret no seat saw — the
+// secret is never written, so a gap.json re-salted CONSISTENTLY passes; or
+// that the verdict's evidence was executed — a VALIDATED is checked for
+// full-pass FORM. Both are C6. A pass means the record is internally
+// consistent, not that the round was honest.
+//
+// A run whose run.json says INCOMPLETE (a round lost seats to infrastructure)
+// is reported as INCOMPLETE and exits 0: an outage is not a tampered chain,
+// and it validates nothing either way (GR-5).
+//
 // Zero dependencies beyond engine/gap.mjs.
 
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs'
@@ -47,14 +58,15 @@ if (runArg === '--all') {
   if (!existsSync(runsRoot)) { console.log('no runs/ to verify'); process.exit(0) }
   const ids = readdirSync(runsRoot, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => e.name)
   const selfPath = fileURLToPath(import.meta.url)
-  let bad = 0
+  let bad = 0, incomplete = 0
   for (const id of ids) {
     const res = spawnSync(process.execPath, [selfPath, instArg, id], { encoding: 'utf8' })
     process.stdout.write(res.stdout || '')
     if (res.status !== 0) { bad++; process.stderr.write(res.stderr || '') }
+    else if (/^(RUN )?INCOMPLETE — /m.test(res.stdout || '')) incomplete++
   }
   if (bad) { console.error(`\n${bad} of ${ids.length} run(s) UNVERIFIABLE.`); process.exit(1) }
-  console.log(`\nALL ${ids.length} run(s) verify.`); process.exit(0)
+  console.log(`\nALL ${ids.length - incomplete} run(s) verify${incomplete ? `; ${incomplete} INCOMPLETE run(s) carry no evidence (outage, GR-5)` : ''}.`); process.exit(0)
 }
 
 const runDir = join(instDir, 'runs', runArg)
@@ -63,6 +75,12 @@ if (!existsSync(runDir)) { console.error(`UNVERIFIABLE: no run directory at ${ru
 const readText = (p) => { try { return readFileSync(p, 'utf8') } catch { return null } }
 const readJson = (p) => { const t = readText(p); if (t == null) return null; try { return JSON.parse(t) } catch { return { __bad: true } } }
 const sha256FileBytes = (p) => { try { return createHash('sha256').update(readFileSync(p)).digest('hex') } catch { return null } }
+
+// run.json is the runner's summary. INCOMPLETE marks a round that lost seats
+// to infrastructure; a verdict missing from such a run is an outage, not a
+// hole in the chain (GR-5).
+const runJson = readJson(join(runDir, 'run.json'))
+const outage = !!runJson && !runJson.__bad && runJson.status === 'INCOMPLETE'
 
 // gate params from the instance config (N/count/mode/threshold); defaults if absent.
 let gate = { N: null, count: 8, mode: null, censusThreshold: 200 }
@@ -145,7 +163,7 @@ for (const { label, dir } of proposalDirs.sort((a, b) => a.label.localeCompare(b
   } else { add('seed recorded', false, 'gap.json missing or has no seedHex') }
 
   // 5. verdict + coverage
-  if (!verdict || verdict.__bad) add('verdict present', false, 'verdict.json missing/unparseable')
+  if (!verdict || verdict.__bad) add('verdict present', false, outage ? 'verdict.json missing — the seat died (run INCOMPLETE, GR-5); nothing was graded' : 'verdict.json missing/unparseable', outage ? 'warn' : 'fail')
   else {
     add('verdict present', true, verdict.status)
     if (verdict.status === 'VALIDATED') {
@@ -164,7 +182,7 @@ for (const { label, dir } of proposalDirs.sort((a, b) => a.label.localeCompare(b
   // 6/7 pending (C6): read-log in-mount, model-pair. Reported, not passed.
   const hardFail = checks.filter(c => !c.ok && c.severity === 'fail')
   const warns = checks.filter(c => !c.ok && c.severity === 'warn')
-  const state = hardFail.length ? 'UNVERIFIABLE' : (verdict?.status || 'VERIFIED')
+  const state = hardFail.length ? 'UNVERIFIABLE' : (verdict?.status || (outage ? 'INCOMPLETE' : 'VERIFIED'))
   results.push({ label, checks, state, warns: warns.length, legacy: !salted, pending: ['read-log in-mount (C6)', 'model-pair (C6)'] })
 }
 
@@ -177,7 +195,11 @@ for (const r of results) {
   for (const c of r.checks) console.log(`      ${c.ok ? 'ok  ' : (c.severity === 'warn' ? 'warn' : 'FAIL')} ${c.name}${c.ok ? '' : ` — ${c.detail}`}`)
   if (r.state === 'UNVERIFIABLE') anyBad = true
 }
-if (!results.length) { console.error('\nUNVERIFIABLE: no proposal directories found in this run.'); process.exit(1) }
+if (!results.length) {
+  if (outage) { console.log(`INCOMPLETE — run ${runArg} lost seats to infrastructure before any proposal was committed (GR-5; see run.json). No chain to verify; nothing here validates anything.`); process.exit(0) }
+  console.error('\nUNVERIFIABLE: no proposal directories found in this run.'); process.exit(1)
+}
 if (anyBad) { console.error(`\nUNVERIFIABLE — at least one proposal cannot be re-derived. A witness of unknown origin validates nothing (GR-4).`); process.exit(1) }
 const totalWarns = results.reduce((n, r) => n + r.warns, 0)
-console.log(`\nRUN VERIFIED — every proposal re-derives from its own saved bytes${totalWarns ? ` (${totalWarns} legacy warning(s): coverage/census metadata a pre-C4 run predates)` : ''}. (pending C6: read-log + model-pair checks)`)
+if (outage) { console.log(`\nRUN INCOMPLETE — the chain re-derives for every committed proposal, but the round lost seats to infrastructure (GR-5); nothing here validates anything.`); process.exit(0) }
+console.log(`\nRUN VERIFIED — every proposal re-derives from its own saved bytes: the record is internally consistent${totalWarns ? ` (${totalWarns} legacy warning(s): coverage/census metadata a pre-C4 run predates)` : ''}. Not established here: that the salt came from an unseen secret, or that gate evidence was executed (C6 pending: read-log + model-pair checks).`)

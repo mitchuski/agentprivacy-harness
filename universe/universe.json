@@ -422,6 +422,19 @@
     ],
     "whose_problem": "AGENTS.md § Whose problem this is",
     "record_layer": "oracle_mage beside this repo (renaming to soul_mage): 3 corpora · 267 claims · untraced 0 · weak 12",
-    "defects_found_by_running": 15
+    "defects_found_by_running": 15,
+    "evocations": {
+      "board": "evocations/README.md",
+      "entries": {
+        "primer": "What Agentprivacy Really Is — 1,998 words, census 64",
+        "whitepaper": "Swordsman ⊥ Mage v6.3 — 13,681 words, census 162",
+        "personas": "42 persona bodies — 53,254 words, census 206"
+      },
+      "doors": [
+        "mages.city/skill.md § Evoke the harness against the corpus",
+        "agentprivacy.org/harness (evocations card)",
+        "agentprivacy.org/begin (route G)"
+      ]
+    }
   }
 }

@@ -1,0 +1,38 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-12",
+  "objective": {
+    "metric": "words of artifact/PRIMER.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check.mjs), N/N or MIRAGE",
+    "hardConstraint": "still the mission document: thesis → architecture → proof → epistemology → invitation → appendix, every heading in order, every appendix name kept; nothing invented"
+  },
+  "gate": {
+    "N": 64,
+    "mode": "census",
+    "how": "node tools/check.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 1998,
+    "date": "2026-09-12",
+    "how": "node tools/measure.mjs → metric; census 64/64; artefact copied from agentprivacy-docs/what-agentprivacy-is.md at 031f0b8"
+  },
+  "best": {
+    "metric": 1998,
+    "leverIds": [],
+    "evidence": "the artefact as it stands in the corpus; nothing has beaten the baseline yet"
+  },
+  "history": [
+    {
+      "metric": 1998,
+      "date": "2026-09-12",
+      "lever": null,
+      "note": "baseline — the mission document as written; census N=64 drawn from it"
+    }
+  ],
+  "attempts": [],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "a shorter mission document that still carries all 64 witnesses and still reads as the mission document",
+    "status": "OPEN"
+  }
+}

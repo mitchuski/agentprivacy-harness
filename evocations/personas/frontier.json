@@ -1,0 +1,38 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-12",
+  "objective": {
+    "metric": "words of artifact/PERSONAS.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check.mjs), N/N or MIRAGE",
+    "hardConstraint": "every persona present under its # name with every ## section, its four invariants verbatim; no persona merged; nothing invented"
+  },
+  "gate": {
+    "N": 206,
+    "mode": "census",
+    "how": "node tools/check.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 53254,
+    "date": "2026-09-12",
+    "how": "node tools/measure.mjs → metric; census 206/206; artefact = the 42 persona bodies each under its # name with a header block carrying its four invariants (evocations/_lib/personas_census.mjs)"
+  },
+  "best": {
+    "metric": 53254,
+    "leverIds": [],
+    "evidence": "the artefact as it stands in the corpus; nothing has beaten the baseline yet"
+  },
+  "history": [
+    {
+      "metric": 53254,
+      "date": "2026-09-12",
+      "lever": null,
+      "note": "baseline — census N=206 (42 names · 4×42 invariants · the distinct ## headings) drawn from the artefact"
+    }
+  ],
+  "attempts": [],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "below 53254 words with all 206 witnesses and the hard constraint intact",
+    "status": "OPEN"
+  }
+}

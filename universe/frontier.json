@@ -11,12 +11,12 @@
     "whyNotAHarness": "The Fiat-Shamir Gap earns its cost only where the claim space is too large to check. This map makes ~100 enumerable claims. Rounds u1 and u2 applied a sampled gate here and produced no evidence about the map at a cost of ~1.4M tokens. See chronicles/2026-07-10_u3_retirement.md."
   },
   "baseline": {
-    "metric": 8997,
+    "metric": 9059,
     "measuredAt": "2026-08-18 (accession-13 withdrawal refold)",
     "note": "Re-measured after (a) the 2026-07-10 retirement re-measure (8112), (b) the 2026-07-12 keeper-seating + holon layer (8319), then (c) the 2026-08-17 fleet sync: the C82 re-typing to informational drift (ruling L149, filed 2026-07-17 in ERRATA) plus fleet stations 13-16 (the DTG verification registry, the litreview runtime, the uor_kappa lane, and a fourth accession since withdrawn) and the Observe generalisation note, then (d) the 2026-08-18 withdrawal of accession 13 by the First Person (its row is a labelled tombstone; the count moved accordingly). The map grows and shrinks honestly: the layer is audited exhaustively, not optimized — the word count is a record, not a target."
   },
   "best": {
-    "metric": 8997,
+    "metric": 9059,
     "leverId": null,
     "gateResult": null,
     "note": "equal to baseline. No round ever validated anything. The metric is retained as a HISTORICAL number, not a live objective — the universe layer is now audited exhaustively, not optimized adversarially."
@@ -117,10 +117,10 @@
   ],
   "history": [
     {
-      "metric": 8997,
+      "metric": 9059,
       "date": "2026-09-12",
       "lever": null,
-      "note": "re-measured after the map recorded the 2026-09-12 tree (drivers, examples/corpus, examples/self, the default, optional/, the record layer); was 8587"
+      "note": "re-measured after the map recorded the 2026-09-12 tree (drivers, examples/corpus, examples/self, the default, optional/, the record layer); was 8587 + the evocations row"
     }
   ]
 }

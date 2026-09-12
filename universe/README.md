@@ -141,6 +141,7 @@ seam still says what it is behind (IMPLEMENTED, every path resolves):
 | the optional layers — this universe's ecosystem, adopted one at a time | `SPECIALISATION.md` · `GRAPH.md` · `HOLONS.md` · `WIKI.md`, shipped behind `optional/` in the default | IMPLEMENTED — none needed to run a round |
 | whose problem an instance is | `AGENTS.md` § Whose problem this is | IMPLEMENTED — origin documents are method, never mandate |
 | the record layer — this fleet's numbers, census-traced, rendered | `~/oracle_mage` (a sibling instance; renaming to soul_mage) | IMPLEMENTED beside this repo, not in it — see the layer table |
+| evocations — the harness called up against the corpus: the mission primer, the whitepaper v6.3, the 42 personas, each with a frozen census, a measured baseline and a frontier | `evocations/README.md` · `evocations/_lib/census.mjs` · `evocations/primer/harness.config.mjs` · `evocations/whitepaper/harness.config.mjs` · `evocations/personas/harness.config.mjs` | IMPLEMENTED — three conform with passing canaries; primer r1 in progress. Doors: the City's skill.md, the lab's /harness/ and /begin/ |
 
 The `universe/` seam itself is unchanged in kind: still an integrity gate, not
 an adversary; `audit.mjs` still reads every claim. What changed is that the

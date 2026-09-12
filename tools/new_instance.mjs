@@ -18,10 +18,18 @@ const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
 const T = join(root, 'templates')
 
-const [dirArg, nameArg] = process.argv.slice(2)
-if (!dirArg) {
-  console.error('usage: node tools/new_instance.mjs <dir> [name]')
-  console.error('  e.g. node tools/new_instance.mjs ../my-harness shrink-the-binary')
+// --prover <model>: seat the prover on a different model than the proposer, so
+// the pair is cross-model from the first round (conform.mjs D4b advisory:
+// same-model pairs have Φ_inference ≈ 0 — the prover shares the proposer's
+// blind spots). One flag here beats a config edit nobody makes.
+const argv = process.argv.slice(2)
+const proverIdx = argv.indexOf('--prover')
+const prover = proverIdx >= 0 ? argv[proverIdx + 1] : null
+const positional = argv.filter((a, i) => a !== '--prover' && i !== proverIdx + 1)
+const [dirArg, nameArg] = positional
+if (!dirArg || (proverIdx >= 0 && !prover)) {
+  console.error('usage: node tools/new_instance.mjs <dir> [name] [--prover <model>]')
+  console.error('  e.g. node tools/new_instance.mjs ../my-harness shrink-the-binary --prover claude-sonnet-5')
   process.exit(1)
 }
 const dest = resolve(dirArg)
@@ -54,9 +62,17 @@ for (const g of ['runs/.gitkeep', 'chronicles/.gitkeep']) {
 // Give the config its name so the very first edit is a real one, not a rename.
 const cfgPath = join(dest, 'harness.config.mjs')
 const cfg = readFileSync(cfgPath, 'utf8')
-if (cfg.includes("name: 'TODO-my-harness'")) {
-  writeFileSync(cfgPath, cfg.replace("name: 'TODO-my-harness'", `name: ${JSON.stringify(name)}`))
+let cfgOut = cfg
+if (cfgOut.includes("name: 'TODO-my-harness'")) {
+  cfgOut = cfgOut.replace("name: 'TODO-my-harness'", `name: ${JSON.stringify(name)}`)
 }
+// Seat the prover model right under the door line; conform.mjs reads
+// config.seatOpts.assay.model and drops the D4b advisory when it differs.
+const doorLine = "door: 'first-person', // T6 — leave exactly as is; conform.mjs checks the literal"
+if (prover && cfgOut.includes(doorLine) && !cfgOut.includes('seatOpts:')) {
+  cfgOut = cfgOut.replace(doorLine, doorLine + `\n\n  // The prover's model (D4b). The proposer runs on the caller's default; the\n  // prover must not. Set by new_instance.mjs --prover.\n  seatOpts: { assay: { model: ${JSON.stringify(prover)} } },`)
+}
+if (cfgOut !== cfg) writeFileSync(cfgPath, cfgOut)
 
 const rel = (p) => join(dirArg, p).replace(/\\/g, '/')
 

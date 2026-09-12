@@ -43,7 +43,9 @@ console.log(`
      node tools/console.mjs                      ${d('watch a bout live on :4242')}
 
   ${c('🧙 BUILD YOUR OWN')} — the setup wizard that installs a mage
-     node tools/new_instance.mjs ../my-harness my-harness
+     ${d('first, one sentence: what does your purpose COUNT? that number is the')}
+     ${d('Gap (ADOPTION.md step 2); a scaffold without it is a to-do list. then:')}
+     node tools/new_instance.mjs ../my-harness my-harness --prover <a different model>
      ${d('fill every TODO (the gate refuses until you do), then:')}
      node engine/conform.mjs ../my-harness
      node tools/bundle.mjs ../my-harness/harness.config.mjs ../my-harness/harness.workflow.mjs

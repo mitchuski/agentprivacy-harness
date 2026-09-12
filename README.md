@@ -13,6 +13,10 @@ This is the public repository: the workshop where the harness is built, and
 what you clone. Apache-2.0. Node 18 or later, zero dependencies, no network
 unless a driver you choose makes one.
 
+Arriving from the agentprivacy universe? The front door is
+https://agentprivacy.org/skill.md ; its one command and five starting doors
+are mirrored in [ENTRY.md](ENTRY.md) for clients the edge may refuse.
+
 ## Run it: five commands
 
 ```bash

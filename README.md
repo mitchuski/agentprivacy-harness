@@ -1,6 +1,6 @@
 # dual-agent-harness
 
-**A verification harness for AI-agent work: one agent proposes, a second
+**The agentprivacy dual-agent harness — tooling for your own agentic research. A verification harness for AI-agent work: one agent proposes, a second
 independently proves, and the tests that decide are derived by hashing the
 proposal together with a secret the proposer never sees — so it cannot grind
 them — and, where the fact set is enumerable, every fact is probed. Config-
@@ -122,7 +122,7 @@ BYO-interface contracts and the small-machine notes.
 **Requirements:** Node ≥ 18, nothing else (zero npm dependencies). Running
 rounds multi-agent needs a driver for the seven seats — Claude Code's
 Workflow tool is the reference runtime; `engine/dual_agent_loop.mjs` also
-accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply.
+accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply. Three drivers ship in `drivers/` — `stub.mjs` (deterministic, no model), `ollama.mjs` (a local model) and `anthropic.mjs` (the Claude API over plain fetch, `ANTHROPIC_API_KEY`) — and `node drivers/run.mjs --instance <dir> --driver stub|ollama|anthropic|split --run <id>` runs a round with any of them and persists the audit trail; `--propose-model`/`--assay-model` put two different models in the two seats. To hand the system to someone else, emit the default distribution (`node tools/make_default.mjs`): the system alone, three examples, no results, no fleet.
 
 1. **Prove the axioms** — one command, every gate this repo has:
    ```bash
@@ -183,8 +183,8 @@ accepts any `rt = { agent, parallel, pipeline, phase, log }` you supply.
 end to end: `examples/field-guide/frontier.json` records three audited folds
 (730 → 573 → 526 → 472, every step at gate 8/8, the last two closed by
 exhaustive census), its `chronicles/` tell each round verdict-first, and the
-repo's `chronicles/` tell the system's story — including the eleven defects
-found by running and the one round that was watched live. Reading them in
+repo's `chronicles/` tell the system's story — including the defects
+found by running (numbered in the chronicles; fifteen at the last count) and the one round that was watched live. Reading them in
 date order is the fastest way to learn what the discipline feels like in
 practice.
 

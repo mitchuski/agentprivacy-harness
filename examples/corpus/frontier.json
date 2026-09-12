@@ -1,0 +1,13 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-12",
+  "objective": {
+    "metric": "weak traces — claims whose only evidence is a memory file rather than the source document; lower is better",
+    "gate": "untraced 0 and unquoted 0 over every claim in kb/records.json (tools/census.mjs)",
+    "hardConstraint": "reads corpus/, never writes into it; no number without a quote; a rendering is never a source"
+  },
+  "gate": { "claims": 6, "untraced": 0, "unquoted": 0, "how": "node tools/census.mjs --gate" },
+  "baseline": { "metric": 1, "date": "2026-09-12", "how": "node tools/census.mjs → weak (cost-2, the on-call saving remembered from the review call)" },
+  "best": { "metric": 1, "leverIds": [], "evidence": "the sample as shipped; nothing has beaten the baseline yet" },
+  "openTarget": { "id": "OT-1", "statement": "find the timesheet export that carries the on-call saving, add it to corpus/, retrace cost-2 to it; weak 1 → 0", "status": "OPEN" }
+}

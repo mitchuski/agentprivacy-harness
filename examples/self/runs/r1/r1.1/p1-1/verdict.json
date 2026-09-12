@@ -1,0 +1,7 @@
+{
+  "leverId": "1",
+  "status": "MIRAGE",
+  "evidence": "The candidate fails the hard constraint: it does not describe the document as one a stranger opens first, detailing the five commands in order, the loop table, the adoption steps, and the constitution. It describes the harness and how to run it, but doesn't present itself *as* the document a new user would encounter.",
+  "failingCheck": "hard constraint: not a stranger's first document",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r1/r1.1/p1-1"
+}

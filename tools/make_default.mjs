@@ -20,7 +20,7 @@
 
 import { cpSync, mkdirSync, rmSync, readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { dirname, join, resolve, relative } from 'node:path'
+import { dirname, join, resolve, relative, basename } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -36,12 +36,17 @@ mkdirSync(out, { recursive: true })
 const read = (p) => readFileSync(join(root, p), 'utf8')
 const write = (rel, text) => { const p = join(out, rel); mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, text.replace(/\r\n/g, '\n')) }
 const copy = (rel, toRel = rel) => cpSync(join(root, rel), join(out, toRel), { recursive: true })
+// copy a directory but leave its run records and chronicles behind: the
+// default carries the instance, never the origin's results (GR-5).
+const RESULT_DIRS = new Set(['runs', 'chronicles', 'artefacts'])
+const copyInstance = (rel) => cpSync(join(root, rel), join(out, rel), { recursive: true, filter: (src) => !RESULT_DIRS.has(basename(src)) })
 
 // ---- the system: directories carried whole ----
 copy('engine')
 copy('seats')
 copy('templates')
 copy('tools')
+copy('drivers')
 rmSync(join(out, 'tools', 'console.roots.json'), { force: true })   // operator-local machine paths
 rmSync(join(out, 'tools', 'workshop.html'), { force: true })        // the origin's front page presents the origin's evidence
 rmSync(join(out, 'tools', 'make_default.mjs'), { force: true })     // the default does not re-emit itself
@@ -49,12 +54,33 @@ rmSync(join(out, 'tools', 'make_default.mjs'), { force: true })     // the defau
 // ---- root documents: constitution + method, no results ----
 for (const f of ['LICENSE', '.gitattributes', '.gitignore',
   'TRUSTS.md', 'GROUND_RULES.md', 'SEAT_CONTRACT.md', 'ADOPTION.md',
-  'SPECIALISATION.md', 'AGENTS.md', 'CLAUDE.md', 'SKILL.md',
-  'WORKFLOW.md', 'GRAPH.md', 'HOLONS.md', 'PRACTICES.md', 'SOURCES.md',
-  'THREATS.md', 'WIKI.md']) {
+  'AGENTS.md', 'CLAUDE.md', 'SKILL.md',
+  'WORKFLOW.md', 'PRACTICES.md', 'SOURCES.md', 'THREATS.md']) {
   if (existsSync(join(root, f))) copy(f)
 }
 write('README.md', read('templates/README.default.md'))
+write('PATHWAYS.md', read('templates/PATHWAYS.default.md'))
+
+// In the default, a few method documents point at things that live upstream or
+// moved behind optional/; repoint them so a newcomer's first click lands.
+const repoint = (rel, pairs) => {
+  const p = join(out, rel); if (!existsSync(p)) return
+  let s = readFileSync(p, 'utf8'); for (const [a, b] of pairs) s = s.split(a).join(b); writeFileSync(p, s)
+}
+repoint('SKILL.md', [['`SPECIALISATION.md`', '`optional/SPECIALISATION.md`'], ['`GRAPH.md`', '`optional/GRAPH.md`'], ['`HOLONS.md`', '`optional/HOLONS.md`'], ['`WIKI.md`', '`optional/WIKI.md`']])
+repoint('ADOPTION.md', [['`universe/audit.mjs`', '`examples/corpus/tools/census.mjs`']])
+repoint('WORKFLOW.md', [['hh_workshop ran every seat on a local', 'the origin\'s standalone workshop ran every seat on a local model, and `drivers/ollama.mjs` does the same here; a local']])
+repoint('SEAT_CONTRACT.md', [['`universe/audit.mjs`', '`examples/corpus/tools/census.mjs`']])
+
+// ---- optional layers: the origin's ecosystem, adopted one at a time ----
+// These four name the origin's own sites, registries and lore. They are method
+// documents, not results, so they ship — but behind a directory whose README
+// says what they are, so a fresh instance is never booted into them by
+// accident (AGENTS.md, "Whose problem this is").
+for (const f of ['SPECIALISATION.md', 'GRAPH.md', 'HOLONS.md', 'WIKI.md']) {
+  if (existsSync(join(root, f))) copy(f, join('optional', f))
+}
+write('optional/README.md', `# optional — layers you adopt one at a time\n\nNone of these is needed to run a round. Each names the origin repository's\nown ecosystem (its sites, registries, personas and wiki farms) as the worked\nexample; the method in each travels, the names do not. Adopt a layer when the\nrung you are on asks for it (README, "Adopt it in steps"):\n\n- \`SPECIALISATION.md\` — dressing seats with personas and skills; the station\n  pattern that lets instances multiply without drifting.\n- \`GRAPH.md\` — the graph dialect: κ-addressed nodes, edges that a signature\n  mints, the emitters in \`tools/\` (spellweb, star, emit_feed, vrc).\n- \`HOLONS.md\` — content addressing: κ = sha256 of canonical JSON with the label\n  excluded from its own preimage; sealed artefacts that re-derive anywhere.\n- \`WIKI.md\` — publishing a harness's ledgers into a federated wiki.\n\nReferences in these files to the origin's fleet, catalogue or chronicles\nresolve upstream, at github.com/mitchuski/agentprivacy-harness.\n`)
 
 // claims register: drop the one row whose status narrates origin results
 // (CR-H7 cites specific folds); every other row's evidence ships and re-runs.
@@ -83,7 +109,13 @@ write(`${fg}/manifest.yaml`, read('templates/manifest.yaml').replace('<instance 
 write(`${fg}/claims_register.md`, read('templates/claims_register.md'))
 write(`${fg}/notes/KILLED_LEVERS.md`, read('templates/KILLED_LEVERS.md'))
 write(`${fg}/chronicles/.gitkeep`, '')
-write(`${fg}/README.md`, `# the spar — reset to its baseline\n\nA practice bout: compress \`artifact/GUIDE.md\` (${frontier.baseline.metric} ${frontier.objective.metric},\nmeasured by: \`${frontier.baseline.how}\`) while the census gate stays a full\npass — every enumerable fact probed, drawn against the ORIGINAL by hashing\nyour proposal with a run secret you never see. No folds have happened here:\nOT-1 is open, the frontier is yours to move, and the first chronicle is\nyours to write.\n\nRun a round (Claude Code Workflow tool):\n\n\`\`\`\nscriptPath: examples/field-guide/harness.workflow.mjs\nargs: { \"repo\": \"<abs>/examples/field-guide\", \"root\": \"<abs of this clone>\", \"runId\": \"r1\" }\n\`\`\`\n\nThen audit (\`node tools/verify_run.mjs examples/field-guide r1\`), fold as\nkeystone (\`seats/keystone.md\`), and seal (\`node tools/mint_artefact.mjs\`).\nThe origin repository's spar walked this same ground to a validated 472 —\nits chronicles are the worked example; its numbers are not yours to inherit.\n`)
+write(`${fg}/README.md`, `# the spar — reset to its baseline\n\nA practice bout: compress \`artifact/GUIDE.md\` (${frontier.baseline.metric} ${frontier.objective.metric},\nmeasured by: \`${frontier.baseline.how}\`) while the census gate stays a full\npass — every enumerable fact probed, drawn against the ORIGINAL by hashing\nyour proposal with a run secret you never see. No folds have happened here:\nOT-1 is open, the frontier is yours to move, and the first chronicle is\nyours to write.\n\nRun a round with a driver (no model, a local model, or the Claude API):\n\n\`\`\`bash\nnode drivers/run.mjs --instance examples/field-guide --driver stub --run smoke\nnode drivers/run.mjs --instance examples/field-guide --driver ollama --model <m> --run r1\nnode drivers/run.mjs --instance examples/field-guide --driver anthropic --run r1      # ANTHROPIC_API_KEY\n\`\`\`\n\nOr with the Claude Code Workflow tool (the reference runtime):\n\n\`\`\`\nscriptPath: examples/field-guide/harness.workflow.mjs\nargs: { \"repo\": \"<abs>/examples/field-guide\", \"root\": \"<abs of this clone>\", \"runId\": \"r1\" }\n\`\`\`\n\nThen audit (\`node tools/verify_run.mjs examples/field-guide r1\`), fold as\nkeystone (\`seats/keystone.md\`), and seal (\`node tools/mint_artefact.mjs\`).\nThe origin repository's spar walked this same ground to a validated 472 —\nits chronicles are the worked example; its numbers are not yours to inherit.\n`)
+
+// ---- the auditor and the self-fold: carried as instances, without results ----
+copyInstance('examples/corpus')
+copyInstance('examples/self')
+write('examples/self/chronicles/.gitkeep', '')
+write('examples/corpus/chronicles/.gitkeep', '')
 
 // frontier.html ships a demo block carrying the origin spar's results; in the
 // default it must not — swap it for the reset shape (served mode reads YOUR
@@ -100,7 +132,7 @@ if (existsSync(fhPath)) {
 }
 
 // provenance note — what was left behind, and where it lives
-write('DEFAULT.md', `# the default distribution\n\nGenerated by \`tools/make_default.mjs\` from the origin repository\n(github.com/mitchuski/agentprivacy-harness). It carries the SYSTEM alone:\nno results, no chronicles, no fleet.\n\nDeliberately absent, living upstream: the origin's advancing frontier and\nrun records · \`chronicles/\` · \`HARNESS_PATHS.md\` (the origin operator's\nfleet — any reference to it in these documents resolves upstream) ·\n\`RESEARCH.md\` (the origin's evidence statement) · \`EVOLUTION.md\` ·\n\`universe/\` (one project's corpus) · the workshop front page.\n\nEvery gate passes here without them — run \`node tools/check.mjs\` and see.\nThe record starts with you.\n`)
+write('DEFAULT.md', `# the default distribution\n\nGenerated by \`tools/make_default.mjs\` from the origin repository\n(github.com/mitchuski/agentprivacy-harness). It carries the SYSTEM alone:\nthe engine, the seats, the tools, three drivers, the constitution, three\nexamples reset to their baselines, and the optional layers behind\n\`optional/\`. No results, no chronicles, no fleet.\n\nDeliberately absent, living upstream: the origin's advancing frontiers and\nrun records · \`chronicles/\` · \`HARNESS_PATHS.md\` (the origin operator's\nfleet — any reference to it in these documents resolves upstream) ·\n\`RESEARCH.md\` (the origin's evidence statement) · \`EVOLUTION.md\` ·\n\`HARDENING.md\` and its plan · \`universe/\` (one project's corpus) · the\nworkshop front page · every \`runs/\` and \`artefacts/\` directory.\n\nEvery gate passes here without them — run \`node tools/check.mjs\` and see.\nThe record starts with you. Whose problem this is: yours (\`AGENTS.md\`).\n`)
 
 // ---- self-check: the default must pass its own gates ----
 console.log(`default distribution → ${relative(process.cwd(), out).replace(/\\/g, '/')}`)

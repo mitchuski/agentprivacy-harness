@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>run r1 — dual-agent harness</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --edge:#30363d; --ink:#c9d1d9; --dim:#8b949e;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --grey:#8b949e; --accent:#a5b4fc; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--ink);
+         font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { font-size:1.3rem; margin:0 0 .3rem; } h4 { margin:0 0 .5rem; font-size:1rem; }
+  a { color: var(--accent); }
+  .inscription { color:var(--accent); letter-spacing:.03em; margin:.2rem 0 .8rem; }
+  .disclaimer { border:1px solid var(--edge); border-left:3px solid var(--grey); background:var(--panel);
+                color:var(--dim); padding:.6rem .9rem; margin:0 0 1.4rem; font-size:.85rem; }
+  .voidbanner { border:2px solid var(--red); background:#3d1418; color:#ffb3ad; padding:.9rem 1rem;
+                margin:0 0 1.4rem; font-weight:bold; }
+  section.phase { border:1px solid var(--edge); border-radius:6px; background:var(--panel);
+                  margin:0 0 1rem; padding:1rem 1.2rem; }
+  section.phase > h2 { margin:0 0 .15rem; font-size:1.05rem; }
+  section.phase > p.mandate { margin:0 0 .9rem; color:var(--dim); font-size:.85rem; }
+  .arrow { text-align:center; color:var(--dim); margin:-.4rem 0 .6rem; }
+  .card { border:1px solid var(--edge); border-radius:6px; padding: .8rem 1rem; margin:0 0 .8rem; background:var(--bg); }
+  .chip { display:inline-block; padding:.05rem .55rem; border-radius:999px; font-size:.75rem;
+          font-weight:bold; vertical-align:middle; border:1px solid; }
+  .chip.validated { color:var(--green); border-color:var(--green); background:#12261a; }
+  .chip.mirage    { color:var(--amber); border-color:var(--amber); background:#2b2211; }
+  .chip.blocked   { color:var(--red);   border-color:var(--red);   background:#3d1418; }
+  .chip.other     { color:var(--grey);  border-color:var(--grey);  background:#1c2128; }
+  .badge { display:inline-block; padding:.1rem .6rem; font-weight:bold; border-radius:4px; margin-bottom:.4rem; }
+  .badge.match    { background:#12261a; color:var(--green); border:1px solid var(--green); }
+  .badge.mismatch { background:var(--red); color:#fff; }
+  .badge.other    { background:#1c2128; color:var(--grey); border:1px solid var(--grey); }
+  .hashbox { border-radius:6px; padding:.6rem .8rem; margin:0 0 .6rem; border:1px solid var(--edge); }
+  .hashbox.match { border-color:var(--green); } .hashbox.incomplete { border-color:var(--grey); }
+  .hashbox.mismatch { border:2px solid var(--red); background:#2a0e11; }
+  dl { display:grid; grid-template-columns:max-content 1fr; gap:.15rem .9rem; margin:.4rem 0; }
+  dt { color:var(--dim); } dd { margin:0; overflow-wrap:anywhere; }
+  pre { background:#0a0d12; border:1px solid var(--edge); border-radius:6px; padding:.7rem .9rem;
+        overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.82rem; margin:.4rem 0; }
+  details { margin:.4rem 0; } summary { cursor:pointer; color:var(--dim); }
+  table { border-collapse:collapse; width:100%; font-size:.85rem; }
+  th, td { border:1px solid var(--edge); padding:.35rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--dim); font-weight:normal; }
+  .missing { color:var(--dim); font-style:italic; } .note { color:var(--dim); font-size:.85rem; }
+  .delta { color:var(--accent); }
+  .tally .chip { margin-right:.4rem; }
+  footer { color:var(--dim); font-size:.8rem; margin-top:2rem; border-top:1px solid var(--edge); padding-top:.8rem; }
+</style></head><body><main>
+<h1>run r1 · self</h1>
+<p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
+<p class="disclaimer">generated projection — never hand-edited, never authoritative; the run directory is the record.
+Rendered 2026-09-12T00:00:09.285Z by tools/render_run.mjs from <code>C:/Users/mitch/dual-agent-harness/examples/self/runs/r1</code>.
+Re-derive anything you care about from the files themselves.</p>
+
+<p class="tally">2 proposal(s) · <span class="chip validated">VALIDATED</span> 0 <span class="chip mirage">MIRAGE</span> 2 <span class="chip blocked">BLOCKED</span> 0 <span class="chip other">NO VERDICT</span> 0</p>
+<section class="phase"><h2>1 · Measure</h2><p class="mandate">frontier numbers only, no advocacy</p><p>Numbers cited from <code>frontier.json</code> — the sole authority (GR-1). Prose never restates them.</p>
+<dl><dt>objective</dt><dd>words of artifact/PATH.md (whitespace-split tokens; tools/measure.mjs), lower is better</dd><dt>baseline</dt><dd>1115</dd><dt>best</dt><dd>1115</dd><dt>best levers</dt><dd>(none folded)</dd><dt>updated</dt><dd>2026-09-12</dd></dl>
+<p class="delta">frontier delta to date: 1115 → 1115 (0)</p>
+<p class="note">no measure.json — the reference engine returns measure output to the orchestrator without persisting it.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>2 · Propose</h2><p class="mandate">soulbae 🧙 (bnot) — blind lenses in parallel</p><div class="card"><h4>r1.1/p1-1</h4><dl><dt>leverId</dt><dd>1</dd><dt>title</dt><dd>Compressed Proposal</dd><dt>lens</dt><dd>line-editor</dd><dt>expectedMetric</dt><dd>300</dd><dt>hardConstraintNote</dt><dd>Maintain all file names, commands, trust/ground rules, seat names, and phases exactly as written.</dd></dl><details><summary>rationale</summary><pre>Reduce redundancy and length while preserving all essential information and commands. Focus on active voice and direct instructions.</pre></details></div>
+<div class="card"><h4>r1.1/p2-1</h4><dl><dt>leverId</dt><dd>1</dd><dt>title</dt><dd>Compressed Dual-Agent Harness Documentation</dd><dt>lens</dt><dd>restructurer</dd><dt>expectedMetric</dt><dd>350</dd><dt>hardConstraintNote</dt><dd>All commands, file names, identifiers, steps, numbers, T1-T6, GR1-GR10, seat and phase names, and adoption steps must be preserved exactly as written.</dd></dl><details><summary>rationale</summary><pre>The original document is verbose and repetitive. This proposal compresses the information into a more concise and structured format using tables and lists, while retaining all essential commands, file names, and constraints. This improves readability and reduces the overall word count.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>3 · Hold-apart</h2><p class="mandate">the Gap ⿻ (xor) — hash the proposal, derive the witnesses</p><div class="card"><h4>r1.1/p1-1</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).</p>
+<dl><dt>mode</dt><dd>SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)</dd><dt>sha256(proposal_canon.json) vs hProposal</dt><dd>e7137c95eb92350a3db661775334ac28bced4b1ac66b16625258a475cebb7c90 ✓</dd><dt>salt (gap.json)</dt><dd>1c4ade4885d70188b8b789b50846ae183a0d53b7d844f7dc25563764ea0d83e4</dd><dt>hSource</dt><dd>69e725884d600f0909d38b58b65b8e5c69af98f3af17cfdbc4fb683b70ed0a38</dd><dt>recorded seedHex (gap.json)</dt><dd>615c1d00d4e5ce4428a026d96d13065ad974f1552c9f9d5c7fd9eff63b44a23b</dd><dt>re-derived sha256(hSource‖hProposal‖salt), at render time</dt><dd>615c1d00d4e5ce4428a026d96d13065ad974f1552c9f9d5c7fd9eff63b44a23b</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>census: all 93 witnesses of census.json, in order</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>The canonical serialisation rule mandates recursive sorting of keys, eliminating all whitespace. A third party shall re-derive the hProposal by computing the SHA256 hash of proposal_canon.json and the seed by computing the SHA256 hash of the concatenated hProposal and salt.</pre></details></div>
+<div class="card"><h4>r1.1/p2-1</h4><div class="hashbox match"><span class="badge match">MATCH ✓</span>
+<p>The witnesses derive from a seed that folds a salt the proposer never saw: soulbae could not have predicted or ground the draw (D1).</p>
+<dl><dt>mode</dt><dd>SALTED — seed = sha256(hSource ‖ hProposal ‖ salt), salt unseen by the proposer (D1)</dd><dt>sha256(proposal_canon.json) vs hProposal</dt><dd>6b88483ebccc08eef4d11972dc98021c554f541877afb179ac0c43b331684c75 ✓</dd><dt>salt (gap.json)</dt><dd>797ef94c739cce28ed84e1259378deea856559e93761b670109f83246f06fda8</dd><dt>hSource</dt><dd>69e725884d600f0909d38b58b65b8e5c69af98f3af17cfdbc4fb683b70ed0a38</dd><dt>recorded seedHex (gap.json)</dt><dd>dc3bd86feea15750ec14ab921f1bed939b66ec4bacbdf70ba48ef223a1e59110</dd><dt>re-derived sha256(hSource‖hProposal‖salt), at render time</dt><dd>dc3bd86feea15750ec14ab921f1bed939b66ec4bacbdf70ba48ef223a1e59110</dd></dl></div><details><summary>the draw (questions + expected answers)</summary><pre>census: all 93 witnesses of census.json, in order</pre></details><details><summary>transcript (third-party re-derivable)</summary><pre>The canonical serialisation rule mandates recursive sorting of keys, eliminating all whitespace. A third party shall re-derive the hProposal by computing the SHA256 hash of proposal_canon.json and the seed by computing the SHA256 hash of the concatenated hProposal and salt.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>4 · Assay</h2><p class="mandate">soulbis ⚔️ (neg) — the full gate, VALIDATED / MIRAGE / BLOCKED</p><div class="card"><h4>r1.1/p1-1 <span class="chip mirage">MIRAGE</span></h4><dl><dt>leverId</dt><dd>1</dd><dt>failingCheck</dt><dd>hard constraint: not a stranger's first document</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/examples/self/runs/r1/r1.1/p1-1</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>The candidate fails the hard constraint: it does not describe the document as one a stranger opens first, detailing the five commands in order, the loop table, the adoption steps, and the constitution. It describes the harness and how to run it, but doesn't present itself *as* the document a new user would encounter.</pre></details></div>
+<div class="card"><h4>r1.1/p2-1 <span class="chip mirage">MIRAGE</span></h4><dl><dt>leverId</dt><dd>1</dd><dt>failingCheck</dt><dd>hard constraint: not a stranger's first document</dd><dt>scratchDir</dt><dd>C:/Users/mitch/dual-agent-harness/examples/self/runs/r1/r1.1/p1-1</dd><dt>candidate.md</dt><dd>present</dd></dl><details><summary>evidence</summary><pre>The candidate fails the hard constraint: it does not describe the document as one a stranger opens first, detailing the five commands in order, the loop table, the adoption steps, and the constitution. It describes the harness and how to run it, but doesn't present itself *as* the document a new user would encounter.</pre></details></div></section>
+<div class="arrow">▼</div><section class="phase"><h2>5 · Critic</h2><p class="mandate">classifies the whole round: structural / probe-limited / noise</p><p class="note">no critic.json — the reference engine returns the critic's classification to the orchestrator without persisting it; the chronicle draft carries the round's reading.</p></section>
+<div class="arrow">▼</div><section class="phase"><h2>6 · Chronicle</h2><p class="mandate">drafts the record — verdict first</p><div class="card"><h4>r1.1/CHRONICLE_DRAFT.md <span class="chip other">DRAFT — keystone reviews and files</span></h4><pre>```markdown
+## Chronicle: Round r1.1
+
+**Verdict:** MIRAGE (Lever 1) - The candidate document fails to present itself as the first document a stranger would encounter, violating a hard constraint.
+
+**Phase-by-Phase Account:**
+
+* **Phase 1: Initial Assessment:** The candidate document was presented for evaluation. Initial inspection revealed a description of a dual-agent harness and its operational workflow.
+* **Phase 2: Lever 1 Evaluation:** Lever 1, assessing whether the document functions as a stranger's first document, triggered a MIRAGE status. The document immediately details the harness's purpose and components, lacking an introductory narrative or context-setting. It does not fulfill the requirement of presenting itself as a document a new user would encounter.
+* **Phase 3: Re-evaluation (p2-1):** A second pass on Lever 1 confirmed the initial assessment. The document continues to fail the hard constraint by jumping directly into system details without establishing a clear initial state or context.
+* **Phase 4: Critic Analysis:** The critic classified the failure as a structural flaw, emphasizing the lack of an introductory narrative and context. The critic affirmed the lens's accuracy in identifying this core deficiency. No witness was deemed necessary.
+
+**Validated Levers &amp; Gates:**
+
+* Gate 1/1: Lever 1 (MIRAGE) - 49/93
+
+**Ledger Entries:**
+
+* **Entry 1:** Document fails to establish initial context and introductory narrative, violating hard constraint of being a stranger's first document. (Severity: High)
+* **Entry 2:** Structural flaw identified: Lack of a clear 'first impression' section. (Severity: Medium)
+
+**Handoff:**
+
+The next lead for the critic is to **Investigate how to structure the introductory section to clearly establish the initial state and context for a new user, simulating a stranger's first encounter with the document.**
+```
+</pre></div></section>
+<footer>
+<p>Conformance (G0): <code>harness.config.mjs</code> present at the instance root —
+this page does not run the gate; run it yourself: <code>node engine/conform.mjs examples/self</code>.
+The gate proves <code>(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</code> on Z/64Z every time rather than taking it on faith.</p>
+<p>The frontier does not move here. Folding is the keystone's; the door is the First Person's (T6/GR-8).</p>
+</footer>
+</main></body></html>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "pilot_resolution_time", "kind": "finding", "name": "Incident resolution time under the pilot",
+    "recorded": "12 weeks, 3 sites; mean resolution 41 → 26 hours; coastal site 38 → 29 hours.",
+    "claims": [
+      {"id": "res-1", "text": "The pilot ran for 12 weeks across 3 sites.", "source": "corpus/report.md", "quote": "The pilot ran for 12 weeks across 3 sites", "kind": "disk", "read": "2026-09-12"},
+      {"id": "res-2", "text": "Mean time to resolve fell from 41 hours to 26 hours.", "source": "corpus/report.md", "quote": "fell from 41 hours to 26 hours", "kind": "disk", "read": "2026-09-12"},
+      {"id": "res-3", "text": "The coastal site improved from 38 hours to 29 hours.", "source": "corpus/report.md", "quote": "38 hours to 29 hours", "kind": "disk", "read": "2026-09-12"},
+      {"id": "res-4", "text": "The 26-hour mean is read directly from the resolution-time dashboard added in 2.3.0.", "source": "corpus/changelog.md", "quote": "the 26-hour mean is read from it directly", "kind": "disk", "read": "2026-09-12"}
+    ]
+  },
+  {
+    "id": "pilot_cost", "kind": "finding", "name": "What the pilot cost",
+    "recorded": "214 engineer-hours, 60 of them training; the on-call saving of about 40 percent is remembered, not yet on disk.",
+    "claims": [
+      {"id": "cost-1", "text": "The pilot consumed 214 engineer-hours, of which 60 were training.", "source": "corpus/report.md", "quote": "214 engineer-hours, of which 60 were training", "kind": "disk", "read": "2026-09-12"},
+      {"id": "cost-2", "text": "The pilot saved about 40 percent of on-call time — said on the review call, sheet not open.", "source": "corpus/notes-from-memory.md", "quote": "saved about 40 percent of on-call time", "kind": "memory", "read": "2026-09-12"}
+    ]
+  }
+]

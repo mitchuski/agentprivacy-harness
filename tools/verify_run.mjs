@@ -110,7 +110,10 @@ for (const { label, dir } of proposalDirs.sort((a, b) => a.label.localeCompare(b
     add('seed == sha256(hSource‖hProposal‖salt)', reSeed === String(gap.seedHex).toLowerCase(), `${reSeed} vs ${gap.seedHex}`)
     // 4. draw replay
     const mode = gap.mode || gate.mode || 'sample'
-    const N = Number.isInteger(gate.N) ? gate.N : (Array.isArray(gap.drawIndices) ? Math.max(...gap.drawIndices) : null)
+    // the bank the draw was taken from is the one recorded with the draw (gap.N);
+    // the live config's N may have grown since (defect #15: a census that gained
+    // two witnesses made a verified round replay as UNVERIFIABLE)
+    const N = Number.isInteger(gap.N) ? gap.N : (Number.isInteger(gate.N) ? gate.N : (Array.isArray(gap.drawIndices) ? Math.max(...gap.drawIndices) : null))
     if (Array.isArray(gap.drawIndices) && N) {
       const expect = mode === 'census' ? Array.from({ length: N }, (_, k) => k + 1) : draw(gap.seedHex, N, gap.drawIndices.length)
       add('draw replays from seed', JSON.stringify(gap.drawIndices) === JSON.stringify(expect), mode === 'census' ? 'census = all facts' : `${JSON.stringify(gap.drawIndices)}`)

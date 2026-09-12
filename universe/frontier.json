@@ -1,6 +1,6 @@
 {
   "authority": "This file is the sole authority for the universe-builder's numbers (GR-1). Prose cites it; prose never restates it. Only the keystone writes it.",
-  "updated": "2026-08-17",
+  "updated": "2026-09-12",
   "instance": "universe-builder",
   "objective": {
     "metric": "words (historical; retained for the record, no longer an optimization target)",
@@ -11,12 +11,12 @@
     "whyNotAHarness": "The Fiat-Shamir Gap earns its cost only where the claim space is too large to check. This map makes ~100 enumerable claims. Rounds u1 and u2 applied a sampled gate here and produced no evidence about the map at a cost of ~1.4M tokens. See chronicles/2026-07-10_u3_retirement.md."
   },
   "baseline": {
-    "metric": 8587,
+    "metric": 8997,
     "measuredAt": "2026-08-18 (accession-13 withdrawal refold)",
     "note": "Re-measured after (a) the 2026-07-10 retirement re-measure (8112), (b) the 2026-07-12 keeper-seating + holon layer (8319), then (c) the 2026-08-17 fleet sync: the C82 re-typing to informational drift (ruling L149, filed 2026-07-17 in ERRATA) plus fleet stations 13-16 (the DTG verification registry, the litreview runtime, the uor_kappa lane, and a fourth accession since withdrawn) and the Observe generalisation note, then (d) the 2026-08-18 withdrawal of accession 13 by the First Person (its row is a labelled tombstone; the count moved accordingly). The map grows and shrinks honestly: the layer is audited exhaustively, not optimized — the word count is a record, not a target."
   },
   "best": {
-    "metric": 8587,
+    "metric": 8997,
     "leverId": null,
     "gateResult": null,
     "note": "equal to baseline. No round ever validated anything. The metric is retained as a HISTORICAL number, not a live objective — the universe layer is now audited exhaustively, not optimized adversarially."
@@ -51,6 +51,13 @@
       "slug": "instances",
       "layer": "harness",
       "authority": "each instance's own frontier.json"
+    },
+    {
+      "slug": null,
+      "layer": "record",
+      "authority": "the trace census + κ per record",
+      "where": "oracle_mage (→ soul_mage)",
+      "note": "added 2026-09-12 — the fleet's numbers, census-traced"
     }
   ],
   "runs": [
@@ -107,5 +114,13 @@
     "The retired loop lives in universe/retired/. It is prior art and a worked negative result, not dead weight — HARNESS_PATHS.md cites it as the domain where the harness was applied and should not have been.",
     "FLEET.md section 7 names a First-Person decision (co-present rite vs key custody); SEATS.md section 5 argues RPP already settles it. Neither is a verdict.",
     "ERRATA E-1..E-8 are recorded, not fixed. Each belongs to the corpus that owns it."
+  ],
+  "history": [
+    {
+      "metric": 8997,
+      "date": "2026-09-12",
+      "lever": null,
+      "note": "re-measured after the map recorded the 2026-09-12 tree (drivers, examples/corpus, examples/self, the default, optional/, the record layer); was 8587"
+    }
   ]
 }

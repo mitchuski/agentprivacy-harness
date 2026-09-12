@@ -35,6 +35,22 @@ export function makeOllamaRt({ model, host = 'http://127.0.0.1:11434', concurren
     } finally { clearTimeout(timer) }
   }
 
+  async function withTransportRetry(fn, label, seatModel, tries = 4) {
+    let last
+    for (let i = 0; i < tries; i++) {
+      try { return await fn() }
+      catch (e) {
+        last = e
+        const transport = /fetch failed|ECONNRESET|ECONNREFUSED|socket hang up|aborted|EPIPE/i.test(String(e && e.message))
+        if (!transport || i === tries - 1) throw e
+        const wait = 3000 * (i + 1)
+        log(`${label} (${seatModel}): transport failure (${e.message}); retry ${i + 1}/${tries - 1} in ${wait / 1000}s`)
+        await new Promise(r => setTimeout(r, wait))
+      }
+    }
+    throw last
+  }
+
   // a fair queue: one local model serialises anyway
   let active = 0; const waiting = []
   const acquire = () => new Promise(r => { if (active < concurrency) { active++; r() } else waiting.push(r) })
@@ -48,7 +64,11 @@ export function makeOllamaRt({ model, host = 'http://127.0.0.1:11434', concurren
       try {
         for (let attempt = 0; attempt < 2; attempt++) {
           let text
-          try { text = await chatOnce(attempt === 0 ? prompt : prompt + '\n\nYour previous answer was not valid JSON matching the required schema. Return ONLY the JSON object.', schema, seatModel) }
+          // A dropped connection is transport, not a model answer: retry it a
+          // few times with a pause before declaring the seat dead (GR-5 —
+          // an outage must be reported as an outage, but not manufactured by
+          // giving up on the first hiccup while a 27B model is paging in).
+          try { text = await withTransportRetry(() => chatOnce(attempt === 0 ? prompt : prompt + '\n\nYour previous answer was not valid JSON matching the required schema. Return ONLY the JSON object.', schema, seatModel), opts.label || 'seat', seatModel) }
           catch (e) { log(`${opts.label || 'seat'} (${seatModel}) failed: ${e.message}`); return null }
           if (!schema) return text
           try { const v = JSON.parse(text); if (shapeOk(v, schema)) return v } catch { /* repair once */ }

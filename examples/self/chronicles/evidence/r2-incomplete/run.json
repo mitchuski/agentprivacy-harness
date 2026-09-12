@@ -1,0 +1,27 @@
+{
+  "name": "self",
+  "runId": "r2",
+  "driver": "ollama",
+  "status": "INCOMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 1,
+    "MIRAGE": 0,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-opus-5 (Claude Code subagents, one per lens)",
+    "prover": "gemma3:27b"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1115,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "858215c5b233ca7ca858e708eba3609742bfa573d95c43c597cedbabc1b4cff8",
+  "keystoneTodo": "RUN INCOMPLETE — round r2.1 lost seats to infrastructure (hold-apart|assay×1/2, chronicle), not to exhausted ideas. FOLD NOTHING: no gate ran on the dead seats, so no verdict here is evidence (GR-5). Re-run the round; the surviving proposals are candidates, not results. Do not move frontier.json."
+}

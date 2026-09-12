@@ -6,7 +6,7 @@ Tooling for your own agentic research. One agent proposes. A second, held apart,
 (⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ
 ```
 
-This copy is yours. It carries the system alone: the engine, the seats, the tools, the constitution, three examples, and drivers that run a round with a stub, a local model, or the Claude API. It carries no results, no chronicles and no fleet; the record starts with you. Apache-2.0. Node 18 or later, zero dependencies, no network unless a driver you choose makes one.
+This copy is yours. It carries the system alone — no results, no chronicles and no fleet; the record starts with you. Apache-2.0. Node 18 or later, zero dependencies, no network unless a driver you choose makes one.
 
 ## Run it: five commands
 
@@ -18,11 +18,11 @@ node tools/render_run.mjs examples/field-guide smoke                    # 4 · r
 node drivers/run.mjs --instance examples/field-guide --driver ollama --model <m> --run r1   # 5 · a real round on a local model (or --driver anthropic with ANTHROPIC_API_KEY)
 ```
 
-Command 2 writes `runs/smoke/<round>/p<i>-<lever>/{proposal_canon.json, gap.json, candidate.md, verdict.json}` and `runs/smoke/run.json`. A stub round folds nothing and says so; command 5 is where a fold can happen. For two different models in the two seats, which is the separation the design wants, pass `--propose-model <a> --assay-model <b>`; `--driver split` puts the proposer on the Claude API and everything else on Ollama.
+Command 2 writes `runs/smoke/<round>/p<i>-<lever>/{proposal_canon.json, gap.json, candidate.md, verdict.json}` and `runs/smoke/run.json`; a stub round folds nothing and says so. Command 5 is where a fold can happen.
 
 ## The loop
 
-Every round runs six phases; each is one seat with one card in `seats/` and one permitted set of writes (`SEAT_CONTRACT.md`).
+Six phases per round, one seat each, one card in `seats/`, one permitted set of writes (`SEAT_CONTRACT.md`):
 
 | seat | phase | does | writes |
 |---|---|---|---|
@@ -43,11 +43,11 @@ Take the rung you need; the rest waits.
 1. **The auditor.** Your own documents, a census of the numbers they claim, no model at all: `examples/corpus`. If every claim you make is enumerable, this is the whole tool (`ADOPTION.md`, step 0).
 2. **The spar.** `examples/field-guide`: compress a 730-word guide while a held-out gate stays 8/8. Run it with the stub, then with a model.
 3. **Your instance.** `node tools/new_instance.mjs ../my-harness my-harness`, then answer five questions in `harness.config.mjs`: the artefact, the number that must move, the gate it must fully pass, the line it must never cross, the door. `node engine/conform.mjs ../my-harness` refuses until every answer is real.
-4. **A second model in the prover's seat** (`--assay-model`). The conformance gate reports Φ_inference = 0 when both seats are the same model; the duel begins when they are not.
+4. **A second model in the prover's seat** (`--assay-model`), the separation the design wants: pass `--propose-model <a> --assay-model <b>`, or `--driver split` for the proposer on the Claude API and everything else on Ollama. The conformance gate reports Φ_inference = 0 when both seats are the same model; the duel begins when they are not.
 5. **The arena.** A referee you cannot tune: a public board, a test suite you did not write, a stranger who rebuilds your artefact byte for byte (`tools/mint_artefact.mjs` seals it; `tools/vrc.mjs` lets a signature mint the edge). The open world is when those results travel.
 6. **Optional layers** in `optional/`: seats dressed with personas (`SPECIALISATION.md`), the graph dialect and content addressing (`GRAPH.md`, `HOLONS.md`), wiki federation (`WIKI.md`). Each names the origin's own ecosystem; none is needed to run a round.
 
-`WORKFLOW.md` is the operator's loop end to end, including how to bundle a config for the Claude Code Workflow tool (`node tools/bundle.mjs`).
+`WORKFLOW.md` is the operator's loop end to end; `node tools/bundle.mjs` bundles a config for the Claude Code Workflow tool.
 
 ## The constitution
 
@@ -58,7 +58,7 @@ Do not change these; everything else is yours.
 
 ## For an agent working here
 
-`AGENTS.md` is the boot file (`CLAUDE.md` imports it): one session, one seat, read your card and nothing past it. The instance you are in belongs to whoever cloned this. Documents that name the origin's sites, lanes or people are upstream context, never your mandate.
+`AGENTS.md` is the boot file (`CLAUDE.md` imports it): one session, one seat, read your card and nothing past it. The instance belongs to whoever cloned this; documents that name the origin's sites, lanes or people are upstream context, never your mandate.
 
 ## What is in the box
 

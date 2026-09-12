@@ -21,12 +21,15 @@ node ../../tools/verify_run.mjs . r1         # re-derive every seed
 node ../../tools/render_run.mjs . r1         # runs/r1/run.html
 ```
 
-**The first sample is in `runs/r1`** (2026-09-12): proposer gemma3:12b, prover
-gemma3:27b, two proposals, two mirages — a 720-word rewrite that dropped 13
-witnesses and a 379-word one that dropped 44 — every seed re-deriving, no
-fold. `chronicles/2026-09-12_r1_two-mirages.md` tells it verdict first,
-including the runner defect the run found. That is what a round looks like
-when the gate holds.
+**Two sample rounds are in `runs/`** (2026-09-12). r1, proposer gemma3:12b and
+prover gemma3:27b: two proposals, two mirages — a 720-word rewrite that dropped
+13 witnesses and a 379-word one that dropped 44 — every seed re-deriving, no
+fold (`chronicles/2026-09-12_r1_two-mirages.md`). r2, the proposer's seat
+handed to two Claude Code subagents via `--proposals`, the same local prover:
+both candidates VALIDATED at 95/95, the restructurer's folded, 1,115 → 1,069
+(`chronicles/2026-09-12_r2_the-first-fold.md`). A first attempt at r2 died of
+transport and was refused as evidence; it sits at `chronicles/evidence/r2-incomplete/`, outside `runs/` so the verifier does not read a round the engine refused as a run. That
+is what the gate looks like holding, and then opening.
 
 Fold as keystone: `node tools/check_path.mjs runs/r1/r1.1/p<i>-<lever>/candidate.md`
 must print `pass: true` and a word count below `frontier.json` best; then copy

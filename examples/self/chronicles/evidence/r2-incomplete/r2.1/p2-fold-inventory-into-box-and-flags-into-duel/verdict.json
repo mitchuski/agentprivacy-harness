@@ -1,0 +1,12 @@
+{
+  "leverId": "fold-inventory-into-box-and-flags-into-duel",
+  "status": "VALIDATED",
+  "evidence": "I verified that the candidate document adheres to the hard constraint of being a standalone document explaining the dual-agent harness, its operation, and adoption steps. It contains the five initial commands, the loop table, the adoption steps, and the constitution as described in the seat card. No external references or pointers to longer versions are present.",
+  "metric": 1069,
+  "gateResult": "95/95",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r2/r2.1/p2-fold-inventory-into-box-and-flags-into-duel",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

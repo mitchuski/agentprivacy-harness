@@ -29,6 +29,14 @@ export default {
 
   door: 'first-person',
 
+  // Per-seat model (SEAT_CONTRACT: seatOpts). The chronicle draft is not
+  // evidence — the keystone reviews it — and its prompt carries the whole
+  // round, the largest of the six; on a 32 GB box the 27B prover died on
+  // exactly this seat twice (r3, 2026-09-12: transport failure, then the OS
+  // killed the run for memory). The draft is drawn by the 12B instead; the
+  // assay stays on whatever --assay-model names, and run.json records that pair.
+  seatOpts: { chronicle: { model: 'gemma3:12b' } },
+
   gate: { N: CENSUS.length, count: 8, mode: 'census', censusThreshold: 200 },
 
   heldApartRule:

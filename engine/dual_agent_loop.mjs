@@ -15,7 +15,7 @@
 // tools/bundle.mjs inlines gap.mjs (and its kappa.mjs helpers) when it
 // concatenates this file into a self-contained .workflow.mjs, because the
 // Workflow runtime has no `import`.
-import { canonicalize, hashCanon, perProposalSalt, deriveSeed, draw } from './gap.mjs'
+import { canonicalize, hashCanon, perProposalSalt, deriveSeed, draw, DRAW_VERSION } from './gap.mjs'
 
 // Code-derive the hold-apart seed and draw for a committed proposal (SALTED
 // mode). Returns null in LEGACY mode (no saltSecret, or no declared gate.N),
@@ -37,7 +37,7 @@ export function deriveHoldApart(proposal, { gate, saltSecret, sourceHash }) {
   const drawIndices = mode === 'census'
     ? Array.from({ length: N }, (_, k) => k + 1)
     : draw(seedHex, N, count)
-  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawIndices }
+  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawVersion: DRAW_VERSION, drawIndices }
 }
 
 export function bootPreamble(root, repo, seatCard) {

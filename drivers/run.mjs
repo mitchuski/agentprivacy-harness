@@ -150,7 +150,7 @@ for (const round of result.detail || []) {
     writeFileSync(join(pdir, 'proposal_canon.json'), canonicalize(p))
     if (typeof p.compressedText === 'string') writeFileSync(join(pdir, 'candidate.md'), p.compressedText)
     const gapSeat = tapFor('gap', p.leverId)
-    writeJson(join(pdir, 'gap.json'), { hSource: d.hSource, hProposal: d.hProposal, salt: d.salt, seedHex: d.seedHex, mode: d.mode, N: d.N, count: d.count, drawIndices: d.drawIndices, draw: gapSeat?.draw || null, transcript: gapSeat?.transcript || null })
+    writeJson(join(pdir, 'gap.json'), { hSource: d.hSource, hProposal: d.hProposal, salt: d.salt, seedHex: d.seedHex, mode: d.mode, N: d.N, count: d.count, drawVersion: d.drawVersion, drawIndices: d.drawIndices, draw: gapSeat?.draw || null, transcript: gapSeat?.transcript || null })
     // match the verdict by lever id, unless the proposers minted duplicate ids
     // (a small model will answer "1" twice) — then by position, which the
     // engine's pipeline preserves; a mis-stated id is filed with the mismatch

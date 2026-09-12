@@ -115,7 +115,7 @@ for (const { label, dir } of proposalDirs.sort((a, b) => a.label.localeCompare(b
     // two witnesses made a verified round replay as UNVERIFIABLE)
     const N = Number.isInteger(gap.N) ? gap.N : (Number.isInteger(gate.N) ? gate.N : (Array.isArray(gap.drawIndices) ? Math.max(...gap.drawIndices) : null))
     if (Array.isArray(gap.drawIndices) && N) {
-      const expect = mode === 'census' ? Array.from({ length: N }, (_, k) => k + 1) : draw(gap.seedHex, N, gap.drawIndices.length)
+      const expect = mode === 'census' ? Array.from({ length: N }, (_, k) => k + 1) : draw(gap.seedHex, N, gap.drawIndices.length, gap.drawVersion || 1)
       add('draw replays from seed', JSON.stringify(gap.drawIndices) === JSON.stringify(expect), mode === 'census' ? 'census = all facts' : `${JSON.stringify(gap.drawIndices)}`)
     } else add('draw replays from seed', false, 'drawIndices or N missing — cannot replay')
   } else if (gap && gap.seedHex) {
@@ -138,7 +138,7 @@ for (const { label, dir } of proposalDirs.sort((a, b) => a.label.localeCompare(b
       // compare as SETS: legacy gap.json lists questions in the LLM's
       // presentation order (often sorted by index), not the draw order. Same 8
       // facts = the draw derived from the seed, regardless of presentation.
-      const expect = draw(gap.seedHex, gate.N, uniqRecorded.length)
+      const expect = draw(gap.seedHex, gate.N, uniqRecorded.length, gap.drawVersion || 1)
       const eqSet = JSON.stringify([...uniqRecorded].sort((a, b) => a - b)) === JSON.stringify([...expect].sort((a, b) => a - b))
       add('legacy draw replays from seed (as a set)', eqSet, `recorded {${uniqRecorded.join(',')}} vs replay {${expect.join(',')}}`)
     } else add('legacy draw replays from seed', true, 'no parseable draw indices — seed reproduction stands as the audit (legacy)')

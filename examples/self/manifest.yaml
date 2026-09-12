@@ -1,0 +1,15 @@
+# manifest.yaml — pipeline state. Keystone-only writes (GR-10).
+pipeline: self
+version: 1
+gates:
+  - G0-conform        # node engine/conform.mjs examples/self green
+  - G1-held-out       # census N/N on the candidate (tools/check_path.mjs)
+  - G2-hard-constraint
+  - G3-frontier-fold  # keystone folds, frontier first, prose second; the candidate becomes artifact/PATH.md and templates/README.default.md
+  - G4-door           # publishing the folded README is the First Person's
+rules:
+  g4_owner: first-person
+  keystone_only_writes: [frontier.json, claims_register.md, manifest.yaml, artifact/PATH.md]
+  scratch_dir: runs/
+  chronicle_per_session: chronicles/
+artifacts: {}

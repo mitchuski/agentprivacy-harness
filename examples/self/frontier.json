@@ -1,0 +1,73 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-12",
+  "objective": {
+    "metric": "words of artifact/PATH.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check_path.mjs), N/N or MIRAGE",
+    "hardConstraint": "still the document a stranger opens first: five commands in order with what each writes, the loop table, the adoption steps, the constitution, the box layout; nothing invented"
+  },
+  "gate": {
+    "N": 95,
+    "mode": "census",
+    "how": "node tools/check_path.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 1115,
+    "date": "2026-09-12",
+    "how": "node tools/measure.mjs → metric (whitespace-split tokens of artifact/PATH.md); census 95/95"
+  },
+  "best": {
+    "metric": 1115,
+    "leverIds": [],
+    "evidence": "the artefact as written by hand on 2026-09-12 and re-baselined the same day after the title and the PATHWAYS.md pointer were added; nothing has beaten the baseline yet"
+  },
+  "history": [
+    {
+      "metric": 1088,
+      "date": "2026-09-12",
+      "lever": null,
+      "note": "baseline — the newcomer path as hand-written; census N=93 drawn from it; run r1 (two mirages) stands against this version, source sha256 69e72588…"
+    },
+    {
+      "metric": 1115,
+      "date": "2026-09-12",
+      "lever": null,
+      "note": "re-baselined — title names the agentprivacy dual-agent harness, PATHWAYS.md pointer added; census N=95"
+    }
+  ],
+  "attempts": [
+    {
+      "runId": "r1",
+      "date": "2026-09-12",
+      "against": 1088,
+      "models": {
+        "proposer": "gemma3:12b",
+        "prover": "gemma3:27b"
+      },
+      "phiInference": 1,
+      "tally": {
+        "VALIDATED": 0,
+        "MIRAGE": 2,
+        "BLOCKED": 0
+      },
+      "candidates": [
+        {
+          "lever": "line-editor",
+          "words": 720,
+          "census": "80/93"
+        },
+        {
+          "lever": "restructurer",
+          "words": 379,
+          "census": "49/93"
+        }
+      ],
+      "chronicle": "chronicles/2026-09-12_r1_two-mirages.md"
+    }
+  ],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "a shorter newcomer path that still carries all 95 witnesses and still reads as the first document a stranger opens",
+    "status": "OPEN"
+  }
+}

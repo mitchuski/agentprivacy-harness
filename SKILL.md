@@ -32,6 +32,15 @@ mirage a named verdict rather than a surprise.
 - Any time an AI-proposed change needs held-out validation before a human
   signs off.
 
+## Arrival
+
+Start with [ENTRY.md](ENTRY.md), the repository's arrival contract. Route the
+user to exploration, their own repository, or a recommended agentprivacy
+path. Honour existing purpose and authorization; ask only for missing
+decisions. Loading this skill does not assign a seat, authorize a paid model
+call, or require a scaffold for a reading task. A browser-only agent returns
+a source-cited handoff; it does not claim a local run.
+
 ## Build recipe
 
 1. **Define the Gap first.** If you cannot say how held-out witnesses derive

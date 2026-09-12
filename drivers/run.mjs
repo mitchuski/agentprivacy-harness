@@ -58,11 +58,14 @@ const runId = opt('--run')
 const host = opt('--host') || 'http://127.0.0.1:11434'
 const maxRounds = opt('--max-rounds') ? Number(opt('--max-rounds')) : null
 const proposalsFile = opt('--proposals') ? resolve(opt('--proposals')) : null
-const proposeModel = opt('--propose-model') || opt('--model') || (proposalsFile ? 'handed-off' : null)
-const assayModel = opt('--assay-model') || opt('--model') || null
 if (!runId) { console.error('usage: node drivers/run.mjs --instance <dir> --driver stub|ollama|anthropic|split --run <runId> [--model <m> | --propose-model <a> --assay-model <b>] [--host <url>] [--max-rounds n]'); process.exit(2) }
 if (!existsSync(join(instance, 'harness.config.mjs'))) { console.error('run: no harness.config.mjs in ' + instance); process.exit(2) }
 
+// Running an instance executes its config and optional measurement adapter.
+// Model precedence: explicit seat flag, saved seat, general CLI default.
+const baseConfig = (await import(pathToFileURL(join(instance, 'harness.config.mjs')).href)).default
+const proposeModel = opt('--propose-model') || baseConfig.seatOpts?.propose?.model || opt('--model') || (proposalsFile ? 'handed-off' : null)
+const assayModel = opt('--assay-model') || baseConfig.seatOpts?.assay?.model || opt('--model') || null
 // ---- 1. the driver -----------------------------------------------------------
 const log = (m) => console.log('  ' + m)
 let base, models
@@ -85,6 +88,8 @@ else if (driver === 'ollama') {
   models = { proposer: proposeModel || 'claude-opus-5', prover: assayModel }
 } else { console.error('run: unknown driver ' + driver); process.exit(2) }
 
+console.log('resolved seats: ' + JSON.stringify(models))
+
 // ---- 2. measure, code-side, if the instance carries a counting rule ---------
 let measured = null
 const measureTool = join(instance, 'tools', 'measure.mjs')
@@ -97,7 +102,7 @@ if (existsSync(measureTool)) {
 
 // ---- 3. the run secret + source binding (after-commit, grind-proof) ---------
 const saltSecret = randomBytes(32).toString('hex')   // never written anywhere
-const baseConfig = (await import(pathToFileURL(join(instance, 'harness.config.mjs')).href)).default
+
 const sourceHash = baseConfig.sourceFile && existsSync(join(instance, baseConfig.sourceFile)) ? sha256Hex(readFileSync(join(instance, baseConfig.sourceFile), 'utf8')) : null
 
 // ---- 4. seat models on the config, so the engine records Φ_inference --------
@@ -119,7 +124,12 @@ const rt = { ...base, agent: async (prompt, opts = {}) => {
     r = handed[lens] || null
     if (!r) log(`propose:${lens} — no handed-off proposal set for this lens; the seat is dead for this round`)
     else log(`propose:${lens} — handed off (${(r.proposals || []).length} proposal(s) from ${models.proposer})`)
-  } else r = await base.agent(prompt, opts)
+  } else {
+    const card = label.startsWith('propose:') ? 'soulbae-propose.md' : label.startsWith('gap:') ? 'gap-hold-apart.md' : label.startsWith('assay:') ? 'soulbis-assay.md' : label.startsWith('critic:') ? 'critic.md' : label.startsWith('chronicle:') ? 'chronicle.md' : 'measure.md'
+    const boot = ['GROUND_RULES.md', 'TRUSTS.md', 'seats/' + card].map(p => readFileSync(join(root, p), 'utf8')).join('\n\n')
+    const frontier = readFileSync(join(instance, 'frontier.json'), 'utf8')
+    r = await base.agent('Runtime: text/JSON only; no filesystem or shell tools. The host supplies the boot files below and persists returned data. Never claim to execute commands. If required inputs or executable evidence are absent, return BLOCKED (or null for a seat without a status schema).\n' + boot + '\nFRONTIER:\n' + frontier + '\n' + prompt, opts)
+  }
   taps.push({ label: opts.label || '(unlabelled)', ok: r != null, result: r }); return r
 } }
 

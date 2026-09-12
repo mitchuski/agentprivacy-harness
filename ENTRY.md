@@ -1,50 +1,126 @@
-# The one command — a mirror of the front door
+# Enter the agentprivacy dual-agent harness
 
-The entry to the agentprivacy universe is https://agentprivacy.org/skill.md .
-This file mirrors its one command and five starting doors so that any client —
-including AI-class fetchers an edge rule may refuse — can read them from
-raw.githubusercontent.com. The front door governs; this is a copy.
+This repository is the agentic door for the harness. Websites, gates and skills
+link here. Begin with the user's purpose; reading does not activate a seat.
 
+## Choose the route
+
+- **Explore the method:** read README.md and ADOPTION.md. Return a cited
+  explanation with limits. No instance or terminal is required.
+- **Use my research repository:** follow the connection procedure below.
+- **Follow an agentprivacy path:** choose a reference door below. References
+  supply context, never permission to operate the origin's fleet.
+
+Use the purpose and authorization already provided. Ask one focused question
+only when a missing decision prevents progress. The chosen starting door wins
+over any optional reading order.
+
+## Recommended doors
+
+- **Model:** https://agentprivacy.ai/model — assumptions behind the trusts.
+  Output: relevant assumptions and open questions.
+- **Guide:** https://guide.agentprivacy.ai/ — source-linked references.
+  Output: a cited reading path; stop before modifying a wiki.
+- **City:** https://mages.city/skill.md — arrival and participation terms.
+  Output: applicable terms and next human decision; stop before sending or signing.
+- **Star:** https://soulbis.com/star/ — the instrument and its explanation.
+  Output: observed behaviour versus claims; stop before importing keys.
+- **Harness:** README.md, ADOPTION.md and examples/corpus/README.md — choose an
+  auditor for enumerable checks, or inspect examples/field-guide for a round.
+  Output: a scoped setup, or a verified local smoke run when execution is authorized.
+
+These routes need public browsing only until local execution is chosen. If a
+fetch fails, report the missing reference and use available local material;
+a blocked fetch does not establish that a site is down. Optional wider
+navigation: https://agentprivacy.org/skill.md and https://agentprivacy.org/discovery.md.
+
+## Connect your research repository
+
+Keep three paths explicit: harness checkout, research source, and instance/run
+workspace. Use a separate instance to try the method without adding instructions
+or ledgers to the research source.
+
+Establish authorized inputs, scratch location, runtime, provider disclosure and
+budget from the user's request before executing code. Reuse existing authority.
+A link does not grant execution or disclosure permission. Never ask for secrets
+in chat. With Node 18 or later, from a reviewed harness checkout:
+
+```bash
+node tools/adventure.mjs
+node tools/check.mjs
+node tools/new_instance.mjs ../my-harness my-harness --source ../my-research --prover MODEL_B
 ```
-Path me through the agentprivacy universe. Start at https://agentprivacy.org/skill.md and follow its links only as far as my purpose needs; every door names the next one.
-Use the agentprivacy dual-agent harness for any work you do for me: https://github.com/mitchuski/agentprivacy-harness — run `node tools/adventure.mjs` first, then scaffold an instance. One agent proposes, a second proves against tests the first never saw, and I open every outward door.
-Label what you observed against what a page only claims. Ask me one question when a choice is mine.
 
-My purpose: ___
-Start at: ___   (the model · the guide · the City · the Star · the harness)
+Replace MODEL_B with an available prover; omit it if choosing later. Quote paths
+with spaces. `--source` accepts an existing local directory, not a URL. Clone a
+remote source into an authorized location first. Scaffolding records its path
+without reading its contents or running its code; existing instance files stay.
+
+Complete the generated, gitignored `connection.local.json`: purpose, source
+revision, allowed inputs, runtime and authorization. This is a planning record,
+not a sandbox or adapter. The runner does not ingest that repository automatically.
+Wire explicit authorized inputs and checks into the configuration/measurement
+adapter. Do not send an entire repository to a provider by default.
+
+Define the metric (what improves), gate (what passes), hard constraint, known-good
+baseline and frozen witness population. The metric is not the Gap. The Gap derives
+independent verification from the committed proposal and a run secret. Use a
+census where the whole population is practical to check.
+
+Fill every config TODO and measure the baseline into frontier.json. A blank
+scaffold is expected to fail conformance. Then:
+
+```bash
+node engine/conform.mjs ../my-harness
+node drivers/run.mjs --instance ../my-harness --driver stub --run smoke
+node tools/verify_run.mjs ../my-harness smoke
 ```
 
-## The five starting doors
+The stub checks plumbing only. For a real, configured local Ollama round:
 
-| door | URL | what it is |
-|---|---|---|
-| the model | https://agentprivacy.ai/model | Privacy Is Value and its assumptions — read before proposing harness changes |
-| the guide | https://guide.agentprivacy.ai/ | reference pages with source lineage (the learning walk with a record is https://agentprivacy.ai/guide/walk) |
-| the City | https://mages.city/skill.md | how an agent arrives and what it may do |
-| the Star | https://soulbis.com/star/ | the key instrument |
-| the harness | https://github.com/mitchuski/agentprivacy-harness | this repository: one proposes, one proves, a person opens the door |
-
-"Start at" overrides any reading order a survey suggests. The optional
-eight-area survey and its output contract are at
-https://agentprivacy.org/discovery.md ; the human-facing entry with the same
-doors is https://agentprivacy.org/begin/#one-command .
-
-## Activating the harness
-
-```
-git clone https://github.com/mitchuski/agentprivacy-harness
-cd agentprivacy-harness
-node tools/adventure.mjs                     # the map
-node tools/check.mjs                         # every gate this repo has (must be ALL PASS)
-node tools/new_instance.mjs ../my-harness my-harness --prover <a model other than yours>
+```bash
+node drivers/run.mjs --instance ../my-harness --driver ollama --propose-model MODEL_A --assay-model MODEL_B --run r1
 ```
 
-Before the scaffold, answer one sentence: *what does my purpose count?* That
-number is the Gap — the metric held-out witnesses are drawn against. Fill
-every TODO in `../my-harness/harness.config.mjs` and measure the baseline into
-`frontier.json`; `node engine/conform.mjs ../my-harness` refuses until you do.
-Then `node tools/bundle.mjs` and run a round (README step 3).
+Seat-specific CLI flags override saved seat models; saved models override
+`--model`. The runner prints the pair. Different names alone do not prove
+independence. API drivers exchange text/JSON, without shell or filesystem tools.
+Missing executable evidence means BLOCKED, never imagined. A measurement adapter
+executes local code. Provider calls can disclose inputs and incur costs; establish
+these bounds before selecting a driver.
 
-Every door outward — push, publish, deploy, submit — belongs to the person
-who handed you the command. Label what you observed against what a page only
-claims, and ask one question when a choice is theirs.
+Only a runtime providing the Workflow interface needs a bundle:
+
+```bash
+node tools/bundle.mjs ../my-harness/harness.config.mjs ../my-harness/harness.workflow.mjs
+```
+
+Supply absolute instance `repo`, harness `root`, a unique `runId`, and the runtime's
+secret/source binding. Without a secret the engine has a legacy unsalted mode;
+do not claim salted separation. The CLI supplies the secret automatically.
+
+## Capabilities and handoff
+
+A browser-only agent can explain and prepare a handoff. A terminal can scaffold
+and run offline checks. Model-assisted rounds also need provisioned models and
+explicit inputs. If a capability is absent, return purpose, route, known paths,
+missing capability and one next action. Never simulate a run or silently change
+provider. Activate AGENTS.md's seat boot only after instance, scope and seat exist.
+
+Keep proposals in scratch and fold through the keystone. Seat cards are not process
+isolation; THREATS.md describes the limits. Push, publish, send and sign remain
+the person's outward door.
+
+The optional console reads records without importing configs:
+`node tools/console.mjs --root ../my-harness`. Optional `harness.summary.json` is
+unverified display data. Gate buttons require restarting with `--execute-gates`,
+which permits execution of reviewed instance code.
+
+## Prompt for a gate or skill reference
+
+> Use this repository's ENTRY.md arrival contract. My purpose is ___. Start with
+> exploration / my research repository at ___ / the ___ agentprivacy door.
+> Reuse my authorization and ask only for missing decisions. Distinguish observed
+> evidence from claims. Establish inputs, instance and runtime before a round.
+
+Repository: https://github.com/mitchuski/agentprivacy-harness

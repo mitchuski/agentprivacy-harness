@@ -1,5 +1,7 @@
 # agentprivacy dual-agent harness — the default distribution
 
+Start with [ENTRY.md](ENTRY.md): exploration, your research repository, or recommended paths.
+
 Tooling for your own agentic research. One agent proposes. A second, held apart, proves. The tests that decide are drawn by hashing the proposal together with a secret the proposer never sees, so the check an agent invents can never be the check its work was built to survive. A person holds the only door outward.
 
 ```

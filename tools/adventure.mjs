@@ -20,7 +20,7 @@ const spar = readJson(join(root, 'examples', 'field-guide', 'frontier.json'))
 const farm = existsSync(join(root, 'examples', 'wiki-farm'))
 const universe = existsSync(join(root, 'universe'))
 const instances = []
-for (const base of [root, resolve(join(root, '..'))]) {
+for (const base of [root]) {
   try { for (const e of readdirSync(base)) {
     const p = join(base, e)
     try { if (statSync(p).isDirectory() && existsSync(join(p, 'harness.config.mjs')) && p !== root) instances.push(p) } catch {}
@@ -30,6 +30,9 @@ for (const base of [root, resolve(join(root, '..'))]) {
 console.log(`
   ${g('(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ')}
 
+  Start with ENTRY.md: explore · use your research repository · recommended paths.
+  Reading does not activate a seat. A scaffold records scope, not permission.
+
   One agent proposes. A second independently proves. The tests are drawn by
   hashing the proposal with a secret the proposer never sees. Everything else
   is a path from that one idea — pick yours.
@@ -38,13 +41,13 @@ console.log(`
 
   ${c('🤺 THE SPAR')} — feel the discipline before you trust it ${d('(start here)')}
      node tools/check.mjs                        ${d('every gate this repo has')}
-     ${d('then run a round:')} README step 3 ${d('— Workflow tool or your own rt driver')}
+     ${d('then run a round:')} node drivers/run.mjs --instance examples/field-guide --driver stub --run smoke ${d('— Workflow tool or your own rt driver')}
      node tools/render_run.mjs examples/field-guide r4
      node tools/console.mjs                      ${d('watch a bout live on :4242')}
 
   ${c('🧙 BUILD YOUR OWN')} — the setup wizard that installs a mage
-     ${d('first, one sentence: what does your purpose COUNT? that number is the')}
-     ${d('Gap (ADOPTION.md step 2); a scaffold without it is a to-do list. then:')}
+     ${d('first, one sentence: what does your purpose COUNT? that number is the metric; the')}
+     ${d('Gap independently selects verification witnesses (ADOPTION.md step 2). then:')}
      node tools/new_instance.mjs ../my-harness my-harness --prover <a different model>
      ${d('fill every TODO (the gate refuses until you do), then:')}
      node engine/conform.mjs ../my-harness

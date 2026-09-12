@@ -54,7 +54,7 @@ rmSync(join(out, 'tools', 'make_default.mjs'), { force: true })     // the defau
 // ---- root documents: constitution + method, no results ----
 for (const f of ['LICENSE', '.gitattributes', '.gitignore',
   'TRUSTS.md', 'GROUND_RULES.md', 'SEAT_CONTRACT.md', 'ADOPTION.md',
-  'AGENTS.md', 'CLAUDE.md', 'SKILL.md',
+  'AGENTS.md', 'CLAUDE.md', 'SKILL.md', 'ENTRY.md',
   'WORKFLOW.md', 'PRACTICES.md', 'SOURCES.md', 'THREATS.md']) {
   if (existsSync(join(root, f))) copy(f)
 }

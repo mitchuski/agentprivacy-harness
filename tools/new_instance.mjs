@@ -10,7 +10,7 @@
 // It never overwrites. Re-running on an existing instance reports what is
 // already there and leaves it alone.
 
-import { mkdirSync, existsSync, copyFileSync, writeFileSync, readFileSync } from 'node:fs'
+import { mkdirSync, existsSync, copyFileSync, writeFileSync, readFileSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve, basename } from 'node:path'
 
@@ -23,14 +23,26 @@ const T = join(root, 'templates')
 // same-model pairs have Φ_inference ≈ 0 — the prover shares the proposer's
 // blind spots). One flag here beats a config edit nobody makes.
 const argv = process.argv.slice(2)
-const proverIdx = argv.indexOf('--prover')
-const prover = proverIdx >= 0 ? argv[proverIdx + 1] : null
-const positional = argv.filter((a, i) => a !== '--prover' && i !== proverIdx + 1)
+const values = {}, positional = []
+for (let i = 0; i < argv.length; i++) {
+  const a = argv[i]
+  if (['--prover', '--source'].includes(a)) {
+    if (!argv[i + 1] || argv[i + 1].startsWith('--') || values[a]) {
+      console.error('missing or duplicate value for ' + a); process.exit(1)
+    }
+    values[a] = argv[++i]
+  } else if (a.startsWith('--')) { console.error('unknown option: ' + a); process.exit(1) }
+  else positional.push(a)
+}
 const [dirArg, nameArg] = positional
-if (!dirArg || (proverIdx >= 0 && !prover)) {
-  console.error('usage: node tools/new_instance.mjs <dir> [name] [--prover <model>]')
-  console.error('  e.g. node tools/new_instance.mjs ../my-harness shrink-the-binary --prover claude-sonnet-5')
+const prover = values['--prover'] || null
+const source = values['--source'] ? resolve(values['--source']) : null
+if (!dirArg || positional.length > 2) {
+  console.error('usage: node tools/new_instance.mjs <dir> [name] [--prover <model>] [--source <research-directory>]')
   process.exit(1)
+}
+if (source && (!existsSync(source) || !statSync(source).isDirectory())) {
+  console.error('--source must name an existing local directory'); process.exit(1)
 }
 const dest = resolve(dirArg)
 const name = nameArg || basename(dest)
@@ -72,7 +84,22 @@ const doorLine = "door: 'first-person', // T6 — leave exactly as is; conform.m
 if (prover && cfgOut.includes(doorLine) && !cfgOut.includes('seatOpts:')) {
   cfgOut = cfgOut.replace(doorLine, doorLine + `\n\n  // The prover's model (D4b). The proposer runs on the caller's default; the\n  // prover must not. Set by new_instance.mjs --prover.\n  seatOpts: { assay: { model: ${JSON.stringify(prover)} } },`)
 }
-if (cfgOut !== cfg) writeFileSync(cfgPath, cfgOut)
+if (made.includes('harness.config.mjs') && cfgOut !== cfg) writeFileSync(cfgPath, cfgOut)
+
+const connectionPath = join(dest, 'connection.local.json')
+if (!existsSync(connectionPath)) {
+  writeFileSync(connectionPath, JSON.stringify({
+    version: 1, state: 'draft', harnessRoot: resolve(root), instanceRoot: dest,
+    researchRoot: source, revision: null, purpose: null, allowedInputs: [],
+    scratchRoot: join(dest, 'runs'), runtime: null,
+    authorization: { execution: null, providerDisclosure: null, budget: null },
+    note: 'Planning record only; not a sandbox or permission grant. The runner does not read source files from this record. Configure explicit inputs and checks before running.'
+  }, null, 2) + '\n')
+  made.push('connection.local.json')
+}
+const ignorePath = join(dest, '.gitignore')
+const ignore = existsSync(ignorePath) ? readFileSync(ignorePath, 'utf8') : ''
+if (!ignore.split(/\r?\n/).includes('connection.local.json')) writeFileSync(ignorePath, ignore + (ignore && !ignore.endsWith('\n') ? '\n' : '') + 'connection.local.json\n')
 
 const rel = (p) => join(dirArg, p).replace(/\\/g, '/')
 
@@ -82,7 +109,8 @@ if (kept.length) console.log('  kept (already present): ' + kept.join(', '))
 
 console.log(`
 It does NOT conform yet, and it should not. Three things are missing, and each
-one is a decision only you can make:
+one must be grounded in the user's purpose and existing authorization.
+Read ENTRY.md; connection.local.json records source and scope without granting permissions:
 
   1. THE GAP — before anything else. Say how held-out witnesses derive from a
      proposal by hashing it. If you cannot, you do not have a harness yet; you

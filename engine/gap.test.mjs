@@ -105,8 +105,9 @@ const throws = (fn, msg) => {
     const idx = bytes[k] % remaining.length
     expect.push(remaining[idx]); remaining.splice(idx, 1)
   }
-  eq(draw(seed, N, count), expect, 'draw matches the byte procedure the prompt described')
+  eq(draw(seed, N, count, 1), expect, 'draw v1 (legacy replay) matches the byte procedure the no-salt prompt describes')
   eq(draw(seed, N, count), draw(seed, N, count), 'draw is deterministic (same seed → same draw)')
+  ok(JSON.stringify(draw(seed, N, count)) !== JSON.stringify(draw(seed, N, count, 1)) || N <= 1, 'the current draw is v2, not the legacy byte rule')
 }
 
 // ---- 4. the draw is a valid permutation prefix ---------------------------
@@ -120,6 +121,26 @@ const throws = (fn, msg) => {
   const big = draw(seed, 200, 120)
   eq(new Set(big).size, 120, 'a >32 draw extends the byte stream and stays distinct')
   ok(big.every(i => i >= 1 && i <= 200), 'extended draw indices stay in range')
+}
+
+// ---- 4b. v2 reaches the whole population (D-1) and does not repeat (D-2) ----
+{
+  const seed = createHash('sha256').update('a large bank').digest('hex')
+  const N = 65536, count = 10000
+  const v1 = draw(seed, N, count, 1)
+  const v2 = draw(seed, N, count)
+  ok(Math.max(...v1) < 12000, `v1 is the biased legacy draw: one byte per pick never reaches far (max ${Math.max(...v1)} of ${N}) — kept for replay only`)
+  ok(Math.max(...v2) > N * 0.98, `v2 reaches the top of the population (max ${Math.max(...v2)} of ${N})`)
+  ok(Math.min(...v2) < N * 0.02, 'v2 reaches the bottom too')
+  eq(new Set(v2).size, count, 'v2 draws without replacement')
+  // a coarse uniformity check: 16 equal bins of 1..N, each should hold ~count/16 picks
+  const bins = new Array(16).fill(0)
+  for (const i of v2) bins[Math.floor((i - 1) * 16 / N)]++
+  ok(Math.min(...bins) > count / 16 * 0.75 && Math.max(...bins) < count / 16 * 1.25, `v2 is roughly uniform across 16 bins: ${bins.join(',')}`)
+  // the v2 stream does not repeat after 8,192 bytes: a 20,000-pick draw from 2^20 keeps its picks distinct and spread
+  const long = draw(seed, 1048576, 20000)
+  eq(new Set(long).size, 20000, 'a 20,000-pick v2 draw is distinct (the stream does not repeat)')
+  throws(() => draw(seed, 8, 4, 3), 'draw refuses an unknown version')
 }
 
 // ---- 5. seed modes: legacy vs salted -------------------------------------

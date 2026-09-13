@@ -20,7 +20,7 @@ the gate, not what anyone declared.
 
 | evocation | artefact | words | census N | state |
 |---|---|---|---|---|
-| `primer` | *What Agentprivacy Really Is* — the mission document | 1,998 | 64 — numbers · ratios · headings · emphasised phrases · named terms | open · r1 running |
+| `primer` | *What Agentprivacy Really Is* — the mission document | 1,998 → **1,573** | 64 — numbers · ratios · headings · emphasised phrases · named terms | **folded r1** (Claude ⊥ gemma3:27b, 64/64); OT-2 open; corpus fold-back = the keeper's door |
 | `whitepaper` | *Swordsman ⊥ Mage* whitepaper v6.3 | 13,681 | 162 — numbers and versions · every `##` section · every defined term · named vocabulary · the formal expressions | open · baseline |
 | `personas` | the 42 persona skills, bodies under their names | 53,254 | 206 — 42 names · 129 frontmatter invariants (alignment · equation_term · proverb · spell) · 35 distinct `##` headings | open · baseline |
 

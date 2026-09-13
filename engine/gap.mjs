@@ -190,7 +190,29 @@ export function perProposalSalt(saltSecret, hProposal) {
 // the stream extends by hashing (seed || counter), so a large census-scale draw
 // stays deterministic and third-party re-derivable without changing the small
 // draws the field guide relies on.
-function seedBytes(seedHex, need) {
+// The draw, in two versions. Both are deterministic in the seed; the auditor
+// replays whichever version the record names (gap.json drawVersion; absent =
+// 1, the legacy hand procedure).
+//
+//   v1 (legacy, kept for replay): digest bytes left to right, ONE byte per pick,
+//      idx = b_k mod remaining. Exact only while the remaining population fits
+//      a byte: for N > 256 a pick can never reach past the first 256 of the
+//      remaining list, so a large bank is drawn from its low end only — a
+//      biased, and therefore tunable, draw (defect D-1, found 2026-09-12 by the
+//      pqc-calibration instance: a 10,000-draw from 65,536 never passed 10,230).
+//      Its expansion counter was also one byte, so the stream repeated after
+//      8,192 bytes (D-2). Never use v1 for a new run; it is here so that
+//      pre-existing records still re-derive.
+//
+//   v2 (current): a stream of sha256(head || counter as 4 bytes big-endian)
+//      blocks; each pick reads a 32-bit big-endian word and REJECTS it when it
+//      falls in the tail that would bias the modulus (v >= 2^32 - 2^32 mod rem),
+//      then idx = v mod remaining. Unbiased for any N up to 2^32, every index
+//      reachable, still a pure function of the seed. Rejections are rare
+//      (< rem / 2^32 per pick) and deterministic, so the replay is exact.
+export const DRAW_VERSION = 2
+
+function seedBytesV1(seedHex, need) {
   const head = fromHex(seedHex)
   if (need <= head.length) return head
   let out = Array.from(head)
@@ -203,15 +225,19 @@ function seedBytes(seedHex, need) {
   return Uint8Array.from(out)
 }
 
-// Draw `count` distinct fact indices (1-based: F1..FN) from N without
-// replacement, exactly as the hold-apart prompt specified: take the seed bytes
-// left to right, and for draw k pick position (b_k mod remaining) out of the
-// not-yet-drawn list, removing it. Returns the picks in draw order.
-export function draw(seedHex, N, count) {
-  if (!Number.isInteger(N) || N < 1) throw new Error(`draw: N must be a positive integer, got ${N}`)
-  if (!Number.isInteger(count) || count < 1) throw new Error(`draw: count must be a positive integer, got ${count}`)
-  if (count > N) throw new Error(`draw: count ${count} exceeds population N ${N}`)
-  const bytes = seedBytes(seedHex, count)
+// An unbounded byte stream for v2: head, then sha256(head || be32(counter)).
+function* seedStreamV2(seedHex) {
+  const head = fromHex(seedHex)
+  for (const b of head) yield b
+  for (let counter = 0; ; counter++) {
+    const ctr = Uint8Array.from([(counter >>> 24) & 0xff, (counter >>> 16) & 0xff, (counter >>> 8) & 0xff, counter & 0xff])
+    const block = sha256Bytes(Uint8Array.from([...head, ...ctr]))
+    for (const b of block) yield b
+  }
+}
+
+function drawV1(seedHex, N, count) {
+  const bytes = seedBytesV1(seedHex, count)
   const remaining = Array.from({ length: N }, (_, i) => i + 1)
   const picks = []
   for (let k = 0; k < count; k++) {
@@ -222,6 +248,38 @@ export function draw(seedHex, N, count) {
   return picks
 }
 
+function drawV2(seedHex, N, count) {
+  const stream = seedStreamV2(seedHex)
+  const word = () => {
+    let v = 0
+    for (let i = 0; i < 4; i++) v = (v * 256) + stream.next().value
+    return v // 0 .. 2^32-1, exact in a double
+  }
+  const remaining = Array.from({ length: N }, (_, i) => i + 1)
+  const picks = []
+  for (let k = 0; k < count; k++) {
+    const rem = remaining.length
+    const limit = 4294967296 - (4294967296 % rem)   // largest multiple of rem that fits
+    let v = word()
+    while (v >= limit) v = word()                    // rejection: no modulo bias
+    const idx = v % rem
+    picks.push(remaining[idx])
+    remaining.splice(idx, 1)
+  }
+  return picks
+}
+
+// count distinct 1-based indices into 1..N, without replacement, as a pure
+// function of (seedHex, N, count, version).
+export function draw(seedHex, N, count, version = DRAW_VERSION) {
+  if (!Number.isInteger(N) || N < 1) throw new Error(`draw: N must be a positive integer, got ${N}`)
+  if (!Number.isInteger(count) || count < 1) throw new Error(`draw: count must be a positive integer, got ${count}`)
+  if (count > N) throw new Error(`draw: count ${count} exceeds population N ${N}`)
+  if (version === 1) return drawV1(seedHex, N, count)
+  if (version === 2) return drawV2(seedHex, N, count)
+  throw new Error(`draw: unknown drawVersion ${version}`)
+}
+
 // The whole hold-apart step in one call: canonicalise, hash, seed, draw. The
 // Gap seat calls this and narrates it; it never re-implements the arithmetic.
 // Returns everything the run manifest and the auditor need.
@@ -230,5 +288,5 @@ export function holdApart({ proposal, N, count, hSource = null, salt = null }) {
   const hProposal = hashCanon(canon)
   const seedHex = deriveSeed({ hSource, hProposal, salt })
   const drawIndices = draw(seedHex, N, count)
-  return { canon, hProposal, hSource, salt, seedHex, N, count, drawIndices }
+  return { canon, hProposal, hSource, salt, seedHex, N, count, drawVersion: DRAW_VERSION, drawIndices }
 }

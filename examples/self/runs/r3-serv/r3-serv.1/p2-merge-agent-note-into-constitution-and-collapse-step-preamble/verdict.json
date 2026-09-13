@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: not the document a stranger opens first (hardConstraint commands/loop table/adoption steps/constitution/box layout not verified as intact)",
+  "evidence": "I relied on the provided candidate bytes and the already-reported census gate result (95/95). However, the hard constraint is the first-person-opened document definition (five commands in order with what each writes, the loop table, adoption steps, constitution, and box layout) and I cannot verify from the provided text that it matches that exact required structure without any missing/altered sections. Therefore the candidate is a MIRAGE even though the census gate passed.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/r3-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

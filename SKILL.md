@@ -32,6 +32,15 @@ mirage a named verdict rather than a surprise.
 - Any time an AI-proposed change needs held-out validation before a human
   signs off.
 
+## Arrival
+
+Start with [ENTRY.md](ENTRY.md), the repository's arrival contract. Route the
+user to exploration, their own repository, or a recommended agentprivacy
+path. Honour existing purpose and authorization; ask only for missing
+decisions. Loading this skill does not assign a seat, authorize a paid model
+call, or require a scaffold for a reading task. A browser-only agent returns
+a source-cited handoff; it does not claim a local run.
+
 ## Build recipe
 
 1. **Define the Gap first.** If you cannot say how held-out witnesses derive
@@ -42,8 +51,10 @@ mirage a named verdict rather than a surprise.
    constraint is validity no score can override.
 3. **Give the proposer at least two blind lenses.** For a product objective,
    one lens per factor, plus a cliff-watcher in the prover.
-4. **Copy `templates/harness.config.mjs`**, fill every TODO, bundle it with
-   `tools/bundle.mjs`, run it.
+4. **Scaffold with `node tools/new_instance.mjs ../my-harness my-harness`**,
+   fill every TODO, then `node drivers/run.mjs --instance ../my-harness
+   --driver stub --run smoke` and `node tools/verify_run.mjs ../my-harness
+   smoke`; bundle with `tools/bundle.mjs` only for a Workflow runtime.
 5. **Fold as the keystone**, in the main session, with `conform.mjs` green
    before and after.
 

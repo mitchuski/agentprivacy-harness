@@ -15,7 +15,7 @@
 // tools/bundle.mjs inlines gap.mjs (and its kappa.mjs helpers) when it
 // concatenates this file into a self-contained .workflow.mjs, because the
 // Workflow runtime has no `import`.
-import { canonicalize, hashCanon, perProposalSalt, deriveSeed, draw } from './gap.mjs'
+import { canonicalize, hashCanon, perProposalSalt, deriveSeed, draw, DRAW_VERSION } from './gap.mjs'
 
 // Code-derive the hold-apart seed and draw for a committed proposal (SALTED
 // mode). Returns null in LEGACY mode (no saltSecret, or no declared gate.N),
@@ -37,7 +37,7 @@ export function deriveHoldApart(proposal, { gate, saltSecret, sourceHash }) {
   const drawIndices = mode === 'census'
     ? Array.from({ length: N }, (_, k) => k + 1)
     : draw(seedHex, N, count)
-  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawIndices }
+  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawVersion: DRAW_VERSION, drawIndices }
 }
 
 export function bootPreamble(root, repo, seatCard) {
@@ -70,6 +70,27 @@ export function validateConfig(config) {
   need(typeof config?.isStructural === 'function', 'config.isStructural required')
   need(Number.isFinite(config?.stop?.dryRounds) && config.stop.dryRounds >= 1, 'config.stop.dryRounds required')
   need(Number.isFinite(config?.stop?.maxRounds) && config.stop.maxRounds >= 1, 'config.stop.maxRounds required')
+
+  // Unfilled placeholders and an empty witness bank are refused HERE, not only
+  // by conform.mjs and bundle.mjs. The newcomer review of 2026-09-12 ran the
+  // blank scaffold through drivers/run.mjs to COMPLETE, exit 0, with gate.N = 0
+  // and an empty draw: a harness that grades nothing must not run at all.
+  const TODO = /\bTODO\b/i
+  const placeholder = (v) => typeof v === 'string' && TODO.test(v)
+  for (const [label, v] of [
+    ['config.name', config?.name],
+    ['config.objective.metric', config?.objective?.metric],
+    ['config.objective.gate', config?.objective?.gate],
+    ['config.objective.hardConstraint', config?.objective?.hardConstraint],
+    ['config.heldApartRule', config?.heldApartRule],
+  ]) need(!placeholder(v), `${label} still contains "TODO" — an unfilled config runs and grades nothing`)
+  for (const f of (Array.isArray(config?.finders) ? config.finders : [])) {
+    need(!placeholder(f?.lens) && !placeholder(f?.hint), `config.finders "${f?.lens}" still contains "TODO"`)
+  }
+  if (config?.gate) {
+    need(Number.isInteger(config.gate.N) && config.gate.N > 0, 'config.gate.N must be a positive integer (the witness-bank size); a gate over zero witnesses probes nothing')
+    need(config.gate.mode === 'census' || config.gate.mode === 'sample', "config.gate.mode must be 'census' or 'sample'")
+  }
   return errs
 }
 

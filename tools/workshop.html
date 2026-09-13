@@ -3,172 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The dual-agent harness — a contribution to verifiable AI</title>
+<title>agentprivacy harness frontier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@300;400;500&display=swap">
 <style>
+  /* the shared Labs / Soulbis / City palette — dark-first */
   :root{
-    color-scheme: light dark;
-    --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9;
-    --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12);
-    --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f;
-    --cyan-soft:rgba(15,147,164,.12); --coral-soft:rgba(200,52,31,.10); --violet-soft:rgba(109,75,214,.10);
-    --mono: ui-monospace,"Cascadia Code","JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
-    --serif:"Iowan Old Style","Hoefler Text","Palatino Linotype",Palatino,Georgia,serif;
-    --sans: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    --maxw:70rem; --prose:64ch;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ground:#05060d; --panel:#0b0f1e; --sink:#080b16;
-      --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.15);
-      --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7;
-      --cyan-soft:rgba(77,217,232,.10); --coral-soft:rgba(232,82,58,.12); --violet-soft:rgba(167,139,250,.12);
-    }
-  }
-  :root[data-theme="light"]{
-    color-scheme: light;
-    --ground:#f5f7fd; --panel:#ffffff; --sink:#eef1f9;
-    --ink:#0b0e1a; --dim:#5b6488; --line:rgba(20,30,70,.12);
-    --cyan:#0f93a4; --coral:#c8341f; --violet:#6d4bd6; --num:#a2542f;
-    --cyan-soft:rgba(15,147,164,.12); --coral-soft:rgba(200,52,31,.10); --violet-soft:rgba(109,75,214,.10);
-  }
-  :root[data-theme="dark"]{
     color-scheme: dark;
-    --ground:#05060d; --panel:#0b0f1e; --sink:#080b16;
-    --ink:#e8edff; --dim:#7c86b8; --line:rgba(120,140,220,.15);
-    --cyan:#4dd9e8; --coral:#e8523a; --violet:#a78bfa; --num:#ffd6c7;
-    --cyan-soft:rgba(77,217,232,.10); --coral-soft:rgba(232,82,58,.12); --violet-soft:rgba(167,139,250,.12);
+    --ground:#080c20; --panel:#0d1230; --lift:#141a3d;
+    --ink:#f0eee8; --dim:rgba(240,238,232,.58); --ghost:rgba(240,238,232,.14);
+    --line:rgba(240,238,232,.09); --line-hover:rgba(240,238,232,.22);
+    --cyan:#4dd9e8; --coral:#e8523a; --violet:#8b5cf6; --amber:#f5b74a; --emerald:#34d399; --num:#ffd6c7;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:Inter,ui-sans-serif,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+    --maxw:72rem;
   }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
-  body{
-    margin:0; background:var(--ground); color:var(--ink);
-    font-family:var(--sans); font-size:17px; line-height:1.65;
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){ color-scheme:light; --ground:#f3f5f8; --panel:#fff; --lift:#e4e9f1; --ink:#101828; --dim:#5c6b7c; --ghost:rgba(16,24,40,.08); --line:rgba(16,24,40,.12); --line-hover:rgba(16,24,40,.28); --cyan:#1d8a9c; --coral:#c2432b; --violet:#6d4bd6; --amber:#a8711a; --emerald:#1f8a5b; --num:#a2542f }
   }
-  .num{font-variant-numeric:tabular-nums;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(1.2rem,4vw,3rem);}
-  .prose{max-width:var(--prose);}
-  a{color:var(--cyan);}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:3px;}
+  :root[data-theme="light"]{ color-scheme:light; --ground:#f3f5f8; --panel:#fff; --lift:#e4e9f1; --ink:#101828; --dim:#5c6b7c; --ghost:rgba(16,24,40,.08); --line:rgba(16,24,40,.12); --line-hover:rgba(16,24,40,.28); --cyan:#1d8a9c; --coral:#c2432b; --violet:#6d4bd6; --amber:#a8711a; --emerald:#1f8a5b; --num:#a2542f }
+  :root[data-theme="dark"]{ color-scheme:dark; --ground:#080c20; --panel:#0d1230; --lift:#141a3d; --ink:#f0eee8; --dim:rgba(240,238,232,.58); --ghost:rgba(240,238,232,.14); --line:rgba(240,238,232,.09); --line-hover:rgba(240,238,232,.22); --cyan:#4dd9e8; --coral:#e8523a; --violet:#8b5cf6; --amber:#f5b74a; --emerald:#34d399; --num:#ffd6c7 }
 
-  /* ---- top bar: the workshop identity, ties to the live console ---- */
-  .topbar{
-    position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--ground) 86%, transparent);
-    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
-  }
-  .topbar .inner{
-    max-width:var(--maxw); margin:0 auto; padding:.7rem clamp(1.2rem,4vw,3rem);
-    display:flex; align-items:center; justify-content:space-between; gap:1rem;
-    font-family:var(--mono); font-size:.76rem; letter-spacing:.12em; text-transform:uppercase;
-  }
-  .topbar .brand{ color:var(--ink); }
-  .topbar .brand .g{ color:var(--violet); }
-  .topbar nav{ display:flex; align-items:center; gap:.4rem 1rem; }
-  .topbar a, .topbar button{
-    font:inherit; color:var(--dim); text-decoration:none; background:none; border:0; cursor:pointer;
-    padding:.3rem .1rem; letter-spacing:.12em; text-transform:uppercase;
-  }
-  .topbar a:hover, .topbar button:hover{ color:var(--ink); }
-  #consoleLink{ display:none; color:var(--cyan); }
+  *{box-sizing:border-box;min-width:0}
+  body{ margin:0; background:var(--ground); color:var(--ink); font:16px/1.6 var(--sans); -webkit-font-smoothing:antialiased; overflow-x:clip }
+  a{ color:var(--cyan); text-decoration:none } a:hover{ text-decoration:underline }
+  a:focus-visible, button:focus-visible, select:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; border-radius:3px }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 clamp(1.2rem,4vw,3rem) }
+  .num{ font-variant-numeric:tabular-nums }
 
-  .eyebrow{
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--dim); margin:0 0 1rem;
-  }
-  h1,h2,h3{ text-wrap:balance; }
-  h2{ font-family:var(--mono); font-weight:600; letter-spacing:-.01em; font-size:clamp(1.5rem,3.4vw,2.2rem); line-height:1.12; margin:0 0 1rem; }
-  h3{ font-family:var(--mono); font-weight:600; font-size:1.02rem; letter-spacing:.01em; margin:0 0 .4rem; }
-  p{margin:0 0 1.1rem;}
-  .lede{font-size:1.14rem;}
-  .dim{color:var(--dim);}
-  .voice{ font-family:var(--serif); font-style:italic; }
+  .topbar{ border-bottom:1px solid var(--line) }
+  .topbar .inner{ max-width:var(--maxw); margin:0 auto; padding:.8rem clamp(1.2rem,4vw,3rem); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap }
+  .brand{ font-family:var(--serif); font-size:1.35rem; color:var(--ink); display:inline-flex; align-items:baseline; gap:.55rem }
+  .brand .g{ color:var(--cyan); font-family:var(--mono); font-size:1rem }
+  .brand .f{ color:var(--dim); font-style:italic }
+  .topbar nav{ display:flex; align-items:center; gap:.3rem 1rem; flex-wrap:wrap; font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase }
+  .topbar nav a, .topbar nav button{ font:inherit; letter-spacing:inherit; text-transform:inherit; color:var(--dim); background:none; border:0; cursor:pointer; padding:.25rem 0 }
+  .topbar nav a:hover, .topbar nav button:hover{ color:var(--ink); text-decoration:none }
+  #consoleLink{ display:none }
 
-  /* ---- hero ---- */
-  header.hero{ padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,3.5rem); }
-  .inscription{ font-family:var(--mono); font-size:clamp(.82rem,1.9vw,1rem); letter-spacing:.04em; color:var(--violet); margin:0 0 1.6rem; }
-  h1.title{ font-family:var(--mono); font-weight:600; letter-spacing:-.02em; font-size:clamp(2.1rem,6.2vw,4rem); line-height:1.04; margin:0 0 1.3rem; max-width:20ch; }
-  h1.title em{ font-family:var(--serif); font-style:italic; font-weight:400; color:var(--cyan); letter-spacing:0; }
-  .hero .lede{ max-width:52ch; }
-  .metric-strip{ display:flex; flex-wrap:wrap; gap:.5rem .9rem; align-items:baseline; margin-top:1.8rem; font-family:var(--mono); font-size:.86rem; color:var(--dim); }
-  .metric-strip b{ color:var(--num); font-weight:600; }
+  header{ padding:clamp(2rem,5vw,3.4rem) 0 1.2rem }
+  .inscription{ font-family:var(--mono); font-size:.82rem; letter-spacing:.04em; color:var(--cyan); margin:0 0 1rem }
+  h1{ font-family:var(--serif); font-weight:300; font-size:clamp(2.2rem,5.5vw,3.6rem); line-height:1.04; letter-spacing:-.01em; margin:0 0 .8rem; text-wrap:balance; max-width:24ch }
+  h1 em{ font-style:italic; color:var(--cyan) }
+  .lede{ color:var(--dim); max-width:62ch; margin:0 }
+  .strip{ display:flex; flex-wrap:wrap; gap:.45rem .7rem; align-items:center; margin-top:1.1rem }
 
-  /* ---- the frontier instrument ---- */
-  .instrument{ margin-top:2.6rem; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.5rem 1rem; overflow:hidden; }
-  .instrument .cap{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:.4rem; }
-  canvas{ display:block; width:100%; height:auto; }
-  .instrument .foot{ font-family:var(--serif); font-style:italic; color:var(--dim); font-size:.95rem; margin:.6rem 0 .2rem; max-width:60ch; }
+  .chip{ font-family:var(--mono); font-size:.72rem; color:var(--ink); background:var(--lift); border:1px solid var(--line-hover); border-radius:999px; padding:.22rem .65rem; display:inline-flex; align-items:center; gap:.45rem; white-space:nowrap }
+  .chip::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--dim); flex:none }
+  .chip.built::before{ background:var(--emerald) } .chip.open::before{ background:var(--amber) } .chip.mirage::before{ background:var(--coral) } .chip.new::before{ background:var(--cyan) } .chip.plain::before{ display:none }
 
-  section{ padding:clamp(3rem,7vw,5.5rem) 0; border-top:1px solid var(--line); }
-  section.sink{ background:var(--sink); }
-  .kicker{ display:flex; align-items:center; gap:.7rem; margin-bottom:1.4rem; }
-  .kicker .glyph{ font-size:1.15rem; line-height:1; color:var(--dim); }
-  .kicker .eyebrow{ margin:0; }
+  .instrument{ margin-top:1.6rem; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.25rem .8rem; overflow:hidden }
+  .instrument .cap{ display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; font-family:var(--mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:.5rem }
+  .instrument select{ font:inherit; font-family:var(--mono); font-size:.72rem; text-transform:none; letter-spacing:.02em; color:var(--ink); background:var(--lift); border:1px solid var(--line-hover); border-radius:6px; padding:.3rem .5rem; max-width:100% }
+  canvas{ display:block; width:100%; height:auto }
+  .instrument .stat{ display:flex; flex-wrap:wrap; gap:.4rem 1rem; font-family:var(--mono); font-size:.76rem; color:var(--dim); margin-top:.5rem }
+  .instrument .stat b{ color:var(--num); font-weight:500 }
+  .instrument .foot{ font-family:var(--serif); font-style:italic; color:var(--dim); font-size:1rem; margin:.5rem 0 .1rem; max-width:64ch }
 
-  .agent{ font-family:var(--mono); font-weight:600; white-space:nowrap; }
-  .agent.sword{ color:var(--coral); }
-  .agent.mage{ color:var(--violet); }
-  .agent.gap{ color:var(--cyan); }
+  .fleet{ display:grid; grid-template-columns:repeat(auto-fill,minmax(16rem,1fr)); gap:.8rem; margin:1.4rem 0 2.6rem }
+  .ws{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:.95rem 1.05rem; display:flex; flex-direction:column; gap:.4rem; transition:border-color .15s }
+  .ws:hover{ border-color:var(--line-hover) }
+  .ws.star{ border-color:color-mix(in srgb, var(--cyan) 45%, var(--line)) }
+  .ws .name{ font-family:var(--serif); font-size:1.3rem; line-height:1.15 } .ws .name a{ color:var(--ink) } .ws .name a:hover{ color:var(--cyan); text-decoration:none }
+  .ws .metric{ font-family:var(--mono); font-size:.7rem; color:var(--dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+  .ws .fold{ font-family:var(--mono); font-size:1.3rem; font-weight:500; letter-spacing:-.01em }
+  .ws .fold .arrow{ color:var(--dim); font-weight:300 } .ws .fold .to{ color:var(--cyan) } .ws .fold .r{ font-size:.78rem; color:var(--dim); margin-left:.5rem; font-weight:400 }
+  .ws .chips{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:auto }
 
-  .loop{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:stretch; margin:1.6rem 0 .4rem; font-family:var(--mono); font-size:.8rem; }
-  .loop .step{ flex:1 1 auto; min-width:8.5rem; background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:.6rem .7rem; }
-  .loop .step .n{ font-size:.66rem; letter-spacing:.14em; color:var(--dim); text-transform:uppercase; }
-  .loop .step .nm{ display:block; margin-top:.15rem; color:var(--ink); }
-  .loop .step.hold{ border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan) inset, 0 0 22px -8px var(--cyan); }
-  .loop .step.hold .nm{ color:var(--cyan); }
-  .loop .door{ flex:1 1 auto; min-width:8.5rem; border:1px dashed var(--line); border-radius:9px; padding:.6rem .7rem; color:var(--dim); }
-  .loop .door .nm{ color:var(--num); display:block; margin-top:.15rem; }
-  .loop .door .n{ font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; }
-
-  .invariant{ font-family:var(--mono); font-size:clamp(1rem,2.6vw,1.5rem); color:var(--cyan); background:var(--cyan-soft); border:1px solid var(--line); border-radius:11px; padding:1rem 1.2rem; margin:1.6rem 0; text-align:center; letter-spacing:.02em; }
-
-  .tiles{ display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1rem; margin-top:1.8rem; }
-  .tile{ background:var(--panel); border:1px solid var(--line); border-radius:13px; padding:1.3rem 1.35rem; }
-  .tile .big{ font-family:var(--mono); font-weight:600; font-variant-numeric:tabular-nums; font-size:clamp(1.9rem,4.4vw,2.6rem); line-height:1; letter-spacing:-.02em; color:var(--ink); display:block; }
-  .tile .big .arrow{ color:var(--dim); font-weight:400; }
-  .tile .big .to{ color:var(--cyan); }
-  .tile .unit{ font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); display:block; margin:.55rem 0 .5rem; }
-  .tile p{ margin:0; font-size:.95rem; color:var(--dim); }
-  .tile.accent-cyan{ border-color:color-mix(in srgb, var(--cyan) 45%, var(--line)); }
-
-  .ladder{ display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:.9rem; margin-top:1.6rem; }
-  .rung{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem; }
-  .rung .t{ font-family:var(--mono); font-weight:600; font-size:1.02rem; color:var(--ink); }
-  .rung .t .g{ margin-right:.4rem; }
-  .rung .stakes{ font-size:.9rem; color:var(--dim); margin-top:.35rem; }
-  .rung .who{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:var(--cyan); margin-top:.6rem; }
-  .rung.reserved{ border-style:dashed; }
-  .rung.reserved .t{ color:var(--dim); }
-  .rung.reserved .who{ color:var(--violet); }
-
-  .limit{ border-left:2px solid var(--coral); padding-left:1.1rem; margin:0 0 1.6rem; max-width:var(--prose); }
-  .limit h3{ color:var(--ink); }
-  .limit p{ color:var(--dim); font-size:.98rem; margin:0; }
-
-  .console-note{
-    display:flex; gap:1rem; align-items:flex-start; margin-top:2rem; max-width:var(--prose);
-    background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem;
-  }
-  .console-note .mono{ font-family:var(--mono); font-size:.85rem; color:var(--cyan); white-space:nowrap; }
-  .console-note p{ margin:0; font-size:.96rem; color:var(--dim); }
-
-  .closer{ text-align:center; padding:clamp(3.5rem,8vw,6rem) 0; }
-  .closer .proverb{ font-family:var(--serif); font-style:italic; font-size:clamp(1.3rem,3.6vw,2rem); line-height:1.35; max-width:24ch; margin:0 auto 2rem; color:var(--ink); text-wrap:balance; }
-  .cta{ display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:.9rem; text-decoration:none; color:var(--ground); background:var(--ink); padding:.7rem 1.2rem; border-radius:9px; letter-spacing:.02em; transition:transform .15s ease; }
-  .cta:hover{ transform:translateY(-2px); }
-  footer{ border-top:1px solid var(--line); padding:2rem 0 3rem; }
-  footer .row{ display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; align-items:center; font-family:var(--mono); font-size:.78rem; color:var(--dim); }
-  footer .inscription-sm{ color:var(--violet); }
+  footer{ border-top:1px solid var(--line); padding:1.4rem 0 2.6rem; font-family:var(--mono); font-size:.72rem; color:var(--dim) }
+  footer .row{ display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; align-items:center }
+  footer .i{ color:var(--cyan) }
+  footer p{ margin:.7rem 0 0; font-family:var(--serif); font-style:italic; font-size:1rem; max-width:60ch }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="inner">
-    <span class="brand"><span class="g">⿻</span> the workshop</span>
-    <nav>
-      <a id="consoleLink" href="/">◐ live console</a>
+    <span class="brand"><span class="g">⿻</span> agentprivacy harness <span class="f">frontier</span></span>
+    <nav aria-label="Main">
+      <a id="consoleLink" href="/">◐ console</a>
+      <a href="https://mages.city/" target="_blank" rel="noopener">🧙 mages.city</a>
+      <a href="https://agentprivacy.org/" target="_blank" rel="noopener">🔬 labs</a>
+      <a href="https://agentprivacy.ai/model" target="_blank" rel="noopener">model</a>
       <a href="https://github.com/mitchuski/agentprivacy-harness" target="_blank" rel="noopener">repo ↗</a>
       <button id="themeToggle" aria-label="Toggle light and dark theme">theme</button>
     </nav>
@@ -176,265 +92,136 @@
 </div>
 
 <div class="wrap">
-
-  <header class="hero">
+  <header>
     <p class="inscription">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</p>
-    <h1 class="title">Work you can trust from agents that <em>cannot grade themselves</em>.</h1>
-    <p class="lede prose">A verification harness for AI-agent work. One agent proposes, a second independently proves, and the tests that decide are derived by hashing the proposal together with a run secret the proposer never sees — so it could not have chosen or ground them. Config-driven, zero dependencies, every axiom re-checked at runtime.</p>
-    <div class="metric-strip">
-      <span><b>730 → 472</b> words, three audited folds</span>
-      <span aria-hidden="true">·</span>
-      <span><b>11</b> defects found by running</span>
-      <span aria-hidden="true">·</span>
-      <span><b>15</b> embodiments, one skeleton</span>
-    </div>
+    <h1>Every fold, on every frontier, <em>only through the gate</em>.</h1>
+    <p><a href="https://github.com/mitchuski/agentprivacy-harness/blob/main/ENTRY.md">Start here: explore · use your research repo · agentprivacy paths ↗</a></p>
+    <p class="lede">One agent proposes, a second proves, and the tests that decide are hashed from the proposal with a secret the proposer never sees. The line steps down only when a human folds an audited win.</p>
+    <div class="strip" id="strip" aria-live="polite"><span class="chip plain">reading the fleet…</span></div>
 
-    <figure class="instrument" aria-label="The frontier: a metric that falls only through the gate, 730 to 472 words across three audited folds." onclick="location.href='/frontier?instance=examples/field-guide'" style="cursor:pointer" title="open the frontier page — fold-by-fold detail, every proof">
-      <div class="cap"><span>the frontier — the moving ceiling</span><span>examples/field-guide · <a href="/frontier?instance=examples/field-guide" onclick="event.stopPropagation()">explore fold by fold →</a></span></div>
+    <figure class="instrument" aria-label="The frontier: a metric that falls only through the gate.">
+      <div class="cap">
+        <span>moving ceiling · R(t) = best / baseline</span>
+        <span><select id="wsel" aria-label="frontier"></select> · <a id="foldLink" href="/frontier">fold by fold →</a></span>
+      </div>
       <canvas id="frontier" width="1100" height="320"></canvas>
-      <figcaption class="foot">A result exists only where the two agents were genuinely held apart. The line steps down only when a human keystone folds an audited win — never on an agent's own word. <a href="/frontier?instance=examples/field-guide">The frontier page</a> opens every fold's record — coverage, lever, R(t), κ — and <a href="/frontier?about=1">what the frontier is</a> explains the words.</figcaption>
+      <div class="stat" id="istat"></div>
+      <figcaption class="foot" id="ifoot"></figcaption>
     </figure>
   </header>
 
-  <section>
-    <div class="kicker"><span class="glyph">◺</span><p class="eyebrow">The problem</p></div>
-    <h2>Self-evaluation is a mirage generator</h2>
-    <div class="prose">
-      <p>As AI systems increasingly <strong>generate work and also judge it</strong> — reward models scoring their own rollouts, an LLM grading model output, an agent writing code and then its own tests — one failure recurs. An agent that proposes a change and then checks its own change will pass: not because it cheats, but because <em class="voice">the check it invents is the check its change was built to survive.</em></p>
-      <p>This is Goodhart's law wearing an agent costume — a problem of <strong>self-reference</strong>, not of any one domain. The result is what this harness names a <span class="agent sword">mirage</span>: it passes the author's probe and fails the real gate. Mirages are the failure behind reward hacking, behind a judge's documented preference for its own style, behind a test suite that is green because it was written to be green. Wherever a generator can influence the test that judges it, the test stops measuring the world and starts measuring the generator's model of the test.</p>
-    </div>
-  </section>
-
-  <section class="sink">
-    <div class="kicker"><span class="glyph">◿</span><p class="eyebrow">The answer</p></div>
-    <h2>Route the information away — don't ask for honesty</h2>
-    <div class="prose">
-      <p>Two agents do the work: <span class="agent mage">soulbae 🧙</span> proposes, <span class="agent sword">soulbis ⚔️</span> proves. Between them sits <span class="agent gap">the Gap ⿻</span>, whose only job is to derive the verification witnesses <strong>by hashing the proposal's own bytes with a run secret the proposer never sees</strong>. The proposer chooses its own exam without ever seeing the syllabus; any revision re-seeds the draw, and grinding it is measured at ≈0.</p>
-    </div>
-
-    <div class="loop" role="list" aria-label="The six-phase loop">
-      <div class="step" role="listitem"><span class="n">measure</span><span class="nm">frontier</span></div>
-      <div class="step" role="listitem"><span class="n">propose 🧙</span><span class="nm">blind lenses</span></div>
-      <div class="step hold" role="listitem"><span class="n">hold-apart ⿻</span><span class="nm">hash → witnesses</span></div>
-      <div class="step" role="listitem"><span class="n">assay ⚔️</span><span class="nm">the full gate</span></div>
-      <div class="step" role="listitem"><span class="n">critic</span><span class="nm">classify</span></div>
-      <div class="door" role="listitem"><span class="n">the door 😊</span><span class="nm">a human's alone</span></div>
-    </div>
-
-    <p class="invariant" aria-label="Mutual information of the prover and proposer outputs given the target is zero.">I(Y<sub>S</sub> ; Y<sub>M</sub> | X) = 0</p>
-
-    <div class="prose">
-      <p>Given the target, what the prover produces carries <strong>no information</strong> about what the proposer produces. Not a promise the agents make each other — a property of how the information is routed: the witnesses are a deterministic function of the proposal, so the proposer provably could not have tuned to them. Then a <strong>multiplicative gate</strong> refuses partial passes (7/8 is a zero, not 87.5%), honest claim-tiers keep results from drifting from evidence, and <strong>the door</strong> keeps every outward action a human's.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="kicker"><span class="glyph">▤</span><p class="eyebrow">The evidence — all re-runnable</p></div>
-    <h2>Checked, not asserted</h2>
-    <div class="tiles">
-      <div class="tile accent-cyan">
-        <span class="big num">730<span class="arrow"> → </span><span class="to">472</span></span>
-        <span class="unit">words · three audited folds</span>
-        <p>A fact-dense guide compressed 35%, every fold passing a held-out gate drawn by hashing the candidate with a secret it never saw; the last two closed by an exhaustive 32-fact census.</p>
-      </div>
-      <div class="tile">
-        <span class="big num">11</span>
-        <span class="unit">defects found by running</span>
-        <p>Each invisible to inspection and obvious on execution — an outage read as an exhausted search, a gate that passed an empty config, a verifier that cried tamper on honest runs. Every one now pinned by a test.</p>
-      </div>
-      <div class="tile">
-        <span class="big num">15</span>
-        <span class="unit">embodiments · one skeleton</span>
-        <p>Quantum circuits, ZK constraint systems, research documents, consent agreements, an acceptance registry — the origin operator's fleet, catalogued apart from the system itself. One seat was held open by invitation until its acceptor signed.</p>
-      </div>
-      <div class="tile">
-        <span class="big num">0</span>
-        <span class="unit">dependencies</span>
-        <p>Plain Node. The governing algebra is re-proven on all 64 values of ℤ/64ℤ every time the gate runs; every result is content-addressed so a stranger can re-derive it from the shipped bytes. And because every sealed result is a κ-addressed node and every minted relation a signed edge, a running harness accretes a <strong>verifiable trust graph</strong> — the construction the whole system is built toward.</p>
-      </div>
-    </div>
-
-    <div class="console-note">
-      <span class="mono">node tools/console.mjs</span>
-      <p>This page ships beside the <strong>live console</strong> — a read-only localhost window that draws the loop as evolving geometry and re-derives every hash in front of you. One presents the work; the other lets you watch a round move. <strong>Both are just consumers.</strong> The harness emits data and never owns a view: <span class="mono">frontier.json</span> · <span class="mono">graph.json</span> · <span class="mono">star.v1</span> · <span class="mono">runtime-feed.v1</span> · wiki pages · κ artefacts · signed VRC edges are stable read-only projections, and any interface you build against them — a terminal, a game, a gallery, a voice — inherits the discipline for free, because interfaces read projections and never write ledgers. The contract table is in <span class="mono">WORKFLOW.md</span>.</p>
-    </div>
-  </section>
-
-  <section class="sink">
-    <div class="kicker"><span class="glyph">⚔</span><p class="eyebrow">The runtime tiers</p></div>
-    <h2>One architecture, widening stakes</h2>
-    <div class="ladder">
-      <div class="rung">
-        <div class="t"><span class="g">🤺</span>the spar</div>
-        <div class="stakes">A practice bout — every strike real, nothing at stake but the frontier.</div>
-        <div class="who">own frontier only</div>
-      </div>
-      <div class="rung reserved">
-        <div class="t">the duel</div>
-        <div class="stakes">The formal bout — a result a counterparty will rely on: signed verdicts, artefacts exchanged.</div>
-        <div class="who">reserved</div>
-      </div>
-      <div class="rung">
-        <div class="t"><span class="g">🏟️</span>the arena</div>
-        <div class="stakes">Against a live external benchmark, other fighters on the board.</div>
-        <div class="who">a public leaderboard</div>
-      </div>
-      <div class="rung">
-        <div class="t"><span class="g">🌍</span>the open world</div>
-        <div class="stakes">Against a real upstream, in the wild — consequences beyond any ledger.</div>
-        <div class="who">the world watching</div>
-      </div>
-    </div>
-    <p class="dim prose" style="margin-top:1.4rem;">The trusts do not change between tiers — the door is the First Person's at every rung. What changes is who is watching, and what a <span class="agent gap">VALIDATED</span> costs.</p>
-  </section>
-
-  <section>
-    <div class="kicker"><span class="glyph">◍</span><p class="eyebrow">The honest boundary</p></div>
-    <h2>The limits this evidence does not cross</h2>
-    <p class="prose dim" style="margin-bottom:2rem;">Stated as plainly as the claims — because the harness would refuse them otherwise.</p>
-    <div class="limit">
-      <h3>Prompt-based separation is topology plus discipline, not a proof.</h3>
-      <p>The engine guarantees what it does not put in a seat's prompt, but not what a seat reads from disk. The invariant holds by construction for the routed information; the rest is enforced by explicit per-seat reads and an audit trail where a seat that read past its card is a named failure. Where a domain permits harder separation — separate processes, models, machines, keys — it should be used.</p>
-    </div>
-    <div class="limit">
-      <h3>The Gap is not always worth its cost.</h3>
-      <p>A held-out adversarial draw earns its price only when the claim space is too large to check. Where every claim is enumerable, an exhaustive auditor gives certainty for free. The repo keeps a retired instance precisely to record where the harness was applied and should not have been. <span class="voice">A harness is for adversaries; an auditor is for facts.</span></p>
-    </div>
-    <div class="limit">
-      <h3>This is a runnable demonstration, not a controlled study.</h3>
-      <p>The evidence is a reproducible repository and a worked frontier, not a benchmarked comparison against baselines under peer review. The claim is that the construction is coherent, checked, and demonstrably catches a class of failure on the instances shown — not that it is optimal.</p>
-    </div>
-  </section>
-
-  <div class="closer">
-    <p class="proverb">A proposer that grades its own work builds mirages; only what the Gap could not tune to is a result.</p>
-    <a class="cta" href="https://github.com/mitchuski/agentprivacy-harness" target="_blank" rel="noopener">↗ github.com/mitchuski/agentprivacy-harness</a>
-  </div>
+  <div class="fleet" id="fleet"><div class="ws"><div class="name">reading…</div></div></div>
 
   <footer>
     <div class="row">
-      <span class="inscription-sm">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</span>
-      <span aria-hidden="true">·</span>
-      <span>Apache-2.0</span>
-      <span aria-hidden="true">·</span>
-      <span>0xagentprivacy — the Privacy-is-Value model (PVM V6)</span>
+      <span class="i">(⚔️⊥⿻⊥🧙)😊 = neg ⊕ bnot → succ</span><span aria-hidden="true">·</span>
+      <span>Apache-2.0</span><span aria-hidden="true">·</span>
+      <span>Privacy is Value · <a href="https://agentprivacy.ai/model" target="_blank" rel="noopener">the model</a></span><span aria-hidden="true">·</span>
+      <span><a href="https://soulbis.com/star/" target="_blank" rel="noopener">the Star</a> draws this ratio</span>
     </div>
+    <p>A flat line is a frontier before its first round: baseline equals best, and the descent only moves through the gate.</p>
   </footer>
-
 </div>
 
 <script>
 (function(){
   "use strict";
   var root = document.documentElement;
+  var served = location.protocol.indexOf('http') === 0 && (location.hostname === '127.0.0.1' || location.hostname === 'localhost');
+  if(served){ document.getElementById('consoleLink').style.display = 'inline'; }
+  function currentTheme(){ var set = root.getAttribute('data-theme'); if(set) return set; return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; }
+  document.getElementById('themeToggle').addEventListener('click', function(){ root.setAttribute('data-theme', currentTheme() === 'dark' ? 'light' : 'dark'); animStart = null; drawFrontier(); });
 
-  // show the "live console" link only when this page is being served (not file:// or a static host)
-  if(location.protocol.indexOf('http') === 0 && location.hostname === '127.0.0.1'){
-    var cl = document.getElementById('consoleLink');
-    if(cl) cl.style.display = 'inline';
-  }
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var fmt = function(n){ return n == null || isNaN(n) ? '—' : Number(n).toLocaleString('en-GB'); };
+  var DEMO = { instance:'examples/field-guide', feed:'demo', movingCeiling:{ metric:'words', baseline:730, best:472, ratioNow:0.6466, open:{id:'OT-4', statement:'below 472 words at gate 8/8', status:'OPEN'}, series:[{label:'baseline',value:730},{label:'fold 1',value:573,lever:'line-edit'},{label:'fold 2',value:526,lever:'compose'},{label:'fold 3',value:472,lever:'restructure'}] } };
+  var feed = DEMO, feeds = {}, instances = [];
 
-  function currentTheme(){
-    var set = root.getAttribute('data-theme');
-    if(set) return set;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  document.getElementById('themeToggle').addEventListener('click', function(){
-    root.setAttribute('data-theme', currentTheme() === 'dark' ? 'light' : 'dark');
-    animStart = null; drawFrontier();
-  });
-
-  // ---- the frontier instrument: the real data, drawn as a descending ceiling ----
-  var canvas = document.getElementById('frontier');
-  var ctx = canvas.getContext('2d');
+  var canvas = document.getElementById('frontier'), ctx = canvas.getContext('2d');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var folds = [ {v:730}, {v:573}, {v:526}, {v:472} ];
-  var openTarget = 430; // OT-4 — "below 472"
-  var lo = 400, hi = 760;
-
   function css(name){ return getComputedStyle(root).getPropertyValue(name).trim(); }
-
-  function sizeCanvas(){
-    var cssW = canvas.clientWidth || canvas.parentElement.clientWidth || 800;
-    var ratio = Math.min(window.devicePixelRatio || 1, 2);
-    var h = Math.max(230, Math.min(330, cssW * 0.30));
-    canvas.style.height = h + 'px';
-    canvas.width = Math.round(cssW * ratio);
-    canvas.height = Math.round(h * ratio);
-    ctx.setTransform(ratio,0,0,ratio,0,0);
-    return {w:cssW, h:h};
-  }
-
+  function sizeCanvas(){ var cssW = canvas.clientWidth || canvas.parentElement.clientWidth || 800, ratio = Math.min(window.devicePixelRatio || 1, 2); var h = Math.max(210, Math.min(300, cssW * 0.27)); canvas.style.height = h + 'px'; canvas.width = Math.round(cssW * ratio); canvas.height = Math.round(h * ratio); ctx.setTransform(ratio,0,0,ratio,0,0); return {w:cssW, h:h}; }
   var animStart = null;
   function drawFrontier(ts){
-    var dim = css('--dim'), cyan = css('--cyan'), violet = css('--violet'), num = css('--num'), line = css('--line'), panel = css('--panel');
-    var d = sizeCanvas();
-    var W = d.w, H = d.h;
-    var padL = 56, padR = 66, padT = 26, padB = 30;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-
-    function X(i){ return padL + plotW * (i/(folds.length-1)); }
-    function Y(v){ return padT + plotH * (1 - (v-lo)/(hi-lo)); }
-
+    var mc = feed.movingCeiling, s = mc.series || [], dim = css('--dim'), cyan = css('--cyan'), violet = css('--violet'), num = css('--num'), line = css('--line'), panel = css('--panel');
+    var d = sizeCanvas(), W = d.w, H = d.h, padL = 64, padR = 70, padT = 26, padB = 30, plotW = W - padL - padR, plotH = H - padT - padB;
+    var vals = s.map(function(p){ return p.value; }).concat([mc.baseline, mc.best]).filter(function(v){ return typeof v === 'number'; });
+    var hi = Math.max.apply(null, vals), lo = Math.min.apply(null, vals);
+    if(hi === lo){ hi = hi + (hi || 1) * 0.25; lo = Math.max(0, lo - (lo || 1) * 0.25); }
+    var pad = (hi - lo) * 0.12; hi += pad; lo = Math.max(0, lo - pad);
+    var n = Math.max(2, s.length);
+    function X(i){ return padL + plotW * (i / (n - 1)); }
+    function Y(v){ return padT + plotH * (1 - (v - lo) / (hi - lo)); }
     ctx.clearRect(0,0,W,H);
-
-    ctx.strokeStyle = line; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(padL, Y(730)); ctx.lineTo(W-padR, Y(730)); ctx.stroke();
-
-    ctx.strokeStyle = violet; ctx.globalAlpha = .85; ctx.setLineDash([6,5]); ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(padL, Y(openTarget)); ctx.lineTo(W-padR, Y(openTarget)); ctx.stroke();
-    ctx.setLineDash([]); ctx.globalAlpha = 1;
-
-    var pts = [{x:X(0), y:Y(folds[0].v)}];
-    for(var i=1;i<folds.length;i++){ pts.push({x:X(i), y:Y(folds[i-1].v)}); pts.push({x:X(i), y:Y(folds[i].v)}); }
-
-    var p = 1;
-    if(!reduce && ts != null){ if(animStart == null) animStart = ts; p = Math.min(1, (ts - animStart) / 1400); }
-
-    ctx.strokeStyle = cyan; ctx.lineWidth = 2.2; ctx.lineJoin = 'round';
-    ctx.shadowColor = cyan; ctx.shadowBlur = 10;
-    ctx.beginPath();
-    var total = pts.length - 1, upto = p * total;
-    ctx.moveTo(pts[0].x, pts[0].y);
-    for(var k=1;k<pts.length;k++){
-      if(k <= upto){ ctx.lineTo(pts[k].x, pts[k].y); }
-      else { var frac = upto - (k-1); if(frac > 0){ ctx.lineTo(pts[k-1].x + (pts[k].x-pts[k-1].x)*frac, pts[k-1].y + (pts[k].y-pts[k-1].y)*frac); } break; }
+    ctx.strokeStyle = line; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(padL, Y(mc.baseline)); ctx.lineTo(W - padR, Y(mc.baseline)); ctx.stroke();
+    var pts = s.length ? [{x:X(0), y:Y(s[0].value)}] : [];
+    for(var i = 1; i < s.length; i++){ pts.push({x:X(i), y:Y(s[i-1].value)}); pts.push({x:X(i), y:Y(s[i].value)}); }
+    var p = 1; if(!reduce && ts != null){ if(animStart == null) animStart = ts; p = Math.min(1, (ts - animStart) / 1200); }
+    if(pts.length){
+      ctx.strokeStyle = cyan; ctx.lineWidth = 2.2; ctx.lineJoin = 'round'; ctx.shadowColor = cyan; ctx.shadowBlur = 10; ctx.beginPath();
+      var total = pts.length - 1, upto = p * total; ctx.moveTo(pts[0].x, pts[0].y);
+      for(var k = 1; k < pts.length; k++){ if(k <= upto){ ctx.lineTo(pts[k].x, pts[k].y); } else { var frac = upto - (k-1); if(frac > 0){ ctx.lineTo(pts[k-1].x + (pts[k].x - pts[k-1].x) * frac, pts[k-1].y + (pts[k].y - pts[k-1].y) * frac); } break; } }
+      ctx.stroke(); ctx.shadowBlur = 0;
     }
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    ctx.font = '600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace';
-    ctx.textBaseline = 'middle';
-    for(var j=0;j<folds.length;j++){
-      var reveal = j/(folds.length-1);
-      if(p < reveal - 0.02) continue;
-      var x = X(j), y = Y(folds[j].v), lastNode = (j===folds.length-1);
-      ctx.fillStyle = lastNode ? cyan : panel;
-      ctx.strokeStyle = cyan; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.arc(x, y, lastNode?5:4, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = (j===0) ? dim : num;
-      ctx.textAlign = j===0 ? 'left' : (lastNode ? 'right' : 'center');
-      ctx.fillText(String(folds[j].v), lastNode ? x-8 : x, y - 15);
+    ctx.font = '500 13px "JetBrains Mono", ui-monospace, Menlo, monospace'; ctx.textBaseline = 'middle';
+    for(var j = 0; j < s.length; j++){
+      var reveal = j / Math.max(1, s.length - 1); if(p < reveal - 0.02) continue;
+      var x = X(j), y = Y(s[j].value), last = (j === s.length - 1);
+      ctx.fillStyle = last ? cyan : panel; ctx.strokeStyle = cyan; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, last ? 5 : 4, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = (j === 0) ? dim : num; ctx.textAlign = j === 0 ? 'left' : (last ? 'right' : 'center'); ctx.fillText(fmt(s[j].value), last ? x - 8 : x, y - 15);
     }
-
-    ctx.fillStyle = dim; ctx.font = '11px ui-monospace, Menlo, Consolas, monospace';
-    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-    ctx.fillText('730 baseline', padL, Y(730)+15);
-    ctx.textAlign = 'right';
-    ctx.fillText('OT-4 · open', W-padR, Y(openTarget)-8);
-
+    ctx.fillStyle = dim; ctx.font = '11px "JetBrains Mono", ui-monospace, Menlo, monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(fmt(mc.baseline) + ' baseline · ' + String(mc.metric || '').slice(0, 48), padL, Y(mc.baseline) + 15);
+    if(mc.open && mc.open.id){ ctx.textAlign = 'right'; ctx.fillStyle = violet; ctx.fillText(mc.open.id + ' · ' + (mc.open.status || 'open'), W - padR, padT + 4); }
     if(!reduce && p < 1){ requestAnimationFrame(drawFrontier); }
   }
+  function startDraw(){ animStart = null; if(reduce){ drawFrontier(); } else { requestAnimationFrame(drawFrontier); } }
+  var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ animStart = null; drawFrontier(); }, 120); });
 
-  function start(){ animStart = null; if(reduce){ drawFrontier(); } else { requestAnimationFrame(drawFrontier); } }
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ start(); io.disconnect(); } }); }, {threshold:.3});
-    io.observe(canvas);
-  } else { start(); }
+  function showFeed(f, id){
+    feed = f; var mc = f.movingCeiling, folds = foldsOf(mc);
+    document.getElementById('istat').innerHTML = '<span>baseline <b>' + fmt(mc.baseline) + '</b></span><span>best <b>' + fmt(mc.best) + '</b></span><span>R(t) <b>' + (mc.ratioNow != null ? mc.ratioNow : '—') + '</b></span><span>folds <b>' + folds + '</b></span>' + (mc.open ? '<span>' + esc(mc.open.id) + ' · ' + esc(mc.open.statement || mc.open.status || '').slice(0, 110) + '</span>' : '');
+    document.getElementById('ifoot').textContent = folds === 0 ? 'No fold has run here yet.' : folds + ' audited fold' + (folds === 1 ? '' : 's') + ' — each one a full held-out pass a human keystone chose to fold.';
+    document.getElementById('foldLink').href = served ? '/frontier?instance=' + encodeURIComponent(id) : 'https://github.com/mitchuski/agentprivacy-harness/tree/main/examples/field-guide';
+    startDraw();
+  }
+  var STAR = function(i){ return /star-hold/.test(i.id); };
+  function card(i){
+    var c = i.config || {}, fs = i.frontierSummary || {}, f = feeds[i.id], mc = f && f.movingCeiling;
+    var base = mc ? mc.baseline : fs.baseline, best = mc ? mc.best : fs.best, r = mc && mc.ratioNow != null ? mc.ratioNow : (base && best != null ? Math.round(best / base * 10000) / 10000 : null);
+    var folds = mc ? foldsOf(mc) : null, metric = (c.objective && c.objective.metric) || (mc && mc.metric) || '', ot = (mc && mc.open) || null;
+    var chips = '<span class="chip ' + (folds > 0 ? 'built' : 'open') + '">' + (folds > 0 ? folds + ' fold' + (folds === 1 ? '' : 's') : 'no fold yet') + '</span>' + (ot && ot.id ? '<span class="chip open">' + esc(ot.id) + '</span>' : '') + (STAR(i) ? '<span class="chip new">star hold</span>' : '') + (c.error ? '<span class="chip mirage">config error</span>' : '');
+    return '<article class="ws' + (STAR(i) ? ' star' : '') + '"><div class="name"><a href="/frontier?instance=' + encodeURIComponent(i.id) + '">' + esc(c.name || i.id) + '</a></div><div class="metric" title="' + esc(metric) + '">' + esc(metric || i.id) + '</div><div class="fold num">' + fmt(base) + '<span class="arrow"> → </span><span class="to">' + fmt(best) + '</span>' + (r != null ? '<span class="r">R ' + r + '</span>' : '') + '</div><div class="chips">' + chips + '</div></article>';
+  }
+  // a fold is a step DOWN the series; a re-baseline (the metric rising because
+  // the artefact grew) is not a fold and must not be counted as one
+  function foldsOf(mc){ var s = (mc && mc.series) || [], n = 0; for (var k = 1; k < s.length; k++) if (s[k].value != null && s[k - 1].value != null && s[k].value < s[k - 1].value) n++; return n; }
+  function renderFleet(){ var order = instances.slice().sort(function(a, b){ return (STAR(b) ? 1 : 0) - (STAR(a) ? 1 : 0); }); document.getElementById('fleet').innerHTML = order.map(card).join('') || '<div class="ws"><div class="name">no frontiers found</div><div class="metric">the console discovers any directory carrying harness.config.mjs</div></div>'; }
+  function renderStrip(){
+    var totalFolds = 0, deepest = null;
+    instances.forEach(function(i){ var f = feeds[i.id]; if(!f || !f.movingCeiling) return; var mc = f.movingCeiling, folds = foldsOf(mc); totalFolds += folds; if(mc.ratioNow != null && (!deepest || mc.ratioNow < deepest.r)) deepest = { name:(i.config && i.config.name) || i.id, r:mc.ratioNow, base:mc.baseline, best:mc.best }; });
+    document.getElementById('strip').innerHTML = '<span class="chip built">' + instances.length + ' frontiers</span><span class="chip ' + (totalFolds ? 'built' : 'open') + '">' + totalFolds + ' audited folds</span>' + (deepest ? '<span class="chip plain">deepest: ' + esc(deepest.name) + ' ' + fmt(deepest.base) + ' → ' + fmt(deepest.best) + ' · R ' + deepest.r + '</span>' : '');
+  }
+  function pick(first){ var sel = document.getElementById('wsel'); sel.innerHTML = instances.map(function(i){ return '<option value="' + esc(i.id) + '"' + (i.id === first ? ' selected' : '') + '>' + esc((i.config && i.config.name) || i.id) + '</option>'; }).join(''); sel.addEventListener('change', function(){ var f = feeds[this.value]; if(f) showFeed(f, this.value); }); }
 
-  var rt;
-  window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ animStart=null; drawFrontier(); }, 120); });
+  if(served){
+    fetch('/api/instances').then(function(r){ return r.json(); }).then(function(list){
+      instances = list || [];
+      var params = new URLSearchParams(location.search), want = params.get('instance');
+      var first = (want && instances.some(function(i){ return i.id === want; })) ? want : (instances.filter(STAR)[0] || instances[0] || {}).id;
+      pick(first); renderFleet();
+      return Promise.all(instances.map(function(i){ return fetch('/api/feed?instance=' + encodeURIComponent(i.id)).then(function(r){ return r.json(); }).then(function(f){ if(f && f.movingCeiling) feeds[i.id] = f; }).catch(function(){}); })).then(function(){ renderFleet(); renderStrip();
+        // no ?instance= asked for: open on the frontier with the most audited
+        // folds (deepest R(t) breaks ties), not the first id alphabetically —
+        // which on a fresh clone is a flat line the reader cannot learn from
+        if(!want){ var best = null; instances.forEach(function(i){ var f = feeds[i.id]; if(!f || !f.movingCeiling) return; var n = foldsOf(f.movingCeiling), r = f.movingCeiling.ratioNow; if(!best || n > best.n || (n === best.n && r != null && (best.r == null || r < best.r))) best = { id: i.id, n: n, r: r }; }); if(best && best.n > 0){ first = best.id; pick(first); } }
+        if(first && feeds[first]) showFeed(feeds[first], first); else showFeed(DEMO, DEMO.instance); });
+    }).catch(function(){ showFeed(DEMO, DEMO.instance); document.getElementById('strip').innerHTML = '<span class="chip mirage">console not answering — demo numbers</span>'; });
+  } else {
+    showFeed(DEMO, DEMO.instance);
+    document.getElementById('strip').innerHTML = '<span class="chip plain">demo · serve with node tools/console.mjs for the live fleet</span>';
+    document.getElementById('fleet').innerHTML = '';
+  }
 })();
 </script>
 </body>

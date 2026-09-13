@@ -2,8 +2,9 @@
 
 The engine (`engine/dual_agent_loop.mjs`) is target-agnostic. A concrete
 harness is a **config object** that fills the seats for one domain. You
-should never need to touch the engine; you write a config, bundle it with
-`tools/bundle.mjs`, and run it.
+should never need to touch the engine; you write a config and run it with
+`drivers/run.mjs` (or bundle it with `tools/bundle.mjs` for a runtime that
+provides the Workflow interface).
 
 ## The seven seats
 

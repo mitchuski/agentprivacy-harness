@@ -1,0 +1,13 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "VALIDATED",
+  "evidence": "The candidate document adheres to the hard constraint: it presents the core structure of the dual-agent harness with the required elements (commands, loop table, adoption steps, constitution, box layout) and does not introduce any new or invented content. The census gate passed with 95/95 witnesses.",
+  "metric": 1058,
+  "gateResult": "95/95",
+  "failingCheck": "",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3/r3.1/p1-trim-connective-prose-on-fold",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

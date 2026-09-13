@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // console.mjs — the Workshop Console: a localhost window onto the harness.
 //
-//   node tools/console.mjs [--port 4242] [--root <dir>]... [--open]
+//   node tools/console.mjs [--port 4242] [--root <dir>]... [--open] [--execute-gates]
+// Discovery reads JSON only. --execute-gates opts into running reviewed code.
 //
 // A GET-only node:http server bound to 127.0.0.1. It is a WINDOW, not a hand:
 // there is no route that writes, folds, mints, or publishes. Minting is
@@ -42,9 +43,11 @@ const argv = isMain ? process.argv.slice(2) : []
 let port = 4242
 const extraRoots = []
 let openBrowser = false
+let executeGates = false
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--port') port = Number(argv[++i]) || 4242
   else if (argv[i] === '--root') extraRoots.push(resolve(argv[++i]))
+  else if (argv[i] === '--execute-gates') executeGates = true
   else if (argv[i] === '--open') openBrowser = true
 }
 // optional machine-local roots: tools/console.roots.json — a JSON array of
@@ -126,6 +129,7 @@ function discover() {
   }
   scan(repoRoot)
   scan(join(repoRoot, 'examples'))
+  scan(join(repoRoot, 'evocations'))
   for (const r of extraRoots) {
     if (existsSync(join(r, 'harness.config.mjs'))) found.push(r)
     scan(r)
@@ -140,31 +144,11 @@ function discover() {
 const instanceById = (id) => discover().find(i => i.id === id) || null
 
 // ---- config summary (serializable fields only; functions never cross) ------
-const configCache = new Map()  // dir -> {mtimeMs, summary}
-async function configSummary(dir) {
-  const cfgPath = join(dir, 'harness.config.mjs')
-  const st = safeStat(cfgPath)
-  if (!st) return { error: 'harness.config.mjs missing' }
-  const hit = configCache.get(dir)
-  if (hit && hit.mtimeMs === st.mtimeMs) return hit.summary
-  let summary
-  try {
-    const mod = await import(pathToFileURL(cfgPath).href + '?v=' + st.mtimeMs)
-    const c = mod.default || {}
-    summary = {
-      name: c.name || basename(dir),
-      objective: c.objective || null,
-      door: c.door || null,
-      heldApartRule: c.heldApartRule || null,
-      finders: Array.isArray(c.finders) ? c.finders.map(f => ({ lens: f.lens, hint: f.hint })) : [],
-      stop: c.stop || null,
-      mana: c.mana || null,   // optional, advisory, display-only (SEAT_CONTRACT)
-    }
-  } catch (e) {
-    summary = { name: basename(dir), error: 'config failed to import: ' + String(e && e.message || e).slice(0, 300) }
-  }
-  configCache.set(dir, { mtimeMs: st.mtimeMs, summary })
-  return summary
+// Discovery reads data only. Never import an untrusted .mjs to draw a page.
+export async function configSummary(dir) {
+  const summary = readJson(join(dir, 'harness.summary.json'))
+  return { name: basename(dir), ...(summary && !summary.__unparseable ? summary : {}),
+    configExecution: 'disabled; optional harness.summary.json is display data, not verified configuration' }
 }
 
 // ---- stamp: cheap change detector ------------------------------------------
@@ -319,7 +303,7 @@ function cachedGate(key, stamp, thunk) {
 
 // ---- doc allowlist (literal names; no path resolution of user input) --------
 const DOCS = {
-  'README.md': 'README.md', 'TRUSTS.md': 'TRUSTS.md', 'GROUND_RULES.md': 'GROUND_RULES.md',
+  'ENTRY.md': 'ENTRY.md', 'README.md': 'README.md', 'TRUSTS.md': 'TRUSTS.md', 'GROUND_RULES.md': 'GROUND_RULES.md',
   'ADOPTION.md': 'ADOPTION.md', 'SEAT_CONTRACT.md': 'SEAT_CONTRACT.md',
   'seats/measure.md': 'seats/measure.md', 'seats/soulbae-propose.md': 'seats/soulbae-propose.md',
   'seats/gap-hold-apart.md': 'seats/gap-hold-apart.md', 'seats/soulbis-assay.md': 'seats/soulbis-assay.md',
@@ -395,6 +379,7 @@ async function handle(req, res) {
   }
 
   if (url.pathname === '/api/gates') {
+    if (!executeGates) return json(res, 403, { error: 'Gate execution disabled. Run checks in a trusted terminal, or restart with --execute-gates after reviewing the instance code.' })
     const inst = instanceById(q.get('instance'))
     if (!inst) return json(res, 404, { error: 'unknown instance' })
     const stamp = stampOf(inst.dir)
@@ -408,6 +393,7 @@ async function handle(req, res) {
   }
 
   if (url.pathname === '/api/check') {
+    if (!executeGates) return json(res, 403, { error: 'Gate execution disabled; use a trusted terminal or --execute-gates.' })
     const result = cachedGate('check', 'ondemand', () => spawnGate('check', ['tools/check.mjs']))
     return json(res, 200, result)
   }

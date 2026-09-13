@@ -430,7 +430,9 @@ function drawGates(){
   const rows=[];
   const gateList = (m&&m.gates&&m.gates.length)?m.gates:['G0-conform','G1','G2','G3','G4-door'];
   for(const g of gateList){
-    if(/^G0/.test(g)) rows.push(`<tr><td>${esc(g)}</td><td>${g0?(g0.exit===0?`<span class="chip on">green</span>`:`<span class="chip bad">FAIL</span>`):'<span class="chip">…</span>'} <span class="kv">${esc(g0?g0.cmd:'')}</span></td></tr>`);
+    if(/^G0/.test(g)) rows.push(gates&&gates.disabled
+      ? `<tr><td>${esc(g)}</td><td><span class="chip">off</span> <span class="kv">not run from this window — restart with <code>node tools/console.mjs --execute-gates</code> after reviewing the instance code, or run <code>${esc(g0.cmd)}</code> in a terminal</span></td></tr>`
+      : `<tr><td>${esc(g)}</td><td>${g0?(g0.exit===0?`<span class="chip on">green</span>`:`<span class="chip bad">FAIL</span>`):'<span class="chip">…</span>'} <span class="kv">${esc(g0?g0.cmd:'')}</span></td></tr>`);
     else if(/G4|door/i.test(g)) rows.push(`<tr><td>${esc(g)}</td><td><span class="chip doc">owner: first-person — no software state, by design (T6)</span></td></tr>`);
     else rows.push(`<tr><td>${esc(g)}</td><td><span class="kv">cited from manifest.yaml — enforced by the loop, not by this page</span></td></tr>`);
   }
@@ -531,7 +533,8 @@ window.selectInstance = async (id)=>{ sel=id; state=null; prevState=null; selRun
 $('runSel').onchange = e=>{ selRun=e.target.value; selRound=null; renderAll(); drawRunSelectors(); };
 $('roundSel').onchange = e=>{ selRound=e.target.value; renderAll(); };
 $('runCheck').onclick = async ()=>{ $('checkOut').style.display='block'; $('checkOut').textContent='running node tools/check.mjs …';
-  const r=await fetch('/api/check'); const j=await r.json(); $('checkOut').textContent=`$ ${j.cmd}\n\n${j.out}\n\nexit ${j.exit} · ${j.at}`; };
+  const r=await fetch('/api/check'); const j=await r.json();
+  $('checkOut').textContent = j.error ? `${j.error}\n\n(restart: node tools/console.mjs --execute-gates — or run node tools/check.mjs in a terminal)` : `$ ${j.cmd}\n\n${j.out}\n\nexit ${j.exit} · ${j.at}`; };
 
 function renderAll(){
   if(!state) return;
@@ -555,6 +558,9 @@ async function refresh(force){
       if(selRun){ const run=s.runs.find(r=>r.runId===selRun)||s.runs[s.runs.length-1]; if(run && !run.rounds.find(r=>r.roundId===selRound)) selRound = run.rounds.length?run.rounds[run.rounds.length-1].roundId:null; }
       drawRunSelectors(); renderAll();
       gates = await (await fetch('/api/gates?instance='+encodeURIComponent(sel))).json();
+      // a 403 means the console was started without --execute-gates: say so in the
+      // G0 cell instead of leaving it blank (the round record is still shown)
+      if (gates.error) gates = { conform: { cmd: 'node engine/conform.mjs ' + sel, exit: null, out: gates.error, at: '' }, audit: null, disabled: true };
       for (const i of instances) if (i.id===sel) i._conform = gates.conform && gates.conform.exit===0;
       drawInstances(); drawGates(); renderTrusts();
     }

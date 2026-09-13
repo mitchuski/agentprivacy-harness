@@ -13,6 +13,10 @@ This is the public repository: the workshop where the harness is built, and
 what you clone. Apache-2.0. Node 18 or later, zero dependencies, no network
 unless a driver you choose makes one.
 
+Start with [ENTRY.md](ENTRY.md): explore the method, connect your research
+repository, or follow an agentprivacy path. The websites and skill references
+lead here; arrival does not start a research round.
+
 ## Run it: five commands
 
 ```bash
@@ -30,7 +34,7 @@ Command 2 writes `runs/smoke/<round>/p<i>-<lever>/{proposal_canon.json, gap.json
 1. **The auditor.** Your own documents under a census, no model at all: `examples/corpus`. If every claim you make is enumerable, this is the whole tool (`ADOPTION.md`, step 0).
 2. **The spar.** `examples/field-guide`: compress a 730-word guide while a held-out gate stays 8/8. Run it with the stub, then with a model.
 3. **Your instance.** `node tools/new_instance.mjs ../my-harness my-harness`, then answer five questions in `harness.config.mjs`: the artefact, the number that must move, the gate it must fully pass, the line it must never cross, the door. `node engine/conform.mjs ../my-harness` refuses until every answer is real.
-4. **A second model in the prover's seat** (`--assay-model`), the separation the design wants: pass `--propose-model <a> --assay-model <b>`, or `--driver split` for the proposer on the Claude API and everything else on Ollama. The conformance gate reports Φ_inference = 0 when both seats are the same model; the duel begins when they are not.
+4. **A second model in the prover's seat** (`--assay-model`), the separation the design wants: pass `--propose-model <a> --assay-model <b>`, or `--driver split` for the proposer on the Claude API and everything else on Ollama; `--driver multi` names a provider per seat (`anthropic:` · `ollama:` · `openai:` · `serv:`), `drivers/openai.mjs` speaks any OpenAI-compatible endpoint, and `--driver serv` seats the proposer on OpenServ's SERV Reasoning API (BRAID as a service) with the prover local — one seat, never both, never the default; `node tools/test_serv_driver.mjs` proves the wire shape against a mock, and the live call needs `SERV_API_KEY`. The conformance gate reports Φ_inference = 0 when both seats are the same model; the duel begins when they are not.
 5. **The arena.** A referee you cannot tune: a public board, a test suite you did not write, a stranger who rebuilds your artefact byte for byte (`tools/mint_artefact.mjs` seals it; `tools/vrc.mjs` lets a signature mint the edge).
 6. **Optional layers.** Seats dressed with personas (`SPECIALISATION.md`), the graph dialect and content addressing (`GRAPH.md`, `HOLONS.md`), wiki federation (`WIKI.md`). Each names this workshop's own ecosystem; none is needed to run a round.
 
@@ -152,7 +156,7 @@ in, and `WORKFLOW.md` is the operator's loop end to end, including the
 BYO-interface contracts and the small-machine notes.
 
 **Requirements:** Node ≥ 18, nothing else (zero npm dependencies). Rounds run
-through `drivers/run.mjs` (stub · ollama · anthropic · split · --proposals), through
+through `drivers/run.mjs` (stub · ollama · anthropic · openai · split · multi · serv · --proposals; `serv` is OpenServ's SERV Reasoning API holding one seat, never both, never the default — the prover stays local), through
 Claude Code's Workflow tool (the reference multi-agent runtime), or through any
 `rt = { agent, parallel, pipeline, phase, log }` you supply to `engine/dual_agent_loop.mjs`.
 

@@ -1,12 +1,26 @@
 // harness.config.mjs — blank harness config. Copy this next to your target
-// artifact, fill every TODO, then bundle:
+// artifact, fill every TODO, then run it with Node alone:
+//   node drivers/run.mjs --instance <dir> --driver stub --run smoke
+// or bundle it for a runtime that provides the Workflow interface:
 //   node tools/bundle.mjs <this file> <out>.workflow.mjs
 // Contract: SEAT_CONTRACT.md. Constitution: TRUSTS.md. Define the Gap FIRST —
 // if you cannot say how held-out witnesses derive from a proposal, you do not
 // have a harness yet, you have a to-do list.
+//
+// The runner, conform.mjs and bundle.mjs all refuse a config still wearing
+// its TODOs. Keep this file self-contained (no imports) if you want to bundle
+// it; a counting rule that is code belongs in <dir>/tools/measure.mjs, which
+// drivers/run.mjs executes before each round and hands to every prompt as
+// ctx.args.measured.
 
 export default {
   name: 'TODO-my-harness',
+
+  // optional — the artifact the run is bound to, RELATIVE TO THIS INSTANCE
+  // (drivers/run.mjs joins it to the instance directory). Its sha256 becomes
+  // hSource in every seed, so a candidate cannot silently change the
+  // population it is graded against.
+  // sourceFile: 'artifact/TARGET.md',
 
   objective: {
     metric: 'TODO — what frontier.json tracks, lower is better',
@@ -48,23 +62,25 @@ export default {
     propose: (finder, measure, ctx) =>
       `Seat PROPOSE — soulbae 🧙 (bnot), lens = ${finder.lens}: ${finder.hint}
 Frontier context: ${JSON.stringify(measure)}.
-Read ${ctx.repo}/notes/KILLED_LEVERS.md first; never re-propose a K-id without new cited evidence.
+TODO: supply the killed-lever ledger as authorized input; never re-propose a K-id without new cited evidence.
 TODO: name the target artifact and what a diffPlan must reference. Propose exactly 1 lever through YOUR lens. Plan only — never implement.`,
-    holdApart: (proposal, i, ctx) =>
-      `Seat HOLD-APART — the Gap ⿻ (xor). Proposal artifact (verbatim):
-${JSON.stringify(proposal)}
-Canonically serialize it (recursive sorted keys, no whitespace) and SAVE those exact bytes to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/proposal_canon.json — it must persist, it is the auditor's only route to your seed. SHA-256 that file (show the exact command; sha256sum of the saved file must equal seedHex), then TODO: state the deterministic draw rule for this instance's witnesses. Write gap.json alongside it. Never accept proposer-suggested witnesses.`,
-    assay: (proposal, gap, i, ctx) =>
-      `Seat ASSAY — soulbis ⚔️ (neg), the prover.
+    holdApart: (proposal, i, ctx, derived) =>
+      `Seat HOLD-APART. Return data only; the host hashes and saves it.
 Proposal: ${JSON.stringify(proposal)}
-Gap: seed=${gap.seedHex}. Re-derive it the auditor's way first: sha256sum ${ctx.runDir}/p${i + 1}-${proposal.leverId}/proposal_canon.json must equal seedHex. BLOCKED if the file is missing or the digest does not reproduce. Transcript: ${gap.transcript}
-TODO: the exact scratch-copy procedure (GR-10) and the full held-out gate to run on the Gap's witnesses. VALIDATED only if full gate pass AND hard constraint holds AND metric beats frontier. Otherwise MIRAGE (name the failing check) or BLOCKED. Write verdict.json to ${ctx.runDir}/p${i + 1}-${proposal.leverId}/ with EXACTLY the schema's shape — flat fields, metric a bare number, no extra nesting. The file an auditor reads must match the data the orchestrator receives.`,
+Engine derivation: ${JSON.stringify(derived)}
+TODO: supply the frozen witness bank as authorized input and map derived.drawIndices to its witnesses. Return the supplied seedHex, draw, and transcript. Do not invent a seed or recompute an unsalted hash. If the derivation or bank is absent, return null.`,
+    assay: (proposal, gap, i, ctx) =>
+      `Seat ASSAY. Return data only; the host persists verdict.json.
+Proposal: ${JSON.stringify(proposal)}
+Gap: ${JSON.stringify(gap)}
+TODO: supply authorized candidate/source inputs and the exact full-gate evidence from an executable adapter, or define an explicitly labelled semantic assessment. API-only seats cannot run shell commands or read local paths. Missing required inputs or executable evidence means BLOCKED. Never claim tests were executed from a description.
+VALIDATED requires full gate pass, hard constraint intact, and a measured frontier beat.`,
     critic: (proposals, verdicts, ctx) =>
       `Seat CRITIC. Proposals: ${JSON.stringify(proposals)}
 Verdicts: ${JSON.stringify(verdicts)}
-Classify each closed lever structural/probe-limited/noise (red-team the proposer's rationale, never the prover's verdict); draft KILLED_LEVERS entries for structural kills; name exactly ONE next lead.`,
+Classify each closed lever structural/probe-limited/noise/mis-gated (red-team the proposer's rationale, never the prover's verdict); draft KILLED_LEVERS entries for structural kills; name exactly ONE next lead.`,
     chronicle: (round, ctx) =>
-      `Seat CHRONICLE. Draft ${ctx.runDir}/CHRONICLE_DRAFT.md following ${ctx.root}/templates/chronicle.md: verdict-first, reversals at win-prominence, handoff block ending in the critic's nextLead. Round data: ${JSON.stringify(round)}. Return the path plus a 5-line verdict summary.`,
+      `Seat CHRONICLE. Draft ${ctx.runDir}/CHRONICLE_DRAFT.md following ${ctx.root}/templates/chronicle.md: verdict-first, reversals at win-prominence, handoff block ending in the critic's nextLead. Round data: ${JSON.stringify(round)}. Return the Markdown draft itself; the host persists it.`,
   },
 
   schemas: {

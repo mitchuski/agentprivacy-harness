@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "The provided candidate fails the held-out census gate: passed 94 out of N=95 witnesses, with the missing witness listed as \"Shared state has exactly one writer\". Because the full held-out gate is not satisfied (passed < N), the candidate cannot be a VALIDATED result even if the hard constraint appears intact.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/r3-serv.1/p1-trim-connective-prose-on-fold"
+}

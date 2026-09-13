@@ -1,0 +1,13 @@
+{
+  "leverId": "agent-note-into-box-constitution-as-columns",
+  "status": "VALIDATED",
+  "evidence": "The candidate document still presents the core components of the dual-agent harness—the loop, the constitution, and the adoption steps—in a clear and organized manner. The five commands are present and accurately describe the workflow. The hard constraint is met: the document remains a self-contained guide for setting up and running the harness.",
+  "metric": 1047,
+  "gateResult": "95/95",
+  "failingCheck": "",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3/r3.1/p2-agent-note-into-box-constitution-as-columns",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

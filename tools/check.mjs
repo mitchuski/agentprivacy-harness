@@ -49,6 +49,7 @@ run('engine tests', ['engine/loop.test.mjs'])
 run('gap tool tests', ['engine/gap.test.mjs'])
 run('salt-mode tests', ['engine/loop.salt.test.mjs'])
 run('console + mint tests', ['tools/console.test.mjs'])
+run('entry regressions', ['tools/entry.test.mjs'])
 run('claims register (enforced-by gate)', ['tools/check_claims.mjs'])
 
 // ---- 3. every instance ---------------------------------------------------

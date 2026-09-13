@@ -1,0 +1,13 @@
+{
+  "leverId": "restructure-lists-tables-merge",
+  "status": "VALIDATED",
+  "evidence": "The document adheres to the specified structure (thesis, architecture, proof, invitation) and maintains all section headings in order. The appendix comprehensively lists all referenced platforms, repositories, and concepts. No new elements were introduced, and there are no pointers to external or extended versions.",
+  "metric": 1573,
+  "gateResult": "64/64",
+  "failingCheck": "",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/evocations/primer/runs/r1/r1.1/p2-restructure-lists-tables-merge",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

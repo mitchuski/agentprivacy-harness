@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: hard constraint (five commands in order with what each writes, the loop table, the adoption steps, the constitution, the box layout; nothing invented; no pointer to a longer version) does not hold",
+  "evidence": "I checked whether the candidate is still the exact “document a stranger opens first” per the hard constraint: it must contain the five commands in order with what each writes, the loop table, the adoption steps, the constitution, and the box layout, with no invented content and no pointer to a longer version. The candidate includes a “Command 2 writes …” and “Command 5 is where a fold can happen” description, but it also contains additional structural/wording beyond the specified minimal first-document contract (e.g., extra sections like “The constitution” plus broader repository inventory and multiple “Optional layers” and “WORKFLOW.md” references), so it is not the exact hard-constraint document a stranger opens first.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-raw/r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "self",
+  "runId": "r3",
+  "driver": "ollama",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 2,
+    "MIRAGE": 0,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "trim-connective-prose-on-fold",
+      "status": "VALIDATED",
+      "evidence": "The candidate document adheres to the hard constraint: it presents the core structure of the dual-agent harness with the required elements (commands, loop table, adoption steps, constitution, box layout) and does not introduce any new or invented content. The census gate passed with 95/95 witnesses.",
+      "metric": 1058,
+      "gateResult": "95/95",
+      "failingCheck": "",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3/r3.1/p1-trim-connective-prose-on-fold"
+    },
+    {
+      "leverId": "agent-note-into-box-constitution-as-columns",
+      "status": "VALIDATED",
+      "evidence": "The candidate document adheres to the hard constraint: it presents five clear commands detailing what each writes, a loop table, adoption steps, the constitution, and the box layout, without introducing any new elements. The census check passed with 95/95 witnesses.",
+      "metric": 1047,
+      "gateResult": "95/95",
+      "failingCheck": "",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3/r3.1/p2-agent-note-into-box-constitution-as-columns"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "gemma3:27b"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)"
+}

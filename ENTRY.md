@@ -23,16 +23,20 @@ over any optional reading order.
   Output: a cited reading path; stop before modifying a wiki.
 - **City:** https://mages.city/skill.md — arrival and participation terms.
   Output: applicable terms and next human decision; stop before sending or signing.
-- **Star:** https://soulbis.com/star/ — the instrument and its explanation.
+- **Star:** https://soulbis.com/star/ — the instrument and its explanation;
+  agents read https://soulbis.com/skill.md.
   Output: observed behaviour versus claims; stop before importing keys.
 - **Harness:** README.md, ADOPTION.md and examples/corpus/README.md — choose an
   auditor for enumerable checks, or inspect examples/field-guide for a round.
   Output: a scoped setup, or a verified local smoke run when execution is authorized.
+- **Lab:** https://agentprivacy.org/services/ — build or assess with the lab.
+  Output: the engagement shape and the human door (mage@agentprivacy.ai);
+  stop before sending.
 
 These routes need public browsing only until local execution is chosen. If a
 fetch fails, report the missing reference and use available local material;
 a blocked fetch does not establish that a site is down. Optional wider
-navigation: https://agentprivacy.org/skill.md and https://agentprivacy.org/discovery.md.
+navigation: the agent door https://agentprivacy.ai/skill.md, the human door https://agentprivacy.org/begin/ and its handoff https://agentprivacy.org/discovery.md.
 
 ## Connect your research repository
 
@@ -51,7 +55,10 @@ node tools/check.mjs
 node tools/new_instance.mjs ../my-harness my-harness --source ../my-research --prover MODEL_B
 ```
 
-Replace MODEL_B with an available prover; omit it if choosing later. Quote paths
+Replace MODEL_B with an available prover; omit it if choosing later. A round
+needs a model in the prover's seat: a local Ollama model or an API key. With
+neither, the stub runs the loop and every verdict is MIRAGE by construction;
+that proves the plumbing, not the work. Quote paths
 with spaces. `--source` accepts an existing local directory, not a URL. Clone a
 remote source into an authorized location first. Scaffolding records its path
 without reading its contents or running its code; existing instance files stay.

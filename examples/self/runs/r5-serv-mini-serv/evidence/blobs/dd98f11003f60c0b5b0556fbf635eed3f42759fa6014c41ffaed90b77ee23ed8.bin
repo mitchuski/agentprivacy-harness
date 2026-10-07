@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: the document is not still the document a stranger opens first; it adds a pointer to PATHWAYS.md and changes the intro/run sections instead of keeping five commands in order with what each writes, the loop table, the adoption steps, the constitution, and the box layout with nothing invented",
+  "evidence": "I checked the candidate against the required first-open structure named in the seat brief. The census is complete at 95/95, but the text is not a minimal self-contained first document because it introduces a longer-version pointer and diverges from the exact ordered sections required by the hard constraint.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r5-serv-mini-serv/r5-serv-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

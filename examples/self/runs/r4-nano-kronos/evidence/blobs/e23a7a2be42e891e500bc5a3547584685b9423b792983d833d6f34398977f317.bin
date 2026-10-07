@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: five commands in order with what each writes; loop table; adoption steps; constitution; box layout — candidate violates the required exact hard-constraint wording/structure (e.g., includes prose/commands beyond the specified “five commands in order with what each writes” and does not present the hard-constraint’s “loop table / adoption steps / constitution / box layout” in the required exact stranger-first layout).",
+  "evidence": "I checked the candidate against the hard constraint described in frontier.json: it must be the exact document a stranger opens first, with the five commands in order including what each writes, then the loop table, then adoption steps, then the constitution, then the box layout, with nothing invented. While the candidate includes sections matching those topics, its structure and command block include extra narrative and formatting that does not match the hard-constraint’s required exact layout, so the hard constraint fails even though the held-out path census gate is 95/95.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-nano-kronos/r4-nano-kronos.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

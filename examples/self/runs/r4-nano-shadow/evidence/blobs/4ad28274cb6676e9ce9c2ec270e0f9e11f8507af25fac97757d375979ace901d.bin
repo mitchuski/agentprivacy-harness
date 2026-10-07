@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "Code-side held-out gate census (tools/check_path.mjs) reported N=95, passed=94, missing=[\"Shared state has exactly one writer\"], so the full gate does not pass (passed < N). Hard constraint: NOT VERIFIED as satisfied—because the hard-constraint check is part of the full held-out gate and the census already failed; the missing witness corresponds to the hard constraint section \"Shared state has exactly one writer\" (the loop table / shared-state writer rule).",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-nano-shadow/r4-nano-shadow.1/p1-trim-connective-prose-on-fold"
+}

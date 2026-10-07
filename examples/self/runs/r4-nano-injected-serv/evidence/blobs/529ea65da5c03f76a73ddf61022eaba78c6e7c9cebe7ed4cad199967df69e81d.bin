@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "I relied on the provided held-out gate output (passed 94 of N=95) and did not accept the candidate as a result. Because the full held-out gate did not reach N/N, the hard constraint cannot be considered satisfied for a VALIDATED verdict.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-nano-injected-serv/r4-nano-injected-serv.1/p1-trim-connective-prose-on-fold"
+}

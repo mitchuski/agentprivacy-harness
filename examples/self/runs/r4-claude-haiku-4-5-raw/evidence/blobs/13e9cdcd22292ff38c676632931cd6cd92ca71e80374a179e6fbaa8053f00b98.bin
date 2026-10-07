@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing [\"Shared state has exactly one writer\"]",
+  "evidence": "Code-side gate (tools/check_path.mjs) reports 94/95 witnesses present; one required witness missing: \"Shared state has exactly one writer\". This is a census failure, not a hard-constraint failure. The candidate reads well and preserves the five-command structure, loop table, adoption steps, constitution, and box layout intact. However, the gate is a multiplicative factor (T5): a zero in the gate collapses the product regardless of metric improvement. 1038 < 1069 (frontier best), but gate-fail is gate-fail.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-claude-haiku-4-5-raw/r4-claude-haiku-4-5-raw.1/p1-trim-connective-prose-on-fold"
+}

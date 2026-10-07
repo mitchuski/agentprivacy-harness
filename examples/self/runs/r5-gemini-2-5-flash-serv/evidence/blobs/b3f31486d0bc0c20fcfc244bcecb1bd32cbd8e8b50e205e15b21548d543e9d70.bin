@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "Hard constraint: the document contains a pointer to a longer version (PATHWAYS.md) in the 'What is in the box' section, violating 'no pointer to a longer version'.",
+  "evidence": "Reviewed the candidate document against the hard constraint. The 'Run it: five commands', 'The loop', 'Adopt it in steps', 'The constitution', and 'What is in the box' sections are present and in order. However, the 'What is in the box' section includes a reference to 'PATHWAYS.md', which serves as a pointer to a longer version of information, directly violating the hard constraint 'no pointer to a longer version'.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r5-gemini-2-5-flash-serv/r5-gemini-2-5-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

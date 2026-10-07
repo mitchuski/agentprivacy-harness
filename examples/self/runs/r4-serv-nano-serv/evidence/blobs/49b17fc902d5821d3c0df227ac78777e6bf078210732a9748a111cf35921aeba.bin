@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: candidate is not the exact stranger-first document (hard-constraint command list / loop / adoption / constitution / box layout not verifiably complete as specified)",
+  "evidence": "I checked the candidate against the hard constraint description: it must be exactly the stranger-first document with five commands in order (and what each writes), the loop table, the adoption steps, the constitution, and the box layout, with nothing invented. While the candidate includes sections matching those headings, it does not provide the full, unambiguous “five commands in order with what each writes” content as a complete, checkable specification (e.g., the exact write locations are asserted but not fully specified for all commands), so the hard constraint cannot be confirmed as satisfied. With the hard constraint unconfirmed, the verdict is MIRAGE even though the held-out gate result is 95/95.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-serv-nano-serv/r4-serv-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

@@ -1,0 +1,79 @@
+{
+  "name": "self",
+  "runId": "r4-nano-injected-guard",
+  "driver": "multi",
+  "status": "INCOMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 0,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gpt-5.4-nano"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "RUN INCOMPLETE — round r4-nano-injected-guard.1 lost seats to infrastructure (hold-apart|assay×2/2, critic), not to exhausted ideas. FOLD NOTHING: no gate ran on the dead seats, so no verdict here is evidence (GR-5). Re-run the round; the surviving proposals are candidates, not results. Do not move frontier.json.",
+  "usage": [
+    {
+      "label": "measure:r4-nano-injected-guard.1",
+      "model": "gpt-5.4-nano",
+      "raw": false,
+      "shadow": false,
+      "guard": true,
+      "prompt_tokens": 5019,
+      "completion_tokens": 163,
+      "total_tokens": 5182
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "gpt-5.4-nano",
+      "raw": false,
+      "shadow": false,
+      "guard": true,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble-injected",
+      "model": "gpt-5.4-nano",
+      "raw": false,
+      "shadow": false,
+      "guard": true,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+    },
+    {
+      "label": "critic:r4-nano-injected-guard.1",
+      "model": "gpt-5.4-nano",
+      "raw": false,
+      "shadow": false,
+      "guard": true,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+    },
+    {
+      "label": "chronicle:r4-nano-injected-guard.1",
+      "model": "gpt-5.4-nano",
+      "raw": false,
+      "shadow": false,
+      "guard": true,
+      "prompt_tokens": 5153,
+      "completion_tokens": 5,
+      "total_tokens": 5158
+    }
+  ]
+}

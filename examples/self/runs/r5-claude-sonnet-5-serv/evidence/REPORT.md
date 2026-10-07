@@ -1,0 +1,29 @@
+# harness/self/r5-claude-sonnet-5-serv evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:a0e74d41c0e8d7145a4f1793526908d3eb46a8f791f18e8ef02576d3dc35281b
+
+Merkle root (provisional, SHA-256, 32 leaves): `b55603637addded70704505b2e90c0e59479611ca98563d5d29bc651e3926c18`
+
+| object | kappa |
+|---|---|
+| candidate:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683` |
+| candidate:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23` |
+| canon:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:81792847bb2445f6bb4c66c7383ba6a7e20438b2087f6f2206c6e2eac3cfde57` |
+| gap:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:cd818c664a17478c7253401c984e9d3cc1f67237a2b9a9ae19d62b66648594e9` |
+| gapjson:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:aca7001430e83ff2bddf034c9a774ccfb620b1c4949b655c1848c0fcb1c34b41` |
+| gapjson:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:c71d76782753f3368182d11b1c07284cd45d2ade4eb97fd7937ea5fb9f97ea0e` |
+| proposal:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:ce14a00e547590256b39807369245f39f7454ec8ef75d8179dae5c86b189e490` |
+| proposal:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:cf0dea00de863272d53598979fb9f059a5863c30dda109aa6bc4ec3b855517a1` |
+| source:run.json | `sha256:bcdf971c5dcea31ce5b8824592234fd40b34893cfac465ac5e7b54cebc0028cd` |
+| tally:r5-claude-sonnet-5-serv.1 | `sha256:41082983ad498b885e2feec8e063c0acc2d75ef041a5f2528cfa3e44b262f825` |
+| verdict:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:ae068373ad5ac5f57f41f105931af534b1cd8acb680e636f3d060a1530894050` |
+| verdict:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:37f72eedeeb27e882b7f742c3350ad38a205ab752b7d859be82461f35e83d5a9` |
+| verdictjson:r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold | `sha256:594b7fa0022a3c315878838984f9829f6c11cbb4f02cbfab5eec08461f5901ed` |
+| verdictjson:r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:eda3cc433b8033a1f80c5e6bc0664a310c8803ea8ef096f2199176006d10e55d` |
+| verdicts:r5-claude-sonnet-5-serv.1 | `sha256:12ce7254272255a1708a6a45c891801d8af7913413400e9b26545b167964a021` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r5-claude-sonnet-5-serv/evidence`.

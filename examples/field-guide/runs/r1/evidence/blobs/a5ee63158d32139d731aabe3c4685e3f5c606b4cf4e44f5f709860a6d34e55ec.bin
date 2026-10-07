@@ -1,0 +1,46 @@
+{
+  "seedHex": "1ec8affb29623c553319588df2e8e0dad432f6e711bd92fec5dee3ada8437515",
+  "draw": [
+    {
+      "factId": "F31",
+      "question": "After the power returns, within what time window should you restock everything used during the outage, and which two items should you restock first?",
+      "expectedAnswer": "Restock everything used during the outage within one week, starting with water and batteries."
+    },
+    {
+      "factId": "F15",
+      "question": "Perishable food that has spent how long above what temperature should be discarded?",
+      "expectedAnswer": "Any perishable food that has spent more than two hours above four degrees Celsius should be discarded."
+    },
+    {
+      "factId": "F27",
+      "question": "For how long does refrigerated medication such as insulin generally remain usable at room temperature, and who should you confirm the rule with for your specific medication?",
+      "expectedAnswer": "Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist."
+    },
+    {
+      "factId": "F21",
+      "question": "In cold weather, which room in the home should you gather everyone in, and what is stated to be safer than any improvised heater?",
+      "expectedAnswer": "Choose one small room on a south-facing side of the home ... layered clothing and blankets are safer than any improvised heater."
+    },
+    {
+      "factId": "F14",
+      "question": "Besides keeping both refrigerator and freezer doors closed as much as possible, what specific reminder action does the guide instruct?",
+      "expectedAnswer": "Tape a note to each door as a reminder."
+    },
+    {
+      "factId": "F20",
+      "question": "How many battery-powered carbon monoxide alarms should you install, and on which floors?",
+      "expectedAnswer": "Install at least one battery-powered carbon monoxide alarm on each floor where people sleep."
+    },
+    {
+      "factId": "F9",
+      "question": "Which six non-perishable foods does the guide name as good choices for the emergency shelf?",
+      "expectedAnswer": "Canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk."
+    },
+    {
+      "factId": "F12",
+      "question": "For about how long does an unopened refrigerator keep food safe?",
+      "expectedAnswer": "An unopened refrigerator keeps food safe for about four hours."
+    }
+  ],
+  "transcript": "SEAT: hold-apart (the Gap, xor). INSTANCE: examples/field-guide. RUN: r1/p2-restructure-to-telegraphic-bullets.\n\n=== STEP 1 · NUMBERED FACTS FROM ORIGINAL artifact/GUIDE.md ===\nBody split into sentences on '.', '!', '?' in reading order; every sentence stating a checkable fact indexed from F1.\nF1: outage lasting up to seventy-two hours.\nF2: written for a temperate climate and assumes no backup generator.\nF3: work through the sections in order; earlier sections cover the preparations that matter most.\nF4: store four litres of water per person per day = twelve litres per person for the full seventy-two hours.\nF5: half of that allowance for drinking, the other half for cooking and basic hygiene.\nF6: store water in food-grade containers, out of direct sunlight, replace every six months.\nF7: if a storm is forecast with advance warning, also fill the bathtub; bathtub water for flushing toilets and washing, never for drinking.\nF8: dedicated shelf of non-perishable food sufficient for three days.\nF9: good choices: canned beans, canned fish, peanut butter, crackers, dried fruit, shelf-stable milk.\nF10: choose foods requiring no cooking; own a manual can opener (electric useless).\nF11: eat perishable refrigerator food first, then freezer, then the emergency shelf.\nF12: an unopened refrigerator keeps food safe for about four hours.\nF13: full freezer holds safe temperature about forty-eight hours, half-full only about twenty-four hours.\nF14: keep both doors closed as much as possible and tape a note to each door as a reminder.\nF15: discard perishable food that has spent more than two hours above four degrees Celsius.\nF16: use battery-powered LED lanterns or headlamps as primary light; avoid candles (leading cause of house fires during outages).\nF17: store at least one light per person plus two spare sets of batteries for each light.\nF18: one headlamp beside each bed and one lantern in the kitchen.\nF19: never run a camping stove, barbecue, or generator indoors, in a garage, or near a window (carbon monoxide, odourless, can be fatal).\nF20: install at least one battery-powered carbon monoxide alarm on each floor where people sleep.\nF21: in cold, choose one small room on a south-facing side, close its door, gather everyone; layered clothing and blankets safer than any improvised heater.\nF22: if indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or neighbour's home.\nF23: keep a battery-powered or hand-crank radio; know the frequency of your local emergency station before the outage.\nF24: a full modern power bank of twenty thousand milliamp-hours recharges a typical phone roughly four times.\nF25: put your phone in low-power mode at the start; agree in advance on one out-of-area contact everyone texts.\nF26: keep a first-aid kit and a seven-day supply of every prescription medication, rotate to stay in date.\nF27: refrigerated medication such as insulin generally remains usable at room temperature up to twenty-eight days; confirm with a pharmacist.\nF28: write pharmacy, doctor, and poison-control numbers on paper.\nF29: wait five minutes before switching major appliances back on.\nF30: if freezer food still contains ice crystals, it can be safely refrozen.\nF31: restock everything used during the outage within one week, starting with water and batteries.\nF32: write a one-page note about what was missing or awkward, and fix at least one gap before the next outage.\nTotal facts: 32 (F1..F32).\n\n=== STEP 2 · CANONICAL SERIALIZATION + HASH ===\nProposal artifact (verbatim from prompt) written to proposal_raw.json, then parsed and re-emitted with recursively sorted keys and no whitespace via canon.mjs (JSON.stringify on primitives, keys Object.keys().sort()). Output persisted as proposal_canon.json (5727 bytes, utf8).\nHash command (Git Bash, cwd = the run scratch dir):\n  sha256sum proposal_canon.json\nDigest:\n  1ec8affb29623c553319588df2e8e0dad432f6e711bd92fec5dee3ada8437515 *proposal_canon.json\nseedHex = 1ec8affb29623c553319588df2e8e0dad432f6e711bd92fec5dee3ada8437515\nVerify: sha256sum proposal_canon.json MUST equal seedHex.\n\n=== STEP 3 · DRAW RULE (8 distinct facts, without replacement) ===\nDigest read as bytes b0,b1,... left to right. For draw k: idx = b_k mod (remaining count); remove remaining[idx]. Remaining starts [F1..F32].\nb0=0x1e=30, rem=32, 30%32=30 -> F31\nb1=0xc8=200, rem=31, 200%31=14 -> F15\nb2=0xaf=175, rem=30, 175%30=25 -> F27\nb3=0xfb=251, rem=29, 251%29=19 -> F21\nb4=0x29=41, rem=28, 41%28=13 -> F14\nb5=0x62=98, rem=27, 98%27=17 -> F20\nb6=0x3c=60, rem=26, 60%26=8 -> F9\nb7=0x55=85, rem=25, 85%25=10 -> F12\nDrawn (order): F31, F15, F27, F21, F14, F20, F9, F12. All distinct.\n\n=== STEP 4 · QUESTIONS ===\nOne comprehension question per drawn fact; expected answers quoted from the ORIGINAL guide sentence. See draw[].\n\nNote: witnesses are Fiat-Shamir-derived from the proposal artifact alone (T2/GR-4); no proposer-suggested witness was accepted. No judgement of the proposal's merits is offered (Gap separates, does not judge)."
+}

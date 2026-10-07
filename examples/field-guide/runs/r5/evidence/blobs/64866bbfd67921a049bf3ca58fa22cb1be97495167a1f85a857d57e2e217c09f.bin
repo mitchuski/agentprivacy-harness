@@ -1,0 +1,14 @@
+{
+  "leverId": "line-edit-baseline-terse-pass",
+  "status": "MIRAGE",
+  "metric": 488,
+  "gateResult": "32/32",
+  "coverage": {
+    "mode": "census",
+    "N": 32,
+    "detection": 1.0
+  },
+  "failingCheck": "frontier-beat: candidate measures 488 words, NOT below frontier best 472 (dominated by r4-compose-line-edit). Gate passed 32/32 and the hard constraint holds, but VALIDATED requires words < frontier best; a full-comprehension candidate that fails to advance the number is a MIRAGE, not a result.",
+  "evidence": "Seed re-derived the auditor's way: sha256sum(proposal_canon.json)=672c4f0c15a537773ce66b9e02d46a3ddfe678e68a1f7c6ab89409cb31f8dfbb==hProposal; sha256(hSource||hProposal||salt)=7956adc06a548404a39a8438e9918e470aed3070bee013b095bc2cfe02130dd5==seedHex (match, not BLOCKED). candidate.md written verbatim from proposal_canon.json compressedText (3094 bytes). Metric mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . => 488. Census gate 32/32: every fact F1..F32 answered from candidate.md alone matches its original-guide expectedAnswer (quantities 4L/12L, 48h/24h, 2h/4C, 20000mAh/~4x, 28-day, all six food items, all eight ordered sections present). Hard constraint holds: title + 8 ordered headers (Water, Food, Fridge/freezer, Light, Heat/safety, Communication, Medical, When power returns), imperative steps, self-contained. Frontier best 472 (frontier.json best.metric); 488>472 fails the beat. Proposer self-declared expectedMetric 488 / DOMINATED; the run confirms it.",
+  "scratchDir": "runs/r5/r5.1/p1-line-edit-baseline-terse-pass"
+}

@@ -1,0 +1,498 @@
+{
+ "status": "kappa-compatible (unverified)",
+ "root": "sha256:79df1b7ef203c7640cf3ea6ef5649206c1b714c83c67745baaedbee6aff609fb",
+ "objects": {
+  "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e": {
+   "0": "agentprivacy-evidence/harness-proposal/1",
+   "1": 0,
+   "2": "clean-nano-serv",
+   "3": "clean-nano-serv.1",
+   "4": "p1-cut-adopt-intro-glue",
+   "5": "cut-adopt-intro-glue",
+   "6": "sha256:76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f"
+  },
+  "sha256:095c23e7c991a79d07d1945b07ad3edd4f75aeae0a168bb256fccb4cc11b211f": {
+   "0": "agentprivacy-evidence/harness-gap/1",
+   "1": "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e",
+   "2": "902152393d34584d490dc284d36641279da209d1d3886ba2e9d9e3fadff9ced6",
+   "3": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+   "4": "76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f",
+   "5": "c42a5c4dad5896aed8ffbdee78dfb3a553e7bfc6db2e96ced9c405b38c15e1fe",
+   "6": "census",
+   "7": 95,
+   "8": 8,
+   "9": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95
+   ]
+  },
+  "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4": {
+   "0": "agentprivacy-evidence/harness-verdict/1",
+   "1": "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e",
+   "2": "MIRAGE",
+   "3": 1061,
+   "4": "95/95",
+   "5": "The candidate asserts the five-command order and describes what some commands write, but it does not include the exact, stranger-openable hard constraint content: the five-command writes with concrete step details, the loop table, and the constitution/box-layout instructions in a form that guarantees nothing is invented. The census indicates the held-out gate ran (95/95), but the hard constraint is not satisfied by the provided text, so this cannot be treated as the document a stranger opens first."
+  },
+  "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30": {
+   "0": "agentprivacy-evidence/harness-proposal/1",
+   "1": 1,
+   "2": "clean-nano-serv",
+   "3": "clean-nano-serv.1",
+   "4": "p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+   "5": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+   "6": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e"
+  },
+  "sha256:0f1cdfdd0b83a3f23164994bca36a148895ea5b776d921c0ec892837cb2e0ee6": {
+   "0": "agentprivacy-evidence/harness-gap/1",
+   "1": "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30",
+   "2": "3bd5023ea7ee2f64cc0819b8da7dab2e064a98943c2af9ec15e64feb5607f0f3",
+   "3": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+   "4": "d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+   "5": "3c12d93406e853f1c6ba469c3f522fd4b535effd969f61ed88bbe58e3b461bf0",
+   "6": "census",
+   "7": 95,
+   "8": 8,
+   "9": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95
+   ]
+  },
+  "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07": {
+   "0": "agentprivacy-evidence/harness-verdict/1",
+   "1": "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30",
+   "2": "MIRAGE",
+   "3": 1046,
+   "4": "95/95",
+   "5": "I relied on the gate outcome already produced by the code-side check_path (95 witnesses present; 95/95). However, the hard constraint is the stranger-first document-layout test (exactly the required five commands in order with their writes, the loop table, adoption steps, constitution, and box layout), and the candidate fails that constraint. Because GR-3 is hard, the result cannot be VALIDATED even though the census gate passed."
+  },
+  "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df": {
+   "0": "agentprivacy-evidence/ledger/1",
+   "1": "verdicts:clean-nano-serv.1",
+   "2": [
+    "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4",
+    "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07"
+   ],
+   "3": "harness/self/clean-nano-serv",
+   "4": "the verdicts of round clean-nano-serv.1, one per proposal, in proposal order"
+  },
+  "sha256:869d018aae1c646acea5e5d2ac513eb7051ecfb1fe01752f34ef40c54c4ce2a2": {
+   "0": "agentprivacy-evidence/check/1",
+   "1": "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df",
+   "2": "harness/run-tally/1",
+   "3": {
+    "n": 2,
+    "validated": 0,
+    "statuses": [
+     "MIRAGE"
+    ]
+   }
+  },
+  "sha256:79df1b7ef203c7640cf3ea6ef5649206c1b714c83c67745baaedbee6aff609fb": {
+   "0": "agentprivacy-evidence/run-root/1",
+   "1": "harness/self/clean-nano-serv",
+   "2": "2026-10-07",
+   "3": [
+    [
+     "candidate:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:31a5088e6b805539b10b32a90eacec9b84d1234097f4e751ea21cab15b79e434"
+    ],
+    [
+     "candidate:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7"
+    ],
+    [
+     "canon:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f"
+    ],
+    [
+     "canon:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e"
+    ],
+    [
+     "gap:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:095c23e7c991a79d07d1945b07ad3edd4f75aeae0a168bb256fccb4cc11b211f"
+    ],
+    [
+     "gap:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:0f1cdfdd0b83a3f23164994bca36a148895ea5b776d921c0ec892837cb2e0ee6"
+    ],
+    [
+     "gapjson:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:140be72a48c30e1ac4cf7479982269ae7ae6d252548e1e7f7e136f72221574c2"
+    ],
+    [
+     "gapjson:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:f5a50410cda504361dd59001b4ce3817726a21ef69bca56ce1f2d446abd906c1"
+    ],
+    [
+     "proposal:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e"
+    ],
+    [
+     "proposal:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30"
+    ],
+    [
+     "source:run.json",
+     "sha256:29acf91c36d180ee844a8e596b026f138b6082149383d2a62bdc87870bf080d5"
+    ],
+    [
+     "tally:clean-nano-serv.1",
+     "sha256:869d018aae1c646acea5e5d2ac513eb7051ecfb1fe01752f34ef40c54c4ce2a2"
+    ],
+    [
+     "verdict:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4"
+    ],
+    [
+     "verdict:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07"
+    ],
+    [
+     "verdictjson:clean-nano-serv.1/p1-cut-adopt-intro-glue",
+     "sha256:890602451ca4a3ce4d8771a5dc5adb21b13f9e239340bb2b2220084af0075c1b"
+    ],
+    [
+     "verdictjson:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+     "sha256:9370a4711fde4d1ae34ccbf8c29b30b10c44c3282484b301c5ea67bfbf9eba6c"
+    ],
+    [
+     "verdicts:clean-nano-serv.1",
+     "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df"
+    ]
+   ],
+   "4": "72f432ca7fad71e6ca25b23556a8331e25c42a064559a6679ae8cee368f0db59",
+   "5": "kappa-compatible (unverified)",
+   "6": "unsigned:harness",
+   "7": {
+    "kappa-registry": "2af8656",
+    "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+   },
+   "8": {
+    "runId": "clean-nano-serv",
+    "status": "COMPLETE",
+    "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+    "run_blob": "sha256:29acf91c36d180ee844a8e596b026f138b6082149383d2a62bdc87870bf080d5"
+   }
+  }
+ },
+ "blobs": {
+  "sha256:29acf91c36d180ee844a8e596b026f138b6082149383d2a62bdc87870bf080d5": 2651,
+  "sha256:76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f": 8292,
+  "sha256:140be72a48c30e1ac4cf7479982269ae7ae6d252548e1e7f7e136f72221574c2": 1673,
+  "sha256:890602451ca4a3ce4d8771a5dc5adb21b13f9e239340bb2b2220084af0075c1b": 896,
+  "sha256:31a5088e6b805539b10b32a90eacec9b84d1234097f4e751ea21cab15b79e434": 6876,
+  "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e": 9262,
+  "sha256:f5a50410cda504361dd59001b4ce3817726a21ef69bca56ce1f2d446abd906c1": 1640,
+  "sha256:9370a4711fde4d1ae34ccbf8c29b30b10c44c3282484b301c5ea67bfbf9eba6c": 912,
+  "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7": 6805
+ },
+ "edges": [
+  {
+   "kappa": "sha256:8fc549b7e099c1d7390cb7a5d8afe374e40ce64fc2f7de0b96b12691b48220c0",
+   "source": "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e",
+   "target": "sha256:76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f",
+   "relation": "evidence-provenance",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:81d931a841c13985fcb1e57de45daa55ba1f808daf237123e2a73cd0d9412df6",
+   "source": "sha256:095c23e7c991a79d07d1945b07ad3edd4f75aeae0a168bb256fccb4cc11b211f",
+   "target": "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e",
+   "relation": "derived-from",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:86361aa558e6febdb7d0f7e282f6e36a0d30bccbf602e6f2a1d716b297d5ba8b",
+   "source": "sha256:095c23e7c991a79d07d1945b07ad3edd4f75aeae0a168bb256fccb4cc11b211f",
+   "target": "sha256:140be72a48c30e1ac4cf7479982269ae7ae6d252548e1e7f7e136f72221574c2",
+   "relation": "evidence-provenance",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:8cdbf150d116275fcd8249f783f63f0081f10607faf9a6b32372763e1febec4c",
+   "source": "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4",
+   "target": "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e",
+   "relation": "derived-from",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:c575a5ab50269aa39e03e9c81731237db279882693761f7f9959eeaa21e320fc",
+   "source": "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4",
+   "target": "sha256:890602451ca4a3ce4d8771a5dc5adb21b13f9e239340bb2b2220084af0075c1b",
+   "relation": "evidence-provenance",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:7b26ad6e61aa14b892cb2bed5fd083a02eca906777dcf0c8b384e36224fc4b55",
+   "source": "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4",
+   "target": "sha256:31a5088e6b805539b10b32a90eacec9b84d1234097f4e751ea21cab15b79e434",
+   "relation": "refers-to",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:c72bb4e1d5c1d1273993b8d650980ad66aaef312daf605000c00fa5dd98342b2",
+   "source": "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30",
+   "target": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+   "relation": "evidence-provenance",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:f4491d3064a3f68f13dfb15abbf766ebfc7ad60aabed92eb8cf342609680f4b6",
+   "source": "sha256:0f1cdfdd0b83a3f23164994bca36a148895ea5b776d921c0ec892837cb2e0ee6",
+   "target": "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30",
+   "relation": "derived-from",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:a0bda75cb1efe23af51212eb9e035a5beb51887122181873a636d729aad44a9f",
+   "source": "sha256:0f1cdfdd0b83a3f23164994bca36a148895ea5b776d921c0ec892837cb2e0ee6",
+   "target": "sha256:f5a50410cda504361dd59001b4ce3817726a21ef69bca56ce1f2d446abd906c1",
+   "relation": "evidence-provenance",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:d60952d91b9b73b7d97f72b69d5eacfad2db8e2bf95b70d6002a55a19ee4427e",
+   "source": "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07",
+   "target": "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30",
+   "relation": "derived-from",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:323e321b6be0d0acc55f65b2761fd34621218d7b956d04a18a370681c841daa0",
+   "source": "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07",
+   "target": "sha256:9370a4711fde4d1ae34ccbf8c29b30b10c44c3282484b301c5ea67bfbf9eba6c",
+   "relation": "evidence-provenance",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:76567e2bd570b6f4f20a5aaf008a51641d10b62f4c13b0e906c04af1301fb64f",
+   "source": "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07",
+   "target": "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7",
+   "relation": "refers-to",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:fad8a74789ddceb605523f3fd77fa4092eb4cd7f3fae92d994d8e9a8690d270f",
+   "source": "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df",
+   "target": "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4",
+   "relation": "composed-of",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:fcbe7663842b763eee81e017b5a1fb760e29f1cf2620f149660fc6905e1c2a4b",
+   "source": "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df",
+   "target": "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07",
+   "relation": "composed-of",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:71c6cf55c7b9e7d440629af18e36a648bbfca144fb1709784e749ac336f3f5aa",
+   "source": "sha256:869d018aae1c646acea5e5d2ac513eb7051ecfb1fe01752f34ef40c54c4ce2a2",
+   "target": "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df",
+   "relation": "derived-from",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:e4e226434736398f43f3b0306b8595fcf25d369524203a7108c729864228239f",
+   "source": "sha256:79df1b7ef203c7640cf3ea6ef5649206c1b714c83c67745baaedbee6aff609fb",
+   "target": "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df",
+   "relation": "composed-of",
+   "asserter": "unsigned:harness"
+  },
+  {
+   "kappa": "sha256:c8bbd64bf9acea52440df14812ad5b3c24d53bf6d91a2d8fd76d30caae5105fe",
+   "source": "sha256:79df1b7ef203c7640cf3ea6ef5649206c1b714c83c67745baaedbee6aff609fb",
+   "target": "sha256:869d018aae1c646acea5e5d2ac513eb7051ecfb1fe01752f34ef40c54c4ce2a2",
+   "relation": "composed-of",
+   "asserter": "unsigned:harness"
+  }
+ ]
+}

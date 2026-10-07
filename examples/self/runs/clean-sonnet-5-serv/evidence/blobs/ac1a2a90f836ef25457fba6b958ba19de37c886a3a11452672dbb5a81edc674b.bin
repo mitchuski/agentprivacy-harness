@@ -1,0 +1,13 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "VALIDATED",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Verified census gate result 95/95 with no missing witnesses as reported. Read the full candidate: five commands appear in order with correct writes, the six-row loop table is intact, the six-step adoption sequence is present, the constitution section lists all GR/T items, and the box layout enumerates all directories/files matching the source tree. No invented claims found; the PATHWAYS.md reference is the pre-existing baseline pointer (carried from the 1069-word folded version), not a new pointer to a longer replacement. Metric 1046 is less than frontier best 1069.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/clean-sonnet-5-serv/clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

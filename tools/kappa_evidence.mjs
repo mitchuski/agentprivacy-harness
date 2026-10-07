@@ -90,12 +90,13 @@ export function mint(instDir, runId, { out = null, sign = false } = {}) {
   }
   const B = new Bundle(lane, asserter)
 
-  const runBlob = B.putBlob(Buffer.from(redact(readFileSync(join(runDir, 'run.json'), 'utf8'))), 'source:run.json')
+  // legacy runs (pre run.json, proposals directly under the run dir) mint too
+  const runBlob = existsSync(join(runDir, 'run.json')) ? B.putBlob(Buffer.from(redact(readFileSync(join(runDir, 'run.json'), 'utf8'))), 'source:run.json') : null
   const rounds = new Map()
   const scan = (base, label) => {
     for (const e of readdirSync(base, { withFileTypes: true })) {
       if (!e.isDirectory() || e.name === 'evidence') continue
-      if (/^p\d+-/.test(e.name)) (rounds.get(label) || rounds.set(label, []).get(label)).push(join(base, e.name))
+      if (/^p\d+-/.test(e.name)) { const rid = label || runId; (rounds.get(rid) || rounds.set(rid, []).get(rid)).push(join(base, e.name)) }
       else scan(join(base, e.name), label ? `${label}/${e.name}` : e.name)
     }
   }
@@ -143,7 +144,8 @@ export function mint(instDir, runId, { out = null, sign = false } = {}) {
     B.check(cn, lk, 'harness/run-tally/1', tally(verdictKs.map(k => B.objects.get(k))))
     ledgerNames.push(ln); checkNames.push(cn)
   }
-  const extra = new Map([['runId', runId], ['status', String(runJson.status || '')], ['sourceHash', String(runJson.sourceHash || '')], ['run_blob', runBlob]])
+  const extra = new Map([['runId', runId], ['status', String(runJson.status || '')], ['sourceHash', String(runJson.sourceHash || '')]])
+  if (runBlob) extra.set('run_blob', runBlob)
   const rootK = B.root([...ledgerNames, ...checkNames], extra)
 
   // write

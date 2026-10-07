@@ -1,0 +1,29 @@
+# harness/self/r4-serv-swift-raw evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:754efbdb228744c15f1d7098ca15fcfc3e541b06ed7474cfe37d673a1178d750
+
+Merkle root (provisional, SHA-256, 32 leaves): `82be2903acca7399904fabb655b780a3e33b077fa97bc685aab5986f7fb3b560`
+
+| object | kappa |
+|---|---|
+| candidate:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683` |
+| candidate:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23` |
+| canon:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:24d2296ca53d66fb5c194a8c61153f2f2d2b85d41a890ea9ffcf233b15744775` |
+| gap:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:66bd841d524210b8257d0b6a27e76503933c294eb985502492e81d84cf7156b5` |
+| gapjson:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:39ad8ba99cb70d3190956accfc293bf6473906e249ed5d2a8084b86e42687df8` |
+| gapjson:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:048ab22cb7369e9670f275a3b17d44e80b93a6b36b4671f4a21aecdb70a1aa2d` |
+| proposal:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:2f788234d8894bc92c03094be09ad2954ad5104d0e21257d3262d9e373b4806f` |
+| proposal:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:efaa256c668d6b13a3e922ddaa74ff62298f57488422b8b31a5f512f26a62ad7` |
+| source:run.json | `sha256:41934dbe137d52503fdd8b851cd50e603019c915c4812c5666585b6795ba750b` |
+| tally:r4-serv-swift-raw.1 | `sha256:474acc53796cfc4178c79a1f7803c717fe66f9bf3730013c06abf6eb88c8abfa` |
+| verdict:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:462fa4e7963607a1ef9798301793fbd9fee0279d42146f5fd05afc898fb895e2` |
+| verdict:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:5aef91cf0d314e7b80abb4d98a802f90b63a4a33575da0a46bb744997a955ab7` |
+| verdictjson:r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold | `sha256:5751c3466a850c8d5ac9d5c74ed8c5f3db91bba38e9caa41c91c04ae29bc707b` |
+| verdictjson:r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:690fb09ee791b6b61161418ba8c57ac0cfed46d681c651f2537eb537788ec782` |
+| verdicts:r4-serv-swift-raw.1 | `sha256:a14eb1c648621df608aabd3239f50f0fda7bb3548c9a0d5add0f4727d1cfad66` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r4-serv-swift-raw/evidence`.

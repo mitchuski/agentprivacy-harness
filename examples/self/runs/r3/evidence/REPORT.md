@@ -1,0 +1,29 @@
+# harness/self/r3 evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:2966d314311f7cf95aeac43c8efb3ff3a291dd0db800f50d5a64fa427cb85ab4
+
+Merkle root (provisional, SHA-256, 32 leaves): `c21e3815d40070bfdfc23e1033a04c40fc5e62a6a310a0759fc9cab954b9a41f`
+
+| object | kappa |
+|---|---|
+| candidate:r3.1/p1-trim-connective-prose-on-fold | `sha256:3690fc8076dd3167bee43e7b7c1cdc5d9169218ca7ed6ee147b3797d044ff9fb` |
+| candidate:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:9198fbd0031d00340a7d4f746b2f35ab3b1ae220fbcb0571a17e731af10f78c1` |
+| canon:r3.1/p1-trim-connective-prose-on-fold | `sha256:c09b7ab6b2a222fc4c616ddad0c17df5c1ae6958e9bfe08b7b5af7a6b75e272f` |
+| canon:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:1b034901111921a93c149e83a97434fdb0c5f62a866bf5bfa3202d83e33fcfee` |
+| gap:r3.1/p1-trim-connective-prose-on-fold | `sha256:f85aadef53f1b7c93a78b8842bf19f3780724d038a83710fb6861b85ecd9dea5` |
+| gap:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:707ada6b547877443b7e55198ed04f62471e2c6b196d3aad3f8e3a8bdf20b23d` |
+| gapjson:r3.1/p1-trim-connective-prose-on-fold | `sha256:6a7ef3af64c05d1d37a4f13a79f820fa327a71c3a0c4efac399bc4df06b25d26` |
+| gapjson:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:1521cf134e01c6f8993f06f200df7a0e963e1c26b26b2fa819b01ec06f8a4175` |
+| proposal:r3.1/p1-trim-connective-prose-on-fold | `sha256:10ba63f1034dc34d8224606cb173ad32720b5ce5eed4bdf0120132a58cd4e783` |
+| proposal:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:7982c0d9d64d3f5557dd76d71b1dbc2ab8c70452dcc4f945dbc025906e7b124b` |
+| source:run.json | `sha256:f44afccafd622c63fe18633eb2f24c7b12e1592f99d91764b2aac4c120c77703` |
+| tally:r3.1 | `sha256:8d84a37462fc4f044be71fc713baf2d8b056c7d9751c094ae6600dc5e9b7eb64` |
+| verdict:r3.1/p1-trim-connective-prose-on-fold | `sha256:b1055df6088932e17cc5c0c00671b3411fa16db6a33681f70ae1a093ce05d0eb` |
+| verdict:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:4931a14f28f84e96d52c30f598dbbf438d581c617ea8c4072970b5dc5f248c63` |
+| verdictjson:r3.1/p1-trim-connective-prose-on-fold | `sha256:59fa0916b26680d8d979ae0fd3daa639d9f7398d3f298c013b7cd3fba287ce95` |
+| verdictjson:r3.1/p2-agent-note-into-box-constitution-as-columns | `sha256:9698742465bca768364ce098032aaa302f6cb9d798c5be64d4eda34c2c4003d2` |
+| verdicts:r3.1 | `sha256:761ba7a5e237fea53be73e9e08247fc8263507404fbcd2d4e93fc26094bef457` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r3/evidence`.

@@ -1,0 +1,236 @@
+{
+  "seedHex": "7956adc06a548404a39a8438e9918e470aed3070bee013b095bc2cfe02130dd5",
+  "hProposal": "672c4f0c15a537773ce66b9e02d46a3ddfe678e68a1f7c6ab89409cb31f8dfbb",
+  "salt": "1a9f899ae608c80e2fb2545eee18bfeca92c0acb9036bcc3ddb8272fbfe80b2f",
+  "hSource": "011a4f3530017e0e6f394f1011efc9ee0233d96966cee000f0d5875d31d05b58",
+  "mode": "census",
+  "drawIndices": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "draw": [
+    {
+      "factIndex": 1,
+      "factId": "F1",
+      "question": "Up to how long an outage does this guide prepare a household for?",
+      "expectedAnswer": "up to seventy-two hours"
+    },
+    {
+      "factIndex": 2,
+      "factId": "F2",
+      "question": "What climate is the guide written for, and what does it assume about a generator?",
+      "expectedAnswer": "a temperate climate and assumes no backup generator"
+    },
+    {
+      "factIndex": 3,
+      "factId": "F3",
+      "question": "In what order should the sections be worked through, and which matter most?",
+      "expectedAnswer": "Work through the sections in order; the earlier sections cover the preparations that matter most"
+    },
+    {
+      "factIndex": 4,
+      "factId": "F4",
+      "question": "How much water should be stored per person per day, and how much per person over the full period?",
+      "expectedAnswer": "four litres of water per person per day, which means twelve litres per person for the full seventy-two hours"
+    },
+    {
+      "factIndex": 5,
+      "factId": "F5",
+      "question": "How is the water allowance split?",
+      "expectedAnswer": "Half of that allowance is for drinking, and the other half covers cooking and basic hygiene"
+    },
+    {
+      "factIndex": 6,
+      "factId": "F6",
+      "question": "What kind of containers, storage condition, and replacement interval apply to stored water?",
+      "expectedAnswer": "food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months"
+    },
+    {
+      "factIndex": 7,
+      "factId": "F7",
+      "question": "If a storm is forecast, what extra water source should you fill, and what is that water for (and not for)?",
+      "expectedAnswer": "also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking"
+    },
+    {
+      "factIndex": 8,
+      "factId": "F8",
+      "question": "How many days of non-perishable food should the dedicated shelf hold?",
+      "expectedAnswer": "non-perishable food sufficient for three days"
+    },
+    {
+      "factIndex": 9,
+      "factId": "F9",
+      "question": "Name the good non-perishable food choices listed.",
+      "expectedAnswer": "canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk"
+    },
+    {
+      "factIndex": 10,
+      "factId": "F10",
+      "question": "What kind of can opener must you own, and why not an electric one?",
+      "expectedAnswer": "a manual can opener, because an electric one will be useless"
+    },
+    {
+      "factIndex": 11,
+      "factId": "F11",
+      "question": "In what order should you eat food during the outage?",
+      "expectedAnswer": "Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf"
+    },
+    {
+      "factIndex": 12,
+      "factId": "F12",
+      "question": "About how long does an unopened refrigerator keep food safe?",
+      "expectedAnswer": "about four hours"
+    },
+    {
+      "factIndex": 13,
+      "factId": "F13",
+      "question": "About how long does a full freezer hold a safe temperature versus a half-full one?",
+      "expectedAnswer": "about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours"
+    },
+    {
+      "factIndex": 14,
+      "factId": "F14",
+      "question": "What should you do with the fridge and freezer doors, and what reminder should you add?",
+      "expectedAnswer": "Keep both doors closed as much as possible and tape a note to each door as a reminder"
+    },
+    {
+      "factIndex": 15,
+      "factId": "F15",
+      "question": "Perishable food that has spent more than how long above what temperature should be discarded?",
+      "expectedAnswer": "more than two hours above four degrees Celsius should be discarded"
+    },
+    {
+      "factIndex": 16,
+      "factId": "F16",
+      "question": "What should be your primary light source, and what should you avoid, and why?",
+      "expectedAnswer": "battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages"
+    },
+    {
+      "factIndex": 17,
+      "factId": "F17",
+      "question": "How many lights per person and how many spare battery sets per light should you store?",
+      "expectedAnswer": "at least one light per person, plus two spare sets of batteries for each light"
+    },
+    {
+      "factIndex": 18,
+      "factId": "F18",
+      "question": "Where should a headlamp and a lantern be kept?",
+      "expectedAnswer": "one headlamp beside each bed and one lantern in the kitchen"
+    },
+    {
+      "factIndex": 19,
+      "factId": "F19",
+      "question": "Where must you never run a camping stove, barbecue, or generator, and why?",
+      "expectedAnswer": "Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal"
+    },
+    {
+      "factIndex": 20,
+      "factId": "F20",
+      "question": "How many carbon monoxide alarms, of what type, on which floors?",
+      "expectedAnswer": "at least one battery-powered carbon monoxide alarm on each floor where people sleep"
+    },
+    {
+      "factIndex": 21,
+      "factId": "F21",
+      "question": "In cold weather, which room should you gather in, and what beats an improvised heater?",
+      "expectedAnswer": "one small room on a south-facing side of the home ... layered clothing and blankets are safer than any improvised heater"
+    },
+    {
+      "factIndex": 22,
+      "factId": "F22",
+      "question": "Below what indoor temperature, if you cannot stay warm, should you relocate, and to where?",
+      "expectedAnswer": "below ten degrees Celsius ... relocate to a warming centre or a neighbour's home"
+    },
+    {
+      "factIndex": 23,
+      "factId": "F23",
+      "question": "What kind of radio should you keep, and what should you know beforehand?",
+      "expectedAnswer": "a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins"
+    },
+    {
+      "factIndex": 24,
+      "factId": "F24",
+      "question": "How many times does a full twenty-thousand-milliamp-hour power bank recharge a typical phone?",
+      "expectedAnswer": "a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times"
+    },
+    {
+      "factIndex": 25,
+      "factId": "F25",
+      "question": "What phone mode and contact arrangement should you set, and why texts?",
+      "expectedAnswer": "low-power mode at the start ... one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls"
+    },
+    {
+      "factIndex": 26,
+      "factId": "F26",
+      "question": "How many days' supply of prescription medication should you keep, plus what kit?",
+      "expectedAnswer": "a first-aid kit and a seven-day supply of every prescription medication"
+    },
+    {
+      "factIndex": 27,
+      "factId": "F27",
+      "question": "Up to how many days does refrigerated medication like insulin remain usable at room temperature, and whom should you confirm with?",
+      "expectedAnswer": "up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist"
+    },
+    {
+      "factIndex": 28,
+      "factId": "F28",
+      "question": "Whose phone numbers should you write on paper, and why?",
+      "expectedAnswer": "the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book"
+    },
+    {
+      "factIndex": 29,
+      "factId": "F29",
+      "question": "How long should you wait before switching major appliances back on, and why?",
+      "expectedAnswer": "Wait five minutes before switching major appliances back on, so the grid can stabilise"
+    },
+    {
+      "factIndex": 30,
+      "factId": "F30",
+      "question": "What sign in the freezer means food can be safely refrozen?",
+      "expectedAnswer": "if food still contains ice crystals, it can be safely refrozen"
+    },
+    {
+      "factIndex": 31,
+      "factId": "F31",
+      "question": "Within what time should you restock what was used, starting with what?",
+      "expectedAnswer": "within one week, starting with water and batteries"
+    },
+    {
+      "factIndex": 32,
+      "factId": "F32",
+      "question": "What note should you write afterward, and what should you fix before the next outage?",
+      "expectedAnswer": "write a one-page note about what was missing or awkward, and fix at least one of those gaps before the next outage arrives"
+    }
+  ],
+  "transcript": "SEAT: hold-apart — the Gap (xor), SALTED mode.\nINSTANCE: examples/field-guide  RUN: r5/r5.1  PROPOSAL: p1-line-edit-baseline-terse-pass\n\n=== STEP 1: FACT CENSUS ===\nSource: examples/field-guide/artifact/GUIDE.md; body split into sentences on . ! ?; every checkable-fact sentence indexed F1 upward. Count = 32 (matches this instance census of 32). Draw population unchanged.\n\nORIGINAL GUIDE FACT CENSUS (F1..F32), body sentences split on . ! ? in order:\nF1: This guide explains how to prepare an ordinary household to manage safely and comfortably through a power outage lasting up to seventy-two hours.\nF2: It is written for a temperate climate and assumes no backup generator.\nF3: Work through the sections in order; the earlier sections cover the preparations that matter most.\nF4: Store four litres of water per person per day, which means twelve litres per person for the full seventy-two hours.\nF5: Half of that allowance is for drinking, and the other half covers cooking and basic hygiene.\nF6: Store the water in food-grade containers, keep the containers out of direct sunlight, and replace stored water every six months.\nF7: If a storm is forecast and you have advance warning, also fill the bathtub; bathtub water is for flushing toilets and washing, never for drinking.\nF8: Keep a dedicated shelf of non-perishable food sufficient for three days.\nF9: Good choices are canned beans, canned fish, peanut butter, crackers, dried fruit, and shelf-stable milk.\nF10: Choose foods that require no cooking, and make sure you own a manual can opener, because an electric one will be useless.\nF11: Eat the perishable food from the refrigerator first, then the food from the freezer, and only then open the emergency shelf.\nF12: An unopened refrigerator keeps food safe for about four hours.\nF13: A full freezer holds a safe temperature for about forty-eight hours, but a half-full freezer holds it for only about twenty-four hours, so it is worth keeping the freezer consolidated and full, even if some of the space is taken up by containers of frozen water.\nF14: Keep both doors closed as much as possible and tape a note to each door as a reminder.\nF15: Any perishable food that has spent more than two hours above four degrees Celsius should be discarded; when in doubt, throw it out.\nF16: Use battery-powered LED lanterns or headlamps as your primary light source, and avoid candles entirely, since candles are a leading cause of house fires during outages.\nF17: Store at least one light per person, plus two spare sets of batteries for each light.\nF18: Keep one headlamp beside each bed and one lantern in the kitchen, and place them where they can be found in the dark.\nF19: Never run a camping stove, barbecue, or generator indoors, in a garage, or near a window, because each of these produces carbon monoxide, which is odourless and can be fatal.\nF20: Install at least one battery-powered carbon monoxide alarm on each floor where people sleep.\nF21: In cold weather, choose one small room on a south-facing side of the home, close its door, and gather everyone there; layered clothing and blankets are safer than any improvised heater.\nF22: If the indoor temperature falls below ten degrees Celsius and you cannot maintain warmth, relocate to a warming centre or a neighbour's home.\nF23: Keep a battery-powered or hand-crank radio for emergency broadcasts, and know the frequency of your local emergency station before the outage begins.\nF24: Charge every phone and power bank whenever a storm is forecast; a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times.\nF25: Put your phone in low-power mode at the start of the outage, and agree in advance on one out-of-area contact whom every member of the household will text, because text messages get through congested networks more reliably than voice calls.\nF26: Keep a first-aid kit and a seven-day supply of every prescription medication, and rotate the medications so they stay in date.\nF27: Refrigerated medication such as insulin generally remains usable at room temperature for up to twenty-eight days, but confirm the rule for your specific medication with a pharmacist before an emergency happens.\nF28: Write down the phone numbers of your pharmacy, your doctor, and the poison-control line on paper, because a dead phone is not a phone book.\nF29: Wait five minutes before switching major appliances back on, so the grid can stabilise.\nF30: Check the freezer: if food still contains ice crystals, it can be safely refrozen.\nF31: Restock everything used during the outage within one week, starting with water and batteries.\nF32: Finally, write a one-page note about what was missing or awkward, and fix at least one of those gaps before the next outage arrives.\n\n=== STEP 2: CANONICAL SERIALIZATION + HASH ===\nProposal artifact serialized: JSON, recursive sorted keys, no whitespace, no trailing newline; exact bytes saved to proposal_canon.json (5779 bytes).\nHash command: sha256sum proposal_canon.json\nDigest: 672c4f0c15a537773ce66b9e02d46a3ddfe678e68a1f7c6ab89409cb31f8dfbb == GIVEN hProposal (match).\n\n=== SEED DERIVATION (auditor re-derivable) ===\nseed = sha256( hSource || hProposal || salt )   [UTF-8 concatenation of the three lowercase hex strings]\nhSource   = 011a4f3530017e0e6f394f1011efc9ee0233d96966cee000f0d5875d31d05b58\nhProposal = 672c4f0c15a537773ce66b9e02d46a3ddfe678e68a1f7c6ab89409cb31f8dfbb\nsalt      = 1a9f899ae608c80e2fb2545eee18bfeca92c0acb9036bcc3ddb8272fbfe80b2f\nseed      = 7956adc06a548404a39a8438e9918e470aed3070bee013b095bc2cfe02130dd5  == GIVEN seedHex (match).\nCommand: node -e \"const c=require('crypto');console.log(c.createHash('sha256').update('011a4f3530017e0e6f394f1011efc9ee0233d96966cee000f0d5875d31d05b58672c4f0c15a537773ce66b9e02d46a3ddfe678e68a1f7c6ab89409cb31f8dfbb1a9f899ae608c80e2fb2545eee18bfeca92c0acb9036bcc3ddb8272fbfe80b2f').digest('hex'))\"\n\n=== STEP 3: DRAW ===\nmode = census: all 32 facts drawn, in order. drawIndices = [1..32] (verbatim from engine, code-derived from the run salt secret the proposer never saw).\nOne comprehension question per drawn fact; each expectedAnswer is quoted from the ORIGINAL GUIDE.md sentence, not from the proposal. Witnesses never sourced from the proposer (GR-4/T2)."
+}

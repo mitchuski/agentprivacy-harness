@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: candidate is not the exact five-commands-first document with the required loop table, adoption steps, constitution, and box layout in the stranger-opened-first form (hardConstraint not satisfied)",
+  "evidence": "I checked the candidate against the hard constraint described in frontier.json: it must be the exact document a stranger opens first, with the five commands in order and their write targets, the loop table, the adoption steps, the constitution, and the box layout—without inventing pointers to longer versions. While the candidate includes those sections, it also contains extra narrative framing and does not match the required exact “hard constraint” structure as the stranger-first document, so the hard constraint fails even though the census gate passed (95/95).",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-nano-multipath/r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

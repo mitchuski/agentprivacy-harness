@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing [\"Shared state has exactly one writer\"]",
+  "evidence": "The code-side gate reported 94/95 with the witness 'Shared state has exactly one writer' absent. Inspecting the candidate, the loop table row for keystone reads 'the ledgers' and the prose below the table states 'Shared state has one writer' — not the exact witness string 'Shared state has exactly one writer' that the census requires. Because passed (94) < N (95), the gate fails and the verdict is MIRAGE regardless of hard-constraint or metric status.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r5-serv-standard-serv/r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold"
+}

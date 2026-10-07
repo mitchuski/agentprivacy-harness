@@ -1,0 +1,92 @@
+{
+  "name": "self",
+  "runId": "r3-raw",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gpt-5.4-nano"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r3-raw.1",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 4722,
+      "completion_tokens": 148,
+      "total_tokens": 4870
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 5164,
+      "completion_tokens": 229,
+      "total_tokens": 5393
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 5164,
+      "completion_tokens": 213,
+      "total_tokens": 5377
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 7157,
+      "completion_tokens": 163,
+      "total_tokens": 7320
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 7171,
+      "completion_tokens": 282,
+      "total_tokens": 7453
+    },
+    {
+      "label": "critic:r3-raw.1",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 5600,
+      "completion_tokens": 294,
+      "total_tokens": 5894
+    },
+    {
+      "label": "chronicle:r3-raw.1",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "prompt_tokens": 5556,
+      "completion_tokens": 608,
+      "total_tokens": 6164
+    }
+  ]
+}

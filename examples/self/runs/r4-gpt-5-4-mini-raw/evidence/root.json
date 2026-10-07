@@ -1,0 +1,36 @@
+{
+ "root_kappa": "sha256:e010a304b1e7927d6f4f64023d7a80a4d7c7d4157acedf0442ccfa8d5ccffdfe",
+ "status": "kappa-compatible (unverified)",
+ "lane": "harness/self/r4-gpt-5-4-mini-raw",
+ "minted_on": "2026-10-07",
+ "merkle_root_sha256": "db9f2e41373b2a3ae621008420b2f00dd956a76570dde6e40216295dd7794ddd",
+ "merkle_leaves": 32,
+ "counts": {
+  "objects": 9,
+  "blobs": 9,
+  "edges": 17
+ },
+ "names": {
+  "source:run.json": "sha256:016cbe8d465479766e19a379eb2f03d8551a44bc6db9f6b8be4d39c547e1e1f9",
+  "canon:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23",
+  "proposal:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:0dbbd319d573318c61bfa16d6af2cc49fe1d7e36d1f537916ac476e56cde7244",
+  "gapjson:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:c80c3f0fa977b16dfc3d0bbbca6be51c7311ba9aff5361e03cb1eb1bb140c01b",
+  "gap:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:221a7d940255254e6aca6aec928c56331b408557b3a2f26a22ef524392ad0422",
+  "verdictjson:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:5c9c44444ad50ecb0b31ecfe66bf5a23cbdb3fa59a6d989683a9fd3db19309d9",
+  "verdict:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:bd8f8f9dda08d9f5b3d39cf1cf654b33fb985462812839f878280f5690af0b87",
+  "candidate:r4-gpt-5-4-mini-raw.1/p1-trim-connective-prose-on-fold": "sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683",
+  "canon:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+  "proposal:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:8f37609c0ed439819c4c1d98a9e11717855e7a460885a2ae723c2567a02e80d5",
+  "gapjson:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:670952c14c4621eac72197e0f9c63e7d1c24491203e2f5a0d3fa0bf5c6eaacaf",
+  "gap:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:33a3178a1449e330f8a4a6aaac2c6b8e6a59bfd28d505eeaf86ab0df29b14256",
+  "verdictjson:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:b4096d871db9f9daf29da236e07d04bde3bccad75101afd173153731bbf382b7",
+  "verdict:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:1b62a4a43fdb0b3ba60f43bb2425e16b3d0577f54b9978c9ff97c0efec884756",
+  "candidate:r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7",
+  "verdicts:r4-gpt-5-4-mini-raw.1": "sha256:8c272ae86ea76ba8248f6d9f729456d21d58b8e8b015d4ac3bf51556663a3edf",
+  "tally:r4-gpt-5-4-mini-raw.1": "sha256:f8f5a181116c01cf3193be6fdd8fd157369744027f55be77713be79327cf8658"
+ },
+ "upstream": {
+  "kappa-registry": "2af8656",
+  "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+ }
+}

@@ -1,0 +1,29 @@
+# harness/self/r4-gpt-5-4-mini-serv evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:7d8e45fb2421cdb0bdf48543072676669de50d9e3c0ad135b349d03bb8f79b14
+
+Merkle root (provisional, SHA-256, 32 leaves): `e4334e5b119017744a7056eacd3f04aae5893cdc6ab724c230c215ce9f714a79`
+
+| object | kappa |
+|---|---|
+| candidate:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683` |
+| candidate:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23` |
+| canon:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:52cdf674d1b0bdf67635b62f8744e0fda704c0a0c1d2b7f507b8436446ef9058` |
+| gap:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:6f2c87d1f83dcf90747ed47ae53c452cb9269037ee72479d5af25d10ea945dc5` |
+| gapjson:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:db31820cd04662e3258ee04f87a814d1cd80a26d983405eb3596ebc91b063efe` |
+| gapjson:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:9f530270f7dc011421ee8c882a40e557bc4f5996cd70a140aada045e01dc6c85` |
+| proposal:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:bb1a24d1e0d121af957ab1b0387e8e16263dfc23bb9c9267fc2df50d5ecb2f55` |
+| proposal:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:652df00cb005943338d26dc014176c8682bc9312c69b0ef0ca68d2ce3f86de76` |
+| source:run.json | `sha256:d263f167232024fb82527eec1a19a03e98c440dbc707df9c27f212a58e89e87b` |
+| tally:r4-gpt-5-4-mini-serv.1 | `sha256:565d182cb165416accc71130cbdc22f79cb71529653d4a66f671d3cffeda4cbc` |
+| verdict:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:58540bfccd5afb88e1d8cd1c4e3830d19402d8b980bc04ab1b4f5df9f41f3886` |
+| verdict:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:87fac7b53ec56aadb150dffee376523915d00a9683c5495c115d3393411d8a8c` |
+| verdictjson:r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold | `sha256:a787020bc272a3dd7627ce03346e5d9e0afe7e1020d886205b58e78e13e71f09` |
+| verdictjson:r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:88a3d26aead2b0f64d3cdd24e597f824b8b90ce026284dfd3c20e49c023cc261` |
+| verdicts:r4-gpt-5-4-mini-serv.1 | `sha256:85d2849833ac16bc01c62b3ab156cc692b0be0bc6d2bceb94d91e025608ce647` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r4-gpt-5-4-mini-serv/evidence`.

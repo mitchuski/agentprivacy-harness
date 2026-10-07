@@ -1,0 +1,51 @@
+{
+ "root_kappa": "sha256:3991e8c117d9fa0840b0ea33015799aa4957f391c4d7a9e4cf8ed4f23111e42c",
+ "status": "kappa-compatible (unverified)",
+ "lane": "harness/field-guide/r2",
+ "minted_on": "2026-10-07",
+ "merkle_root_sha256": "7594d76d026e6465778e67f67f56851c94e7a8d4426971a35c27a9b48b3bac1a",
+ "merkle_leaves": 62,
+ "counts": {
+  "objects": 17,
+  "blobs": 16,
+  "edges": 34
+ },
+ "names": {
+  "canon:r2.1/p1-line-edit-per-sentence-pass": "sha256:1a575b6ae56e50ea66bb818c7cfa1d0f6d2b3e68091e5413a405e1b5c452cd4c",
+  "proposal:r2.1/p1-line-edit-per-sentence-pass": "sha256:8c31b4f61d67581f1bdfc23439a275a21b2274c6a45614af881d791c8dd633da",
+  "gapjson:r2.1/p1-line-edit-per-sentence-pass": "sha256:72344b94e1aaa5aa7395e9d780a1117e0a7c1fedb16e88e1022c471d4128a48d",
+  "gap:r2.1/p1-line-edit-per-sentence-pass": "sha256:170d8dd82e94dfc29efef4657b1a5f63dabac7bba5678ea41c14043f5d653048",
+  "verdictjson:r2.1/p1-line-edit-per-sentence-pass": "sha256:8c41d54c9ee0c4cab7a6ddc27d863b094b2653ead7a5ed3eeac18191f9ac38d9",
+  "verdict:r2.1/p1-line-edit-per-sentence-pass": "sha256:af811b761de21f4e5875299192e590fa2b56b1d386e3bb519099ba118b41b6fd",
+  "candidate:r2.1/p1-line-edit-per-sentence-pass": "sha256:25b45ed79b1c5ac2ea82770037dd07e1cec8b71f51272273b3676cb90d18da42",
+  "canon:r2.1/p2-restructure-lists-and-timing-table": "sha256:80126a021fa91c85d65ea986148ab47f7fd276c73ed4aafe2a8fda874353d437",
+  "proposal:r2.1/p2-restructure-lists-and-timing-table": "sha256:fce177397dddb395ec564902d7d86108676f15120a8a50eb65ebb3654202b6b3",
+  "gapjson:r2.1/p2-restructure-lists-and-timing-table": "sha256:7295aeb88bebeb9c4e3df8105776fa2f374e48f3045be1fc9874d12b4b868b7a",
+  "gap:r2.1/p2-restructure-lists-and-timing-table": "sha256:6c7b9aef6dd9b6440bb3b7306de6add46581ce5402dd2ac512d6f26cafadae9a",
+  "verdictjson:r2.1/p2-restructure-lists-and-timing-table": "sha256:96a173b9058668832d4baf2f89d2a792f651ec72461a49f7471529ccc99d28b9",
+  "verdict:r2.1/p2-restructure-lists-and-timing-table": "sha256:5e976aac1f5913793f60ea4261530c67c8c822226f7ec8afe322656374f2f619",
+  "candidate:r2.1/p2-restructure-lists-and-timing-table": "sha256:7fdfbfdd88bf56dae25b83bf24597b98ec9cc365cb0016a05640b40ff59cfed8",
+  "verdicts:r2.1": "sha256:2202c4cdb1372a87a7c5cdfdd603f43f3520d59578a01ae0ae326646006b9677",
+  "tally:r2.1": "sha256:06bb12fbfe7c111336891ec9b990dd63327beab939efb51cb246cb2c06f5fba1",
+  "canon:r2.2/p1-line-editor-tighten-pass": "sha256:a7efe7ec8d319f1b7e0eb10e5f7d920f040f630830315d8b628a9e2819c1467f",
+  "proposal:r2.2/p1-line-editor-tighten-pass": "sha256:2a962b104dc4c30738c8bbddf11e89d1dd1ca926d8005aaef2fb3d4af884fd88",
+  "gapjson:r2.2/p1-line-editor-tighten-pass": "sha256:690a5b3aa8b7a14ce299c4d9e7f30c568042b90754bb7391623d8d87d5c783fd",
+  "gap:r2.2/p1-line-editor-tighten-pass": "sha256:b99b943d3ad278dbb771886ee71280d886fa10ef8dacc80828800de65dd5cbb4",
+  "verdictjson:r2.2/p1-line-editor-tighten-pass": "sha256:897e9863a7af96c765bb108ffeac871269ab42cc4745cce2c05f9bb94160c1a5",
+  "verdict:r2.2/p1-line-editor-tighten-pass": "sha256:12d93725f27691c475fe52fdedbed5332623b6cfa3f52ca820b8d2d394c8b970",
+  "candidate:r2.2/p1-line-editor-tighten-pass": "sha256:c1b7b6f9f7741d28d39daa1d40074a8ed56ddc6740cfe71dbc19491c45a03189",
+  "canon:r2.2/p2-restructure-merge-terse-prose": "sha256:a85595a55f796c951188bfb33229cd2b8c4d9f759be92fdc6f015644d24c9f94",
+  "proposal:r2.2/p2-restructure-merge-terse-prose": "sha256:d71c009f4ee11f3d1e7b42bcaa2628bd893e269b370200002e9aaebc2c189fa9",
+  "gapjson:r2.2/p2-restructure-merge-terse-prose": "sha256:3249fe104fce60045d62e80e3c08dac1e73ddffc0fd8fca13889b52836d0650d",
+  "gap:r2.2/p2-restructure-merge-terse-prose": "sha256:69392e3cd28063ee93f760fec3ae159395d2c6a6b67e93c06689cc269f788c23",
+  "verdictjson:r2.2/p2-restructure-merge-terse-prose": "sha256:396ba9825684d4a5e4ba0129d3e31af9d4e27e1216ea9ac501dfd8f1ec384601",
+  "verdict:r2.2/p2-restructure-merge-terse-prose": "sha256:404b5c95ac34f21088511ea0a57dc4e4c5960a6192f62fae2cb5aed927fa16f8",
+  "candidate:r2.2/p2-restructure-merge-terse-prose": "sha256:c065fbb1c8b62e60aaa26d2894044e2008e5dd8c43ba9ea8607092074dc24aff",
+  "verdicts:r2.2": "sha256:17db0f5649687edeaa6450d94183671eb733e55ebc406910177b16af5fa26248",
+  "tally:r2.2": "sha256:1bd7a3719f507bb3983d955a0e888d677afb17850d6f85c10352b600a022030e"
+ },
+ "upstream": {
+  "kappa-registry": "2af8656",
+  "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+ }
+}

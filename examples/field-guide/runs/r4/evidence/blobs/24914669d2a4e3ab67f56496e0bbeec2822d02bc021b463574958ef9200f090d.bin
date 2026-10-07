@@ -1,0 +1,9 @@
+{
+  "leverId": "r4-compose-restructure",
+  "status": "VALIDATED",
+  "metric": 484,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = b733dbd6dcabd64c2c47d53fb528c4be71c6b987c59041ece336de6f98ae10c5 (matches seedHex; all 8 draw indices re-verified: F24,F21,F10,F13,F29,F11,F7,F2). Gate: all 8 held-out questions answered correctly from candidate.md alone (F24 storm-forecast charging + ~4 recharges from 20,000 mAh; F21 small south-facing room + layered clothing and blankets; F10 manual can opener, electric useless; F13 full freezer ~48h vs half-full ~24h; F29 wait 5 minutes, grid stabilise; F11 fridge then freezer then emergency shelf; F7 fill bathtub on storm forecast with advance warning, flushing/washing never drinking; F2 temperate climate, no backup generator). Metric: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 484 < frontier best 526 (frontier.json). Hard constraint holds: candidate.md remains a self-contained, sectioned instruction document.",
+  "scratchDir": "runs/r4/r4.1/p2-r4-compose-restructure"
+}

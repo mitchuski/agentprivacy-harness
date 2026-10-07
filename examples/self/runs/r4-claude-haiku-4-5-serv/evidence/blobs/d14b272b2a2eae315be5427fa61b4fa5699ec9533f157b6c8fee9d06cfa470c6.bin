@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "Code-side gate (tools/check_path.mjs) reports 94/95 passed; one witness missing: 'Shared state has exactly one writer'. This witness is a hard constraint derived from GR-10 and the seat contract — it must appear in the loop table or adoption steps. Candidate includes the loop table but does not explicitly name this constraint in the adoption steps or box layout sections where it belongs.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-claude-haiku-4-5-serv/r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold"
+}

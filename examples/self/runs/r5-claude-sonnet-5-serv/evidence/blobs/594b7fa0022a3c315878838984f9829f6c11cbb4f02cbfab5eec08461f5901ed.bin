@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "Verified check_path.mjs output (94/95, missing witness 'Shared state has exactly one writer'); confirmed candidate text reads 'Shared state has one writer' rather than the exact phrasing required by the witness set, so the census correctly flags it absent. Per GR-3/T5 a gate fail is a zero regardless of the metric (1038 < frontier best 1069), so the product collapses and the verdict is MIRAGE.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r5-claude-sonnet-5-serv/r5-claude-sonnet-5-serv.1/p1-trim-connective-prose-on-fold"
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "restructure-to-bulleted-sections",
+  "status": "VALIDATED",
+  "metric": 570,
+  "gateResult": "8/8",
+  "failingCheck": "",
+  "evidence": "Seed re-derived: sha256sum proposal_canon.json = 797727eebf595c087a22a1875c8ef8b99262f2336d2c1a3c9af452ce6f4aa192 == seedHex (not BLOCKED). Draw independently reproduced from digest bytes b0..b7 = F26,F28,F10,F7,F27,F11,F18,F12. candidate.md written verbatim from proposal_raw.json compressedText (3427 chars). Held-out gate answered from candidate.md ALONE, 8/8 correct: F26 (7-day supply; rotate them, line 36) / F28 (pharmacy, doctor, poison-control on paper; dead phone is not a phone book, line 38) / F10 (manual can opener; electric is useless, line 12) / F7 (flushing toilets and washing, never drinking, line 8) / F27 (up to 28 days; confirm with a pharmacist, line 37) / F11 (perishable fridge, then freezer, then emergency shelf, line 13) / F18 (headlamp by each bed, lantern in the kitchen, line 22) / F12 (fridge about 4 hours, line 16). Metric mechanical: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 570. Hard constraint holds: self-contained instruction document (title + all 8 named sections in order + scope statement + every actionable instruction with its numbers; no pointer/cross-reference/external dependency). Frontier best = 730 (frontier.json); 570 < 730, beat by 160 words (-21.9%). node engine/conform.mjs examples/field-guide = PASS.",
+  "scratchDir": "examples/field-guide/runs/r1/p2-restructure-to-bulleted-sections"
+}

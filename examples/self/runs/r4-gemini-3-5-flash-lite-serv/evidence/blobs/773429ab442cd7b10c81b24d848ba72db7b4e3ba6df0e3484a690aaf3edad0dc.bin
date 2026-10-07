@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "I checked the candidate prose against the N=95 census and found that witness 95 ('Shared state has exactly one writer') was deleted during the trim, causing the census gate to fail at 94/95. Because the census check failed, the candidate is a MIRAGE.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-gemini-3-5-flash-lite-serv/r4-gemini-3-5-flash-lite-serv.1/p1-trim-connective-prose-on-fold"
+}

@@ -1,0 +1,99 @@
+{
+  "name": "self",
+  "runId": "r5-serv-mini-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:serv-mini"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r5-serv-mini-serv.1",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5019,
+      "completion_tokens": 92,
+      "total_tokens": 5111
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5468,
+      "completion_tokens": 138,
+      "total_tokens": 5606
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5453,
+      "completion_tokens": 128,
+      "total_tokens": 5581
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7475,
+      "completion_tokens": 211,
+      "total_tokens": 7686
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7452,
+      "completion_tokens": 170,
+      "total_tokens": 7622
+    },
+    {
+      "label": "critic:r5-serv-mini-serv.1",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5833,
+      "completion_tokens": 210,
+      "total_tokens": 6043
+    },
+    {
+      "label": "chronicle:r5-serv-mini-serv.1",
+      "model": "serv-mini",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5651,
+      "completion_tokens": 447,
+      "total_tokens": 6098
+    }
+  ]
+}

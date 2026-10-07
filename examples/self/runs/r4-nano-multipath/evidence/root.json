@@ -1,0 +1,36 @@
+{
+ "root_kappa": "sha256:8be2f43a95af2bedf607bfaeb31c75ed0521f17a711e7bad97ddecb926f30143",
+ "status": "kappa-compatible (unverified)",
+ "lane": "harness/self/r4-nano-multipath",
+ "minted_on": "2026-10-07",
+ "merkle_root_sha256": "1440dfc297614c4d20b26eaafa70e87b326a588d779fb4f7c5d2746b9e215b4e",
+ "merkle_leaves": 32,
+ "counts": {
+  "objects": 9,
+  "blobs": 9,
+  "edges": 17
+ },
+ "names": {
+  "source:run.json": "sha256:0d3c4036260b93baeab6f672e12ede480e9b9d74e947357f91791681e816e2ae",
+  "canon:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23",
+  "proposal:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:8ae39d6410a3a5efd7f3288674b2a76f5dec80f8f3b0dc4b976e4f2e4cfb3e59",
+  "gapjson:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:75bf3019f0ae6662ea71beaab300051dea0326b0bee549cbe99fb07329fa157b",
+  "gap:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:eccd1ead928e7470d09fc171dbb4ec3a265c899d8ed2a156cf2d75de1476058e",
+  "verdictjson:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:455292b4f73ce48ecf703454c450803a4d5e1a8b3c40c539424426c7d73ad3c7",
+  "verdict:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:50d88a9b15700aa1c7715d75c3ec85af3c2cc76ef60ac0c5b81040750aa8d017",
+  "candidate:r4-nano-multipath.1/p1-trim-connective-prose-on-fold": "sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683",
+  "canon:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+  "proposal:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:4374a7661b28abcc48bc8ebcaabd3b632518d0c3e19e62feeb4f9fd78128f47f",
+  "gapjson:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:20500f63bc3e826e1c6c94c32e9d2d3c249cde94d47217835562ea903d133f25",
+  "gap:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:c6fa55864f74d9eaee2c1135c9568ae315a05517eec11bba97bd611f5f8911bc",
+  "verdictjson:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:0e2bc4e49fe97efee7348db41cd7b9c076b933d2960414d99acd76224abb6bc1",
+  "verdict:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:427336a1276cdb959be2129b131722f6aa468104aa852d618df6566ee39597ed",
+  "candidate:r4-nano-multipath.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7",
+  "verdicts:r4-nano-multipath.1": "sha256:66a10cdb54f644319d265b04c6f6c5d3a31c49fc0c4ce8ff31c858764ec15b76",
+  "tally:r4-nano-multipath.1": "sha256:9057470037e187d56a13bb01a4ea3d46287683076cc24b0556257552a774cdd8"
+ },
+ "upstream": {
+  "kappa-registry": "2af8656",
+  "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+ }
+}

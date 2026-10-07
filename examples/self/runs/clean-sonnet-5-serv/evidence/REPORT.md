@@ -1,0 +1,29 @@
+# harness/self/clean-sonnet-5-serv evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:25a9d75121c72a0b95bf5bb5eb94059124c99bb5c311a182902f5cc3e551785c
+
+Merkle root (provisional, SHA-256, 32 leaves): `fac12cc27a11cdd273f163795fdd406b54551fd1464112ab40e256be2d35d876`
+
+| object | kappa |
+|---|---|
+| candidate:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:31a5088e6b805539b10b32a90eacec9b84d1234097f4e751ea21cab15b79e434` |
+| candidate:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f` |
+| canon:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:795069391a48b450a3b2acb89862e432528c838a9d09d24994f0e8afb5809fd5` |
+| gap:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:6fcb7e6459c20d496435e4b8efb6f646885083ae0776bda4f9d839870dfbf1ca` |
+| gapjson:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:f675f2a94766c6f34225f482e5c634f268b46358131827447a3e92f94fff19d8` |
+| gapjson:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:9d176eb591a7bd59f73679c8e159227de5dfbacb6da341eb4d2faca706ec36e1` |
+| proposal:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:4288c80055d5004c9a2b853f5b1bb4496c440fbe723215051967754fbf4d8198` |
+| proposal:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:41c6c653c20da20308c881097c9a3be9095cc471658fed3c65dce895e9c43644` |
+| source:run.json | `sha256:ebf6d562449ac1fb57a3beddffae57c91b14338fc65e1d39b8d2c20f2b8cf9c8` |
+| tally:clean-sonnet-5-serv.1 | `sha256:7245b668a3ea85e77ba9a0b2134dbb7000e8ae7b8b5ed73adbe65f2ca0c26e84` |
+| verdict:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:ad9aa24174441bb42423b694a203e2d9f6f122d955556dabfb875e116fd278c6` |
+| verdict:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:056ede3ea8438d363168691992dd52d360f24d19b6f3da6d2816db959244f3bb` |
+| verdictjson:clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue | `sha256:ce43b4ae651c57789ccf7d61e3e84d33dd52025c233c4e066277201db8ee8d09` |
+| verdictjson:clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:ac1a2a90f836ef25457fba6b958ba19de37c886a3a11452672dbb5a81edc674b` |
+| verdicts:clean-sonnet-5-serv.1 | `sha256:2700a4a48d865f295ccc265c1b82f10b2b1231c2731b98fc616e4b6ef1f778b7` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/clean-sonnet-5-serv/evidence`.

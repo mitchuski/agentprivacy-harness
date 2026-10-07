@@ -1,0 +1,109 @@
+{
+  "name": "self",
+  "runId": "r4-claude-haiku-4-5-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 1,
+    "MIRAGE": 1,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "status": "VALIDATED",
+      "metric": 1046,
+      "gateResult": "95/95",
+      "failingCheck": null,
+      "evidence": "Candidate passes census gate 95/95 (code-side check_path.mjs confirmed). Hard constraint verified: document remains the stranger's entry point with five commands in order (check.mjs, run.mjs stub, verify_run.mjs, render_run.mjs, run.mjs real model), their outputs, the loop table, adoption steps, constitution (TRUSTS.md and GROUND_RULES.md), and box layout. No invented content or pointers to longer versions. Metric 1046 beats frontier best 1069.",
+      "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-claude-haiku-4-5-serv/r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:claude-haiku-4.5"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r4-claude-haiku-4-5-serv.1",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5901,
+      "completion_tokens": 229,
+      "total_tokens": 6130
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6295,
+      "completion_tokens": 332,
+      "total_tokens": 6627
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8745,
+      "completion_tokens": 257,
+      "total_tokens": 9002
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6288,
+      "completion_tokens": 324,
+      "total_tokens": 6612
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8722,
+      "completion_tokens": 215,
+      "total_tokens": 8937
+    },
+    {
+      "label": "critic:r4-claude-haiku-4-5-serv.1",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6865,
+      "completion_tokens": 516,
+      "total_tokens": 7381
+    },
+    {
+      "label": "chronicle:r4-claude-haiku-4-5-serv.1",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6822,
+      "completion_tokens": 1132,
+      "total_tokens": 7954
+    }
+  ]
+}

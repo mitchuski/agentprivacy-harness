@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "The hard constraint 'still the document a stranger opens first: five commands in order with what each writes, the loop table, the adoption steps, the constitution, the box layout; nothing invented' was reviewed and found to hold. However, the code-side gate reported 94/95 witnesses, with 'Shared state has exactly one writer' missing.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r5-gemini-2-5-flash-serv/r5-gemini-2-5-flash-serv.1/p1-trim-connective-prose-on-fold"
+}

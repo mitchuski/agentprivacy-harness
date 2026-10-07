@@ -1,0 +1,29 @@
+# harness/self/r5-gemini-3-8-flash-serv evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:be8407e333702f9e9918d8be031c5da2a6d12118672aafa3eec70f6c7b985622
+
+Merkle root (provisional, SHA-256, 32 leaves): `8c2b2fe4d62c0f011e15525656ac2ee762cc4e470e91f33f449fe01159c121f2`
+
+| object | kappa |
+|---|---|
+| candidate:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683` |
+| candidate:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23` |
+| canon:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:0501033d7df1e8b650a719ae90d6ba06f210162c89cc55c2504651f500689cdd` |
+| gap:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:a82169c5bd53e3ffad42af25f2bfd4b1d545160c1c1918221e2b2c9a5784b95f` |
+| gapjson:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:cac0d5100c20d755f97a4f3f5652abf722cef017aa6ef627dba9ca64ef40fbb2` |
+| gapjson:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:499e279814286f4f0f906e558b4480cb70648c240150d0f7b52a7d041578cd6f` |
+| proposal:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:0eb156c85810e957c404d847b1e2c5ec93e0d3564fbf06c6c921496a0c20ab88` |
+| proposal:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:74dc16c3473711e69f138b9660344eed282df9bdc296dfb3cbd7a61d138d891c` |
+| source:run.json | `sha256:25ee5d5b898f869d862d3fbc5d342eddbb3eecf42d7ff9bcc11757fd74f40f6a` |
+| tally:r5-gemini-3-8-flash-serv.1 | `sha256:eac9541042694a892cafe27e50cb57a45ec6f9698770a06b1d43bcffe50f3c6a` |
+| verdict:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:ccf98c7708a25b7df4d0026a8bc31cb6100fd16f24620e5ea57240496daf2d76` |
+| verdict:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:e57f3755a6f71b3eeaa778336d8e77962750fa9ac5dbe76d523442ac2b186910` |
+| verdictjson:r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold | `sha256:71540a735bb2dee7a716134db604ae7c9bc9de58f5ae04829b8d3008c99f6a25` |
+| verdictjson:r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:a9c5f69db854b95be05e50cbce152e2f020565713f401a4d74ab4ca5dbd1efc9` |
+| verdicts:r5-gemini-3-8-flash-serv.1 | `sha256:79b7d6d5d30def177d3af38e75b66403b547b6292b24e2e418d2176884fce065` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r5-gemini-3-8-flash-serv/evidence`.

@@ -1,0 +1,13 @@
+{
+  "leverId": "cut-adopt-intro-glue",
+  "status": "VALIDATED",
+  "metric": 1061,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Verified reported census gate 95/95 (N=95, missing=[]) and metric 1061 < frontier best 1069, satisfying GR-1/T5. Read the candidate against the hard constraint: the five commands appear in order with each's effect/writes named (check.mjs gate sweep; stub round writes proposal_canon.json/gap.json/candidate.md/verdict.json + run.json; verify_run.mjs re-derives seeds offline; render_run.mjs writes run.html; a real model round where a fold can happen), the loop table lists all six seats with phase/does/writes, the six adoption steps (auditor→spar→instance→second-model→arena→optional layers) are intact, the TRUSTS/GROUND_RULES constitution bullets and the box-layout tree are all present verbatim in structure, and nothing appears invented relative to the folded r2 baseline; the PATHWAYS.md mention is the pre-existing origin pointer already counted in the census, not a new pointer to a longer version of this document.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/clean-sonnet-5-serv/clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

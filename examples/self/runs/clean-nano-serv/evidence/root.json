@@ -1,0 +1,36 @@
+{
+ "root_kappa": "sha256:79df1b7ef203c7640cf3ea6ef5649206c1b714c83c67745baaedbee6aff609fb",
+ "status": "kappa-compatible (unverified)",
+ "lane": "harness/self/clean-nano-serv",
+ "minted_on": "2026-10-07",
+ "merkle_root_sha256": "72f432ca7fad71e6ca25b23556a8331e25c42a064559a6679ae8cee368f0db59",
+ "merkle_leaves": 32,
+ "counts": {
+  "objects": 9,
+  "blobs": 9,
+  "edges": 17
+ },
+ "names": {
+  "source:run.json": "sha256:29acf91c36d180ee844a8e596b026f138b6082149383d2a62bdc87870bf080d5",
+  "canon:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:76059f5669efd54d274bd894cde6a3b6b80a5ccec8459ec2e332b2dae187176f",
+  "proposal:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:2081af7b662c89280d9f0fdc73e4b6ad48237b7def180f3026550c35eb44985e",
+  "gapjson:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:140be72a48c30e1ac4cf7479982269ae7ae6d252548e1e7f7e136f72221574c2",
+  "gap:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:095c23e7c991a79d07d1945b07ad3edd4f75aeae0a168bb256fccb4cc11b211f",
+  "verdictjson:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:890602451ca4a3ce4d8771a5dc5adb21b13f9e239340bb2b2220084af0075c1b",
+  "verdict:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:fb0a5bcf7f51e69a192e04ba47e0778df105b7a8c23093c722244ea1dd85c8b4",
+  "candidate:clean-nano-serv.1/p1-cut-adopt-intro-glue": "sha256:31a5088e6b805539b10b32a90eacec9b84d1234097f4e751ea21cab15b79e434",
+  "canon:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+  "proposal:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:a23cfaa8a029e2a693b845f376795ae59072da2c9dabab45098b9ee08bf5ff30",
+  "gapjson:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:f5a50410cda504361dd59001b4ce3817726a21ef69bca56ce1f2d446abd906c1",
+  "gap:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:0f1cdfdd0b83a3f23164994bca36a148895ea5b776d921c0ec892837cb2e0ee6",
+  "verdictjson:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:9370a4711fde4d1ae34ccbf8c29b30b10c44c3282484b301c5ea67bfbf9eba6c",
+  "verdict:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:84343f8dd3e72ba646053915604ed91ba0d2d727e833573324e8b8e25708ad07",
+  "candidate:clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7",
+  "verdicts:clean-nano-serv.1": "sha256:642d64b3a935fc9fea5bfcca2912cbcdb2786617c036ea4740b552e7aaecd0df",
+  "tally:clean-nano-serv.1": "sha256:869d018aae1c646acea5e5d2ac513eb7051ecfb1fe01752f34ef40c54c4ce2a2"
+ },
+ "upstream": {
+  "kappa-registry": "2af8656",
+  "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+ }
+}

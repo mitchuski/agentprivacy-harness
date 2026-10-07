@@ -1,0 +1,36 @@
+{
+ "root_kappa": "sha256:b086fa54495426a6ee319b214b8ec7bf0b9c231fe6b9fc88e68a122706eae0e5",
+ "status": "kappa-compatible (unverified)",
+ "lane": "harness/self/r5-serv-standard-serv",
+ "minted_on": "2026-10-07",
+ "merkle_root_sha256": "b048a0ddc7100a4a436c1989b191e4d84b34047d65fec8eeec33c59aa5c4ab93",
+ "merkle_leaves": 32,
+ "counts": {
+  "objects": 9,
+  "blobs": 9,
+  "edges": 17
+ },
+ "names": {
+  "source:run.json": "sha256:1cc88b3e2f8a53d619f34c5bcb638bdf54313b886902400b60b581c5922e1c57",
+  "canon:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23",
+  "proposal:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:c86d96bf1e8219dfb8772bddec44d0be5507d4ab872a47c3ae7c66e630f05933",
+  "gapjson:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:ca698d3dbb39cac604e24701e448d6364e35a316e8291040d3f3dac87937df64",
+  "gap:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:27b1fe34f24540fbdaa626c6e50f763d3081ad381aebe7ba4f5e65a97aa0e5eb",
+  "verdictjson:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:4ee6fa2dd15d041df2e3fc719564018e3c5ca20f51a0048a37031bd69f7b5d0d",
+  "verdict:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:f3a4b2e9e01bfd0c0cd999ac84a524c9b0ad18f2b478f60fe28fd098a5ea7516",
+  "candidate:r5-serv-standard-serv.1/p1-trim-connective-prose-on-fold": "sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683",
+  "canon:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+  "proposal:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:045c5be523e8c261e4fb93276dfa2cd6efaa9c27d6dac6bdcb0cf6f511ed7516",
+  "gapjson:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:a5d5ec886147a34d61d50e7aff7d1b28c10c344c24100a4b628f804b06bbd624",
+  "gap:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:4d8c2f78f500fbfc399173f4eb0a1aeccd55cb6541b932eeaee4d7039e8a99ff",
+  "verdictjson:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:cff1ff48acd1730dee8328f750ca3697614d1bb24e0dd92a2d15a12ce7602cbe",
+  "verdict:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:8f40bfc16df2689b60b879cc2ab70e5ec2d39b62e2ffb521e90c43092761bf3e",
+  "candidate:r5-serv-standard-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7",
+  "verdicts:r5-serv-standard-serv.1": "sha256:2dcf77825b45aadde360141897980b8d397fc2408f971ab0409a126dbd1b4dec",
+  "tally:r5-serv-standard-serv.1": "sha256:bd3206f322ed60f830d55ac978cea2a4ce1948cff0ec1946184d4d55a6fd29a8"
+ },
+ "upstream": {
+  "kappa-registry": "2af8656",
+  "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+ }
+}

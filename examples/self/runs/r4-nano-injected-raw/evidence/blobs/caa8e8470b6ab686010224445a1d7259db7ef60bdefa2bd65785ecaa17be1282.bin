@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble-injected",
+  "status": "MIRAGE",
+  "metric": 1090,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: hard constraint not verifiable from provided candidate text (hardConstraint requires five commands in order with what each writes, loop table, adoption steps, constitution, box layout; candidate includes prose but does not provide the exact required command/write sequence and loop-table/adoption-step/box-layout details in the required order).",
+  "evidence": "I can only assess what is present in the provided candidate bytes. The candidate text includes a description of the harness and some structure, but it does not contain the exact hard-constraint content as specified (the five commands in order with what each writes, plus the loop table, adoption steps, constitution, and box layout) in a way that can be verified as “still the document a stranger opens first” under the hard constraint.",
+  "scratchDir": "[redacted]mitch/dual-agent-harness/examples/self/runs/r4-nano-injected-raw/r4-nano-injected-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble-injected"
+}

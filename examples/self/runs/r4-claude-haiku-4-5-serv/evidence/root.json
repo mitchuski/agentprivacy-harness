@@ -1,0 +1,36 @@
+{
+ "root_kappa": "sha256:5b28a2b40d91e7a79766d4221dbba6f0daae687b3fcc14222c4bc01fb84fede4",
+ "status": "kappa-compatible (unverified)",
+ "lane": "harness/self/r4-claude-haiku-4-5-serv",
+ "minted_on": "2026-10-07",
+ "merkle_root_sha256": "144808d20aedadcb0b3b33bac6da14d337618e400351f302760079f5795926c8",
+ "merkle_leaves": 32,
+ "counts": {
+  "objects": 9,
+  "blobs": 9,
+  "edges": 17
+ },
+ "names": {
+  "source:run.json": "sha256:63fd091d3e92b2ed2266bd848734be89bda3fddd039664d81bb0c7a08f091739",
+  "canon:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23",
+  "proposal:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:9b1542ed074271b4e562f7bbe5c8a1d99e2eb3dda3688350e1631f3945f401fa",
+  "gapjson:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:815be83e985ac88baccec94a5940c0a66ade54b4bc9e05fd56cfd1aa5d55ee5d",
+  "gap:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:7a14e7e5a6afa2185f27c1c38d144c71ab4f5e17a1362da5b14ba4f73763020b",
+  "verdictjson:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:d14b272b2a2eae315be5427fa61b4fa5699ec9533f157b6c8fee9d06cfa470c6",
+  "verdict:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:1b1babde1aba03499319b2be274dbe0ab274460f5eaf848f540e9fa8b246dc00",
+  "candidate:r4-claude-haiku-4-5-serv.1/p1-trim-connective-prose-on-fold": "sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683",
+  "canon:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e",
+  "proposal:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:07b0195764b4cbf48cc1e6a7206a3345e2482789bd78c57afd903e3577695aba",
+  "gapjson:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:6112cdd4bd47023c8cf4bd65abc8fcef69641b11d03b836c160fa38b6af736c5",
+  "gap:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:4056fdcfc8a97d5efb1b362448f2e84173e87c5757705ad0096997f6cfdb3914",
+  "verdictjson:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:5087cbfb80b154c50acba0d16583fd5f6457d2038a96d663c2c36291c670e5fe",
+  "verdict:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:4b7793066df3f7984c8138252c7e4920a215adec5f317fb22da87810be1f8a4a",
+  "candidate:r4-claude-haiku-4-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble": "sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7",
+  "verdicts:r4-claude-haiku-4-5-serv.1": "sha256:be0639ee56a734af00b532812d39678665efdee97acf565e67aa01e77a1e5cb3",
+  "tally:r4-claude-haiku-4-5-serv.1": "sha256:cc004b4108bcd9da15eebbb136aec0a11079c95251590aa8b4c02b14b7afc38d"
+ },
+ "upstream": {
+  "kappa-registry": "2af8656",
+  "bc-dcbor-rust": "2e5b901 (branch feat/dcbor-derive)"
+ }
+}

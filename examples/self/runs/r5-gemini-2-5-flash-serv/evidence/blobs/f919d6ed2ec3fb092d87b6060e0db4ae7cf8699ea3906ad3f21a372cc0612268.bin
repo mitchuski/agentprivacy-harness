@@ -1,0 +1,99 @@
+{
+  "name": "self",
+  "runId": "r5-gemini-2-5-flash-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gemini-2.5-flash"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r5-gemini-2-5-flash-serv.1",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5334,
+      "completion_tokens": 88,
+      "total_tokens": 7954
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5895,
+      "completion_tokens": 152,
+      "total_tokens": 6329
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5894,
+      "completion_tokens": 151,
+      "total_tokens": 6765
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7973,
+      "completion_tokens": 207,
+      "total_tokens": 9402
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7990,
+      "completion_tokens": 257,
+      "total_tokens": 11738
+    },
+    {
+      "label": "critic:r5-gemini-2-5-flash-serv.1",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6238,
+      "completion_tokens": 350,
+      "total_tokens": 9155
+    },
+    {
+      "label": "chronicle:r5-gemini-2-5-flash-serv.1",
+      "model": "gemini-2.5-flash",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6250,
+      "completion_tokens": 1207,
+      "total_tokens": 11767
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# harness/self/r3-raw evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:cd04d58c7a1319e0e4242cef9f99153efa6ab9b78ca80142fb40c011ca3d0ede
+
+Merkle root (provisional, SHA-256, 32 leaves): `121c1a83d318bf4649d49acd5ecffa0e59a4efab14c6ddf14a00be8e5b67dee2`
+
+| object | kappa |
+|---|---|
+| candidate:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683` |
+| candidate:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23` |
+| canon:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:1bb24a76b3c8f7a052b04f23e312b45b1ab51631040f74fd44fba527d50118c0` |
+| gap:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:5f271e798d0a366db6e7635d045128813d34a23dbfa54f6d083adf98e3e8f905` |
+| gapjson:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:7d1f9f20ecac1dbb2a712d433d4e0a9a4293de7cb5271194f93493875de01f2d` |
+| gapjson:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:ccafa063059653b9d1bac5ccd2ff7404fca7b6db5aa3481821d2e3257cca3452` |
+| proposal:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:025d246018aae1a3c0997747d95176fb65311d7bf22f9f66d483436d1efd90dd` |
+| proposal:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:da5b12c53666568d580a70aeb40dac1494a8215777e0f7a23e5078250a26a25c` |
+| source:run.json | `sha256:00d82d6dbef03072b47b5d59c5931de917c42f669cb927cdaf2579381bb2b579` |
+| tally:r3-raw.1 | `sha256:f23d05df84dfac7ee03dd0e45be047dfcd67c46561b7f649eb3480cade0e9264` |
+| verdict:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:4ee83f81dd1806d373030c0c8b0e6953bcb7aa2bf33398da2278d682d1699fe9` |
+| verdict:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:7962fb1c9d97d25170a8a45aa00925a1422296136c1fa99d00335fd7f1aae6d8` |
+| verdictjson:r3-raw.1/p1-trim-connective-prose-on-fold | `sha256:981c2d20fca8051b1935d0fb1356fb6d84649ecbb5c9033615b12704e03b5e3d` |
+| verdictjson:r3-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:f2485e8615e81b633bb381f50410bd7b2942587129fd236b9120016712c64d26` |
+| verdicts:r3-raw.1 | `sha256:056e383b9dbfca2a84d7680df2085206f0338f99b19d78fbd482bdce1589e5cb` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r3-raw/evidence`.

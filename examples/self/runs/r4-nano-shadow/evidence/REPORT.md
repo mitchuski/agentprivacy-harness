@@ -1,0 +1,29 @@
+# harness/self/r4-nano-shadow evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:fd8f0df039394ec7f9779135f6b93cb110bf0a359895bbc7a537720b74a17a64
+
+Merkle root (provisional, SHA-256, 32 leaves): `09b044b557546bbe78b269e332d712c953777a6667178c1e5ba4216af4b15f07`
+
+| object | kappa |
+|---|---|
+| candidate:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:e001022c44d7e1d42f66d7160f172f1cedbd0e2ae1064647f6ca5e0859fd8683` |
+| candidate:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:62ff8d728fdfb99123b73f19a00a9ba6e370879eae48927ad30f2d600beaebf7` |
+| canon:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:b65b1d7467d62bbd0db323b02693d58b8cd376237b318f344eec1b77615b4f23` |
+| canon:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:d9dc7a234b213ce4fdf5295fcd2bb6f9af2326bfd51e167d149bde5e0a496b5e` |
+| gap:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:3590b4f1934a33e89766e94236118cf3e6d034df8c17fd8b2c5a235ced57d2ab` |
+| gap:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:1c23562b0c426a2af7a0e2c9964b8cb544d2d7722d44b5a1f7435c45012d6eea` |
+| gapjson:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:f9cb044e3db69e68428c6f18c54e317ec9cf61a053024d3861de16ee466f9821` |
+| gapjson:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:9b56b6c3abecdc6fa1c95e4e7ba5204239a15d819d3c25f5f224560ad03660f7` |
+| proposal:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:ffa409d25c1b0f89109ab02f47a9d35824017033dde516f0efd526d86d1e2260` |
+| proposal:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:c5f0a711691488a1fc0aa1b2ec82ab8e04da6d294900862edadf87ade9349b0a` |
+| source:run.json | `sha256:32ca7128f6974df6a660bc6029c2005fee1a2d73677029de4dfc91b4d5334bef` |
+| tally:r4-nano-shadow.1 | `sha256:bae9b757ad6e8b0994fd74d0705858babf854099e6c4e4b0b6008a8db3c463b9` |
+| verdict:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:3481806c0e1c84fd43834f34d0169607d4cbebbcf54843b2dc5c636407deafde` |
+| verdict:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:50681d49035b32d1a3fc75a19a81dc166dcdc4f7d4eb34a61b2090c61041eab1` |
+| verdictjson:r4-nano-shadow.1/p1-trim-connective-prose-on-fold | `sha256:4ad28274cb6676e9ce9c2ec270e0f9e11f8507af25fac97757d375979ace901d` |
+| verdictjson:r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble | `sha256:2fd58779c07aae931ac2b0d663497b092adcdbdb40fa9a85fe6de6112b838dd9` |
+| verdicts:r4-nano-shadow.1 | `sha256:0344909f4613e59b15b262b33a98f02f27e87dbe7bd439b66ecfb4a94d39c121` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify examples/self/runs/r4-nano-shadow/evidence`.

@@ -177,7 +177,7 @@ function tally(verdicts) {
   const statuses = verdicts.map(v => v.get(2))
   return { n: verdicts.length, validated: statuses.filter(s => s === 'VALIDATED').length, statuses: [...new Set(statuses)].sort() }
 }
-const RULES = { 'harness/run-tally/1': (rows) => tally(rows) }
+const RULES = { 'harness/run-tally/1': (rows) => tally(rows), 'rows/count/1': (rows) => ({ n: rows.length }) }
 
 // ---------------------------------------------------------------- verifying
 export function verify(bundle, log = console.log) {

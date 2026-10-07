@@ -1,0 +1,126 @@
+resolved seats: {"proposer":"claude-fable-5-1 (Claude Code subagents, one per lens)","prover":"serv:gemini-3.5-flash-lite"}
+measured: {"metric":1069,"census":95,"passed":95,"pass":true,"rule":"whitespace-split tokens of artifact/PATH.md"}
+  serv: seat "chronicle" pinned to gemma3:12b; the prover is on SERV, so it rides gemini-3.5-flash-lite for this run
+  — Measure —
+  round r4-gemini-3-5-flash-lite-serv.1 opens — measure syncs the frontier
+  — Propose —
+  propose:line-editor — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  propose:restructurer — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  2 proposal(s) on the table: trim-connective-prose-on-fold, merge-agent-note-into-constitution-and-collapse-step-preamble
+  assay closed: 2/2 — {"VALIDATED":1,"MIRAGE":1,"BLOCKED":0}
+  — Critic —
+  — Chronicle —
+  round r4-gemini-3-5-flash-lite-serv.1 closes — 1 structural win(s), dry=0/2
+
+{
+  "name": "self",
+  "runId": "r4-gemini-3-5-flash-lite-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 1,
+    "MIRAGE": 1,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "status": "VALIDATED",
+      "metric": 1046,
+      "gateResult": "95/95",
+      "failingCheck": null,
+      "evidence": "Re-derived seed successfully from proposal canonical bytes, executed full held-out census gate achieving 95/95 passed, verified hard constraint holds with all five commands, loop table, adoption steps, constitution, and box layout intact, and confirmed metric 1046 beats the frontier best of 1069.",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-gemini-3-5-flash-lite-serv/r4-gemini-3-5-flash-lite-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gemini-3.5-flash-lite"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r4-gemini-3-5-flash-lite-serv.1",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5334,
+      "completion_tokens": 132,
+      "total_tokens": 5466
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5899,
+      "completion_tokens": 155,
+      "total_tokens": 6054
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5903,
+      "completion_tokens": 163,
+      "total_tokens": 6066
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8000,
+      "completion_tokens": 227,
+      "total_tokens": 8227
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7983,
+      "completion_tokens": 215,
+      "total_tokens": 8198
+    },
+    {
+      "label": "critic:r4-gemini-3-5-flash-lite-serv.1",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6171,
+      "completion_tokens": 429,
+      "total_tokens": 6600
+    },
+    {
+      "label": "chronicle:r4-gemini-3-5-flash-lite-serv.1",
+      "model": "gemini-3.5-flash-lite",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6229,
+      "completion_tokens": 791,
+      "total_tokens": 7020
+    }
+  ]
+}
+
+verify:  node tools/verify_run.mjs C:/Users/mitch/dual-agent-harness/examples/self r4-gemini-3-5-flash-lite-serv
+render:  node tools/render_run.mjs C:/Users/mitch/dual-agent-harness/examples/self r4-gemini-3-5-flash-lite-serv

@@ -1,0 +1,126 @@
+resolved seats: {"proposer":"claude-fable-5-1 (Claude Code subagents, one per lens)","prover":"serv:serv-swift"}
+measured: {"metric":1069,"census":95,"passed":95,"pass":true,"rule":"whitespace-split tokens of artifact/PATH.md"}
+  serv: seat "chronicle" pinned to gemma3:12b; the prover is on SERV, so it rides serv-swift for this run
+  — Measure —
+  round r4-serv-swift-raw.1 opens — measure syncs the frontier
+  — Propose —
+  propose:line-editor — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  propose:restructurer — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  2 proposal(s) on the table: trim-connective-prose-on-fold, merge-agent-note-into-constitution-and-collapse-step-preamble
+  assay closed: 2/2 — {"VALIDATED":1,"MIRAGE":1,"BLOCKED":0}
+  — Critic —
+  — Chronicle —
+  round r4-serv-swift-raw.1 closes — 1 structural win(s), dry=0/2
+
+{
+  "name": "self",
+  "runId": "r4-serv-swift-raw",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 1,
+    "MIRAGE": 1,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "status": "VALIDATED",
+      "metric": 1046,
+      "gateResult": "95/95",
+      "failingCheck": null,
+      "evidence": "Census gate passed 95/95 (code-side check_path.mjs confirmed). Hard constraint verified: candidate remains the document a stranger opens first, containing five commands in order with their outputs, the loop table (six phases with seat/phase/does/writes columns), adoption steps (six numbered steps from auditor through arena), the constitution (TRUSTS.md and GROUND_RULES.md references with their core principles), and box layout (engine/, seats/, drivers/, tools/, templates/, examples/, optional/ directories with descriptions). No invented content; no pointer to longer version. Metric 1046 beats frontier best 1069. All three conditions met.",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-serv-swift-raw/r4-serv-swift-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:serv-swift"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r4-serv-swift-raw.1",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5578,
+      "completion_tokens": 237,
+      "total_tokens": 5815
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5971,
+      "completion_tokens": 238,
+      "total_tokens": 6209
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5961,
+      "completion_tokens": 246,
+      "total_tokens": 6207
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8396,
+      "completion_tokens": 265,
+      "total_tokens": 8661
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8379,
+      "completion_tokens": 238,
+      "total_tokens": 8617
+    },
+    {
+      "label": "critic:r4-serv-swift-raw.1",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6573,
+      "completion_tokens": 822,
+      "total_tokens": 7395
+    },
+    {
+      "label": "chronicle:r4-serv-swift-raw.1",
+      "model": "serv-swift",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6841,
+      "completion_tokens": 2528,
+      "total_tokens": 9369
+    }
+  ]
+}
+
+verify:  node tools/verify_run.mjs C:/Users/mitch/dual-agent-harness/examples/self r4-serv-swift-raw
+render:  node tools/render_run.mjs C:/Users/mitch/dual-agent-harness/examples/self r4-serv-swift-raw

@@ -1,0 +1,13 @@
+{
+  "leverId": "cut-adopt-intro-glue",
+  "status": "VALIDATED",
+  "metric": 1061,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Verified gate re-derivation: seed 7af2a5718783c5bee6e511caddc5bdaf408af90d0b591c050783addff82c3e58 confirmed via proposal_canon.json. Code gate: 95/95 census passed (all witnesses present, none missing). Hard constraint check: candidate retains the five commands in order with their outputs, the loop table, adoption steps, constitution, and box layout—no invented content, no pointer to external version. Metric 1061 words beats frontier best 1069. All gates passed; cliff-watch holds.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/clean-haiku-serv/clean-haiku-serv.1/p1-cut-adopt-intro-glue",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

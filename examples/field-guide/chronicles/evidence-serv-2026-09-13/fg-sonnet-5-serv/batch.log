@@ -1,0 +1,108 @@
+resolved seats: {"proposer":"claude-fable-5-1 (Claude Code subagents, one per lens)","prover":"serv:claude-sonnet-5"}
+  — Measure —
+  round fg-sonnet-5-serv.1 opens — measure syncs the frontier
+  — Propose —
+  propose:line-editor — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  propose:restructurer — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  2 proposal(s) on the table: line-edit-full-tighten, restructure-lists-collapse-preamble
+  assay closed: 2/2 — {"VALIDATED":0,"MIRAGE":0,"BLOCKED":2}
+  — Critic —
+  — Chronicle —
+  round fg-sonnet-5-serv.1 closes — 0 structural win(s), dry=1/2
+
+{
+  "name": "field-guide",
+  "runId": "fg-sonnet-5-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 0,
+    "BLOCKED": 2
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:claude-sonnet-5"
+  },
+  "phiInference": 1,
+  "measured": null,
+  "sourceHash": null,
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:fg-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7510,
+      "completion_tokens": 2863,
+      "total_tokens": 10373
+    },
+    {
+      "label": "gap:restructure-lists-collapse-preamble",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 11018,
+      "completion_tokens": 3430,
+      "total_tokens": 14448
+    },
+    {
+      "label": "gap:line-edit-full-tighten",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 11010,
+      "completion_tokens": 3569,
+      "total_tokens": 14579
+    },
+    {
+      "label": "assay:restructure-lists-collapse-preamble",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 11629,
+      "completion_tokens": 948,
+      "total_tokens": 12577
+    },
+    {
+      "label": "assay:line-edit-full-tighten",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 11888,
+      "completion_tokens": 1033,
+      "total_tokens": 12921
+    },
+    {
+      "label": "critic:fg-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9461,
+      "completion_tokens": 1023,
+      "total_tokens": 10484
+    },
+    {
+      "label": "chronicle:fg-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 10049,
+      "completion_tokens": 2973,
+      "total_tokens": 13022
+    }
+  ]
+}
+
+verify:  node tools/verify_run.mjs C:/Users/mitch/dual-agent-harness/examples/field-guide fg-sonnet-5-serv
+render:  node tools/render_run.mjs C:/Users/mitch/dual-agent-harness/examples/field-guide fg-sonnet-5-serv

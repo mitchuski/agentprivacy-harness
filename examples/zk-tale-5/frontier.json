@@ -1,0 +1,39 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-13",
+  "objective": {
+    "metric": "words of artifact/FORGE.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check_forge.mjs), N/N or MIRAGE",
+    "hardConstraint": "still teaches Tale 5: the story beats in order, the R1CS lesson (a × b = c, one multiplication per constraint, additions free), the two worked examples, witness vs instance, the constraint-count costs, the inscription, codes and proverb; nothing invented"
+  },
+  "gate": {
+    "N": 85,
+    "mode": "census",
+    "how": "node tools/check_forge.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 1056,
+    "date": "2026-09-13",
+    "how": "node tools/measure.mjs → metric (whitespace-split tokens of artifact/FORGE.md); census 85/85"
+  },
+  "best": {
+    "metric": 1056,
+    "leverIds": [],
+    "evidence": "baseline — Tale 5 as published in the Zero Knowledge Spellbook; census N=85 drawn from it; nothing has beaten it yet"
+  },
+  "history": [
+    {
+      "metric": 1056,
+      "date": "2026-09-13",
+      "lever": null,
+      "note": "baseline — artifact/FORGE.md = Zero Knowledge Spellbook Tale 5, The Constraint Forge; census N=85"
+    }
+  ],
+  "attempts": [],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "below 1056 words with all 85 witnesses and the hard constraint intact",
+    "status": "OPEN"
+  },
+  "closedTargets": []
+}

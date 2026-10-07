@@ -1,0 +1,13 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "VALIDATED",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Verified census result reported by tools/check_path.mjs (95/95, no missing witnesses) and confirmed candidate word count (1046) is below frontier best (1069). Read the candidate document end-to-end and confirmed it still opens with the five numbered commands each annotated with what it writes/does, the six-phase loop table plus keystone row, the six-step adoption path, the two-item constitution (TRUSTS.md/GROUND_RULES.md) with the AGENTS.md note folded in, and the full box layout listing engine/seats/drivers/tools/templates/examples/optional — nothing invented and the closing PATHWAYS.md reference is the pre-existing non-longer-version pointer already present in the prior VALIDATED 1069 fold, not a new pointer to a longer version.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r5-claude-sonnet-5-serv/r5-claude-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "leverId": "line-edit-full-tighten",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": "0/32",
+  "coverage": null,
+  "failingCheck": "Missing Gap witness source: original GUIDE.md numbered fact list (F1..F32) / gap.json expected-answers cannot be constructed from provided inputs, so census gate and seed re-derivation cannot be completed safely.",
+  "evidence": "BLOCKED per seat procedure: step 1 requires re-deriving Gap seed from Gap’s transcript; step 3 requires running FULL held-out gate on Gap’s Fiat–Shamir witnesses; but this run context does not include the original numbered fact list (F1..F32) or GUIDE.md text needed to build expected answers for the census questions. Hence gap.json/witness questions cannot be constructed, and the full gate cannot be evaluated. Also, executing sha256sum/printf is not permitted here, and no computed hashes are provided to confirm (a) proposal_canon.json digest equality and (b) seedHex re-derivation.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-nano-raw/fg-nano-raw.1/p1-line-edit-full-tighten/",
+  "leverIdMismatch": "p1-line-edit-full-tighten"
+}

@@ -1,0 +1,226 @@
+{
+  "claude-fable-5": {
+    "display": "Claude Fable 5",
+    "provider": "anthropic",
+    "inCentsPerM": 1300,
+    "outCentsPerM": 6500,
+    "reasoning": false
+  },
+  "claude-fable-5-1": {
+    "display": "Claude Fable 5.1",
+    "provider": "anthropic",
+    "inCentsPerM": 1200,
+    "outCentsPerM": 6000,
+    "reasoning": true
+  },
+  "claude-haiku-4.5": {
+    "display": "Claude Haiku 4.5",
+    "provider": "anthropic",
+    "inCentsPerM": 125,
+    "outCentsPerM": 650,
+    "reasoning": true
+  },
+  "claude-opus-4.6": {
+    "display": "Claude Opus 4.6",
+    "provider": "anthropic",
+    "inCentsPerM": 650,
+    "outCentsPerM": 3250,
+    "reasoning": true
+  },
+  "claude-opus-4.7": {
+    "display": "Claude Opus 4.7",
+    "provider": "anthropic",
+    "inCentsPerM": 650,
+    "outCentsPerM": 3250,
+    "reasoning": true
+  },
+  "claude-opus-4.8": {
+    "display": "Claude Opus 4.8",
+    "provider": "anthropic",
+    "inCentsPerM": 650,
+    "outCentsPerM": 3250,
+    "reasoning": true
+  },
+  "claude-opus-5": {
+    "display": "Claude Opus 5",
+    "provider": "anthropic",
+    "inCentsPerM": 600,
+    "outCentsPerM": 3000,
+    "reasoning": true
+  },
+  "claude-sonnet-4.6": {
+    "display": "Claude Sonnet 4.6",
+    "provider": "anthropic",
+    "inCentsPerM": 400,
+    "outCentsPerM": 2000,
+    "reasoning": true
+  },
+  "claude-sonnet-5": {
+    "display": "Claude Sonnet 5",
+    "provider": "anthropic",
+    "inCentsPerM": 260,
+    "outCentsPerM": 1300,
+    "reasoning": true
+  },
+  "gemini-2.5-flash": {
+    "display": "Gemini 2.5 Flash",
+    "provider": "google",
+    "inCentsPerM": 40,
+    "outCentsPerM": 350,
+    "reasoning": true
+  },
+  "gemini-3-flash-preview": {
+    "display": "Gemini 3 Flash Preview",
+    "provider": "google",
+    "inCentsPerM": 60,
+    "outCentsPerM": 400,
+    "reasoning": true
+  },
+  "gemini-3.1-flash-lite": {
+    "display": "Gemini 3.1 Flash Lite",
+    "provider": "google",
+    "inCentsPerM": 30,
+    "outCentsPerM": 180,
+    "reasoning": false
+  },
+  "gemini-3.1-pro-preview": {
+    "display": "Gemini 3.1 Pro Preview",
+    "provider": "google",
+    "inCentsPerM": 250,
+    "outCentsPerM": 1600,
+    "reasoning": true
+  },
+  "gemini-3.5-flash": {
+    "display": "Gemini 3.5 Flash",
+    "provider": "google",
+    "inCentsPerM": 195,
+    "outCentsPerM": 1200,
+    "reasoning": true
+  },
+  "gemini-3.5-flash-lite": {
+    "display": "Gemini 3.5 Flash Lite",
+    "provider": "google",
+    "inCentsPerM": 40,
+    "outCentsPerM": 300,
+    "reasoning": false
+  },
+  "gemini-3.6-flash": {
+    "display": "Gemini 3.6 Flash",
+    "provider": "google",
+    "inCentsPerM": 100,
+    "outCentsPerM": 450,
+    "reasoning": true
+  },
+  "gemini-3.7-flash": {
+    "display": "Gemini 3.7 Flash",
+    "provider": "google",
+    "inCentsPerM": 100,
+    "outCentsPerM": 450,
+    "reasoning": true
+  },
+  "gemini-3.8-flash": {
+    "display": "Gemini 3.8 Flash",
+    "provider": "google",
+    "inCentsPerM": 100,
+    "outCentsPerM": 450,
+    "reasoning": true
+  },
+  "gpt-6-astra": {
+    "display": "GPT 6 Astra",
+    "provider": "openai",
+    "inCentsPerM": 1200,
+    "outCentsPerM": 6000,
+    "reasoning": true
+  },
+  "gpt-5.4": {
+    "display": "GPT-5.4",
+    "provider": "openai",
+    "inCentsPerM": 325,
+    "outCentsPerM": 2000,
+    "reasoning": true
+  },
+  "gpt-5.4-mini": {
+    "display": "GPT-5.4 Mini",
+    "provider": "openai",
+    "inCentsPerM": 100,
+    "outCentsPerM": 600,
+    "reasoning": true
+  },
+  "gpt-5.4-nano": {
+    "display": "GPT-5.4 Nano",
+    "provider": "openai",
+    "inCentsPerM": 25,
+    "outCentsPerM": 160,
+    "reasoning": true
+  },
+  "gpt-5.5": {
+    "display": "GPT-5.5",
+    "provider": "openai",
+    "inCentsPerM": 650,
+    "outCentsPerM": 3900,
+    "reasoning": true
+  },
+  "gpt-5.6-luna": {
+    "display": "GPT-5.6 Luna",
+    "provider": "openai",
+    "inCentsPerM": 25,
+    "outCentsPerM": 150,
+    "reasoning": false
+  },
+  "gpt-5.6-sol": {
+    "display": "GPT-5.6 Sol",
+    "provider": "openai",
+    "inCentsPerM": 650,
+    "outCentsPerM": 4000,
+    "reasoning": false
+  },
+  "gpt-5.6-terra": {
+    "display": "GPT-5.6 Terra",
+    "provider": "openai",
+    "inCentsPerM": 250,
+    "outCentsPerM": 1500,
+    "reasoning": false
+  },
+  "serv-mini": {
+    "display": "serv-mini",
+    "provider": "serv",
+    "inCentsPerM": 100,
+    "outCentsPerM": 600,
+    "reasoning": true
+  },
+  "serv-nano": {
+    "display": "serv-nano",
+    "provider": "serv",
+    "inCentsPerM": 25,
+    "outCentsPerM": 175,
+    "reasoning": true
+  },
+  "serv-pro": {
+    "display": "serv-pro",
+    "provider": "serv",
+    "inCentsPerM": 450,
+    "outCentsPerM": 2500,
+    "reasoning": true
+  },
+  "serv-standard": {
+    "display": "serv-standard",
+    "provider": "serv",
+    "inCentsPerM": 375,
+    "outCentsPerM": 2000,
+    "reasoning": true
+  },
+  "serv-swift": {
+    "display": "serv-swift",
+    "provider": "serv",
+    "inCentsPerM": 125,
+    "outCentsPerM": 650,
+    "reasoning": true
+  },
+  "serv-ultra": {
+    "display": "serv-ultra",
+    "provider": "serv",
+    "inCentsPerM": 650,
+    "outCentsPerM": 3250,
+    "reasoning": true
+  }
+}

@@ -29,3 +29,14 @@ have to rediscover.
 | `universe/chronicles/2026-07-10_u1_incomplete.md` | an outage reported as an exhausted search |
 | `universe/chronicles/2026-07-10_u2_mis-gated.md` | a gate no candidate could pass, and a critic with no word for it |
 | `universe/chronicles/2026-07-10_u3_retirement.md` | the harness that should have been an auditor |
+
+## Reconstruction assay maintenance
+
+[The ratio names its denominator](2026-09-21_the-ratio-names-its-denominator.md) ·
+21 September 2026 · protocol and offline scorer; no attack result.
+
+## Arena-tier fold
+
+[The arena, folded](2026-10-07_maintenance_the-arena-folded.md) · 7 October 2026 ·
+seven leaderboard lanes surveyed, rules A1-A40, three seats, four templates, accessions #18-#20; the
+registry κ axis landed the same day ([maintenance](2026-10-07_maintenance_kappa-evidence-registry-axis.md)).

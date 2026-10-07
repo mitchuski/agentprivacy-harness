@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-narrative-prose",
+  "status": "MIRAGE",
+  "metric": 1132,
+  "gateResult": "56/57",
+  "failingCheck": "census: missing the Mage's tetrahedron",
+  "evidence": "The held-out census gate output on the candidate was 56/57, with the missing witness explicitly listed as “the Mage's tetrahedron”. Because the full held-out gate did not pass, the hard-constraint (teach The Eight-Pointed Star as defined in the lineage/hardConstraint) cannot be considered satisfied for this artifact.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-nano-raw/ms-nano-raw.1/p1-tighten-narrative-prose"
+}

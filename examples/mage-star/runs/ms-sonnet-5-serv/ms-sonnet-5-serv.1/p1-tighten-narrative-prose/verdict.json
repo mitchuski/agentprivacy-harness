@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-narrative-prose",
+  "status": "MIRAGE",
+  "metric": 1132,
+  "gateResult": "56/57",
+  "failingCheck": "census: missing the Mage's tetrahedron",
+  "evidence": "Reviewed the code-side gate output (tools/check_star.mjs) showing 56/57 witnesses present with 'the Mage's tetrahedron' missing; per GR-3/T5 a gate fail collapses the product regardless of metric or narrative fidelity, so the word-count improvement (1132 < 1205) is moot. Read through the candidate text and confirmed it describes the Mage's antipode/second tetrahedron only via paraphrase ('traced as a second tetrahedron... the Mage's is not two stars but one'), not as the exact witness phrase the census checks for, consistent with the reported miss.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-sonnet-5-serv/ms-sonnet-5-serv.1/p1-tighten-narrative-prose"
+}

@@ -1,0 +1,109 @@
+{
+  "name": "self",
+  "runId": "r4-gemini-3-5-flash-lite-raw",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 1,
+    "MIRAGE": 1,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "status": "VALIDATED",
+      "metric": 1046,
+      "gateResult": "95/95",
+      "failingCheck": null,
+      "evidence": "I verified that the candidate successfully passes the 95/95 witness census and maintains the hard constraint. All required elements—five commands in order with descriptions, the loop table, adoption steps, the constitution, and the box layout—are present without any invented additions or pointers to longer versions. Furthermore, the word count of 1046 improves upon the frontier best of 1069.",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-gemini-3-5-flash-lite-raw/r4-gemini-3-5-flash-lite-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gemini-3.5-flash-lite"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r4-gemini-3-5-flash-lite-raw.1",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5031,
+      "completion_tokens": 127,
+      "total_tokens": 5158
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5599,
+      "completion_tokens": 161,
+      "total_tokens": 5760
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5598,
+      "completion_tokens": 334,
+      "total_tokens": 5932
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7678,
+      "completion_tokens": 205,
+      "total_tokens": 7883
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7698,
+      "completion_tokens": 243,
+      "total_tokens": 7941
+    },
+    {
+      "label": "critic:r4-gemini-3-5-flash-lite-raw.1",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5873,
+      "completion_tokens": 305,
+      "total_tokens": 6178
+    },
+    {
+      "label": "chronicle:r4-gemini-3-5-flash-lite-raw.1",
+      "model": "gemini-3.5-flash-lite",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5802,
+      "completion_tokens": 723,
+      "total_tokens": 6525
+    }
+  ]
+}

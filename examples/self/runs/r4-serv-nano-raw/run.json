@@ -1,0 +1,99 @@
+{
+  "name": "self",
+  "runId": "r4-serv-nano-raw",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:serv-nano"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r4-serv-nano-raw.1",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 4722,
+      "completion_tokens": 133,
+      "total_tokens": 4855
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5170,
+      "completion_tokens": 230,
+      "total_tokens": 5400
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5174,
+      "completion_tokens": 257,
+      "total_tokens": 5431
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7170,
+      "completion_tokens": 150,
+      "total_tokens": 7320
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7184,
+      "completion_tokens": 235,
+      "total_tokens": 7419
+    },
+    {
+      "label": "critic:r4-serv-nano-raw.1",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5540,
+      "completion_tokens": 183,
+      "total_tokens": 5723
+    },
+    {
+      "label": "chronicle:r4-serv-nano-raw.1",
+      "model": "serv-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5373,
+      "completion_tokens": 637,
+      "total_tokens": 6010
+    }
+  ]
+}

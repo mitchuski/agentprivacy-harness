@@ -50,10 +50,12 @@ export function strictify(s) {
     const props = {}
     for (const [k, v] of Object.entries(out.properties)) {
       let q = strictify(v)
-      if (!req.has(k)) {
+      if (!req.has(k) && !q.enum) {
+        // make optional non-enum fields nullable so the model may omit them under strict mode;
+        // enum fields are left as plain required enums — Anthropic strict mode rejects a nullable enum
+        // ("enum value does not match declared type") while OpenAI accepts it.
         if (typeof q.type === 'string' && q.type !== 'null') q = { ...q, type: [q.type, 'null'] }
         else if (Array.isArray(q.type) && !q.type.includes('null')) q = { ...q, type: [...q.type, 'null'] }
-        if (Array.isArray(q.enum) && !q.enum.includes(null)) q = { ...q, enum: [...q.enum, null] }
       }
       props[k] = q
     }
@@ -66,7 +68,9 @@ export function strictify(s) {
   return out
 }
 
-export function makeServRt({ model, apiKey = process.env.SERV_API_KEY, baseUrl = process.env.SERV_BASE_URL || 'https://inference-api.openserv.ai', raw = false, shadow = null, systemPrompt = DEFAULT_SYSTEM, maxTokens = 16000, temperature = 0.2, concurrency = 2, timeoutMs = 600000, log = (m) => console.log('  ' + m) } = {}) {
+// temperature is omitted unless the caller sets one: some reasoning models
+// (e.g. claude-sonnet-5) reject it with 400 "deprecated for this model".
+export function makeServRt({ model, apiKey = process.env.SERV_API_KEY, baseUrl = process.env.SERV_BASE_URL || 'https://inference-api.openserv.ai', raw = false, shadow = null, guard = false, systemPrompt = DEFAULT_SYSTEM, maxTokens = 16000, temperature = null, concurrency = 2, timeoutMs = 600000, log = (m) => console.log('  ' + m) } = {}) {
   if (!model) throw new Error('serv driver: a model is required (a SERV catalogue id, e.g. gpt-5.4-nano or claude-haiku-4.5)')
   if (!apiKey) throw new Error('serv driver: SERV_API_KEY is not set (console.openserv.ai issues one; the live call is the key holder\'s)')
   if (shadow && (typeof shadow !== 'object' || typeof shadow.hint !== 'string')) throw new Error('serv driver: shadow must be { hint, max_iterations }')
@@ -85,14 +89,15 @@ export function makeServRt({ model, apiKey = process.env.SERV_API_KEY, baseUrl =
         messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }],
       }
       if (schema) body.response_format = { type: 'json_schema', json_schema: { name: 'seat', strict: true, schema: strictify(schema) } }
-      if (shadow) body.tools = [{ type: 'function', function: { name: 'serv_shadow_agent', parameters: { type: 'object', properties: { hint: { type: 'string', default: shadow.hint }, max_iterations: { type: 'integer', default: shadowIters } } } } }]
+      if (guard) body.tools = [{ type: 'function', function: { name: 'serv_prompt_guard', parameters: { type: 'object', properties: {} } } }]
+      if (shadow) body.tools = [...(body.tools || []), { type: 'function', function: { name: 'serv_shadow_agent', parameters: { type: 'object', properties: { hint: { type: 'string', default: shadow.hint }, max_iterations: { type: 'integer', default: shadowIters } } } } }]
       const headers = { 'content-type': 'application/json', authorization: 'Bearer ' + apiKey }
       if (raw) headers['x-openserv-disable-braid'] = 'true'
       const res = await fetch(endpoint, { method: 'POST', headers, body: JSON.stringify(body), signal: controller.signal })
       if (!res.ok) { const e = new Error(`serv ${res.status}: ${(await res.text()).slice(0, 300)}`); e.status = res.status; throw e }
       const data = await res.json()
       const u = data.usage || {}
-      usage.push({ label, model: seatModel, raw: !!raw, shadow: !!shadow, prompt_tokens: u.prompt_tokens ?? null, completion_tokens: u.completion_tokens ?? null, total_tokens: u.total_tokens ?? null })
+      usage.push({ label, model: seatModel, raw: !!raw, shadow: !!shadow, guard: !!guard, prompt_tokens: u.prompt_tokens ?? null, completion_tokens: u.completion_tokens ?? null, total_tokens: u.total_tokens ?? null })
       const msg = data.choices?.[0]?.message || {}
       if (msg.refusal) throw new Error('refusal: ' + String(msg.refusal).slice(0, 200))
       return typeof msg.content === 'string' ? msg.content : (Array.isArray(msg.content) ? msg.content.filter(b => b.type === 'text').map(b => b.text).join('') : '')

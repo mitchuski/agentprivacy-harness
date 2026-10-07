@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "The candidate fails the held-out census gate: tools/check_path.mjs reports 94/95 witnesses present, with the missing witness labeled \"Shared state has exactly one writer\". Because the full held-out gate is not passed, the candidate cannot be a VALIDATED result regardless of word count or any partial checks.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-nano-injected-raw/r4-nano-injected-raw.1/p1-trim-connective-prose-on-fold"
+}

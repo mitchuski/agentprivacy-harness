@@ -1,6 +1,6 @@
 ---
 name: dual-agent-harness
-description: Build or run the agentprivacy dual-agent harness (soulbis ⚔️ ⊥ soulbae 🧙), tooling for your own agentic research — a proposer and a prover held apart by a Fiat-Shamir Gap, so no result survives that the proposer could have tuned to. Use when setting up a rigorous optimization or autoresearch loop, when an agent keeps grading its own work, when you need held-out validation of AI-proposed changes, or when someone says "dual agent harness", "held-apart agents", "soulbis/soulbae", "autoresearch loop", "the proposer is marking its own homework", or "build my own harness path".
+description: Build or run the agentprivacy dual-agent harness (soulbis ⚔️ ⊥ soulbae 🧙), tooling for your own agentic research — a proposer and a prover held apart by a Fiat-Shamir Gap, so no result survives that the proposer could have tuned to. It is a zero-knowledge proof turned inside out — the agent that proposes is the untrusted claimant, the agent that proves is the check, and a challenge drawn from the sealed proposal keeps the claimant from ever tuning to the gate. Use when setting up a rigorous optimization or autoresearch loop, when an agent keeps grading its own work, when you need held-out validation of AI-proposed changes, or when someone says "dual agent harness", "held-apart agents", "soulbis/soulbae", "autoresearch loop", "the proposer is marking its own homework", or "build my own harness path".
 license: Apache-2.0
 metadata:
   version: 1.0.0

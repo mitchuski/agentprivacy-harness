@@ -1,0 +1,10 @@
+{
+  "leverId": "line-edit-full-tighten",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": "0/0",
+  "coverage": null,
+  "failingCheck": "Cannot re-derive Gap seed or run gate: no filesystem or shell tool available in this runtime to (1) read artifact/GUIDE.md, (2) serialize/persist proposal_canon.json and mechanically sha256sum it against hProposal, (3) recompute seedHex from hProposal+salt, (4) write candidate.md/gap.json/verdict.json to disk, or (5) run tr/grep for a mechanical word count. The upstream transcript for this round also reports BLOCKED for identical reasons, and no comprehension questions were produced (0 facts probed).",
+  "evidence": "No commands were or could be executed. GR-4/GR-10 require deriving witnesses and running the gate in a scratch copy via actual tool access; none exists in this text/JSON-only runtime. Supplied literals (seedHex=17a5cbb31ae52a640a41a64d82bcc12303bd836f1c0999a5ec1c673fd310cf22, hProposal=31c61d39e4487d2c2f3518cd18035cb8167a8acf97ba3da5476e01922e489fef, salt=306c7f4d00b8ac89d2e8bfd3a74288d02f4ae1ab0acab249400579b805736bf5) are echoed only, not verified, because sha256sum could not be run. No candidate.md was written, no questions were answered, no word count was taken, and no hard-constraint check was performed. This verdict is BLOCKED, not MIRAGE, because the failure is missing executable capability, not a failed gate.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-sonnet-5-serv/fg-sonnet-5-serv.1/p1-line-edit-full-tighten/"
+}

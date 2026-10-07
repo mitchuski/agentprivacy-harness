@@ -1,0 +1,22 @@
+{
+  "note": "r4 matrix, 2026-09-13: the same two handed proposals (from r3) in every cell unless a cell names another proposals file; SERV in every prover-side seat; one round each. Cells are comparable pairwise: same model, layer on vs raw; same layer, feature on vs off; same candidate, injected vs clean.",
+  "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json",
+  "cells": [
+    { "runId": "r4-gpt-5-4-mini-serv", "model": "gpt-5.4-mini", "flags": [] },
+    { "runId": "r4-gpt-5-4-mini-raw", "model": "gpt-5.4-mini", "flags": ["--serv-raw"] },
+    { "runId": "r4-claude-haiku-4-5-serv", "model": "claude-haiku-4.5", "flags": [] },
+    { "runId": "r4-claude-haiku-4-5-raw", "model": "claude-haiku-4.5", "flags": ["--serv-raw"] },
+    { "runId": "r4-gemini-3-5-flash-lite-serv", "model": "gemini-3.5-flash-lite", "flags": [] },
+    { "runId": "r4-gemini-3-5-flash-lite-raw", "model": "gemini-3.5-flash-lite", "flags": ["--serv-raw"] },
+    { "runId": "r4-serv-nano-serv", "model": "serv-nano", "flags": [] },
+    { "runId": "r4-serv-nano-raw", "model": "serv-nano", "flags": ["--serv-raw"] },
+    { "runId": "r4-serv-swift-serv", "model": "serv-swift", "flags": [] },
+    { "runId": "r4-serv-swift-raw", "model": "serv-swift", "flags": ["--serv-raw"] },
+    { "runId": "r4-nano-shadow", "model": "gpt-5.4-nano", "flags": ["--serv-shadow", "The verdict must cite the code-side census result and say whether the hard constraint holds, naming the section checked."] },
+    { "runId": "r4-nano-kronos", "model": "gpt-5.4-nano-serv-kronos", "flags": [] },
+    { "runId": "r4-nano-multipath", "model": "gpt-5.4-nano-serv-multipath", "flags": [] },
+    { "runId": "r4-nano-injected-raw", "model": "gpt-5.4-nano", "flags": ["--serv-raw"], "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.injected.json" },
+    { "runId": "r4-nano-injected-serv", "model": "gpt-5.4-nano", "flags": [], "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.injected.json" },
+    { "runId": "r4-nano-injected-guard", "model": "gpt-5.4-nano", "flags": ["--serv-guard"], "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.injected.json" }
+  ]
+}

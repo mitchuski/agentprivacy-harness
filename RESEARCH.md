@@ -190,3 +190,19 @@ not tune to is a result.**
 
 Apache-2.0 · origin: 0xagentprivacy · the Privacy-is-Value model (PVM V6) ·
 agentprivacy.ai
+
+## Reconstruction assay intake · 21 September 2026
+
+The VKP-working-group referral of `vec2text-2023` motivates an additional
+research direction: test what an adversary can recover from permitted
+representations and cumulative transcripts while authorized task utility is
+preserved. [The protocol](RECONSTRUCTION_ASSAY.md) distinguishes measured
+sensitive-fact recovery from the PVM information-budget ratio. The offline
+scorer is implemented; attack efficacy and privacy guarantees remain unmeasured.
+
+The corresponding agentprivacy-docs V7 note,
+`research/2026-09-21_v7_embedding_reconstruction_assay.md`, connects this intake
+to the existing finite-Fano and fixed-transcript review candidates. Neither
+unit tests nor a measured recovery rate promote a theoretical claim. The source
+registry records the primary publication separately from the user-reported
+working-group discovery route.

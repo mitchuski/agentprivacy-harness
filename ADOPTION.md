@@ -113,6 +113,39 @@ the claim space is too large to check.** A harness is for adversaries; an
 auditor is for facts. Deciding which you have is the first design decision
 (Part II, step 0).
 
+### 8. The word on the other seat — a proof turned inside out
+
+It is a zero-knowledge proof turned inside out: the agent that proposes is the
+untrusted claimant, the agent that proves is the check, and a Fiat-Shamir
+challenge drawn from the sealed proposal keeps the claimant from ever tuning
+to the gate. The names are the world's, mirrored. Cryptography calls the party
+that submits a claim the *prover* and the party that checks it the *verifier*;
+this harness names the seat for what it does in the rite, so soulbis, who
+proves the boundary holds, is called the prover, and soulbae, who submits the
+lever, is the claimant. Even the word *witness* changes sides: in zero
+knowledge it is the prover's secret hidden from the verifier; here it is the
+check hidden from the claimant. Opposite directions, one law — the one who
+would convince may not steer the check. The analogy is tight where the gate is
+code (a census either passes or it does not) and loose where the gate is
+judgment (a model's soundness is not a bound; §III of the lending below).
+
+Lending the prover's seat to borrowed models, one round each, taught four
+things this document now carries:
+
+- **The code cuts the same in any hand.** Every borrowed prover reported the
+  census — the part of the gate that is code — to the same count. Put as much
+  of the gate into code as it will bear (Step 2: `gate: { mode: 'census' }`).
+- **The judgment seat inherits the judge.** On the same candidate, capable
+  models validated a true fold and the strictest small one refused it. Reserve
+  the model for what only judgment can settle, and seat a mind equal to it.
+- **A borrowed prover is only as honest as it is able.** Asked to re-derive a
+  seal it had no hands to compute, the honest model refused and the confident
+  one echoed the number it was shown. Trust the rite that re-derives the seal
+  (`tools/verify_run.mjs`, `tools/mint_artefact.mjs`), never the voice that
+  claims it.
+- **Nothing was folded.** The frontier stood where it stood; the fold is the
+  keystone's alone (T6).
+
 ### The seventh capital, and other outcomes
 
 In the origin fight, the artifact is your behavioural residue, the metric is

@@ -1,0 +1,29 @@
+# harness/primer/r1 evidence graph - minted 2026-10-07 - status: kappa-compatible (unverified)
+
+Evidence root: sha256:ab443cb712ac74c7fd470845aa42439f919328cb9e7ded1bbb70ab8cfecfe65a
+
+Merkle root (provisional, SHA-256, 32 leaves): `44fd3c51fc73c4879423fb26e6c2a9df0aaa7ca137f0e9472f3eecabef1f3dd3`
+
+| object | kappa |
+|---|---|
+| candidate:r1.1/p1-line-edit-body-prose | `sha256:8cc610f1767bf14fd7157e2ebc7a48bf30a762721e5fb3d6cba064b083a50a36` |
+| candidate:r1.1/p2-restructure-lists-tables-merge | `sha256:552207237e55664db9f0f6c1b04501694ebf36742a019623fa0881ac8300be33` |
+| canon:r1.1/p1-line-edit-body-prose | `sha256:f29f2c771619ce1fe0e0d5ae599df6dc5788b034bcc1343ff41a5952899d7bc6` |
+| canon:r1.1/p2-restructure-lists-tables-merge | `sha256:e9d42c39850055da1f48f7cf5b1227e88a6e6e0469ba12d52d08e2e7168dfeb1` |
+| gap:r1.1/p1-line-edit-body-prose | `sha256:20076b3327b352a921db8f30ad9a73fb8fdae2e952ff8d6307440278a8cfe805` |
+| gap:r1.1/p2-restructure-lists-tables-merge | `sha256:5e543f6d644c55bc9bed6ff3d3d113446a45b80934261fbda7a0a3cf8fb35295` |
+| gapjson:r1.1/p1-line-edit-body-prose | `sha256:5822be6d81bfbd34a5305c59210615183e046161339b3657c6ac0891a061123f` |
+| gapjson:r1.1/p2-restructure-lists-tables-merge | `sha256:646bfa04cf34b91bdb97b13410408a80d06dba74da927d05a5a5d703fe67fdcf` |
+| proposal:r1.1/p1-line-edit-body-prose | `sha256:ace3859c33966613f87b6b233f8713b600184460f77e113cacd877200309b3d6` |
+| proposal:r1.1/p2-restructure-lists-tables-merge | `sha256:a88764c3964cb97e4b304298759a32574329647b5ecd532eb93716f148918255` |
+| source:run.json | `sha256:430c8942f6e666bbfe66328a042f510444f8663e1ad7ec7ad203c43da410bd2f` |
+| tally:r1.1 | `sha256:94b5813eef9b60e63222b40bdbd1fc64eff83f247b48960e969da4eb7dd35eb3` |
+| verdict:r1.1/p1-line-edit-body-prose | `sha256:3a4b190f27375b81c7f3b977e33b6cd7eb7a49d0ae274a7970b2ab117cb61101` |
+| verdict:r1.1/p2-restructure-lists-tables-merge | `sha256:7d83d089108c17e6c5a7cdc1a1cb848b3d6b4dca61debe1e35f2a841b91cf11c` |
+| verdictjson:r1.1/p1-line-edit-body-prose | `sha256:3b1d591d2d8321162366486ad93f20c65df82ba3d3f5dadc941a95a01b436c9e` |
+| verdictjson:r1.1/p2-restructure-lists-tables-merge | `sha256:7afb2ff190c3c3eedf37d0a66873b24a5b0d76d1494e19000775685aa07ddc2d` |
+| verdicts:r1.1 | `sha256:a59cbd4cfac7d90e0feb8d0cc84ff5512647aed9c6b9e99697cef942218b382e` |
+
+Objects 9, blobs 9, edges 17. Asserter `unsigned:harness` (placeholder, no key).
+
+Verify from the bundle alone: `node tools/kappa_evidence.mjs verify evocations/primer/runs/r1/evidence`.

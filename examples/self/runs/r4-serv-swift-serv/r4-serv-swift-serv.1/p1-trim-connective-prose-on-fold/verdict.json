@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing [\"Shared state has exactly one writer\"]",
+  "evidence": "Code-side gate (tools/check_path.mjs) reports 94/95 passed; witness \"Shared state has exactly one writer\" is missing from the candidate. The hard constraint requires all 95 witnesses present. Candidate word count 1038 beats frontier best 1069, but the gate failure is a zero that collapses the product (T5). The document still reads as the newcomer path (five commands, loop table, adoption steps, constitution, box layout), but the missing witness means the gate does not fully pass.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-serv-swift-serv/r4-serv-swift-serv.1/p1-trim-connective-prose-on-fold"
+}

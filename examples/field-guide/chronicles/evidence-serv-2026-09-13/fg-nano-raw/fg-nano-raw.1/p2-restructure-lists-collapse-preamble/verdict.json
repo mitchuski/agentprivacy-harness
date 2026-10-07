@@ -1,0 +1,11 @@
+{
+  "leverId": "restructure-lists-collapse-preamble",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": "0/0",
+  "coverage": null,
+  "failingCheck": "Missing required GUIDE.md at C:/Users/mitch/dual-agent-harness/examples/field-guide/artifact/GUIDE.md (cannot enumerate/comprehend-probe the exact 32 declarative facts; transcript indicates per-fact gate questions cannot be constructed or graded).",
+  "evidence": "Transcript BLOCKED: cannot number exactly 32 declarative facts or print original sentence list without GUIDE.md from required path. Therefore cannot construct deterministic comprehension-question draw tied to the original facts, nor re-derive/verify gap.json contents. Additionally, the required seed re-derivation procedure references proposal_canon.json whose presence and digest are not available here, so full held-out gate cannot be executed.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-nano-raw/fg-nano-raw.1/p2-restructure-lists-collapse-preamble/",
+  "leverIdMismatch": "p2-restructure-lists-collapse-preamble"
+}

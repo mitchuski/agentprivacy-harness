@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-story-prose",
+  "status": "MIRAGE",
+  "metric": 1035,
+  "gateResult": "84/85",
+  "failingCheck": "census: missing [\"additions are easy\"]",
+  "evidence": "Code gate (tools/check_forge.mjs) reports 84/85 witnesses present; the phrase \"additions are easy\" does not appear in the candidate. This is a core teaching point — Ironbound's explanation that \"Additions are easy—they're just wiring\" appears in the narrative but the exact witness phrase is absent. Hard constraint requires all 85 witnesses intact. Metric 1035 < frontier 1056, but gate failure collapses the product (T5).",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-haiku-serv/zk-haiku-serv.1/p1-tighten-story-prose"
+}

@@ -1,0 +1,39 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-13",
+  "objective": {
+    "metric": "words of artifact/STAR.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check_star.mjs), N/N or MIRAGE",
+    "hardConstraint": "still teaches The Eight-Pointed Star: Luca and the lineage, the stella octangula as two crossing tetrahedra, neg (64 − v) and bnot (63 − v) meeting at the gap, the City Key as a reading not an authority, the lattice codes, the V6 erratum; nothing invented"
+  },
+  "gate": {
+    "N": 57,
+    "mode": "census",
+    "how": "node tools/check_star.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 1205,
+    "date": "2026-09-13",
+    "how": "node tools/measure.mjs → metric (whitespace-split tokens of artifact/STAR.md); census 57/57"
+  },
+  "best": {
+    "metric": 1205,
+    "leverIds": [],
+    "evidence": "baseline — Tome VIII Act 3 as published in the City of Mages tomes; census N=57 drawn from it; nothing has beaten it yet"
+  },
+  "history": [
+    {
+      "metric": 1205,
+      "date": "2026-09-13",
+      "lever": null,
+      "note": "baseline — artifact/STAR.md = City of Mages Tome VIII Act 3, The Eight-Pointed Star; census N=57"
+    }
+  ],
+  "attempts": [],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "below 1205 words with all 57 witnesses and the hard constraint intact",
+    "status": "OPEN"
+  },
+  "closedTargets": []
+}

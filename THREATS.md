@@ -54,3 +54,15 @@ It is tiered OPEN in `claims_register.md` until process mounts (C6) close it.
   mount; the proposer's mount excludes `witnesses/`, `gap/`, and the salt;
   `verify_run` fails closed on a read-log touching a path outside the mount.
 - **malicious referee** → the duel tier's two-party commit-reveal seed.
+
+## Representation and transcript disclosure
+
+Embedding inversion is an additional disclosure threat, not closed by the
+existing proposal-verification gates. Any exposed vectors, permitted summaries,
+metadata, retries and accumulated review feedback belong to the attacker view.
+A digest authenticates bytes; it does not make their contents private.
+
+[RECONSTRUCTION_ASSAY.md](RECONSTRUCTION_ASSAY.md) supplies an experiment
+protocol and offline scorer. No inversion resistance, process isolation or
+information-capacity bound has been measured by adding this tool. Source:
+`vec2text-2023` in SOURCES.md; research effectiveness remains OPEN.

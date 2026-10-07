@@ -47,9 +47,11 @@ run('the axioms', ['engine/conform.mjs'])
 // ---- 2. the engine's own tests -------------------------------------------
 run('engine tests', ['engine/loop.test.mjs'])
 run('gap tool tests', ['engine/gap.test.mjs'])
+run('reconstruction scorer', ['--test', 'tools/reconstruction_score.test.mjs'])
 run('salt-mode tests', ['engine/loop.salt.test.mjs'])
 run('console + mint tests', ['tools/console.test.mjs'])
 run('entry regressions', ['tools/entry.test.mjs'])
+run('kappa evidence (registry axis)', ['tools/kappa_evidence.test.mjs'])
 run('claims register (enforced-by gate)', ['tools/check_claims.mjs'])
 
 // ---- 3. every instance ---------------------------------------------------
@@ -111,6 +113,8 @@ for (const c of candidates) run(`instance: ${relative(root, c).replace(/\\/g, '/
 for (const c of candidates) {
   const rel = relative(root, c).replace(/\\/g, '/')
   if (existsSync(join(c, 'runs'))) run(`verify runs: ${rel}`, ['tools/verify_run.mjs', rel, '--all'])
+  if (existsSync(join(c, 'runs'))) for (const id of readdirSync(join(c, 'runs'), { withFileTypes: true }).filter(e => e.isDirectory()).map(e => e.name))
+    if (existsSync(join(c, 'runs', id, 'evidence', 'root.json'))) run(`verify evidence: ${rel}/${id}`, ['tools/kappa_evidence.mjs', 'verify', join(rel, 'runs', id, 'evidence')])
 }
 
 // ---- 3b. the holon mesh — κ re-derivation over minted artefacts -----------

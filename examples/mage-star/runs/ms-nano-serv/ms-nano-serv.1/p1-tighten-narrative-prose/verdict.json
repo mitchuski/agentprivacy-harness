@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-narrative-prose",
+  "status": "MIRAGE",
+  "metric": 1132,
+  "gateResult": "56/57",
+  "failingCheck": "census: missing the Mage's tetrahedron",
+  "evidence": "The held-out gate census result on the candidate was 56/57, with the missing witness explicitly listed as “the Mage's tetrahedron”. Since the verdict requires a full held-out gate pass (passed == N == 57) and a hard-constraint teach-through, this candidate cannot be VALIDATED regardless of the 1132 token count or the prose narrative framing.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-nano-serv/ms-nano-serv.1/p1-tighten-narrative-prose"
+}

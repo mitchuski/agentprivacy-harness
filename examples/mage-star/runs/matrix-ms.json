@@ -1,0 +1,11 @@
+{
+  "note": "mage-star, 2026-09-13: a fourth source — Tome VIII Act 3, The Eight-Pointed Star, from the City of Mages tomes (the stella octangula: neg ⊥ bnot at the gap; the City Key). Self-style mechanism, SERV holds every prover-side seat. nano on/off + haiku + sonnet-5.",
+  "instance": "examples/mage-star",
+  "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/proposals.ms.json",
+  "cells": [
+    { "runId": "ms-nano-serv", "model": "gpt-5.4-nano", "flags": [] },
+    { "runId": "ms-nano-raw", "model": "gpt-5.4-nano", "flags": ["--serv-raw"] },
+    { "runId": "ms-haiku-serv", "model": "claude-haiku-4.5", "flags": [] },
+    { "runId": "ms-sonnet-5-serv", "model": "claude-sonnet-5", "flags": [] }
+  ]
+}

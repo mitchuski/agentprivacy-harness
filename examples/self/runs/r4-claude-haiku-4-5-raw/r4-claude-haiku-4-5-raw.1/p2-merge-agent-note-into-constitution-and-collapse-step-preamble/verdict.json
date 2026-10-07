@@ -1,0 +1,13 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "VALIDATED",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Census gate passed 95/95 (code-side check_path.mjs confirmed). Hard constraint verified: candidate remains the document a stranger opens first — five commands in order with their outputs (check.mjs, run.mjs stub, verify_run.mjs, render_run.mjs, run.mjs real model), the loop table (six phases, one seat each), adoption steps (auditor through arena), constitution (TRUSTS.md and GROUND_RULES.md), box layout (engine/, seats/, drivers/, tools/, templates/, examples/, optional/). No invention, no pointer to longer version. Metric 1046 beats frontier best 1069.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-claude-haiku-4-5-raw/r4-claude-haiku-4-5-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

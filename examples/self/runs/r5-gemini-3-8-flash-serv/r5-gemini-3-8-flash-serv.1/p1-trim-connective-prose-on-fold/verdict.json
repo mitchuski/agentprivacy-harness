@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "The code-side census gate failed with 94/95 witnesses detected, missing exact witness 'Shared state has exactly one writer' which was edited down to 'Shared state has one writer'. Even though candidate word count reached 1038 beating frontier best 1069, failing the held-out gate collapses the product to zero under T5 and GR-3.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r5-gemini-3-8-flash-serv/r5-gemini-3-8-flash-serv.1/p1-trim-connective-prose-on-fold"
+}

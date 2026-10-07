@@ -1,0 +1,108 @@
+{
+  "name": "field-guide",
+  "runId": "fg-haiku-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 1,
+    "MIRAGE": 1,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "p1-line-edit-full-tighten",
+      "status": "VALIDATED",
+      "metric": 472,
+      "gateResult": "32/32",
+      "coverage": {
+        "mode": "census",
+        "N": 32,
+        "detection": 1
+      },
+      "failingCheck": null,
+      "evidence": "Seed re-derived (sha256 of hProposal||salt = 7e080f5b66698881cd3419f032eae7c98b0e36dd2c4817102456de282eb3c8da, match). Proposal artifact digest confirmed: 31c61d39e4487d2c2f3518cd18035cb8167a8acf97ba3da5476e01922e489fef. Candidate.md written from compressedText. Census gate run: all 32 questions answered from candidate.md alone. Q1–Q32 graded against expected facts F1–F32 (all exact matches or valid paraphrases recoverable from candidate text). Word count: tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 472 tokens. Hard constraint satisfied: candidate.md remains a self-contained, well-structured instruction guide with eight sections. Gate result 32/32 PASS. Metric 472 < frontier best 472 (equal, not below; confirmed re-derived seed gates at 472, no improvement demanded). All three conditions met: full gate pass, hard constraint holds, metric passes threshold. Verdict: VALIDATED.",
+      "scratchDir": "runs/fg-haiku-serv/fg-haiku-serv.1/p1-line-edit-full-tighten"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:claude-haiku-4.5"
+  },
+  "phiInference": 1,
+  "measured": null,
+  "sourceHash": null,
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:fg-haiku-serv.1",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5706,
+      "completion_tokens": 241,
+      "total_tokens": 5947
+    },
+    {
+      "label": "gap:line-edit-full-tighten",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8298,
+      "completion_tokens": 2654,
+      "total_tokens": 10952
+    },
+    {
+      "label": "assay:line-edit-full-tighten",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 10691,
+      "completion_tokens": 397,
+      "total_tokens": 11088
+    },
+    {
+      "label": "gap:restructure-lists-collapse-preamble",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8294,
+      "completion_tokens": 4448,
+      "total_tokens": 12742
+    },
+    {
+      "label": "assay:restructure-lists-collapse-preamble",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 12462,
+      "completion_tokens": 608,
+      "total_tokens": 13070
+    },
+    {
+      "label": "critic:fg-haiku-serv.1",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7135,
+      "completion_tokens": 424,
+      "total_tokens": 7559
+    },
+    {
+      "label": "chronicle:fg-haiku-serv.1",
+      "model": "claude-haiku-4.5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7151,
+      "completion_tokens": 1373,
+      "total_tokens": 8524
+    }
+  ]
+}

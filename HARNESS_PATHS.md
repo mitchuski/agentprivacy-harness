@@ -23,7 +23,7 @@ invitation — was signed on 2026-07-14; a twelfth carries the skeleton whole
 as a standalone sibling; two later runtimes carried the hold-apart into an
 agent-operated acceptance flow and into literature review, and the sixteenth
 accession is the first **descendant lane** — no loop at all, but the
-constitution inherited whole. **Fifteen entries stand**; numbering is by
+constitution inherited whole. **Nineteen entries stand** (three arena lanes and a second descendant joined on 2026-10-07; see `CHALLENGE_LANES.md`); numbering is by
 accession and never reused, so one number sits empty (withdrawn before its
 counterpart work published — the door decides what is named here, and when).
 Grouping is by weight.
@@ -53,6 +53,10 @@ reading a complete one.
 | the DTG verification registry | ZK ceremony suite acceptance | registry rows, honestly accepted | digest-manifest byte-match; the decision consumes only `pinned` | acceptance flow, **human-gated** — first external run accepted |
 | the litreview runtime | prior-art novelty (Programme WP-14) | residues surviving refutation | context isolation: refuters never see the prover's argument (D3) | full, non-numeric — sweep ⊥ refute ⊥ judge |
 | uor_kappa_mage | upstream substrate convergence (kappa-registry) | *(no metric)* — a P-gated research lane | *(inherited, not drawn)* — TRUSTS + GROUND_RULES govern every session | **descendant lane** — the constitution inherited whole |
+| star-hold (+ harness-disclosure) | claims register over a ZK runtime | unbacked claims, ↓ (baseline 4/19); disclosure-debt beside it | census over every row; a falsification is a WIN filed as a K-id | coherence instance, **unrun** (added 2026-09-11) |
+| hashsmash_mage | reduced-round hash collision claims (Yukon hashsmash, AI-judged) | the judge's score, ↓ (crown 47.6 at sha256-r32) | the organiser's own replay + a split assay (A re-derives, B rehearses the judge) | **arena** — the fully measured route search, 59 calls charged |
+| sig_mage | signature golf (Yukon sig.golf, Lean-certified) | S + charged C, ↓ | the differential emulator gate (honest / exhaust / tamper / cross), then Lean | **arena** — promoted entries, the witness trim in the record with credit |
+| kappa_evidence_mage | κ-addressed evidence ledgers for the fleet | *(no metric)* — bundles that re-derive from a root | the verifier that sees only the bundle | **descendant lane** — tooling folded into `tools/kappa_evidence.mjs` |
 
 ---
 
@@ -692,9 +696,64 @@ says so.
 
 ---
 
+
+### 18 · hashsmash_mage — the arena, with an AI judge (added 2026-10-07)
+
+*(instance at `~/hashsmash_mage/`; Yukon hashsmash, reduced-round collision
+claims judged by an AI reviewer the organiser runs)*
+
+The first lane where the judge is itself a model, so the prover seat was
+split: assay A re-derives every number from per-call CPU ledgers in which
+everything is charged (abandoned calls, stopped calls, the watcher's kills);
+assay B rehearses the judge from its own archived dossiers and its
+aggregation rule (one `unsupported` anywhere sinks a package). Three packages
+passed: 1ded36a8 at 52.1 first try, then 8bad82c1 at 47.6, the only entry on
+the board whose route search is fully measured (59 solver calls, 593,858.32
+CPU-s, callgrind-calibrated unit, itemised margin); sha3-r6 02d6a703 at
+125.58. One package failed on "participant-reported only" and was repaired by
+shipping an organiser-executed replay and a credited certificate. The
+measurement was then copied verbatim by others, which is where the κ evidence
+ledger (#20) was born. Rules A9-A12, A17, A19, A27-A34 of `CHALLENGE_LANES.md`
+come from here. On HOLD awaiting owner review.
+
+### 19 · sig_mage — the arena, Lean-certified (added 2026-10-07)
+
+*(instance at `~/sig_mage/sigmage/`; Yukon sig.golf, signature size plus
+charged verification cycles under a Lean kernel)*
+
+When the prover is a kernel, drawing witnesses against it is theatre; the Gap
+moved forward into a differential emulator gate run before any Lean: base and
+new images on the same key and message, honest runs byte-identical in witness
+and zero in verify delta, exhaustion rejecting, random flips matching base,
+each side's signature rejected by the other's expander, JSON out, a NO-GO
+halting everything. The Mage proposes and prices; the Swordsman attacks and
+alone holds the sign-off. Two entries promoted (62479bf4, c49fc5a6), the
+witness trim in the record since #574 with coauthor credit, the credit filter
+adopted field-wide; a re-apply kit (snapshot / apply / relocate) after a stale
+base cost 35+ cycles; a handoff discipline of stacked dated blocks and a
+research ledger with a verdict and a reopen condition per pathway; two
+stale-constant misses that became the constants-refuter seat. Rules A2, A4,
+A5, A21-A22, A25-A26, A36-A38, A40 come from here. PAUSED on a win-condition check.
+
+### 20 · kappa_evidence_mage — the second descendant (added 2026-10-07)
+
+*(instance at `~/kappa_evidence_mage/`; lineage #16, the kappa-registry
+survey, applied to the fleet's own evidence)*
+
+Every number a lane reports becomes an object with a κ on the registry's own
+axis (sha256 over canonical dCBOR), linked by typed edges under one run root,
+so a reader holding only the bundle recomputes the totals and never trusts the
+lane. Minted the hashsmash r32 ledger and the sig_mage H2 gate the day it was
+built; its verifier's first act on the second lane was to refuse a stale
+layout file. The tooling folded into this repo the same day
+(`tools/dcbor.mjs`, `tools/kappa_evidence.mjs`, the `Evidence root:` line in
+the chronicle template, `HOLONS.md`'s second axis). Every κ is labelled
+"kappa-compatible (unverified)" until the cross-implementation check against
+the compiled registry crate passes; no public note quotes a root before then.
+Proverb minted under: *the decimal travels; the root stays.*
 ## What travels, what stays, and how the fleet syncs
 
-Read these fifteen and you will notice the same skeleton under fifteen
+Read these nineteen and you will notice the same skeleton under nineteen
 unrecognisably different bodies: an objective (or an honest absence of one), a
 hard constraint, a gate the proposer cannot choose, a ledger only one seat
 writes, and a door only a person opens. And one body carries no skeleton at

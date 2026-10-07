@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: hardConstraint (five commands in order with what each writes, the loop table, the adoption steps, the constitution, the box layout; nothing invented) does not match the required template",
+  "evidence": "I checked the candidate against the hard constraint described in frontier.json/objective.hardConstraint: the document must be the exact stranger-first artifact with the required five-command sequence, the loop table, the adoption steps, the constitution, and the box layout, with no invented or missing elements. Although the held-out gate census passed (95/95) and the candidate word count is 1046, the hard constraint does not hold for this candidate, so it cannot be a VALIDATED result.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-serv-nano-raw/r4-serv-nano-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

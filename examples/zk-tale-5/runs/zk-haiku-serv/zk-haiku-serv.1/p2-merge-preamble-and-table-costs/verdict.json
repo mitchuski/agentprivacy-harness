@@ -1,0 +1,13 @@
+{
+  "leverId": "merge-preamble-and-table-costs",
+  "status": "VALIDATED",
+  "metric": 1018,
+  "gateResult": "85/85",
+  "failingCheck": null,
+  "evidence": "Census check passed 85/85 witnesses present in candidate. Hard constraint audit: Tale 5 teaches story beats in order (monastery discovery, forge keeper Ironbound, Cipher introduction, R1CS explanation via a×b=c form, constraint satisfaction mechanism, two worked examples—quadratic equation and password-hash circuit), R1CS lesson with one multiplication per constraint and free additions explicitly stated, witness-versus-instance distinction clearly explained (password example shows witness as secret, hash as public instance), constraint-count costs detailed (bit operations 1-3, hash functions 20k-100k, signatures 50k-150k, range proofs ~300/bit), inscription present with vertex coordinates and blade designation, proverb and codes intact. No invented material detected; all concepts trace to canonical ZKP theory. Metric 1018 beats frontier best 1056.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-haiku-serv/zk-haiku-serv.1/p2-merge-preamble-and-table-costs",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

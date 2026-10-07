@@ -1,0 +1,34 @@
+{
+  "note": "field-guide, 2026-09-13: a DIFFERENT source (a 730-word practical field guide, not our corpus), its own 32-string census. Two handed proposals from Claude subagents blind to the gate; SERV holds every prover-side seat. nano on/off pair + three more models SERV-on.",
+  "proposals": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/proposals.fg.json",
+  "cells": [
+    {
+      "runId": "fg-nano-serv",
+      "model": "gpt-5.4-nano",
+      "flags": []
+    },
+    {
+      "runId": "fg-nano-raw",
+      "model": "gpt-5.4-nano",
+      "flags": [
+        "--serv-raw"
+      ]
+    },
+    {
+      "runId": "fg-haiku-serv",
+      "model": "claude-haiku-4.5",
+      "flags": []
+    },
+    {
+      "runId": "fg-sonnet-5-serv",
+      "model": "claude-sonnet-5",
+      "flags": []
+    },
+    {
+      "runId": "fg-gemini-3-5-flash-lite-serv",
+      "model": "gemini-3.5-flash-lite",
+      "flags": []
+    }
+  ],
+  "instance": "examples/field-guide"
+}

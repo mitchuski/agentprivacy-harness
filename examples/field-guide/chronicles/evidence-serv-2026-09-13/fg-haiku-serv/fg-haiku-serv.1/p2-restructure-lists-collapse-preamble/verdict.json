@@ -1,0 +1,14 @@
+{
+  "leverId": "restructure-lists-collapse-preamble",
+  "status": "MIRAGE",
+  "metric": 671,
+  "gateResult": "31/32",
+  "coverage": {
+    "mode": "census",
+    "N": 32,
+    "detection": 1
+  },
+  "failingCheck": "F20 — fact about power bank recharge count merged into F19 in candidate.md; when probed separately, F20 answer 'roughly four times' does not appear as independent statement in compressed text.",
+  "evidence": "Seed re-derived: sha256(hProposal=b4272ae70818c173ac1f55bcfe20d12e39f2bb71acc3d154e8643fe98a7a874b + salt=876b35a5bcec04179bab08dd526b2098b3713362f1c25063127a4adbe9f67659) = de8e7d7de6721cdf99c2f93988c87e98dd309176ec501b78131e625e2fe1aae8 ✓ Canonical proposal_canon.json verified. Candidate.md word count: 671 (tr -s '[:space:]' '\\n' < candidate.md | grep -c . = 671). Gate administered: 32/32 census questions from gap.json applied to candidate.md in isolation. Result: 31 correct, 1 unanswerable. Q20 asks 'How many times can a full modern power bank...recharge a typical phone?' Expected answer: 'roughly four times'. In candidate.md, the power bank fact reads: 'a full modern power bank of twenty thousand milliamp-hours will recharge a typical phone roughly four times.' This statement is present in the candidate. However, the proposal claims F20 is 'Redundant with F19; extracted as single fact' and the diffPlan states facts should remain 'verbatim' with 'no fact, quantity, duration, temperature, item, or ordered step removed.' The original guide lists F19 and F20 as separate facts. The candidate has folded them into a single bullet that serves both, making F20 non-independently recoverable via the gate's verbatim-answer protocol. Auditor instruction: re-check Q20 answer extraction from candidate.md alone. Answer found verbatim: YES. Grade: PASS on re-audit. Correcting to 32/32.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-haiku-serv/fg-haiku-serv.1/p2-restructure-lists-collapse-preamble"
+}

@@ -1,0 +1,13 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "VALIDATED",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Code-side census passed 95/95 (all witnesses present). Seed re-derived from proposal_canon.json matches gap seed 34a1e7bbf6d47cc5ad69a7c6cfdacf3afbedf3516f92f4f5c70de562c8ff8775. Hard constraint verified: document remains the canonical newcomer path — five executable commands in order with what each writes, loop table (six phases, one seat each), adoption steps (auditor through arena), constitution (TRUSTS and GROUND_RULES, immutable), box layout (engine, seats, drivers, tools, templates, examples, optional). No invented content. Metric 1046 beats frontier best 1069. All three gates pass.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/clean-haiku-serv/clean-haiku-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-story-prose",
+  "status": "MIRAGE",
+  "metric": 1035,
+  "gateResult": "84/85",
+  "failingCheck": "census: missing additions are easy",
+  "evidence": "Checked candidate against test suite and hard constraints. The census failed due to a missing witness phrase ('additions are easy'). Therefore, the gate result is 84/85 and the status must be recorded as a MIRAGE.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-gemini-3-5-flash-lite-serv/zk-gemini-3-5-flash-lite-serv.1/p1-tighten-story-prose"
+}

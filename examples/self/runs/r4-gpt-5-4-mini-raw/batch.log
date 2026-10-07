@@ -1,0 +1,116 @@
+resolved seats: {"proposer":"claude-fable-5-1 (Claude Code subagents, one per lens)","prover":"serv:gpt-5.4-mini"}
+measured: {"metric":1069,"census":95,"passed":95,"pass":true,"rule":"whitespace-split tokens of artifact/PATH.md"}
+  serv: seat "chronicle" pinned to gemma3:12b; the prover is on SERV, so it rides gpt-5.4-mini for this run
+  — Measure —
+  round r4-gpt-5-4-mini-raw.1 opens — measure syncs the frontier
+  — Propose —
+  propose:line-editor — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  propose:restructurer — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  2 proposal(s) on the table: trim-connective-prose-on-fold, merge-agent-note-into-constitution-and-collapse-step-preamble
+  assay closed: 2/2 — {"VALIDATED":0,"MIRAGE":2,"BLOCKED":0}
+  — Critic —
+  — Chronicle —
+  round r4-gpt-5-4-mini-raw.1 closes — 0 structural win(s), dry=1/2
+
+{
+  "name": "self",
+  "runId": "r4-gpt-5-4-mini-raw",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gpt-5.4-mini"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:r4-gpt-5-4-mini-raw.1",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 4722,
+      "completion_tokens": 69,
+      "total_tokens": 4791
+    },
+    {
+      "label": "gap:trim-connective-prose-on-fold",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5161,
+      "completion_tokens": 122,
+      "total_tokens": 5283
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5167,
+      "completion_tokens": 133,
+      "total_tokens": 5300
+    },
+    {
+      "label": "assay:trim-connective-prose-on-fold",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7185,
+      "completion_tokens": 170,
+      "total_tokens": 7355
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7202,
+      "completion_tokens": 230,
+      "total_tokens": 7432
+    },
+    {
+      "label": "critic:r4-gpt-5-4-mini-raw.1",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5555,
+      "completion_tokens": 217,
+      "total_tokens": 5772
+    },
+    {
+      "label": "chronicle:r4-gpt-5-4-mini-raw.1",
+      "model": "gpt-5.4-mini",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 5363,
+      "completion_tokens": 45,
+      "total_tokens": 5408
+    }
+  ]
+}
+
+verify:  node tools/verify_run.mjs C:/Users/mitch/dual-agent-harness/examples/self r4-gpt-5-4-mini-raw
+render:  node tools/render_run.mjs C:/Users/mitch/dual-agent-harness/examples/self r4-gpt-5-4-mini-raw

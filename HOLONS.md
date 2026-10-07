@@ -40,6 +40,36 @@ there, two auditors catch each other; here, two κ functions would just break
 addressing. The independent check for κ lives in the test layer and in the
 language-agnostic spec, which has been cross-derived in a second language.)
 
+## The second axis: registry κ for evidence bundles
+
+The κ law above is the holon law: sha256 over canonical JSON. The UOR
+kappa-registry computes its κ as sha256 over canonical dCBOR, the axis its
+identity anchors, typed edges and signed namespace roots live on. The harness
+keeps both, deliberately, and never mixes them in one preimage:
+
+- **holon κ** (`tools/kappa.mjs`): an artefact's address in the City's mesh,
+  canonical JSON, the `edges` field excluded so signed relations never move it.
+- **registry κ** (`tools/dcbor.mjs`): the address of an *evidence object*
+  minted from a run's record by `tools/kappa_evidence.mjs`, canonical dCBOR
+  with the registry's rules (integer-keyed maps, the Edge struct's permanent
+  keys, the Vec<u8>-as-int-array derive quirk), so a registry or anyone holding
+  its rules re-derives the bundle without the harness.
+
+Both are `sha256:` + hex and both are re-derived, never trusted. A run's
+evidence bundle (`runs/<runId>/evidence/`) is: one object per proposal, gap
+and verdict; one blob per saved byte file; typed edges (the gap `derived-from`
+its proposal, since the seed derives from hProposal and hProposal IS the canon
+blob's κ hex: witnesses drawn from a κ the prover could not choose); a ledger
+and a tally check per round; one run root. `verify` re-derives all of it from
+the root and `tools/check.mjs` does so on every gate run. The same layout is
+verified by an independent Python implementation (kappa_evidence_mage), and
+the two encoders are held equal on a fixed struct vector in
+`tools/kappa_evidence.test.mjs`. Equality with the compiled Rust crate is the
+pending P1 check; until it passes every registry κ carries the label
+"kappa-compatible (unverified)". With `--sign`, an ephemeral ed25519 key (the
+`tools/vrc.mjs` convention) signs the root and the edges' asserter becomes
+that key's registry anchor, `sha256(dCBOR{algorithm, public_key})`.
+
 ## Edges: how holons compose
 
 A holon references another **by κ**. Two kinds of edge:

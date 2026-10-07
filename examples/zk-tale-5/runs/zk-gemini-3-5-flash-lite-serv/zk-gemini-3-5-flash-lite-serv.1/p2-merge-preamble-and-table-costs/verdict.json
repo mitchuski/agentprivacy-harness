@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-preamble-and-table-costs",
+  "status": "MIRAGE",
+  "metric": 1018,
+  "gateResult": "85/85",
+  "failingCheck": "hardConstraint: missing required story element (the relationship proverb protocol (rpp) rule in narrative text)",
+  "evidence": "Checked candidate against the hard constraint. The candidate omitted the required relationship proverb protocol (rpp) text block and altered the narrative flow of Tale 5. Although the code gate passed with 85/85 witnesses and the metric improved to 1018 words, the hard constraint failed due to missing required instructional elements.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-gemini-3-5-flash-lite-serv/zk-gemini-3-5-flash-lite-serv.1/p2-merge-preamble-and-table-costs"
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-ceremony-prose",
+  "status": "MIRAGE",
+  "metric": 1047,
+  "gateResult": "56/62",
+  "failingCheck": "census: missing Reception is bilateral, Registration is transactional, The seat did not make the relation, You will inscribe, You will be received, The name will be given by the relation",
+  "evidence": "Ran the code-side gate result as reported (tools/check_naming.mjs: N=62, passed=56); six required witness phrases from the census are absent from the candidate text verbatim, so the held-out gate fails outright regardless of word count or hard-constraint reading. Since passed < N, this is a mechanical MIRAGE per the seat's verdict rule; hard-constraint and metric-vs-frontier comparison are moot once the gate fails (T5 cliff-watch: a gate fail is a zero).",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-sonnet-5-serv/mn-sonnet-5-serv.1/p1-tighten-ceremony-prose"
+}

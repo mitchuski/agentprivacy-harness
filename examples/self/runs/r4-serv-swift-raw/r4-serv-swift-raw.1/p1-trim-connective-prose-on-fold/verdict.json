@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing [\"Shared state has exactly one writer\"]",
+  "evidence": "Code-side gate (tools/check_path.mjs) reports 94/95 witnesses present; the witness \"Shared state has exactly one writer\" is missing from the candidate. This is a structural element of the loop table (the six phases, one seat each, one permitted set of writes) and appears in the frontier baseline at 1115 words. The hard constraint requires the loop table intact with all its rows and the adoption steps, constitution, and box layout unaltered. A missing witness from the census is a MIRAGE regardless of word count.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-serv-swift-raw/r4-serv-swift-raw.1/p1-trim-connective-prose-on-fold"
+}

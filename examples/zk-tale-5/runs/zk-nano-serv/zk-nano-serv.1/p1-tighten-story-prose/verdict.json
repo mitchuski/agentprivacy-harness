@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-story-prose",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": null,
+  "failingCheck": "missing required gate inputs/evidence for FULL held-out gate verification (e.g., proposal+gap witnesses or verify_run/check_forge outputs not provided in the prompt)",
+  "evidence": "I can’t re-derive the Gap seed or run the FULL held-out gate as required because the prompt does not include the third-party re-derivation output (verify_run) nor the held-out witness/gap.json and proposal artifact used for witness hashing. Per the procedure, if the held-out gate cannot be checked, this verdict cannot be issued.",
+  "scratchDir": null
+}

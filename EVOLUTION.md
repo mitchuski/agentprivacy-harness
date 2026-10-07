@@ -98,6 +98,23 @@ filed (the upstream's DelegationScope is *ahead of* the VRC — a
 contribution seam, not a claim). Nothing here moves without maintainer
 review upstream and the First Person's door here.
 
+## Phase 6 — the arena tier (FOLDED 2026-10-07)
+
+Seven leaderboard lanes ran between August and October 2026 and none of
+their method was in this tree. `CHALLENGE_LANES.md` folds it as rules
+A1-A40 with the lane and the shipped entry that proved each: everything
+charged, calibrated units and itemised margins, the differential emulator
+gate, the split assay (re-derive / rehearse the judge), the ship gate whose
+NO-GO is final, the submit policy and the harness label, credit by
+citation, stacked handoffs and kills with reopen conditions. Three new
+support seats (`constants-refuter`, `judge-rehearsal`, `ship-gate`), four
+templates (`SUBMISSION_NOTE`, `HANDOFF`, `EVIDENCE_TABLE`, the upgraded
+`KILLED_LEVERS`), three fleet accessions (#18-#20). The evidence root
+(Phase 5's κ, now on the registry axis in `tools/kappa_evidence.mjs`) is
+the artefact that ties the arena back to the trust graph: a reused
+measurement is a reused object. Still open: the cross-implementation check
+against the compiled registry crate, after which notes may quote roots.
+
 ## What leaves, what stays
 
 | leaves the harness | stays in the harness |

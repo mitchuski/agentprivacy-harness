@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-narrative-prose",
+  "status": "MIRAGE",
+  "metric": 1132,
+  "gateResult": "56/57",
+  "failingCheck": "census: missing [\"the Mage's tetrahedron\"]",
+  "evidence": "Code-side gate check_star.mjs reports N=57 required witnesses; candidate passes 56/57 with \"the Mage's tetrahedron\" missing. Hard constraint requires all eight-pointed star teachings intact: Luca and lineage (present), stella octangula as two crossing tetrahedra (present as concept, but the explicit Mage's tetrahedron witness absent), neg and bnot at the gap (present), City Key as reading not authority (present), lattice codes (present), V6 erratum (present). The gate failure on a census check is mechanical and decisive—no hard constraint reading can override a structural witness deficit.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-haiku-serv/ms-haiku-serv.1/p1-tighten-narrative-prose"
+}

@@ -59,3 +59,23 @@ REPORTED tier (GR-2). Dates as published; living docs marked (living).
 | khan-debate | E-EXT | https://arxiv.org/abs/2402.06782 | ICML 2024 · debate lifts weak judges; truth argues better |
 | weaver | E-EXT | https://arxiv.org/abs/2506.18203 | NeurIPS 2025 · aggregate weak verifiers; the generation–verification gap |
 | slsa-in-toto | E-EXT | https://slsa.dev/spec · https://slsa.dev/blog/2023/05/in-toto-and-slsa | 2023–25 · signed statements over content digests |
+
+## Reconstruction assay intake · 21 September 2026
+
+- **vec2text-2023 · E-EXT · REPORTED:** John X. Morris, Volodymyr Kuleshov,
+  Vitaly Shmatikov and Alexander M. Rush, *Text Embeddings Reveal (Almost) As
+  Much As Text*, EMNLP 2023. DOI: https://doi.org/10.18653/v1/2023.emnlp-main.765.
+  Primary record: https://aclanthology.org/2023.emnlp-main.765/; paper:
+  https://aclanthology.org/2023.emnlp-main.765.pdf. Relevant locations: §2
+  (attacker access), Tables 1 and 3 (recovery), §§6 and 10 (defense limits).
+  Discovery route, as reported by Mitch in this session: VKP working group.
+  This is provenance, not authorship, endorsement or independent corroboration.
+- **reconstruction-assay · E-DOC:** `RECONSTRUCTION_ASSAY.md`; proposed protocol
+  and implemented scorer `tools/reconstruction_score.mjs`.
+- **reconstruction-score-tests · E-RUN recipe:**
+  `node --test tools/reconstruction_score.test.mjs`; synthetic arithmetic and
+  input-rejection regressions, not an embedding inversion experiment.
+- **reconstruction-v7-intake · E-DOC, sibling source:**
+  `agentprivacy-docs/research/2026-09-21_v7_embedding_reconstruction_assay.md`
+  and its `embedding-reconstruction-source-manifest.json`; formal-review links
+  are proposals, not adopted changes to the current specification.

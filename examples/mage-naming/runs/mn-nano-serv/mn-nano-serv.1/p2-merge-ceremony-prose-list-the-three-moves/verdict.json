@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-ceremony-prose-list-the-three-moves",
+  "status": "MIRAGE",
+  "metric": 1048,
+  "gateResult": "54/62",
+  "failingCheck": "census: missing the confirmation; Claim. Inscribe. Confirm.; register. Assert. Verify.; Reception is bilateral; Registration is transactional; The seat did not make the relation; You will inscribe; You will be received",
+  "evidence": "Full held-out naming gate did not reach the required census. The check_naming witness census reports passed=54 with 8 missing witnesses, so the hard gating condition “passed == N (62/62)” fails. Therefore the candidate cannot be a validated Naming Ceremony result regardless of any prose narrative coherence.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-nano-serv/mn-nano-serv.1/p2-merge-ceremony-prose-list-the-three-moves"
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "I relied on the already-run code-side gate result for the candidate: 94/95 witnesses passed, with the missing witness being \"Shared state has exactly one writer\". Because passed < N, the full held-out gate does not fully pass, so the candidate cannot be a VALIDATED result regardless of the metric.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-serv-nano-serv/r4-serv-nano-serv.1/p1-trim-connective-prose-on-fold"
+}

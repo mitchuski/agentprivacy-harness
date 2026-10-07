@@ -1,0 +1,15 @@
+{
+  "leverId": "restructure-lists-collapse-preamble",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": "0/8",
+  "coverage": {
+    "mode": "census",
+    "N": 8,
+    "detection": 1
+  },
+  "failingCheck": "Missing required input: ORIGINAL sentence-indexed fact list (GUIDE.md with F1..F32) needed to generate the Gap’s comprehension questions and expected answers; transcript provided BLOCKED question content, so gate cannot be executed.",
+  "evidence": "BLOCKED by missing required evidence for seat assay gate: the original sentence-indexed fact list from artifact/GUIDE.md (with F1..F32) is not provided to this seat, so (1) census fact count/index mapping cannot be verified, (2) the Gap’s comprehension questions/expected answers cannot be generated, and (3) any computed gateResult would be ungrounded and therefore invalid under the procedure. Also cannot truthfully compute the stated seed re-derivation because the required proposal_canon.json bytes are not provided in the prompt transcript to this seat.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-nano-serv/fg-nano-serv.1/p2-restructure-lists-collapse-preamble",
+  "leverIdMismatch": "p2-restructure-lists-collapse-preamble"
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "The candidate did not satisfy the hard held-out census gate: tools/check_path.mjs reported 94/95 witnesses present, with the missing witness labeled \"Shared state has exactly one writer\". Because the full held-out gate did not pass, the proposal cannot be treated as the stranger-opened first document a keystone would fold.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-nano-multipath/r4-nano-multipath.1/p1-trim-connective-prose-on-fold"
+}

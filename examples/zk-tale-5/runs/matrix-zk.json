@@ -1,0 +1,12 @@
+{
+  "note": "zk-tale-5, 2026-09-13: a second source from the agentprivacy ecosystem — Tale 5, The Constraint Forge, from the Zero Knowledge Spellbook. Same self-style mechanism (code census + model-judged hard constraint), SERV holds every prover-side seat. nano on/off pair + two more models SERV-on.",
+  "instance": "examples/zk-tale-5",
+  "proposals": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/proposals.zk.json",
+  "cells": [
+    { "runId": "zk-nano-serv", "model": "gpt-5.4-nano", "flags": [] },
+    { "runId": "zk-nano-raw", "model": "gpt-5.4-nano", "flags": ["--serv-raw"] },
+    { "runId": "zk-haiku-serv", "model": "claude-haiku-4.5", "flags": [] },
+    { "runId": "zk-sonnet-5-serv", "model": "claude-sonnet-5", "flags": [] },
+    { "runId": "zk-gemini-3-5-flash-lite-serv", "model": "gemini-3.5-flash-lite", "flags": [] }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-ceremony-prose-list-the-three-moves",
+  "status": "MIRAGE",
+  "metric": 1048,
+  "gateResult": "54/62",
+  "failingCheck": "census: missing the confirmation, Claim. Inscribe. Confirm., register. Assert. Verify., Reception is bilateral, Registration is transactional, The seat did not make the relation, You will inscribe, You will be received",
+  "evidence": "Ran tools/check_naming.mjs on the candidate: passed 54/62, with 8 witnesses absent from the census list (verbatim phrases required by census.json were not found in the merged prose). Because passed (54) < N (62), the gate fails outright regardless of word count or narrative content, per GR-3/T5 the gate failure collapses the whole product to zero. Reviewed the candidate text for the hard-constraint elements (V63 arrival, three bilateral moves vs transactional, flaxscrip's Bitcoin block 945508, closing line, cast, proverb/lineage) — these are present narratively, but that is moot since the mechanical census already fails.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-sonnet-5-serv/mn-sonnet-5-serv.1/p2-merge-ceremony-prose-list-the-three-moves"
+}

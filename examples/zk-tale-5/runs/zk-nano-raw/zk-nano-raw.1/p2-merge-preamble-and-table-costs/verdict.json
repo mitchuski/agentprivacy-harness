@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-preamble-and-table-costs",
+  "status": "MIRAGE",
+  "metric": 1018,
+  "gateResult": "85/85",
+  "failingCheck": "hard constraint: Tale 5 must include the two worked examples (witness vs instance distinction; R1CS lesson with one multiplication per constraint; constraint-count costs; inscription + proverb and protocol codes); candidate includes additional narrative but does not faithfully preserve the required worked-example structure from Tale 5",
+  "evidence": "I verified the held-out gate via the provided check_forge result: 85/85 witnesses present (gateResult 85/85). However, I cannot confirm the hard constraint from the candidate text: it appears to include Tale-5-like themes and a generic arithmetic circuit/R1CS explanation, but the specific required worked examples and the Tale 5 exact story beat ordering/inscription+proverb+codes bundle are not evidently preserved as the constraint-count-cost teaching in the original Tale 5 artifact.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-nano-raw/zk-nano-raw.1/p2-merge-preamble-and-table-costs"
+}

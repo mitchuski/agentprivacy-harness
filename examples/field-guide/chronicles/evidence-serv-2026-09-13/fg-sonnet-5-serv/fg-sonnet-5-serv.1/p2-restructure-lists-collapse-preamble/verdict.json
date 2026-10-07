@@ -1,0 +1,10 @@
+{
+  "leverId": "restructure-lists-collapse-preamble",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": "0/0",
+  "coverage": null,
+  "failingCheck": "Missing executable evidence: (1) cannot read C:/Users/mitch/dual-agent-harness/examples/field-guide/artifact/GUIDE.md to index F1..F32 or derive comprehension questions — no filesystem/shell tool access in this runtime and content not supplied in prompt; (2) cannot write or hash proposal_canon.json to verify sha256sum == hProposal (b4272ae70818c173ac1f55bcfe20d12e39f2bb71acc3d154e8643fe98a7a874b), so the Gap's seed cannot be re-derived per GR-4/T2 — the seat card requires re-deriving the seed first and halting if it does not reproduce; (3) cannot execute the concatenation+sha256 step to check against seedHex c7d565d06f17250866754bdbc9a285be8763ac3aba18d8b0e541348b4d001872; (4) cannot write candidate.md or verdict.json to the scratch dir, nor mechanically count words via tr/grep, nor pose or grade census questions without fabricating fact content, which is disallowed.",
+  "evidence": "No commands were executed; none are claimed to have been executed. This is a text/JSON-only seat with no filesystem or shell tools, so none of the seat's Procedure steps (seed re-derivation, scratch implementation, full gate run, mechanical word count) could be performed. Per the runtime contract, required inputs and executable evidence being absent mandates BLOCKED rather than a fabricated VALIDATED/MIRAGE verdict. Nothing was written to disk (no verdict.json, no candidate.md, no proposal_canon.json, no gap.json) because no write capability exists in this runtime.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-sonnet-5-serv/fg-sonnet-5-serv.1/p2-restructure-lists-collapse-preamble/"
+}

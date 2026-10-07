@@ -1,0 +1,99 @@
+{
+  "name": "zk-tale-5",
+  "runId": "zk-nano-raw",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:gpt-5.4-nano"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1056,
+    "census": 85,
+    "passed": 85,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/FORGE.md"
+  },
+  "sourceHash": "a767502a2bcb0a490d1d7ea1f357a1efeee0f4b7b252a38e6d05645f0eaa574c",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:zk-nano-raw.1",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 3739,
+      "completion_tokens": 100,
+      "total_tokens": 3839
+    },
+    {
+      "label": "gap:tighten-story-prose",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 4167,
+      "completion_tokens": 199,
+      "total_tokens": 4366
+    },
+    {
+      "label": "gap:merge-preamble-and-table-costs",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 4171,
+      "completion_tokens": 266,
+      "total_tokens": 4437
+    },
+    {
+      "label": "assay:tighten-story-prose",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6193,
+      "completion_tokens": 158,
+      "total_tokens": 6351
+    },
+    {
+      "label": "assay:merge-preamble-and-table-costs",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6163,
+      "completion_tokens": 251,
+      "total_tokens": 6414
+    },
+    {
+      "label": "critic:zk-nano-raw.1",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 4555,
+      "completion_tokens": 221,
+      "total_tokens": 4776
+    },
+    {
+      "label": "chronicle:zk-nano-raw.1",
+      "model": "gpt-5.4-nano",
+      "raw": true,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 4411,
+      "completion_tokens": 807,
+      "total_tokens": 5218
+    }
+  ]
+}

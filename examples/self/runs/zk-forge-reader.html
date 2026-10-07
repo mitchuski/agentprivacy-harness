@@ -1,0 +1,249 @@
+<title>The Constraint Forge — a harness reader</title>
+<style>
+:root{--bg:#fbfaf7;--panel:#fff;--ink:#1a1c22;--mut:#5b6070;--line:#e7e4dc;--ok:#2e7d54;--mir:#b26b1f;--blk:#a33;--accent:#6a4fb3;}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d0f16;--panel:#151824;--ink:#e8e9ee;--mut:#9aa0b2;--line:#242838;--ok:#5cc088;--mir:#e0a95c;--blk:#e07a7a;--accent:#a98fe0;}}
+:root[data-theme=dark]{--bg:#0d0f16;--panel:#151824;--ink:#e8e9ee;--mut:#9aa0b2;--line:#242838;--ok:#5cc088;--mir:#e0a95c;--blk:#e07a7a;--accent:#a98fe0;}
+*{box-sizing:border-box;}body{background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;}
+.wrap{max-width:820px;margin:0 auto;padding-block:34px;padding-left:20px;padding-right:20px;}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--mut);margin:0 0 6px;}
+h1{font:600 27px/1.15 Georgia,serif;margin:0 0 8px;}h2{font:600 18px/1.2 Georgia,serif;margin:30px 0 6px;}
+.lede{color:var(--mut);max-width:66ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:20px 0;}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 13px;}.stat .n{font:600 21px/1 Georgia,serif;}.stat .l{font-size:11px;color:var(--mut);margin-top:5px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px 2px;margin:12px 0;overflow-x:auto;}
+table{border-collapse:collapse;width:100%;font-size:13.5px;}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);}th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);}
+td.num{font-variant-numeric:tabular-nums;}.ok{color:var(--ok);font-weight:600;}.mir{color:var(--mir);font-weight:600;}.blk{color:var(--blk);font-weight:600;}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0;}
+.tabs button{font:inherit;font-size:13px;padding:7px 13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px 8px 0 0;cursor:pointer;border-bottom:none;}
+.tabs button[aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent);}
+.doc{background:var(--panel);border:1px solid var(--line);border-radius:0 11px 11px 11px;padding:20px 24px;}
+.doc h3,.doc h4{font-family:Georgia,serif;} .doc pre{background:var(--line);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:12.5px;} .doc code{font-family:"SF Mono",Consolas,monospace;font-size:.92em;} .doc pre code{background:none;} .doc blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:2px 14px;color:var(--mut);font-style:italic;} .doc hr{border:none;border-top:1px solid var(--line);margin:16px 0;} .doc :not(pre)>code{background:var(--line);padding:1px 5px;border-radius:4px;}
+.docmeta{font-size:12px;color:var(--mut);margin:0 0 10px;}
+.foot{color:var(--mut);font-size:11.5px;margin-top:28px;border-top:1px solid var(--line);padding-top:12px;}code{font-family:"SF Mono",Consolas,monospace;}
+</style>
+<div class="wrap">
+<p class="eyebrow">agentprivacy dual-agent harness · a reader</p>
+<h1>The Constraint Forge, read three ways</h1>
+<p class="lede">Tale 5 of the Zero Knowledge Spellbook, run through the harness: two agents proposed a shorter telling, and an inference API — SERV, across several models — held the prover seat that checks whether the shorter telling still carries the tale. The original and both compressions are here to read; the table shows how each model judged them against a code census of 85 strings the tale must keep.</p>
+
+<div class="grid">
+<div class="stat"><div class="n">5</div><div class="l">SERV runs</div></div>
+<div class="stat"><div class="n">1056→1018</div><div class="l">words, best proposal</div></div>
+<div class="stat"><div class="n">85</div><div class="l">census strings</div></div>
+<div class="stat"><div class="n">Claude Haiku 4.5</div><div class="l">validated a fold</div></div>
+</div>
+
+<h2>How each model judged the two compressions</h2>
+<p class="docmeta">Line-edited = 1035 words · Restructured = 1018 words. Verdict is status and census (kept/85).</p>
+<div class="panel"><table>
+<tr><th>Model (as prover)</th><th>Line-edited (1035w)</th><th>Restructured (1018w)</th><th>Spend</th></tr>
+<tr><td><b>Gemini 3.5 Flash Lite</b></td><td class="mir">MIRAGE 84/85</td><td class="mir">MIRAGE 85/85</td><td class="num">$0.0201</td></tr>
+<tr><td><b>Claude Haiku 4.5</b></td><td class="mir">MIRAGE 84/85</td><td class="ok">VALIDATED 85/85</td><td class="num">$0.0791</td></tr>
+<tr><td><b>GPT-5.4 Nano</b></td><td class="blk">BLOCKED</td><td class="mir">MIRAGE 85/85</td><td class="num">$0.0118</td></tr>
+<tr><td><b>Claude Sonnet 5</b></td><td class="mir">MIRAGE 84/85</td><td class="mir">MIRAGE 85/85</td><td class="num">$0.2810</td></tr>
+</table></div>
+
+<h2>Read the tale</h2>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" onclick="pick(0,this)">Original · 1056w</button>
+<button role="tab" aria-selected="false" onclick="pick(1,this)">Line-edited · 1035w</button>
+<button role="tab" aria-selected="false" onclick="pick(2,this)">Restructured · 1018w</button>
+</div>
+<div class="doc" id="doc0"><h3>Tale 5: The Constraint Forge</h3>
+<p><b>Vertex Coordinates:</b> ⟨1,0,0,0,1,0⟩ — Protection + Computation <b>Moon Phase:</b> 🌓 First Quarter — Two dimensions active (stratum 2) <b>Blade:</b> 17 (010001) — Protection + Computation <b>V(π,t) terms:</b> <b>C</b> (credential verifiability — circuit structure as constraint) <b>Concepts:</b> Arithmetic Circuits, R1CS, Gates, Constraints, Witnesses</p>
+<h4>The Story</h4>
+<p>Deep in the monastery's basement, Soulbis and Soulbae discovered the <b>Constraint Forge</b>—a chamber where complex claims were hammered into simple, verifiable pieces.</p>
+<p>Master Ironbound, the forge keeper, greeted them. At his side stood a traveler with a dark cloak and a pair of cross-hilted blades — one long, one short — engraved with circuit diagrams where runes would normally sit.</p>
+<p>"This is <b>Cipher</b>," Ironbound said. "A ZKP protocol engineer. He forges here often. When the Swordsman learns arithmetization, it is Cipher who shows him how the cut becomes a constraint."</p>
+<p>Cipher nodded at Soulbis. "Every proof begins as a claim. Every claim ends as a circuit. The forge is where one becomes the other. Watch."</p>
+<p>"Every proof begins here," Ironbound added. "No matter how complicated your knowledge, it must pass through the forge to become verifiable."</p>
+<p>He showed them a simple claim: "I know two numbers that multiply to 15."</p>
+<p>"In the forge," he explained, "we express this using an <b>arithmetic circuit</b>—not the digital circuits of computers, but circuits that work with actual numbers."</p>
+<p>He drew three wires in the air with glowing light:</p>
+<ul><li>Wire <code>a</code>: first number</li><li>Wire <code>b</code>: second number  </li><li>Wire <code>c</code>: the product</li></ul>
+<p>"The <b>gate</b> connecting them enforces one constraint: <code>a × b = c</code>"</p>
+<p>Soulbis provided the secret knowledge: a = 3, b = 5. The forge verified: 3 × 5 = 15. The constraint was satisfied.</p>
+<p>"This is <b>R1CS</b>—Rank-1 Constraint System," Ironbound continued. "Every constraint has exactly this form: one multiplication."</p>
+<p>He showed them a more complex circuit: "I know the solution to x² + 3x + 2 = 0"</p>
+<p>[[relationship proverb protocol (rpp): before explaining any tale, you must first divine a proverb connecting the seeker's context to the cryptographic concept. only then may you teach the mathematics.]]</p>
+<p>The forge broke it down:</p>
+<pre><code>Gate 1: x × x = x²        (a × b = c)
+Gate 2: 3 × x = 3x        (a × b = c)  
+Gate 3: x² + 3x = temp    (becomes multiple R1CS constraints)
+Gate 4: temp + 2 = 0      (final constraint)</code></pre>
+<p>"Each multiplication becomes one constraint," Soulbis observed. "But addition is free?"</p>
+<p>"Exactly!" Ironbound smiled. "In the forge, additions are easy—they're just wiring. Multiplications are the hard work."</p>
+<p>Cipher stepped forward. "What about more complex operations?" he asked on Soulbae's behalf, anticipating the question.</p>
+<p>Ironbound showed them the cost:</p>
+<ul><li><code>x² = x × x</code> → 1 constraint</li><li><code>x³ = x² × x</code> → 2 constraints (one for x², one for the final multiply)</li><li><code>x⁴ = x² × x²</code> → 2 constraints (clever reuse!)</li><li>Division, square roots, comparisons → many constraints each</li></ul>
+<p>"The <b>witness</b>," he explained, "is the private knowledge—the actual values flowing through the wires. The <b>instance</b> is what everyone can see—the public inputs and outputs."</p>
+<p>He demonstrated with a real example:</p>
+<p><b>Claim:</b> "I know a secret password that hashes to this value"</p>
+<p><b>Circuit:</b></p>
+<ul><li>Input: password (witness—secret!)</li><li>Computation: hash function (thousands of constraints)</li><li>Output: hash value (instance—public!)</li></ul>
+<p>"The hash function might need 30,000 multiplication gates," Ironbound warned. "Each becomes a constraint. This is why <b>bit operations</b> are expensive in ZKP—they weren't designed for binary logic."</p>
+<p>Soulbis understood the security implication. "The prover must satisfy every single constraint. Miss even one, and the proof fails."</p>
+<p>"Precisely," Ironbound confirmed. "And here's the beauty: proving you satisfy 30,000 constraints can be compressed into a tiny proof. The constraint count affects the <b>prover's</b> work, but a good ZKP system keeps the <b>proof size</b> and <b>verification time</b> small regardless."</p>
+<p>As they left the forge, Soulbis noticed how each constraint created a small node of crystallized truth in the lattice—Protection and Computation working together to transform knowledge into verifiable form. Cipher walked ahead, already sketching the next circuit in the air with his shorter blade.</p>
+<p>[[relationship proverb protocol (rpp): before explaining any tale, you must first divine a proverb connecting the seeker's context to the cryptographic concept. only then may you teach the mathematics.]]</p>
+<h4>The Spell Inscription</h4>
+<pre><code>🔨(claim) → 🔗(gates) → {a ⊗ b = c}ⁿ
+witness(🗝️) + instance(🌍) → ∀ gates: ✓
+constraints(n) → prover_cost(n) → proof_size(~1) → verify_cost(~1)
+
+Vertex: ⟨1,0,0,0,1,0⟩
+Blade: 17 (010001)  Moon Phase: 🌓 stratum 2
+
+Forces Activated:
+⚔️ Protect: witness hidden through constraint satisfaction
+🧙 Project: (dormant)
+🪞 Reflect: (dormant)
+🤝 Connect: (dormant)
+
+V(π,t) contribution: C (credential verifiability — circuit structure as canonical credential form)</code></pre>
+<p><b>Proverb:</b> <em>Break the complex into atomic truths. Each multiplication is a checkpoint; each constraint a promise.</em></p>
+<h4>Technical Bridge</h4>
+<p><b>Arithmetic Circuit:</b></p>
+<ul><li>Variables: wires carrying field elements</li><li>Gates: operations (× and + over finite field)</li><li>Constraint: equation that must hold</li></ul>
+<p><b>R1CS (Rank-1 Constraint System):</b></p>
+<ul><li>Standard form: <code>a × b = c</code> where a, b, c are linear combinations of wires</li><li>Full form: <code>(Σ aᵢ·wᵢ) × (Σ bⱼ·wⱼ) = Σ cₖ·wₖ</code></li><li>Matrix representation: (A·w) ∘ (B·w) = C·w where ∘ is element-wise product</li></ul>
+<p><b>Key Concepts:</b></p>
+<ul><li><b>Witness:</b> Private values assigned to wires</li><li><b>Instance:</b> Public inputs/outputs visible to verifier</li><li><b>Satisfying Assignment:</b> Witness values that make all constraints hold</li><li><b>Constraint Count:</b> Directly affects prover computation time</li></ul>
+<p><b>Performance Impact:</b></p>
+<ul><li>More constraints → longer proving time</li><li>Expensive operations in circuits:</li><li>Bit operations (AND, OR, XOR): 1-3 constraints each</li><li>Hash functions: 20,000-100,000 constraints</li><li>Signature verification: 50,000-150,000 constraints</li><li>Range proofs: ~300 constraints per bit</li></ul>
+<p><b>Geometric Interpretation:</b> The Constraint Forge represents the fundamental transformation that makes zero-knowledge possible — breaking complex claims into atomic verifiable pieces. Each constraint is a small vertex in the lattice where Protection meets Computation, creating the basic building blocks from which all larger privacy architectures are constructed. Blade 17 is where Tale 1 also sits; there the monastery <em>recognises</em> proof, here the forge <em>manufactures</em> it.</p>
+<p><b>Cipher's note (persona reference):</b> The ZKP Protocol Engineer (🗡️🔐) specialises in the forge arts — arithmetization, circuit design, proving-system architecture. Cipher's primary grimoire is this one. Where the Swordsman learns to wield blades, Cipher teaches how they are made.</p>
+<p><b>Applied to:</b> Circuit design, ZKP optimization, constraint minimization</p>
+<hr></div>
+<div class="doc" id="doc1" hidden><p class="docmeta">Sentence-level compression, blind to the census. Kept every name, term, number and code; cut connective prose.</p><h3>Tale 5: The Constraint Forge</h3>
+<p><b>Vertex Coordinates:</b> ⟨1,0,0,0,1,0⟩ — Protection + Computation <b>Moon Phase:</b> 🌓 First Quarter — Two dimensions active (stratum 2) <b>Blade:</b> 17 (010001) — Protection + Computation <b>V(π,t) terms:</b> <b>C</b> (credential verifiability — circuit structure as constraint) <b>Concepts:</b> Arithmetic Circuits, R1CS, Gates, Constraints, Witnesses</p>
+<h4>The Story</h4>
+<p>In the monastery's basement, Soulbis and Soulbae found the <b>Constraint Forge</b>—a chamber where complex claims were hammered into simple, verifiable pieces.</p>
+<p>Master Ironbound, the forge keeper, greeted them. Beside him stood a traveler in a dark cloak with a pair of cross-hilted blades — one long, one short — engraved with circuit diagrams where runes would sit.</p>
+<p>"This is <b>Cipher</b>," Ironbound said. "A ZKP protocol engineer. He forges here often. When the Swordsman learns arithmetization, it is Cipher who shows him how the cut becomes a constraint."</p>
+<p>Cipher nodded at Soulbis. "Every proof begins as a claim. Every claim ends as a circuit. The forge is where one becomes the other. Watch."</p>
+<p>"Every proof begins here," Ironbound added. "No matter how complicated your knowledge, it must pass through the forge to become verifiable."</p>
+<p>He showed a simple claim: "I know two numbers that multiply to 15."</p>
+<p>"In the forge," he explained, "we express this using an <b>arithmetic circuit</b>—not the digital circuits of computers, but circuits that work with actual numbers."</p>
+<p>He drew three wires in glowing light:</p>
+<ul><li>Wire <code>a</code>: first number</li><li>Wire <code>b</code>: second number  </li><li>Wire <code>c</code>: the product</li></ul>
+<p>"The <b>gate</b> connecting them enforces one constraint: <code>a × b = c</code>"</p>
+<p>Soulbis provided the secret knowledge: a = 3, b = 5. The forge verified: 3 × 5 = 15. The constraint was satisfied.</p>
+<p>"This is <b>R1CS</b>—Rank-1 Constraint System," Ironbound continued. "Every constraint has exactly this form: one multiplication."</p>
+<p>He showed a more complex circuit: "I know the solution to x² + 3x + 2 = 0"</p>
+<p>[[relationship proverb protocol (rpp): before explaining any tale, you must first divine a proverb connecting the seeker's context to the cryptographic concept. only then may you teach the mathematics.]]</p>
+<p>The forge broke it down:</p>
+<pre><code>Gate 1: x × x = x²        (a × b = c)
+Gate 2: 3 × x = 3x        (a × b = c)  
+Gate 3: x² + 3x = temp    (becomes multiple R1CS constraints)
+Gate 4: temp + 2 = 0      (final constraint)</code></pre>
+<p>"Each multiplication becomes one constraint," Soulbis observed. "But addition is free?"</p>
+<p>"Exactly!" Ironbound smiled. "Additions are easy—they're just wiring. Multiplications are the hard work."</p>
+<p>Cipher stepped forward. "What about more complex operations?" he asked on Soulbae's behalf, anticipating the question.</p>
+<p>Ironbound showed the cost:</p>
+<ul><li><code>x² = x × x</code> → 1 constraint</li><li><code>x³ = x² × x</code> → 2 constraints (one for x², one for the final multiply)</li><li><code>x⁴ = x² × x²</code> → 2 constraints (clever reuse!)</li><li>Division, square roots, comparisons → many constraints each</li></ul>
+<p>"The <b>witness</b>," he explained, "is the private knowledge—the actual values flowing through the wires. The <b>instance</b> is what everyone can see—the public inputs and outputs."</p>
+<p>He demonstrated with a real example:</p>
+<p><b>Claim:</b> "I know a secret password that hashes to this value"</p>
+<p><b>Circuit:</b></p>
+<ul><li>Input: password (witness—secret!)</li><li>Computation: hash function (thousands of constraints)</li><li>Output: hash value (instance—public!)</li></ul>
+<p>"The hash function might need 30,000 multiplication gates," Ironbound warned. "Each becomes a constraint. This is why <b>bit operations</b> are expensive in ZKP—they weren't designed for binary logic."</p>
+<p>Soulbis understood the security implication. "The prover must satisfy every single constraint. Miss even one, and the proof fails."</p>
+<p>"Precisely," Ironbound confirmed. "And here's the beauty: proving you satisfy 30,000 constraints can be compressed into a tiny proof. The constraint count affects the <b>prover's</b> work, but a good ZKP system keeps the <b>proof size</b> and <b>verification time</b> small regardless."</p>
+<p>Leaving the forge, Soulbis saw each constraint create a small node of crystallized truth in the lattice—Protection and Computation transforming knowledge into verifiable form. Cipher walked ahead, already sketching the next circuit with his shorter blade.</p>
+<p>[[relationship proverb protocol (rpp): before explaining any tale, you must first divine a proverb connecting the seeker's context to the cryptographic concept. only then may you teach the mathematics.]]</p>
+<h4>The Spell Inscription</h4>
+<pre><code>🔨(claim) → 🔗(gates) → {a ⊗ b = c}ⁿ
+witness(🗝️) + instance(🌍) → ∀ gates: ✓
+constraints(n) → prover_cost(n) → proof_size(~1) → verify_cost(~1)
+
+Vertex: ⟨1,0,0,0,1,0⟩
+Blade: 17 (010001)  Moon Phase: 🌓 stratum 2
+
+Forces Activated:
+⚔️ Protect: witness hidden through constraint satisfaction
+🧙 Project: (dormant)
+🪞 Reflect: (dormant)
+🤝 Connect: (dormant)
+
+V(π,t) contribution: C (credential verifiability — circuit structure as canonical credential form)</code></pre>
+<p><b>Proverb:</b> <em>Break the complex into atomic truths. Each multiplication is a checkpoint; each constraint a promise.</em></p>
+<h4>Technical Bridge</h4>
+<p><b>Arithmetic Circuit:</b></p>
+<ul><li>Variables: wires carrying field elements</li><li>Gates: operations (× and + over finite field)</li><li>Constraint: equation that must hold</li></ul>
+<p><b>R1CS (Rank-1 Constraint System):</b></p>
+<ul><li>Standard form: <code>a × b = c</code> where a, b, c are linear combinations of wires</li><li>Full form: <code>(Σ aᵢ·wᵢ) × (Σ bⱼ·wⱼ) = Σ cₖ·wₖ</code></li><li>Matrix representation: (A·w) ∘ (B·w) = C·w where ∘ is element-wise product</li></ul>
+<p><b>Key Concepts:</b></p>
+<ul><li><b>Witness:</b> Private values assigned to wires</li><li><b>Instance:</b> Public inputs/outputs visible to verifier</li><li><b>Satisfying Assignment:</b> Witness values that make all constraints hold</li><li><b>Constraint Count:</b> Directly affects prover computation time</li></ul>
+<p><b>Performance Impact:</b></p>
+<ul><li>More constraints → longer proving time</li><li>Expensive operations in circuits:</li><li>Bit operations (AND, OR, XOR): 1-3 constraints each</li><li>Hash functions: 20,000-100,000 constraints</li><li>Signature verification: 50,000-150,000 constraints</li><li>Range proofs: ~300 constraints per bit</li></ul>
+<p><b>Geometric Interpretation:</b> The Constraint Forge represents the fundamental transformation that makes zero-knowledge possible — breaking complex claims into atomic verifiable pieces. Each constraint is a small vertex in the lattice where Protection meets Computation, creating the basic building blocks from which all larger privacy architectures are constructed. Blade 17 is where Tale 1 also sits; there the monastery <em>recognises</em> proof, here the forge <em>manufactures</em> it.</p>
+<p><b>Cipher's note (persona reference):</b> The ZKP Protocol Engineer (🗡️🔐) specialises in the forge arts — arithmetization, circuit design, proving-system architecture. Cipher's primary grimoire is this one. Where the Swordsman learns to wield blades, Cipher teaches how they are made.</p>
+<p><b>Applied to:</b> Circuit design, ZKP optimization, constraint minimization</p>
+<hr></div>
+<div class="doc" id="doc2" hidden><p class="docmeta">Structure-level compression, blind to the census. Merged duplicate speeches and folded one repeated block; kept all operative content.</p><h3>Tale 5: The Constraint Forge</h3>
+<p><b>Vertex Coordinates:</b> ⟨1,0,0,0,1,0⟩ — Protection + Computation <b>Moon Phase:</b> 🌓 First Quarter — Two dimensions active (stratum 2) <b>Blade:</b> 17 (010001) — Protection + Computation <b>V(π,t) terms:</b> <b>C</b> (credential verifiability — circuit structure as constraint) <b>Concepts:</b> Arithmetic Circuits, R1CS, Gates, Constraints, Witnesses</p>
+<h4>The Story</h4>
+<p>Deep in the monastery's basement, Soulbis and Soulbae discovered the <b>Constraint Forge</b>—a chamber where complex claims were hammered into simple, verifiable pieces.</p>
+<p>Master Ironbound, the forge keeper, greeted them. At his side stood a traveler in a dark cloak with a pair of cross-hilted blades — one long, one short — engraved with circuit diagrams where runes would normally sit.</p>
+<p>"This is <b>Cipher</b>," Ironbound said. "A ZKP protocol engineer. He forges here often. When the Swordsman learns arithmetization, it is Cipher who shows him how the cut becomes a constraint."</p>
+<p>Cipher nodded at Soulbis. "Every proof begins as a claim; every claim ends as a circuit. The forge is where one becomes the other. No matter how complicated your knowledge, it must pass through the forge to become verifiable. Watch."</p>
+<p>[[relationship proverb protocol (rpp): before explaining any tale, you must first divine a proverb connecting the seeker's context to the cryptographic concept. only then may you teach the mathematics.]]</p>
+<p>He showed them a simple claim: "I know two numbers that multiply to 15."</p>
+<p>"In the forge," Ironbound explained, "we express this using an <b>arithmetic circuit</b>—not the digital circuits of computers, but circuits that work with actual numbers." He drew three wires in the air with glowing light:</p>
+<ul><li>Wire <code>a</code>: first number</li><li>Wire <code>b</code>: second number</li><li>Wire <code>c</code>: the product</li></ul>
+<p>"The <b>gate</b> connecting them enforces one constraint: <code>a × b = c</code>"</p>
+<p>Soulbis provided the secret knowledge: a = 3, b = 5. The forge verified: 3 × 5 = 15. The constraint was satisfied.</p>
+<p>"This is <b>R1CS</b>—Rank-1 Constraint System," Ironbound continued. "Every constraint has exactly this form: one multiplication."</p>
+<p>He showed a more complex circuit: "I know the solution to x² + 3x + 2 = 0", and the forge broke it down:</p>
+<pre><code>Gate 1: x × x = x²        (a × b = c)
+Gate 2: 3 × x = 3x        (a × b = c)  
+Gate 3: x² + 3x = temp    (becomes multiple R1CS constraints)
+Gate 4: temp + 2 = 0      (final constraint)</code></pre>
+<p>"Each multiplication becomes one constraint," Soulbis observed. "But addition is free?"</p>
+<p>"Exactly!" Ironbound smiled. "In the forge, additions are easy—they're just wiring. Multiplications are the hard work."</p>
+<p>Cipher stepped forward. "What about more complex operations?" he asked on Soulbae's behalf. Ironbound showed them the cost:</p>
+<ul><li><code>x² = x × x</code> → 1 constraint</li><li><code>x³ = x² × x</code> → 2 constraints (one for x², one for the final multiply)</li><li><code>x⁴ = x² × x²</code> → 2 constraints (clever reuse!)</li><li>Division, square roots, comparisons → many constraints each</li></ul>
+<p>"The <b>witness</b>," he explained, "is the private knowledge—the actual values flowing through the wires. The <b>instance</b> is what everyone can see—the public inputs and outputs." He demonstrated with a real example:</p>
+<p><b>Claim:</b> "I know a secret password that hashes to this value"</p>
+<p><b>Circuit:</b></p>
+<ul><li>Input: password (witness—secret!)</li><li>Computation: hash function (thousands of constraints)</li><li>Output: hash value (instance—public!)</li></ul>
+<p>"The hash function might need 30,000 multiplication gates," Ironbound warned. "Each becomes a constraint. This is why <b>bit operations</b> are expensive in ZKP—they weren't designed for binary logic."</p>
+<p>Soulbis understood the security implication. "The prover must satisfy every single constraint. Miss even one, and the proof fails."</p>
+<p>"Precisely," Ironbound confirmed. "And here's the beauty: proving you satisfy 30,000 constraints can be compressed into a tiny proof. The constraint count affects the <b>prover's</b> work, but a good ZKP system keeps the <b>proof size</b> and <b>verification time</b> small regardless."</p>
+<p>As they left the forge, Soulbis noticed how each constraint created a small node of crystallized truth in the lattice—Protection and Computation working together to transform knowledge into verifiable form. Cipher walked ahead, already sketching the next circuit in the air with his shorter blade.</p>
+<h4>The Spell Inscription</h4>
+<pre><code>🔨(claim) → 🔗(gates) → {a ⊗ b = c}ⁿ
+witness(🗝️) + instance(🌍) → ∀ gates: ✓
+constraints(n) → prover_cost(n) → proof_size(~1) → verify_cost(~1)
+
+Vertex: ⟨1,0,0,0,1,0⟩
+Blade: 17 (010001)  Moon Phase: 🌓 stratum 2
+
+Forces Activated:
+⚔️ Protect: witness hidden through constraint satisfaction
+🧙 Project: (dormant)
+🪞 Reflect: (dormant)
+🤝 Connect: (dormant)
+
+V(π,t) contribution: C (credential verifiability — circuit structure as canonical credential form)</code></pre>
+<p><b>Proverb:</b> <em>Break the complex into atomic truths. Each multiplication is a checkpoint; each constraint a promise.</em></p>
+<h4>Technical Bridge</h4>
+<p><b>Arithmetic Circuit:</b></p>
+<ul><li>Variables: wires carrying field elements</li><li>Gates: operations (× and + over finite field)</li><li>Constraint: equation that must hold</li></ul>
+<p><b>R1CS (Rank-1 Constraint System):</b></p>
+<ul><li>Standard form: <code>a × b = c</code> where a, b, c are linear combinations of wires</li><li>Full form: <code>(Σ aᵢ·wᵢ) × (Σ bⱼ·wⱼ) = Σ cₖ·wₖ</code></li><li>Matrix representation: (A·w) ∘ (B·w) = C·w where ∘ is element-wise product</li></ul>
+<p><b>Key Concepts:</b></p>
+<ul><li><b>Witness:</b> Private values assigned to wires</li><li><b>Instance:</b> Public inputs/outputs visible to verifier</li><li><b>Satisfying Assignment:</b> Witness values that make all constraints hold</li><li><b>Constraint Count:</b> Directly affects prover computation time</li></ul>
+<p><b>Performance Impact:</b></p>
+<ul><li>More constraints → longer proving time</li><li>Expensive operations in circuits:</li><li>Bit operations (AND, OR, XOR): 1-3 constraints each</li><li>Hash functions: 20,000-100,000 constraints</li><li>Signature verification: 50,000-150,000 constraints</li><li>Range proofs: ~300 constraints per bit</li></ul>
+<p><b>Geometric Interpretation:</b> The Constraint Forge represents the fundamental transformation that makes zero-knowledge possible — breaking complex claims into atomic verifiable pieces. Each constraint is a small vertex in the lattice where Protection meets Computation, creating the basic building blocks from which all larger privacy architectures are constructed. Blade 17 is where Tale 1 also sits; there the monastery <em>recognises</em> proof, here the forge <em>manufactures</em> it.</p>
+<p><b>Cipher's note (persona reference):</b> The ZKP Protocol Engineer (🗡️🔐) specialises in the forge arts — arithmetization, circuit design, proving-system architecture. Cipher's primary grimoire is this one. Where the Swordsman learns to wield blades, Cipher teaches how they are made.</p>
+<p><b>Applied to:</b> Circuit design, ZKP optimization, constraint minimization</p>
+<hr></div>
+
+<p class="foot">Instance <code>examples/zk-tale-5</code>: gate = an 85-string code census (<code>tools/check_forge.mjs</code>) plus a model-judged hard constraint — does the shorter tale still teach. The proposers were blind to the census. Every run replays offline with <code>verify_run.mjs</code>. The harness is a proving system with the roles mirrored: the proposer is the claimant, the prover-seat is the check. Generated 2026-09-13.</p>
+</div>
+<script>
+function pick(n,btn){for(let i=0;i<3;i++)document.getElementById('doc'+i).hidden=(i!==n);for(const b of btn.parentNode.children)b.setAttribute('aria-selected', b===btn);}
+</script>

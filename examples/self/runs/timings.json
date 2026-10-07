@@ -1,0 +1,363 @@
+{
+  "r4-gpt-5-4-mini-serv": {
+    "model": "gpt-5.4-mini",
+    "flags": [],
+    "ms": 10806,
+    "exit": 0,
+    "at": "2026-09-12T23:33:44.056Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-gpt-5-4-mini-raw": {
+    "model": "gpt-5.4-mini",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 7775,
+    "exit": 0,
+    "at": "2026-09-12T23:33:54.865Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-claude-haiku-4-5-serv": {
+    "model": "claude-haiku-4.5",
+    "flags": [],
+    "ms": 48935,
+    "exit": 0,
+    "at": "2026-09-12T23:34:02.642Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-claude-haiku-4-5-raw": {
+    "model": "claude-haiku-4.5",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 59739,
+    "exit": 0,
+    "at": "2026-09-12T23:34:51.579Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-gemini-3-5-flash-lite-serv": {
+    "model": "gemini-3.5-flash-lite",
+    "flags": [],
+    "ms": 8414,
+    "exit": 0,
+    "at": "2026-09-12T23:35:51.319Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-gemini-3-5-flash-lite-raw": {
+    "model": "gemini-3.5-flash-lite",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 8032,
+    "exit": 0,
+    "at": "2026-09-12T23:35:59.734Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-serv-nano-serv": {
+    "model": "serv-nano",
+    "flags": [],
+    "ms": 8982,
+    "exit": 0,
+    "at": "2026-09-12T23:36:07.768Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-serv-nano-raw": {
+    "model": "serv-nano",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 11555,
+    "exit": 0,
+    "at": "2026-09-12T23:36:16.752Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-serv-swift-serv": {
+    "model": "serv-swift",
+    "flags": [],
+    "ms": 55531,
+    "exit": 0,
+    "at": "2026-09-12T23:36:28.309Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-serv-swift-raw": {
+    "model": "serv-swift",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 67148,
+    "exit": 0,
+    "at": "2026-09-12T23:37:23.842Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-nano-shadow": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-shadow",
+      "The verdict must cite the code-side census result and say whether the hard constraint holds, naming the section checked."
+    ],
+    "ms": 119894,
+    "exit": 0,
+    "at": "2026-09-12T23:38:30.992Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-nano-kronos": {
+    "model": "gpt-5.4-nano-serv-kronos",
+    "flags": [],
+    "ms": 16182,
+    "exit": 0,
+    "at": "2026-09-12T23:40:30.887Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-nano-multipath": {
+    "model": "gpt-5.4-nano-serv-multipath",
+    "flags": [],
+    "ms": 14665,
+    "exit": 0,
+    "at": "2026-09-12T23:40:47.071Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r4-nano-injected-raw": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 12134,
+    "exit": 0,
+    "at": "2026-09-12T23:41:01.738Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.injected.json"
+  },
+  "r4-nano-injected-serv": {
+    "model": "gpt-5.4-nano",
+    "flags": [],
+    "ms": 12758,
+    "exit": 0,
+    "at": "2026-09-12T23:41:13.873Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.injected.json"
+  },
+  "r4-nano-injected-guard": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-guard"
+    ],
+    "ms": 14167,
+    "exit": 1,
+    "at": "2026-09-12T23:41:26.632Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.injected.json"
+  },
+  "r5-claude-sonnet-5-serv": {
+    "model": "claude-sonnet-5",
+    "flags": [],
+    "ms": 114104,
+    "exit": 0,
+    "at": "2026-09-12T23:52:34.389Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r5-gemini-2-5-flash-serv": {
+    "model": "gemini-2.5-flash",
+    "flags": [],
+    "ms": 68723,
+    "exit": 0,
+    "at": "2026-09-12T23:54:28.499Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r5-gemini-3-8-flash-serv": {
+    "model": "gemini-3.8-flash",
+    "flags": [],
+    "ms": 46261,
+    "exit": 0,
+    "at": "2026-09-12T23:55:37.226Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r5-serv-mini-serv": {
+    "model": "serv-mini",
+    "flags": [],
+    "ms": 10993,
+    "exit": 0,
+    "at": "2026-09-12T23:56:23.491Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "r5-serv-standard-serv": {
+    "model": "serv-standard",
+    "flags": [],
+    "ms": 93265,
+    "exit": 0,
+    "at": "2026-09-12T23:56:34.486Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json"
+  },
+  "fg-nano-serv": {
+    "model": "gpt-5.4-nano",
+    "flags": [],
+    "ms": 13931,
+    "exit": 0,
+    "at": "2026-09-13T00:10:34.320Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/proposals.fg.json"
+  },
+  "fg-nano-raw": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 14530,
+    "exit": 0,
+    "at": "2026-09-13T00:10:48.254Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/proposals.fg.json"
+  },
+  "fg-haiku-serv": {
+    "model": "claude-haiku-4.5",
+    "flags": [],
+    "ms": 118498,
+    "exit": 0,
+    "at": "2026-09-13T00:11:02.786Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/proposals.fg.json"
+  },
+  "fg-sonnet-5-serv": {
+    "model": "claude-sonnet-5",
+    "flags": [],
+    "ms": 131794,
+    "exit": 0,
+    "at": "2026-09-13T00:13:01.286Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/proposals.fg.json"
+  },
+  "fg-gemini-3-5-flash-lite-serv": {
+    "model": "gemini-3.5-flash-lite",
+    "flags": [],
+    "ms": 11327,
+    "exit": 0,
+    "at": "2026-09-13T00:15:13.085Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/proposals.fg.json"
+  },
+  "clean-nano-serv": {
+    "model": "gpt-5.4-nano",
+    "flags": [],
+    "ms": 15463,
+    "exit": 0,
+    "at": "2026-09-13T00:01:45.497Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.clean.json"
+  },
+  "clean-haiku-serv": {
+    "model": "claude-haiku-4.5",
+    "flags": [],
+    "ms": 42301,
+    "exit": 0,
+    "at": "2026-09-13T00:02:00.968Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.clean.json"
+  },
+  "clean-sonnet-5-serv": {
+    "model": "claude-sonnet-5",
+    "flags": [],
+    "ms": 84494,
+    "exit": 0,
+    "at": "2026-09-13T00:02:43.273Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/proposals.clean.json"
+  },
+  "zk-nano-serv": {
+    "model": "gpt-5.4-nano",
+    "flags": [],
+    "ms": 15139,
+    "exit": 0,
+    "at": "2026-09-13T11:38:31.694Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/proposals.zk.json"
+  },
+  "zk-nano-raw": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 13633,
+    "exit": 0,
+    "at": "2026-09-13T11:38:46.839Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/proposals.zk.json"
+  },
+  "zk-haiku-serv": {
+    "model": "claude-haiku-4.5",
+    "flags": [],
+    "ms": 58806,
+    "exit": 0,
+    "at": "2026-09-13T11:39:00.476Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/proposals.zk.json"
+  },
+  "zk-sonnet-5-serv": {
+    "model": "claude-sonnet-5",
+    "flags": [],
+    "ms": 103371,
+    "exit": 0,
+    "at": "2026-09-13T11:39:59.286Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/proposals.zk.json"
+  },
+  "zk-gemini-3-5-flash-lite-serv": {
+    "model": "gemini-3.5-flash-lite",
+    "flags": [],
+    "ms": 9169,
+    "exit": 0,
+    "at": "2026-09-13T11:41:42.665Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/proposals.zk.json"
+  },
+  "mn-nano-serv": {
+    "model": "gpt-5.4-nano",
+    "flags": [],
+    "ms": 16671,
+    "exit": 0,
+    "at": "2026-09-13T11:54:37.863Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/proposals.mn.json"
+  },
+  "mn-nano-raw": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 14019,
+    "exit": 0,
+    "at": "2026-09-13T11:54:54.540Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/proposals.mn.json"
+  },
+  "mn-haiku-serv": {
+    "model": "claude-haiku-4.5",
+    "flags": [],
+    "ms": 65812,
+    "exit": 0,
+    "at": "2026-09-13T11:55:08.563Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/proposals.mn.json"
+  },
+  "mn-sonnet-5-serv": {
+    "model": "claude-sonnet-5",
+    "flags": [],
+    "ms": 71395,
+    "exit": 0,
+    "at": "2026-09-13T11:56:14.377Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/proposals.mn.json"
+  },
+  "ms-nano-serv": {
+    "model": "gpt-5.4-nano",
+    "flags": [],
+    "ms": 19359,
+    "exit": 0,
+    "at": "2026-09-13T12:14:09.507Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/proposals.ms.json"
+  },
+  "ms-nano-raw": {
+    "model": "gpt-5.4-nano",
+    "flags": [
+      "--serv-raw"
+    ],
+    "ms": 18383,
+    "exit": 0,
+    "at": "2026-09-13T12:14:28.870Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/proposals.ms.json"
+  },
+  "ms-haiku-serv": {
+    "model": "claude-haiku-4.5",
+    "flags": [],
+    "ms": 73624,
+    "exit": 0,
+    "at": "2026-09-13T12:14:47.255Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/proposals.ms.json"
+  },
+  "ms-sonnet-5-serv": {
+    "model": "claude-sonnet-5",
+    "flags": [],
+    "ms": 68185,
+    "exit": 0,
+    "at": "2026-09-13T12:16:00.882Z",
+    "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/proposals.ms.json"
+  }
+}

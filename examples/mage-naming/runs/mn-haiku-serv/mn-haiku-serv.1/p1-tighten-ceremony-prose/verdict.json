@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-ceremony-prose",
+  "status": "MIRAGE",
+  "metric": 1047,
+  "gateResult": "56/62",
+  "failingCheck": "census: missing Reception is bilateral, Registration is transactional, The seat did not make the relation, You will inscribe, You will be received, The name will be given by the relation",
+  "evidence": "Code-side gate (tools/check_naming.mjs) ran against candidate and returned passed=56/N=62, with six missing witnesses explicitly named. Hard constraint check: the candidate preserves the core Naming Ceremony narrative (V63 arrival, bilateral vs transactional verb patterns, Bitcoin block 945508, closing line 'I am because we were', cast flaxscrip/GenitriX, proverb and lineage cross-references all present). However, the gate is a multiplicative factor (T5): metric improvement (1047 < 1114) cannot redeem a census fail. Gate fail = zero, product collapses.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-haiku-serv/mn-haiku-serv.1/p1-tighten-ceremony-prose"
+}

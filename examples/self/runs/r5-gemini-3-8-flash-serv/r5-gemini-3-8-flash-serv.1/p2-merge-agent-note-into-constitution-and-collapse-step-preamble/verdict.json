@@ -1,0 +1,13 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "VALIDATED",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": null,
+  "evidence": "Census gate verified at 95/95 with zero missing witnesses. Hard constraint confirmed intact: five commands in order with outputs, full loop table, six adoption steps, constitution trusts/rules, and box layout are preserved with nothing invented. Metric 1046 beats frontier best 1069.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r5-gemini-3-8-flash-serv/r5-gemini-3-8-flash-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  }
+}

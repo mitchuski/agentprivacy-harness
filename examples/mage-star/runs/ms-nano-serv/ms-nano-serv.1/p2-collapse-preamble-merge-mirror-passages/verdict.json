@@ -1,0 +1,9 @@
+{
+  "leverId": "collapse-preamble-merge-mirror-passages",
+  "status": "MIRAGE",
+  "metric": 1057,
+  "gateResult": "55/57",
+  "failingCheck": "census: missing eight-pointed star; the Mage's tetrahedron",
+  "evidence": "The held-out full gate (tools/check_star.mjs in census mode) reports only 55/57 witnesses present: missing the “eight-pointed star” and “the Mage's tetrahedron.” Because the full held-out gate fails N=57, the candidate cannot be a validated result regardless of word count or narrative framing.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-nano-serv/ms-nano-serv.1/p2-collapse-preamble-merge-mirror-passages"
+}

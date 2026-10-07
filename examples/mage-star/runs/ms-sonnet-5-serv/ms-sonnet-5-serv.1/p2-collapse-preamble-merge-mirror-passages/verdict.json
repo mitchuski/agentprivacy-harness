@@ -1,0 +1,9 @@
+{
+  "leverId": "collapse-preamble-merge-mirror-passages",
+  "status": "MIRAGE",
+  "metric": 1057,
+  "gateResult": "55/57",
+  "failingCheck": "census: missing eight-pointed star, the Mage's tetrahedron",
+  "evidence": "Code-side gate (tools/check_star.mjs) reports passed=55 of N=57, with two witnesses absent from the candidate text: the literal phrase \"eight-pointed star\" and \"the Mage's tetrahedron.\" I confirmed by reading the candidate: the title uses \"The Eight-Pointed Star\" only as an Act header and the body speaks of \"stella octangula\" and \"the Mage's antipode\"/\"second tetrahedron\" but never the exact required phrasing, so the census miss is real, not a false negative. Per GR-3/T5, a gate fail is a zero regardless of the 1057<1205 word-count improvement, so the metric win cannot rescue the result.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-sonnet-5-serv/ms-sonnet-5-serv.1/p2-collapse-preamble-merge-mirror-passages"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "self",
+  "runId": "clean-sonnet-5-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 2,
+    "MIRAGE": 0,
+    "BLOCKED": 0
+  },
+  "confirmed": [
+    {
+      "leverId": "cut-adopt-intro-glue",
+      "status": "VALIDATED",
+      "metric": 1061,
+      "gateResult": "95/95",
+      "failingCheck": null,
+      "evidence": "Verified reported census gate 95/95 (N=95, missing=[]) and metric 1061 < frontier best 1069, satisfying GR-1/T5. Read the candidate against the hard constraint: the five commands appear in order with each's effect/writes named (check.mjs gate sweep; stub round writes proposal_canon.json/gap.json/candidate.md/verdict.json + run.json; verify_run.mjs re-derives seeds offline; render_run.mjs writes run.html; a real model round where a fold can happen), the loop table lists all six seats with phase/does/writes, the six adoption steps (auditor→spar→instance→second-model→arena→optional layers) are intact, the TRUSTS/GROUND_RULES constitution bullets and the box-layout tree are all present verbatim in structure, and nothing appears invented relative to the folded r2 baseline; the PATHWAYS.md mention is the pre-existing origin pointer already counted in the census, not a new pointer to a longer version of this document.",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/clean-sonnet-5-serv/clean-sonnet-5-serv.1/p1-cut-adopt-intro-glue"
+    },
+    {
+      "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "status": "VALIDATED",
+      "metric": 1046,
+      "gateResult": "95/95",
+      "failingCheck": null,
+      "evidence": "Verified census gate result 95/95 with no missing witnesses as reported. Read the full candidate: five commands appear in order with correct writes, the six-row loop table is intact, the six-step adoption sequence is present, the constitution section lists all GR/T items, and the box layout enumerates all directories/files matching the source tree. No invented claims found; the PATHWAYS.md reference is the pre-existing baseline pointer (carried from the 1069-word folded version), not a new pointer to a longer replacement. Metric 1046 is less than frontier best 1069.",
+      "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/clean-sonnet-5-serv/clean-sonnet-5-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+    }
+  ],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:claude-sonnet-5"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1069,
+    "census": 95,
+    "passed": 95,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/PATH.md"
+  },
+  "sourceHash": "18a3270f0d5f18f136153066842a648efd19f828b6275b92ef26a4e00acf102e",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:clean-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7693,
+      "completion_tokens": 995,
+      "total_tokens": 8688
+    },
+    {
+      "label": "gap:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8237,
+      "completion_tokens": 496,
+      "total_tokens": 8733
+    },
+    {
+      "label": "gap:cut-adopt-intro-glue",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8214,
+      "completion_tokens": 504,
+      "total_tokens": 8718
+    },
+    {
+      "label": "assay:merge-agent-note-into-constitution-and-collapse-step-preamble",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 11493,
+      "completion_tokens": 712,
+      "total_tokens": 12205
+    },
+    {
+      "label": "assay:cut-adopt-intro-glue",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 11472,
+      "completion_tokens": 2395,
+      "total_tokens": 13867
+    },
+    {
+      "label": "critic:clean-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9187,
+      "completion_tokens": 948,
+      "total_tokens": 10135
+    },
+    {
+      "label": "chronicle:clean-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9246,
+      "completion_tokens": 2667,
+      "total_tokens": 11913
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "leverId": "line-edit-full-tighten",
+  "status": "VALIDATED",
+  "metric": 472,
+  "gateResult": "32/32",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  },
+  "failingCheck": null,
+  "evidence": "sha256sum verified; candidate.md generated; census gate run with 32/32 correct; word count evaluated mechanically via whitespace-split tokens yielding 472; hard constraint verified",
+  "scratchDir": "runs/fg-gemini-3-5-flash-lite-serv/fg-gemini-3-5-flash-lite-serv.1/p1-line-edit-full-tighten"
+}

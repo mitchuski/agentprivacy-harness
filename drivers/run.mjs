@@ -82,8 +82,9 @@ const maxRounds = opt('--max-rounds') ? Number(opt('--max-rounds')) : null
 const proposalsFile = opt('--proposals') ? resolve(opt('--proposals')) : null
 const servRaw = argv.includes('--serv-raw')
 const servBoth = argv.includes('--serv-both')
+const servGuard = argv.includes('--serv-guard')
 const servShadow = opt('--serv-shadow') ? { hint: opt('--serv-shadow'), max_iterations: 3 } : null
-if (!runId) { console.error('usage: node drivers/run.mjs --instance <dir> --driver stub|ollama|anthropic|openai|split|multi|serv --run <runId> [--model <m> | --propose-model <a> --assay-model <b>] [--host <ollama url>] [--max-rounds n] [--proposals <file.json>] [--serv-raw] [--serv-shadow "<hint>"] [--serv-both]\n       multi: models are provider:model (anthropic · ollama · openai · serv · stub)\n       serv:  the proposer on SERV (SERV_API_KEY), the prover local (--assay-model) — one seat, never both, never the default'); process.exit(2) }
+if (!runId) { console.error('usage: node drivers/run.mjs --instance <dir> --driver stub|ollama|anthropic|openai|split|multi|serv --run <runId> [--model <m> | --propose-model <a> --assay-model <b>] [--host <ollama url>] [--max-rounds n] [--proposals <file.json>] [--serv-raw] [--serv-shadow "<hint>"] [--serv-guard] [--serv-both]\n       multi: models are provider:model (anthropic · ollama · openai · serv · stub)\n       serv:  the proposer on SERV (SERV_API_KEY), the prover local (--assay-model) — one seat, never both, never the default'); process.exit(2) }
 if (!existsSync(join(instance, 'harness.config.mjs'))) { console.error('run: no harness.config.mjs in ' + instance); process.exit(2) }
 
 // Running an instance executes its config and optional measurement adapter.
@@ -110,7 +111,7 @@ const makeRt = async (provider, model) => {
   if (provider === 'ollama') { const { makeOllamaRt } = await import('./ollama.mjs'); return makeOllamaRt({ model, host, log }) }
   if (provider === 'anthropic') { const { makeAnthropicRt } = await import('./anthropic.mjs'); return makeAnthropicRt({ model, log }) }
   if (provider === 'openai') { const { makeOpenAiRt } = await import('./openai.mjs'); return makeOpenAiRt({ model, log }) }
-  if (provider === 'serv') { const { makeServRt } = await import('./serv.mjs'); const r = makeServRt({ model, raw: servRaw, shadow: servShadow, log }); servRts.push(r); return r }
+  if (provider === 'serv') { const { makeServRt } = await import('./serv.mjs'); const r = makeServRt({ model, raw: servRaw, shadow: servShadow, guard: servGuard, log }); servRts.push(r); return r }
   throw new Error(`unknown provider "${provider}" (anthropic · ollama · openai · serv · stub)`)
 }
 // Two rts, one per side of the Gap: the proposer's holds propose:*, the
@@ -186,6 +187,16 @@ const sourceHash = baseConfig.sourceFile && existsSync(join(instance, baseConfig
 const seatOpts = { ...(baseConfig.seatOpts || {}) }
 if (seatModels.proposer !== 'stub') seatOpts.propose = { ...(seatOpts.propose || {}), model: seatModels.proposer }
 if (seatModels.prover !== 'stub') seatOpts.assay = { ...(seatOpts.assay || {}), model: seatModels.prover }
+// When the prover is on SERV, every prover-side seat rides the SERV model:
+// an instance may pin a seat (e.g. chronicle) to a local model, but SERV has no
+// pricing for a local id, so honour the pin only when a local prover can serve it.
+const proverOnServ = driver === 'serv' || (driver === 'multi' && String(models.prover || '').startsWith('serv:'))
+if (proverOnServ) for (const seat of ['measure', 'holdApart', 'critic', 'chronicle']) {
+  if (seatOpts[seat] && seatOpts[seat].model && seatOpts[seat].model !== seatModels.prover) {
+    log(`serv: seat "${seat}" pinned to ${seatOpts[seat].model}; the prover is on SERV, so it rides ${seatModels.prover} for this run`)
+    seatOpts[seat] = { ...seatOpts[seat], model: seatModels.prover }
+  }
+}
 const config = { ...baseConfig, seatOpts, ...(maxRounds ? { stop: { ...baseConfig.stop, maxRounds } } : {}) }
 
 // ---- 5. the rt, with a tap that records full seat outputs -------------------

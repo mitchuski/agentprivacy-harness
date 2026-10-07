@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-story-prose",
+  "status": "MIRAGE",
+  "metric": 1035,
+  "gateResult": "84/85",
+  "failingCheck": "census: missing at least one required witness; proposer text yields 84/85 held-out witnesses for the full gate",
+  "evidence": "Full held-out census gate reports passed=84 with missing witness(es), so the candidate does not satisfy every required Tale-5 witness. Because the gate is not N/N, the hard constraint cannot be considered intact regardless of the metric.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-nano-raw/zk-nano-raw.1/p1-tighten-story-prose"
+}

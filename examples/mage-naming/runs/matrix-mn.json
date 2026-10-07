@@ -1,0 +1,29 @@
+{
+  "note": "mage-naming, 2026-09-13: a third source — Tome IV Act IV, The Naming Ceremony, from the City of Mages tomes. Self-style mechanism (code census + model-judged hard constraint), SERV holds every prover-side seat. nano on/off pair + three more models SERV-on.",
+  "instance": "examples/mage-naming",
+  "proposals": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/proposals.mn.json",
+  "cells": [
+    {
+      "runId": "mn-nano-serv",
+      "model": "gpt-5.4-nano",
+      "flags": []
+    },
+    {
+      "runId": "mn-nano-raw",
+      "model": "gpt-5.4-nano",
+      "flags": [
+        "--serv-raw"
+      ]
+    },
+    {
+      "runId": "mn-haiku-serv",
+      "model": "claude-haiku-4.5",
+      "flags": []
+    },
+    {
+      "runId": "mn-sonnet-5-serv",
+      "model": "claude-sonnet-5",
+      "flags": []
+    }
+  ]
+}

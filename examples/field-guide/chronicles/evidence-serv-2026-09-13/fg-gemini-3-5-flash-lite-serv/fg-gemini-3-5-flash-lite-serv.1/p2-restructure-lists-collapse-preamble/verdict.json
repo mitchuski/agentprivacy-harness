@@ -1,0 +1,14 @@
+{
+  "leverId": "restructure-lists-collapse-preamble",
+  "status": "VALIDATED",
+  "metric": 460,
+  "gateResult": "32/32",
+  "coverage": {
+    "mode": "census",
+    "detection": "always — every witness probed"
+  },
+  "failingCheck": null,
+  "evidence": "Seed re-derived and verified; all 32 facts recoverable under census mode gate; word count mechanically measured via whitespace split yielding 460 tokens (beating current best 472); hard constraint maintained as self-contained instruction guide.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-gemini-3-5-flash-lite-serv/fg-gemini-3-5-flash-lite-serv.1/p2-restructure-lists-collapse-preamble",
+  "leverIdMismatch": "p2-restructure-lists-collapse-preamble"
+}

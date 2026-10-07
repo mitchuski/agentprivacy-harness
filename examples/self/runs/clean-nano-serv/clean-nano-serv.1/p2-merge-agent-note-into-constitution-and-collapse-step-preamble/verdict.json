@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: document mismatch vs five-commands/loop/constitution/box-layout (GR-3 hardConstraint held-out door test)",
+  "evidence": "I relied on the gate outcome already produced by the code-side check_path (95 witnesses present; 95/95). However, the hard constraint is the stranger-first document-layout test (exactly the required five commands in order with their writes, the loop table, adoption steps, constitution, and box layout), and the candidate fails that constraint. Because GR-3 is hard, the result cannot be VALIDATED even though the census gate passed.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/clean-nano-serv/clean-nano-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-preamble-and-table-costs",
+  "status": "MIRAGE",
+  "metric": 1018,
+  "gateResult": "85/85",
+  "failingCheck": "hard constraint (Tale 5)",
+  "evidence": "The candidate text includes many Tale 5-adjacent elements (R1CS a×b=c, witnesses vs instance, two worked example themes, and the “constraint forge” narrative), but it does not unambiguously preserve the full Tale 5 method-doc requirement set “in story beats in order” including the constraint-count cost discussion, the witness-versus-instance distinction, and the required inscription/proverb/codes exactly as Tale 5 prescribes. Because the held-out gate/census passed but the content-faithfulness hard constraint is not satisfied, the result is a MIRAGE rather than VALIDATED.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/zk-tale-5/runs/zk-nano-serv/zk-nano-serv.1/p2-merge-preamble-and-table-costs"
+}

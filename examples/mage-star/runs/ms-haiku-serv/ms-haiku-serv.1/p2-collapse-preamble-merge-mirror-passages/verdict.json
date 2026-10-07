@@ -1,0 +1,9 @@
+{
+  "leverId": "collapse-preamble-merge-mirror-passages",
+  "status": "MIRAGE",
+  "metric": 1057,
+  "gateResult": "55/57",
+  "failingCheck": "census: missing [\"eight-pointed star\",\"the Mage's tetrahedron\"]",
+  "evidence": "Code-side gate (tools/check_star.mjs) reports 55/57 witnesses passed; two critical witnesses absent: \"eight-pointed star\" and \"the Mage's tetrahedron\". The candidate teaches Luca's stella octangula, the two crossing tetrahedra, and the City Key as a reading, but does not explicitly name or foreground the eight-pointed star as a distinct witness, nor does it isolate \"the Mage's tetrahedron\" as a named entity. The hard constraint requires all 57 witnesses intact; the proposal achieves 1057 words but fails the census gate.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-star/runs/ms-haiku-serv/ms-haiku-serv.1/p2-collapse-preamble-merge-mirror-passages"
+}

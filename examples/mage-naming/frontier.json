@@ -1,0 +1,39 @@
+{
+  "authority": "This file is the single source of truth for numbers (GR-1). No metric appears in prose except as a citation of this file. Keystone-only writes.",
+  "updated": "2026-09-13",
+  "objective": {
+    "metric": "words of artifact/NAMING.md (whitespace-split tokens; tools/measure.mjs), lower is better",
+    "gate": "census over census.json: every witness present in the candidate (tools/check_naming.mjs), N/N or MIRAGE",
+    "hardConstraint": "still tells the Naming Ceremony: arrival at V63, the three bilateral moves vs the transactional ones, flaxscrip's Bitcoin block 945508, the closing line, the cast, the proverb and lineage; nothing invented"
+  },
+  "gate": {
+    "N": 62,
+    "mode": "census",
+    "how": "node tools/check_naming.mjs <candidate>"
+  },
+  "baseline": {
+    "metric": 1114,
+    "date": "2026-09-13",
+    "how": "node tools/measure.mjs → metric (whitespace-split tokens of artifact/NAMING.md); census 62/62"
+  },
+  "best": {
+    "metric": 1114,
+    "leverIds": [],
+    "evidence": "baseline — Tome IV Act IV as published in the City of Mages tomes; census N=62 drawn from it; nothing has beaten it yet"
+  },
+  "history": [
+    {
+      "metric": 1114,
+      "date": "2026-09-13",
+      "lever": null,
+      "note": "baseline — artifact/NAMING.md = City of Mages Tome IV Act IV, The Naming Ceremony; census N=62"
+    }
+  ],
+  "attempts": [],
+  "openTarget": {
+    "id": "OT-1",
+    "statement": "below 1114 words with all 62 witnesses and the hard constraint intact",
+    "status": "OPEN"
+  },
+  "closedTargets": []
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "I checked the candidate against the stated hard constraint and the gate report. The candidate still presents the required opening structure, but the code-side census already missed one witness, so it cannot validate. The missing witness is explicitly named in the gate output, and that alone is enough to make this a MIRAGE.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-gpt-5-4-mini-serv/r4-gpt-5-4-mini-serv.1/p1-trim-connective-prose-on-fold"
+}

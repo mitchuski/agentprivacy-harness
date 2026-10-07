@@ -1,0 +1,115 @@
+resolved seats: {"proposer":"claude-fable-5-1 (Claude Code subagents, one per lens)","prover":"serv:claude-sonnet-5"}
+measured: {"metric":1205,"census":57,"passed":57,"pass":true,"rule":"whitespace-split tokens of artifact/STAR.md"}
+  — Measure —
+  round ms-sonnet-5-serv.1 opens — measure syncs the frontier
+  — Propose —
+  propose:line-editor — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  propose:restructurer — handed off (1 proposal(s) from claude-fable-5-1 (Claude Code subagents, one per lens))
+  2 proposal(s) on the table: tighten-narrative-prose, collapse-preamble-merge-mirror-passages
+  assay closed: 2/2 — {"VALIDATED":0,"MIRAGE":2,"BLOCKED":0}
+  — Critic —
+  — Chronicle —
+  round ms-sonnet-5-serv.1 closes — 0 structural win(s), dry=1/2
+
+{
+  "name": "mage-star",
+  "runId": "ms-sonnet-5-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:claude-sonnet-5"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1205,
+    "census": 57,
+    "passed": 57,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/STAR.md"
+  },
+  "sourceHash": "afe0ad1bad522502ad0414a5df98e6e291e75f1f6916eaaef1ede551324b5f40",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:ms-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6354,
+      "completion_tokens": 571,
+      "total_tokens": 6925
+    },
+    {
+      "label": "gap:tighten-narrative-prose",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6871,
+      "completion_tokens": 275,
+      "total_tokens": 7146
+    },
+    {
+      "label": "gap:collapse-preamble-merge-mirror-passages",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6873,
+      "completion_tokens": 453,
+      "total_tokens": 7326
+    },
+    {
+      "label": "assay:tighten-narrative-prose",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9894,
+      "completion_tokens": 541,
+      "total_tokens": 10435
+    },
+    {
+      "label": "assay:collapse-preamble-merge-mirror-passages",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9798,
+      "completion_tokens": 684,
+      "total_tokens": 10482
+    },
+    {
+      "label": "critic:ms-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7774,
+      "completion_tokens": 1534,
+      "total_tokens": 9308
+    },
+    {
+      "label": "chronicle:ms-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8274,
+      "completion_tokens": 2908,
+      "total_tokens": 11182
+    }
+  ]
+}
+
+verify:  node tools/verify_run.mjs C:/Users/mitch/dual-agent-harness/examples/mage-star ms-sonnet-5-serv
+render:  node tools/render_run.mjs C:/Users/mitch/dual-agent-harness/examples/mage-star ms-sonnet-5-serv

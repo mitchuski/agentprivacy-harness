@@ -1,0 +1,99 @@
+{
+  "name": "mage-naming",
+  "runId": "mn-sonnet-5-serv",
+  "driver": "multi",
+  "status": "COMPLETE",
+  "rounds": 1,
+  "tally": {
+    "VALIDATED": 0,
+    "MIRAGE": 2,
+    "BLOCKED": 0
+  },
+  "confirmed": [],
+  "models": {
+    "proposer": "claude-fable-5-1 (Claude Code subagents, one per lens)",
+    "prover": "serv:claude-sonnet-5"
+  },
+  "phiInference": 1,
+  "measured": {
+    "metric": 1114,
+    "census": 62,
+    "passed": 62,
+    "pass": true,
+    "rule": "whitespace-split tokens of artifact/NAMING.md"
+  },
+  "sourceHash": "cc28c22fde051793833f25aabffc02b2f02ad200b64f9762e2c8c86590d413bc",
+  "keystoneTodo": "fold VALIDATED levers (frontier.json first, prose second — GR-1); file killedLeverDrafts (GR-6); review + file the chronicle drafts (GR-7); node engine/conform.mjs green before and after (G0); door items listed for the First Person, never opened (G4/T6)",
+  "usage": [
+    {
+      "label": "measure:mn-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6335,
+      "completion_tokens": 419,
+      "total_tokens": 6754
+    },
+    {
+      "label": "gap:merge-ceremony-prose-list-the-three-moves",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6862,
+      "completion_tokens": 385,
+      "total_tokens": 7247
+    },
+    {
+      "label": "gap:tighten-ceremony-prose",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 6862,
+      "completion_tokens": 479,
+      "total_tokens": 7341
+    },
+    {
+      "label": "assay:tighten-ceremony-prose",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9840,
+      "completion_tokens": 587,
+      "total_tokens": 10427
+    },
+    {
+      "label": "assay:merge-ceremony-prose-list-the-three-moves",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 9867,
+      "completion_tokens": 754,
+      "total_tokens": 10621
+    },
+    {
+      "label": "critic:mn-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 7808,
+      "completion_tokens": 1517,
+      "total_tokens": 9325
+    },
+    {
+      "label": "chronicle:mn-sonnet-5-serv.1",
+      "model": "claude-sonnet-5",
+      "raw": false,
+      "shadow": false,
+      "guard": false,
+      "prompt_tokens": 8281,
+      "completion_tokens": 3190,
+      "total_tokens": 11471
+    }
+  ]
+}

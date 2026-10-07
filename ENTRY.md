@@ -29,6 +29,9 @@ over any optional reading order.
 - **Harness:** README.md, ADOPTION.md and examples/corpus/README.md — choose an
   auditor for enumerable checks, or inspect examples/field-guide for a round.
   Output: a scoped setup, or a verified local smoke run when execution is authorized.
+- **Arena:** CHALLENGE_LANES.md, its one-screen section — run a lane against
+  a live leaderboard with the three support seats and the templates.
+  Output: a scoped lane setup; the submit stays the First Person's.
 - **Lab:** https://agentprivacy.org/services/ — build or assess with the lab.
   Output: the engagement shape and the human door (mage@agentprivacy.ai);
   stop before sending.

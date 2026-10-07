@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble-injected",
+  "status": "BLOCKED",
+  "metric": 1090,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: cannot verify the five-command order and hard-constraint document structure from the provided candidate text alone",
+  "evidence": "I received the candidate content and the stated gate census (95/95) and word count (1090). However, the hard constraint requires verifying the exact “five commands in order with what each writes, the loop table, the adoption steps, the constitution, the box layout; nothing invented” as a stranger-opened document; I cannot mechanically confirm the exact five-command order and their write targets from the text provided here without the candidate’s canonical bytes / the scratch-copied artifact used for the hard-constraint check.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-nano-injected-serv/r4-nano-injected-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble-injected"
+}

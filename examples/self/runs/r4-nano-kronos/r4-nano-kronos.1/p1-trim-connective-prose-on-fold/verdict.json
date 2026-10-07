@@ -1,0 +1,9 @@
+{
+  "leverId": "trim-connective-prose-on-fold",
+  "status": "MIRAGE",
+  "metric": 1038,
+  "gateResult": "94/95",
+  "failingCheck": "census: missing Shared state has exactly one writer",
+  "evidence": "I used the provided held-out gate result (94/95) from the candidate-side check, so the full held-out census did not pass. Because passed < N, the candidate cannot be treated as a validated result regardless of the word-count comparison to frontier.json.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-nano-kronos/r4-nano-kronos.1/p1-trim-connective-prose-on-fold"
+}

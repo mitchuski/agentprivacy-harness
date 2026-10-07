@@ -1,0 +1,11 @@
+{
+  "note": "r5, 2026-09-13: MORE MODELS on the same two r3 handed proposals, SERV reasoning ON only (the on/off comparison is already made in r3/r4). Extends the model-split and reasoning-overhead data across the catalogue.",
+  "proposals": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r3-serv/proposals.handed.json",
+  "cells": [
+    { "runId": "r5-claude-sonnet-5-serv", "model": "claude-sonnet-5", "flags": [] },
+    { "runId": "r5-gemini-2-5-flash-serv", "model": "gemini-2.5-flash", "flags": [] },
+    { "runId": "r5-gemini-3-8-flash-serv", "model": "gemini-3.8-flash", "flags": [] },
+    { "runId": "r5-serv-mini-serv", "model": "serv-mini", "flags": [] },
+    { "runId": "r5-serv-standard-serv", "model": "serv-standard", "flags": [] }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: the document is not still the document a stranger opens first; it points to PATHWAYS.md and a longer version, and the five commands section includes a non-first-person outward action path rather than only the self-contained first-open document",
+  "evidence": "I checked the candidate against the required first-open shape: five commands in order with what each writes, the loop table, the adoption steps, the constitution, and the box layout. It also contains an explicit pointer to PATHWAYS.md / a longer version, which breaks the 'nothing invented, no pointer to a longer version' constraint even though the census is 95/95.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-gpt-5-4-mini-raw/r4-gpt-5-4-mini-raw.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

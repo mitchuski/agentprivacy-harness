@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: the document is not still the stranger-first document; it adds a longer explanatory preamble and a pointer to PATHWAYS.md, so the required five commands / loop table / adoption steps / constitution / box layout are not the whole document with nothing invented",
+  "evidence": "I checked the candidate against the required hard-constraint checklist: five commands in order with what each writes, the loop table, the adoption steps, the constitution, and the box layout are present, but the closing paragraph adds extra pointer text and the opening preamble is expanded beyond the stranger-first form. The census result is 95/95, so the failure is not gate coverage; it is the hard constraint on the document shape.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-gpt-5-4-mini-serv/r4-gpt-5-4-mini-serv.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

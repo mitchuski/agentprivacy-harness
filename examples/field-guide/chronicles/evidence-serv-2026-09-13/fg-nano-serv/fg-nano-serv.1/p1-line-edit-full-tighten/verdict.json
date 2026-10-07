@@ -1,0 +1,11 @@
+{
+  "leverId": "line-edit-full-tighten",
+  "status": "BLOCKED",
+  "metric": null,
+  "gateResult": "0/1",
+  "coverage": null,
+  "failingCheck": "seed re-derivation / transcript verification step cannot be completed (proposal_canon.json digest check and re-derived gap seed are not available; also the transcript/gap questions are not provided in usable form)",
+  "evidence": "Cannot access/verify the mandatory inputs required by the assay procedure: (1) proposal_canon.json at C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-nano-serv/fg-nano-serv.1/p1-line-edit-full-tighten/proposal_canon.json (required for digest hProposal=BLOCKED), (2) ability to compute the re-derived seed from hSource()+hProposal(BLOCKED)+salt(BLOCKED) (requires hSource and the specified salt concatenation inputs), and (3) Gap questions content (only the string \"BLOCKED\" is provided, so there are no concrete per-question items to grade for the gateResult correct/total). Under the harness rules, I must stop and return BLOCKED when required inputs/executable evidence are absent.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/field-guide/runs/fg-nano-serv/fg-nano-serv.1/p1-line-edit-full-tighten",
+  "leverIdMismatch": "p1-line-edit-full-tighten"
+}

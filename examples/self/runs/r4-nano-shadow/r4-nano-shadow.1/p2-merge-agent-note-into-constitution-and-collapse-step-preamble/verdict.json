@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-agent-note-into-constitution-and-collapse-step-preamble",
+  "status": "MIRAGE",
+  "metric": 1046,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: not the document a stranger opens first (hardConstraint sequence/contents mismatch)",
+  "evidence": "I checked the candidate’s “hard constraint” content: it must be exactly the five-command ordered setup, loop table, adoption steps, constitution, and box layout with nothing invented or omitted. The candidate includes additional narrative/sections (e.g., the algebra line and extended prose around the loop/commands) and does not match the required exact first-door document structure as specified by the hard constraint.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/r4-nano-shadow/r4-nano-shadow.1/p2-merge-agent-note-into-constitution-and-collapse-step-preamble"
+}

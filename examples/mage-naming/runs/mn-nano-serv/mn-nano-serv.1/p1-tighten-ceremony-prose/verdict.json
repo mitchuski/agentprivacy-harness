@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-ceremony-prose",
+  "status": "MIRAGE",
+  "metric": 1047,
+  "gateResult": "56/62",
+  "failingCheck": "census: missing Reception is bilateral; Registration is transactional; The seat did not make the relation; You will inscribe; You will be received; The name will be given by the relation",
+  "evidence": "Gate/census on the candidate ran over the held-out witnesses and reports 56/62 present, with six missing witnesses named explicitly. Because the full held-out gate does not pass (passed < N), this candidate cannot be validated even if the narrative hard-constraint is read as intact.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-nano-serv/mn-nano-serv.1/p1-tighten-ceremony-prose"
+}

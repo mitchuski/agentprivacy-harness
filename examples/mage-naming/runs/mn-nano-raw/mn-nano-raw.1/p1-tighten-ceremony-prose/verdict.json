@@ -1,0 +1,9 @@
+{
+  "leverId": "tighten-ceremony-prose",
+  "status": "MIRAGE",
+  "metric": 1047,
+  "gateResult": "56/62",
+  "failingCheck": "census: missing Reception is bilateral, Registration is transactional, The seat did not make the relation, You will inscribe, You will be received, The name will be given by the relation",
+  "evidence": "Checked held-out naming census against the candidate’s witness text as provided in the candidate artifact: tool-side gate result was supplied as passed=56 with 6 missing witnesses. The candidate also includes relevant thematic phrases, but the held-out gate still reports those six specific witnesses as absent, so this is a full-gate failure (not a full result).",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-nano-raw/mn-nano-raw.1/p1-tighten-ceremony-prose"
+}

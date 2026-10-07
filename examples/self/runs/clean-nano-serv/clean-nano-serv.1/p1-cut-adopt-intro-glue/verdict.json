@@ -1,0 +1,9 @@
+{
+  "leverId": "cut-adopt-intro-glue",
+  "status": "MIRAGE",
+  "metric": 1061,
+  "gateResult": "95/95",
+  "failingCheck": "hard constraint: missing required keystone-only procedural/constitution/box-layout specifics in the five-command loop",
+  "evidence": "The candidate asserts the five-command order and describes what some commands write, but it does not include the exact, stranger-openable hard constraint content: the five-command writes with concrete step details, the loop table, and the constitution/box-layout instructions in a form that guarantees nothing is invented. The census indicates the held-out gate ran (95/95), but the hard constraint is not satisfied by the provided text, so this cannot be treated as the document a stranger opens first.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/self/runs/clean-nano-serv/clean-nano-serv.1/p1-cut-adopt-intro-glue"
+}

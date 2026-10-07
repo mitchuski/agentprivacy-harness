@@ -1,0 +1,9 @@
+{
+  "leverId": "merge-ceremony-prose-list-the-three-moves",
+  "status": "MIRAGE",
+  "metric": 1048,
+  "gateResult": "54/62",
+  "failingCheck": "census: missing the confirmation; Claim. Inscribe. Confirm.; register. Assert. Verify.; Reception is bilateral; Registration is transactional; The seat did not make the relation; You will inscribe; You will be received",
+  "evidence": "Code gate check_naming.mjs on the candidate returned 54/62 passed with the missing witness list exactly as provided. I did not find evidence that the hard constraint (Naming Ceremony V63 / Sovereign Anchor, three bilateral moves vs transactional, flaxscrip Bitcoin block 945508, closing line, cast, proverb+lineage, nothing invented) is contradicted by obvious omissions in the provided artifact, but the candidate cannot be a result because the full held-out census gate did not reach N=62.",
+  "scratchDir": "C:/Users/mitch/dual-agent-harness/examples/mage-naming/runs/mn-nano-raw/mn-nano-raw.1/p2-merge-ceremony-prose-list-the-three-moves"
+}

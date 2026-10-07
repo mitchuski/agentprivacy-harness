@@ -32,6 +32,9 @@ over any optional reading order.
 - **Arena:** CHALLENGE_LANES.md, its one-screen section — run a lane against
   a live leaderboard with the three support seats and the templates.
   Output: a scoped lane setup; the submit stays the First Person's.
+  The City's Arena district (https://mages.city/arena.md) is where such lanes
+  are cited and, once the City's community DID is minted, where a reviewed
+  evidence root becomes a membership and role credential.
 - **Lab:** https://agentprivacy.org/services/ — build or assess with the lab.
   Output: the engagement shape and the human door (mage@agentprivacy.ai);
   stop before sending.

@@ -46,7 +46,9 @@ node engine/loop.test.mjs               # the engine's failure-semantics tests
 node tools/verify_run.mjs <instance> <runId>   # re-derive every Gap seed from saved bytes
 ```
 
-Requirements: Node ≥ 18, zero dependencies, no network. If a gate exits
+Requirements: Node ≥ 18, zero dependencies, no network. On Windows, set
+`git config --global core.longpaths true` before cloning: run-record paths
+reach 177 characters and a deep checkout directory exceeds the default limit. If a gate exits
 non-zero, every line it printed is a command you can re-run yourself.
 
 ## Whose problem this is

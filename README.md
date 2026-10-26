@@ -449,6 +449,33 @@ recorded" rather than being papered over (GR-5). Verdicts wear their color —
 VALIDATED green, MIRAGE amber, BLOCKED red — and the frontier does not move
 here any more than it moves in the loop.
 
+## Show a lane as a chain
+
+A run page shows one round. When a lane has minted many κ-evidence bundles
+(`tools/kappa_evidence.mjs mint`, or `kappa-evidence-mage`), the whole lane can
+be read as a **PoAW chain**, and the problem becomes a *quest* of the Mages City with a subdomain of its own (the mage's quest: an adventure that turns into a guide): one page that re-derives every bundle root in the
+reader's browser, draws the entries as a tree on the 64-vertex lattice, writes
+them out as seals, and plays them as sound. Lever names stay on the members'
+build; the public sees kinds and hashes. The engine lives with the hash-site
+lane (`blake3_mage`); a chain is one project file:
+
+```json
+{ "id": "my_lane",
+  "identity": { "name": "My lane", "domain": "my-lane.mages.city", "status": "kappa-verified per step", "asserter": "unsigned:my_mage" },
+  "chain": { "dir": "/path/to/evidence", "bundle_glob": "r0*", "lane": "my/lane", "axis": { "word": "step", "key": "order" } } }
+```
+
+```bash
+python levers/chain_site.py my_lane     # → runs/site/my_lane/{local,public,revealed,open}/
+node levers/evidence_cards.mjs          # → the community's chains.json + seals.json
+```
+
+Twelve lanes read this way on 2026-10-25 (hash challenges, curve, sig golf,
+EC rank, Falcon, ML-DSA and others). A reader can gather every chain's roots on
+mages.city's star of the chains and fold a chosen face into their City Key; the
+skill drafts `evidence-chain-page`, `seal-notation` and `evidence-chain-face`
+carry the method.
+
 ## Build your own harness path
 
 (Steps 6 and 7 of the pathway, expanded.)

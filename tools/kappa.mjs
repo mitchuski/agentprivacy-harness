@@ -22,6 +22,8 @@ import { createHash } from 'node:crypto'
 
 // canonical JSON: recursively sorted keys, no whitespace. The κ preimage.
 export function canonicalJson(v) {
+  // not JSON: refuse rather than print it (NaN/Infinity would print as null and [undefined] as [], giving different values one κ — formal_mage O12b; star-registry.ts refuses the same way)
+  if (v === undefined || typeof v === 'function' || typeof v === 'symbol' || typeof v === 'bigint' || (typeof v === 'number' && !Number.isFinite(v))) throw new Error('canonical JSON: ' + (typeof v === 'number' ? String(v) : typeof v) + ' is not a JSON value')
   if (v === null || typeof v !== 'object') return JSON.stringify(v)
   if (Array.isArray(v)) return '[' + v.map(canonicalJson).join(',') + ']'
   return '{' + Object.keys(v).sort().map(k => JSON.stringify(k) + ':' + canonicalJson(v[k])).join(',') + '}'

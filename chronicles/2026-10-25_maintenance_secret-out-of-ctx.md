@@ -1,0 +1,15 @@
+# Maintenance · 2026-10-25 · The secret leaves ctx, verdicts keep their seats, salted runs mint
+
+Maintenance, not research: no seat, no round, no verdict. Three defects found by the formal_mage survey (`~/formal_mage/FORMAL_MAP.md`, Tier A3 and B3), each fixed with a test that fails on the old code.
+
+**1. `ctx.args` carried the salt secret** (`engine/dual_agent_loop.mjs`). Every prompt builder, the proposer's included, received `ctx.args = runArgs`, and `runArgs.saltSecret` was in it. No shipped config read it, but a config could have, and a proposer that can read the secret can grind its proposal against the draw (T2). `ctxFor` now hands prompt builders `publicArgs`, which is runArgs without `saltSecret`. The engine still reads `runArgs.saltSecret` itself after Propose closes. New test (`engine/loop.salt.test.mjs`): a hostile config prints all of `ctx.args` into its measure and propose prompts, and two runs that differ only in the secret must produce byte-identical pre-Gap prompts that never contain the secret. This is the non-interference property stated as a test. The Lean model of it is planned in formal_mage.
+
+**2. A dead middle seat shifted verdicts onto the wrong proposal** (`engine/dual_agent_loop.mjs`, `drivers/run.mjs`). The pipeline's results were `.filter(Boolean)`-ed, and `run.mjs` matched duplicate-id proposals to verdicts by position in that filtered list. One dead seat therefore moved every later verdict up one slot. The round record now carries `verdictsByIndex`, with one slot per proposal and null where a seat died, and the persister matches by index. Older engines without the field fall back to the dense list as before. New test: three proposals with the same id, the middle Gap seat dies, and proposal 3 must keep its own verdict.
+
+**3. `mint_artefact` refused every salted run** (`tools/mint_artefact.mjs`). It compared every recorded seed against sha256(canon), which is the legacy rule. It now applies `verify_run`'s two rules: salted means the canon hashes to hProposal and the seed equals sha256(hSource‖hProposal‖salt); legacy means the seed is sha256(canon). Checked on `examples/field-guide` r5, which is salted: it was refused before the fix (six MISMATCH) and prepares after it. The test artefact was deleted.
+
+**Checked.** `node engine/loop.salt.test.mjs`: the new assertions fail on the old engine and pass on the new one. `node tools/check.mjs`: all 64 gates pass. One baseline run before the edits reported 1 of 64 failing, and two immediate re-runs passed, so one gate is flaky. It was not identified here.
+
+**Not done.** The bundled copies (`dist/default-harness/`, `examples/field-guide/harness.workflow.mjs`, `skills_fold_harness/*/harness.workflow.mjs`) still carry the old engine; regenerate them with `tools/bundle.mjs` when the change is accepted. The four re-implementations of the run chain (verify_run, mint_artefact, render_run, kappa_evidence) should share one checker module. This fix aligns mint with verify_run but does not merge them.
+
+**Doors (the First Person's, unexecuted).** Commit; regenerate the bundles.

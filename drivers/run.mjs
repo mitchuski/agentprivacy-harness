@@ -247,8 +247,11 @@ for (const round of result.detail || []) {
     // recorded rather than dropped
     const ids = (round.proposals || []).map(q => q.leverId)
     const unique = new Set(ids).size === ids.length
-    let verdict = unique ? ((round.verdicts || []).find(v => v.leverId === p.leverId) || null) : ((round.verdicts || [])[i] || null)
-    if (!verdict && (round.verdicts || [])[i] && !ids.includes(round.verdicts[i].leverId)) verdict = { ...round.verdicts[i], leverIdMismatch: round.verdicts[i].leverId, leverId: p.leverId }
+    // byIndex[i] is proposal i's verdict or null (a dead seat); older engines
+    // without it fall back to the dense list, which is only safe with no deaths
+    const byIndex = round.verdictsByIndex || round.verdicts || []
+    let verdict = unique ? ((round.verdicts || []).find(v => v.leverId === p.leverId) || null) : (byIndex[i] || null)
+    if (!verdict && byIndex[i] && !ids.includes(byIndex[i].leverId)) verdict = { ...byIndex[i], leverIdMismatch: byIndex[i].leverId, leverId: p.leverId }
     if (verdict && verdict.leverId !== p.leverId) verdict = { ...verdict, leverIdMismatch: verdict.leverId, leverId: p.leverId }
     if (verdict) writeJson(join(pdir, 'verdict.json'), verdict.status === 'VALIDATED' ? { ...verdict, coverage: { mode: d.mode, detection: d.mode === 'census' ? 'always — every witness probed' : `${d.count}/${d.N}` } } : verdict)
   })

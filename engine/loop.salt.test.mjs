@@ -141,6 +141,83 @@ const ok = (cond, msg) => { if (cond) console.log(`  ok   ${msg}`); else { faile
   ok(r.detail[0].proposalsLog[0]?.hProposal === expected.hProposal, 'the retry ledger records the committed proposal hash')
 }
 
+// ---- non-interference: the proposer's prompt is independent of the secret ----
+// Every prompt builder receives ctx. If ctx.args carried saltSecret, a config's
+// propose prompt could read it and grind against the draw (T2). Two runs that
+// differ only in the secret must hand every pre-Gap seat byte-identical prompts.
+{
+  const seen = { a: [], b: [] }
+  const mkRt = (bucket) => ({
+    agent: async (prompt, opts) => {
+      if (opts.label?.startsWith('measure') || opts.label?.startsWith('propose')) seen[bucket].push(prompt)
+      if (opts.label?.startsWith('measure')) return { metric: 1 }
+      if (opts.label?.startsWith('propose')) return { proposals: [{ leverId: 'lev-ni', compressedText: 'x' }] }
+      if (opts.label?.startsWith('gap:')) return { seedHex: 'x', draw: '[]', transcript: 't' }
+      if (opts.label?.startsWith('assay:')) return { leverId: 'lev-ni', status: 'MIRAGE', gateResult: '0/8', evidence: 'e' }
+      if (opts.label?.startsWith('critic')) return { classifications: [], nextLead: 'n' }
+      return 'draft'
+    },
+    parallel: async (thunks) => Promise.all(thunks.map(t => t().catch(() => null))),
+    pipeline: async (items, ...stages) => Promise.all(items.map(async (item, i) => {
+      let prev = item
+      for (const s of stages) { prev = await s(prev, item, i); if (prev == null) return null }
+      return prev
+    })),
+    phase: () => {}, log: () => {},
+  })
+  // a hostile config: its prompts print everything ctx.args holds
+  const leaky = (tag) => (...a) => `${tag} ${JSON.stringify(a[a.length - 1]?.args ?? a.find(x => x && x.args)?.args)}`
+  const cfg = {
+    name: 'ni-smoke', objective: { metric: 'w', gate: 'g', hardConstraint: 'h' }, door: 'first-person',
+    heldApartRule: 'r', keystoneOnlyWrites: ['frontier.json'],
+    finders: [{ lens: 'a', hint: 'a' }, { lens: 'b', hint: 'b' }],
+    gate: { N: 32, count: 8, mode: 'sample' },
+    prompts: { measure: leaky('M'), propose: (f, m, ctx) => `P ${f.lens} ${JSON.stringify(ctx.args)}`,
+      holdApart: () => 'g', assay: () => 'a', critic: () => 'c', chronicle: () => 'ch' },
+    schemas: { measure: {}, proposal: {}, gap: {}, verdict: {}, critic: {} },
+    stop: { dryRounds: 1, maxRounds: 1 }, isValidated: (v) => v.status === 'VALIDATED', isStructural: () => false,
+  }
+  await runHarness(cfg, mkRt('a'), { repo: '/tmp/x', runId: 'r', saltSecret: 'a'.repeat(64), sourceHash: 'h' })
+  await runHarness(cfg, mkRt('b'), { repo: '/tmp/x', runId: 'r', saltSecret: 'b'.repeat(64), sourceHash: 'h' })
+  ok(seen.a.length === 3 && seen.a.join('\n') === seen.b.join('\n'), 'measure + propose prompts are byte-identical under two different secrets')
+  ok(!seen.a.join('\n').includes('a'.repeat(64)), 'the secret never appears in any pre-Gap prompt')
+}
+
+// ---- a dead middle seat must not shift verdicts onto the wrong proposal ----
+{
+  const rt = {
+    agent: async (prompt, opts) => {
+      if (opts.label?.startsWith('measure')) return { metric: 1 }
+      if (opts.label?.startsWith('propose')) return { proposals: prompt.endsWith('p-a') ? [{ leverId: 'dup' }, { leverId: 'dup' }, { leverId: 'dup' }] : [] }
+      if (opts.label?.startsWith('gap:')) return { seedHex: 'x', draw: '[]', transcript: prompt }
+      if (opts.label?.startsWith('assay:')) return { leverId: 'dup', status: 'MIRAGE', gateResult: prompt, evidence: 'e' }
+      if (opts.label?.startsWith('critic')) return { classifications: [], nextLead: 'n' }
+      return 'draft'
+    },
+    parallel: async (thunks) => Promise.all(thunks.map(t => t().catch(() => null))),
+    pipeline: async (items, ...stages) => Promise.all(items.map(async (item, i) => {
+      if (i === 1) return null                 // the middle Gap seat dies
+      let prev = item
+      for (const s of stages) { prev = await s(prev, item, i); if (prev == null) return null }
+      return prev
+    })),
+    phase: () => {}, log: () => {},
+  }
+  const cfg = {
+    name: 'dead-seat', objective: { metric: 'w', gate: 'g', hardConstraint: 'h' }, door: 'first-person',
+    heldApartRule: 'r', keystoneOnlyWrites: ['frontier.json'], finders: [{ lens: 'a', hint: 'a' }, { lens: 'b', hint: 'b' }],
+    prompts: { measure: () => 'm', propose: (f) => `p-${f.lens}`, holdApart: () => 'g',
+      assay: (p, gap, i) => `verdict-for-${i}`, critic: () => 'c', chronicle: () => 'ch' },
+    schemas: { measure: {}, proposal: {}, gap: {}, verdict: {}, critic: {} },
+    stop: { dryRounds: 1, maxRounds: 1 }, isValidated: () => false, isStructural: () => false,
+  }
+  const r = await runHarness(cfg, rt, { repo: '/tmp/x', runId: 'r' })
+  const byIndex = r.detail[0].verdictsByIndex
+  ok(Array.isArray(byIndex) && byIndex.length === 3, 'verdictsByIndex has one slot per proposal')
+  ok(byIndex[1] === null, 'the dead seat leaves a null in its own slot')
+  ok(String(byIndex[2]?.gateResult).endsWith('verdict-for-2'), 'proposal 3 keeps its own verdict (not shifted into slot 2)')
+}
+
 console.log('')
 if (failed) { console.error(`${failed} salt-mode assertion(s) FAILED.`); process.exit(1) }
 console.log('loop.salt.test: the D1 salt holds through the loop.')

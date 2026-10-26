@@ -210,7 +210,29 @@ function perProposalSalt(saltSecret, hProposal) {
 // the stream extends by hashing (seed || counter), so a large census-scale draw
 // stays deterministic and third-party re-derivable without changing the small
 // draws the field guide relies on.
-function seedBytes(seedHex, need) {
+// The draw, in two versions. Both are deterministic in the seed; the auditor
+// replays whichever version the record names (gap.json drawVersion; absent =
+// 1, the legacy hand procedure).
+//
+//   v1 (legacy, kept for replay): digest bytes left to right, ONE byte per pick,
+//      idx = b_k mod remaining. Exact only while the remaining population fits
+//      a byte: for N > 256 a pick can never reach past the first 256 of the
+//      remaining list, so a large bank is drawn from its low end only — a
+//      biased, and therefore tunable, draw (defect D-1, found 2026-09-12 by the
+//      pqc-calibration instance: a 10,000-draw from 65,536 never passed 10,230).
+//      Its expansion counter was also one byte, so the stream repeated after
+//      8,192 bytes (D-2). Never use v1 for a new run; it is here so that
+//      pre-existing records still re-derive.
+//
+//   v2 (current): a stream of sha256(head || counter as 4 bytes big-endian)
+//      blocks; each pick reads a 32-bit big-endian word and REJECTS it when it
+//      falls in the tail that would bias the modulus (v >= 2^32 - 2^32 mod rem),
+//      then idx = v mod remaining. Unbiased for any N up to 2^32, every index
+//      reachable, still a pure function of the seed. Rejections are rare
+//      (< rem / 2^32 per pick) and deterministic, so the replay is exact.
+const DRAW_VERSION = 2
+
+function seedBytesV1(seedHex, need) {
   const head = fromHex(seedHex)
   if (need <= head.length) return head
   let out = Array.from(head)
@@ -223,15 +245,19 @@ function seedBytes(seedHex, need) {
   return Uint8Array.from(out)
 }
 
-// Draw `count` distinct fact indices (1-based: F1..FN) from N without
-// replacement, exactly as the hold-apart prompt specified: take the seed bytes
-// left to right, and for draw k pick position (b_k mod remaining) out of the
-// not-yet-drawn list, removing it. Returns the picks in draw order.
-function draw(seedHex, N, count) {
-  if (!Number.isInteger(N) || N < 1) throw new Error(`draw: N must be a positive integer, got ${N}`)
-  if (!Number.isInteger(count) || count < 1) throw new Error(`draw: count must be a positive integer, got ${count}`)
-  if (count > N) throw new Error(`draw: count ${count} exceeds population N ${N}`)
-  const bytes = seedBytes(seedHex, count)
+// An unbounded byte stream for v2: head, then sha256(head || be32(counter)).
+function* seedStreamV2(seedHex) {
+  const head = fromHex(seedHex)
+  for (const b of head) yield b
+  for (let counter = 0; ; counter++) {
+    const ctr = Uint8Array.from([(counter >>> 24) & 0xff, (counter >>> 16) & 0xff, (counter >>> 8) & 0xff, counter & 0xff])
+    const block = sha256Bytes(Uint8Array.from([...head, ...ctr]))
+    for (const b of block) yield b
+  }
+}
+
+function drawV1(seedHex, N, count) {
+  const bytes = seedBytesV1(seedHex, count)
   const remaining = Array.from({ length: N }, (_, i) => i + 1)
   const picks = []
   for (let k = 0; k < count; k++) {
@@ -242,6 +268,38 @@ function draw(seedHex, N, count) {
   return picks
 }
 
+function drawV2(seedHex, N, count) {
+  const stream = seedStreamV2(seedHex)
+  const word = () => {
+    let v = 0
+    for (let i = 0; i < 4; i++) v = (v * 256) + stream.next().value
+    return v // 0 .. 2^32-1, exact in a double
+  }
+  const remaining = Array.from({ length: N }, (_, i) => i + 1)
+  const picks = []
+  for (let k = 0; k < count; k++) {
+    const rem = remaining.length
+    const limit = 4294967296 - (4294967296 % rem)   // largest multiple of rem that fits
+    let v = word()
+    while (v >= limit) v = word()                    // rejection: no modulo bias
+    const idx = v % rem
+    picks.push(remaining[idx])
+    remaining.splice(idx, 1)
+  }
+  return picks
+}
+
+// count distinct 1-based indices into 1..N, without replacement, as a pure
+// function of (seedHex, N, count, version).
+function draw(seedHex, N, count, version = DRAW_VERSION) {
+  if (!Number.isInteger(N) || N < 1) throw new Error(`draw: N must be a positive integer, got ${N}`)
+  if (!Number.isInteger(count) || count < 1) throw new Error(`draw: count must be a positive integer, got ${count}`)
+  if (count > N) throw new Error(`draw: count ${count} exceeds population N ${N}`)
+  if (version === 1) return drawV1(seedHex, N, count)
+  if (version === 2) return drawV2(seedHex, N, count)
+  throw new Error(`draw: unknown drawVersion ${version}`)
+}
+
 // The whole hold-apart step in one call: canonicalise, hash, seed, draw. The
 // Gap seat calls this and narrates it; it never re-implements the arithmetic.
 // Returns everything the run manifest and the auditor need.
@@ -250,7 +308,7 @@ function holdApart({ proposal, N, count, hSource = null, salt = null }) {
   const hProposal = hashCanon(canon)
   const seedHex = deriveSeed({ hSource, hProposal, salt })
   const drawIndices = draw(seedHex, N, count)
-  return { canon, hProposal, hSource, salt, seedHex, N, count, drawIndices }
+  return { canon, hProposal, hSource, salt, seedHex, N, count, drawVersion: DRAW_VERSION, drawIndices }
 }
 
 
@@ -292,7 +350,7 @@ function deriveHoldApart(proposal, { gate, saltSecret, sourceHash }) {
   const drawIndices = mode === 'census'
     ? Array.from({ length: N }, (_, k) => k + 1)
     : draw(seedHex, N, count)
-  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawIndices }
+  return { salted: true, mode, N, count, hSource: sourceHash || null, hProposal, salt, seedHex, drawVersion: DRAW_VERSION, drawIndices }
 }
 
 function bootPreamble(root, repo, seatCard) {
@@ -325,6 +383,27 @@ function validateConfig(config) {
   need(typeof config?.isStructural === 'function', 'config.isStructural required')
   need(Number.isFinite(config?.stop?.dryRounds) && config.stop.dryRounds >= 1, 'config.stop.dryRounds required')
   need(Number.isFinite(config?.stop?.maxRounds) && config.stop.maxRounds >= 1, 'config.stop.maxRounds required')
+
+  // Unfilled placeholders and an empty witness bank are refused HERE, not only
+  // by conform.mjs and bundle.mjs. The newcomer review of 2026-09-12 ran the
+  // blank scaffold through drivers/run.mjs to COMPLETE, exit 0, with gate.N = 0
+  // and an empty draw: a harness that grades nothing must not run at all.
+  const TODO = /\bTODO\b/i
+  const placeholder = (v) => typeof v === 'string' && TODO.test(v)
+  for (const [label, v] of [
+    ['config.name', config?.name],
+    ['config.objective.metric', config?.objective?.metric],
+    ['config.objective.gate', config?.objective?.gate],
+    ['config.objective.hardConstraint', config?.objective?.hardConstraint],
+    ['config.heldApartRule', config?.heldApartRule],
+  ]) need(!placeholder(v), `${label} still contains "TODO" — an unfilled config runs and grades nothing`)
+  for (const f of (Array.isArray(config?.finders) ? config.finders : [])) {
+    need(!placeholder(f?.lens) && !placeholder(f?.hint), `config.finders "${f?.lens}" still contains "TODO"`)
+  }
+  if (config?.gate) {
+    need(Number.isInteger(config.gate.N) && config.gate.N > 0, 'config.gate.N must be a positive integer (the witness-bank size); a gate over zero witnesses probes nothing')
+    need(config.gate.mode === 'census' || config.gate.mode === 'sample', "config.gate.mode must be 'census' or 'sample'")
+  }
   return errs
 }
 
@@ -356,7 +435,13 @@ async function runHarness(config, rt, runArgs = {}) {
   // still claimed. A win an auditor cannot reproduce is not a win (GR-4). With
   // the round in the path, every (round, proposal) scratch dir is unique, and
   // no config prompt needs to change since they all build from ctx.runDir.
-  const ctxFor = (roundId) => ({ root, repo, runId, roundId, runDir: `${runRoot}/${roundId}`, runRoot, config, args: runArgs })
+  //
+  // ctx.args never carries the salt secret. Every prompt builder receives ctx,
+  // the proposer's included, and a secret any seat can read is not a secret:
+  // the proposer could grind its proposal against the draw (T2). The engine
+  // reads runArgs.saltSecret itself, below, and only after Propose closes.
+  const { saltSecret: _secret, ...publicArgs } = runArgs
+  const ctxFor = (roundId) => ({ root, repo, runId, roundId, runDir: `${runRoot}/${roundId}`, runRoot, config, args: publicArgs })
 
   // Per-seat model/effort. A measure that counts words and a Gap that must
   // hash and draw are not the same job; paying frontier prices for both is how
@@ -390,6 +475,7 @@ async function runHarness(config, rt, runArgs = {}) {
     log(`${proposals.length} proposal(s) on the table: ${proposals.map(p => p.leverId).join(', ') || 'none'}`)
 
     let closed = []
+    let verdictsByIndex = []
     let critic = null
     // Code-derive each proposal's seed + draw BEFORE the Gap seat runs (SALTED
     // mode). The proposer has already returned (Propose closed above), and the
@@ -404,7 +490,11 @@ async function runHarness(config, rt, runArgs = {}) {
     const proposalsLog = proposals.map((p, i) => ({ leverId: p.leverId, roundId, hProposal: derived[i]?.hProposal || null, seedHex: derived[i]?.seedHex || null, salted: !!derived[i] }))
     if (proposals.length > 0) {
       // ---- per proposal: Hold-apart (the Gap ⿻) then Assay (soulbis ⚔️), no barrier ----
-      closed = (await pipeline(
+      // verdictsByIndex keeps a null where a seat died, so verdict i belongs to
+      // proposal i. `closed` (nulls dropped) feeds the tally and the critic; the
+      // persister matches by index, never by position in `closed`, which a dead
+      // middle seat would shift onto the wrong proposal.
+      verdictsByIndex = await pipeline(
         proposals,
         (p, _item, i) => agent(
           `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx, derived[i])}`,
@@ -412,7 +502,9 @@ async function runHarness(config, rt, runArgs = {}) {
         (gap, p, i) => gap ? agent(
           `${BOOT('soulbis-assay.md')}\n${config.prompts.assay(p, gap, i, ctx)}`,
           { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict, ...seatOpts('assay') }) : null,
-      )).filter(Boolean)
+      )
+      verdictsByIndex = proposals.map((_, i) => verdictsByIndex[i] || null)
+      closed = verdictsByIndex.filter(Boolean)
       for (const v of closed) tally[v.status] = (tally[v.status] || 0) + 1
       log(`assay closed: ${closed.length}/${proposals.length} — ${JSON.stringify(tally)}`)
 
@@ -425,7 +517,7 @@ async function runHarness(config, rt, runArgs = {}) {
 
     // ---- Chronicle — draft only; the keystone reviews and files ----
     phase('Chronicle')
-    const roundData = { roundId, measure, proposals, verdicts: closed, critic, holdApart: derived, proposalsLog }
+    const roundData = { roundId, measure, proposals, verdicts: closed, verdictsByIndex, critic, holdApart: derived, proposalsLog }
     const chronicle = await agent(
       `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
       { label: `chronicle:${roundId}`, phase: 'Chronicle', ...seatOpts('chronicle') })

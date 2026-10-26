@@ -31,7 +31,9 @@ const root = join(here, '..')
 
 const STRONG = new Set(['proven', 'derived'])
 const WEAK_ENFORCE = new Set(['prompt', 'manual', 'nothing'])
-const KNOWN_ENFORCE = new Set(['code', 'protocol', 'runtime', 'prompt', 'manual', 'nothing'])
+// `proof`: a machine-checked theorem (e.g. a Lean statement whose axiom audit
+// passes) carries the claim; strong, like code. The cell should name the theorem.
+const KNOWN_ENFORCE = new Set(['code', 'proof', 'protocol', 'runtime', 'prompt', 'manual', 'nothing'])
 
 // the CURRENT enforcement of a cell like "**prompt** (seat cards) → runtime,
 // post-D3" is `prompt`: take the text before any arrow, strip markdown/backticks,
@@ -133,4 +135,4 @@ if (failures.length) {
   console.error(`\nA PROVEN/DERIVED claim enforced only by prompt/manual/nothing is an overclaim. Fix the claim or the enforcement.`)
   process.exit(1)
 }
-console.log(`\nCLAIMS GATE PASS — ${claimsChecked} strong-tier claim(s) across ${enforcedRegisters} register(s) all enforced by code/protocol/runtime.`)
+console.log(`\nCLAIMS GATE PASS — ${claimsChecked} strong-tier claim(s) across ${enforcedRegisters} register(s) all enforced by code/proof/protocol/runtime.`)

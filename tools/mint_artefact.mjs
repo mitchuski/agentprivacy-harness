@@ -79,7 +79,15 @@ const audited = proposals.map(p => {
   const gap = maybeJson(join(p.dir, 'gap.json'))
   const derived = existsSync(canonPath) ? sha256File(canonPath) : null
   const recorded = gap && typeof gap.seedHex === 'string' ? gap.seedHex.toLowerCase() : null
-  const hashState = derived && recorded ? (derived === recorded ? 'MATCH' : 'MISMATCH') : 'INCOMPLETE'
+  // the same two rules as tools/verify_run.mjs. Salted: the canon hashes to
+  // hProposal and the seed re-derives as sha256(hSource‖hProposal‖salt).
+  // Legacy: the seed IS sha256(canon). Comparing every run against the legacy
+  // rule refused every salted run as MISMATCH.
+  const salted = !!(gap && gap.salt && gap.hProposal)
+  const ok = !derived || !recorded ? null
+    : salted ? derived === String(gap.hProposal).toLowerCase() && sha256Hex(String(gap.hSource ?? '') + gap.hProposal + gap.salt) === recorded
+    : derived === recorded
+  const hashState = ok === null ? 'INCOMPLETE' : (ok ? 'MATCH' : 'MISMATCH')
   const verdict = maybeJson(join(p.dir, 'verdict.json'))
   return { ...p, derived, recorded, hashState, verdict, canonPath }
 })

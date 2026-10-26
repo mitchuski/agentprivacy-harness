@@ -122,7 +122,13 @@ export async function runHarness(config, rt, runArgs = {}) {
   // still claimed. A win an auditor cannot reproduce is not a win (GR-4). With
   // the round in the path, every (round, proposal) scratch dir is unique, and
   // no config prompt needs to change since they all build from ctx.runDir.
-  const ctxFor = (roundId) => ({ root, repo, runId, roundId, runDir: `${runRoot}/${roundId}`, runRoot, config, args: runArgs })
+  //
+  // ctx.args never carries the salt secret. Every prompt builder receives ctx,
+  // the proposer's included, and a secret any seat can read is not a secret:
+  // the proposer could grind its proposal against the draw (T2). The engine
+  // reads runArgs.saltSecret itself, below, and only after Propose closes.
+  const { saltSecret: _secret, ...publicArgs } = runArgs
+  const ctxFor = (roundId) => ({ root, repo, runId, roundId, runDir: `${runRoot}/${roundId}`, runRoot, config, args: publicArgs })
 
   // Per-seat model/effort. A measure that counts words and a Gap that must
   // hash and draw are not the same job; paying frontier prices for both is how
@@ -156,6 +162,7 @@ export async function runHarness(config, rt, runArgs = {}) {
     log(`${proposals.length} proposal(s) on the table: ${proposals.map(p => p.leverId).join(', ') || 'none'}`)
 
     let closed = []
+    let verdictsByIndex = []
     let critic = null
     // Code-derive each proposal's seed + draw BEFORE the Gap seat runs (SALTED
     // mode). The proposer has already returned (Propose closed above), and the
@@ -170,7 +177,11 @@ export async function runHarness(config, rt, runArgs = {}) {
     const proposalsLog = proposals.map((p, i) => ({ leverId: p.leverId, roundId, hProposal: derived[i]?.hProposal || null, seedHex: derived[i]?.seedHex || null, salted: !!derived[i] }))
     if (proposals.length > 0) {
       // ---- per proposal: Hold-apart (the Gap ⿻) then Assay (soulbis ⚔️), no barrier ----
-      closed = (await pipeline(
+      // verdictsByIndex keeps a null where a seat died, so verdict i belongs to
+      // proposal i. `closed` (nulls dropped) feeds the tally and the critic; the
+      // persister matches by index, never by position in `closed`, which a dead
+      // middle seat would shift onto the wrong proposal.
+      verdictsByIndex = await pipeline(
         proposals,
         (p, _item, i) => agent(
           `${BOOT('gap-hold-apart.md')}\n${config.prompts.holdApart(p, i, ctx, derived[i])}`,
@@ -178,7 +189,9 @@ export async function runHarness(config, rt, runArgs = {}) {
         (gap, p, i) => gap ? agent(
           `${BOOT('soulbis-assay.md')}\n${config.prompts.assay(p, gap, i, ctx)}`,
           { label: `assay:${p.leverId}`, phase: 'Assay', schema: config.schemas.verdict, ...seatOpts('assay') }) : null,
-      )).filter(Boolean)
+      )
+      verdictsByIndex = proposals.map((_, i) => verdictsByIndex[i] || null)
+      closed = verdictsByIndex.filter(Boolean)
       for (const v of closed) tally[v.status] = (tally[v.status] || 0) + 1
       log(`assay closed: ${closed.length}/${proposals.length} — ${JSON.stringify(tally)}`)
 
@@ -191,7 +204,7 @@ export async function runHarness(config, rt, runArgs = {}) {
 
     // ---- Chronicle — draft only; the keystone reviews and files ----
     phase('Chronicle')
-    const roundData = { roundId, measure, proposals, verdicts: closed, critic, holdApart: derived, proposalsLog }
+    const roundData = { roundId, measure, proposals, verdicts: closed, verdictsByIndex, critic, holdApart: derived, proposalsLog }
     const chronicle = await agent(
       `${BOOT('chronicle.md')}\n${config.prompts.chronicle(roundData, ctx)}`,
       { label: `chronicle:${roundId}`, phase: 'Chronicle', ...seatOpts('chronicle') })

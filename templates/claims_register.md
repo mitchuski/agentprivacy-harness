@@ -10,7 +10,7 @@ Tiers (epistemic strength): **PROVEN** (executed here, re-runnable) ·
 it) · **MYTH** (chronicles only).
 
 **enforced by** (the second axis — the *mechanism*, not the strength; D4):
-`code` (a gate re-runs it) · `protocol` (impossible-by-construction, e.g. a
+`code` (a gate re-runs it) · `proof` (a machine-checked theorem names it) · `protocol` (impossible-by-construction, e.g. a
 hash commitment) · `runtime` (denied by the sandbox/mount) · `prompt` (a seat
 card asks) · `manual` (honest human discipline) · `nothing` (unenforced).
 `tools/check_claims.mjs` is a hard gate: **a PROVEN or DERIVED claim enforced

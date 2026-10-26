@@ -56,10 +56,10 @@ class Bundle {
   ledger(name, desc, ks) { const k = this.put(new Map([[0, `${NS}/ledger/1`], [1, name], [2, ks], [3, this.lane], [4, desc]]), name); for (const c of ks) this.edge(k, c, 'composed-of'); return k }
   check(name, ledgerK, rule, facts) { const k = this.put(new Map([[0, `${NS}/check/1`], [1, ledgerK], [2, rule], [3, facts]]), name); this.edge(k, ledgerK, 'derived-from'); return k }
   root(composed, extra) {
-    const leaves = [...this.objects.keys(), ...this.blobs.keys(), ...this.edges.keys()].sort()
+    const leaves = [...new Set([...this.objects.keys(), ...this.blobs.keys(), ...this.edges.keys()])].sort()   // a set, as verify reads it
     const mroot = D.merkleRoot(leaves.map(x => Buffer.from(x))).toString('hex')
     const v = new Map([[0, `${NS}/run-root/1`], [1, this.lane], [2, new Date().toISOString().slice(0, 10)],
-      [3, [...this.names.entries()].sort().map(([n, k]) => [n, k])], [4, mroot], [5, D.STATUS], [6, this.asserter], [7, D.UPSTREAM]])
+      [3, [...this.names.entries()].sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)).map(([n, k]) => [n, k])]   /* by name, as the Python minter sorts */, [4, mroot], [5, D.STATUS], [6, this.asserter], [7, D.UPSTREAM]])
     if (extra) v.set(8, extra)
     const rk = D.kappaFromValue(v); this.objects.set(rk, v)
     for (const n of composed) { const e = D.edgeRecord(rk, this.names.get(n), 'composed-of', this.asserter); this.edges.set(D.kappaFromValue(e), e) }
@@ -177,7 +177,20 @@ function tally(verdicts) {
   const statuses = verdicts.map(v => v.get(2))
   return { n: verdicts.length, validated: statuses.filter(s => s === 'VALIDATED').length, statuses: [...new Set(statuses)].sort() }
 }
-const RULES = { 'harness/run-tally/1': (rows) => tally(rows), 'rows/count/1': (rows) => ({ n: rows.length }) }
+// Parity with kappa_evidence_mage verify_bundle.py rule_lever_tally: one record/1 per lever, fields at key 3.
+function leverTally(rows) {
+  const rs = rows.map(r => r.get(3)), st = rs.map(f => f.get('status')), kinds = [...new Set(st)].sort()
+  const cpu = Math.round(rs.reduce((s, f) => s + Number(f.get('cpu_s')), 0) * 100) / 100
+  return { n: rs.length, statuses: kinds, by_status: Object.fromEntries(kinds.map(x => [x, st.filter(s => s === x).length])), cpu_s_total: cpu }
+}
+// formal/axiom-audit/1 — formal_mage: each row one cited Lean theorem with its printed axiom footprint
+// (formal_mage tools/mint_formal.py; the Python twin is verify_bundle.py rule_formal_axiom_audit).
+function axiomAudit(rows) {
+  const std = new Set(['propext', 'Classical.choice', 'Quot.sound'])
+  const rs = rows.map(r => r.get(3)), all = new Set(rs.flatMap(r => r.get('axioms')))
+  return { n: rs.length, ok: rs.filter(r => r.get('ok') === true).length, axioms: [...all].sort(), nonstandard: [...all].filter(a => !std.has(a)).sort() }
+}
+const RULES = { 'harness/run-tally/1': (rows) => tally(rows), 'rows/count/1': (rows) => ({ n: rows.length }), 'formal/axiom-audit/1': axiomAudit, 'hashsmash/lever-tally/1': leverTally }
 
 // ---------------------------------------------------------------- verifying
 export function verify(bundle, log = console.log) {

@@ -11,7 +11,7 @@
 // P1 cargo run; it is not that run.
 
 import { strict as assert } from 'node:assert'
-import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -68,6 +68,12 @@ assert.throws(() => D.decode(Buffer.from('1900ff', 'hex')), /non-canonical|trail
 // --- end to end on the primer run: mint, verify, sign, tamper ---
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const inst = join(root, 'evocations', 'primer')
+if (!existsSync(join(inst, 'runs', 'r1'))) {
+  // the default distribution ships the system alone, no runs (make_default.mjs): the vectors above are
+  // the whole check there, and this line says so rather than passing in silence
+  console.log(`kappa_evidence: ${n} checks passed (encoder vectors, cross-implementation vector); mint/verify/sign/tamper SKIPPED: no primer run at ${inst} in this tree`)
+  process.exit(0)
+}
 const tmp = mkdtempSync(join(tmpdir(), 'kappa-ev-'))
 try {
   const r = mint(inst, 'r1', { out: join(tmp, 'plain') })
@@ -82,16 +88,23 @@ try {
   // determinism: same inputs, same root (the date is the only moving part within a day)
   const r3 = mint(inst, 'r1', { out: join(tmp, 'again') })
   eq(r3.rootK, r.rootK, 'mint is deterministic')
+  // a proven reply without the verifier: the mint refuses (flashprove/verify-rerun/1 needs cp_verify; PROVEN_SEAT.md)
+  const inst2 = join(tmp, 'inst2'); cpSync(join(inst, 'runs', 'r1'), join(inst2, 'runs', 'r1'), { recursive: true })
+  const pdir = join(inst2, 'runs', 'r1', 'r1.1', 'p1-line-edit-body-prose', 'proof'); mkdirSync(pdir, { recursive: true })
+  writeFileSync(join(pdir, 'ID.txt'), '0'.repeat(64)); writeFileSync(join(pdir, 'example.proof'), Buffer.from('not a proof'))
+  const envSave = process.env.FLASHPROVE_CP_VERIFY; delete process.env.FLASHPROVE_CP_VERIFY
+  assert.throws(() => mint(inst2, 'r1', { out: join(tmp, 'proven') }), /needs cp_verify/); n++
+  if (envSave) process.env.FLASHPROVE_CP_VERIFY = envSave
   // tamper: one byte in one object
   const objs = readdirSync(join(tmp, 'plain', 'objects')).sort()
   const f = join(tmp, 'plain', 'objects', objs[0]); const d = Buffer.from(readFileSync(f)); d[d.length - 1] ^= 1; writeFileSync(f, d)
   const v3 = verify(join(tmp, 'plain'), () => {})
   assert.ok(!v3.ok && v3.fails.some(m => /does not hash to its name/.test(m)), 'tamper detected'); n++
   // tamper: a flipped signature
-  meta.signature.sig = meta.signature.sig.slice(0, -2) + (meta.signature.sig.endsWith('A') ? 'B' : 'A') + meta.signature.sig.slice(-1)
+  meta.signature.sig = meta.signature.sig.slice(0, -2) + (meta.signature.sig.at(-2) === 'A' ? 'B' : 'A') + meta.signature.sig.slice(-1)
   writeFileSync(join(tmp, 'signed', 'root.json'), JSON.stringify(meta))
   const v4 = verify(join(tmp, 'signed'), () => {})
   assert.ok(!v4.ok && v4.fails.some(m => /signature/.test(m)), 'bad signature detected'); n++
 } finally { rmSync(tmp, { recursive: true, force: true }) }
 
-console.log(`kappa_evidence: ${n} checks passed (encoder vectors, cross-implementation vector, mint/verify/sign/tamper on evocations/primer r1)`)
+console.log(`kappa_evidence: ${n} checks passed (encoder vectors, cross-implementation vector, mint/verify/sign/tamper on evocations/primer r1, proven-reply refusal without cp_verify)`)

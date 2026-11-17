@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "kind": "harness",
+  "id": "agentprivacy-dual-agent-harness",
+  "title": "agentprivacy dual-agent harness",
+  "execution": {
+    "interface": "openrsi-exec-v1",
+    "dockerfile": "Dockerfile",
+    "entrypoint": ["node", "/opt/harness/openrsi/enter.mjs"]
+  }
+}

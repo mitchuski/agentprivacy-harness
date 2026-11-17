@@ -1,6 +1,6 @@
 # Formally verified parts of this repository
 
-Sealed in the κ registry: formal_mage evidence bundle `evidence/2026-10-26_75`, root `sha256:d4d42f9e333323b20d5b649525cbe28f8885fa2cb0cdd10943a04cac3793b9da` (75 theorems, 75/75 within the standard axioms).
+Sealed in the κ registry: formal_mage evidence bundle `evidence/2026-11-04_83`, root `sha256:81f2dd578a4fb486c502268e38fcd1302509f6c19656e5410d32946dd5a6f703` (83 theorems, 83/83 within the standard axioms).
 
 Engine behaviour that carries a machine-checked receipt in `formal_mage` (Lean 4, core library, kernel-checked, axiom-audited). `node tools/formal_census.mjs <this repo>` in formal_mage fails if a tag names a theorem outside the audited census. Each Lean statement models the code named beside it; the correspondence is stated in the theorem's doc comment, and where a test pins the code to the model it is named.
 
@@ -13,3 +13,5 @@ Engine behaviour that carries a machine-checked receipt in `formal_mage` (Lean 4
 | The proposer's view is independent of the salt secret (test: `engine/loop.salt.test.mjs`) | `engine/dual_agent_loop.mjs` ctxFor | proved (model + test) | formal: proved formal_mage:Formal.Harness.noninterference |
 | Only propose: labels reach the proposer's provider | `drivers/run.mjs` pair | proved | formal: proved formal_mage:Formal.Harness.routing_by_seat |
 | The identity the conformance gate checks, neg ∘ bnot = succ on Z/64 | `engine/conform.mjs` | proved | formal: proved formal_mage:Formal.Lattice.neg_bnot_eq_succ |
+| A `proven-reply` row's check recomputes its truth: a passing `flashprove/verify-rerun/1` means every row's verdict is the verifier's on that row's sealed bytes under that row's id; without the verifier the check fails (P1); a changed proof keeping the old verdict is refused | `tools/kappa_evidence.mjs` flashproveVerifyRerun, mint (PROVEN_SEAT.md) | proved (model of the rule; cp_verify is FlashProve's) | formal: proved formal_mage:Formal.ProvenLeaf.rerun_sound · formal: proved formal_mage:Formal.ProvenLeaf.rerun_refuses_without_verifier · formal: proved formal_mage:Formal.ProvenLeaf.rerun_detects_change |
+| Two distinct commitment ids do not give two distinct weight files (one weight file under two settings), so a proven seat moves Φ_inference to *verified relative to named commitments* and no further; the inference holds only for an id that is a function of the weights alone | `PROVEN_SEAT.md`, THREATS.md same-model priors, CR-H10 | refuted (the inference) · proved (the weights-only case) | formal: proved formal_mage:Formal.ProvenLeaf.ids_differ_weights_equal · formal: proved formal_mage:Formal.ProvenLeaf.ids_differ_weights_equal_witness · formal: proved formal_mage:Formal.ProvenLeaf.ids_differ_weights_differ_of_weights_only |

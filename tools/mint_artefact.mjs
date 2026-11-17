@@ -18,6 +18,10 @@
 //     canon bytes (witnesses of unknown origin certify nothing — GR-4)
 //   - a non-green conformance gate (G0 before anything moves)
 //   - a run with no verdict anywhere (a candidate is not a result — GR-5)
+//   - a run whose run.json declares a proven seat (`proven: {seat, commitment}`)
+//     with a closed proposal that carries no proof/ beside its verdict, or a
+//     proof under another commitment (a proven seat's reply without a proof
+//     certifies nothing — PROVEN_SEAT.md)
 //
 // This tool shares no gathering code with tools/console.mjs at runtime — it
 // re-derives everything itself, deliberately (two auditors, not one).
@@ -102,6 +106,23 @@ if (conform.status !== 0) refuse(`the conformance gate is not green — fix that
 const withVerdicts = audited.filter(p => p.verdict && p.verdict.status)
 if (!withVerdicts.length) refuse('no verdict.json anywhere in this run — a candidate is not a result (GR-5)')
 
+// 4. a proven seat's reply without a proof certifies nothing (PROVEN_SEAT.md)
+// run.json may declare `proven: { seat, commitment }`: the host fetched the commitment id before the
+// run, one of the five things never taken from the server. Then every closed proposal carries proof/
+// beside its verdict.json (example.proof, and ID.txt equal to the declared id) or the mint refuses.
+// The proof bytes are sealed here by sha256 and copied into evidence/; their truth is the κ mint's
+// to re-run (tools/kappa_evidence.mjs, rule flashprove/verify-rerun/1). A run that declares no
+// proven seat is untouched: no field is added, so its artefact id does not move.
+const runRecord = maybeJson(join(runDir, 'run.json')) || {}
+const proven = runRecord.proven && typeof runRecord.proven === 'object' ? runRecord.proven : null
+const proofFile = (p, f) => join(p.dir, 'proof', f)
+if (proven) {
+  if (!/^[0-9a-f]{64}$/.test(String(proven.commitment || ''))) refuse('run.json declares a proven seat without a 64-hex commitment id (PROVEN_SEAT.md)')
+  const unproven = withVerdicts.filter(p => !existsSync(proofFile(p, 'example.proof')) || !existsSync(proofFile(p, 'ID.txt'))
+    || readFileSync(proofFile(p, 'ID.txt'), 'utf8').trim() !== proven.commitment)
+  if (unproven.length) refuse(`a proven seat's reply without a proof certifies nothing (PROVEN_SEAT.md). Seat ${proven.seat || '?'} is declared proven under ${proven.commitment.slice(0, 16)}…; closed proposals without proof/example.proof and a matching proof/ID.txt: ${unproven.map(p => p.name).join(', ')}`)
+}
+
 // ---- assemble ----------------------------------------------------------------
 const frontier = maybeJson(join(instDir, 'frontier.json'))
 const cfg = await (async () => {
@@ -136,6 +157,9 @@ const artefactProposals = withVerdicts.map(p => ({
   // single-omission detection probability. A sample is never dressed as a proof.
   verdict: { status: p.verdict.status, metric: p.verdict.metric, gateResult: p.verdict.gateResult, coverage: p.verdict.coverage || null },
   verdictSha256: sha256File(join(p.dir, 'verdict.json')),
+  // a proven seat (PROVEN_SEAT.md): the proof travels with the seal by sha256; the κ mint re-runs it
+  ...(proven ? { proven: { seat: proven.seat || null, commitment: proven.commitment, proofSha256: sha256File(proofFile(p, 'example.proof')),
+    expected: existsSync(proofFile(p, 'expected.txt')) ? readFileSync(proofFile(p, 'expected.txt'), 'utf8').trim() : 'YES' } } : {}),
 }))
 
 // universe drafts — only when the layer is present (the seam)
@@ -193,6 +217,8 @@ const artefact = {
     sha256: sha256File(join(instDir, 'frontier.json')),
   } : null,
   proposals: artefactProposals,
+  ...(proven ? { proven: { seat: proven.seat || null, commitment: proven.commitment, rule: 'flashprove/verify-rerun/1',
+    note: 'every closed proposal carries its proof, sealed here by sha256; the κ mint re-runs cp_verify on the sealed bytes (PROVEN_SEAT.md)' } } : {}),
   chronicle: chronicle ? { path: chronicle.path, frontmatter: chronicle.frontmatter, sha256: sha256File(chronicle.abs) } : null,
   conform: { command: `node engine/conform.mjs ${relInst}`, exit: 0, at: new Date().toISOString() },
   evidenceManifest: {},   // filled after the copies
@@ -229,6 +255,9 @@ for (const p of withVerdicts) {
     const src = join(p.dir, f)
     if (existsSync(src)) copyEvidence(src, `${p.name}/${f}`)
   }
+  if (proven) for (const f of ['example.proof', 'ID.txt', 'expected.txt', 'example.req', 'example.y']) {
+    if (existsSync(proofFile(p, f))) copyEvidence(proofFile(p, f), `${p.name}/proof/${f}`)
+  }
 }
 if (frontier) copyEvidence(join(instDir, 'frontier.json'), 'frontier.json')
 if (chronicle) copyEvidence(chronicle.abs, chronicle.path)
@@ -247,7 +276,7 @@ removed, sha256 the bytes. Never trust the label (Law L5).
 
 Sealed from \`${relInst}\` run \`${runId}\`: ${validated.length} VALIDATED /
 ${artefactProposals.length} closed proposals, every Gap seed re-derived MATCH,
-conform green at mint. ${artefact.frontier && artefact.frontier.beat ? 'This run’s levers are IN the folded frontier best.' : 'This run is sealed but NOT folded into the frontier.'}
+conform green at mint.${proven ? ` Seat ${proven.seat || '?'} declared proven under commitment \`${proven.commitment}\`: every closed proposal carries its proof, sealed by sha256; re-run them with the κ mint (rule flashprove/verify-rerun/1).` : ''} ${artefact.frontier && artefact.frontier.beat ? 'This run’s levers are IN the folded frontier best.' : 'This run is sealed but NOT folded into the frontier.'}
 
 ## What the software did NOT do — and will not
 
